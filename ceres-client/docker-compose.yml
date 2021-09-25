@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+    volumes:
+      - .:/ceres-client
+    ports:
+      - 3000:3000
+    image: app:client
+    container_name: ceres-client
+    command: npm start
