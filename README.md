@@ -1,12 +1,7 @@
 Ceres Client and Serverside <br>
 
 - Prerequisites (From the ./ directory)<br>
-  --- cd ceres-client<br>
-  --- npm install<br>
-  --- cd ..<br>
-  --- cd ceres-server<br>
-  --- npm install<br>
-  --- cd ..<br>
+  --- ./prereq.sh
 
 - Steps to run (From the ./ directory) <br>
   --- docker-compose up<br>
