@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  ceres-client:
+    build:
+      context: ./ceres-client
+    volumes:
+      - ./ceres-client:/ceres-client
+    ports:
+      - 3000:3000
+    image: ceres-client:client
+    container_name: ceres-client
+    command: npm start
+
+  ceres-server:
+    build:
+      context: ./ceres-server
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./ceres-server/src:/home/node/app/src
+      - ./ceres-server/nodemon.json:/home/node/app/nodemon.json
+    container_name: ceres-server
+    ports:
+      - 8080:8080
+    command: npm run dev
