@@ -1,7 +1,11 @@
 Ceres Client and Serverside <br>
 
 - Prerequisites (From the ./ directory)<br>
-  --- ./prereq.sh
+  --- ./prereq.sh<br>
+
+* If permission is denied, do the following<br>
+  --- chmod +x prereq.sh<br>
+  --- ./prereq.sh<br>
 
 - Steps to run (From the ./ directory) <br>
   --- docker-compose up<br>
