@@ -6,10 +6,9 @@ Ceres Client and Serverside <br>
   --- cd .<br>
   --- cd ceres-server<br>
   --- npm install<br>
+  --- cd . <br>
 
-- Steps to run: <br>
-  --- Go to command line<br>
-  --- docker-compose build<br>
+- Steps to run (From the ./ directory) <br>
   --- docker-compose up<br>
 
 - To visit the client <br>
