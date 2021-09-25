@@ -1,6 +1,6 @@
 Ceres Serverside
 
-- Steps to run:
+- Steps to run: <br>
   --- Go to command line<br>
   --- Run the following command: docker-compose build<br>
   --- Run the following command: docker-compose up<br>
