@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  ceres-client:
+    build:
+      target: production
+    command: node build/index.js
+
+  ceres-server:
+    build:
+      target: production
+    command: node build/index.js
