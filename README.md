@@ -4,11 +4,11 @@ If this is your first time setting up the environment, proceed with Section A<br
 
 The steps in Section A only need to be done once. Once completed, only follow the steps in Section B<br>
 
-------------------------Section A------------------------
+------------------------Section A------------------------<br>
 Instructions on setting up the build (From the ./ directory)<br>
---- make setup
+--- make setup<br>
 
-------------------------Section B------------------------
+------------------------Section B------------------------<br>
 
 - Steps to run (From the ./ directory) <br>
   --- make build<br>
