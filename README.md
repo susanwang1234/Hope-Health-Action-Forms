@@ -5,8 +5,9 @@ If this is your first time setting up the environment, proceed with Section A<br
 The steps in Section A only need to be done once. Once completed, only follow the steps in Section B<br>
 
 ------------------------Section A------------------------<br>
-Instructions on setting up the build (From the ./ directory)<br>
---- make setup<br>
+
+- Instructions on setting up the build (From the ./ directory)<br>
+  --- make setup<br>
 
 ------------------------Section B------------------------<br>
 
