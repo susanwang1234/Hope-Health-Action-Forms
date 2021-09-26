@@ -1,4 +1,4 @@
-FROM node:16.10-alpine
+FROM node:16.10-alpine as base
 
 WORKDIR /ceres-client
 
@@ -9,6 +9,10 @@ COPY package.json ./
 RUN npm install
 
 COPY . .
+
+FROM base as production
+
+ENV NODE_PATH=./build
 
 RUN npm run build
 
