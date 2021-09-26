@@ -1,4 +1,4 @@
-Ceres Client and Serverside <br>
+<h1>Ceres Client and Serverside</h1> <br>
 
 If this is your first time setting up the environment, proceed with Section A<br>
 
