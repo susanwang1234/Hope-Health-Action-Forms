@@ -1,8 +1,8 @@
 <h1>Ceres Client and Serverside</h1> <br>
 
 If this is your first time setting up the environment, proceed with Section A<br>
-
 The steps in Section A only need to be done once. Once completed, only follow the steps in Section B<br>
+A video tutorial for setting up the environment can be found here: https://youtu.be/p5ku4wTy-FQ <br>
 
 ------------------------Section A------------------------<br>
 
