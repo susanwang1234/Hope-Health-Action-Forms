@@ -42,7 +42,7 @@ The steps in Section C only need to be done once. Once completed, only follow th
 
 - Steps to run (From the ./ directory) <br>
   --- docker-compose build<br>
-  --- docker-compose up -d<br?>
+  --- docker-compose up -d<br>
 
 - To visit the client <br>
   --- Go to the following URL: http://localhost:3000/<br>
