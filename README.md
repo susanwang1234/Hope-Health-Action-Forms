@@ -3,7 +3,7 @@
 If this is your first time setting up the environment, proceed with Section A<br>
 The steps in Section A only need to be done once. Once completed, only follow the steps in Section B<br>
 
-***If the commands "make ____" do not work, refer only to Section C<br>
+\*\*\*If the commands "make \_\_\_\_" do not work, refer only to Section C<br>
 
 A video tutorial for setting up the environment can be found here: https://youtu.be/p5ku4wTy-FQ <br>
 
@@ -29,10 +29,10 @@ A video tutorial for setting up the environment can be found here: https://youtu
 
 ------------------------Section C------------------------<br>
 
-- Instructions on setting up the build (From the ./ directory)
+- Instructions on setting up the build (From the ./ directory)<br>
   --- ./setup.sh<br>
 
-- *** If permission is denied, do the following<br>
+- \*\*\* If permission is denied, do the following<br>
   --- chmod +x setup.sh<br>
   --- ./setup.sh<br>
 
