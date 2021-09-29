@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 
 const NAMESPACE = 'Dashboard Control';
 
-const dashboardHealthCheck = (req: Request, res: Response, next: NextFunction) => {
+const dashboardHealthCheck = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Sample health check for route called');
 
   return res.status(200).json({
