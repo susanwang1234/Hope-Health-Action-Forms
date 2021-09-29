@@ -3,6 +3,7 @@ import http from 'http';
 import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
+import dashboardRoutes from './routes/dashboard';
 
 // Constants
 const NAMESPACE = 'Server';
@@ -35,6 +36,9 @@ app.use((req, res, next) => {
 
   next();
 });
+
+/** Routes */
+app.use('', dashboardRoutes);
 
 /** Error Handling */
 app.use((req, res, next) => {
