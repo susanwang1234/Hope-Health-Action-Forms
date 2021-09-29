@@ -1,12 +1,11 @@
 'use strict';
 import http from 'http';
 import express from 'express';
-import logging from 'config/logging';
-import config from 'config/config';
+import logging from './config/logging';
+import config from './config/config';
 
 // Constants
 const NAMESPACE = 'Server';
-const PORT = 8080;
 const app = express();
 
 /** Logging Requests */
@@ -16,6 +15,8 @@ app.use((req, res, next) => {
   res.on('finish', () => {
     logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`);
   });
+
+  next();
 });
 
 /** parsing requests */
@@ -31,6 +32,8 @@ app.use((req, res, next) => {
     res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
     return res.status(200).json({});
   }
+
+  next();
 });
 
 /** Error Handling */
@@ -45,13 +48,3 @@ app.use((req, res, next) => {
 /** Create the server */
 const httpServer = http.createServer(app);
 httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
-
-/* // Sample GET request
-app.get('/', (req, res) => {
-  res.send('Ceres');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
- */
