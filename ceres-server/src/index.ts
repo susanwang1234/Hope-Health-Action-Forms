@@ -4,6 +4,7 @@ import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
 import dashboardRoutes from './routes/dashboard';
+import departMentRoutes from './routes/department';
 
 // Constants
 const NAMESPACE = 'Server';
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 
 /** Routes */
 app.use('', dashboardRoutes);
+app.use('/department', departMentRoutes);
 
 /** Error Handling */
 app.use((req, res, next) => {
