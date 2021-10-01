@@ -10,23 +10,22 @@ const SERVER = {
   port: SERVER_PORT
 };
 
-const DB_PORT = process.env.HOST_NAME || 30061;
-const DB_USER = process.env.DB_USER || 'root';
-const DB_PASSWORD = process.env.DB_PASSWORD || 'root';
-const DB_NAME = process.env.DB_NAME || 'HHA';
-const DB_HOST = process.env.DB_HOST || 'localhost';
+const MYSQL_HOST = process.env.MYSQL_HOST || 'ceres-database';
+const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'ceresdb';
+const MYSQL_USER = process.env.MYSQL_HOST || 'HHA';
+const MYSQL_PASS = process.env.MYSQL_HOST || 'password';
 
-const DATABASE = {
-  port: DB_PORT,
-  username: DB_USER,
-  password: DB_PASSWORD,
-  name: DB_NAME,
-  host: DB_HOST
+
+const MYSQL = {
+  username: MYSQL_USER,
+  password: MYSQL_PASS,
+  database: MYSQL_DATABASE,
+  host: MYSQL_HOST
 };
 
 const config = {
   server: SERVER,
-  database: DATABASE
+  database: MYSQL
 };
 
 export default config;
