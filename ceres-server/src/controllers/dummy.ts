@@ -44,6 +44,44 @@ const createDummy = async (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
+const deleteAllDummy = async (req: Request, res: Response, next: NextFunction) => {
+  logging.info(NAMESPACE, 'Deleting all Dummies.');
+
+  let query = 'DELETE FROM Dummies';
+
+  Connect()
+    .then((connection) => {
+      Query(connection, query)
+        .then((results) => {
+          logging.info(NAMESPACE, 'Deleted dummies: ', results);
+
+          return res.status(200).json({
+            results
+          });
+        })
+        .catch((error) => {
+          logging.error(NAMESPACE, error.message, error);
+
+          return res.status(200).json({
+            message: error.message,
+            error
+          });
+        })
+        .finally(() => {
+          logging.info(NAMESPACE, 'Closing connection.');
+            connection.end();
+        });
+    })
+    .catch((error) => {
+      logging.error(NAMESPACE, error.message, error);
+
+      return res.status(200).json({
+        message: error.message,
+        error
+      });
+    });
+};
+
 const getAllDummy = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Getting all Dummies.');
 
@@ -82,4 +120,4 @@ const getAllDummy = async (req: Request, res: Response, next: NextFunction) => {
     });
 };
 
-export default { createDummy, getAllDummy };
+export default { createDummy, deleteAllDummy, getAllDummy };
