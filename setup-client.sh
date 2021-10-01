@@ -1,3 +1,3 @@
-	cd ceres-client
-	npm install
-	cd ..
+cd ceres-client
+npm install
+cd ..
