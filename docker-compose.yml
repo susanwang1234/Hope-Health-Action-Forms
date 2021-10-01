@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   ceres-client:
@@ -17,6 +17,10 @@ services:
       context: ./ceres-server
       dockerfile: Dockerfile
       target: base
+    depends_on:
+      - ceres-database
+    stdin_open: true
+    tty: true
     volumes:
       - ./ceres-server/src:/home/node/app/src
       - ./ceres-server/nodemon.json:/home/node/app/nodemon.json
@@ -24,3 +28,12 @@ services:
     ports:
       - 8080:8080
     command: npm run dev
+
+  ceres-database:
+    image: mysql:8.0
+    build: ./ceres-database
+    environment:
+      - MYSQL_DATABASE=ceresdb
+      - MYSQL_USER=HHA
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password

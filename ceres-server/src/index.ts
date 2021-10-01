@@ -1,16 +1,66 @@
+/** Use strict */
 'use strict';
 
-import express from "express";
+/** Import modules */
+import http from 'http';
+import express from 'express';
+import logging from './config/logging';
+import config from './config/config';
+import dashboardRoutes from './routes/dashboard';
+import departmentRoutes from './routes/department';
+import dummyRoutes from './routes/dummy';
 
-// Constants
-const PORT = 8080;
-const app = express();
+/** Define server */
+const NAMESPACE = 'Server';
+const router = express();
 
-// Sample GET request
-app.get("/", (req, res) => {
-    res.send( "Ceres" );
+/** Default request */
+router.get("/", (req, res) => {
+    res.send( "Welcome to Team Ceres" );
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+/** Logging Requests */
+router.use((req, res, next) => {
+  logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
+
+  res.on('finish', () => {
+    logging.info(NAMESPACE, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}], STATUS - [${res.statusCode}]`);
+  });
+
+  next();
 });
+
+/** parsing requests */
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
+
+/** Rules of api */
+router.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // TODO Change access where routes and ips predefined when deployed to production
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type Accept, Authorization');
+
+  if (req.method == 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
+    return res.status(200).json({});
+  }
+
+  next();
+});
+
+/** Routes */
+router.use('', dashboardRoutes);
+router.use('/department', departmentRoutes);
+router.use('/dummy', dummyRoutes);
+
+/** Error Handling */
+router.use((req, res, next) => {
+  const error = new Error('not found');
+
+  return res.status(404).json({
+    message: error.message
+  });
+});
+
+/** Create the server */
+const httpServer = http.createServer(router);
+httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
