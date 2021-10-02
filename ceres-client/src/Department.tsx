@@ -4,11 +4,11 @@ import './App.css';
 function Department() {
     return(
         <div className="min-h-screen">
-            <div className="mt-8 grid grid-cols-3 gap-4">
-                <div className="py-56 text-center mx-6 row-span-3 bg-gray-300 rounded">Case Studies</div>
-                <div className="py-56 text-center mx-6 row-span-3 bg-gray-300 rounded">Reports</div>
-                <div className="py-28 text-center mx-6 bg-gray-300 rounded">Employee of the Month</div>
-                <div className="py-28 text-center mx-6 bg-gray-300 rounded">Leaderboard</div>
+            <div className="mt-8 grid grid-cols-3 gap-4 h-screen p-6">
+                <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">Case Studies</div>
+                <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">Reports</div>
+                <div className="text-center mx-6 bg-gray-300 rounded">Employee of the Month</div>
+                <div className="text-center mx-6 row-span-2 bg-gray-300 rounded">Leaderboard</div>
             </div>
             
         </div>
