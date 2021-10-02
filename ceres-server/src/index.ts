@@ -9,6 +9,7 @@ import config from './config/config';
 import dashboardRoutes from './routes/dashboard';
 import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
+import testDatabaseRoutes from './routes/testDatabase';
 
 /** Define server */
 const NAMESPACE = 'Server';
@@ -51,6 +52,7 @@ router.use((req, res, next) => {
 router.use('', dashboardRoutes);
 router.use('/department', departmentRoutes);
 router.use('/dummy', dummyRoutes);
+router.use('/testDatabase', testDatabaseRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {
