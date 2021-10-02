@@ -3,8 +3,46 @@ import './App.css';
 
 function Department() {
     return(
+        <div className="min-h-screen">
+            <div className="mt-8 grid grid-cols-3 gap-4">
+                <div className="py-56 text-center mx-6 row-span-3 bg-gray-300 rounded">Case Studies</div>
+                <div className="py-56 text-center mx-6 row-span-3 bg-gray-300 rounded">Reports</div>
+                <div className="py-28 text-center mx-6 bg-gray-300 rounded">Employee of the Month</div>
+                <div className="py-28 text-center mx-6 bg-gray-300 rounded">Leaderboard</div>
+            </div>
+            
+        </div>
+    );
+}
+
+function CaseStudy() {
+    return(
         <div>
-            <h1>Department Page</h1>
+            <h1>Case Studies</h1>
+        </div>
+    );
+}
+
+function Report() {
+    return(
+        <div>
+            <h1>Reports</h1>
+        </div>
+    );
+}
+
+function EmployeeOfTheMonth() {
+    return(
+        <div>
+            <h1>Employee of the Month</h1>
+        </div>
+    );
+}
+
+function LeaderBoard() {
+    return(
+        <div>
+            <h1>Leaderboard</h1>
         </div>
     );
 }
