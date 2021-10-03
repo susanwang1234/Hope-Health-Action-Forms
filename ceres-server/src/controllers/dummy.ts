@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
-import { Connect, Query } from '../config/mysql';
+import { Connect, knex, Query } from '../config/mysql';
 
 const NAMESPACE = 'Dummies';
 
@@ -84,6 +84,9 @@ const deleteAllDummy = async (req: Request, res: Response, next: NextFunction) =
 
 const getAllDummy = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Getting all Dummies.');
+
+  const dummies = await knex.select('*').from('Dummies');
+  console.log('DUMMIES FROM KNEX', dummies)
 
   let query = 'SELECT * FROM Dummies';
 
