@@ -44,44 +44,6 @@ const createTestDatabase = async (req: Request, res: Response, next: NextFunctio
     });
 };
 
-const deleteAllTestDatabase = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, 'Deleting Rehab Deaths.');
-
-  let query = 'DELETE FROM Rehab_Report.Rehab_Deaths';
-
-  Connect()
-    .then((connection) => {
-      Query(connection, query)
-        .then((results) => {
-          logging.info(NAMESPACE, 'Deleted Rehab Deaths: ', results);
-
-          return res.status(200).json({
-            results
-          });
-        })
-        .catch((error) => {
-          logging.error(NAMESPACE, error.message, error);
-
-          return res.status(200).json({
-            message: error.message,
-            error
-          });
-        })
-        .finally(() => {
-          logging.info(NAMESPACE, 'Closing connection.');
-            connection.end();
-        });
-    })
-    .catch((error) => {
-      logging.error(NAMESPACE, error.message, error);
-
-      return res.status(200).json({
-        message: error.message,
-        error
-      });
-    });
-};
-
 const getAllTestDatabase = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Getting all Rehab Deaths.');
 
@@ -120,4 +82,4 @@ const getAllTestDatabase = async (req: Request, res: Response, next: NextFunctio
     });
 };
 
-export default { createTestDatabase, deleteAllTestDatabase, getAllTestDatabase };
+export default { createTestDatabase, getAllTestDatabase };

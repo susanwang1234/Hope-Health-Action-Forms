@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS Rehab_Report.Rehab_Report (
   outpatients INT NULL,
   PRIMARY KEY (id),
   UNIQUE INDEX id_UNIQUE (id ASC) VISIBLE);
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -58,7 +57,6 @@ CREATE TABLE IF NOT EXISTS Rehab_Report.Rehab_Deaths (
     REFERENCES Rehab_Report.Rehab_Report (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -77,8 +75,7 @@ CREATE TABLE IF NOT EXISTS Rehab_Report.Rehab_Discharges (
     REFERENCES Rehab_Report.Rehab_Report (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-ENGINE = InnoDB;
-
+    
 
 -- -----------------------------------------------------
 -- Table Rehab_Report.Rehab_Stays
@@ -96,7 +93,6 @@ CREATE TABLE IF NOT EXISTS Rehab_Report.Rehab_Stays (
     REFERENCES Rehab_Report.Rehab_Report (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -118,7 +114,6 @@ CREATE TABLE IF NOT EXISTS Rehab_Report.Rehab_Admissions (
     REFERENCES Rehab_Report.Rehab_Report (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -137,15 +132,14 @@ CREATE TABLE IF NOT EXISTS Rehab_Report.Rehab_Outpatient (
     REFERENCES Rehab_Report.Rehab_Report (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
-ENGINE = InnoDB;
 
 
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-GRANT SELECT ON Rehab_Report.Rehab_Deaths TO 'HHA'@'ceres-database';
-GRANT INSERT ON Rehab_Report.Rehab_Deaths TO 'HHA'@'ceres-database';
-GRANT DELETE ON Rehab_Report.Rehab_Deaths TO 'HHA'@'ceres-database';
+-- GRANT SELECT ON Rehab_Report.Rehab_Deaths TO 'HHA'@'ceres-database';
+-- GRANT INSERT ON Rehab_Report.Rehab_Deaths TO 'HHA'@'ceres-database';
+-- GRANT DELETE ON Rehab_Report.Rehab_Deaths TO 'HHA'@'ceres-database';
 
 ALTER USER 'HHA' IDENTIFIED WITH mysql_native_password BY 'password';
 
