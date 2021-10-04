@@ -1,18 +1,22 @@
 <h1>Ceres Client and Serverside</h1> <br>
 
-If this is your first time setting up the environment, proceed with Section A<br>
-The steps in Section A only need to be done once. Once completed, only follow the steps in Section B<br>
+Proceed with Section A if:<br>
+
+1. This is your first time setting up the environment<br>
+2. New dependencies were added<br>
+
+Otherwise proceed to Section B<br>
 
 \*\*\*If the commands "make \_\_\_\_" do not work, refer only to Section C<br>
 
 A video tutorial for setting up the environment can be found here: https://youtu.be/p5ku4wTy-FQ <br>
 
-------------------------Section A------------------------<br>
+-----------------------------------Section A-----------------------------------<br>
 
 - Instructions on setting up the build (From the ./ directory)<br>
   --- make setup<br>
 
-------------------------Section B------------------------<br>
+-----------------------------------Section B-----------------------------------<br>
 
 - Steps to run (From the ./ directory) <br>
   --- make build<br>
@@ -27,7 +31,13 @@ A video tutorial for setting up the environment can be found here: https://youtu
 - To shut down the Docker containers (From the ./ directory)<br>
   --- make down<br>
 
-------------------------Section C------------------------<br>
+-----------------------------------Section C-----------------------------------<br>
+
+Proceed with Section C if:<br>
+
+1. This is your first time setting up the environment<br>
+2. New dependencies were added<br>
+3. The commands "make \_\_\_\_" do not work<br>
 
 - Instructions on setting up the build (From the ./ directory)<br>
   --- ./setup.sh<br>
@@ -36,9 +46,9 @@ A video tutorial for setting up the environment can be found here: https://youtu
   --- chmod +x setup.sh<br>
   --- ./setup.sh<br>
 
-The steps in Section C only need to be done once. Once completed, only follow the steps in Section D<br>
+Otherwise proceed to Section D<br>
 
-------------------------Section D------------------------<br>
+-----------------------------------Section D-----------------------------------<br>
 
 - Steps to run (From the ./ directory) <br>
   --- docker-compose build<br>
