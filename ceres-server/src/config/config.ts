@@ -28,5 +28,4 @@ const config = {
   database: MYSQL
 };
 
-
 export default config;
