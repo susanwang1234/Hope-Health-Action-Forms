@@ -10,38 +10,37 @@ const dbParams = {
 };
 
 const Connect = async () =>
-    new Promise<mysql.Connection>((resolve, reject) => {
-        const connection = mysql.createConnection(dbParams);
-        connection.connect((error) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-            resolve(connection);
-        });
+  new Promise<mysql.Connection>((resolve, reject) => {
+    const connection = mysql.createConnection(dbParams);
+    connection.connect((error) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(connection);
     });
+  });
 
 const Query = async (connection: mysql.Connection, query: string) =>
-    new Promise((resolve, reject) => {
-        connection.query(query, connection, (error, result) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-            resolve(result);
-        });
+  new Promise((resolve, reject) => {
+    connection.query(query, connection, (error, result) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(result);
     });
+  });
 
-
-const knex = require('knex')({
-    client: 'mysql2',
-    connection: {
-        host: config.database.host,
-        port: 3306,
-        user: config.database.username,
-        password: config.database.password,
-        database: config.database.database
-    }
+const Knex = require('knex')({
+  client: 'mysql2',
+  connection: {
+    host: config.database.host,
+    port: 3306,
+    user: config.database.username,
+    password: config.database.password,
+    database: config.database.database
+  }
 });
 
-export { Connect, Query, knex };
+export { Connect, Query, Knex };

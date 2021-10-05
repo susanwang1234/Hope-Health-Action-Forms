@@ -1,9 +1,11 @@
-version: "3.8"
+version: '3.8'
 
 services:
   ceres-client:
     build:
       context: ./ceres-client
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./ceres-client:/ceres-client
     ports:

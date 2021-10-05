@@ -9,14 +9,15 @@ import config from './config/config';
 import dashboardRoutes from './routes/dashboard';
 import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
+import rehabReportRoutes from './routes/rehabReport';
 
 /** Define server */
 const NAMESPACE = 'Server';
 const router = express();
 
 /** Default request */
-router.get("/", (req, res) => {
-    res.send( "Welcome to Team Ceres" );
+router.get('/', (req, res) => {
+  res.send('Welcome to Team Ceres');
 });
 
 /** Logging Requests */
@@ -51,6 +52,7 @@ router.use((req, res, next) => {
 router.use('', dashboardRoutes);
 router.use('/department', departmentRoutes);
 router.use('/dummy', dummyRoutes);
+router.use('/rehab_report', rehabReportRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {

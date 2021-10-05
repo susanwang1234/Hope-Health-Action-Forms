@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
-import { Connect, knex, Query } from '../config/mysql';
+import { Knex } from '../config/mysql';
 
 const NAMESPACE = 'Dummies';
 
@@ -9,8 +9,8 @@ const createDummy = async (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const { dummyName, dummyInfo } = req.body;
-    const createdDummyId = await knex.insert({ dummies_name: dummyName, dummies_info: dummyInfo }).into('Dummies');
-    const createdDummy = await knex.select('*').from('Dummies').where('dummies_id', '=', createdDummyId);
+    const createdDummyId = await Knex.insert({ dummies_name: dummyName, dummies_info: dummyInfo }).into('Dummies');
+    const createdDummy = await Knex.select('*').from('Dummies').where('dummies_id', '=', createdDummyId);
     logging.info(NAMESPACE, 'Created dummy:', createdDummy);
     res.status(201).send(createdDummy);
   } catch (error: any) {
@@ -23,7 +23,7 @@ const deleteAllDummy = async (req: Request, res: Response, next: NextFunction) =
   logging.info(NAMESPACE, 'Deleting all Dummies.');
 
   try {
-    await knex('Dummies').del();
+    await Knex('Dummies').del();
     logging.info(NAMESPACE, 'Deleted all dummies');
     res.sendStatus(204);
   } catch (error: any) {
@@ -36,7 +36,7 @@ const getAllDummy = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Getting all Dummies.');
 
   try {
-    const dummies = await knex.select('*').from('Dummies');
+    const dummies = await Knex.select('*').from('Dummies');
     logging.info(NAMESPACE, 'Retrieved dummies:', dummies);
     res.status(200).send(dummies);
   } catch (error: any) {
