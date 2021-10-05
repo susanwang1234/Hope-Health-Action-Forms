@@ -32,4 +32,16 @@ const Query = async (connection: mysql.Connection, query: string) =>
         });
     });
 
-export { Connect, Query };
+
+const knex = require('knex')({
+    client: 'mysql2',
+    connection: {
+        host: config.database.host,
+        port: 3306,
+        user: config.database.username,
+        password: config.database.password,
+        database: config.database.database
+    }
+});
+
+export { Connect, Query, knex };

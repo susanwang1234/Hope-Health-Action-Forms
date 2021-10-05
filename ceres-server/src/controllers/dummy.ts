@@ -1,123 +1,48 @@
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
-import { Connect, Query } from '../config/mysql';
+import { Connect, knex, Query } from '../config/mysql';
 
 const NAMESPACE = 'Dummies';
 
 const createDummy = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, 'Inserting Dummies');
+  logging.info(NAMESPACE, 'Creating Dummy');
 
-  let { dummies_name, dummies_info } = req.body;
-
-  let query = `INSERT INTO Dummies (dummies_name, dummies_info) VALUES ("${dummies_name}", "${dummies_info}")`;
-
-  Connect()
-    .then((connection) => {
-      Query(connection, query)
-        .then((result) => {
-          logging.info(NAMESPACE, 'Dummy created: ', result);
-
-          return res.status(200).json({
-            result
-          });
-        })
-        .catch((error) => {
-          logging.error(NAMESPACE, error.message, error);
-
-          return res.status(200).json({
-            message: error.message,
-            error
-          });
-        })
-        .finally(() => {
-          logging.info(NAMESPACE, 'Closing connection.');
-          connection.end();
-        });
-    })
-    .catch((error) => {
-      logging.error(NAMESPACE, error.message, error);
-
-      return res.status(200).json({
-        message: error.message,
-        error
-      });
-    });
+  try {
+    const { dummyName, dummyInfo } = req.body;
+    const createdDummyId = await knex.insert({ dummies_name: dummyName, dummies_info: dummyInfo }).into('Dummies');
+    const createdDummy = await knex.select('*').from('Dummies').where('dummies_id', '=', createdDummyId);
+    logging.info(NAMESPACE, 'Created dummy:', createdDummy);
+    res.status(201).send(createdDummy);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error.message);
+  }
 };
 
 const deleteAllDummy = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Deleting all Dummies.');
 
-  let query = 'DELETE FROM Dummies';
-
-  Connect()
-    .then((connection) => {
-      Query(connection, query)
-        .then((results) => {
-          logging.info(NAMESPACE, 'Deleted dummies: ', results);
-
-          return res.status(200).json({
-            results
-          });
-        })
-        .catch((error) => {
-          logging.error(NAMESPACE, error.message, error);
-
-          return res.status(200).json({
-            message: error.message,
-            error
-          });
-        })
-        .finally(() => {
-          logging.info(NAMESPACE, 'Closing connection.');
-            connection.end();
-        });
-    })
-    .catch((error) => {
-      logging.error(NAMESPACE, error.message, error);
-
-      return res.status(200).json({
-        message: error.message,
-        error
-      });
-    });
+  try {
+    await knex('Dummies').del();
+    logging.info(NAMESPACE, 'Deleted all dummies');
+    res.sendStatus(204);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
 };
 
 const getAllDummy = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Getting all Dummies.');
 
-  let query = 'SELECT * FROM Dummies';
-
-  Connect()
-    .then((connection) => {
-      Query(connection, query)
-        .then((results) => {
-          logging.info(NAMESPACE, 'Retrieved dummy: ', results);
-
-          return res.status(200).json({
-            results
-          });
-        })
-        .catch((error) => {
-          logging.error(NAMESPACE, error.message, error);
-
-          return res.status(200).json({
-            message: error.message,
-            error
-          });
-        })
-        .finally(() => {
-          logging.info(NAMESPACE, 'Closing connection.');
-            connection.end();
-        });
-    })
-    .catch((error) => {
-      logging.error(NAMESPACE, error.message, error);
-
-      return res.status(200).json({
-        message: error.message,
-        error
-      });
-    });
+  try {
+    const dummies = await knex.select('*').from('Dummies');
+    logging.info(NAMESPACE, 'Retrieved dummies:', dummies);
+    res.status(200).send(dummies);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error.message);
+  }
 };
 
 export default { createDummy, deleteAllDummy, getAllDummy };
