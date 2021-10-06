@@ -1,28 +1,11 @@
 import React from "react";
 import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
 import NavBar from './components/NavBar'
 
 function Department() {
     return(
-        <Router>
-          <Switch>  
-              <Route exact path='/' component={renderDepartment}/>
-              <NavBar />
-              <Route path='/Department-home-page' component={renderDepartment}/>
-          </Switch>
-        </Router>
-      )
-}
-
-function renderDepartment(){
-    return(
-                <NavBar/>
-                /*{ {CaseStudy()}
-                {dataPreview()}
-                {EmployeeOfTheMonth()}
-                {LeaderBoard()} }*/
-    );
+    <NavBar/>
+    )
 }
 
 function CaseStudy() {

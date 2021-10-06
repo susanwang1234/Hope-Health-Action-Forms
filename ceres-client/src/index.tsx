@@ -8,7 +8,7 @@ import Department from './Department';
 
 ReactDOM.render(
     <React.StrictMode>
-    <Department />
+    <App />
   </React.StrictMode> ,document.getElementById('root')
 );
 

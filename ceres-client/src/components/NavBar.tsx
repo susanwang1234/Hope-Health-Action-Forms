@@ -12,7 +12,7 @@ class NavBar extends React.Component{
                     <Link to='Department-data'>
                     <li>Data</li>
                     </Link>
-                    <li>log out</li>
+                    <li><button>Logout</button></li>
                 </ul>
             </nav>
         )
