@@ -2,14 +2,7 @@
 import mysql from 'mysql2';
 import config from '../config/config';
 
-const dbParams = {
-  host: config.database.host,
-  user: config.database.username,
-  password: config.database.password,
-  database: config.database.database
-};
-
-const pool = mysql.createPool(dbParams);
+const pool = mysql.createPool(config.database);
 
 export const Query = <T = any>(query: string, values?: any) => {
   return new Promise((resolve, reject) => {

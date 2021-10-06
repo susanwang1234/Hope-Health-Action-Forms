@@ -22,9 +22,16 @@ const MYSQL = {
   host: MYSQL_HOST
 };
 
+const JWT_SECRET = process.env.JWT_SECRET || 'this-is-a-dev-secret';
+
+const JWT = {
+  secret: JWT_SECRET
+};
+
 const config = {
   server: SERVER,
-  database: MYSQL
+  database: MYSQL,
+  jwt: JWT
 };
 
 export default config;
