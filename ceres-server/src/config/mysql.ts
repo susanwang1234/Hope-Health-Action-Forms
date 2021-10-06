@@ -9,28 +9,19 @@ const dbParams = {
   database: config.database.database
 };
 
-const Connect = async () =>
-  new Promise<mysql.Connection>((resolve, reject) => {
-    const connection = mysql.createConnection(dbParams);
-    connection.connect((error) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(connection);
-    });
-  });
+const pool = mysql.createPool(dbParams);
 
-const Query = async (connection: mysql.Connection, query: string) =>
-  new Promise((resolve, reject) => {
-    connection.query(query, connection, (error, result) => {
-      if (error) {
-        reject(error);
-        return;
+const Query = <T = any>(query: string, values?: any) => {
+  return new Promise((resolve, reject) => {
+    pool.query(query, values, (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
       }
-      resolve(result);
     });
   });
+};
 
 const Knex = require('knex')({
   client: 'mysql2',
@@ -43,4 +34,4 @@ const Knex = require('knex')({
   }
 });
 
-export { Connect, Query, Knex };
+export { Query, Knex };
