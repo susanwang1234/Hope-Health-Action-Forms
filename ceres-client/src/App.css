@@ -1,6 +1,24 @@
 .App {
   text-align: center;
 }
+button{
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 30px;
+}
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 7vh;
+  background-color: rgb(116, 116, 116);
+}
+.nav-links{
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  color: white;
+}
 
 .App-logo {
   height: 40vmin;
