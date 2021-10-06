@@ -11,7 +11,7 @@ const dbParams = {
 
 const pool = mysql.createPool(dbParams);
 
-const Query = <T = any>(query: string, values?: any) => {
+export const Query = <T = any>(query: string, values?: any) => {
   return new Promise((resolve, reject) => {
     pool.query(query, values, (err, results) => {
       if (err) {
@@ -23,7 +23,7 @@ const Query = <T = any>(query: string, values?: any) => {
   });
 };
 
-const Knex = require('knex')({
+export const Knex = require('knex')({
   client: 'mysql2',
   connection: {
     host: config.database.host,
@@ -34,4 +34,8 @@ const Knex = require('knex')({
   }
 });
 
-export { Query, Knex };
+import users from './queries/users';
+
+export default {
+  users
+};
