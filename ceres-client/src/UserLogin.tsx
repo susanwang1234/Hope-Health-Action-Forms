@@ -11,7 +11,7 @@ interface FormData{
 }
 
 
-function App() {
+function UserLogin() {
   const { register, handleSubmit, formState: { errors }} = useForm<FormData>({mode: "onChange"});
 
   const onSubmit = handleSubmit(({username, password, remember}) => {
@@ -69,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+export default UserLogin;
