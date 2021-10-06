@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
-import { Knex } from '../config/mysql';
+import { Knex } from '../db/mysql';
 
 const NAMESPACE = 'Dummies';
 

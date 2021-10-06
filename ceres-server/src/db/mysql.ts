@@ -1,6 +1,6 @@
 /** database module */
 import mysql from 'mysql2';
-import config from './config';
+import config from '../config/config';
 
 const dbParams = {
   host: config.database.host,
