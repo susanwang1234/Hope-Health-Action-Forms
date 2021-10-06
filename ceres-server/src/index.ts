@@ -10,6 +10,7 @@ import dashboardRoutes from './routes/dashboard';
 import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
 import rehabReportRoutes from './routes/rehabReport';
+import routes from './routes/index';
 
 /** Define server */
 const NAMESPACE = 'Server';
@@ -49,6 +50,7 @@ router.use((req, res, next) => {
 });
 
 /** Routes */
+router.use('', routes);
 router.use('', dashboardRoutes);
 router.use('/department', departmentRoutes);
 router.use('/dummy', dummyRoutes);
