@@ -11,6 +11,8 @@ import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
 import rehabReportRoutes from './routes/rehabReport';
 import routes from './routes/index';
+import passport from 'passport';
+import './middlewares/passport-strategies.mw.ts';
 
 /** Define server */
 const NAMESPACE = 'Server';
@@ -35,6 +37,9 @@ router.use((req, res, next) => {
 /** parsing requests */
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
+
+/** passport initialization */
+router.use(passport.initialize());
 
 /** Rules of api */
 router.use((req, res, next) => {
@@ -68,24 +73,3 @@ router.use((req, res, next) => {
 /** Create the server */
 const httpServer = http.createServer(router);
 httpServer.listen(config.server.port, () => logging.info(NAMESPACE, `Server running on ${config.server.hostname}:${config.server.port}`));
-
-import bcrypt, { hash } from 'bcrypt';
-const generateHash = async (password: string) => {
-  try {
-    const salt = await bcrypt.genSalt(12);
-    const hash = await bcrypt.hash(password, salt);
-    console.log(hash);
-  } catch (error) {}
-};
-
-const compareHash = async (password: string, hashed: string) => {
-  try {
-    const val = await bcrypt.compare(password, hashed);
-    console.log(val);
-    return val;
-  } catch (error) {
-    console.log('uh oh');
-  }
-};
-
-// generateHash('password123');

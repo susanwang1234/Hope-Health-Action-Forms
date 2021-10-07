@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     return;
   }
   // validate token
-  jwt.verify(token, config.jwt.secret);
+  const payload = jwt.verify(token, config.jwt.secret);
   res.json({ message: 'sercret obtained endpoint!' });
 });
 

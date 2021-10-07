@@ -5,6 +5,8 @@ import db from '../../db/queries/users';
 import * as userModel from '../../db/models/user';
 import { User } from '../../db/types/user';
 import * as jwt from 'jsonwebtoken';
+import { authenticate } from 'passport';
+import { Request } from 'express';
 
 const router = Router();
 
@@ -17,26 +19,28 @@ const router = Router();
 
 /*       */
 
-router.post('/', async (req, res) => {
+export interface ReqUser extends Request {
+  user?: {
+    id?: number;
+    roleName?: string;
+    departmentName?: string;
+  };
+}
+
+router.post('/', authenticate('local'), async (req: ReqUser, res) => {
   const { username, password } = req.body;
 
   try {
-    userModel.findOne(username, async (err: Error, user: User) => {
-      if (err) {
-        return res.status(500).json({ message: err.message });
-      }
-      const isMatch = await bcrypt.compare(password, user.pwd);
-
-      if (isMatch) {
-        const token = jwt.sign({ userID: user.id, role: user.roleName, department: user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
-        res.json(token);
-        return;
-      }
-    });
+    if (req.user) {
+      const token = jwt.sign({ userID: req.user.id, role: req.user.roleName, department: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
+      res.json(token);
+      return;
+    }
+    throw Error('ERROR: req.user is not defined');
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'oops server went down' });
   }
 });
 
-export = router;
+export default router;

@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 );
 
 
-INSERT INTO `User` (username,pwd,roleID) 
+INSERT INTO `User` (username,pwd,departmentID, roleID) 
 VALUES (
     'admin',
     '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
