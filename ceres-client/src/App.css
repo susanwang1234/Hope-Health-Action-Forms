@@ -36,3 +36,45 @@
     transform: rotate(360deg);
   }
 }
+
+/* Added CSS */
+
+/*min-height-100vh*/
+.min-height-100vh {
+  min-height: 100vh;
+}
+
+/*mt-8 grid grid-cols-3 gap-4 h-screen p-6*/
+.grid-department {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  height: 100vw;
+  padding: 1.5rem;
+}
+
+/*text-center mx-6 row-span-2 bg-gray-300 rounded*/
+.grey-block {
+  text-align: center;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  grid-row: span 2 / span 2;
+  background-color: #e2e8f0;
+  border-radius: 0.25rem;
+}
+
+/*form block*/
+.grey-blocks-form {
+  padding: 10px;
+  width: 50%;
+  height: 50%;
+  background-color: #e2e8f0;
+  border-radius: 0.25rem;
+}
+
+/*header form*/
+.header-form {
+  font-weight: bold;
+  text-align: center;
+}

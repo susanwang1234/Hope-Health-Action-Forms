@@ -4,8 +4,8 @@ import './App.css';
 
 function RehabForm() {
     return(
-        <div>
-            <h1>Rehab Monthly Data Collection</h1>
+        <div className='grey-blocks-form'>
+            <h1 className='header-form'>Rehab Monthly Data Collection</h1>
             Beds avaliable:
             <input type="number" id="beds-avaliable" name="beds-avaliable" min="0" /><br/>
 
@@ -23,3 +23,5 @@ function RehabForm() {
         </div>
     );
 }
+
+export default RehabForm;
