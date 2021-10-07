@@ -3,6 +3,7 @@ import './App.css';
 import { useForm } from 'react-hook-form';
 import Logo from './images/Logo.png';
 import display from './images/CBR_training_March 21.png';
+<<<<<<< HEAD
 
 interface FormData {
   username: string;
@@ -80,6 +81,22 @@ function App() {
         <img src={display} alt="Display" className="object-fill h-screen w-full" />
       </div>
     </div>
+=======
+import Department from './Department';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import UserLogin from './UserLogin';
+
+function App() {
+  return (
+    <Router>
+      <Switch>
+        <Route exact path="/" component={UserLogin} />
+        <Route path="/Department-home-page" component={Department} />
+        <Route path="bv/Department-data" component={Department}></Route>
+      </Switch>
+    </Router>
+>>>>>>> 19-create-dataPreview-component
   );
 }
 
