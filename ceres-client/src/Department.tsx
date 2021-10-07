@@ -5,6 +5,12 @@ function Department() {
   return <NavBar />;
 }
 
+function renderDepartment(){
+    return(
+        <NavBar/>
+    );
+}
+
 function CaseStudy() {
   return (
     <div>
