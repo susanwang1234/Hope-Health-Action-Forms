@@ -17,8 +17,8 @@ function Department() {
                 <div className="mt-8 grid grid-cols-3 gap-4 h-screen p-6">
                     <div 
                         className="text-lg font-bold text-center mx-6 row-span-3 bg-gray-300 flex flex-col justify-end rounded">Case Studies
-                        <button className="font-bold text-white py-2 px-4 hover:bg-blue-700 bg-blue-400 rounded-full">Current Case Study</button>
-                        <button className="font-bold text-white py-2 px-4 hover:bg-green-800 bg-green-400 rounded-full">+ Add Case Study</button>
+                        <button className="font-bold text-white mx-6 py-2 px-4 hover:bg-blue-700 bg-blue-400 rounded-full">Current Case Study</button>
+                        <button className="font-bold text-white mx-6 my-6 py-2 px-4 hover:bg-green-800 bg-green-400 rounded-full">+ Add Case Study</button>
                     </div>
                     <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">Reports</div>
                     <div className="text-center mx-6 bg-gray-300 rounded">Employee of the Month</div>
