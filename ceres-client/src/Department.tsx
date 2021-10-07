@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import './App.css';
 import NavBar from './components/NavBar'
 
@@ -11,7 +11,7 @@ function Department() {
 function CaseStudy() {
     return(
         <div>
-            <h1 className="text-center mx-6 row-span-3 bg-gray-300 rounded">Case Studies</h1>
+            <h1>Case Studies</h1>
         </div>
     );
 }
