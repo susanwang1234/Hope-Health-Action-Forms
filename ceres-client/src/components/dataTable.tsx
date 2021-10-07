@@ -11,7 +11,7 @@ export class dataTable extends React.Component{
     }
     render(){
         return(
-            <div className = "box"> 
+            <div className="box"> 
                 <button></button>
             </div>
         )
