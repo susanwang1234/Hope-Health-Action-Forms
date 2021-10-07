@@ -7,6 +7,9 @@ import Department from './Department';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import UserLogin from './UserLogin';
+import dataPage from './dataPage';
+
+
 
 function App() {
   return (
@@ -14,7 +17,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={UserLogin} />
         <Route path="/Department-home-page" component={Department} />
-        <Route path="bv/Department-data" component={Department}></Route>
+        <Route path="/Department-data" component={Department}/>
+        <Route path="/dataPage" component={dataPage}/>
       </Switch>
     </Router>
   );
