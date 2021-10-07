@@ -19,10 +19,6 @@ function UserLogin() {
 
   const onSubmit = handleSubmit(({username, password, remember}) => {
     console.log(username, password, remember);
-    const history = useHistory();
-    
-    history.push("/");
-
 
 
   })
