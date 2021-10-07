@@ -4,7 +4,7 @@ services:
   ceres-client:
     build:
       context: ./ceres-client
-    environment:
+  environment:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./ceres-client:/ceres-client
@@ -24,8 +24,7 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ./ceres-server/src:/home/node/app/src
-      - ./ceres-server/nodemon.json:/home/node/app/nodemon.json
+      - ./ceres-server:/home/node/app/
     container_name: ceres-server
     ports:
       - 8080:8080
