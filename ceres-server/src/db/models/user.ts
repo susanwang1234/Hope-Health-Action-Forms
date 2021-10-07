@@ -1,9 +1,9 @@
-import { BasicUser, User } from '../types/user';
+import { User } from '../types/user';
 import { db } from '../mysql';
 import { OkPacket, RowDataPacket } from 'mysql2';
 
 export const findOne = (username: string, callback: Function) => {
-  const queryString = `SELECT U.username, U.pwd, D.departmentName, R.roleName 
+  const queryString = `SELECT U.id, U.username, U.pwd, D.departmentName, R.roleName 
                         FROM User AS U, Role AS R, Department AS D
                         WHERE (U.username = ? AND R.id = U.roleID AND D.id = U.departmentID)`;
 

@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import config from '../../config/config';
 import db from '../../db/queries/users';
 import * as userModel from '../../db/models/user';
-import { User, BasicUser } from '../../db/types/user';
+import { User } from '../../db/types/user';
 import * as jwt from 'jsonwebtoken';
 
 const router = Router();
@@ -28,8 +28,9 @@ router.post('/', async (req, res) => {
       const isMatch = await bcrypt.compare(password, user.pwd);
 
       if (isMatch) {
-        const token = jwt.sign({ userID: user.id, role: user.roleName, department: user.departmentName }, config.jwt.secret);
-        return res.status(200).json('successful!');
+        const token = jwt.sign({ userID: user.id, role: user.roleName, department: user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
+        res.json(token);
+        return;
       }
     });
   } catch (error) {

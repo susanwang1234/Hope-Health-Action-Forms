@@ -1,8 +1,5 @@
-export interface BasicUser {
+export interface User {
   id: number;
-}
-
-export interface User extends BasicUser {
   username: string;
   pwd: string;
   departmentName: string;
