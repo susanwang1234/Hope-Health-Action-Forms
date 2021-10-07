@@ -15,7 +15,6 @@ const MYSQL_DATABASE = process.env.MYSQL_DATABASE || 'ceresdb';
 const MYSQL_USER = process.env.MYSQL_HOST || 'HHA';
 const MYSQL_PASS = process.env.MYSQL_HOST || 'password';
 
-
 const MYSQL = {
   username: MYSQL_USER,
   password: MYSQL_PASS,
