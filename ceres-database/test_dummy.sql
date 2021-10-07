@@ -1,7 +1,7 @@
 CREATE TABLE Dummies(
-	dummies_id INT PRIMARY KEY AUTO_INCREMENT,
-	dummies_name VARCHAR(60),
-	dummies_info INT
+  dummies_id INT PRIMARY KEY AUTO_INCREMENT,
+  dummies_name VARCHAR(60),
+  dummies_info INT
 );
 
 INSERT INTO Dummies(dummies_name, dummies_info) VALUES("Dummy1", 111);
