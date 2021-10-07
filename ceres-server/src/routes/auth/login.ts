@@ -1,29 +1,37 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { Knex } from '../../db/mysql';
+import config from '../../config/config';
+import db from '../../db/queries/users';
+import * as userModel from '../../db/models/user';
+import { User, BasicUser } from '../../db/types/user';
+import * as jwt from 'jsonwebtoken';
 
 const router = Router();
+
+/*     const data = await Knex('User')
+      .join('Role', 'User.roleID', 'Role.id')
+      .join('Department', 'User.departmentID', 'Department.ID')
+      .select('User.username as username', 'User.pwd as password', 'Department.departmentName as departmentName')
+      .where('username',username)
+      .andWhere('U.roleID',) */
+
+/*       */
 
 router.post('/', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const [userFound] = await Knex.raw(
-      `SELECT U.username, U.pwd,  R.roleName, D.departmentName
-      FROM User AS U, Role AS R, Department AS D
-      WHERE (U.username = ? AND R.id = U.roleID)`,
-      [username]
-    );
-    console.log(userFound);
-    // console.log(userFound);
-    // console.log(password);
+    userModel.findOne(username, async (err: Error, user: User) => {
+      if (err) {
+        return res.status(500).json({ message: err.message });
+      }
+      const isMatch = await bcrypt.compare(password, user.pwd);
 
-    // const isValid = await bcrypt.compare(password, userFound.pwd);
-
-    // if (userFound && isValid) {
-    //   return res.json('successful!');
-    // }
-    return res.status(401).json({ message: 'wrong username or password' });
+      if (isMatch) {
+        const token = jwt.sign({ userID: user.id, role: user.roleName, department: user.departmentName }, config.jwt.secret);
+        return res.status(200).json('successful!');
+      }
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'oops server went down' });

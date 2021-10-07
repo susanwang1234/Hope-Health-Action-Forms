@@ -14,6 +14,7 @@ INSERT INTO `User` (username,pwd,roleID)
 VALUES (
     'admin',
     '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
+    1,
     1
     );
 
