@@ -3,6 +3,12 @@ import './App.css';
 import { useForm } from 'react-hook-form';
 import Logo from './images/Logo.png';
 import display from './images/CBR_training_March 21.png';
+<<<<<<< HEAD
+=======
+import {Link} from "react-router-dom"
+import { useHistory } from "react-router-dom";
+
+>>>>>>> master
 
 interface FormData{
   username: string
@@ -16,6 +22,11 @@ function UserLogin() {
 
   const onSubmit = handleSubmit(({username, password, remember}) => {
     console.log(username, password, remember);
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
   })
 
   return (
@@ -69,4 +80,8 @@ function UserLogin() {
   );
 }
 
+<<<<<<< HEAD
 export default UserLogin;
+=======
+export default UserLogin;
+>>>>>>> master
