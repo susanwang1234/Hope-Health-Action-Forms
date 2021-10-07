@@ -1,12 +1,8 @@
 import { Router } from 'express';
-import bcrypt from 'bcrypt';
 import config from '../../config/config';
-import db from '../../db/queries/users';
-import * as userModel from '../../db/models/user';
-import { User } from '../../db/types/user';
 import * as jwt from 'jsonwebtoken';
 import { authenticate } from 'passport';
-import { Request } from 'express';
+import { ReqUser } from '../../types';
 
 const router = Router();
 
@@ -19,20 +15,12 @@ const router = Router();
 
 /*       */
 
-export interface ReqUser extends Request {
-  user?: {
-    id?: number;
-    roleName?: string;
-    departmentName?: string;
-  };
-}
-
 router.post('/', authenticate('local'), async (req: ReqUser, res) => {
   const { username, password } = req.body;
 
   try {
     if (req.user) {
-      const token = jwt.sign({ userID: req.user.id, role: req.user.roleName, department: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
+      const token = jwt.sign({ userID: req.user.id, username: req.user.username, role: req.user.roleName, department: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
       res.json(token);
       return;
     }

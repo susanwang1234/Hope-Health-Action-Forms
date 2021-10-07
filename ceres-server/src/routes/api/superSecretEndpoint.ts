@@ -1,21 +1,18 @@
 import { Router } from 'express';
-import config from '../../config/config';
-import * as jwt from 'jsonwebtoken';
+import { ReqUser } from '../../types';
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  // only get resource if authenticated
-  const bearerToken = req.headers.authorization === undefined ? undefined : req.headers.authorization.split(' ');
-  const token = bearerToken && bearerToken[0] === 'Bearer' ? bearerToken[1] : null;
-
-  if (!bearerToken || !token) {
-    res.status(401).json({ message: 'unauthorized' });
-    return;
+router.get('/', (req: ReqUser, res) => {
+  try {
+    if (!req.user) {
+      throw new Error('req.user not instantiated');
+    }
+    res.json({ message: `secret obtained by ${req.user.username}` });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'server error trying to auth' });
   }
-  // validate token
-  const payload = jwt.verify(token, config.jwt.secret);
-  res.json({ message: 'sercret obtained endpoint!' });
 });
 
 export default router;
