@@ -1,17 +1,8 @@
-import React from 'react';
 import './App.css';
+import NavBar from './components/NavBar';
 
 function Department() {
-  return (
-    <div className="min-h-screen">
-      <div className="mt-8 grid grid-cols-3 gap-4 h-screen p-6">
-        <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">Case Studies</div>
-        <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">Reports</div>
-        <div className="text-center mx-6 bg-gray-300 rounded">Employee of the Month</div>
-        <div className="text-center mx-6 row-span-2 bg-gray-300 rounded">Leaderboard</div>
-      </div>
-    </div>
-  );
+  return <NavBar />;
 }
 
 function CaseStudy() {
@@ -22,17 +13,20 @@ function CaseStudy() {
   );
 }
 
-function Report() {
+function dataPreview() {
   return (
-    <div>
-      <h1>Reports</h1>
+    <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">
+      <h1>Current statistics</h1>
+      <button>Department Data</button>
+      <button>Edit Data</button>
+      <button>Add New Data</button>g
     </div>
   );
 }
 
 function EmployeeOfTheMonth() {
   return (
-    <div>
+    <div className="text-center mx-6 bg-gray-300 rounded">
       <h1>Employee of the Month</h1>
     </div>
   );
@@ -40,10 +34,9 @@ function EmployeeOfTheMonth() {
 
 function LeaderBoard() {
   return (
-    <div>
+    <div className="text-center mx-6 row-span-2 bg-gray-300 rounded">
       <h1>Leaderboard</h1>
     </div>
   );
 }
-
 export default Department;

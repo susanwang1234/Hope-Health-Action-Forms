@@ -2,13 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import Department from './Department';
-import RehabForm from './RehabForm';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RehabForm /> 
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -4,6 +4,7 @@ setup:
 	npm install craco
 	npm install @craco/craco
 	npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+	npm install react-router-dom
 	cd ..
 	cd ceres-server
 	npm install
@@ -17,6 +18,7 @@ setup-client:
 	npm install craco
 	npm install @craco/craco
 	npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
+	npm install react-router-dom
 	cd ..
 
 setup-server:
@@ -29,6 +31,9 @@ setup-server:
 
 build:
 	docker-compose build
+
+u:
+	docker-compose up
 
 up:
 	docker-compose up -d
