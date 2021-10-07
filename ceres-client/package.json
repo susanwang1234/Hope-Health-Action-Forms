@@ -47,14 +47,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-<<<<<<< HEAD
     "@types/react-router-dom": "^5.3.0",
     "autoprefixer": "^9.8.8",
     "postcss": "^7.0.39",
-=======
-    "autoprefixer": "^9.8.7",
-    "postcss": "^7.0.38",
->>>>>>> fe9f199884bac8e9fa3eda6879c8f3a4012380ec
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.16"
   }
 }
