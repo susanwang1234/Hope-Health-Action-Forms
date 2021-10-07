@@ -1,7 +1,7 @@
 export interface UsersTable {
   id?: number;
   username?: string;
-  password?: string;
-  role?: number;
-  department?: number;
+  pwd?: string;
+  roleID?: number;
+  departmentID?: number;
 }
