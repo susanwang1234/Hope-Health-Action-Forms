@@ -16,15 +16,12 @@ const router = Router();
 /*       */
 
 router.post('/', authenticate('local'), async (req: ReqUser, res) => {
-  const { username, password } = req.body;
-
   try {
-    if (req.user) {
-      const token = jwt.sign({ userID: req.user.id, username: req.user.username, role: req.user.roleName, department: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
-      res.json(token);
-      return;
+    if (!req.user) {
+      throw Error('ERROR: req.user is not defined');
     }
-    throw Error('ERROR: req.user is not defined');
+    const token = jwt.sign({ userID: req.user.id, username: req.user.username, role: req.user.roleName, department: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
+    res.json(token);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'oops server went down' });
