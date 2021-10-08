@@ -51,6 +51,14 @@ function CaseStudy() {
   );
 }
 
+function CaseStudy() {
+  return (
+    <div>
+      <h1>Case Studies</h1>
+    </div>
+  );
+}
+
 function dataPreview() {
   return (
     <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">

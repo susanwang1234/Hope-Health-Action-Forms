@@ -32,6 +32,9 @@ setup-server:
 build:
 	docker-compose build
 
+u:
+	docker-compose up
+
 up:
 	docker-compose up -d
 
