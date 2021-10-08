@@ -62,3 +62,17 @@ Otherwise proceed to Section D<br>
 
 - To shut down the Docker containers (From the ./ directory)<br>
   --- docker-compose down<br>
+
+<h1>Important Knex commands (executed inside server docker container root)</h1><br>
+
+<h3>Make a migration:</h3><br>
+node_modules/.bin/knex migrate:make -x ts "migration_name"<br>
+
+<h3>Run migrations:</h3><br>
+node_modules/.bin/knex migrate:latest<br>
+
+<h3>Make seed:</h3><br>
+node_modules/.bin/knex seed:make -x ts "seed_name"<br>
+
+<h3>Seed database:</h3><br>
+node_modules/.bin/knex seed:run
