@@ -10,17 +10,13 @@ function Department() {
                 <Route exact path='/' component={renderDepartment}/>
                 <NavBar/>
                 <Route path='/Department-home-page' component={renderDepartment}/>
-
-
             </Switch>
             <div className="min-h-screen">
                 <div className="mt-8 grid grid-cols-3 gap-4 h-screen p-6">
                     <div 
-                        className="text-lg font-bold text-center mx-6 p-4 row-span-3 bg-gray-300 relative rounded">Case Studies
-                        <button className="font-bold text-center text-white mx-6 py-2 px-4 hover:bg-blue-500 bg-blue-400 
-                         absolute bottom-4 left-0 rounded-full">Current Case Study</button>
-                        <button className="font-bold text-center text-white mx-6 my-6 py-2 px-4 hover:bg-green-500 bg-green-400 
-                        w-full absolute bottom-12 left-0 rounded-full">+ Add Case Study</button>
+                        className="text-xl font-bold text-center mx-6 p-4 row-span-3 bg-gray-300 relative rounded">Case Studies
+                        <button className="font-bold text-center text-white py-2 px-4 hover:bg-blue-500 bg-blue-400 w-3/4 absolute bottom-4 left-0 rounded-full">Current Case Study</button>
+                        <button className="font-bold text-center text-white py-2 px-4 hover:bg-green-500 bg-green-400 w-3/4 absolute bottom-12 left-0 rounded-full">+ Add Case Study</button>
                     </div>
                     <div className="text-center mx-6 row-span-3 bg-gray-300 rounded">Reports</div>
                     <div className="text-center mx-6 bg-gray-300 rounded">Employee of the Month</div>
