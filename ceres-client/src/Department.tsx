@@ -17,14 +17,14 @@ function Department() {
             Case Studies
             <div className="flex flex-col items-center">
             <button
-              className="font-bold text-white py-2 px-4 border-0 hover:bg-blue-800 bg-blue-400 
-                         w-9/12 absolute bottom-4 rounded-full"
+              className="font-semibold hover:font-bold text-white py-2 px-4 border-0 hover:bg-blue-800 bg-blue-400 
+                         w-9/12 absolute bottom-4 rounded-md"
             >
               Current Case Study
             </button>
             <button
-              className="font-bold text-white my-6 py-2 px-4 border-0 hover:bg-green-800 bg-green-400 
-                        w-9/12 absolute bottom-12 rounded-full"
+              className="font-semibold hover:font-bold text-white my-6 py-2 px-4 border-0 hover:bg-green-800 bg-green-400 
+                        w-9/12 absolute bottom-12 rounded-md"
             >
               + Add Case Study
             </button>
