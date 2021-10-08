@@ -9,6 +9,10 @@ module.exports = {
       user: process.env.MYSQL_USER || 'HHA',
       password: process.env.MYSQL_PASS || 'password',
       database: process.env.MYSQL_DATABASE || 'ceresdb'
+    },
+    migrations: {
+      directory: './migrations',
+      tableName: 'knex_migrations'
     }
   },
 };
