@@ -13,6 +13,12 @@ export const findOne = (username: string, callback: Function) => {
     }
 
     const row = (<RowDataPacket>result)[0];
+
+    if (row === undefined) {
+      callback(null, undefined);
+      return;
+    }
+
     const user: User = {
       id: row.id,
       username: row.username,

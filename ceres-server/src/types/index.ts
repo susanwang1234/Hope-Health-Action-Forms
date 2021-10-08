@@ -1,11 +1,13 @@
 import { Request } from 'express';
+import { User } from '../db/types/user';
 
 export interface ReqUser extends Request {
-  user?: {
-    id?: number;
-    pwd?: string;
-    username?: string;
-    roleName?: string;
-    departmentName?: string;
-  };
+  user?: User | Payload;
+}
+
+export interface Payload {
+  id: number;
+  username: string;
+  roleName: string;
+  departmentName: string;
 }

@@ -20,7 +20,8 @@ router.post('/', authenticate('local'), async (req: ReqUser, res) => {
     if (!req.user) {
       throw Error('ERROR: req.user is not defined');
     }
-    const token = jwt.sign({ userID: req.user.id, username: req.user.username, role: req.user.roleName, department: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
+    // TODO: reqUser could be either payload or user
+    const token = jwt.sign({ id: req.user.id, username: req.user.username, roleName: req.user.roleName, departmentName: req.user.departmentName }, config.jwt.secret, { expiresIn: '15d' });
     res.json(token);
   } catch (error) {
     console.log(error);
