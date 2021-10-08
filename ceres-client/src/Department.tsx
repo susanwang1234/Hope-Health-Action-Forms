@@ -16,18 +16,18 @@ function Department() {
           <div className="text-lg font-bold text-center p-4 mx-6 row-span-3 bg-gray-300 relative rounded">
             Case Studies
             <div className="flex flex-col items-center">
-            <button
-              className="font-bold text-white py-2 px-4 border-0 hover:bg-blue-800 bg-blue-400 
+              <button
+                className="font-bold text-white py-2 px-4 border-0 hover:bg-blue-800 bg-blue-400 
                          w-9/12 absolute bottom-4 rounded-full"
-            >
-              Current Case Study
-            </button>
-            <button
-              className="font-bold text-white my-6 py-2 px-4 border-0 hover:bg-green-800 bg-green-400 
+              >
+                Current Case Study
+              </button>
+              <button
+                className="font-bold text-white my-6 py-2 px-4 border-0 hover:bg-green-800 bg-green-400 
                         w-9/12 absolute bottom-12 rounded-full"
-            >
-              + Add Case Study
-            </button>
+              >
+                + Add Case Study
+              </button>
             </div>
           </div>
           <div className="text-center mx-6 row-span-3 p-4 bg-gray-300 rounded">Reports</div>
