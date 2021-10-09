@@ -1,12 +1,15 @@
+/*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
+
 .navbar {
     background: #ffffff;
     grid-area: nav;
-    height: 60px;
+    height: auto;
     display: flex;
-    align-items: center;
+    align-items:center;
     justify-content: space-between;
     padding: 0 30px 0 30px;
     border-bottom: 1px solid lightgray;
+    overflow:auto;
   }
   
   .nav_icon {
@@ -17,12 +20,18 @@
     font-size: 26px;
     color: #a5aaad;
   }
+
+  .navlogo {
+    float:left;
+    height: "10px";
+    margin-right: 50px;
+  }
   
   .navbar__left > a {
     margin-right: 30px;
     text-decoration: none;
     color: #a5aaad;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 700;
   }
   

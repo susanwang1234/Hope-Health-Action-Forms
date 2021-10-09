@@ -21,7 +21,7 @@ function Login() {
 
   const onSubmit = handleSubmit(({ username, password, remember }) => {
     console.log(username, password, remember);
-    history.push("/Department-home-page");
+    history.push("/dashboard");
   });
 
   return (

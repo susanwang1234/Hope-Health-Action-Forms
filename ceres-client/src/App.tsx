@@ -10,9 +10,9 @@ function App() {
     <Router>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route path="/Department-home-page" component={Department}></Route>
-        <Route path="bv/Department-data" component={Department}></Route>
-        <Route path="bv/Rehab-form" component={RehabForm}></Route>
+        <Route path="/dashboard" component={Department}></Route>
+        <Route path="bv/data" component={Department}></Route>
+        <Route path="bv/submit-report" component={RehabForm}></Route>
       </Switch>
     </Router>
   );
