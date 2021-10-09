@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import testRouter from './testEndpoint';
+import secretRouter from './superSecretEndpoint';
 
 const router = Router();
 
-router.use('/test', testRouter);
+router.use('/secrets', secretRouter);
 
 export default router;

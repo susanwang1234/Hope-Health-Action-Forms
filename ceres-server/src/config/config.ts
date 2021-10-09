@@ -16,7 +16,7 @@ const MYSQL_USER = process.env.MYSQL_HOST || 'HHA';
 const MYSQL_PASS = process.env.MYSQL_HOST || 'password';
 
 const MYSQL = {
-  username: MYSQL_USER,
+  user: MYSQL_USER,
   password: MYSQL_PASS,
   database: MYSQL_DATABASE,
   host: MYSQL_HOST

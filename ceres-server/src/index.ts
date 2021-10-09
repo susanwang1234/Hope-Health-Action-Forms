@@ -11,6 +11,8 @@ import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
 import rehabReportRoutes from './routes/rehabReport';
 import routes from './routes/index';
+import passport from 'passport';
+import './middlewares/passport-strategies.mw.ts';
 
 /** Define server */
 const NAMESPACE = 'Server';
@@ -35,6 +37,9 @@ router.use((req, res, next) => {
 /** parsing requests */
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
+
+/** passport initialization */
+router.use(passport.initialize());
 
 /** Rules of api */
 router.use((req, res, next) => {
