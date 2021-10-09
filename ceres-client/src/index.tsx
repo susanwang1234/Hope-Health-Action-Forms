@@ -7,7 +7,7 @@ import RehabForm from './RehabForm';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RehabForm />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
