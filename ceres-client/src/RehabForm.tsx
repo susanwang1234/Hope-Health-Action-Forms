@@ -1,30 +1,82 @@
 import './App.css';
+import React, { Component } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 
-function RehabForm() {
-  return (
-    <div className="grey-blocks-form">
-      <h1 className="title-form">Rehab Monthly Data Collection</h1>
-      <label className="margin-left-50px">Beds avaliable: </label>
-      <input className="margin-bottom-25px" type="number" id="beds-avaliable" name="beds-avaliable" min="0" />
-      <br />
+class RehabForm extends Component {
 
-      <label className="margin-left-50px">Bed days: </label>
-      <input className="margin-bottom-25px" type="number" id="bed-days" name="bed-days" min="0" />
-      <br />
+  changeSaved() {
+    alert("Changes saved.");
+  }
 
-      <label className="margin-left-50px">Patient days: </label>
-      <input className="margin-bottom-25px" type="number" id="patient-days" name="patient-days" min="0" />
-      <br />
+  render() {
+    return (
+      <div>
 
-      <label className="margin-left-50px">Hospitalized: </label>
-      <input className="margin-bottom-25px" type="number" id="hospitalized" name="hospitalized" min="0" />
-      <br />
+      <div className="grey-blocks-form">
+        <Form.Label column="lg">Rehab Monthly Data Collection</Form.Label>
 
-      <label className="margin-left-50px">Discharged alive: </label>
-      <input className="margin-bottom-25px" type="number" id="discharged-alive" name="discharged-alive" min="0" />
-      <br />
-    </div>
-  );
+        <Row>
+          <Form.Label className="margin-left-50px" column lg={2}>
+            Beds avaliable: 
+          </Form.Label>
+          <Col>
+            <Form.Control className="width-20-percent" size="sm" type="number" id="beds-avaliable" name="beds-avaliable" min="0" />
+          </Col>
+        </Row>
+        <br />
+
+
+        <Row>
+          <Form.Label className="margin-left-50px" column lg={2}>
+            Bed days: 
+          </Form.Label>
+          <Col>
+            <Form.Control className="width-20-percent" size="sm" type="number" id="bed-days" name="bed-days" min="0" />
+          </Col>
+        </Row>
+        <br />
+
+        <Row>
+          <Form.Label className="margin-left-50px" column lg={2}>
+            Patient days: 
+          </Form.Label>
+          <Col>
+            <Form.Control className="width-20-percent" size="sm" type="number" id="patient-days" name="patient-days" min="0" />
+          </Col>
+        </Row>
+        <br />
+
+        <Row>
+          <Form.Label className="margin-left-50px" column lg={2}>
+            Hospitalized: 
+          </Form.Label>
+          <Col>
+            <Form.Control className="width-20-percent" size="sm" type="number" id="hospitalized" name="hospitalized" min="0" />
+          </Col>
+        </Row>
+        <br />
+
+        <Row>
+          <Form.Label className="margin-left-50px" column lg={2}>
+            Discharged alive: 
+          </Form.Label>
+          <Col>
+            <Form.Control className="width-20-percent" size="sm" type="number" id="discharged-alive" name="discharged-alive" min="0" />
+          </Col>
+        </Row>
+        <br />
+
+      </div>
+
+      <div className="button-form">
+        <Button variant="primary" href="/Department-home-page" onClick={this.changeSaved}>Save</Button>{' '}
+      </div>
+
+      </div>
+      
+    );
+  }
 }
 
 export default RehabForm;
