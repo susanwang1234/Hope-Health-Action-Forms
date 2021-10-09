@@ -11,8 +11,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/dashboard" component={Department}></Route>
-        <Route path="bv/data" component={Department}></Route>
-        <Route path="bv/submit-report" component={RehabForm}></Route>
+        <Route path="/data" component={Department}></Route>
+        <Route path="/submit-report" component={RehabForm}></Route>
       </Switch>
     </Router>
   );
