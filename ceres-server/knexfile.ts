@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    client: "mysql2",
+    client: 'mysql2',
     connection: {
       host: process.env.MYSQL_HOST || 'ceres-database',
       port: process.env.MYSQL_PORT || 3306,
@@ -17,5 +17,5 @@ module.exports = {
     seed: {
       directory: './seeds'
     }
-  },
+  }
 };
