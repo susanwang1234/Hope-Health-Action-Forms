@@ -1,21 +1,21 @@
 .App {
   text-align: center;
 }
-button{
+button {
   padding: 5px;
   border: 1px solid black;
   border-radius: 30px;
   align-items: center;
 }
 
-nav{
+nav {
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 7vh;
   background-color: rgb(116, 116, 116);
 }
-.nav-links{
+.nav-links {
   display: flex;
   justify-content: space-around;
   width: 50%;
@@ -99,19 +99,19 @@ nav{
   text-align: center;
 }
 
-.margin-left-50px{
+.margin-left-50px {
   margin-left: 50px;
 }
 
-.margin-bottom-25px{
+.margin-bottom-25px {
   margin-bottom: 25px;
 }
 
-.width-20-percent{
+.width-20-percent {
   width: 20% !important;
 }
 
-.button-form{
+.button-form {
   height: 100%;
   margin-top: 25px;
   margin-left: 100px;
