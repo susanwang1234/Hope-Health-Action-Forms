@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable('DepartmentQuestions', (table: Knex.CreateTableBuilder) => {
+  return knex.schema.createTable('DepartmentQuestion', (table: Knex.CreateTableBuilder) => {
     table.increments();
     table.integer('departmentId').unsigned().notNullable().references('id').inTable('Department');
     table.integer('questionId').unsigned().notNullable().references('id').inTable('Questions');
@@ -9,8 +9,6 @@ export async function up(knex: Knex): Promise<void> {
   });
 }
 
-
 export async function down(knex: Knex): Promise<void> {
-  return knex.schema.dropTable('DepartmentQuestions');
+  return knex.schema.dropTable('DepartmentQuestion');
 }
-
