@@ -1,7 +1,7 @@
 import { Knex } from 'knex';
 
 export async function up(knex: Knex): Promise<void> {
-  return knex.schema.createTable('Rehab_Report', (table) => {
+  return knex.schema.createTable('Rehab_Report', (table: Knex.CreateTableBuilder) => {
     table.increments();
     table.dateTime('curr_date');
     table.integer('beds_available');
