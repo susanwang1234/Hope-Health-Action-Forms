@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
+import '../App.css';
+
 
 class DataReport extends React.Component <any,any>{
     render(){
         if(this.props.data === null){
-            return(<p>nothing</p>);
+            return(<p>select from the list</p>);
         }else{
             let keys = Object.keys(this.props.data);
             let values: string[] = Object.values(this.props.data);
@@ -13,17 +15,22 @@ class DataReport extends React.Component <any,any>{
                 pairs.push(pair);
             }
             return(
-                <table>
-                    {pairs.map((pair: string[]) =>
-                    <tr>
-                        {pair.map((item: string) =>
-                        <td>
-                            {item}
-                        </td>
+                <div>
+                    <table>
+                        {pairs.map((pair: string[]) =>
+                        <tr>
+                            {pair.map((item: string) =>
+                            <td>
+                                {item}
+                            </td>
+                            )}
+                        </tr>
                         )}
-                    </tr>
-                    )}
-                </table>
+                    </table>
+                    <button className="edit-button" onClick={() => console.log("edit")}>
+                        Edit
+                    </button>
+                </div>
             );
         }
     }
