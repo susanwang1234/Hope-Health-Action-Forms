@@ -77,26 +77,33 @@ To shut down the Docker containers (From the ./ directory)<br>
 <h1>Important Knex commands (executed inside server docker container root)</h1>
 
 <h3>Make a migration</h3>
+Steps to run (From the ceres-server CLI terminal) <br>
 - node_modules/.bin/knex migrate:make -x ts "migration_name"<br>
 
 <h3>Run migrations</h3>
+Steps to run (From the ceres-server CLI terminal)
 - node_modules/.bin/knex migrate:latest<br>
 
 <h3>Make seed</h3>
+Steps to run (From the ceres-server CLI terminal)
 - node_modules/.bin/knex seed:make -x ts "seed_name"<br>
 
 <h3>Seed database</h3>
+Steps to run (From the ceres-server CLI terminal)
 - node_modules/.bin/knex seed:run<br>
 
 <h1>Important mysql commands (executed inside mysql docker container root)</h1>
 
 <h3>Login to table</h3>
+Steps to run (From the ceres-ceres-database-1 CLI terminal)
 - mysql -u root -p<br>
 - password (this is the password)<br>
 
 <h3>Show tables</h3>
+Steps to run (From the ceres-ceres-database-1 CLI terminal)
 - use ceresdb;<br>
 - show tables;<br>
 
 <h3>Delete a table</h3>
+Steps to run (From the ceres-ceres-database-1 CLI terminal)
 - Delete _____ <br>
