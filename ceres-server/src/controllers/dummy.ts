@@ -10,7 +10,7 @@ const createDummy = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { dummyName, dummyInfo } = req.body;
     const createdDummyId = await Knex.insert({ dummies_name: dummyName, dummies_info: dummyInfo }).into('Dummies');
-    const createdDummy = await Knex.select('*').from('Dummies').where('dummies_id', '=', createdDummyId);
+    const createdDummy = await Knex.select('*').from('Dummies').where('id', '=', createdDummyId);
     logging.info(NAMESPACE, 'Created dummy:', createdDummy);
     res.status(201).send(createdDummy);
   } catch (error: any) {
