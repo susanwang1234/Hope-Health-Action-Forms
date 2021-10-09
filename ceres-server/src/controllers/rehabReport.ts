@@ -89,7 +89,9 @@ const editRehabReport = async (req: Request, res: Response, next: NextFunction) 
       stays: stays,
       admissions: admissions,
       outpatients: outpatients
-    }).into('Rehab_Report');
+    })
+      .into('Rehab_Report')
+      .where('id', '=', id);
     const retrieveRehabReport = await Knex.select('*').from('Rehab_Report').where('id', '=', id);
     logging.info(NAMESPACE, 'Edited Rehab Report:', retrieveRehabReport);
     res.status(201).send(retrieveRehabReport);
