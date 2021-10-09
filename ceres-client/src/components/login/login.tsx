@@ -1,7 +1,7 @@
-import './App.css';
+import '../../App.css';
 import { useForm } from 'react-hook-form';
-import Logo from './images/Logo.png';
-import display from './images/CBR_training_March 21.png';
+import Logo from './../../images/Logo.png';
+import display from './../../images/CBR_training_March 21.png';
 import { useHistory } from "react-router-dom";
 
 interface FormData {
@@ -10,7 +10,7 @@ interface FormData {
   remember: boolean;
 }
 
-function UserLogin() {
+function Login() {
   let history = useHistory();
 
   const {
@@ -86,4 +86,4 @@ function UserLogin() {
   );
 }
 
-export default UserLogin;
+export default Login;
