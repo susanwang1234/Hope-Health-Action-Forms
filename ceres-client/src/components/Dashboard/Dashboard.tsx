@@ -51,8 +51,8 @@ const Dashboard = () => {
             <div className="card_inner">
               <p className="font-bold text-title">Employee of the Month</p>
               <p className="text-primary-p">Best employee name and photo here.</p>
-              <button type="submit" className="view_button">Current Employee of the Month</button>
-              <button type="submit" className="add_button">+ Add Employee of the Month</button>
+              <button type="submit" className="view_button">Current Employee</button>
+              <button type="submit" className="add_button">+ Add Employee</button>
             </div>
           </div>
 
