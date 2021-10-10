@@ -10,8 +10,9 @@ import { FormContext } from './FormContext';
 
 console.log('JSONfile', JSONfile);
 
+// Citation for dynamic forms, updating JSON fields, the JSON structure, and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
+
 function RehabForm() {
-  // Citation for dynamic forms and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
   const [elements, setElements] = useState<any | null>(null);
   useEffect(() => {
