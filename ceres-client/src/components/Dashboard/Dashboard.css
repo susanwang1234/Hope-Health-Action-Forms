@@ -170,6 +170,10 @@ dashboard {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
+.filler_image{
+  size: 100px;
+}
+
 @media only screen and (max-width: 855px) {
   .dashboard__cards {
     grid-template-columns: 1fr;
