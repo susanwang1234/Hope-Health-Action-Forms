@@ -51,6 +51,56 @@ const createRehabReport = async (req: Request, res: Response, next: NextFunction
   }
 };
 
+const editRehabReport = async (req: Request, res: Response, next: NextFunction) => {
+  logging.info(NAMESPACE, 'Creating Rehab Report');
+
+  try {
+    const {
+      id,
+      currDate,
+      bedsAvailable,
+      bedDays,
+      patientDays,
+      hospitalised,
+      discharged,
+      selfDischarges,
+      deathsBefore48,
+      deathsAfter48,
+      daysHospitalised,
+      referrals,
+      transfers,
+      stays,
+      admissions,
+      outpatients
+    } = req.body;
+    await Knex.update({
+      curr_date: currDate,
+      beds_available: bedsAvailable,
+      bed_days: bedDays,
+      patient_days: patientDays,
+      hospitalised: hospitalised,
+      discharged: discharged,
+      self_discharges: selfDischarges,
+      deaths_before_48: deathsBefore48,
+      deaths_after_48: deathsAfter48,
+      days_hospitalised: daysHospitalised,
+      referrals: referrals,
+      transfers: transfers,
+      stays: stays,
+      admissions: admissions,
+      outpatients: outpatients
+    })
+      .into('Rehab_Report')
+      .where('id', '=', id);
+    const retrieveRehabReport = await Knex.select('*').from('Rehab_Report').where('id', '=', id);
+    logging.info(NAMESPACE, 'Edited Rehab Report:', retrieveRehabReport);
+    res.status(201).send(retrieveRehabReport);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error.message);
+  }
+};
+
 const deleteAllRehabReport = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Deleting all Rehab Reports');
 
@@ -91,4 +141,4 @@ const getAllRehabReport = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-export default { createRehabReport, deleteAllRehabReport, deleteRehabReport, getAllRehabReport };
+export default { createRehabReport, editRehabReport, deleteAllRehabReport, deleteRehabReport, getAllRehabReport };
