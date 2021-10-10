@@ -34,7 +34,7 @@ const Dashboard = () => {
             <div className="card_inner">
               <p className="font-bold text-title">Case Study</p>
               <img src={display} alt="Display" className="filler_image"></img>
-              <p className="text-primary-p">Cool case information here.</p>
+              <p className="text-primary-p">Cool case information here or maybe a short summary.</p>
               <button type="submit" onClick={onClick} className="view_button">Current Case Studies</button>
               <button type="submit" onClick={onClick} className="add_button">+ Add Case Study</button>
             </div>
