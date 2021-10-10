@@ -1,0 +1,62 @@
+/*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
+
+/*min-height-100vh*/
+.min-height-100vh {
+  min-height: 100vh;
+}
+
+/*mt-8 grid grid-cols-3 gap-4 h-screen p-6*/
+.grid-department {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  height: 100vw;
+  padding: 1.5rem;
+}
+
+/*text-center mx-6 row-span-2 bg-gray-300 rounded*/
+.grey-block {
+  text-align: center;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  grid-row: span 2 / span 2;
+  background-color: #b98c8c;
+  border-radius: 0.25rem;
+}
+
+.grey-blocks-form {
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+  width: 80%;
+  height: 600px;
+  padding: 25px;
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.title-form {
+  font-weight: bold;
+  text-align: center;
+}
+
+.margin-left-50px {
+  margin-left: 50px;
+}
+
+.margin-bottom-25px {
+  margin-bottom: 25px;
+}
+
+.width-20-percent {
+  width: 20% !important;
+}
+
+.button-form {
+  height: 100%;
+  margin-top: 25px;
+  margin-left: 100px;
+}

@@ -1,4 +1,6 @@
 /*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
+/*Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position*/
+/*Citation: https://www.w3schools.com/css/css3_buttons.asp*/
 
 dashboard {
   background: #f3f4f6;
@@ -57,6 +59,7 @@ dashboard {
   text-align: center;
   align-items: center;
   justify-content: space-between;
+  
 }
 
 .card1 {
@@ -93,6 +96,84 @@ dashboard {
   padding: 25px;
   border-radius: 5px;
   font-size: 14px;
+}
+
+.add_button{
+  background-color: #59b030;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 10%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.add_button:hover{
+  background-color: #3a791c;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 10%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.view_button{
+  background-color: #009cc4;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-top: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 0%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.view_button:hover{
+  background-color: #117088;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 500;
+  margin-top: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 0%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.filler_image{
+  border: 2px solid black;
 }
 
 @media only screen and (max-width: 855px) {
