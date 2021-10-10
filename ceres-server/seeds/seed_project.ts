@@ -1,10 +1,21 @@
 import { Knex } from 'knex';
 
 export async function seed(knex: Knex): Promise<void> {
-  // Deletes ALL existing entries
+  // Delete All existing entries, keeping in mind of foreign key constraints 
+  await knex('Dummies').del();
   await knex('Rehab_Report').del();
+  await knex('User').del();
+  await knex('Role').del();
+  await knex('Department').del();
 
-  // Inserts seed entries
+  // Insert seed entries
+  await knex('Department').insert([{ id: 1, name: 'Rehab' }]);
+  await knex('Role').insert([
+    { id: 1, name: 'admin' },
+    { id: 2, name: 'user' },
+    { id: 3, name: 'departmentHead' }
+  ]);
+  await knex('User').insert([{ id: 1, username: 'admin', password: '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm', departmentId: 1, roleId: 1 }]);
   await knex('Rehab_Report').insert([
     {
       id: 1,
@@ -43,4 +54,9 @@ export async function seed(knex: Knex): Promise<void> {
       outpatients: 16
     }
   ]);
+  await knex('Dummies').insert([
+    { id: 1, dummies_name: 'Dummy1', dummies_info: 111 },
+    { id: 2, dummies_name: 'Dummy2', dummies_info: 222 }
+  ]);
+  
 }
