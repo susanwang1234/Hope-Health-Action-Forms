@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './components/Login/Login.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import RehabForm from './RehabForm';
 
 ReactDOM.render(
   <React.StrictMode>

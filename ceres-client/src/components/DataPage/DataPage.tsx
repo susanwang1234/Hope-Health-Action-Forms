@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
-import ReportElement from './components/ReportElement';
-import ReportData from './components/ReportData'
+import '../../App.css'
+import ReportElement from '../ReportElement';
+import ReportData from '../ReportData'
 
-class dataPage extends React.Component <any[], any>{
+class DataPage extends React.Component <any[], any>{
     constructor(props: any[]){
         super(props);
         this.state = {reports: [{date: "1.jan.2020", employee: "Simon Miller", Beds_Available: "345", Bed_Days: "74", Hospitalized: "31", etc:"..."},
@@ -28,4 +28,4 @@ class dataPage extends React.Component <any[], any>{
                         indexOfSelectedReport: index});
     }
 }
-export default dataPage;
+export default DataPage;
