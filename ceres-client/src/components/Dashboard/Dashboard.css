@@ -105,8 +105,13 @@ dashboard {
   text-align: center;
   border-radius: 5px;
   font-weight: 500;
-  width:100%;
-  margin: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 10%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
@@ -119,8 +124,13 @@ dashboard {
   text-align: center;
   border-radius: 5px;
   font-weight: 500;
-  width:100%;
-  margin: 6px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 10%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
@@ -133,8 +143,12 @@ dashboard {
   text-align: center;
   border-radius: 5px;
   font-weight: 500;
-  width: 100%;
-  margin: 6px;
+  margin-top: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 0%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
@@ -147,8 +161,12 @@ dashboard {
   text-align: center;
   border-radius: 5px;
   font-weight: 500;
-  width: 100%;
-  margin: 6px;
+  margin-top: 6px;
+  width: 80%;
+  position: absolute;
+  bottom: 0%;  
+  left: 50%; 
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
