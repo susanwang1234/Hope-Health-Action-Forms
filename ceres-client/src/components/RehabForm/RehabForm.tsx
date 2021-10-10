@@ -14,7 +14,7 @@ class RehabForm extends Component {
         <Navbar/>
         <div>
           <div className="grey-blocks-form">
-            <Form.Label column="lg">Rehab Monthly Data Collection</Form.Label>
+            <Form.Label column="lg" >Rehab Monthly Data Collection</Form.Label>
 
             <Row>
               <Form.Label className="margin-left-50px" column lg={2}>
