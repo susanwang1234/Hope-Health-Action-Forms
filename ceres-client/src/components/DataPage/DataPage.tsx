@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../App.css'
+import '../../App.css';
 import ReportElement from '../ReportElement';
 import ReportData from '../ReportData';
 import NavBar from "../../components/Navbar/Navbar";

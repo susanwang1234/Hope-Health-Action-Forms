@@ -11,9 +11,6 @@
   padding: 10px;
   
 }
-li:focus{
-  background-color: blue;
-}
 
 .report-in-list:hover{
   background-color: rgb(39, 194, 221);
