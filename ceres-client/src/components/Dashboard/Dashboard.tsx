@@ -5,12 +5,11 @@ import display from './../../images/original_artwork.jpg';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
-  
   let history = useHistory();
 
   const onClick = () => {
     history.push('/case-study');
-  }
+  };
 
   return (
     <main>
@@ -35,8 +34,12 @@ const Dashboard = () => {
               <p className="font-bold text-title">Case Study</p>
               <img src={display} alt="Display" className="filler_image"></img>
               <p className="text-primary-p">Cool case information here or maybe a short summary.</p>
-              <button type="submit" onClick={onClick} className="view_button">Current Case Studies</button>
-              <button type="submit" onClick={onClick} className="add_button">+ Add Case Study</button>
+              <button type="submit" onClick={onClick} className="view_button">
+                Current Case Studies
+              </button>
+              <button type="submit" onClick={onClick} className="add_button">
+                + Add Case Study
+              </button>
             </div>
           </div>
 
@@ -54,8 +57,12 @@ const Dashboard = () => {
               <p className="font-bold text-title">Employee of the Month</p>
               <img src={display} alt="Display" className="filler_image"></img>
               <p className="text-primary-p">Information about employee of the month.</p>
-              <button type="submit" className="view_button">Current Employee</button>
-              <button type="submit" className="add_button">+ Add Employee</button>
+              <button type="submit" className="view_button">
+                Current Employee
+              </button>
+              <button type="submit" className="add_button">
+                + Add Employee
+              </button>
             </div>
           </div>
 
