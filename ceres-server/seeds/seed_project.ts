@@ -6,10 +6,42 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('Rehab_Report').del();
   await knex('User').del();
   await knex('Role').del();
+  await knex('DepartmentQuestion').del();
   await knex('Department').del();
+  await knex('Question').del();
 
   // Insert seed entries
+  await knex('Question').insert([
+    { id: 1, label: 'Beds available', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 2, label: 'Beds days', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 3, label: 'Patient days', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 4, label: 'Hospitalized', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 5, label: 'Discharged alive', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 6, label: 'Died before 48h', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 7, label: 'Died after 48h', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 8, label: 'Days hospitalised', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 9, label: 'Referrals', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 10, label: 'Transfers', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 11, label: 'Self-discharged', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 12, label: 'Stayed in the ward', inputType: 'text', responseType: 'number', isMSPP: true },
+    { id: 13, label: 'Admissions', inputType: 'text', responseType: 'number', isMSPP: true },
+  ]);
   await knex('Department').insert([{ id: 1, name: 'Rehab' }]);
+  await knex('DepartmentQuestion').insert([
+    { id: 1, departmentId: 1, questionId: 1, isRequired: true},
+    { id: 2, departmentId: 1, questionId: 2, isRequired: true},
+    { id: 3, departmentId: 1, questionId: 3, isRequired: true},
+    { id: 4, departmentId: 1, questionId: 4, isRequired: true},
+    { id: 5, departmentId: 1, questionId: 5, isRequired: true},
+    { id: 6, departmentId: 1, questionId: 6, isRequired: true},
+    { id: 7, departmentId: 1, questionId: 7, isRequired: true},
+    { id: 8, departmentId: 1, questionId: 8, isRequired: true},
+    { id: 9, departmentId: 1, questionId: 9, isRequired: true},
+    { id: 10, departmentId: 1, questionId: 10, isRequired: true},
+    { id: 11, departmentId: 1, questionId: 11, isRequired: true},
+    { id: 12, departmentId: 1, questionId: 12, isRequired: true},
+    { id: 13, departmentId: 1, questionId: 13, isRequired: true},
+  ]);
   await knex('Role').insert([
     { id: 1, name: 'admin' },
     { id: 2, name: 'user' },
@@ -58,5 +90,4 @@ export async function seed(knex: Knex): Promise<void> {
     { id: 1, dummies_name: 'Dummy1', dummies_info: 111 },
     { id: 2, dummies_name: 'Dummy2', dummies_info: 222 }
   ]);
-  
 }
