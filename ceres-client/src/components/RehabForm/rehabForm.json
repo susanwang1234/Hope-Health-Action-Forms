@@ -1,95 +1,95 @@
 [
-    {
-        "page_label": "Rehab Form",
-        "fields": [
-            {
-                "field_id": "beds-avaliable",
-                "field_label": "Beds avaliable",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "bed-days",
-                "field_label": "Bed Days",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "patient-days",
-                "field_label": "Patient Days",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "hospitalized",
-                "field_label": "Hospitalized",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "discharged-alive",
-                "field_label": "Discharged alive",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "died-before-48h",
-                "field_label": "Died before 48h",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "died-after-48h",
-                "field_label": "Died after 48h",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "days-hospitalized",
-                "field_label": "Days hospitalized",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "referrals",
-                "field_label": "Referrals",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "transfers",
-                "field_label": "Transfers",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            },
-            {
-                "field_id": "self-discharged",
-                "field_label": "Self discharged",
-                "field_mandatory": true,
-                "field_placeholder": 0,
-                "field_type": "number",
-                "field_value": 0
-            }
-        ]
-    }
+  {
+    "page_label": "Rehab Form",
+    "fields": [
+      {
+        "field_id": "beds-avaliable",
+        "field_label": "Beds avaliable",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 10
+      },
+      {
+        "field_id": "bed-days",
+        "field_label": "Bed Days",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "patient-days",
+        "field_label": "Patient Days",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "hospitalized",
+        "field_label": "Hospitalized",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "discharged-alive",
+        "field_label": "Discharged alive",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "died-before-48h",
+        "field_label": "Died before 48h",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "died-after-48h",
+        "field_label": "Died after 48h",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "days-hospitalized",
+        "field_label": "Days hospitalized",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "referrals",
+        "field_label": "Referrals",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "transfers",
+        "field_label": "Transfers",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "self-discharged",
+        "field_label": "Self discharged",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      }
+    ]
+  }
 ]
