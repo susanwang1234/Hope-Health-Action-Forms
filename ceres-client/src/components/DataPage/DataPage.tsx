@@ -2,6 +2,7 @@ import React from 'react';
 import '../../App.css';
 import ReportElement from '../ReportElement';
 import ReportData from '../ReportData';
+import Navbar from '../Navbar/Navbar';
 
 class DataPage extends React.Component<any[], any> {
   constructor(props: any[]) {
@@ -18,6 +19,7 @@ class DataPage extends React.Component<any[], any> {
   render() {
     return (
       <div>
+        <Navbar />
         <ul className="report-list">
           {this.state.reports.map((report: any, index: number) => (
             <ReportElement data={report} onClick={() => this.handleClick(index)} />
