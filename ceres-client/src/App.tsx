@@ -1,22 +1,18 @@
-import React from 'react';
 import './App.css';
-import { useForm } from 'react-hook-form';
-import Logo from './images/Logo.png';
-import display from './images/CBR_training_March 21.png';
-import Department from './Department';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import NavBar from './components/NavBar';
-import UserLogin from './UserLogin';
-import dataPage from './dataPage';
+import Login from './components/Login/Login';
+import RehabForm from './components/RehabForm/RehabForm';
+import DataPage from './components/DataPage/DataPage';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={UserLogin} />
-        <Route path="/Department-home-page" component={Department} />
-        <Route path="/Department-data" component={Department} />
-        <Route path="/dataPage" component={dataPage} />
+        <Route exact path="/" component={Login} />
+        <Route path="/dashboard" component={Dashboard}></Route>
+        <Route path="/submit-report" component={RehabForm}></Route>
+        <Route path="/data-page" component={DataPage}></Route>
       </Switch>
     </Router>
   );

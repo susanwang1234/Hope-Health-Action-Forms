@@ -1,9 +1,9 @@
 import React from 'react';
-import './App.css';
-import ReportElement from './components/ReportElement';
-import ReportData from './components/ReportData';
+import '../../App.css';
+import ReportElement from '../ReportElement';
+import ReportData from '../ReportData';
 
-class dataPage extends React.Component<any[], any> {
+class DataPage extends React.Component<any[], any> {
   constructor(props: any[]) {
     super(props);
     this.state = {
@@ -31,4 +31,4 @@ class dataPage extends React.Component<any[], any> {
     this.setState({ displayingData: this.state.reports[index], indexOfSelectedReport: index });
   }
 }
-export default dataPage;
+export default DataPage;

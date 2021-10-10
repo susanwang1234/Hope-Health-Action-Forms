@@ -1,4 +1,4 @@
-import './App.css';
+import '../../App.css';
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Row, Col } from 'react-bootstrap';
@@ -66,7 +66,7 @@ class RehabForm extends Component {
         </div>
 
         <div className="button-form">
-          <Button variant="primary" href="/Department-home-page" onClick={this.changeSaved}>
+          <Button variant="primary" href="/dashboard" onClick={this.changeSaved}>
             Save
           </Button>{' '}
         </div>
