@@ -36,7 +36,7 @@ function RehabForm() {
         if (id === field_id) {
           switch(field_type) {
             default:
-              field['field_value'] = event.target.value;
+              field['field_value'] = event.target.valueAsNumber;
               break;
           }
         }
