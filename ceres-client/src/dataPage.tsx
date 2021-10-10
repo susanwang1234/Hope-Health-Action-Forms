@@ -6,8 +6,76 @@ import ReportData from './components/ReportData'
 class dataPage extends React.Component <any[], any>{
     constructor(props: any[]){
         super(props);
-        this.state = {reports: [{date: "1.jan.2020", employee: "Simon Miller", Beds_Available: "345", Bed_Days: "74", Hospitalized: "31", etc:"..."},
-                     {date: "1.feb,2020", employee: "cillian murphy", Beds_Available: "135", Bed_Days: "53", Hospitalized: "39", etc:"..."}],
+        this.state = {reports: [{
+
+            id: 1,
+        
+            curr_date: "2021-10-04T20:53:15.000Z",
+        
+            beds_available: 19,
+        
+            bed_days: 434,
+        
+            patient_days: 377,
+        
+            hospitalised: 17,
+        
+            discharged: 2,
+        
+            self_discharges: 1,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 0,
+        
+            days_hospitalised: 334,
+        
+            referrals: 0,
+        
+            transfers: 0,
+        
+            stays: 13,
+        
+            admissions: 4,
+        
+            outpatients: 16
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          }],
                       displayingData: null,
                       indexOfSelectedReport: null
                     };

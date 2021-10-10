@@ -9,7 +9,6 @@ import NavBar from './components/NavBar';
 import UserLogin from './UserLogin';
 import dataPage from './dataPage';
 
-
 function App() {
   return (
     <Router>
