@@ -1,8 +1,16 @@
 import './Dashboard.css';
 import Navbar from '../Navbar/Navbar';
+import { useHistory } from 'react-router-dom';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
+  
+  let history = useHistory();
+
+  const onClick = () => {
+    history.push('/case-study');
+  }
+
   return (
     <main>
       <Navbar />
@@ -25,8 +33,8 @@ const Dashboard = () => {
             <div className="card_inner">
               <p className="font-bold text-title">Case Study</p>
               <p className="text-primary-p">Cool case information here.</p>
-              <button type="submit" className="view_button">Current Case Studies</button>
-              <button type="submit" className="add_button">+ Add Case Study</button>
+              <button type="submit" onClick={onClick} className="view_button">Current Case Studies</button>
+              <button type="submit" onClick={onClick} className="add_button">+ Add Case Study</button>
             </div>
           </div>
 
