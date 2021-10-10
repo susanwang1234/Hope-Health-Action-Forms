@@ -22,9 +22,24 @@ function RehabForm() {
 
   // Can look at the JSON data values after you press the save button in the console of your browser's developer's tools 
   const handleSave = (event : any) => {
-    alert("Your changes have been saved.")
-    event.preventDefault();
+    let canSave: boolean = true;
+    
+    elements.fields.forEach((field : any) => {
+      console.log(isNaN(field.field_value))
+      if (isNaN(field.field_value)) {
+        canSave = false
+      }
+    });
 
+    if (canSave) {
+      alert("Your changes have been saved.")
+    }
+    else {
+      alert("Error: You have not filled all the required fields.")
+    }
+    
+    event.preventDefault();
+    
     console.log(elements)
   }
 
@@ -42,7 +57,7 @@ function RehabForm() {
         }
         setElements(newElements)
       });
-      console.log(elements)
+     console.log(elements)
     } 
 
   // var result = (condition) ? (value1) : (value2) is the ternary operator, executes value1 if condition is true, otherwise false, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
