@@ -8,7 +8,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 10
+        "field_value": 0
       },
       {
         "field_id": "bed-days",

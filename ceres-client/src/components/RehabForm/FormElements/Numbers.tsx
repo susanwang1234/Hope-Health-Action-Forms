@@ -32,9 +32,15 @@ const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_v
             id="number-entry"
             name="number-entry"
             min="0"
+            maxLength={5}
             placeholder={my_field_placeholder ? my_field_placeholder : ''}
-            value={my_field_value}
-            onInput={(event: any) => handleChange(my_field_id, event)}
+            value={parseInt(my_field_value, 10)}
+            onInput={(event: any) => {
+              if (event.target.value.length > event.target.maxLength) {
+                event.target.value = event.target.value.slice(0, event.target.maxLength);
+              }
+              handleChange(my_field_id, event);
+            }}
           />
         </Col>
       </Row>
