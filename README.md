@@ -113,4 +113,4 @@ Steps to run (From the ceres-ceres-database-1 CLI terminal)
 <h3>Delete a table</h3>
 Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
-- Delete **\_\_\_\_**; <br>
+- DROP TABLE "table_name"; <br>
