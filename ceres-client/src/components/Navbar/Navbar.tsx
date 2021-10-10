@@ -12,7 +12,7 @@ const Navbar = () => {
         <div className="navlogo">
           <img src={logo} alt="HHA Logo" width="200px" />
         </div>
-        <a className="active_link" href="/dashboard">
+        <a href="/dashboard">
           Home
         </a>
         <a href="/data-page">View Data</a>

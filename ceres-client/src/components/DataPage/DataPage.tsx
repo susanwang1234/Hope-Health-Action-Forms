@@ -1,7 +1,8 @@
 import React from 'react';
 import '../../App.css'
 import ReportElement from '../ReportElement';
-import ReportData from '../ReportData'
+import ReportData from '../ReportData';
+import NavBar from "../../components/Navbar/Navbar";
 
 class DataPage extends React.Component <any[], any>{
     constructor(props: any[]){
@@ -75,6 +76,321 @@ class DataPage extends React.Component <any[], any>{
         
             outpatients: 46
         
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
+          },
+          {
+
+            id: 2,
+        
+            curr_date: "2019-01-07T20:14:15.000Z",
+        
+            beds_available: 45,
+        
+            bed_days: 236,
+        
+            patient_days: 321,
+        
+            hospitalised: 3,
+        
+            discharged: 4,
+        
+            self_discharges: 0,
+        
+            deaths_before_48: 1,
+        
+            deaths_after_48: 1,
+        
+            days_hospitalised: 211,
+        
+            referrals: 5,
+        
+            transfers: 3,
+        
+            stays: 111,
+        
+            admissions: 67,
+        
+            outpatients: 46
+        
           }],
                       displayingData: null,
                       indexOfSelectedReport: null
@@ -82,13 +398,19 @@ class DataPage extends React.Component <any[], any>{
     }
     render(){
         return(
-            <div>
-                <ul className="report-list">
-                    {this.state.reports.map((report: any,index: number) =><ReportElement data={report} 
-                    onClick ={() => this.handleClick(index)}/>)}
-                </ul>
-                <ReportData data={this.state.displayingData}/>
-            </div>
+            <React.Fragment>
+                <NavBar/>
+                <div className="flex">
+                    <div className=" card border-black font-bold text-center p-4 m-6 row-span-3 bg-gray-300 relative rounded">
+                        <h4 className="text-center">Submitted Reports</h4>
+                        <ul className=" overflow-auto max-h-80 p-0">
+                            {this.state.reports.map((report: any,index: number) =><ReportElement data={report} 
+                            onClick ={() => this.handleClick(index)}/>)}
+                        </ul>
+                    </div>
+                    <ReportData data={this.state.displayingData}/>  
+                </div>
+            </React.Fragment>
         );
     }
     handleClick(index: number) : void{

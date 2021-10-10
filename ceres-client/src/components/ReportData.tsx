@@ -5,7 +5,7 @@ import '../App.css';
 class DataReport extends React.Component <any,any>{
     render(){
         if(this.props.data === null){
-            return(<p>select from the list</p>);
+            return(<p className="m-60 font-bold text-xl">Select a report from the list</p>);
         }else{
             let keys = Object.keys(this.props.data);
             let values: string[] = Object.values(this.props.data);
@@ -15,8 +15,8 @@ class DataReport extends React.Component <any,any>{
                 pairs.push(pair);
             }
             return(
-                <div>
-                    <table>
+                <div className="m-6">
+                    <table className="table-fixed bg-gray-300">
                         {pairs.map((pair: string[]) =>
                         <tr>
                             {pair.map((item: string) =>
@@ -27,29 +27,14 @@ class DataReport extends React.Component <any,any>{
                         </tr>
                         )}
                     </table>
-                    <button className="edit-button" onClick={() => console.log("edit")}>
+                    <button className="bg-blue-400 rounded text-white font-bold py-2 px-4 rounded hover:bg-blue-200 w-40"
+                    onClick={() => console.log("edit")}>
                         Edit
                     </button>
                 </div>
             );
         }
     }
-    updateData(){
-        this.setState({
-                keys: Object.keys(this.props.data),
-                values: Object.values(this.props.data),
-                pairs: [],
-            })
-            console.log(this.state.keys.length)
-            console.log("dfasdsa");
-        for(let i = 0; i < this.state.keys.length; i++){
-            let pair = [this.state.keys[i],this.state.values[i]]
-            this.state.pairs.push(pair);
-        }
-    }
-    // componentWillReceiveProps(nextProps : any) {
-    //     this.setState({ data: nextProps.data });  
-    // }
     
 }
 export default DataReport;
