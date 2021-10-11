@@ -16,7 +16,7 @@ class DataReport extends React.Component <any,any>{
             }
             return(
                 <div className="m-6">
-                    <table className="table-fixed bg-gray-300">
+                    <table className="table-fixed bg-gray-100">
                         {pairs.map((pair: string[]) =>
                         <tr>
                             {pair.map((item: string) =>
@@ -27,7 +27,7 @@ class DataReport extends React.Component <any,any>{
                         </tr>
                         )}
                     </table>
-                    <button className="bg-blue-400 rounded text-white font-bold py-2 px-4 rounded hover:bg-blue-200 w-40"
+                    <button className="bg-blue-400 text-white py-2 px-4 hover:bg-blue-200 w-40"
                     onClick={() => console.log("edit")}>
                         Edit
                     </button>
@@ -35,6 +35,5 @@ class DataReport extends React.Component <any,any>{
             );
         }
     }
-    
 }
 export default DataReport;
