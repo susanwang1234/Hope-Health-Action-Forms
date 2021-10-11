@@ -96,6 +96,9 @@ Steps to run (From the ceres-server CLI terminal)
 
 - node_modules/.bin/knex seed:run<br>
 
+<h3> Important notes </h3>
+<p>You only need to make a migration if you want to change the schema. You only need to make a seed if you want to change the default state of the database. Otherwise, just run the migration and seed the database to view the updated database.</p>
+
 <h1>Important mysql commands (executed inside mysql docker container root)</h1>
 
 <h3>Login to table</h3>
@@ -114,3 +117,15 @@ Steps to run (From the ceres-ceres-database-1 CLI terminal)
 Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
 - DROP TABLE "table_name"; <br>
+
+<h3> View table columns </h3>
+
+- SHOW COLUMNS FROM (TableName) <br>
+
+Or <br>
+
+- SHOW COLUMNS FROM (TableName) FROM (SchemaName) <br>
+
+Or <br>
+
+- SHOW COLUMNS FROM (SchemaName).(TableName)
