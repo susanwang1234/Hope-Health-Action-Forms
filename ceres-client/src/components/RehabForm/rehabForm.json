@@ -89,7 +89,24 @@
         "field_placeholder": 0,
         "field_type": "number",
         "field_value": 0
+      },
+      {
+        "field_id": "stayed-in-ward",
+        "field_label": "Stayed in the ward",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "admissions",
+        "field_label": "Admissions",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
       }
+      
     ]
   }
 ]
