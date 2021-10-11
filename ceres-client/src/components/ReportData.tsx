@@ -27,7 +27,7 @@ class DataReport extends React.Component <any,any>{
                         </tr>
                         )}
                     </table>
-                    <button className="bg-blue-400 text-white py-2 px-4 hover:bg-blue-200 w-40"
+                    <button className=" button bg-blue-400 text-white hover:bg-blue-200 w-40"
                     onClick={() => console.log("edit")}>
                         Edit
                     </button>
