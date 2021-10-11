@@ -3,8 +3,12 @@ import '../../App.css';
 import ReportElement from '../ReportElement';
 import ReportData from '../ReportData';
 import Navbar from '../Navbar/Navbar';
+import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
 
 class DataPage extends React.Component<any[], any> {
+  
+  
   constructor(props: any[]) {
     super(props);
     this.state = {
@@ -17,6 +21,8 @@ class DataPage extends React.Component<any[], any> {
     };
   }
   render() {
+    
+    
     return (
       <div>
         <Navbar />

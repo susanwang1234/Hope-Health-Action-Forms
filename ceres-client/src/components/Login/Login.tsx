@@ -3,6 +3,10 @@ import { useForm } from 'react-hook-form';
 import Logo from './../../images/Logo.png';
 import display from './../../images/CBR_training_March 21.png';
 import { useHistory } from 'react-router-dom';
+import { useContext } from 'react'
+import { UserContext } from '../../UserContext';
+import { useEffect } from 'react'
+
 
 interface FormData {
   username: string;
@@ -24,8 +28,19 @@ function Login() {
     history.push('/dashboard');
   });
 
+  const userContext = useContext(UserContext);
+
+  useEffect(() => {
+    if (userContext){
+      userContext.setUser({name: 'Ritika' , department: 'comp science'})
+    }
+    
+  }, [])
+
+  console.log('Username (Login) is ' , userContext.user?.name)
+  console.log('Department (Login) is ' , userContext.user?.department)
   return (
-    <div className="flex">
+    <div className="flex md:flex-row flex-col" >
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
         <div className="max-w-md w-full mx-auto">
           <div className="text-center font-medium text-xl ">
