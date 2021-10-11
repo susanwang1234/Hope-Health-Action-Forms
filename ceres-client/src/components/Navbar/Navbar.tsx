@@ -13,7 +13,6 @@ const Navbar = () => {
 
   if (pagePath == "/dashboard") {
     return (
-
       <nav className="navbar">
         <div className="nav_icon">
           <i className="fa fa-bars" aria-hidden="true"></i>
