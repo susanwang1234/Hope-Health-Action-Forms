@@ -1,9 +1,15 @@
 import React from 'react';
 import NavBar from '../Navbar/Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
 import '../../App.css';
 
 function Department() {
+  const userContext = useContext(UserContext);
+
+  console.log('Username (Department) is ' , userContext.user?.name)
+  console.log('Department (Department) is ' , userContext.user?.department)
   return (
     <Router>
       <Switch>

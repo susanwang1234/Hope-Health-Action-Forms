@@ -3,6 +3,8 @@ import '../../App.css';
 import './dataPage.css'
 import ReportElement from '../ReportElement';
 import ReportData from '../ReportData';
+import { useContext } from 'react';
+import { UserContext } from '../../UserContext';
 import NavBar from "../../components/Navbar/Navbar";
 import { useHistory } from 'react-router-dom';
 

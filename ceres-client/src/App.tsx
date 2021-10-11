@@ -5,16 +5,19 @@ import RehabForm from './components/RehabForm/RehabForm';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudy from './components/CaseStudy/CaseStudy';
+import { UserContextProvider } from './UserContext';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/dashboard" component={Dashboard}></Route>
-        <Route path="/submit-report" component={RehabForm}></Route>
-        <Route path="/data-page" component={DataPage}></Route>
-        <Route path="/case-study" component={CaseStudy}></Route>
+        <UserContextProvider> 
+          <Route exact path="/" component={Login} />
+          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/submit-report" component={RehabForm}></Route>
+          <Route path="/data-page" component={DataPage}></Route>
+          <Route path="/case-study" component={CaseStudy}></Route>
+        </UserContextProvider>
       </Switch>
     </Router>
   );
