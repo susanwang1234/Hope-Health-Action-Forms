@@ -2,6 +2,8 @@ import './Dashboard.css';
 import Navbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
 import display from './../../images/original_artwork.jpg';
+import React, { useContext } from 'react';
+import { UserContext } from '../../UserContext';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
@@ -10,6 +12,11 @@ const Dashboard = () => {
   const onClick = () => {
     history.push('/case-study');
   };
+
+  const userContext = useContext(UserContext);
+
+  console.log('Username (Dashboard) is ' , userContext.user?.name)
+  console.log('Department (Dashboard) is ' , userContext.user?.department)
 
   return (
     <main>

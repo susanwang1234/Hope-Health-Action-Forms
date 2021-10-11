@@ -5,6 +5,7 @@ export interface ReqUser extends Request {
   user?: User | Payload;
 }
 
+
 export interface Payload {
   id: number;
   username: string;
