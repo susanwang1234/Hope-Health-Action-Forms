@@ -25,7 +25,6 @@ function RehabForm() {
     let canSave: boolean = true;
 
     elements.fields.forEach((field: any) => {
-      console.log(isNaN(field.field_value));
       if (isNaN(field.field_value)) {
         canSave = false;
       }
