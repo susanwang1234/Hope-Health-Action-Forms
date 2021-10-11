@@ -126,5 +126,6 @@ Or <br>
 
 SHOW COLUMNS FROM (TableName) FROM (SchemaName) <br>
 
+Or <br>
 
 SHOW COLUMNS FROM (SchemaName).(TableName)
