@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <UserContext.Provider> 
+        <UserContext.Provider value = ''> 
           <Route exact path="/" component={Login} />
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/submit-report" component={RehabForm}></Route>
