@@ -1,4 +1,4 @@
-<h1>Ceres Project Introduction<h1>
+<h1>Ceres Project Introduction</h1>
 
 Ceres’ web-based application for Hope Health Action (HHA) will allow users to upload, submit, and view data to fulfill their monthly requirements. Currently, users are able to add new MSPP required data; eventually, they will also be able to upload new case studies and an employee of the month to receive points and compete with other departments. Users will also be able to view data they had previously submitted so they can either edit or delete the files.<br>
 
