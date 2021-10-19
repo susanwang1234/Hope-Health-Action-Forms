@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 });
 
 /** Enable CORS */
-const allowedOrigins = ['http://localhost:3000', 'http://localhost:3000/data-page'];
+const allowedOrigins = ['http://localhost:3000'];
 
 /** Define allowed requests and URLs */
 const options: cors.CorsOptions = {
