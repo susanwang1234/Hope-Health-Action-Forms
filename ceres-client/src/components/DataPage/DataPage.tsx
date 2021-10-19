@@ -20,7 +20,7 @@ class DataPage extends React.Component<any[], any> {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
+      console.log('Fetched Rehab Reports are: ' + data);
       this.setState({
         isLoaded: true,
         reports: data
