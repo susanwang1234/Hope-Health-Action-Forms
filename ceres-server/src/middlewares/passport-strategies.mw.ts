@@ -3,7 +3,7 @@ import { User as myUser } from '../db/types/user';
 import passport from 'passport';
 import * as PassportLocal from 'passport-local';
 import PassportJWT from 'passport-jwt';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Payload } from '../types';
 import config from '../config/config';
 
