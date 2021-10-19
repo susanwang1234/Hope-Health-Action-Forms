@@ -9,13 +9,13 @@ class DataPage extends React.Component<any[], any> {
   constructor(props: any[]) {
     super(props);
     this.state = {
+      isLoaded: false,
       reports: [],
       displayingData: null,
       indexOfSelectedReport: null
     };
   }
   async componentDidMount() {
-    console.log('Before');
     const url = 'http://localhost:8080/rehab_report/get/rehab_report';
     try {
       const response = await fetch(url);
