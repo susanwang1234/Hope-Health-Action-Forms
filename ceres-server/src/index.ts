@@ -1,8 +1,9 @@
 /** Use strict */
 'use strict';
 
-/** Import modules */
+/** Import Modules */
 import http from 'http';
+import cors from 'cors';
 import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
@@ -14,14 +15,26 @@ import routes from './routes/index';
 import passport from 'passport';
 import './middlewares/passport-strategies.mw.ts';
 
-/** Define server */
+/** Define Server */
 const NAMESPACE = 'Server';
 const router = express();
 
-/** Default request */
+/** Default Request */
 router.get('/', (req, res) => {
   res.send('Welcome to Team Ceres');
 });
+
+/** Enable CORS */
+const allowedOrigins = ['http://localhost:3000'];
+
+/** Define allowed requests and URLs */
+const options: cors.CorsOptions = {
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'DELETE', 'UPDATE', 'PUT', 'PATCH']
+};
+
+/** Pass Options to CORS */
+router.use(cors(options));
 
 /** Logging Requests */
 router.use((req, res, next) => {
@@ -34,14 +47,14 @@ router.use((req, res, next) => {
   next();
 });
 
-/** parsing requests */
+/** Parsing Requests */
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
-/** passport initialization */
+/** Passport Initialization */
 router.use(passport.initialize());
 
-/** Rules of api */
+/** Rules of API */
 router.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); // TODO Change access where routes and ips predefined when deployed to production
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type Accept, Authorization');
