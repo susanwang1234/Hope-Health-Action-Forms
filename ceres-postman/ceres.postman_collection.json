@@ -300,19 +300,18 @@
 			"name": "Department",
 			"item": [
 				{
-					"name": "localhost:8080/department/69",
+					"name": "localhost:8080/department",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/department/69",
+							"raw": "localhost:8080/department",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"department",
-								"69"
+								"department"
 							]
 						}
 					},
