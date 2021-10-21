@@ -11,6 +11,7 @@ import dashboardRoutes from './routes/dashboard';
 import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
 import rehabReportRoutes from './routes/rehabReport';
+import departmentFormRoutes from './routes/departmentForm';
 import routes from './routes/index';
 import passport from 'passport';
 import './middlewares/passport-strategies.mw.ts';
@@ -73,6 +74,7 @@ router.use('', dashboardRoutes);
 router.use('/department', departmentRoutes);
 router.use('/dummy', dummyRoutes);
 router.use('/rehab_report', rehabReportRoutes);
+router.use('/department_form', departmentFormRoutes);
 
 /** Error Handling */
 router.use((req, res, next) => {
