@@ -6,6 +6,9 @@ import PassportJWT from 'passport-jwt';
 import bcrypt from 'bcryptjs';
 import { Payload } from '../types';
 import config from '../config/config';
+import logging from '../config/logging';
+
+const NAMESPACE = 'PASSPORT MIDDLEWARE';
 
 passport.serializeUser((user: myUser, done) => {
   if (user.pwd) {
@@ -18,6 +21,8 @@ passport.deserializeUser((user: myUser, done) => done(null, user));
 passport.use(
   new PassportLocal.Strategy({}, async (username, password, done) => {
     try {
+      console.log('PASSPORT [MIDDLEWARE]: ', username, password);
+
       userModel.findOne(username, async (err: Error, user: myUser) => {
         if (err) {
           throw new Error('error from user query');
@@ -29,7 +34,7 @@ passport.use(
         }
 
         const isMatch = user.pwd === undefined ? false : await bcrypt.compare(password, user.pwd);
- 
+
         if (isMatch) {
           delete user.pwd; // immediately remove password incase of incorrect jwt usage
           done(null, user);

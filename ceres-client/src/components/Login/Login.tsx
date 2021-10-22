@@ -15,6 +15,8 @@ interface FormData {
   remember: boolean;
 }
 
+
+
 function Login() {
   let history = useHistory();
 
@@ -24,10 +26,23 @@ function Login() {
     formState: { errors }
   } = useForm<FormData>({ mode: 'onChange' });
 
+
   const onSubmit = handleSubmit(({ username, password, remember }) => {
-    console.log('HEHERER');
     console.log(username, password, remember);
-    //history.push('/dashboard');
+
+    const user = {
+      username,
+      password
+    }
+  
+    const url = 'http://localhost:8080/auth/login';
+    axios.post(url, user)
+      .then((response) => {
+        console.log(response.data);
+        history.push('/dashboard');
+      }).catch((error) => {
+        console.log(error);
+      })
   });
 
   const userContext = useContext(UserContext);
@@ -59,7 +74,7 @@ function Login() {
               <input
                 {...register('username', {
                   required: true,
-                  minLength: 6,
+                  minLength: 5,
                   maxLength: 25
                 })}
                 style={{ borderColor: errors.username ? 'red' : '' }}
