@@ -29,7 +29,7 @@ passport.use(
         }
 
         const isMatch = user.pwd === undefined ? false : await bcrypt.compare(password, user.pwd);
-
+ 
         if (isMatch) {
           delete user.pwd; // immediately remove password incase of incorrect jwt usage
           done(null, user);
