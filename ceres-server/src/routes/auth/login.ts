@@ -14,20 +14,16 @@ const router = Router();
       .andWhere('U.roleID',) 
 */
 
-router.post('/', authenticate('local', {session: false}), async (req: ReqUser, res) => {
+router.post('/', authenticate('local', { session: false }), async (req: ReqUser, res) => {
   try {
     if (!req.user) {
       throw Error('ERROR: req.user is not defined');
     }
     const payload = { id: req.user.id, username: req.user.username, roleName: req.user.roleName, departmentName: req.user.departmentName };
 
-    const token = jwt.sign(
-      payload,
-      config.jwt.secret,
-       { expiresIn: '15d' }
-       );
+    const token = jwt.sign(payload, config.jwt.secret, { expiresIn: '15d' });
 
-    res.status(200).json({success: true, token: 'Bearer ' + token}) ;
+    res.status(200).json({ success: true, token: 'Bearer ' + token, user: payload });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: 'oops server went down' });

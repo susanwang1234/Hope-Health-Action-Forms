@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext } from 'react'
 import { UserContext } from '../../UserContext';
 import { useEffect } from 'react'
+import axios from 'axios';
 
 
 interface FormData {
@@ -24,8 +25,9 @@ function Login() {
   } = useForm<FormData>({ mode: 'onChange' });
 
   const onSubmit = handleSubmit(({ username, password, remember }) => {
+    console.log('HEHERER');
     console.log(username, password, remember);
-    history.push('/dashboard');
+    //history.push('/dashboard');
   });
 
   const userContext = useContext(UserContext);
