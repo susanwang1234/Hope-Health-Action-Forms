@@ -128,5 +128,5 @@ Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
 <h3> View table columns </h3>
 
-- DESCRIBE COLUMNS FROM (TableName); <br>
+- DESCRIBE (TableName); <br>
 
