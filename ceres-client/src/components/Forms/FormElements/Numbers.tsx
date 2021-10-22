@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Row, Col, Nav } from 'react-bootstrap';
-import '../RehabForm.css';
+import '../Forms.css';
 import { FormContext } from '../FormContext';
 
 // Citation: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b

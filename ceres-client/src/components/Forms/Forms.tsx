@@ -1,18 +1,19 @@
-import './RehabForm.css';
+import './Forms.css';
 import Navbar from '../Navbar/Navbar';
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form, Row, Col, Nav } from 'react-bootstrap';
-import JSONfile from './rehabForm.json';
 import { useState, useEffect } from 'react';
 import Element from './Elements';
 import { FormContext } from './FormContext';
+
+import JSONfile from './jsonForms/rehabForm.json';
 
 // console.log('JSONfile', JSONfile);
 
 // Citation for dynamic forms, updating JSON fields, the JSON structure, and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
-function RehabForm() {
+function Forms() {
   const [elements, setElements] = useState<any | null>(null);
   useEffect(() => {
     return setElements(JSONfile[0]);
@@ -80,4 +81,4 @@ function RehabForm() {
   );
 }
 
-export default RehabForm;
+export default Forms;
