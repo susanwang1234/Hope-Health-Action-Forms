@@ -22,34 +22,34 @@ function Forms() {
   const { fields, page_label }: any = elements ?? {}; // ?? is the nullish coalscending operator which checks if the left or right side is null and uses the non-null side, see https://www.javascripttutorial.net/es-next/javascript-nullish-coalescing-operator/
 
 
-  function returnListOfStrings(elements: any) : string {
-    // returns list of field_id values from a JSON form object
-    let list_of_field_ids : any = [];
+  function returnListOfStringValues(json_key: string) : string {
+    // returns list of values from a JSON form object
+    let list_of_values : any = [];
     elements.fields.forEach((field: any) => {
-        list_of_field_ids.push(field['field_id']);
+        list_of_values.push(field[json_key]);
     });
 
-    // return list of field_id values from a JSON form object into a string with parenthesis in between
-    // Output example: "(field_id1, field_id2, ...)"
-    let string_of_field_ids : string = "(";
-    for (let index=0; index<list_of_field_ids.length; index++) {
-      if(index + 1 == list_of_field_ids.length) {
-        string_of_field_ids = string_of_field_ids + list_of_field_ids[index];
+    // return list of values from a JSON form object into a string with parenthesis in between
+    // Output example: "(value1, value2, ...)"
+    let string_of_values : string = "(";
+    for (let index=0; index<list_of_values.length; index++) {
+      if(index + 1 == list_of_values.length) {
+        string_of_values = string_of_values + list_of_values[index];
       }
       else 
       {
-        string_of_field_ids = list_of_field_ids[index] + ", " + string_of_field_ids;
+        string_of_values = list_of_values[index] + ", " + string_of_values;
       }
     }
-    string_of_field_ids = string_of_field_ids + ")";
-    return string_of_field_ids;
+    string_of_values = string_of_values + ")";
+    return string_of_values;
   };
 
   const insertIntoDatabase : any = (elements: any) => {
     //Citation: https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp
       
-    let mysql = require('mysql');
-    let connection = mysql.createConnection({
+    var mysql = require('mysql');
+    var connection = mysql.createConnection({
       host: "localhost",
       user: "root",
       password: "password",
@@ -63,8 +63,9 @@ function Forms() {
         }
         console.log("Database is connected.")
 
-        let string_of_field_ids = returnListOfStrings(elements);
-        let query = "INSERT INTO Rehab_Report " + string_of_field_ids + " VALUES " + string_of_field_ids;
+        let string_of_field_ids = returnListOfStringValues("field_id"); // returns field_id in fields from the JSON object
+        let string_of_field_values = returnListOfStringValues("field_value")
+        let query = "INSERT INTO Rehab_Report " + string_of_field_ids + " VALUES " + string_of_field_values;
 
         connection.query(query, function (err : any, result: any) {
           if (err){ 
