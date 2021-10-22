@@ -64,7 +64,7 @@ function Forms() {
         console.log("Database is connected.")
 
         let string_of_field_ids = returnListOfStringValues("field_id"); // returns field_id in fields from the JSON object
-        let string_of_field_values = returnListOfStringValues("field_value")
+        let string_of_field_values = returnListOfStringValues("field_value");
         let query = "INSERT INTO Rehab_Report " + string_of_field_ids + " VALUES " + string_of_field_values;
 
         connection.query(query, function (err : any, result: any) {
