@@ -14,11 +14,70 @@ import JSONfile from './jsonForms/rehabForm.json';
 // Citation for dynamic forms, updating JSON fields, the JSON structure, and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
 function Forms() {
+  
   const [elements, setElements] = useState<any | null>(null);
   useEffect(() => {
     return setElements(JSONfile[0]);
   }, []);
   const { fields, page_label }: any = elements ?? {}; // ?? is the nullish coalscending operator which checks if the left or right side is null and uses the non-null side, see https://www.javascripttutorial.net/es-next/javascript-nullish-coalescing-operator/
+
+
+  function returnListOfStrings(elements: any) : string {
+    // returns list of field_id values from a JSON form object
+    let list_of_field_ids : any = [];
+    elements.fields.forEach((field: any) => {
+        list_of_field_ids.push(field['field_id']);
+    });
+
+    // return list of field_id values from a JSON form object into a string with parenthesis in between
+    // Output example: "(field_id1, field_id2, ...)"
+    let string_of_field_ids : string = "(";
+    for (let index=0; index<list_of_field_ids.length; index++) {
+      if(index + 1 == list_of_field_ids.length) {
+        string_of_field_ids = string_of_field_ids + list_of_field_ids[index];
+      }
+      else 
+      {
+        string_of_field_ids = list_of_field_ids[index] + ", " + string_of_field_ids;
+      }
+    }
+    string_of_field_ids = string_of_field_ids + ")";
+    return string_of_field_ids;
+  };
+
+  const insertIntoDatabase : any = (elements: any) => {
+    //Citation: https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp
+      
+    let mysql = require('mysql');
+    let connection = mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "password",
+      database: "ceresdb"
+    });
+
+    connection.connect(
+      function(err : any){
+        if(err) {
+          throw err;
+        }
+        console.log("Database is connected.")
+
+        let string_of_field_ids = returnListOfStrings(elements);
+        let query = "INSERT INTO Rehab_Report " + string_of_field_ids + " VALUES " + string_of_field_ids;
+
+        connection.query(query, function (err : any, result: any) {
+          if (err){ 
+            throw err;
+          }
+          console.log("1 record inserted");
+        });
+
+      });
+    
+  };
+
+
 
   // Can look at the JSON data values after you press the save button in the console of your browser's developer's tools
   const handleSave = (event: any) => {
@@ -31,13 +90,15 @@ function Forms() {
     });
 
     if (canSave) {
-      alert('Your changes have been saved.');
+      insertIntoDatabase(elements)
+      alert('Your changes have been saved.'); 
+      
     } else {
       alert('Error: You have not filled all the required fields.');
     }
 
     event.preventDefault();
-
+    
     console.log(elements);
   };
 

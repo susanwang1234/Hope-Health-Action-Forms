@@ -27,7 +27,7 @@
         "field_value": 0
       },
       {
-        "field_id": "hospitalized",
+        "field_id": "hospitalised",
         "field_label": "Hospitalized",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -83,7 +83,7 @@
         "field_value": 0
       },
       {
-        "field_id": "self_discharged",
+        "field_id": "self_discharges",
         "field_label": "Self discharged",
         "field_mandatory": true,
         "field_placeholder": 0,
