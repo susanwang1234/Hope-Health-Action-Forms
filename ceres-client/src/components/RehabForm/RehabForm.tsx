@@ -61,7 +61,6 @@ function RehabForm() {
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
-        <Navbar />
         <div>
           <div className="grey-blocks-form">
             <Form.Label column="lg">{page_label}</Form.Label>
