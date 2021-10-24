@@ -341,6 +341,29 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "DepartmentForm",
+			"item": [
+				{
+					"name": "localhost:8080/department_form/:id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/department_form/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"department_form/:id"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	]
 }
