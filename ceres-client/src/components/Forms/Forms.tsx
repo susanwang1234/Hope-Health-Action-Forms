@@ -22,64 +22,6 @@ function Forms() {
   const { fields, page_label }: any = elements ?? {}; // ?? is the nullish coalscending operator which checks if the left or right side is null and uses the non-null side, see https://www.javascripttutorial.net/es-next/javascript-nullish-coalescing-operator/
 
 
-  function returnListOfStringValues(json_key: string) : string {
-    // returns list of values from a JSON form object
-    let list_of_values : any = [];
-    elements.fields.forEach((field: any) => {
-        list_of_values.push(field[json_key]);
-    });
-
-    // return list of values from a JSON form object into a string with parenthesis in between
-    // Output example: "(value1, value2, ...)"
-    let string_of_values : string = "(";
-    for (let index=0; index<list_of_values.length; index++) {
-      if(index + 1 == list_of_values.length) {
-        string_of_values = string_of_values + list_of_values[index];
-      }
-      else 
-      {
-        string_of_values = list_of_values[index] + ", " + string_of_values;
-      }
-    }
-    string_of_values = string_of_values + ")";
-    return string_of_values;
-  };
-
-  const insertIntoDatabase : any = (elements: any) => {
-    //Citation: https://www.w3schools.com/nodejs/nodejs_mysql_insert.asp
-      
-    var mysql = require('mysql');
-    var connection = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "password",
-      database: "ceresdb"
-    });
-
-    connection.connect(
-      function(err : any){
-        if(err) {
-          throw err;
-        }
-        console.log("Database is connected.")
-
-        let string_of_field_ids = returnListOfStringValues("field_id"); // returns field_id in fields from the JSON object
-        let string_of_field_values = returnListOfStringValues("field_value");
-        let query = "INSERT INTO Rehab_Report " + string_of_field_ids + " VALUES " + string_of_field_values;
-
-        connection.query(query, function (err : any, result: any) {
-          if (err){ 
-            throw err;
-          }
-          console.log("1 record inserted");
-        });
-
-      });
-    
-  };
-
-
-
   // Can look at the JSON data values after you press the save button in the console of your browser's developer's tools
   const handleSave = (event: any) => {
     let canSave: boolean = true;
@@ -91,7 +33,6 @@ function Forms() {
     });
 
     if (canSave) {
-      insertIntoDatabase(elements)
       alert('Your changes have been saved.'); 
       
     } else {
@@ -128,7 +69,7 @@ function Forms() {
         <div>
           <div className="grey-blocks-form">
             <Form.Label column="lg">{page_label}</Form.Label>
-            <form>
+            <form action="http://localhost:8080/rehab_report/create/rehab_report" method="POST">
               {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
               <div className="button-form">
                 <Button variant="primary" onClick={(e) => handleSave(e)}>
