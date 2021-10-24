@@ -20,7 +20,7 @@ export const findOne = (username: string, callback: Function) => {
     const user: User = {
       id: row.id,
       username: row.username,
-      pwd: row.password,
+      password: row.password,
       departmentName: row.departmentName,
       roleName: row.roleName
     };

@@ -1,65 +1,37 @@
 import * as userModel from '../db/models/user';
 import { User as myUser } from '../db/types/user';
 import passport from 'passport';
-import * as PassportLocal from 'passport-local';
 import PassportJWT from 'passport-jwt';
-import bcrypt from 'bcryptjs';
-import { Payload } from '../types';
 import config from '../config/config';
 import logging from '../config/logging';
 
 const NAMESPACE = 'PASSPORT MIDDLEWARE';
 
-passport.serializeUser((user: myUser, done) => {
-  if (user.pwd) {
-    delete user.pwd; // immediately delete from object incase of incorrect usage
-  }
-  done(null, user);
-});
-passport.deserializeUser((user: myUser, done) => done(null, user));
+const jwtOptions = {
+  jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: config.jwt.secret
+};
 
-passport.use(
-  new PassportLocal.Strategy({}, async (username, password, done) => {
-    try {
-      console.log('PASSPORT [MIDDLEWARE]: ', username, password);
+const strategyAll = new PassportJWT.Strategy(jwtOptions, async (payload, done) => {
+  logging.info(NAMESPACE, 'jwt verification: incoming payload', payload);
 
-      userModel.findOne(username, async (err: Error, user: myUser) => {
-        if (err) {
-          throw new Error('error from user query');
-        }
+  const username = payload.sub;
 
-        if (user === undefined) {
-          done(null, false);
-          return;
-        }
-
-        const isMatch = user.pwd === undefined ? false : await bcrypt.compare(password, user.pwd);
-
-        if (isMatch) {
-          delete user.pwd; // immediately remove password incase of incorrect jwt usage
-          done(null, user);
-        } else {
-          done(null, false);
-        }
-      });
-    } catch (error) {
-      done(null, false);
-    }
-  })
-);
-
-passport.use(
-  new PassportJWT.Strategy(
-    {
-      jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: config.jwt.secret
-    },
-    (payload: Payload, done) => {
-      try {
-        done(null, payload);
-      } catch (error) {
-        done(error);
+  try {
+    await userModel.findOne(username, async (err: Error, user: myUser) => {
+      if (err) {
+        throw new Error('error from user query');
       }
-    }
-  )
-);
+      if (user) {
+        user.password && delete user.password;
+        return done(null, user);
+      } else {
+        return done(null, false);
+      }
+    });
+  } catch (error) {
+    done(error, false);
+  }
+});
+
+passport.use('authAll', strategyAll);

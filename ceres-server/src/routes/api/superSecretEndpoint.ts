@@ -1,10 +1,9 @@
 import { Router } from 'express';
-import { ReqUser } from '../../types';
 import { authenticate } from 'passport';
 
 const router = Router();
 
-router.get('/', authenticate('jwt', {session: false}), (req: ReqUser, res) => {
+router.get('/', authenticate('authAll', { session: false }), (req, res) => {
   try {
     if (!req.user) {
       throw new Error('req.user not instantiated');
