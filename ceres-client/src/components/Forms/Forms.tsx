@@ -65,16 +65,15 @@ function Forms() {
 
   
   const handleSave = (event: any) => {
-    let canSubmit: boolean = true;
+    let can_submit: boolean = true;
 
     elements.fields.forEach((field: any) => {
       if (isNaN(field.field_value)) {
-        canSubmit = false;
+        can_submit = false;
       }
     });
 
-    if (canSubmit) {
-
+    if (can_submit) {
       //Passes form data into the database with a POST request
       //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
       let JSONObjForDatabase = parseJSONElementsForDatabase(elements.fields);
@@ -103,6 +102,7 @@ function Forms() {
     console.log(elements);
   };
 
+  //Updates the key field_value in the JSON object
   const handleChange: any = (id: any, event: any) => {
     const newElements = { ...elements };
     newElements.fields.forEach((field: any) => {
