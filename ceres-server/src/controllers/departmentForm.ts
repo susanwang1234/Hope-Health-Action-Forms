@@ -6,8 +6,11 @@ const NAMESPACE = 'Department Form';
 
 const getDepartmentFormById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'FETCHING DEPARTMENT FORM');
-  const departmentId = req.params.id;
-  // assert departmentId is a number
+  const departmentId: number = +req.params.id;
+  if (!departmentId || departmentId < 0) {
+    res.status(400).send({ error: 'Incorrect usage for /departmentForm/:id , id must be a positive integer' });
+    return;
+  }
   // assert department exists, else send 404
   try {
     const questions = await Knex.select('*')
