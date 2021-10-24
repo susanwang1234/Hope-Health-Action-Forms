@@ -1,276 +1,346 @@
 {
-  "info": {
-    "_postman_id": "d48d6c76-d2d8-4405-8792-f36f589750dc",
-    "name": "ceres",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Rehab Report",
-      "item": [
-        {
-          "name": "localhost:8080/rehab_report/create/rehab_report",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"currDate\": \"2021-10-6 16:27:08\",\r\n    \"bedsAvailable\": 21,\r\n    \"bedDays\": 436,\r\n    \"patientDays\": 379,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 2,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/rehab_report/create/rehab_report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab_report", "create", "rehab_report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/rehab_report/edit/rehab_report",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"id\": 2,\r\n    \"currDate\": \"2021-10-7 05:13:08\",\r\n    \"bedsAvailable\": 23,\r\n    \"bedDays\": 500,\r\n    \"patientDays\": 380,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 9,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/rehab_report/edit/rehab_report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab_report", "edit", "rehab_report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/rehab_report/delete_all/rehab_report",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/rehab_report/delete_all/rehab_report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab_report", "delete_all", "rehab_report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/rehab_report/delete/rehab_report",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"rehabReportId\": 1\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/rehab_report/delete/rehab_report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab_report", "delete", "rehab_report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/rehab_report/get/rehab_report",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/rehab_report/get/rehab_report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab_report", "get", "rehab_report"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Authentication",
-      "item": [
-        {
-          "name": "Step 1: login request",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/auth/login",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["auth", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Step 2: attempt to access secret route",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVOYW1lIjoiYWRtaW4iLCJkZXBhcnRtZW50TmFtZSI6IlJlaGFiIiwiaWF0IjoxNjMzNzczMDc4LCJleHAiOjE2MzUwNjkwNzh9.X_0H_lpHhtrDdsQKC4Zngyq34KACQAZHiVMUCl0Jw5U",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/api/secrets",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["api", "secrets"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Dummy",
-      "item": [
-        {
-          "name": "localhost:8080/dummy/create/dummy",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"dummyName\": \"dummy99\",\r\n    \"dummyInfo\": 99\r\n}\r\n",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/dummy/create/dummy",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dummy", "create", "dummy"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/dummy/delete/dummy",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/dummy/delete/dummy",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dummy", "delete", "dummy"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/dummy/get/dummy",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/dummy/get/dummy",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dummy", "get", "dummy"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Dashboard",
-      "item": [
-        {
-          "name": "localhost:8080/dashboard",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/dashboard",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dashboard"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Department",
-      "item": [
-        {
-          "name": "localhost:8080/department/69",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department/69",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department", "69"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Default",
-      "item": [
-        {
-          "name": "localhost:8080/",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": [""]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+	"info": {
+		"_postman_id": "7942ef50-f337-4cb2-9434-34def313c4df",
+		"name": "ceres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Rehab Report",
+			"item": [
+				{
+					"name": "localhost:8080/rehab_report/create/rehab_report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currDate\": \"2021-10-6 16:27:08\",\r\n    \"bedsAvailable\": 21,\r\n    \"bedDays\": 436,\r\n    \"patientDays\": 379,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 2,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rehab_report/create/rehab_report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab_report",
+								"create",
+								"rehab_report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/rehab_report/edit/rehab_report",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"currDate\": \"2021-10-7 05:13:08\",\r\n    \"bedsAvailable\": 23,\r\n    \"bedDays\": 500,\r\n    \"patientDays\": 380,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 9,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rehab_report/edit/rehab_report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab_report",
+								"edit",
+								"rehab_report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/rehab_report/delete_all/rehab_report",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rehab_report/delete_all/rehab_report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab_report",
+								"delete_all",
+								"rehab_report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/rehab_report/delete/rehab_report",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rehabReportId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rehab_report/delete/rehab_report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab_report",
+								"delete",
+								"rehab_report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/rehab_report/get/rehab_report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rehab_report/get/rehab_report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab_report",
+								"get",
+								"rehab_report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Step 1: login request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 2: attempt to access secret route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVOYW1lIjoiYWRtaW4iLCJkZXBhcnRtZW50TmFtZSI6IlJlaGFiIiwiaWF0IjoxNjMzNzczMDc4LCJleHAiOjE2MzUwNjkwNzh9.X_0H_lpHhtrDdsQKC4Zngyq34KACQAZHiVMUCl0Jw5U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/secrets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"secrets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dummy",
+			"item": [
+				{
+					"name": "localhost:8080/dummy/create/dummy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dummyName\": \"dummy99\",\r\n    \"dummyInfo\": 99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/dummy/create/dummy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dummy",
+								"create",
+								"dummy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/dummy/delete/dummy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dummy/delete/dummy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dummy",
+								"delete",
+								"dummy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/dummy/get/dummy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dummy/get/dummy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dummy",
+								"get",
+								"dummy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "localhost:8080/dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dashboard",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "localhost:8080/department",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/department",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"department"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Default",
+			"item": [
+				{
+					"name": "localhost:8080/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }

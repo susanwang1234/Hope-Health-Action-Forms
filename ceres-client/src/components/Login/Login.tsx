@@ -40,7 +40,7 @@ function Login() {
   console.log('Username (Login) is ' , userContext.user?.name)
   console.log('Department (Login) is ' , userContext.user?.department)
   return (
-    <div className="flex md:flex-row flex-col" >
+    <div className="flex xl:flex-row flex-col" >
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
         <div className="max-w-md w-full mx-auto">
           <div className="text-center font-medium text-xl ">
@@ -94,7 +94,7 @@ function Login() {
           </form>
         </div>
       </div>
-      <div>
+      <div className = "hidden xl:flex">
         <img src={display} alt="Display" className="object-fill h-screen w-full" />
       </div>
     </div>
