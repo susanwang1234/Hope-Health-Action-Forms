@@ -26,13 +26,11 @@ Otherwise proceed to Section B<br>
 A video tutorial for setting up the environment can be found here: https://youtu.be/p5ku4wTy-FQ<br>
 
 <h3>Section A</h3>
-
 Instructions on setting up the build (From the ./ directory)
 
 - make setup<br>
 
 <h3>Section B</h3>
-
 Steps to run (From the ./ directory)
 
 - make build<br>
@@ -51,26 +49,24 @@ To shut down the Docker containers (From the ./ directory)
 - make stop<br>
 
 <h3>Section C</h3>
-
 Proceed with Section C if:
 
 1. This is your first time setting up the environment<br>
 2. New dependencies were added<br>
 3. The commands "make \_\_\_\_" do not work<br>
 
-Instructions on setting up the build (From the ./ directory)<br>
+Instructions on setting up the build (From the ./ directory)
 
 - ./setup.sh<br>
 
 \*\*\* If permission is denied, do the following<br>
 
-- chmod +x setup.sh<br>
+- chmod +x setup.sh
 - ./setup.sh<br>
 
 Otherwise proceed to Section D<br>
 
 <h3>Section D</h3>
-
 Steps to run (From the ./ directory)
 
 - docker-compose build<br>
@@ -116,7 +112,7 @@ Steps to run (From the ceres-server CLI terminal)
 <h1>Important mysql commands (executed inside mysql docker container root)</h1>
 
 <h3>Dumping the schema</h3>
-Steps to run (From the ceres-ceres-database-1 CLI terminal)<br>
+Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
 - mysqldump -u root -p --databases ceresdb > dump.sql<br>
 
