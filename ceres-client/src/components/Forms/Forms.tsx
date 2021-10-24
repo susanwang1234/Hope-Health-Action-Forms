@@ -45,19 +45,22 @@ function Forms() {
 
  //example of output of pareJSONElementsForDatabase (type JSON object)  -> { currDate: 2021-10-05 07:44:04, bedsAvaliable: 0, bedDays: 0 ...}
   function parseJSONElementsForDatabase(oldJSONObject : any) {
-    let newJSONObjectString = "{ currDate:" + Date() + ", ";
+    let currentDate = Date();
+    let newJSONObjectString = '{ "currDate": ' + '"' + currentDate + '"' + ', ';
     let listIndex = 0;
-    console.log(oldJSONObject.fields.length)
     for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
+      let endOfStr = ''
       if(listIndex < oldJSONObject.length - 1) {
-        newJSONObjectString = newJSONObjectString + oldJSONObject[listIndex].field_id + ":" + oldJSONObject[listIndex].field_value + ", "
+        endOfStr = ', '
       }
       else {
-        newJSONObjectString = newJSONObjectString + oldJSONObject[listIndex].field_id + ":" + oldJSONObject[listIndex].field_value + "}"
+        endOfStr = ' }'
       }
+      newJSONObjectString = newJSONObjectString + '"' + oldJSONObject[listIndex].field_id + '"' + ': '  + oldJSONObject[listIndex].field_value + endOfStr
+      
     }
-    //let newJSONObject = JSON.parse(newJSONObjectString);
-    return newJSONObjectString
+    let newJSONObject = JSON.parse(newJSONObjectString);
+    return newJSONObject
   }
 
   
@@ -73,14 +76,15 @@ function Forms() {
     if (canSubmit) {
 
       //Passes form data into the database with a POST request
-      //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
-      /*
+      //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+      let JSONObjForDatabase = parseJSONElementsForDatabase(elements.fields);
+       console.log(JSONObjForDatabase)
       fetch(' http://localhost:8080/rehab_report/create/rehab_report', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(elements)
+        body: JSON.stringify(JSONObjForDatabase)
       })
         .then((response) => response.json())
         .then((data) => {
@@ -90,9 +94,7 @@ function Forms() {
           console.error('Error:', error);
         });
 
-        */
-       let JSONObj = parseJSONElementsForDatabase(elements);
-       console.log(JSONObj)
+       
       alert('Your changes have been saved.');
     } else {
       alert('Error: You have not filled all the required fields.');
