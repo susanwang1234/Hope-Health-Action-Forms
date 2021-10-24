@@ -67,7 +67,7 @@ function Forms() {
       <main>
         <Navbar />
         <div>
-          <div className="grey-blocks-form">
+          <div className="blocks-form">
             <Form.Label column="lg">{page_label}</Form.Label>
             <form action="http://localhost:8080/rehab_report/create/rehab_report" method="POST">
               {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
