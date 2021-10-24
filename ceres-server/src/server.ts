@@ -4,7 +4,7 @@
 /** Import Modules */
 import http from 'http';
 import cors from 'cors';
-import express from 'express';
+import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
 import dashboardRoutes from './routes/dashboard';
@@ -15,14 +15,23 @@ import routes from './routes/index';
 import passport from 'passport';
 import './middlewares/passport-strategies.mw.ts';
 
-/** Define Server */
+const router: Application = createServer();
 const NAMESPACE = 'Server';
-const router = express();
 
-/** Default Request */
-router.get('/', (req, res) => {
-  res.send('Welcome to Team Ceres');
-});
+export function createServer() {
+  /** Define Server */
+  const router: Application = express();
+  return router;
+}
+
+defaultRequest(router);
+
+export function defaultRequest(router: Application) {
+  /** Default Request */
+  router.get('/', (req: Request, res: Response, next: NextFunction) => {
+    res.send('Welcome to Team Ceres');
+  });
+}
 
 /** Enable CORS */
 const allowedOrigins = ['http://localhost:3000'];
@@ -67,12 +76,14 @@ router.use((req, res, next) => {
   next();
 });
 
-/** Routes */
-router.use('', routes);
-router.use('', dashboardRoutes);
-router.use('/department', departmentRoutes);
-router.use('/dummy', dummyRoutes);
-router.use('/rehab_report', rehabReportRoutes);
+export function apiRoutes(router: Application) {
+  /** Routes */
+  router.use('', routes);
+  router.use('', dashboardRoutes);
+  router.use('/department', departmentRoutes);
+  router.use('/dummy', dummyRoutes);
+  router.use('/rehab_report', rehabReportRoutes);
+}
 
 /** Error Handling */
 router.use((req, res, next) => {
