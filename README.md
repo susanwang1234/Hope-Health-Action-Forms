@@ -1,10 +1,16 @@
 <h1>Ceres Project Introduction</h1>
 
-Ceres’ web-based application for Hope Health Action (HHA) will allow users to upload, submit, and view data to fulfill their monthly requirements. Currently, users are able to add new MSPP required data; eventually, they will also be able to upload new case studies and an employee of the month to receive points and compete with other departments. Users will also be able to view data they had previously submitted so they can either edit or delete the files.<br>
+Ceres’ web-based application for Hope Health Action (HHA) will allow users to upload, submit, and view data to fulfill their monthly requirements. Currently, users are able to add new MSPP required
+data; eventually, they will also be able to upload new case studies and an employee of the month to receive points and compete with other departments. Users will also be able to view data they had
+previously submitted so they can either edit or delete the files.<br>
 
 <h1>Ceres Directory Structure</h1>
 
-In the root directory, there are 4 folders. These 4 folders are ceres-client, ceres-database, ceres-postman and ceres-server. ceres-client contains all the files for the client written with Typescript and React and a dockerfile. It follows the typical React file structure where it has an src folder with all the different tsx files inside of it. ceres-database contains a dockerfile and sql files for the mysql database used for this project. The sql files will be removed next iteration since we transitioned to using migrations and seeds. ceres-postman contains a json of the rest api for this project. ceres-server contains all the files for the server written with Typescript and Node/Express and a dockerfile. It follows the typical Node file structure where it has an src folder with all the different tsx files inside of it. <br>                                                                                                                                           
+In the root directory, there are 4 folders. These 4 folders are ceres-client, ceres-database, ceres-postman and ceres-server. ceres-client contains all the files for the client written with Typescript
+and React and a dockerfile. It follows the typical React file structure where it has an src folder with all the different tsx files inside of it. ceres-database contains a dockerfile and sql files for
+the mysql database used for this project. The sql files will be removed next iteration since we transitioned to using migrations and seeds. ceres-postman contains a json of the rest api for this
+project. ceres-server contains all the files for the server written with Typescript and Node/Express and a dockerfile. It follows the typical Node file structure where it has an src folder with all
+the different tsx files inside of it. <br>
 
 <h1>Ceres Client and Serverside Build and Deploy Instructions</h1>
 
@@ -90,19 +96,24 @@ Steps to run (From the ceres-server CLI terminal) <br>
 - node_modules/.bin/knex migrate:make -x ts "migration_name"<br>
 
 <h3>Run migrations</h3>
-Steps to run (From the ceres-server CLI terminal)
+Steps to run (From the ceres-server CLI terminal)<br>
 
 - node_modules/.bin/knex migrate:latest<br>
 
 <h3>Make seed</h3>
-Steps to run (From the ceres-server CLI terminal)
+Steps to run (From the ceres-server CLI terminal)<br>
 
 - node_modules/.bin/knex seed:make -x ts "seed_name"<br>
 
 <h3>Seed database</h3>
-Steps to run (From the ceres-server CLI terminal)
+Steps to run (From the ceres-server CLI terminal)<br>
 
 - node_modules/.bin/knex seed:run<br>
+
+<h3>Dumping the schema</h3>
+Steps to run (From the ceres-server CLI terminal)<br>
+
+- mysqldump -u root -p --databases ceresdb > dump.sql<br>
 
 <h3> Important notes </h3>
 <p>You only need to make a migration if you want to change the schema. You only need to make a seed if you want to change the default state of the database. Otherwise, just run the migration and seed the database to view the updated database.</p>
@@ -128,5 +139,4 @@ Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
 <h3> View table columns </h3>
 
-- DESCRIBE COLUMNS FROM (TableName); <br>
-
+- DESCRIBE COLUMNS; <br>
