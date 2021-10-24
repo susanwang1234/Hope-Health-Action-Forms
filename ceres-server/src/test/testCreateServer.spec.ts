@@ -26,3 +26,6 @@ describe('testCreateServerFailure', function () {
     request(test2).get('/').expect(404, done);
   });
 });
+
+// Close running servers
+httpServerTest1.close();
