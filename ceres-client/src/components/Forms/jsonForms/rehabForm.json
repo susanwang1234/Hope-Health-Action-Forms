@@ -3,7 +3,7 @@
     "page_label": "Rehab Form",
     "fields": [
       {
-        "field_id": "bedsAvaliable",
+        "field_id": "beds_avaliable",
         "field_label": "Beds avaliable",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -11,7 +11,7 @@
         "field_value": 0
       },
       {
-        "field_id": "bedDays",
+        "field_id": "bed_days",
         "field_label": "Bed days",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -19,7 +19,7 @@
         "field_value": 0
       },
       {
-        "field_id": "patientDays",
+        "field_id": "patient_days",
         "field_label": "Patient days",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -43,7 +43,7 @@
         "field_value": 0
       },
       {
-        "field_id": "selfDischarges",
+        "field_id": "self_discharges",
         "field_label": "Self discharged",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -51,7 +51,7 @@
         "field_value": 0
       },
       {
-        "field_id": "deathsBefore48",
+        "field_id": "deaths_before_48",
         "field_label": "Died before 48h",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -59,7 +59,7 @@
         "field_value": 0
       },
       {
-        "field_id": "deathsAfter48",
+        "field_id": "deaths_after_48",
         "field_label": "Died after 48h",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -67,7 +67,7 @@
         "field_value": 0
       },
       {
-        "field_id": "daysHospitalised",
+        "field_id": "days_hospitalised",
         "field_label": "Days hospitalised",
         "field_mandatory": true,
         "field_placeholder": 0,

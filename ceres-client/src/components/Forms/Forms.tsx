@@ -81,9 +81,6 @@ function Forms() {
        console.log(JSONObjForDatabase)
       fetch(' http://localhost:8080/rehab_report/create/rehab_report', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
         body: JSON.stringify(JSONObjForDatabase)
       })
         .then((response) => response.json())
