@@ -14,37 +14,95 @@ import JSONfile from './jsonForms/rehabForm.json';
 // Citation for dynamic forms, updating JSON fields, the JSON structure, and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
 function Forms() {
-  
   const [elements, setElements] = useState<any | null>(null);
   useEffect(() => {
     return setElements(JSONfile[0]);
   }, []);
-  const { fields, page_label }: any = elements ?? {}; // ?? is the nullish coalscending operator which checks if the left or right side is null and uses the non-null side, see https://www.javascripttutorial.net/es-next/javascript-nullish-coalescing-operator/
+  const { fields, page_label }: any = elements ?? {};
 
 
-  // Can look at the JSON data values after you press the save button in the console of your browser's developer's tools
+  //example of input (type JSON object) ->
+  /* [
+      {
+        "field_id": "beds_avaliable",
+        "field_label": "bedsAvaliable",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "bed_days",
+        "field_label": "bedDays",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      ...
+    ]
+  You can see the value of the 'fields' key in rehabForm.json (from .../src/components/Forms/jsonForms/)*/
+
+ //example of output of pareJSONElementsForDatabase (type JSON object)  -> { currDate: 2021-10-05 07:44:04, bedsAvaliable: 0, bedDays: 0 ...}
+  function parseJSONElementsForDatabase(oldJSONObject : any) {
+    let newJSONObjectString = "{ currDate:" + Date() + ", ";
+    let listIndex = 0;
+    console.log(oldJSONObject.fields.length)
+    for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
+      if(listIndex < oldJSONObject.length - 1) {
+        newJSONObjectString = newJSONObjectString + oldJSONObject[listIndex].field_id + ":" + oldJSONObject[listIndex].field_value + ", "
+      }
+      else {
+        newJSONObjectString = newJSONObjectString + oldJSONObject[listIndex].field_id + ":" + oldJSONObject[listIndex].field_value + "}"
+      }
+    }
+    //let newJSONObject = JSON.parse(newJSONObjectString);
+    return newJSONObjectString
+  }
+
+  
   const handleSave = (event: any) => {
-    let canSave: boolean = true;
+    let canSubmit: boolean = true;
 
     elements.fields.forEach((field: any) => {
       if (isNaN(field.field_value)) {
-        canSave = false;
+        canSubmit = false;
       }
     });
 
-    if (canSave) {
-      alert('Your changes have been saved.'); 
-      
+    if (canSubmit) {
+
+      //Passes form data into the database with a POST request
+      //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch 
+      /*
+      fetch(' http://localhost:8080/rehab_report/create/rehab_report', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(elements)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+
+        */
+       let JSONObj = parseJSONElementsForDatabase(elements);
+       console.log(JSONObj)
+      alert('Your changes have been saved.');
     } else {
       alert('Error: You have not filled all the required fields.');
     }
 
     event.preventDefault();
-    
+
     console.log(elements);
   };
 
-  // Updates JSON values in the form + Can look at JSON data values being updated as you add/change values on your browser's developer's tools
   const handleChange: any = (id: any, event: any) => {
     const newElements = { ...elements };
     newElements.fields.forEach((field: any) => {
@@ -61,7 +119,6 @@ function Forms() {
     console.log(elements);
   };
 
-  // var result = (condition) ? (value1) : (value2) is the ternary operator, executes value1 if condition is true, otherwise false, see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
@@ -69,14 +126,14 @@ function Forms() {
         <div>
           <div className="blocks-form">
             <Form.Label column="lg">{page_label}</Form.Label>
-            <form action="http://localhost:8080/rehab_report/create/rehab_report" method="POST">
+            <Form>
               {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
               <div className="button-form">
                 <Button variant="primary" onClick={(e) => handleSave(e)}>
                   Save
                 </Button>{' '}
               </div>
-            </form>
+            </Form>
           </div>
         </div>
       </main>
