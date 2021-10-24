@@ -33,6 +33,8 @@ services:
   ceres-database:
     image: mysql:8.0
     build: ./ceres-database
+    volumes:
+      - ./ceres-database:/ceres-database
     environment:
       - MYSQL_DATABASE=ceresdb
       - MYSQL_USER=HHA
