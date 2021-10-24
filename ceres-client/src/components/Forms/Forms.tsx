@@ -46,7 +46,7 @@ function Forms() {
  //example of output of pareJSONElementsForDatabase (type JSON object)  -> { currDate: 2021-10-05 07:44:04, bedsAvaliable: 0, bedDays: 0 ...}
   function parseJSONElementsForDatabase(oldJSONObject : any) {
     let currentDate = Date();
-    let newJSONObjectString = '{ "currDate": ' + '"' + currentDate + '"' + ', ';
+    let newJSONObjectString = '{ "curr_date": ' + '"' + currentDate + '"' + ', ';
     let listIndex = 0;
     for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
       let endOfStr = ''
