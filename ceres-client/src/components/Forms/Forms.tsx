@@ -79,7 +79,8 @@ function Forms() {
       //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
       let JSONObjForDatabase = parseJSONElementsForDatabase(elements.fields);
        console.log(JSONObjForDatabase)
-      fetch(' http://localhost:8080/rehab_report/create/rehab_report', {
+      fetch('http://localhost:8080/rehab_report/create/rehab_report', {
+        mode: "cors",
         method: 'POST',
         body: JSON.stringify(JSONObjForDatabase)
       })
