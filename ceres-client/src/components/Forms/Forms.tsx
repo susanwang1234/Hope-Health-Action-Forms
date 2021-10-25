@@ -66,7 +66,6 @@ function Forms() {
   
   const handleSave = (event: any) => {
     let canSubmit: boolean = true;
-
     elements.fields.forEach((field: any) => {
       if (isNaN(field.field_value)) {
         canSubmit = false;
@@ -74,14 +73,15 @@ function Forms() {
     });
 
     if (canSubmit) {
-
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json");
       //Passes form data into the database with a POST request
       //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
       let JSONObjForDatabase = parseJSONElementsForDatabase(elements.fields);
        console.log(JSONObjForDatabase)
       fetch('http://localhost:8080/rehab_report/create/rehab_report', {
-        mode: "cors",
         method: 'POST',
+        headers: headers,
         body: JSON.stringify(JSONObjForDatabase)
       })
         .then((response) => response.json())
