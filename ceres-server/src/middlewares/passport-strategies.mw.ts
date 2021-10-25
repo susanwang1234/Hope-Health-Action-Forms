@@ -4,6 +4,7 @@ import passport from 'passport';
 import PassportJWT from 'passport-jwt';
 import config from '../config/config';
 import logging from '../config/logging';
+import { Knex } from '../db/mysql';
 
 const NAMESPACE = 'PASSPORT MIDDLEWARE';
 
@@ -14,24 +15,24 @@ const jwtOptions = {
 
 const strategyAll = new PassportJWT.Strategy(jwtOptions, async (payload, done) => {
   logging.info(NAMESPACE, 'jwt verification: incoming payload', payload);
-
-  const username = payload.sub;
+  const id = payload.sub;
 
   try {
-    await userModel.findOne(username, async (err: Error, user: myUser) => {
-      if (err) {
-        throw new Error('error from user query');
-      }
-      if (user) {
-        user.password && delete user.password;
-        return done(null, user);
-      } else {
-        return done(null, false);
-      }
-    });
+    const user: myUser = await Knex('User')
+      .select(['User.username', 'User.password', 'Department.name as departmentName', 'Role.name as roleName'])
+      .leftJoin('Role', 'User.roleId', 'Role.id')
+      .leftJoin('Department', 'User.departmentId', 'Department.id')
+      .where('User.username', id)
+      .first();
+
+    if (!user) {
+      return done(null, false);
+    } else {
+      user.password && delete user.password; // delete so that password is not propagated
+      return done(null, user);
+    }
   } catch (error) {
     done(error, false);
   }
 });
-
 passport.use('authAll', strategyAll);
