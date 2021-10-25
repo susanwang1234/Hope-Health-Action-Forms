@@ -9,11 +9,10 @@ const validPassword = async (candidate: string, hash: string) => {
 };
 
 const issueJWT = (user: myUser) => {
-  const { id } = user;
   const expiresIn = '1d';
 
   const payload = {
-    sub: id,
+    sub: user.id,
     iat: Date.now()
   };
 

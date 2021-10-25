@@ -41,7 +41,7 @@ function Login() {
         console.log(response.data);
         history.push('/dashboard');
       }).catch((error) => {
-        console.log(error);
+        console.log(error.response);
       })
   });
 

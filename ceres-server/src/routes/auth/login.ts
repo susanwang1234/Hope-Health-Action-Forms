@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
       .first();
 
     if (!user) {
-      res.status(401).json({ success: false, msg: 'entered incorrect username or password' });
+      return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
     }
 
     if (user.password) {
@@ -27,32 +27,13 @@ router.post('/', async (req, res) => {
       if (isValid) {
         delete user.password;
         const tokenObject = authUtil.issueJWT(user);
-        res.status(200).json({ success: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expiresIn });
-      } else {
-        res.status(401).json({ success: false, msg: 'entered incorrect username or password' });
+        return res.status(200).json({ isAuthenticated: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expiresIn });
       }
     }
+    return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
   } catch (error) {
     res.status(500).json({ message: 'server error' });
   }
 });
 
 export default router;
-
-/* 
-      if (!user) {
-        res.status(401).json({ success: false, msg: 'entered incorrect username or password' });
-      }
-
-      if (user.password) {
-        const isValid = await authUtil.validPassword(password, user.password);
-
-        if (isValid) {
-          delete user.password;
-          const tokenObject = authUtil.issueJWT(user);
-          res.status(200).json({ success: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expiresIn });
-        } else {
-          res.status(401).json({ success: false, msg: 'entered incorrect username or password' });
-        }
-      }
-*/
