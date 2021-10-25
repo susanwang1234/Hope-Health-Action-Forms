@@ -70,7 +70,7 @@ export function enableLogging(router: Application, namespace: string) {
   router.use(passport.initialize());
 }
 
-export function linkRoutes(router: Application) {
+export function enableRoutes(router: Application) {
   /** Routes */
   router.use('', routes);
   router.use('', dashboardRoutes);
