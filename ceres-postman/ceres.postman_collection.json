@@ -250,45 +250,22 @@
             }
           },
           "response": []
-        },
+        }
+      ]
+    },
+    {
+      "name": "DepartmentForm",
+      "item": [
         {
-          "name": "localhost:8080/department/1",
+          "name": "localhost:8080/department_form/:id",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/department/1",
+              "raw": "localhost:8080/department_form/:id",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["department", "1"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/department_form/1",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department_form/1",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department_form", "1"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "localhost:8080/department_form/2",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department_form/2",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department_form", "2"]
+              "path": ["department_form/:id"]
             }
           },
           "response": []
