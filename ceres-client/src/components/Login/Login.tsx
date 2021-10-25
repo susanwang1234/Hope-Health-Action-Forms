@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext } from 'react'
 import { UserContext } from '../../UserContext';
 import { useEffect } from 'react'
-import axios from 'axios';
+import http from '../../services/httpService'
 
 
 interface FormData {
@@ -34,15 +34,21 @@ function Login() {
       username,
       password
     }
-  
-    const url = 'http://localhost:8080/auth/login';
-    axios.post(url, user)
-      .then((response) => {
-        console.log(response.data);
+
+    const postLogin = async (user:any) => {
+      try {
+        const url = '/auth/login';
+        const response = await http.post(url, user);
+        const {data} = response;
+        console.log('log in data:',data);
         history.push('/dashboard');
-      }).catch((error) => {
+      }catch (error:any){
         console.log(error.response);
-      })
+      }
+
+    }
+
+    postLogin(user);
   });
 
   const userContext = useContext(UserContext);
