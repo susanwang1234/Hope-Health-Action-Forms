@@ -46,7 +46,7 @@ function Forms() {
  //example of output of pareJSONElementsForDatabase (type JSON object)  -> { currDate: 2021-10-05 07:44:04, bedsAvaliable: 0, bedDays: 0 ...}
   function parseJSONElementsForDatabase(oldJSONObject : any) {
     let currentDate = Date();
-    let newJSONObjectString = '{ "currDate": ' + '"' + currentDate + '"' + ', ';
+    let newJSONObjectString = '{ ';
     let listIndex = 0;
     for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
       let endOfStr = ''
@@ -66,7 +66,6 @@ function Forms() {
   
   const handleSave = (event: any) => {
     let can_submit: boolean = true;
-
     elements.fields.forEach((field: any) => {
       if (isNaN(field.field_value)) {
         can_submit = false;
@@ -74,13 +73,15 @@ function Forms() {
     });
 
     if (can_submit) {
+      const headers = new Headers();
+      headers.append("Content-Type", "application/json");
       //Passes form data into the database with a POST request
       //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
       let JSONObjForDatabase = parseJSONElementsForDatabase(elements.fields);
        console.log(JSONObjForDatabase)
       fetch('http://localhost:8080/rehab_report/create/rehab_report', {
-        mode: "cors",
         method: 'POST',
+        headers: headers,
         body: JSON.stringify(JSONObjForDatabase)
       })
         .then((response) => response.json())
