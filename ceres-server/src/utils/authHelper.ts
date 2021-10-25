@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { User } from '../db/types/user';
+import { User as myUser } from '../db/types/user';
 import * as jwt from 'jsonwebtoken';
 import config from '../config/config';
 
@@ -8,12 +8,12 @@ const validPassword = async (candidate: string, hash: string) => {
   return isValid;
 };
 
-const issueJWT = (user: User) => {
-  const username = user.username;
+const issueJWT = (user: myUser) => {
+  const { id } = user;
   const expiresIn = '1d';
 
   const payload = {
-    sub: username,
+    sub: id,
     iat: Date.now()
   };
 

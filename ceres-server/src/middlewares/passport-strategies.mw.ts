@@ -5,8 +5,17 @@ import PassportJWT from 'passport-jwt';
 import config from '../config/config';
 import logging from '../config/logging';
 import { Knex } from '../db/mysql';
+import { Request } from 'express';
 
 const NAMESPACE = 'PASSPORT MIDDLEWARE';
+
+const cookieExtractor = (req: Request) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies['access_token'];
+  }
+  return token;
+};
 
 const jwtOptions = {
   jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -19,10 +28,10 @@ const strategyAll = new PassportJWT.Strategy(jwtOptions, async (payload, done) =
 
   try {
     const user: myUser = await Knex('User')
-      .select(['User.username', 'User.password', 'Department.name as departmentName', 'Role.name as roleName'])
+      .select(['User.id', 'User.username', 'User.password', 'Department.name as departmentName', 'Role.name as roleName'])
       .leftJoin('Role', 'User.roleId', 'Role.id')
       .leftJoin('Department', 'User.departmentId', 'Department.id')
-      .where('User.username', id)
+      .where('User.id', id)
       .first();
 
     if (!user) {
