@@ -3,7 +3,7 @@
     "page_label": "Rehab Form",
     "fields": [
       {
-        "field_id": "bedsAvaliable",
+        "field_id": "bedsAvailable",
         "field_label": "Beds avaliable",
         "field_mandatory": true,
         "field_placeholder": 0,
