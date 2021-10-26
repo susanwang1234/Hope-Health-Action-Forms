@@ -1,6 +1,7 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
+import { departmentFormError } from 'test/testTools/errorMessages';
 
 const NAMESPACE = 'Department Form';
 
@@ -20,7 +21,7 @@ const getDepartmentFormById = async (req: Request, res: Response, next: NextFunc
       .where('Department.id', departmentId);
     logging.info(NAMESPACE, `FETCHED DEPARTMENT FORM FOR DEPARTMENT ${departmentId}`, questions);
     if (!questions.length) {
-      res.status(404).send({ error: 'Department does not exist or its form structure is empty' });
+      res.status(404).send(departmentFormError);
       return;
     }
     res.send(questions);

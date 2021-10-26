@@ -1,7 +1,7 @@
 import http from 'http';
 import { createServer, sendFirstRequest } from '../server';
 import { Application, Request, Response, NextFunction } from 'express';
-import PORT from './testConfig/testPort';
+import PORT from './testTools/serverPort';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');

@@ -1,18 +1,18 @@
 version: '3.8'
 
 services:
-  # ceres-client:
-  #   build:
-  #     context: ./ceres-client
-  #   environment:
-  #     - CHOKIDAR_USEPOLLING=true
-  #   volumes:
-  #     - ./ceres-client:/ceres-client
-  #   ports:
-  #     - 3000:3000
-  #   image: ceres-client:client
-  #   container_name: ceres-client
-  #   command: npm start
+  ceres-client:
+    build:
+      context: ./ceres-client
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./ceres-client:/ceres-client
+    ports:
+      - 3000:3000
+    image: ceres-client:client
+    container_name: ceres-client
+    command: npm start
 
   ceres-server:
     build:

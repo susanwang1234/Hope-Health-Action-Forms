@@ -137,3 +137,11 @@ Steps to run (From the ceres-ceres-database-1 CLI terminal)
 Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
 - DESCRIBE COLUMNS; <br>
+
+<h1>Running Unit Tests</h1>
+
+<h3>Serverside Unit Tests</h3>
+Steps to run (From the ceres-server CLI terminal)
+
+- node_modules/.bin/knex migrate:latest (Only needed if migrations have not been done)<br>
+- ./runTests.sh<br>

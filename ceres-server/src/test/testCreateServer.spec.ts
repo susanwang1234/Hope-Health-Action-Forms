@@ -2,7 +2,7 @@ import request from 'supertest';
 import http from 'http';
 import { createServer, sendFirstRequest } from '../server';
 import { Application } from 'express';
-import PORT from './testConfig/testPort';
+import PORT from './testTools/serverPort';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
