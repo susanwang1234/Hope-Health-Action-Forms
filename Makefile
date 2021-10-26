@@ -25,21 +25,32 @@ u:
 up:
 	docker-compose up -d
 
-stop: 
-	docker-compose stop
+up-test:
+	docker-compose up -d
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
+	docker exec ceres-server npm test
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
 
-up-prod:
-	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
-
-test:
+up-test-stop:
 	docker-compose up -d
 	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
 	docker exec ceres-server npm test
 	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
 	docker-compose stop
 
-test-continue:
-	docker-compose up -d
+up-prod:
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+stop: 
+	docker-compose stop
+
+migrate:
+	docker exec ceres-server node_modules/.bin/knex migrate:latest
+
+seed:
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
+
+test:
 	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
 	docker exec ceres-server npm test
 	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
