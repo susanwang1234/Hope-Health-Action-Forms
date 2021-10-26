@@ -1,5 +1,5 @@
 import http from 'http';
-import { createServer, enableRoutes, sendFirstRequest } from '../server';
+import { createServer, sendFirstRequest } from '../server';
 import { Application, Request, Response, NextFunction } from 'express';
 const expect = require('chai').expect;
 const chai = require('chai');
@@ -21,13 +21,12 @@ const result = {
 };
 
 // Test 1: Send a request with non-json body
-describe('testCreateServerSuccess', () => {
+describe('testSendNonJsonRequestSuccess', () => {
   let testApp: Application;
   let httpServer: http.Server;
   before('Create a working server', () => {
     testApp = createServer();
     sendFirstRequest(testApp);
-    enableRoutes(testApp);
     httpServer = http.createServer(testApp);
     httpServer.listen(PORT, () => {
       console.log('server running on port ${PORT}');
@@ -51,7 +50,7 @@ describe('testCreateServerSuccess', () => {
 });
 
 // Test 2: Send a request with json body
-describe('testSendRequestSuccess', () => {
+describe('testSendJsonRequestSuccess', () => {
   let testApp: Application;
   let httpServer: http.Server;
   before('Create a working server', () => {
