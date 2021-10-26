@@ -136,7 +136,7 @@ Steps to run (From the ceres-ceres-database-1 CLI terminal)
 <h3> View table columns </h3>
 Steps to run (From the ceres-ceres-database-1 CLI terminal)
 
-- DESCRIBE COLUMNS; <br>
+- DESCRIBE "table_name"; <br>
 
 <h1>Running Unit Tests</h1>
 
