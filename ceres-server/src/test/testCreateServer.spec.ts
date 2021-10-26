@@ -2,12 +2,10 @@ import request from 'supertest';
 import http from 'http';
 import { createServer, sendFirstRequest } from '../server';
 import { Application } from 'express';
+import PORT from './testConfig/testPort';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
-
-// Define Test Server Port
-const PORT: number = parseInt(<string>process.env.PORT, 10) || 4000;
 
 // Test 1: Create a non-working server
 describe('testCreateServerFailure', () => {
@@ -28,9 +26,7 @@ describe('testCreateServerSuccess', () => {
     testApp = createServer();
     sendFirstRequest(testApp);
     httpServer = http.createServer(testApp);
-    httpServer.listen(PORT, () => {
-      console.log('server running on port ${PORT}');
-    });
+    httpServer.listen(PORT);
   });
   after('Close a working server', () => {
     httpServer.close();

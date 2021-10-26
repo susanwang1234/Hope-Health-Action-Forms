@@ -1,19 +1,17 @@
 import http from 'http';
 import { createServer, sendFirstRequest } from '../server';
 import { Application, Request, Response, NextFunction } from 'express';
+import PORT from './testConfig/testPort';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-// Define Test Server Port
-const PORT: number = parseInt(<string>process.env.PORT, 10) || 2000;
-
 // Body of dummy request
 const result = {
   message: 'Send Request',
   value: 66,
-  obj: [1, 2, 3, 4, 5],
+  arr: [1, 2, 3, 4, 5],
   dummyJson: {
     id: 22,
     name: 'Dummy'
@@ -28,9 +26,7 @@ describe('testSendNonJsonRequestSuccess', () => {
     testApp = createServer();
     sendFirstRequest(testApp);
     httpServer = http.createServer(testApp);
-    httpServer.listen(PORT, () => {
-      console.log('server running on port ${PORT}');
-    });
+    httpServer.listen(PORT);
   });
   after('Close a working server', () => {
     httpServer.close();
@@ -59,9 +55,7 @@ describe('testSendJsonRequestSuccess', () => {
       res.send(result);
     });
     httpServer = http.createServer(testApp);
-    httpServer.listen(PORT, () => {
-      console.log('server running on port ${PORT}');
-    });
+    httpServer.listen(PORT);
   });
   after('Close a working server', () => {
     httpServer.close();
@@ -73,14 +67,14 @@ describe('testSendJsonRequestSuccess', () => {
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
-        expect(res.body).to.be.a('object');
-        expect(res.body).to.have.property('message');
-        expect(res.body).to.have.property('value');
+        expect(res.body).to.be.an('object');
+        expect(res.body).to.have.deep.property('message');
+        expect(res.body).to.have.deep.property('value');
         expect(res.body.value).to.be.a('number');
-        expect(res.body).to.have.property('obj');
-        expect(res.body).to.have.property('dummyJson');
-        expect(res.body.dummyJson).to.have.property('id');
-        expect(res.body.dummyJson).to.have.property('name');
+        expect(res.body).to.have.deep.property('arr');
+        expect(res.body).to.have.deep.property('dummyJson');
+        expect(res.body.dummyJson).to.have.deep.property('id');
+        expect(res.body.dummyJson).to.have.deep.property('name');
         done();
       });
   });
@@ -93,11 +87,11 @@ describe('testSendJsonRequestSuccess', () => {
         expect(res).to.have.status(200);
         expect(res.body.message).to.deep.equal('Send Request');
         expect(res.body.value).to.deep.equal(66);
-        expect(res.body.obj).to.be.a('array').with.lengthOf(5);
-        expect(res.body.obj).to.be.an('array').that.does.not.include(6);
-        expect(res.body.obj).to.be.an('array').that.does.include(5);
-        expect(res.body.obj).to.deep.include(5);
-        expect(res.body.obj).to.have.ordered.members([1, 2, 3, 4, 5]).but.not.have.ordered.members([3, 1]);
+        expect(res.body.arr).to.be.an('array').with.lengthOf(5);
+        expect(res.body.arr).to.be.an('array').that.does.not.include(6);
+        expect(res.body.arr).to.be.an('array').that.does.include(5);
+        expect(res.body.arr).to.deep.include(5);
+        expect(res.body.arr).to.have.ordered.members([1, 2, 3, 4, 5]).but.not.have.ordered.members([3, 1]);
         expect(res.body.dummyJson.id).to.be.a('number');
         expect(res.body.dummyJson.id).to.deep.equal(22);
         expect(res.body.dummyJson.name).to.be.string;
