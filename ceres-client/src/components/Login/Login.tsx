@@ -44,12 +44,12 @@ function Login() {
     <div className="flex xl:flex-row flex-col" >
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
         <div className="max-w-md w-full mx-auto">
-          <div className="log_container">
+          <div className="logo_container">
             <img src={Logo} alt="Logo" className="logo_image" />
           </div>
         </div>
-        <div className="max-w-md w-9/12 mx-auto mt-4 bg-white p-8 border border-gray-300 rounded-xl shadow-2xl">
-          <div className="text-3xl font-bold text-gray-900 mt-2 text-center">Sign In </div>
+        <div className="border sign_in_box">
+          <div className="sign_in_container">Sign In </div>
           <form action="" className="space-y-6" onSubmit={onSubmit}>
             <div>
               <label htmlFor="" className="input_field_heading">
@@ -82,7 +82,7 @@ function Login() {
         </div>
       </div>
       <div className = "hidden xl:flex">
-        <img src={display} alt="Display" className="object-fill h-screen w-full" />
+        <img src={display} alt="Display" className="image" />
       </div>
     </div>
   );
