@@ -23,8 +23,8 @@ function Login() {
     formState: { errors }
   } = useForm<FormData>({ mode: 'onChange' });
 
-  const onSubmit = handleSubmit(({ username, password, remember }) => {
-    console.log(username, password, remember);
+  const onSubmit = handleSubmit(({ username, password }) => {
+    console.log(username, password);
     history.push('/dashboard');
   });
 
@@ -39,6 +39,7 @@ function Login() {
 
   console.log('Username (Login) is ' , userContext.user?.name)
   console.log('Department (Login) is ' , userContext.user?.department)
+
   return (
     <div className="flex xl:flex-row flex-col" >
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
@@ -73,20 +74,6 @@ function Login() {
                 Password
               </label>
               <input {...register('password', { required: true })} name="password" type="password" className="w-full p-2 border border-gray-300 rounded mt-1" />
-            </div>
-
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input {...register('remember', { required: false })} name="remember" type="checkbox" className="h-4 w-4 text-blue-300 rounded" />
-                <label htmlFor="" className="ml-2 text-sm text-gray-600">
-                  Remember me
-                </label>
-              </div>
-              <div>
-                <a href="/#" className="font-medium text-sm text-blue-500">
-                  Forgot Password
-                </a>
-              </div>
             </div>
             <div>
               <button className="w-full py-2 px-4 transition-all transform duration-300 ease-in bg-blue-600 hover:bg-blue-800 font-medium hover:font-bold rounded-md text-white text-sm">Submit</button>
