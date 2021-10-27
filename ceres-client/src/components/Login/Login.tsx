@@ -44,15 +44,15 @@ function Login() {
     <div className="flex xl:flex-row flex-col" >
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
         <div className="max-w-md w-full mx-auto">
-          <div className="text-center font-medium text-xl ">
-            <img src={Logo} alt="Logo" className="object-contain h-48 w-full" />
+          <div className="log_container">
+            <img src={Logo} alt="Logo" className="logo_image" />
           </div>
         </div>
         <div className="max-w-md w-9/12 mx-auto mt-4 bg-white p-8 border border-gray-300 rounded-xl shadow-2xl">
           <div className="text-3xl font-bold text-gray-900 mt-2 text-center">Sign In </div>
           <form action="" className="space-y-6" onSubmit={onSubmit}>
             <div>
-              <label htmlFor="" className="text-sm font-bold text-gray-600 block">
+              <label htmlFor="" className="input_field_heading">
                 Username
               </label>
               <input
@@ -61,22 +61,22 @@ function Login() {
                   minLength: 6,
                   maxLength: 25
                 })}
+                className="border input_field"
                 style={{ borderColor: errors.username ? 'red' : '' }}
                 name="username"
                 type="text"
-                className="w-full p-2 border border-gray-300 rounded mt-1"
               />
               {errors.username && 'Username is invalid'}
             </div>
 
             <div>
-              <label htmlFor="" className="text-sm font-bold text-gray-600 block">
+              <label htmlFor="" className="input_field_heading">
                 Password
               </label>
-              <input {...register('password', { required: true })} name="password" type="password" className="w-full p-2 border border-gray-300 rounded mt-1" />
+              <input {...register('password', { required: true })} name="password" type="password" className="border input_field" />
             </div>
             <div>
-              <button className="w-full py-2 px-4 transition-all transform duration-300 ease-in bg-blue-600 hover:bg-blue-800 font-medium hover:font-bold rounded-md text-white text-sm">Submit</button>
+              <button className="transform hover:bg-blue-800 hover:font-bold submit_button">Submit</button>
             </div>
           </form>
         </div>
