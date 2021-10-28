@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "name": "Rehabilitation"
+    },
+    {
+        "id": 2,
+        "name": "Maternity"
+    },
+    {
+        "id": 3,
+        "name": "Community Health"
+    },
+    {
+        "id": 4,
+        "name": "NICUPaeds"
+    }
+]

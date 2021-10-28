@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudy from './components/CaseStudy/CaseStudy';
 import { UserContextProvider } from './UserContext';
 import Forms from './components/Forms/Forms';
+import Departments from './components/Departments/Departments';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/submit-report" component={Forms}></Route>
           <Route path="/data-page" component={DataPage}></Route>
           <Route path="/case-study" component={CaseStudy}></Route>
+          <Route path="/departments" component={Departments}></Route>
         </UserContextProvider>
       </Switch>
     </Router>
