@@ -18,6 +18,10 @@ const createNewForm = async (req: Request, res: Response, next: NextFunction) =>
     res.status(201).send(newForm);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
+    if (error.errno === 1452) {
+      res.status(404).send({ error: `Cannot find department with id ${departmentId}` });
+      return;
+    }
     res.status(500).send(error);
   }
 };
