@@ -3,6 +3,6 @@ import controller from '../controllers/form';
 
 const router = express.Router();
 
-router.get('/:department_id', controller.createNewForm);
+router.post('', controller.createNewForm);
 
 export = router;
