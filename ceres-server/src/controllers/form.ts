@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 
 const NAMESPACE = 'Form';
+const SQL_FOREIGN_KEY_CONSTRAINT_ERROR_CODE: number = 1452;
 
 const createNewForm = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'Creating new form');
@@ -18,7 +19,7 @@ const createNewForm = async (req: Request, res: Response, next: NextFunction) =>
     res.status(201).send(newForm);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
-    if (error.errno === 1452) {
+    if (error.errno === SQL_FOREIGN_KEY_CONSTRAINT_ERROR_CODE) {
       res.status(404).send({ error: `Cannot find department with id ${departmentId}` });
       return;
     }
