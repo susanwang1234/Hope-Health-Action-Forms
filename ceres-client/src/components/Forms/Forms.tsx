@@ -45,9 +45,11 @@ function Forms() {
 
  //example of output of parseJSONElementsForDatabase (type JSON object)  -> { "currDate": "2021-10-05 07:44:04", "bedsAvaliable": 0, "bedDays": 0 ...}
   function parseJSONElementsForDatabase(oldJSONObject : any) {
-    //Source which converts JavaScript date format into SQL date format : https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-    let currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');;
+    //[Copied] Source which converts JavaScript date format into SQL date format : https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
+    let currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
+
     let newJSONObjectString = '{ "currDate": ' + currentDate + ", ";
+    
     let listIndex = 0;
     for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
       let endOfStr = ''
