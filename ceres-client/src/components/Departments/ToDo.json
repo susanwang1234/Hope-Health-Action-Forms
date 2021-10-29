@@ -1,0 +1,22 @@
+[
+    {
+        "id": 2,
+        "caseStudy": true,
+        "mspp": false
+    },
+    {
+        "id": 3,
+        "caseStudy": true,
+        "mspp": true
+    },
+    {
+        "id": 4,
+        "caseStudy": false,
+        "mspp": true
+    },
+    {
+        "id": 5,
+        "caseStudy": true,
+        "mspp": true
+    }
+]
