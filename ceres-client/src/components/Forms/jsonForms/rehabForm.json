@@ -3,7 +3,7 @@
     "page_label": "Rehab Form",
     "fields": [
       {
-        "field_id": "beds_avaliable",
+        "field_id": "bedsAvailable",
         "field_label": "Beds avaliable",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -11,16 +11,16 @@
         "field_value": 0
       },
       {
-        "field_id": "bed_days",
-        "field_label": "Bed Days",
+        "field_id": "bedDays",
+        "field_label": "Bed days",
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
         "field_value": 0
       },
       {
-        "field_id": "patient_days",
-        "field_label": "Patient Days",
+        "field_id": "patientDays",
+        "field_label": "Patient days",
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
@@ -43,7 +43,15 @@
         "field_value": 0
       },
       {
-        "field_id": "deaths_before_48",
+        "field_id": "selfDischarges",
+        "field_label": "Self discharged",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "deathsBefore48",
         "field_label": "Died before 48h",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -51,7 +59,7 @@
         "field_value": 0
       },
       {
-        "field_id": "deaths_after_48",
+        "field_id": "deathsAfter48",
         "field_label": "Died after 48h",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -59,7 +67,7 @@
         "field_value": 0
       },
       {
-        "field_id": "days_hospitalised",
+        "field_id": "daysHospitalised",
         "field_label": "Days hospitalised",
         "field_mandatory": true,
         "field_placeholder": 0,
@@ -83,14 +91,6 @@
         "field_value": 0
       },
       {
-        "field_id": "self_discharges",
-        "field_label": "Self discharged",
-        "field_mandatory": true,
-        "field_placeholder": 0,
-        "field_type": "number",
-        "field_value": 0
-      },
-      {
         "field_id": "stays",
         "field_label": "Stayed in the ward",
         "field_mandatory": true,
@@ -101,6 +101,14 @@
       {
         "field_id": "admissions",
         "field_label": "Admissions",
+        "field_mandatory": true,
+        "field_placeholder": 0,
+        "field_type": "number",
+        "field_value": 0
+      },
+      {
+        "field_id": "outpatients",
+        "field_label": "Outpatients",
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
