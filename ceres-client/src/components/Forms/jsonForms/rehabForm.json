@@ -1,6 +1,6 @@
 [
   {
-    "page_label": "Rehab Form",
+    "page_label": "Rehab Monthly Data Collection",
     "fields": [
       {
         "field_id": "bedsAvailable",
@@ -8,7 +8,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "bedDays",
@@ -16,7 +16,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "patientDays",
@@ -24,7 +24,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "hospitalised",
@@ -32,7 +32,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "discharged",
@@ -40,7 +40,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "selfDischarges",
@@ -48,7 +48,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "deathsBefore48",
@@ -56,7 +56,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "deathsAfter48",
@@ -64,7 +64,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "daysHospitalised",
@@ -72,7 +72,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "referrals",
@@ -80,7 +80,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "transfers",
@@ -88,7 +88,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "stays",
@@ -96,7 +96,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "admissions",
@@ -104,7 +104,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       },
       {
         "field_id": "outpatients",
@@ -112,7 +112,7 @@
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
-        "field_value": 0
+        "field_value": null
       }
       
     ]

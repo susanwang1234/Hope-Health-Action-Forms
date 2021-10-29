@@ -47,9 +47,9 @@ function Forms() {
   function parseJSONElementsForDatabase(oldJSONObject : any) {
     //[Copied] Source which converts JavaScript date format into SQL date format : https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
     let currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-
-    let newJSONObjectString = '{ "currDate": ' + currentDate + ", ";
     
+    let newJSONObjectString = '{ "currDate": ' + '"' + currentDate + '"' + ", "
+
     let listIndex = 0;
     for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
       let endOfStr = ''
@@ -62,6 +62,7 @@ function Forms() {
       newJSONObjectString = newJSONObjectString + '"' + oldJSONObject[listIndex].field_id + '"' + ': '  + oldJSONObject[listIndex].field_value + endOfStr
       
     }
+    console.log(newJSONObjectString)
     let newJSONObject = JSON.parse(newJSONObjectString);
     return newJSONObject
   }
@@ -70,7 +71,7 @@ function Forms() {
   const handleSave = (event: any) => {
     let can_submit: boolean = true;
     elements.fields.forEach((field: any) => {
-      if (isNaN(field.field_value) && field.field_mandatory) {
+      if (field.field_value === null && field.field_mandatory) {
         can_submit = false;
       }
     });
