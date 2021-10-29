@@ -5,10 +5,10 @@ import './Departments.css';
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 /*
-                                     if (DepartmentDetail.name == "Maternity") {
-                                                <div className="checkmark_icon">
-                                                </div>
-                                            }
+if (DepartmentDetail.name == "Maternity") {
+<div className="checkmark_icon">
+</div>
+}
 */
 
 class Departments extends Component {
