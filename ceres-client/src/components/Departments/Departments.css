@@ -64,18 +64,18 @@
 }
 .checkmark{
   content: "";
-    display: block;
-    box-sizing: border-box;
-    position: absolute;
-    left: 8px;
-    top: 2px;
-    width: 6px;
-    height: 15px;
-    border-color: white;
-    border-width: 0 2px 2px 0;
-    border-style: solid;
-    transform-origin: bottom left;
-    transform: rotate(45deg)
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 8px;
+  top: 2px;
+  width: 6px;
+  height: 15px;
+  border-color: white;
+  border-width: 0 2px 2px 0;
+  border-style: solid;
+  transform-origin: bottom left;
+  transform: rotate(45deg)
 }
 .alert_icon{
   height: 30px;
@@ -86,6 +86,22 @@
   position: relative;
   margin:6px;
 }
-.alert{
-  content:"!";
+.alert::after,
+.alert::before{
+  content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    border-radius: 2px;
+    width: 2.5px;
+    background: white;
+    left: 12.5px;
+}
+.alert::after {
+  top: 4px;
+  height: 14px
+}
+.alert::before {
+  height: 1.6px;
+  bottom: 10px
 }

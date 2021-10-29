@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import DepartmentData from "./Departments.json";
 import ToDoData from "./ToDo.json";
 import './Departments.css';
-//source:https://css.gg/check-o
+//source for checkmark icon:https://css.gg/check-o
+//source for alert icon: https://css.gg/danger
 /*
                                      if (DepartmentDetail.name == "Maternity") {
                                                 <div className="checkmark_icon">
