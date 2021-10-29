@@ -3,7 +3,7 @@
 
 /** Import Modules */
 import { Application } from 'express';
-import { createServer, sendFirstRequest, enableCors, enableLogging, linkRoutes, enableErrorHandling, enableServerListening } from 'server';
+import { createServer, sendFirstRequest, enableCors, enableLogging, enableRoutes, enableErrorHandling, enableServerListening } from 'server';
 
 /** Create instance of Server */
 const startServer = () => {
@@ -12,7 +12,7 @@ const startServer = () => {
   sendFirstRequest(app);
   enableCors(app);
   enableLogging(app, NAMESPACE);
-  linkRoutes(app);
+  enableRoutes(app);
   enableErrorHandling(app);
   enableServerListening(app, NAMESPACE);
 };

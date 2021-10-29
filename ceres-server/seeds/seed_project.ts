@@ -9,7 +9,7 @@ import { insertRehabReports } from './inserts/insert_rehab_reports';
 import { insertDummies } from './inserts/insert_dummies';
 
 export async function seed(knex: Knex): Promise<void> {
-  // Delete All existing entries, keeping in mind of foreign key constraints
+  // Delete all existing entries, keeping in mind of foreign key constraints
   await knex('Dummies').del();
   await knex('Rehab_Report').del();
   await knex('User').del();
