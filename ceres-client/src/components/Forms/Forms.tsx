@@ -25,7 +25,7 @@ function Forms() {
   /* [
       {
         "field_id": "bedsAvaliable",
-        "field_label": "bedsAvaliable",
+        "field_label": "Beds avaliable",
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
@@ -33,7 +33,7 @@ function Forms() {
       },
       {
         "field_id": "bedDays",
-        "field_label": "bedDays",
+        "field_label": "Bed days",
         "field_mandatory": true,
         "field_placeholder": 0,
         "field_type": "number",
