@@ -10,44 +10,82 @@
 
 .card {
   display: inline;
+  background-color: #f7f7f7;
   flex-direction: column;
   justify-content: space-around;
   height: 300px;
   padding: 25px;
   border-radius: 5px;
-  background: #ffffff;
-  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+  border-color: #d6d6d6;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .card_inner{
   display: inline;
-  font-size: 25px;
+  font-weight: bold;
+  font-family: Arial;
+  font-size: 30px;
   text-align: center;
-  align-items: center;
   justify-content: space-between;
 }
 .view_button{
   background-color: #009cc4;
+  font-weight: bold;
+  font-family: Arial;
   color: white;
   border: none;
   font-size: 20px;
   padding: 4px 10px;
   text-align: center;
   border-radius: 5px;
-  font-weight: 500;
-  margin-top: 6px;
   width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .view_button:hover{
   background-color: #117088;
+  font-family: Arial;
+  font-weight: bold;
   color: white;
   border: none;
   font-size: 20px;
   padding: 4px 10px;
   text-align: center;
   border-radius: 5px;
-  font-weight: 500;
-  margin-top: 6px;
   width: 80%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.checkmark_icon{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #59b030;
+  display:inline-block;
+  position: relative;
+  margin:6px;
+}
+.checkmark{
+  content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 8px;
+    top: 2px;
+    width: 6px;
+    height: 15px;
+    border-color: white;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    transform-origin: bottom left;
+    transform: rotate(45deg)
+}
+.alert_icon{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #e57200;
+  display:inline-block;
+  position: relative;
+  margin:6px;
+}
+.alert{
+  content:"!";
 }
