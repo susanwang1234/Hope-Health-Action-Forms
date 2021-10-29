@@ -18,11 +18,6 @@ function Forms() {
   useEffect(() => {
     return setElements(JSONfile[0]);
   }, []);
-<<<<<<< HEAD
-  const { fields, page_label }: any = elements ?? {}; // ?? is the nullish coalscending operator which checks if the left or right side is null and uses the non-null side, see https://www.javascripttutorial.net/es-next/javascript-nullish-coalescing-operator/
-
-  // Can look at the JSON data values after you press the save button in the console of your browser's developer's tools
-=======
   const { fields, page_label }: any = elements ?? {};
 
 
@@ -69,20 +64,14 @@ function Forms() {
   }
 
   
->>>>>>> 28-insert-rehab-into-db
   const handleSave = (event: any) => {
     let can_submit: boolean = true;
     elements.fields.forEach((field: any) => {
-      if (isNaN(field.field_value)) {
+      if (isNaN(field.field_value) && field.field_mandatory) {
         can_submit = false;
       }
     });
 
-<<<<<<< HEAD
-    if (canSave) {
-      alert('Your changes have been saved.'); 
-      
-=======
     if (can_submit) {
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
@@ -105,7 +94,6 @@ function Forms() {
 
        
       alert('Your changes have been saved.');
->>>>>>> 28-insert-rehab-into-db
     } else {
       alert('Error: You have not filled all the required fields.');
     }
