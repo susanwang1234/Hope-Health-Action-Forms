@@ -10,6 +10,7 @@ const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_v
   const { handleChange }: any = useContext(FormContext);
 
   let heading: any = { my_field_label };
+  
   if (my_field_mandatory === true) {
     heading = (
       <>
@@ -17,9 +18,16 @@ const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_v
       </>
     );
   }
+  else {
+    heading = (
+    <>
+      {my_field_label}
+    </>
+    );
+  }
 
   let numberClassName = "width-20-percent";
-  if(my_field_value === null){
+  if(my_field_value === null && my_field_mandatory == true){
     numberClassName = numberClassName + " field-invalid-border"
   }
 
