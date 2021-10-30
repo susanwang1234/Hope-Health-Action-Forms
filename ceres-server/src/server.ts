@@ -8,6 +8,7 @@ import dashboardRoutes from './routes/dashboard';
 import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
 import rehabReportRoutes from './routes/rehabReport';
+import authenticationRoutes from './routes/authentication';
 import routes from './routes/index';
 import passport from 'passport';
 import './middlewares/passport-strategies.mw.ts';
@@ -77,6 +78,7 @@ export function linkRoutes(router: Application) {
   router.use('/department', departmentRoutes);
   router.use('/dummy', dummyRoutes);
   router.use('/rehab_report', rehabReportRoutes);
+  router.use('/auth', authenticationRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

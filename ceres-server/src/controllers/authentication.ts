@@ -1,12 +1,12 @@
-import { Router } from 'express';
-import { User as myUser } from '../../db/types/user';
-import * as userModel from '../../db/models/user';
-import authUtil from '../../utils/authHelper';
-import { Knex } from '../../db/mysql';
+import { Request, Response, NextFunction } from 'express';
+import { User as myUser } from '../db/types/user';
+import logging from '../config/logging';
+import authUtil from '../utils/authHelper';
+import { Knex } from '../db/mysql';
 
-const router = Router();
+const NAMESPACE = 'Authentication';
 
-router.post('/', async (req, res) => {
+const login = async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
 
   try {
@@ -16,6 +16,8 @@ router.post('/', async (req, res) => {
       .leftJoin('Department', 'User.departmentId', 'Department.id')
       .where('User.username', username)
       .first();
+
+    logging.info(NAMESPACE, 'Retrieved from db', user);
 
     if (!user) {
       return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
@@ -31,9 +33,10 @@ router.post('/', async (req, res) => {
       }
     }
     return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
-  } catch (error) {
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
     res.status(500).json({ message: 'server error' });
   }
-});
+};
 
-export default router;
+export default { login };
