@@ -4,9 +4,9 @@ import controller from '../controllers/userController';
 const router = express.Router();
 
 router.get('', controller.getUsers);
-// router.get('', controller.editUserById);
-// router.get('', controller.createUser);
+// router.post('', controller.editUserById);
+// router.put('', controller.createUser);
 router.delete('/:id', controller.deleteUserById);
-// router.get('', controller.deleteUsers);
+router.delete('', controller.deleteUsers);
 
 export = router;

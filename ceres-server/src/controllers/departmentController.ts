@@ -21,7 +21,7 @@ const getDepartments = async (req: Request, res: Response, next: NextFunction) =
   logging.info(NAMESPACE, `GETTING LIST OF DEPARTMENTS`);
   try {
     const departments: Department[] = await Knex.select('*').from('Department');
-    logging.info(NAMESPACE, 'Retrieved departments:', departments);
+    logging.info(NAMESPACE, `RETRIEVED DEPARTMENTS ${departments}`);
     res.status(200).send(departments);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);

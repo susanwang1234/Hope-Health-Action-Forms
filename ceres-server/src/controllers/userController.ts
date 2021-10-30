@@ -40,4 +40,16 @@ const deleteUserById = async (req: Request, res: Response, next: NextFunction) =
   }
 };
 
-export default { getUsers, deleteUserById };
+const deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
+  logging.info(NAMESPACE, `DELETING ALL USERS`);
+  try {
+    await Knex('User').del();
+    logging.info(NAMESPACE, `DELETED ALL USERS`);
+    res.sendStatus(204);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
+};
+
+export default { getUsers, deleteUserById, deleteUsers };

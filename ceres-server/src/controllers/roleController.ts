@@ -9,7 +9,7 @@ const getRoles = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING LIST OF ROLES`);
   try {
     const roles: Role[] = await Knex.select('*').from('Role');
-    logging.info(NAMESPACE, 'Retrieved role:', roles);
+    logging.info(NAMESPACE, `RETRIEVED ROLES ${roles}`);
     res.status(200).send(roles);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
