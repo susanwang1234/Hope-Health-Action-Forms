@@ -79,8 +79,8 @@ export function enableRoutes(router: Application) {
   router.use('', dashboardRoutes);
   router.use('/department', departmentRoutes);
   router.use('/dummy', dummyRoutes);
-  router.use('/rehab_report', rehabReportRoutes);
-  router.use('/department_form', departmentFormRoutes);
+  router.use('/rehab-report', rehabReportRoutes);
+  router.use('/department-form', departmentFormRoutes);
   router.use('/role', roleRoutes);
   router.use('/user', userRoutes);
 }

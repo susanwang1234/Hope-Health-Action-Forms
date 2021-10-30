@@ -2,7 +2,7 @@ import http from 'http';
 import { createServer, enableErrorHandling, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
-import { departmentFormError, pageNotFoundError } from './testTools/errorMessages';
+import { departmentDNEError, pageNotFoundError } from './testTools/errorMessages';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -55,11 +55,11 @@ describe('testGetDepartmentFormFailure', () => {
   it('Throw error code 404 for department form yet to be created', (done) => {
     chai
       .request(testApp)
-      .get('/department_form/4')
+      .get('/department-form/14')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
-        expect(res.text).to.deep.equal(JSON.stringify(departmentFormError));
+        expect(res.text).to.deep.equal(JSON.stringify(departmentDNEError));
         done();
       });
   });
@@ -83,7 +83,7 @@ describe('testGetDepartmentFormSuccess', () => {
   it('Validate department form #2 request properties', (done) => {
     chai
       .request(testApp)
-      .get('/department_form/2')
+      .get('/department-form/2')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -106,7 +106,7 @@ describe('testGetDepartmentFormSuccess', () => {
   it('Validate department form #2 request fields', (done) => {
     chai
       .request(testApp)
-      .get('/department_form/2')
+      .get('/department-form/2')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -127,7 +127,7 @@ describe('testGetDepartmentFormSuccess', () => {
   it('Validate department form #3 request properties', (done) => {
     chai
       .request(testApp)
-      .get('/department_form/3')
+      .get('/department-form/3')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -150,7 +150,7 @@ describe('testGetDepartmentFormSuccess', () => {
   it('Validate department form #3 request fields', (done) => {
     chai
       .request(testApp)
-      .get('/department_form/3')
+      .get('/department-form/3')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);

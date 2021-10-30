@@ -1,7 +1,7 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
-import { departmentFormError } from 'test/testTools/errorMessages';
+import { departmentDNEError } from 'test/testTools/errorMessages';
 
 const NAMESPACE = 'Department Form';
 
@@ -21,7 +21,7 @@ const getDepartmentFormById = async (req: Request, res: Response, next: NextFunc
       .where('Department.id', departmentId);
     logging.info(NAMESPACE, `FETCHED DEPARTMENT FORM FOR DEPARTMENT ${departmentId}`, questions);
     if (!questions.length) {
-      res.status(404).send(departmentFormError);
+      res.status(404).send(departmentDNEError);
       return;
     }
     res.send(questions);
