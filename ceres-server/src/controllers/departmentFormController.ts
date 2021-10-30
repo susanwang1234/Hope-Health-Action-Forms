@@ -1,7 +1,7 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
-import { departmentDNEError } from 'test/testTools/errorMessages';
+import { departmentNegativeInputError, departmentDNEError } from 'test/testTools/errorMessages';
 
 const NAMESPACE = 'Department Form';
 
@@ -9,7 +9,7 @@ const getDepartmentFormById = async (req: Request, res: Response, next: NextFunc
   logging.info(NAMESPACE, 'FETCHING DEPARTMENT FORM');
   const departmentId: number = +req.params.id;
   if (!departmentId || departmentId < 0) {
-    res.status(400).send({ error: 'Incorrect usage for /departmentForm/:id , id must be a positive integer' });
+    res.status(400).send(departmentNegativeInputError);
     return;
   }
 

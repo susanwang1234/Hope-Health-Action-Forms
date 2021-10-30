@@ -2,7 +2,7 @@ import http from 'http';
 import { createServer, enableErrorHandling, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
-import { departmentDNEError, pageNotFoundError } from './testTools/errorMessages';
+import { departmentDNEError, departmentNegativeInputError, pageNotFoundError } from './testTools/errorMessages';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -41,10 +41,21 @@ describe('testGetDepartmentFormFailure', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
+  it('Throw error code 404 for department with a negative number', (done) => {
+    chai
+      .request(testApp)
+      .get('/department-form/-1')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(departmentNegativeInputError));
+        done();
+      });
+  });
   it('Throw error code 404 for invalid URL', (done) => {
     chai
       .request(testApp)
-      .get('/department_form')
+      .get('/department-form')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
