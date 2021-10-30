@@ -1,7 +1,6 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
-import { Knex } from '../db/mysql';
-import { Department } from '../db/models/departmentModel';
+import { getItem } from './requestTemplates/getRequest';
 
 const NAMESPACE = 'Department Control';
 
@@ -18,15 +17,7 @@ const departmentPage = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const getDepartments = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `GETTING LIST OF DEPARTMENTS`);
-  try {
-    const departments: Department[] = await Knex.select('*').from('Department');
-    logging.info(NAMESPACE, `RETRIEVED DEPARTMENTS ${departments}`);
-    res.status(200).send(departments);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error.message);
-  }
+  await getItem(req, res, next, NAMESPACE, 'Department');
 };
 
 export default { departmentPage, getDepartments };
