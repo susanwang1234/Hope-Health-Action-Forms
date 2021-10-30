@@ -9,6 +9,7 @@ import departmentRoutes from './routes/department';
 import dummyRoutes from './routes/dummy';
 import rehabReportRoutes from './routes/rehabReport';
 import authenticationRoutes from './routes/authentication';
+import departmentFormRoutes from './routes/departmentForm';
 import routes from './routes/index';
 import passport from 'passport';
 import './middlewares/passport-strategies.mw.ts';
@@ -71,7 +72,7 @@ export function enableLogging(router: Application, namespace: string) {
   router.use(passport.initialize());
 }
 
-export function linkRoutes(router: Application) {
+export function enableRoutes(router: Application) {
   /** Routes */
   router.use('', routes);
   router.use('', dashboardRoutes);
@@ -79,6 +80,7 @@ export function linkRoutes(router: Application) {
   router.use('/dummy', dummyRoutes);
   router.use('/rehab_report', rehabReportRoutes);
   router.use('/auth', authenticationRoutes);
+  router.use('/department_form', departmentFormRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

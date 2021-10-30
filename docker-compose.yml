@@ -35,6 +35,8 @@ services:
     build: ./ceres-database
     volumes:
       - ./ceres-database:/ceres-database
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=ceresdb
       - MYSQL_USER=HHA

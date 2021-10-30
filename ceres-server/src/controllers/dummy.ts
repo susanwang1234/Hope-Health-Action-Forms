@@ -5,7 +5,7 @@ import { Knex } from '../db/mysql';
 const NAMESPACE = 'Dummies';
 
 const createDummy = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, 'Creating Dummy');
+  logging.info(NAMESPACE, `CREATING DUMMY`);
 
   try {
     const { dummyName, dummyInfo } = req.body;
@@ -20,7 +20,7 @@ const createDummy = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const deleteAllDummy = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, 'Deleting all Dummies.');
+  logging.info(NAMESPACE, `DELETING ALL DUMMIES`);
 
   try {
     await Knex('Dummies').del();
@@ -33,7 +33,7 @@ const deleteAllDummy = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const getAllDummy = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, 'Getting all Dummies.');
+  logging.info(NAMESPACE, `GETTING LIST OF DEPARTMENTS`);
 
   try {
     const dummies = await Knex.select('*').from('Dummies');
