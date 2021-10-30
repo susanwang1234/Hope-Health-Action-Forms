@@ -40,10 +40,8 @@ function Departments(){
                             return <div className="card">
                                         <div className="card_inner">
                                             <h2><b>{DepartmentDetail.name}</b></h2>
-                                            {iconChecker(ToDoData[index].caseStudy)}
-                                            <div className="text">Case Study</div>
-                                            {iconChecker(ToDoData[index].mspp)}
-                                            <div className="text">MSPP Report</div>
+                                            <div className="text">{iconChecker(ToDoData[index].caseStudy)}Case Study</div>
+                                            <div className="text">{iconChecker(ToDoData[index].mspp)}MSPP Report</div>
                                         <button type="submit" onClick={onClick} className="view_button">View Department</button>
                                     </div>
                                 </div>
