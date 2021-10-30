@@ -1,7 +1,7 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
-import { negativeInputError, dneError } from 'test/testTools/errorMessages';
+import { departmentNegativeInputError, departmentDNEError } from 'test/testTools/errorMessages';
 
 const NAMESPACE = 'Department Form';
 
@@ -9,7 +9,7 @@ const getDepartmentFormById = async (req: Request, res: Response, next: NextFunc
   logging.info(NAMESPACE, 'FETCHING DEPARTMENT FORM');
   const departmentId: number = +req.params.id;
   if (!departmentId || departmentId < 0) {
-    res.status(400).send(negativeInputError);
+    res.status(400).send(departmentNegativeInputError);
     return;
   }
 
@@ -21,7 +21,7 @@ const getDepartmentFormById = async (req: Request, res: Response, next: NextFunc
       .where('Department.id', departmentId);
     logging.info(NAMESPACE, `FETCHED DEPARTMENT FORM FOR DEPARTMENT ${departmentId}`, questions);
     if (!questions.length) {
-      res.status(404).send(dneError);
+      res.status(404).send(departmentDNEError);
       return;
     }
     res.send(questions);

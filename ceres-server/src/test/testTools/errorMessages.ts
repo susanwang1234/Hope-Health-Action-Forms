@@ -1,13 +1,15 @@
-function negativeInputErrorTemplate(url: string) {
+function negativeInputError(url: string) {
   return { error: `Incorrect usage for ${url}, id must be a positive integer` };
 }
 
-function dneErrorTemplate(entity: string) {
+function dneError(entity: string) {
   return { error: `${entity} does not exist or its form structure is empty` };
 }
 
-const negativeInputError = negativeInputErrorTemplate('/departmentForm/:id');
-const dneError = dneErrorTemplate('Department');
+const departmentNegativeInputError = negativeInputError('/departmentForm/:id');
+const departmentDNEError = dneError('Department');
+const userNegativeInputError = negativeInputError('/user/:id');
+const userDNEError = dneError('User');
 const pageNotFoundError = { message: 'not found' };
 
-export { negativeInputError, dneError, pageNotFoundError };
+export { departmentNegativeInputError, departmentDNEError, userNegativeInputError, userDNEError, pageNotFoundError };
