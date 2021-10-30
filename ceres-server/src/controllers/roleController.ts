@@ -7,7 +7,6 @@ const NAMESPACE = 'Role Control';
 
 const getRoles = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING LIST OF ROLES`);
-
   try {
     const roles: Role[] = await Knex.select('*').from('Role');
     logging.info(NAMESPACE, 'Retrieved role:', roles);

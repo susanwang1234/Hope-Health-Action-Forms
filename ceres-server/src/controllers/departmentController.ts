@@ -19,7 +19,6 @@ const departmentPage = async (req: Request, res: Response, next: NextFunction) =
 
 const getDepartments = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING LIST OF DEPARTMENTS`);
-
   try {
     const departments: Department[] = await Knex.select('*').from('Department');
     logging.info(NAMESPACE, 'Retrieved departments:', departments);
