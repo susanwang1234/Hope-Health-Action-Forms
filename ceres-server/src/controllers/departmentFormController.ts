@@ -2,16 +2,19 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { departmentNegativeInputError, departmentDNEError } from 'test/testTools/errorMessages';
+import { validateParamId } from './requestTemplates/validateParamId';
 
 const NAMESPACE = 'Department Form';
 
 const getDepartmentFormById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'FETCHING DEPARTMENT FORM');
   const departmentId: number = +req.params.id;
-  if (!departmentId || departmentId < 0) {
-    res.status(400).send(departmentNegativeInputError);
-    return;
-  }
+  validateParamId(departmentId)
+    ? () => {}
+    : () => {
+        res.status(400).send(departmentNegativeInputError);
+        return;
+      };
 
   try {
     const questions = await Knex.select('Department.*', 'Question.*', 'DepartmentQuestion.*')

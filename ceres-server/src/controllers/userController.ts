@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { getItem } from './requestTemplates/getRequest';
 import { userNegativeInputError, userDNEError } from 'test/testTools/errorMessages';
+import { validateParamId } from './requestTemplates/validateParamId';
 
 const NAMESPACE = 'User Control';
 
@@ -22,10 +23,12 @@ const getUsers = async (req: Request, res: Response, next: NextFunction) => {
 const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `DELETING A USER BY ID`);
   const userId: number = +req.params.id;
-  if (!userId || userId < 0) {
-    res.status(400).send(userNegativeInputError);
-    return;
-  }
+  validateParamId(userId)
+    ? () => {}
+    : () => {
+        res.status(400).send(userNegativeInputError);
+        return;
+      };
 
   try {
     const deleteByUserId = await Knex('User').del().where('id', '=', userId);
