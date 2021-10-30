@@ -12,6 +12,13 @@ the mysql database used for this project. The sql files will be removed next ite
 project. ceres-server contains all the files for the server written with Typescript and Node/Express and a dockerfile. It follows the typical Node file structure where it has an src folder with all
 the different tsx files inside of it. <br>
 
+<h1>Valid login Credentials</h1>
+You must input a valid account from the login page in order to reach the dashboard
+
+username: admin password: password123
+
+[Note: you can still access without it if you change from the URL /login to /dashboard]
+
 <h1>Ceres Client and Serverside Build and Deploy Instructions</h1>
 
 Proceed with Section A if:
