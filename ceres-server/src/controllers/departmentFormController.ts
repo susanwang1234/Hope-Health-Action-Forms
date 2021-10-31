@@ -9,12 +9,10 @@ const NAMESPACE = 'Department Form';
 const getDepartmentFormById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'FETCHING DEPARTMENT FORM');
   const departmentId: number = +req.params.id;
-  validateParamId(departmentId)
-    ? () => {}
-    : () => {
-        res.status(400).send(departmentNegativeInputError);
-        return;
-      };
+  if (validateParamId(departmentId)) {
+    res.status(400).send(departmentNegativeInputError);
+    return;
+  }
 
   try {
     const questions = await Knex.select('Department.*', 'Question.*', 'DepartmentQuestion.*')
