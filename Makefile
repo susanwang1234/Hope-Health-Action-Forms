@@ -19,6 +19,9 @@ setup-server:
 build:
 	docker-compose build
 
+down:
+	docker-compose down
+
 u:
 	docker-compose up
 

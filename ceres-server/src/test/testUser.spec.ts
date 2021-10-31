@@ -2,6 +2,7 @@ import http from 'http';
 import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
+import { userDNEError, userNegativeInputError, pageNotFoundError } from './testTools/errorMessages';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -106,6 +107,78 @@ describe('testPostUserSuccess', () => {
         expect(res.body[0].password).to.deep.equal('$2a$12$7bWbFzy6wdFRCG3JVp8JFe7PZTJ/X6FjwpY/769gMEVgbc9vvnggu');
         expect(res.body[0].departmentId).to.deep.equal(3);
         expect(res.body[0].roleId).to.deep.equal(3);
+        done();
+      });
+  });
+});
+
+// Test 3: PUT request (Failure)
+describe('testEditUserFailure', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Throw error code 404 for user with a negative number', (done) => {
+    chai
+      .request(testApp)
+      .put('/user/-1')
+      .set('content-type', 'application/json')
+      .send({
+        username: 'hospitalAdmin',
+        password: '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
+        departmentId: 1,
+        roleId: 2
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(userNegativeInputError));
+        done();
+      });
+  });
+  it('Throw error code 404 for invalid URL', (done) => {
+    chai
+      .request(testApp)
+      .put('/user/')
+      .set('content-type', 'application/json')
+      .send({
+        username: 'hospitalAdmin',
+        password: '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
+        departmentId: 1,
+        roleId: 2
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        expect(res.text).to.deep.equal(JSON.stringify(pageNotFoundError));
+        done();
+      });
+  });
+  it('Throw error code 404 for user yet to be created', (done) => {
+    chai
+      .request(testApp)
+      .put('/user/14')
+      .set('content-type', 'application/json')
+      .send({
+        username: 'hospitalAdmin',
+        password: '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
+        departmentId: 1,
+        roleId: 2
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        expect(res.text).to.deep.equal(JSON.stringify(userDNEError));
         done();
       });
   });
