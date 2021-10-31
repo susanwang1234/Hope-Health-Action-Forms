@@ -336,7 +336,7 @@ describe('testDeleteUsersSuccess', () => {
         done();
       });
   });
-  it('testValidateDeleteUsersSuccess', (done) => {
+  it('Validate there are no users left', (done) => {
     chai
       .request(testApp)
       .get('/user')
