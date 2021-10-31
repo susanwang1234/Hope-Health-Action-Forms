@@ -29,7 +29,7 @@ function Departments(){
     }
 
     return (
-        <div className="ul">
+        <div className="headerbar">
             <img src={logo} className="logo"></img>
             <button type="submit" className="logout_button">Log Out</button>
             <button type="submit" className="admin_button">Admin Options</button>

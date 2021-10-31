@@ -12,7 +12,6 @@
   gap: 30px;
   margin: 50px 200px;
 }
-
 .card {
   display: inline;
   background-color: rgb(245, 245, 245);
@@ -35,6 +34,7 @@
   text-align: left;
   margin: 6px;
   position: relative;
+  margin-left: 12px;
 }
 .view_button{
   background-color: #009cc4;
@@ -46,7 +46,7 @@
   padding: 4px 10px;
   text-align: center;
   border-radius: 5px;
-  width: 80%;
+  width: 60%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .view_button:hover{
@@ -59,7 +59,7 @@
   padding: 4px 10px;
   text-align: center;
   border-radius: 5px;
-  width: 80%;
+  width: 60%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .checkmark_icon{
@@ -71,6 +71,7 @@
   top: 12px;
   display:inline-block;
   margin:6px;
+  margin-right: 12px;
 }
 .checkmark{
   content: "";
@@ -96,6 +97,7 @@
   display:inline-block;
   position: relative;
   margin:6px;
+  margin-right: 12px;
 }
 .alert::after,
 .alert::before{
@@ -116,7 +118,7 @@
   height: 1.6px;
   bottom: 10px
 }
-.ul {
+.headerbar {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -164,4 +166,62 @@
   top: 9%;
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
+}
+@media only screen and (max-width: 1140px){
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin: 50px 150px;
+  }
+  .logout_button{
+    background-color: rgb(245, 245, 245);
+    font-family: Arial;
+    color: rgb(0, 0, 0);
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #d6d6d6;
+    width: 100px;
+    position: absolute;
+    top: .89%;
+    right: 1%;
+    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
+  }
+  .admin_button{
+    background-color: #823b8a;
+    font-family: Arial;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: #d6d6d6;
+    width: 150px;
+    position: absolute;
+    top: 5.03%;
+    right: 1%;
+    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
+  }
+}
+@media only screen and (max-width: 755px){
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin: 50px 100px;
+  }
+}
+@media only screen and (max-width: 555px){
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    margin: 50px 30px;
+  }
 }
