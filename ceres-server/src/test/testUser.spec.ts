@@ -204,7 +204,7 @@ describe('testEditUserSuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate created user properties and fields', (done) => {
+  it('Validate edited user properties and fields', (done) => {
     chai
       .request(testApp)
       .put('/user/1')
@@ -231,6 +231,10 @@ describe('testEditUserSuccess', () => {
         expect(res.body[0].roleId).to.deep.equal(2);
         done();
       });
+    usernames[0] = 'hospitalAdmin';
+    passwords[0] = '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm';
+    departmentIds[0] = 1;
+    roleIds[0] = 2;
   });
 });
 
@@ -273,3 +277,33 @@ describe('testDeleteUserFailure', () => {
       });
   });
 });
+
+// Test 6: DELETE request (Single user, Success)
+describe('testDeleteUserSuccess', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Validate error code for deleted user', (done) => {
+    chai
+      .request(testApp)
+      .delete('/user/3')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(204);
+        done();
+      });
+  });
+});
+
+validateUserPropertiesAndFields('testValidateDeleteUserSuccess', 'Validate there are 2 rows of properties', 'Validate there are 2 rows of fields');
