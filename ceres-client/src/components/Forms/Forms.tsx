@@ -77,26 +77,6 @@ function Forms() {
     });
 
     if (can_submit) {
-      const headers = new Headers();
-      headers.append("Content-Type", "application/json");
-      //Passes form data into the database with a POST request
-      //CITATION: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-      let JSONObjForDatabase = parseJSONElementsForDatabase(elements.fields);
-       console.log(JSONObjForDatabase)
-      fetch('http://localhost:8080/rehab_report/create/rehab_report', {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(JSONObjForDatabase)
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Success:', data);
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-
-       
       alert('Your changes have been saved.');
     } else {
       alert('Error: You have not filled all the required fields.');
