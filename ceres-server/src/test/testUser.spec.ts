@@ -13,58 +13,62 @@ const passwords = ['$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm
 const departmentIds = [1, 2];
 const roleIds = [1, 4];
 
+const validateUserPropertiesAndFields = (testTitle: string, propertiesTitle: string, fieldsTitle: string) => {
+  describe(testTitle, () => {
+    let testApp: Application;
+    let httpServer: http.Server;
+    let id = 0;
+    before('Create a working server', () => {
+      testApp = createServer();
+      sendFirstRequest(testApp);
+      enableRoutes(testApp);
+      httpServer = http.createServer(testApp);
+      httpServer.listen(PORT);
+    });
+    after('Close a working server', () => {
+      httpServer.close();
+    });
+    it(propertiesTitle, (done) => {
+      chai
+        .request(testApp)
+        .get('/user')
+        .end((err: any, res: any) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          expect(res.body).to.be.an('array');
+          res.body.forEach((item: any) => {
+            expect(item).to.be.an('object');
+            expect(item).to.have.deep.property('id');
+            expect(item).to.have.deep.property('username');
+            expect(item).to.have.deep.property('password');
+            expect(item).to.have.deep.property('departmentId');
+            expect(item).to.have.deep.property('roleId');
+          });
+          done();
+        });
+    });
+    it(fieldsTitle, (done) => {
+      chai
+        .request(testApp)
+        .get('/user')
+        .end((err: any, res: any) => {
+          expect(err).to.be.null;
+          expect(res).to.have.status(200);
+          res.body.forEach((item: any) => {
+            expect(item.id).to.deep.equal(++id);
+            expect(item.username).to.deep.equal(usernames[id - 1]);
+            expect(item.password).to.deep.equal(passwords[id - 1]);
+            expect(item.departmentId).to.deep.equal(departmentIds[id - 1]);
+            expect(item.roleId).to.deep.equal(roleIds[id - 1]);
+          });
+          done();
+        });
+    });
+  });
+};
+
 // Test 1: GET request
-describe('testGetUserSuccess', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  let id = 0;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableRoutes(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
-  });
-  after('Close a working server', () => {
-    httpServer.close();
-  });
-  it('Validate user request properties', (done) => {
-    chai
-      .request(testApp)
-      .get('/user')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('array');
-        res.body.forEach((item: any) => {
-          expect(item).to.be.an('object');
-          expect(item).to.have.deep.property('id');
-          expect(item).to.have.deep.property('username');
-          expect(item).to.have.deep.property('password');
-          expect(item).to.have.deep.property('departmentId');
-          expect(item).to.have.deep.property('roleId');
-        });
-        done();
-      });
-  });
-  it('Validate user request fields', (done) => {
-    chai
-      .request(testApp)
-      .get('/user')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        res.body.forEach((item: any) => {
-          expect(item.id).to.deep.equal(++id);
-          expect(item.username).to.deep.equal(usernames[id - 1]);
-          expect(item.password).to.deep.equal(passwords[id - 1]);
-          expect(item.departmentId).to.deep.equal(departmentIds[id - 1]);
-          expect(item.roleId).to.deep.equal(roleIds[id - 1]);
-        });
-        done();
-      });
-  });
-});
+validateUserPropertiesAndFields('testGetUserSuccess', 'Validate user request properties', 'Validate user request fields');
 
 // Test 2: POST request
 describe('testPostUserSuccess', () => {
@@ -225,6 +229,46 @@ describe('testEditUserSuccess', () => {
         expect(res.body[0].password).to.deep.equal('$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm');
         expect(res.body[0].departmentId).to.deep.equal(1);
         expect(res.body[0].roleId).to.deep.equal(2);
+        done();
+      });
+  });
+});
+
+// Test 5: DELETE request (Single user, Failure)
+describe('testDeleteUserFailure', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Throw error code 404 for user with a negative number', (done) => {
+    chai
+      .request(testApp)
+      .delete('/user/-1')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(userNegativeInputError));
+        done();
+      });
+  });
+  it('Throw error code 404 for user yet to be created', (done) => {
+    chai
+      .request(testApp)
+      .delete('/user/14')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        expect(res.text).to.deep.equal(JSON.stringify(userDNEError));
         done();
       });
   });
