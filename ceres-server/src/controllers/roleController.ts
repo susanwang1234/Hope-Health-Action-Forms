@@ -1,10 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
-import { getItem } from './requestTemplates/getRequest';
+import { getItems } from './requestTemplates/getAllRequest';
 
 const NAMESPACE = 'Role Control';
+const TABLENAME = 'Role';
 
 const getRoles = async (req: Request, res: Response, next: NextFunction) => {
-  await getItem(req, res, next, NAMESPACE, 'Role');
+  await getItems(req, res, next, NAMESPACE, TABLENAME);
 };
 
 export default { getRoles };

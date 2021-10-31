@@ -1,9 +1,10 @@
-import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
-import { Knex } from '../db/mysql';
-import { getItem } from './requestTemplates/getRequest';
+import { getItems } from './requestTemplates/getAllRequest';
+import { createItem } from './requestTemplates/createRequest';
+import { editItemById } from './requestTemplates/editByIdRequest';
+import { deleteItemById } from './requestTemplates/deleteByIdRequest';
+import { deleteItems } from './requestTemplates/deleteAllRequest';
 import { userNegativeInputError, userDNEError } from 'test/testTools/errorMessages';
-import { validateParamId } from './requestTemplates/validateParamId';
 
 const NAMESPACE = 'User Control';
 const TABLENAME = 'User';
@@ -14,73 +15,23 @@ const inputtedReqBody = (req: Request) => {
 };
 
 const getUsers = async (req: Request, res: Response, next: NextFunction) => {
-  await getItem(req, res, next, NAMESPACE, TABLENAME);
+  await getItems(req, res, next, NAMESPACE, TABLENAME);
 };
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `CREATING A USER`);
-  try {
-    const createUser = await Knex.insert(inputtedReqBody(req)).into(TABLENAME);
-    const retrievedCreatedUser = await Knex.select('*').from(TABLENAME).where('id', '=', createUser);
-    logging.info(NAMESPACE, 'CREATED USER', retrievedCreatedUser);
-    res.status(201).send(retrievedCreatedUser);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error.message);
-  }
+  await createItem(req, res, next, NAMESPACE, TABLENAME, inputtedReqBody(req));
 };
 
 const editUserById = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `EDITING A USER BY ID`);
-  const userId: number = +req.params.id;
-  if (validateParamId(userId)) {
-    res.status(400).send(userNegativeInputError);
-    return;
-  }
-
-  try {
-    await Knex.update(inputtedReqBody(req)).into(TABLENAME).where('id', '=', userId);
-    const retrieveEditedUser = await Knex.select('*').from(TABLENAME).where('id', '=', userId);
-    logging.info(NAMESPACE, `EDITED USER WITH ID ${userId}`, retrieveEditedUser);
-    res.status(201).send(retrieveEditedUser);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error);
-  }
+  await editItemById(req, res, next, NAMESPACE, TABLENAME, userNegativeInputError, userDNEError, inputtedReqBody(req));
 };
 
 const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `DELETING A USER BY ID`);
-  const userId: number = +req.params.id;
-  if (validateParamId(userId)) {
-    res.status(400).send(userNegativeInputError);
-    return;
-  }
-
-  try {
-    const deleteByUserId = await Knex(TABLENAME).del().where('id', '=', userId);
-    if (!deleteByUserId) {
-      res.status(404).send(userDNEError);
-      return;
-    }
-    logging.info(NAMESPACE, `DELETED USER WITH ID ${userId}`, deleteByUserId);
-    res.sendStatus(204);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error);
-  }
+  await deleteItemById(req, res, next, NAMESPACE, TABLENAME, userNegativeInputError, userDNEError);
 };
 
 const deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `DELETING ALL USERS`);
-  try {
-    await Knex(TABLENAME).del();
-    logging.info(NAMESPACE, `DELETED ALL USERS`);
-    res.sendStatus(204);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error);
-  }
+  await deleteItems(req, res, next, NAMESPACE, TABLENAME);
 };
 
 export default { getUsers, createUser, editUserById, deleteUserById, deleteUsers };

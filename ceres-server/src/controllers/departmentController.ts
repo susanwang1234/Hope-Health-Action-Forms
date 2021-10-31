@@ -1,8 +1,9 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
-import { getItem } from './requestTemplates/getRequest';
+import { getItems } from './requestTemplates/getAllRequest';
 
 const NAMESPACE = 'Department Control';
+const TABLENAME = 'Department';
 
 const departmentPage = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GET request with ID: ${req.params.id}`);
@@ -17,7 +18,7 @@ const departmentPage = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const getDepartments = async (req: Request, res: Response, next: NextFunction) => {
-  await getItem(req, res, next, NAMESPACE, 'Department');
+  await getItems(req, res, next, NAMESPACE, TABLENAME);
 };
 
 export default { departmentPage, getDepartments };
