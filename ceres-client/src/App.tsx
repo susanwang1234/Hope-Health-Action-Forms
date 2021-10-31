@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
-import CaseStudy from './components/CaseStudy/CaseStudy';
+import CaseStudy from './components/CaseStudy/CaseStudySubmit';
 import { UserContextProvider } from './UserContext';
 import Forms from './components/Forms/Forms';
 

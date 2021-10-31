@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import React, { useContext } from 'react';
 import { UserContext } from '../../UserContext';
 
+import data_dummy from './DummyDataCS.json'
+
 const CaseStudy = () => {
   let history = useHistory();
   const onClick = () => {};
@@ -14,7 +16,15 @@ const CaseStudy = () => {
   return (
     <main>
       <Navbar />
-      <div className="background">Case Study</div>
+      <div className="flex">
+        <h1>Current Case Study</h1>
+        {data_dummy.map((Story, index) => {
+          return <div>
+            <h1>{Story.name}</h1>
+            <h2>{Story.questions}</h2>
+          </div>
+        })}
+      </div>
     </main>
   );
 };
