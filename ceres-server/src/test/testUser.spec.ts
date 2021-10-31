@@ -1,3 +1,5 @@
+'use strict';
+
 import http from 'http';
 import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
@@ -8,10 +10,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-const usernames = ['admin', 'staff01'];
-const passwords = ['$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm', '$2a$12$Es2.DjFL5jKSukJjgXOubuP..MipNRcqM5KfzL49bdymFqAkB62r2'];
-const departmentIds = [1, 2];
-const roleIds = [1, 4];
+let usernames = ['admin', 'staff01'];
+let passwords = ['$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm', '$2a$12$Es2.DjFL5jKSukJjgXOubuP..MipNRcqM5KfzL49bdymFqAkB62r2'];
+let departmentIds = [1, 2];
+let roleIds = [1, 4];
 
 const validateUserPropertiesAndFields = (testTitle: string, propertiesTitle: string, fieldsTitle: string) => {
   describe(testTitle, () => {
@@ -307,3 +309,42 @@ describe('testDeleteUserSuccess', () => {
 });
 
 validateUserPropertiesAndFields('testValidateDeleteUserSuccess', 'Validate there are 2 rows of properties', 'Validate there are 2 rows of fields');
+
+// Test 7: DELETE request (All users, Success)
+describe('testDeleteUsersSuccess', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Validate error code for deleted user', (done) => {
+    chai
+      .request(testApp)
+      .delete('/user')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(204);
+        done();
+      });
+  });
+  it('testValidateDeleteUsersSuccess', (done) => {
+    chai
+      .request(testApp)
+      .get('/user')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array').with.lengthOf(0);
+        done();
+      });
+  });
+});
