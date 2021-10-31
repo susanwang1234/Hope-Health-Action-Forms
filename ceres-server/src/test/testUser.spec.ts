@@ -183,3 +183,49 @@ describe('testEditUserFailure', () => {
       });
   });
 });
+
+// Test 4: PUT request (Success)
+describe('testEditUserSuccess', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Validate created user properties and fields', (done) => {
+    chai
+      .request(testApp)
+      .put('/user/1')
+      .set('content-type', 'application/json')
+      .send({
+        username: 'hospitalAdmin',
+        password: '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
+        departmentId: 1,
+        roleId: 2
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.be.an('object');
+        expect(res.body[0]).to.have.deep.property('id');
+        expect(res.body[0]).to.have.deep.property('username');
+        expect(res.body[0]).to.have.deep.property('password');
+        expect(res.body[0]).to.have.deep.property('departmentId');
+        expect(res.body[0]).to.have.deep.property('roleId');
+        expect(res.body[0].username).to.deep.equal('hospitalAdmin');
+        expect(res.body[0].password).to.deep.equal('$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm');
+        expect(res.body[0].departmentId).to.deep.equal(1);
+        expect(res.body[0].roleId).to.deep.equal(2);
+        done();
+      });
+  });
+});
