@@ -8,13 +8,26 @@ import { validateParamId } from './requestTemplates/validateParamId';
 const NAMESPACE = 'User Control';
 const TABLENAME = 'User';
 
-const inputtedBody = (req: Request) => {
+const inputtedReqBody = (req: Request) => {
   const { username, password, departmentId, roleId } = req.body;
   return { username: username, password: password, departmentId: departmentId, roleId: roleId };
 };
 
 const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   await getItem(req, res, next, NAMESPACE, TABLENAME);
+};
+
+const createUser = async (req: Request, res: Response, next: NextFunction) => {
+  logging.info(NAMESPACE, `CREATING A USER`);
+  try {
+    const createUser = await Knex.insert(inputtedReqBody(req)).into(TABLENAME);
+    const retrievedCreatedUser = await Knex.select('*').from(TABLENAME).where('id', '=', createUser);
+    logging.info(NAMESPACE, 'CREATED USER', retrievedCreatedUser);
+    res.status(201).send(retrievedCreatedUser);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error.message);
+  }
 };
 
 const editUserById = async (req: Request, res: Response, next: NextFunction) => {
@@ -26,7 +39,7 @@ const editUserById = async (req: Request, res: Response, next: NextFunction) => 
   }
 
   try {
-    await Knex.update(inputtedBody(req)).into(TABLENAME).where('id', '=', userId);
+    await Knex.update(inputtedReqBody(req)).into(TABLENAME).where('id', '=', userId);
     const retrieveEditedUser = await Knex.select('*').from(TABLENAME).where('id', '=', userId);
     logging.info(NAMESPACE, `EDITED USER WITH ID ${userId}`, retrieveEditedUser);
     res.status(201).send(retrieveEditedUser);
@@ -70,4 +83,4 @@ const deleteUsers = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { getUsers, editUserById, deleteUserById, deleteUsers };
+export default { getUsers, createUser, editUserById, deleteUserById, deleteUsers };
