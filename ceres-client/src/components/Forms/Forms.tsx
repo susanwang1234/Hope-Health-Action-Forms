@@ -20,54 +20,6 @@ function Forms() {
   }, []);
   const { fields, page_label }: any = elements ?? {};
 
-
-  //example of input (type JSON object) ->
-  /* [
-      {
-        "field_id": "bedsAvaliable",
-        "field_label": "Beds avaliable",
-        "field_mandatory": true,
-        "field_placeholder": 0,
-        "field_type": "number",
-        "field_value": 0
-      },
-      {
-        "field_id": "bedDays",
-        "field_label": "Bed days",
-        "field_mandatory": true,
-        "field_placeholder": 0,
-        "field_type": "number",
-        "field_value": 0
-      },
-      ...
-    ]
-  You can see the value of the 'fields' key in rehabForm.json (from .../src/components/Forms/jsonForms/)*/
-
- //example of output of parseJSONElementsForDatabase (type JSON object)  -> { "currDate": "2021-10-05 07:44:04", "bedsAvaliable": 0, "bedDays": 0 ...}
-  function parseJSONElementsForDatabase(oldJSONObject : any) {
-    //[Copied] Source which converts JavaScript date format into SQL date format : https://stackoverflow.com/questions/5129624/convert-js-date-time-to-mysql-datetime
-    let currentDate = new Date().toISOString().slice(0, 19).replace('T', ' ');
-    
-    let newJSONObjectString = '{ "currDate": ' + '"' + currentDate + '"' + ", "
-
-    let listIndex = 0;
-    for(listIndex=0; listIndex<oldJSONObject.length; listIndex++) {
-      let endOfStr = ''
-      if(listIndex < oldJSONObject.length - 1) {
-        endOfStr = ', '
-      }
-      else {
-        endOfStr = ' }'
-      }
-      newJSONObjectString = newJSONObjectString + '"' + oldJSONObject[listIndex].field_id + '"' + ': '  + oldJSONObject[listIndex].field_value + endOfStr
-      
-    }
-    console.log(newJSONObjectString)
-    let newJSONObject = JSON.parse(newJSONObjectString);
-    return newJSONObject
-  }
-
-  
   const handleSave = (event: any) => {
     let can_submit: boolean = true;
     elements.fields.forEach((field: any) => {
