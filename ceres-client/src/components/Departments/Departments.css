@@ -1,3 +1,9 @@
+/*
+Citation: https://css.gg/check-o
+Citation: https://css.gg/danger
+Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position
+Citation: https://www.w3schools.com/css/css3_buttons.asp
+*/
 .background{
   background: #f5f5f5;
   width: 100%;
@@ -9,10 +15,10 @@
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 30px;
+  gap: 40px;
   margin: 50px 200px;
 }
-.card {
+.individual_card {
   display: inline;
   background-color: rgb(245, 245, 245);
   flex-direction: column;
@@ -21,9 +27,10 @@
   padding: 25px;
   border-radius: 5px;
   border-color: #d6d6d6;
+  position: relative;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-.card_inner{
+.inside_card{
   font-family: Arial;
   font-size: 30px;
   text-align: center;
@@ -36,7 +43,7 @@
   position: relative;
   margin-left: 12px;
 }
-.view_button{
+.view_department_button{
   background-color: #009cc4;
   font-weight: bold;
   font-family: Arial;
@@ -47,9 +54,13 @@
   text-align: center;
   border-radius: 5px;
   width: 60%;
+  position: absolute;
+  top: 240px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.view_button:hover{
+.view_department_button:hover{
   background-color: #117088;
   font-family: Arial;
   font-weight: bold;
@@ -60,6 +71,10 @@
   text-align: center;
   border-radius: 5px;
   width: 60%;
+  position: absolute;
+  top: 240px;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .checkmark_icon{
@@ -127,7 +142,7 @@
   top: 0;
   width: 100%;
 }
-.logo{
+.department_logo{
   height: 35px;
   width: 140px;
   margin: 6px;
@@ -146,7 +161,7 @@
   border-color: #d6d6d6;
   width: 100px;
   position: absolute;
-  top: 1.5%;
+  top: 15%;
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
@@ -163,7 +178,7 @@
   border-color: #d6d6d6;
   width: 150px;
   position: absolute;
-  top: 9%;
+  top: 120%;
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
@@ -171,57 +186,16 @@
   .cards {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
-    margin: 50px 150px;
+    gap: 40px;
+    margin: 50px 200px;
   }
-  .logout_button{
-    background-color: rgb(245, 245, 245);
-    font-family: Arial;
-    color: rgb(0, 0, 0);
-    font-size: 15px;
-    font-weight: bold;
-    padding: 4px 10px;
-    text-align: center;
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: #d6d6d6;
-    width: 100px;
-    position: absolute;
-    top: .89%;
-    right: 1%;
-    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
-  }
-  .admin_button{
-    background-color: #823b8a;
-    font-family: Arial;
-    color: rgb(255, 255, 255);
-    font-size: 15px;
-    font-weight: bold;
-    padding: 4px 10px;
-    text-align: center;
-    border-radius: 5px;
-    border-width: 1px;
-    border-color: #d6d6d6;
-    width: 150px;
-    position: absolute;
-    top: 5.03%;
-    right: 1%;
-    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
-  }
+
 }
-@media only screen and (max-width: 755px){
+@media only screen and (max-width: 770px){
   .cards {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
-    margin: 50px 100px;
-  }
-}
-@media only screen and (max-width: 555px){
-  .cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-    margin: 50px 30px;
+    margin: 50px 5px;
   }
 }
