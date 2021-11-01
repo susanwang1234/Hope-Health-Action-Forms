@@ -21,11 +21,11 @@ const Dashboard = () => {
   return (
     <main>
       <Navbar />
-      <div className="dashboard__container">
+      <div className="dashboard-container">
         {/* <!-- MAIN TITLE STARTS HERE --> */}
 
-        <div className="dashboard__title">
-          <div className="dashboard__greeting">
+        <div className="dashboard-title">
+          <div className="dashboard-greeting">
             <h1>Hope Health Action</h1>
             <p>Dashboard</p>
           </div>
@@ -34,17 +34,17 @@ const Dashboard = () => {
         {/* <!-- MAIN TITLE ENDS HERE --> */}
 
         {/* <!-- MAIN CARDS STARTS HERE --> */}
-        <div className="dashboard__cards">
+        <div className="dashboard-cards">
           <div className="card">
             <i className="fa fa-user-o fa-2x text-lightblue" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">Case Study</p>
-              <img src={display} alt="Display" className="filler_image"></img>
+              <img src={display} alt="Display" className="filler-image"></img>
               <p className="text-primary-p">Cool case information here or maybe a short summary.</p>
-              <button type="submit" onClick={onClick} className="view_button">
+              <button type="submit" onClick={onClick} className="view-button">
                 Current Case Studies
               </button>
-              <button type="submit" onClick={onClick} className="add_button">
+              <button type="submit" onClick={onClick} className="add-button">
                 + Add Case Study
               </button>
             </div>
@@ -52,7 +52,7 @@ const Dashboard = () => {
 
           <div className="card">
             <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">Department Info</p>
               <p className="text-primary-p">Information about your department will appear here.</p>
             </div>
@@ -60,14 +60,14 @@ const Dashboard = () => {
 
           <div className="card">
             <i className="fa fa-video-camera fa-2x text-yellow" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">Employee of the Month</p>
-              <img src={display} alt="Display" className="filler_image"></img>
+              <img src={display} alt="Display" className="filler-image"></img>
               <p className="text-primary-p">Information about employee of the month.</p>
-              <button type="submit" className="view_button">
+              <button type="submit" className="view-button">
                 Current Employee
               </button>
-              <button type="submit" className="add_button">
+              <button type="submit" className="add-button">
                 + Add Employee
               </button>
             </div>
@@ -75,7 +75,7 @@ const Dashboard = () => {
 
           <div className="card">
             <i className="fa fa-thumbs-up fa-2x text-green" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">To Do</p>
               <p className="text-primary-p">Dynamic list goes here.</p>
             </div>
