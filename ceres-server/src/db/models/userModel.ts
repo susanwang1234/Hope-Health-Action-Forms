@@ -1,4 +1,4 @@
-import { User } from '../types/user';
+import { User } from '../types/userType';
 import { db } from '../mysql';
 import { OkPacket, RowDataPacket } from 'mysql2';
 

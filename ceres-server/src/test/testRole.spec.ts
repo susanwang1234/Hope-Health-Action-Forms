@@ -9,10 +9,10 @@ chai.use(chaiHttp);
 
 let id = 0;
 
-const departments = ['Rehab', 'NICUPaeds'];
+const roles = ['hhaAdmin', 'hospitalAdmin', 'departmentHead', 'user'];
 
 // Test 1: GET request
-describe('testGetDepartmentSuccess', () => {
+describe('testGetRoleSuccess', () => {
   let testApp: Application;
   let httpServer: http.Server;
   before('Create a working server', () => {
@@ -25,10 +25,10 @@ describe('testGetDepartmentSuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate department request properties', (done) => {
+  it('Validate role request properties', (done) => {
     chai
       .request(testApp)
-      .get('/department')
+      .get('/role')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -41,24 +41,18 @@ describe('testGetDepartmentSuccess', () => {
         done();
       });
   });
-  it('Validate department request fields', (done) => {
+  it('Validate role request fields', (done) => {
     chai
       .request(testApp)
-      .get('/department')
+      .get('/role')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         res.body.forEach((item: any) => {
           expect(item.id).to.deep.equal(++id);
-          expect(item.name).to.deep.equal(departments[id - 1]);
+          expect(item.name).to.deep.equal(roles[id - 1]);
         });
         done();
       });
   });
 });
-
-// Test 2: POST request
-
-// Test 3: DELETE request
-
-// Test 4: PUT request

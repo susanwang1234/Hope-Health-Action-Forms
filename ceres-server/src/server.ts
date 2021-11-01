@@ -4,12 +4,13 @@ import cors from 'cors';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import dashboardRoutes from './routes/dashboard';
-import departmentRoutes from './routes/department';
-import dummyRoutes from './routes/dummy';
-import rehabReportRoutes from './routes/rehabReport';
-import departmentFormRoutes from './routes/departmentForm';
-import routes from './routes/index';
+import dashboardRoutes from './routes/dashboardRoute';
+import departmentRoutes from './routes/departmentRoute';
+import dummyRoutes from './routes/dummyRoute';
+import rehabReportRoutes from './routes/rehabReportRoute';
+import departmentFormRoutes from './routes/departmentFormRoute';
+import roleRoutes from './routes/roleRoute';
+import routes from './routes/indexRoute';
 import passport from 'passport';
 import './middlewares/passport-strategies.mw.ts';
 
@@ -79,6 +80,7 @@ export function enableRoutes(router: Application) {
   router.use('/dummy', dummyRoutes);
   router.use('/rehab_report', rehabReportRoutes);
   router.use('/department_form', departmentFormRoutes);
+  router.use('/role', roleRoutes);
 }
 
 export function enableErrorHandling(router: Application) {
