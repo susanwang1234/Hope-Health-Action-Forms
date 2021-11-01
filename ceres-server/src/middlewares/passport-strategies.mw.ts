@@ -11,13 +11,14 @@ const NAMESPACE = 'PASSPORT MIDDLEWARE';
 const cookieExtractor = (req: Request) => {
   let token = null;
   if (req && req.cookies) {
-    token = req.cookies['access_token'];
+    token = req.cookies['jwt'];
   }
+  logging.info(NAMESPACE, 'cookie', token);
   return token;
 };
 
 const jwtOptions = {
-  jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+  jwtFromRequest: cookieExtractor,
   secretOrKey: config.jwt.secret
 };
 

@@ -13,6 +13,7 @@ import departmentFormRoutes from './routes/departmentFormRoute';
 import roleRoutes from './routes/roleRoute';
 import routes from './routes/indexRoute';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 import './middlewares/passport-strategies.mw.ts';
 
 export function createServer() {
@@ -68,6 +69,7 @@ export function enableLogging(router: Application, namespace: string) {
   /** Parsing Requests */
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
+  router.use(cookieParser());
 
   /** Passport Initialization */
   router.use(passport.initialize());

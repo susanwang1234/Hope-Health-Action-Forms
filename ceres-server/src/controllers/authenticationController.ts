@@ -29,7 +29,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       if (isValid) {
         delete user.password;
         const tokenObject = authUtil.issueJWT(user);
-        return res.status(200).json({ isAuthenticated: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expiresIn });
+        res.cookie('jwt', tokenObject.token, { httpOnly: true, sameSite: true });
+        return res.status(200).json({ isAuthenticated: true, user: user });
       }
     }
     return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
@@ -39,4 +40,14 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { login };
+// persists authentication state with front end and back end
+const authenticate = (req: Request, res: Response, next: NextFunction) => {
+  res.status(200).json({ isAuthenticated: true, user: req.user });
+};
+
+const logout = (req: Request, res: Response, next: NextFunction) => {
+  res.clearCookie('jwt');
+  res.status(200).json({ sucess: true });
+};
+
+export default { login, logout, authenticate };
