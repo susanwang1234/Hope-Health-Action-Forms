@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import './DataPage.css';
+import './dataPage.css';
 import ReportElement from '../ReportElement';
 import ReportData from '../ReportData';
 import NavBar from '../../components/Navbar/Navbar';
