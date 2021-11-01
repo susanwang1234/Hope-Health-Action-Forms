@@ -1,0 +1,109 @@
+/*
+Citation: https://css.gg/check-o
+Citation: https://css.gg/danger
+Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position
+Citation: https://www.w3schools.com/css/css3_buttons.asp
+*/
+
+.view-department-button{
+    background-color: #009cc4;
+    font-weight: bold;
+    font-family: Arial;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 5px;
+    width: 60%;
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .view-department-button:hover{
+    background-color: #117088;
+    font-family: Arial;
+    font-weight: bold;
+    color: white;
+    border: none;
+    font-size: 20px;
+    padding: 4px 10px;
+    text-align: center;
+    border-radius: 5px;
+    width: 60%;
+    position: absolute;
+    top: 240px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .checkmark-icon{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #59b030;
+    position: relative;
+    top: 12px;
+    display:inline-block;
+    margin:6px;
+    margin-right: 12px;
+  }
+
+  .checkmark{
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    left: 7.8px;
+    top: 2px;
+    width: 7px;
+    height: 15px;
+    border-color: white;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    transform-origin: bottom left;
+    transform: rotate(45deg)
+  }
+
+
+  .alert-icon{
+    height: 30px;
+    width: 30px;
+    top: 12px;
+    border-radius: 50%;
+    background-color: #e57200;
+    display:inline-block;
+    position: relative;
+    margin:6px;
+    margin-right: 12px;
+  }
+  .alert::after,
+  .alert::before{
+    content: "";
+      display: block;
+      box-sizing: border-box;
+      position: absolute;
+      border-radius: 2px;
+      width: 2.5px;
+      background: white;
+      left: 12.5px;
+  }
+  .alert::after {
+    top: 4px;
+    height: 14px
+  }
+  .alert::before {
+    height: 1.6px;
+    bottom: 10px
+  }
+
+  
+  
+  
+
+
+  
