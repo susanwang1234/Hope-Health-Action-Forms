@@ -1,5 +1,7 @@
 .data-list{
+    margin: 2em;
     padding: 25px;
+    border: 1px solid blanchedalmond;
     height: 500px;
     border-radius: 5px;
     background: #ffffff;

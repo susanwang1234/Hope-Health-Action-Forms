@@ -14,17 +14,19 @@ class DataReport extends React.Component<any, any> {
         pairs.push(pair);
       }
       return (
-        <div className="m-6">
-          <table className="table-fixed bg-gray-100">
+        <div className="displaying-form">
+          <p className="mx-3 font-bold text-center">form for department X date Y</p>
+          <form className="displaying-form-elements">
             {pairs.map((pair: string[]) => (
-              <tr>
-                {pair.map((item: string) => (
-                  <td>{item}</td>
-                ))}
-              </tr>
+              <div>
+                <label className="mx-3">{pair[0]}</label>
+                <br></br>
+                <input className="input-box mx-3" type = "text" value = {pair[1]} readOnly></input>
+              </div>
+            
             ))}
-          </table>
-          <button className=" button bg-blue-400 text-white hover:bg-blue-200 w-40" onClick={() => console.log('edit')}>
+          </form>
+          <button className=" edit-button" onClick={() => console.log('edit')}>
             Edit
           </button>
         </div>
