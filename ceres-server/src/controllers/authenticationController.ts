@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { User as myUser } from '../db/types/user';
+import { User as myUser } from '../db/types/userType';
 import logging from '../config/logging';
 import authUtil from '../utils/authHelper';
 import { Knex } from '../db/mysql';

@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { User as myUser } from '../db/types/user';
+import { User as myUser } from '../db/types/userType';
 import * as jwt from 'jsonwebtoken';
 import config from '../config/config';
 
