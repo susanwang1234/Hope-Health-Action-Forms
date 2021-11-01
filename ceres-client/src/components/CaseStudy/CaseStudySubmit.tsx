@@ -21,7 +21,16 @@ const CaseStudy = () => {
         {data_dummy.map((Story, index) => {
           return <div>
             <h1>{Story.name}</h1>
-            <h2>{Story.questions}</h2>
+            <h2>{Story.questions.map((Questions, idx)=> {return <div> 
+            <h1>{Questions['id (this refers to id in CSTQ table)']}</h1>
+            <h1>{Questions['inputType (most likely refers to an HTML input type)']}</h1>
+            <h1>{Questions.caseStudyQuestionId}</h1>
+            <h1>{Questions.caseStudyTypeId}</h1>
+            <h1>{Questions.label}</h1>
+            <h1>{Questions['responseType (expected responseType in case the response type they want to be used doesn\'t line up with the input type)']}</h1>
+            </div>
+            
+            })}</h2>
           </div>
         })}
       </div>

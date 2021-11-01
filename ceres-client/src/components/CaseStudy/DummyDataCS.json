@@ -1,10 +1,15 @@
 [
     {
         "name": "Patient Story",
-        "questions": "Question1"
-    },
-    {
-        "name": "User Story",
-        "questions": "question2"
+        "questions": [
+        {
+            "id (this refers to id in CSTQ table)": 1,
+            "caseStudyTypeId": 1,
+            "caseStudyQuestionId": 1,
+            "label": "Patient's name?",
+            "inputType (most likely refers to an HTML input type)": "text",
+            "responseType (expected responseType in case the response type they want to be used doesn't line up with the input type)": "string"
+        }
+        ]
     }
 ]
