@@ -1,7 +1,7 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
-import { Department } from '../db/models/department';
+import { Department } from '../db/models/departmentModel';
 
 const NAMESPACE = 'Department Control';
 

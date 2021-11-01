@@ -1,5 +1,4 @@
-import * as userModel from '../db/models/user';
-import { User as myUser } from '../db/types/user';
+import { User as myUser } from '../db/types/userType';
 import passport from 'passport';
 import PassportJWT from 'passport-jwt';
 import config from '../config/config';
