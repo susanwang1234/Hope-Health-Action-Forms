@@ -9,7 +9,7 @@ const CaseStudy = () => {
   const onClick = () => {};
   const userContext = useContext(UserContext);
 
-  console.log('Username (Case Study) is ' , userContext.user?.name)
+  console.log('Username (Case Study) is ' , userContext.user?.role)
   console.log('Department (Case Study) is ' , userContext.user?.department)
   return (
     <main>

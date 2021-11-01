@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   const userContext = useContext(UserContext);
 
-  console.log('Username (Dashboard) is ' , userContext.user?.name)
+  console.log('Username (Dashboard) is ' , userContext.user?.role)
   console.log('Department (Dashboard) is ' , userContext.user?.department)
 
   return (

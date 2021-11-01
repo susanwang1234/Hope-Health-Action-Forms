@@ -11,14 +11,14 @@ import { useContext } from 'react'
 function Departments(){
 const userContext = useContext(UserContext);
 
-console.log('Username (Department) is ' , userContext.user?.name)
+console.log('Username (Department) is ' , userContext.user?.role)
 console.log('Department (Department) is ' , userContext.user?.department)
 //var index = userContext.user.index;
 //experiment
 
 let history = useHistory();
 const onClick = () => {
-	userContext.setUser({name: 'Ritika', department: 'new department'})
+	userContext.setUser({role: 1, department: 3})
     history.push('/dashboard');
 };
 
