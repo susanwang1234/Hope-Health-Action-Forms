@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import display from './../../images/original_artwork.jpg';
 import React, { useContext } from 'react';
 import { UserContext } from '../../UserContext';
+import ToDoData from '../Departments/ToDo.json';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
@@ -17,6 +18,21 @@ const Dashboard = () => {
 
   console.log('Username (Dashboard) is ' , userContext.user?.role)
   console.log('Department (Dashboard) is ' , userContext.user?.department)
+  var departmentIndex = userContext.user?.department;
+
+  function iconChecker(isComplete: boolean){
+  	if(isComplete){
+    	return (
+      	<div className="checkmark_icon">
+        	<div className="checkmark"></div>
+      	</div>
+    	);}
+    	return(
+      	<div className="alert_icon">
+        	<div className="alert"></div>
+      	</div>
+    	);
+	}
 
   return (
     <main>
@@ -54,7 +70,8 @@ const Dashboard = () => {
             <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
             <div className="card_inner">
               <p className="font-bold text-title">Department Info</p>
-              <p className="text-primary-p">Information about your department will appear here.</p>
+              <div className="text">{iconChecker(ToDoData[departmentIndex!-2].caseStudy)}Case Study</div>
+							<div className="text">{iconChecker(ToDoData[departmentIndex!-2].mspp)}MSPP Report</div>
             </div>
           </div>
 
