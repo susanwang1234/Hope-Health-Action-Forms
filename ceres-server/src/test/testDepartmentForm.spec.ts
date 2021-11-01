@@ -2,7 +2,7 @@ import http from 'http';
 import { createServer, enableErrorHandling, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
-import { departmentDNEError, departmentNegativeInputError, pageNotFoundError } from './testTools/errorMessages';
+import { departmentDNEError, departmentNegativeOrNanInputError, pageNotFoundError } from '../shared/errorMessages';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -48,7 +48,7 @@ describe('testGetDepartmentFormFailure', () => {
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(departmentNegativeInputError));
+        expect(res.text).to.deep.equal(JSON.stringify(departmentNegativeOrNanInputError));
         done();
       });
   });

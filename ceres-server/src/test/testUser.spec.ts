@@ -4,7 +4,7 @@ import http from 'http';
 import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
-import { userDNEError, userNegativeInputError, pageNotFoundError } from './testTools/errorMessages';
+import { userDNEError, userNegativeOrNanInputError, pageNotFoundError } from '../shared/errorMessages';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -148,7 +148,7 @@ describe('testEditUserFailure', () => {
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(userNegativeInputError));
+        expect(res.text).to.deep.equal(JSON.stringify(userNegativeOrNanInputError));
         done();
       });
   });
@@ -263,7 +263,7 @@ describe('testDeleteUserFailure', () => {
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(userNegativeInputError));
+        expect(res.text).to.deep.equal(JSON.stringify(userNegativeOrNanInputError));
         done();
       });
   });

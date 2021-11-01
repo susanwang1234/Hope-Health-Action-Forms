@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { getItems } from './requestTemplates/getAllRequest';
 
 const NAMESPACE = 'Department Control';
-const TABLENAME = 'Department';
+const TABLE_NAME = 'Department';
 
 const departmentPage = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GET request with ID: ${req.params.id}`);
@@ -18,7 +18,7 @@ const departmentPage = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const getDepartments = async (req: Request, res: Response, next: NextFunction) => {
-  await getItems(req, res, next, NAMESPACE, TABLENAME);
+  await getItems(req, res, next, NAMESPACE, TABLE_NAME);
 };
 
 export default { departmentPage, getDepartments };
