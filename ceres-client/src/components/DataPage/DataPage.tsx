@@ -1,8 +1,8 @@
 import React from 'react';
 import '../../App.css';
 import './DataPage.css';
-import ReportElement from '../ReportElement';
-import ReportData from '../ReportData';
+import ReportElement from './ReportElement';
+import ReportData from './ReportData';
 import NavBar from '../../components/Navbar/Navbar';
 
 class DataPage extends React.Component<any[], any> {

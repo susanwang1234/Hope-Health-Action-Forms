@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import '../App.css';
+import React from 'react';
+import '../../App.css';
 
 class DataReport extends React.Component<any, any> {
   render() {
@@ -21,9 +21,8 @@ class DataReport extends React.Component<any, any> {
               <div>
                 <label className="mx-3">{pair[0]}</label>
                 <br></br>
-                <input className="input-box mx-3" type = "text" value = {pair[1]} readOnly></input>
+                <input className="input-box mx-3" type="text" value={pair[1]} readOnly></input>
               </div>
-            
             ))}
           </form>
           <button className=" edit-button" onClick={() => console.log('edit')}>
