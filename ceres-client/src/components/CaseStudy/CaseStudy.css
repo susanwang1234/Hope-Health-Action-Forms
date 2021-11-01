@@ -1,5 +1,5 @@
 /*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
-.background {
+/* .background {
   padding: 10px;
   margin-right: auto;
   margin-left: auto;
@@ -10,4 +10,47 @@
   border-radius: 5px;
   background: #ffffff;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.headerbar {
+  list-style-type: none;
+  padding: 10px 10px;
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
+
+.department_logo{
+  height: 35px;
+  width: 140px;
+  margin: 6px;
+  margin-left: 10px;
+}
+
+.logout_button{
+  background-color: rgb(245, 245, 245);
+  font-family: Arial;
+  color: rgb(0, 0, 0);
+  font-size: 15px;
+  font-weight: bold;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: #d6d6d6;
+  width: 100px;
+  position: absolute;
+  top: 30%;
+  right: 1%;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
+}
+
+
+
+
