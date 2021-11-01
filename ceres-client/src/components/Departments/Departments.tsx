@@ -3,13 +3,22 @@ import ToDoData from "./ToDo.json";
 import './Departments.css';
 import { useHistory } from 'react-router-dom';
 import logo from '../../images/navlogo.png';
+import { UserContext } from '../../UserContext';
+import { useContext } from 'react'
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 
 function Departments(){
+const userContext = useContext(UserContext);
+
+console.log('Username (Department) is ' , userContext.user?.name)
+console.log('Department (Department) is ' , userContext.user?.department)
+//var index = userContext.user.index;
+//experiment
 
 let history = useHistory();
 const onClick = () => {
+	userContext.setUser({name: 'Ritika', department: 'new department'})
     history.push('/dashboard');
 };
 

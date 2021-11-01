@@ -25,7 +25,7 @@ function Login() {
 
   const onSubmit = handleSubmit(({ username, password, remember }) => {
     console.log(username, password, remember);
-    history.push('/dashboard');
+    history.push('/departments');
   });
 
   const userContext = useContext(UserContext);
