@@ -42,3 +42,4 @@ services:
       - MYSQL_USER=HHA
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
+    container_name: ceres-database
