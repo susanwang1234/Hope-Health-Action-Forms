@@ -44,15 +44,15 @@ function Login() {
     <div className="flex xl:flex-row flex-col" >
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
         <div className="max-w-md w-full mx-auto">
-          <div className="logo_container">
-            <img src={Logo} alt="Logo" className="logo_image" />
+          <div className="logo-container">
+            <img src={Logo} alt="Logo" className="logo-image" />
           </div>
         </div>
-        <div className="border sign_in_box">
-          <div className="sign_in_container">Sign In </div>
+        <div className="border sign-in-box">
+          <div className="sign-in-container">Sign In </div>
           <form action="" className="space-y-6" onSubmit={onSubmit}>
             <div>
-              <label htmlFor="" className="input_field_heading">
+              <label htmlFor="" className="input-field-heading">
                 Username
               </label>
               <input
@@ -61,7 +61,7 @@ function Login() {
                   minLength: 6,
                   maxLength: 25
                 })}
-                className="border input_field"
+                className="border input-field"
                 style={{ borderColor: errors.username ? 'red' : '' }}
                 name="username"
                 type="text"
@@ -70,13 +70,13 @@ function Login() {
             </div>
 
             <div>
-              <label htmlFor="" className="input_field_heading">
+              <label htmlFor="" className="input-field-heading">
                 Password
               </label>
-              <input {...register('password', { required: true })} name="password" type="password" className="border input_field" />
+              <input {...register('password', { required: true })} name="password" type="password" className="border input-field" />
             </div>
             <div>
-              <button className="transform hover:bg-blue-800 hover:font-bold submit_button">Submit</button>
+              <button className="transform hover:bg-blue-800 hover:font-bold submit-button">Submit</button>
             </div>
           </form>
         </div>

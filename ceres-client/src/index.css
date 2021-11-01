@@ -5,7 +5,7 @@ Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+c
 Citation: https://www.w3schools.com/css/css3_buttons.asp
 */
 
-.view_department_button{
+.view-department-button{
     background-color: #009cc4;
     font-weight: bold;
     font-family: Arial;
@@ -23,7 +23,7 @@ Citation: https://www.w3schools.com/css/css3_buttons.asp
     box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   
-  .view_department_button:hover{
+  .view-department-button:hover{
     background-color: #117088;
     font-family: Arial;
     font-weight: bold;
@@ -41,7 +41,7 @@ Citation: https://www.w3schools.com/css/css3_buttons.asp
     box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
-  .checkmark_icon{
+  .checkmark-icon{
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -70,7 +70,7 @@ Citation: https://www.w3schools.com/css/css3_buttons.asp
   }
 
 
-  .alert_icon{
+  .alert-icon{
     height: 30px;
     width: 30px;
     top: 12px;
