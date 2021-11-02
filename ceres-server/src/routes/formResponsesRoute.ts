@@ -3,6 +3,6 @@ import controller from '../controllers/formResponsesController';
 
 const router = express.Router();
 
-router.post('/:id', controller.addNewFormResponses);
+router.post('/:formId', controller.addNewFormResponses);
 
 export = router;
