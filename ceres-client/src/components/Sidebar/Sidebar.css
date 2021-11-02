@@ -23,6 +23,13 @@
   font-size: 14px;
 }
 
+.dropLink {
+    /* Links that descend from a dropdown button */
+    color: #91908e;
+    padding-left: 40px;
+    font-size: 14px;
+}
+
 ul li a:hover,
 ul lu a.active {
   /* Sidebar link's being hovered */
