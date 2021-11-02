@@ -9,6 +9,7 @@ import departmentRoutes from './routes/departmentRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
 import dummyRoutes from './routes/dummyRoute';
 import formRoutes from './routes/formRoute';
+import formResponsesRoutes from './routes/formResponsesRoute';
 import rehabReportRoutes from './routes/rehabReportRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
@@ -85,6 +86,7 @@ export function enableRoutes(router: Application) {
   router.use('/role', roleRoutes);
   router.use('/user', userRoutes);
   router.use('/form', formRoutes);
+  router.use('/form-responses', formResponsesRoutes);
 }
 
 export function enableErrorHandling(router: Application) {
