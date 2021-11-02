@@ -11,6 +11,7 @@ import dummyRoutes from './routes/dummyRoute';
 import rehabReportRoutes from './routes/rehabReportRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
 import roleRoutes from './routes/roleRoute';
+import userRoutes from './routes/userRoute';
 import routes from './routes/indexRoute';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
@@ -81,10 +82,11 @@ export function enableRoutes(router: Application) {
   router.use('', dashboardRoutes);
   router.use('/department', departmentRoutes);
   router.use('/dummy', dummyRoutes);
-  router.use('/rehab_report', rehabReportRoutes);
   router.use('/auth', authenticationRoutes);
-  router.use('/department_form', departmentFormRoutes);
+  router.use('/rehab-report', rehabReportRoutes);
+  router.use('/department-form', departmentFormRoutes);
   router.use('/role', roleRoutes);
+  router.use('/user', userRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

@@ -5,6 +5,7 @@ import config from '../config/config';
 import logging from '../config/logging';
 import { Knex } from '../db/mysql';
 import { Request } from 'express';
+import userModel from '../db/models/userModel';
 
 const NAMESPACE = 'PASSPORT MIDDLEWARE';
 
@@ -27,12 +28,7 @@ const strategyAll = new PassportJWT.Strategy(jwtOptions, async (payload, done) =
   const id = payload.sub;
 
   try {
-    const user: myUser = await Knex('User')
-      .select(['User.id', 'User.username', 'User.password', 'Department.name as departmentName', 'Role.name as roleName'])
-      .leftJoin('Role', 'User.roleId', 'Role.id')
-      .leftJoin('Department', 'User.departmentId', 'Department.id')
-      .where('User.id', id)
-      .first();
+    const user: myUser = await userModel.findOne('User.id', id);
 
     if (!user) {
       return done(null, false);
