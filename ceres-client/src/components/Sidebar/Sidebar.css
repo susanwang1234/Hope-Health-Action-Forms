@@ -39,26 +39,28 @@ ul lu a.active {
 
 .sideButton {
   /* Dropdown button */
-  background-color: white;
+  background: white;
   color: white;
   border: none;
-  width: auto;
   color: #91908e;
   font-size: 14px;
   font-family: Arial;
   border: none;
   padding-left: 20px;
   display: flex;
+  /* TODO: Find better way to specify width */
+  width: 240px;
 }
 
 .sideButton:focus {
   background-color: white;
   color: #555555;
   box-shadow: none;
+  display: flex;
 }
 
 .sideButton:hover {
-  background-color: #e7e7e7;
+  background: #e7e7e7;
   color: #555555;
   box-shadow: none;
 }

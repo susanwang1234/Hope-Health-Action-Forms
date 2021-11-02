@@ -8,9 +8,11 @@ import { AiOutlineHome } from 'react-icons/ai';
 import { setSyntheticLeadingComments } from 'typescript';
 import '../../App.css';
 import { HiHome, HiStar } from 'react-icons/hi';
-import { BsFillPersonFill, BsPencilSquare } from 'react-icons/bs';
+import { BsFillPersonFill, BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
 import { IoMdArrowDropdown } from 'react-icons/io';
+import { FaHistory } from 'react-icons/fa'
+import { ImStatsDots } from 'react-icons/im'
 import './Sidebar.css';
 
 const Sidebar = ({ show }: any) => {
@@ -51,15 +53,15 @@ const Sidebar = ({ show }: any) => {
           {open && (
             <li>
               <Link to="/dashboard" className="dropLink" color="red">
-                <IoIosJournal />
+                <BsFillCalendarFill />
                 This Month's Report
               </Link>
               <Link to="/dashboard" className="dropLink">
-                <IoIosJournal />
+                <FaHistory />
                 Previous Reports
               </Link>
               <Link to="/dashboard" className="dropLink">
-                <IoIosJournal />
+                <ImStatsDots />
                 Statistics
               </Link>
             </li>
