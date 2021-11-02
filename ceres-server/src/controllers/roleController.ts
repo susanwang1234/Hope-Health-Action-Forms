@@ -1,21 +1,11 @@
-import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
-import { Knex } from '../db/mysql';
-import { Role } from '../db/models/roleModel';
+import { getItems } from './requestTemplates/getAllRequest';
 
 const NAMESPACE = 'Role Control';
+const TABLE_NAME = 'Role';
 
 const getRoles = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `GETTING LIST OF ROLES`);
-
-  try {
-    const roles: Role[] = await Knex.select('*').from('Role');
-    logging.info(NAMESPACE, 'Retrieved role:', roles);
-    res.status(200).send(roles);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error.message);
-  }
+  await getItems(req, res, next, NAMESPACE, TABLE_NAME);
 };
 
 export default { getRoles };
