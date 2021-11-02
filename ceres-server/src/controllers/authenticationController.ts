@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { User as myUser } from '../db/types/userType';
 import logging from '../config/logging';
 import authUtil from '../utils/authHelper';
-import { Knex } from '../db/mysql';
+import userModel from 'db/models/userModel';
 
 const NAMESPACE = 'Authentication';
 
@@ -10,12 +10,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
   const { username, password } = req.body;
 
   try {
-    const user: myUser = await Knex('User')
-      .select(['User.id', 'User.username', 'User.password', 'Department.name as departmentName', 'Role.name as roleName'])
-      .leftJoin('Role', 'User.roleId', 'Role.id')
-      .leftJoin('Department', 'User.departmentId', 'Department.id')
-      .where('User.username', username)
-      .first();
+    const user: myUser = await userModel.findOne('User.username', username);
 
     logging.info(NAMESPACE, 'Retrieved from db', user);
 
@@ -35,7 +30,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
-    res.status(500).json({ message: 'server error' });
+    res.status(500).json({ message: 'server error from login' });
   }
 };
 

@@ -24,8 +24,6 @@ function Login() {
   } = useForm<FormData>({ mode: 'onChange' });
 
   const onSubmit = handleSubmit(({ username, password, remember }) => {
-    console.log(username, password, remember);
-
     const user = {
       username,
       password
@@ -36,7 +34,6 @@ function Login() {
         const url = '/auth/login';
         const response = await http.post(url, user);
         const { data } = response;
-        console.log('log in data:', data);
         history.push('/dashboard');
       } catch (error: any) {
         console.log(error.response);
