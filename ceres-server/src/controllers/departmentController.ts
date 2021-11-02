@@ -1,9 +1,9 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
-import { Knex } from '../db/mysql';
-import { Department } from '../db/models/departmentModel';
+import { getItems } from './requestTemplates/getAllRequest';
 
 const NAMESPACE = 'Department Control';
+const TABLE_NAME = 'Department';
 
 const departmentPage = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GET request with ID: ${req.params.id}`);
@@ -18,16 +18,7 @@ const departmentPage = async (req: Request, res: Response, next: NextFunction) =
 };
 
 const getDepartments = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `GETTING LIST OF DEPARTMENTS`);
-
-  try {
-    const departments: Department[] = await Knex.select('*').from('Department');
-    logging.info(NAMESPACE, 'Retrieved departments:', departments);
-    res.status(200).send(departments);
-  } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
-    res.status(500).send(error.message);
-  }
+  await getItems(req, res, next, NAMESPACE, TABLE_NAME);
 };
 
 export default { departmentPage, getDepartments };
