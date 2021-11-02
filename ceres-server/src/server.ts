@@ -8,7 +8,7 @@ import dashboardRoutes from './routes/dashboardRoute';
 import departmentRoutes from './routes/departmentRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
 import dummyRoutes from './routes/dummyRoute';
-import formRoutes from './routes/form';
+import formRoutes from './routes/formRoute';
 import rehabReportRoutes from './routes/rehabReportRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
