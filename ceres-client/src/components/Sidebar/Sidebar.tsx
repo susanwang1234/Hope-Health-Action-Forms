@@ -35,7 +35,7 @@ const Sidebar = ({show}:any) => {
           <Link to="/dashboard" className='sideLink'><IoIosJournal/>Case Studies</Link>
         </li>
         <li>
-          <Button className='button' onClick={() => setOpen(!open)}><IoMdArrowDropdown/>Reports</Button>
+          <Button className='sideButton' onClick={() => setOpen(!open)}><IoMdArrowDropdown/>Reports</Button>
           {open && 
             <li>
               <Link to="/dashboard" className='link' color='red'><IoIosJournal/>This Month's Report</Link>

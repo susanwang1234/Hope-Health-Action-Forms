@@ -1,34 +1,97 @@
-.link {
-    color: #91908e;
-    padding-left: 20px;
-    font-size: 14px;
+.sidebar {
+  /* When sidebar is open */
+  width: 240px;
+  background: #ffffff;
+  position: absolute;
+  height: 95vh;
+  left: -100%;
+  transition: all 0.3s;
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
 }
 
-ul li .button {
-    /* Dropdown button */
-    background-color: white;
-    width: auto;
-    color: #91908e;
-    text-decoration: none;
-    font-size: 16px;
-    font-family: Arial;
-    display: flex;
-    padding: 10px 0px;
-    border-radius: 6px;
-    display:flex;
-    border: none;
-    padding: 10px 0px;
-    border-radius: 6px;
+.sidebar.active {
+  /* When sidebar is closed */
+  left: 0;
 }
 
-.button:focus {
-    background-color: white;
-    color: #0a58ca;
-    box-shadow: none;
+.sideLink {
+  /* Links to other pages */
+  color: #91908e;
+  padding-left: 20px;
+  font-size: 14px;
 }
 
-.button:hover {
-    background-color: #00abcd;
-    color: #0a58ca;
-    box-shadow: none;
+ul li a:hover,
+ul lu a.active {
+  /* Sidebar link's being hovered */
+  background: #e7e7e7;
+  color: #555555;
+}
+
+.sideButton {
+  /* Dropdown button */
+  background-color: white;
+  color: white;
+  border: none;
+  width: auto;
+  color: #91908e;
+  font-size: 14px;
+  font-family: Arial;
+  border: none;
+  padding-left: 20px;
+  display: flex;
+}
+
+.sideButton:focus {
+  background-color: white;
+  color: #555555;
+  box-shadow: none;
+}
+
+.sideButton:hover {
+  background-color: #e7e7e7;
+  color: #555555;
+  box-shadow: none;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  list-style-type: none;
+}
+
+ul li a {
+  /* Sidebar buttons */
+  color: #58554d;
+  text-decoration: none;
+  font-size: 16px;
+  font-family: Arial;
+  padding: 10px 0px;
+  border-radius: 6px;
+  display: flex;
+}
+
+svg {
+  /* Space between react-icons and button labels */
+  margin-right: 10px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #efeaea;
 }
