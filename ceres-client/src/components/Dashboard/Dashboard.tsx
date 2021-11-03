@@ -1,4 +1,5 @@
 import './Dashboard.css';
+import '../../App.css';
 import Navbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
 import display from './../../images/original_artwork.jpg';
@@ -23,12 +24,12 @@ const Dashboard = () => {
   function iconChecker(isComplete: boolean){
   	if(isComplete){
     	return (
-      	<div className="checkmark_icon">
+      	<div className="checkmark-icon">
         	<div className="checkmark"></div>
       	</div>
     	);}
     	return(
-      	<div className="alert_icon">
+      	<div className="alert-icon">
         	<div className="alert"></div>
       	</div>
     	);
@@ -70,8 +71,8 @@ const Dashboard = () => {
             <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
             <div className="card-inner">
               <p className="font-bold text-title">Department Info</p>
-              <div className="text">{iconChecker(ToDoData[departmentIndex!-2].caseStudy)}Case Study</div>
-							<div className="text">{iconChecker(ToDoData[departmentIndex!-2].mspp)}MSPP Report</div>
+              <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
+							<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
             </div>
           </div>
 

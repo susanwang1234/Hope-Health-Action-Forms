@@ -4,9 +4,9 @@ import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudy from './components/CaseStudy/CaseStudy';
+import Departments from './components/Departments/Departments';
 import { UserContextProvider } from './UserContext';
 import Forms from './components/Forms/Forms';
-import Departments from './components/Departments/Departments';
 
 function App() {
   return (
