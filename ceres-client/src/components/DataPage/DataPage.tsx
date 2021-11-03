@@ -16,7 +16,7 @@ class DataPage extends React.Component<any[], any> {
     };
   }
   async componentDidMount() {
-    const url = 'http://localhost:8080/rehab_report/get/rehab_report';
+    const url = 'http://localhost:8080/rehab-report/get/rehab-report';
     try {
       const response = await fetch(url);
       const data = await response.json();

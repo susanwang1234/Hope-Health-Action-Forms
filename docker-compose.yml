@@ -33,8 +33,13 @@ services:
   ceres-database:
     image: mysql:8.0
     build: ./ceres-database
+    volumes:
+      - ./ceres-database:/ceres-database
+    ports:
+      - 3306:3306
     environment:
       - MYSQL_DATABASE=ceresdb
       - MYSQL_USER=HHA
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
+    container_name: ceres-database

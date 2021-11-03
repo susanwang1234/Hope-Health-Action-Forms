@@ -6,7 +6,6 @@ import { Button, Nav } from 'react-bootstrap';
 import { IconContext } from 'react-icons';
 import { AiOutlineHome } from 'react-icons/ai';
 import { setSyntheticLeadingComments } from 'typescript';
-import '../../App.css';
 import { HiHome, HiStar } from 'react-icons/hi';
 import { BsFillPersonFill, BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
@@ -31,12 +30,6 @@ const Sidebar = ({ show }: any) => {
           <Link to="/dashboard" className="sideLink">
             <BsPencilSquare />
             Departments
-          </Link>
-        </li>
-        <li>
-          <Link to="/dashboard" className="sideLink">
-            <BsPencilSquare />
-            Reports
           </Link>
         </li>
         <li>

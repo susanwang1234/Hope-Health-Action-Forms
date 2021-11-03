@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { ReqUser } from '../../types';
+import { ReqUser } from '../../types/indexType';
 import { authenticate } from 'passport';
 
 const router = Router();

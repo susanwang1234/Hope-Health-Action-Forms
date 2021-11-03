@@ -1,0 +1,120 @@
+[
+  {
+    "page_label": "Rehab Monthly Data Collection",
+    "fields": [
+      {
+        "field_id": "bedsAvailable",
+        "field_label": "Beds avaliable",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "bedDays",
+        "field_label": "Bed days",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "patientDays",
+        "field_label": "Patient days",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "hospitalised",
+        "field_label": "Hospitalized",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "discharged",
+        "field_label": "Discharged alive",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "selfDischarges",
+        "field_label": "Self discharged",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "deathsBefore48",
+        "field_label": "Died before 48h",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "deathsAfter48",
+        "field_label": "Died after 48h",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "daysHospitalised",
+        "field_label": "Days hospitalised",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "referrals",
+        "field_label": "Referrals",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "transfers",
+        "field_label": "Transfers",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "stays",
+        "field_label": "Stayed in the ward",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "admissions",
+        "field_label": "Admissions",
+        "field_mandatory": true,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      },
+      {
+        "field_id": "outpatients",
+        "field_label": "Outpatients",
+        "field_mandatory": false,
+        "field_placeholder": "Enter a number",
+        "field_type": "number",
+        "field_value": null
+      }
+      
+    ]
+  }
+]

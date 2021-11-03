@@ -1,40 +1,26 @@
 setup:
 	cd ceres-client
 	npm install
-	npm install craco
-	npm install @craco/craco
-	npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
-	npm install react-router-dom
-	npm install bootstrap react-bootstrap 
 	cd ..
 	cd ceres-server
 	npm install
-	npm install express body-parser dotenv
-	npm install npm install --save-dev @types/express @types/body-parser @types/dotenv
-	npm install knex
 	cd ..
 
 setup-client:
 	cd ceres-client
 	npm install
-	npm install craco
-	npm install @craco/craco
-	npm install -D tailwindcss@npm:@tailwindcss/postcss7-compat postcss@^7 autoprefixer@^9
-	npm install react-router-dom
-	npm install bootstrap react-bootstrap 
 	cd ..
 
 setup-server:
 	cd ceres-server
 	npm install
-	npm install express body-parser dotenv
-	npm install npm install --save-dev @types/express @types/body-parser @types/dotenv 
-	npm install @types/mysql
-	npm install knex
 	cd ..
 
 build:
 	docker-compose build
+
+down:
+	docker-compose down
 
 u:
 	docker-compose up
@@ -42,8 +28,39 @@ u:
 up:
 	docker-compose up -d
 
-stop: 
+up-migrate-test:
+	docker-compose up -d
+	docker exec ceres-server node_modules/.bin/knex migrate:latest
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
+	docker exec ceres-server npm test
+	docker-compose down
+
+up-test:
+	docker-compose up -d
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
+	docker exec ceres-server npm test
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
+
+up-test-stop:
+	docker-compose up -d
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
+	docker exec ceres-server npm test
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
 	docker-compose stop
 
 up-prod:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+
+stop: 
+	docker-compose stop
+
+migrate:
+	docker exec ceres-server node_modules/.bin/knex migrate:latest
+
+seed:
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
+
+test:
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
+	docker exec ceres-server npm test
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_project.ts
