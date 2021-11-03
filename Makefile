@@ -19,11 +19,21 @@ setup-server:
 build:
 	docker-compose build
 
+down:
+	docker-compose down
+
 u:
 	docker-compose up
 
 up:
 	docker-compose up -d
+
+up-migrate-test:
+	docker-compose up -d
+	docker exec ceres-server node_modules/.bin/knex migrate:latest
+	docker exec ceres-server node_modules/.bin/knex seed:run --specific=seed_test.ts
+	docker exec ceres-server npm test
+	docker-compose down
 
 up-test:
 	docker-compose up -d

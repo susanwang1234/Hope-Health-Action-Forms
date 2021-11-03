@@ -2,7 +2,7 @@ import { Router } from 'express';
 import config from '../../config/config';
 import * as jwt from 'jsonwebtoken';
 import { authenticate } from 'passport';
-import { ReqUser } from '../../types';
+import { ReqUser } from '../../types/indexType';
 
 const router = Router();
 

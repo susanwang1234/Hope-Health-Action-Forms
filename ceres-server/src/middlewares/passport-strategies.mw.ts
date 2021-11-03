@@ -1,10 +1,10 @@
-import * as userModel from '../db/models/user';
-import { User as myUser } from '../db/types/user';
+import * as userModel from '../db/models/userModel';
+import { User as myUser } from '../db/types/userType';
 import passport from 'passport';
 import * as PassportLocal from 'passport-local';
 import PassportJWT from 'passport-jwt';
 import bcrypt from 'bcryptjs';
-import { Payload } from '../types';
+import { Payload } from '../types/indexType';
 import config from '../config/config';
 
 passport.serializeUser((user: myUser, done) => {

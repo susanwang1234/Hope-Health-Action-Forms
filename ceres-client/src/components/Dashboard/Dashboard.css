@@ -8,34 +8,34 @@ dashboard {
   overflow-y: auto;
 }
 
-.dashboard__container {
+.dashboard-container {
   padding: 20px 35px;
 }
 
-.dashboard__title {
+.dashboard-title {
   display: flex;
   align-items: center;
 }
 
-.dashboard__title > img {
+.dashboard-title > img {
   max-height: 100px;
   object-fit: contain;
   margin-right: 20px;
 }
 
-.dashboard__greeting > h1 {
+.dashboard-greeting > h1 {
   font-size: 24px;
   color: #2e4a66;
   margin-bottom: 5px;
 }
 
-.dashboard__greeting > p {
+.dashboard-greeting > p {
   font-size: 14px;
   font-weight: 700;
   color: #a5aaad;
 }
 
-.dashboard__cards {
+.dashboard-cards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
@@ -53,7 +53,7 @@ dashboard {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.card_inner {
+.card-inner {
   display: inline;
   font-size: 25px;
   text-align: center;
@@ -98,7 +98,7 @@ dashboard {
   font-size: 14px;
 }
 
-.add_button{
+.add-button{
   background-color: #59b030;
   color: white;
   border: none;
@@ -117,7 +117,7 @@ dashboard {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.add_button:hover{
+.add-button:hover{
   background-color: #3a791c;
   color: white;
   border: none;
@@ -136,7 +136,7 @@ dashboard {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.view_button{
+.view-button{
   background-color: #009cc4;
   color: white;
   border: none;
@@ -154,7 +154,7 @@ dashboard {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.view_button:hover{
+.view-button:hover{
   background-color: #117088;
   color: white;
   border: none;
@@ -172,12 +172,12 @@ dashboard {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.filler_image{
+.filler-image{
   border: 2px solid black;
 }
 
 @media only screen and (max-width: 855px) {
-  .dashboard__cards {
+  .dashboard-cards {
     grid-template-columns: 1fr;
     gap: 10px;
     margin-bottom: 0;
