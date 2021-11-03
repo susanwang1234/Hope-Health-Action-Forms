@@ -1,8 +1,9 @@
 import logging from 'config/logging';
 import { Knex } from 'db/mysql';
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, response } from 'express';
 import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
+import { editItemsById } from './requestTemplates/editByIdRequest';
 import { isInvalidInput } from './requestTemplates/isInvalidInput';
 
 const NAMESPACE = 'Form Response';
@@ -43,4 +44,12 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
   await createItems(req, res, next, NAMESPACE, TABLE_NAME, formResponses, formResponseFKName, formId);
 };
 
-export default { getFormResponsesByFormId, addNewFormResponses };
+const editFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
+  const formId: number = +req.params.formId;
+  const responsesToEdit = req.body.map((formResponse: any) => {
+    return { ...formResponse, formId: formId };
+  });
+  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit);
+};
+
+export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId };
