@@ -27,13 +27,13 @@ const Sidebar = ({ show }: any) => {
           </Link>
         </li>
         <li>
-          <Link to="/dashboard" className="sideLink">
+          <Link to="/departments" className="sideLink">
             <BsPencilSquare />
             Departments
           </Link>
         </li>
         <li>
-          <Link to="/dashboard" className="sideLink">
+          <Link to="/case-study" className="sideLink">
             <IoIosJournal />
             Case Studies
           </Link>
@@ -45,15 +45,15 @@ const Sidebar = ({ show }: any) => {
           </Button>
           {open && (
             <li>
-              <Link to="/dashboard" className="dropLink" color="red">
+              <Link to="/submit-report" className="dropLink" color="red">
                 <BsFillCalendarFill />
                 This Month's Report
               </Link>
-              <Link to="/dashboard" className="dropLink">
+              <Link to="/data-page" className="dropLink">
                 <FaHistory />
                 Previous Reports
               </Link>
-              <Link to="/dashboard" className="dropLink">
+              <Link to="/statistics" className="dropLink">
                 <ImStatsDots />
                 Statistics
               </Link>
