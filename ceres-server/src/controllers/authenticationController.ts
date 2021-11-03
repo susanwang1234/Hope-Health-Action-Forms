@@ -15,7 +15,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     logging.info(NAMESPACE, 'Retrieved from db', user);
 
     if (!user) {
-      return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
+      return res.status(401).json({ isAuthenticated: false, msg: 'User not found' });
     }
 
     if (user.password) {
@@ -27,10 +27,10 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         return res.status(200).json({ isAuthenticated: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expiresIn });
       }
     }
-    return res.status(401).json({ isAuthenticated: false, msg: 'entered incorrect username or password' });
+    return res.status(401).json({ isAuthenticated: false, msg: 'Entered incorrect username or password' });
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
-    res.status(500).json({ message: 'server error from login' });
+    res.status(500).json({ message: 'Server error from login' });
   }
 };
 
