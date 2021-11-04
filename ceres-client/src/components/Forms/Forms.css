@@ -110,7 +110,8 @@
 
 /*Toggle button CSS from: https://www.geeksforgeeks.org/how-to-create-a-toggle-switch-in-react-as-a-reusable-component/ [Copied code]*/ 
 .container {
-  text-align: left;
+  position: relative;
+  right: 100px;
   font-weight: bold;
 }
 .toggle-switch {

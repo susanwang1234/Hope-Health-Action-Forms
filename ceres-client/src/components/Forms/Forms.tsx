@@ -85,7 +85,7 @@ function Forms() {
         <Navbar />
         <React.Fragment>
         <ToggleSwitch label="MSPP Data only" />
-      </React.Fragment>
+        </React.Fragment>
         <div>
           <div className="blocks-form">
           <div className="title-form"><Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label></div>
