@@ -88,9 +88,11 @@ function Forms() {
             <Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label>
             <Form>
               {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
+              <div className="button-form">
                 <button className="view-submit-form-button" onClick={(e) => handleSave(e)}>
                   Submit
                 </button>
+              </div>
             </Form>
           </div>
         </div>
