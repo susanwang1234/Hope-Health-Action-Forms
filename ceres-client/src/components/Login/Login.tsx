@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import Logo from './../../images/Logo.png';
 import display from './../../images/CBR_training_March 21.png';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react'
+import { useContext } from 'react';
 import { UserContext } from '../../UserContext';
-import { useEffect } from 'react'
-
+import { useEffect } from 'react';
+import http from '../../services/httpService';
 
 interface FormData {
   username: string;
@@ -23,25 +23,39 @@ function Login() {
     formState: { errors }
   } = useForm<FormData>({ mode: 'onChange' });
 
-  const onSubmit = handleSubmit(({ username, password }) => {
-    console.log(username, password);
-    history.push('/dashboard');
+  const onSubmit = handleSubmit(({ username, password, remember }) => {
+    const user = {
+      username,
+      password
+    };
+
+    const postLogin = async (user: any) => {
+      try {
+        const url = '/auth/login';
+        const response = await http.post(url, user);
+        const { data } = response;
+        history.push('/dashboard');
+      } catch (error: any) {
+        console.log(error.response);
+      }
+    };
+
+    postLogin(user);
   });
 
   const userContext = useContext(UserContext);
 
   useEffect(() => {
-    if (userContext){
-      userContext.setUser({role: 1 , department: 2})
+    if (userContext) {
+      userContext.setUser({ role: 1, department: 2 });
     }
-    
-  }, [])
+  }, []);
 
-  console.log('Username (Login) is ' , userContext.user?.role)
-  console.log('Department (Login) is ' , userContext.user?.department)
+  console.log('Username (Login) is ', userContext.user?.role);
+  console.log('Department (Login) is ', userContext.user?.department);
 
   return (
-    <div className="flex xl:flex-row flex-col" >
+    <div className="flex xl:flex-row flex-col">
       <div className="min-h-screen bg-gray-50 flex flex-col flex-grow">
         <div className="max-w-md w-full mx-auto">
           <div className="logo-container">
@@ -58,7 +72,7 @@ function Login() {
               <input
                 {...register('username', {
                   required: true,
-                  minLength: 6,
+                  minLength: 5,
                   maxLength: 25
                 })}
                 className="border input-field"
@@ -81,7 +95,7 @@ function Login() {
           </form>
         </div>
       </div>
-      <div className = "hidden xl:flex">
+      <div className="hidden xl:flex">
         <img src={display} alt="Display" className="image" />
       </div>
     </div>

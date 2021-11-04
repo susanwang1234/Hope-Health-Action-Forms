@@ -1,30 +1,16 @@
 import { User } from '../types/userType';
-import { db } from '../mysql';
-import { OkPacket, RowDataPacket } from 'mysql2';
+import { Knex } from '../mysql';
 
-export const findOne = (username: string, callback: Function) => {
-  const queryString = `SELECT U.id as id, U.username as username, U.password as password, D.name as departmentName, R.name as roleName
-                        FROM User AS U, Role AS R, Department AS D
-                        WHERE (U.username = ? AND R.id = U.roleId AND D.id = U.departmentId)`;
+// template to find a user corresponding to any type of column value
+const findOne = (columnName: string, val: any) => {
+  return Knex('User')
+    .select(['User.id', 'User.username', 'User.password', 'Department.id as departmentId', 'Role.id as roleId'])
+    .leftJoin('Role', 'User.roleId', 'Role.id')
+    .leftJoin('Department', 'User.departmentId', 'Department.id')
+    .where(Knex.raw('?? = ?', [columnName, val]))
+    .first();
+};
 
-  db.query(queryString, username, (err, result) => {
-    if (err) {
-      callback(err);
-    }
-    const row = (<RowDataPacket>result)[0];
-    if (row === undefined) {
-      callback(null, undefined);
-      return;
-    }
-
-    const user: User = {
-      id: row.id,
-      username: row.username,
-      pwd: row.password,
-      departmentName: row.departmentName,
-      roleName: row.roleName
-    };
-    console.log(user);
-    callback(null, user);
-  });
+export default {
+  findOne
 };
