@@ -29,6 +29,25 @@ const CaseStudy = () => {
           <div className = "flex flex-col">
             <h2 className = "mb-4">Type of Case Study</h2>
             <input placeholder = "Dropdown"/>
+            <h1>Current Case Study</h1>
+
+        
+        {data_dummy.map((Story, index) => {
+          return <div>
+            <h1>{Story.name}</h1>
+            <h2>{Story.questions.map((Questions, idx)=> {return <div> 
+            <h1>{Questions['id']}</h1>
+            <h1>{Questions['inputType']}</h1>
+            <h1>{Questions.caseStudyQuestionId}</h1>
+            <h1>{Questions.caseStudyTypeId}</h1>
+            <h1>{Questions.label}</h1>
+            <h1>{Questions['responseType']}</h1>
+            </div>
+            
+            })}</h2>
+          </div>
+        })}
+
 
 
           </div>
