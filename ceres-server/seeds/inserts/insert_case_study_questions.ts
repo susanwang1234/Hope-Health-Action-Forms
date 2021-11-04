@@ -2,9 +2,9 @@ import { Knex } from 'knex';
 
 export async function insertCaseStudyQuestions(knex: Knex): Promise<void> {
   await insertQuestionsFromPatientStory(knex);
-  await insertStaffRecognitionQuestions(knex);
-  await insertTrainingSessionQuestions(knex);
-  await insertEquipmentReceivedQuestions(knex);
+  await insertQuestionsFromStaffRecognition(knex);
+  await insertQuestionsFromTrainingSession(knex);
+  await insertQuestionsFromEquipmentReceived(knex);
 }
 
 async function insertQuestionsFromPatientStory(knex: Knex): Promise<void> {
@@ -18,7 +18,7 @@ async function insertQuestionsFromPatientStory(knex: Knex): Promise<void> {
   ]);
 }
 
-async function insertStaffRecognitionQuestions(knex: Knex): Promise<void> {
+async function insertQuestionsFromStaffRecognition(knex: Knex): Promise<void> {
   await knex('CaseStudyQuestion').insert([
     { id: 7, label: 'Staff name', inputType: 'text', responseType: 'string' },
     { id: 8, label: 'Role/Job Title', inputType: 'text', responseType: 'string' },
@@ -28,7 +28,7 @@ async function insertStaffRecognitionQuestions(knex: Knex): Promise<void> {
   ]);
 }
 
-async function insertTrainingSessionQuestions(knex: Knex): Promise<void> {
+async function insertQuestionsFromTrainingSession(knex: Knex): Promise<void> {
   await knex('CaseStudyQuestion').insert([
     { id: 12, label: 'Training date?', inputType: 'text', responseType: 'string' },
     { id: 13, label: 'What was the training on?', inputType: 'text', responseType: 'string' },
@@ -38,7 +38,7 @@ async function insertTrainingSessionQuestions(knex: Knex): Promise<void> {
   ]);
 }
 
-async function insertEquipmentReceivedQuestions(knex: Knex): Promise<void> {
+async function insertQuestionsFromEquipmentReceived(knex: Knex): Promise<void> {
   await knex('CaseStudyQuestion').insert([
     { id: 17, label: 'What equipment was received?', inputType: 'text', responseType: 'string' },
     { id: 18, label: 'What department recevied the equipment?', inputType: 'text', responseType: 'string' },
