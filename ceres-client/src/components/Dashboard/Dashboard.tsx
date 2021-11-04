@@ -3,9 +3,8 @@ import '../../App.css';
 import Navbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
 import display from './../../images/original_artwork.jpg';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { UserContext } from '../../UserContext';
-import ToDoData from '../Departments/ToDo.json';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
@@ -17,10 +16,11 @@ const Dashboard = () => {
 
   const userContext = useContext(UserContext);
 
-  console.log('Username (Dashboard) is ' , userContext.user?.role)
-  console.log('Department (Dashboard) is ' , userContext.user?.department)
+  console.log('Username (Dashboard) is ', userContext.user?.role);
+  console.log('Department (Dashboard) is ', userContext.user?.department);
+  /*
+leave for later
   var departmentIndex = userContext.user?.department;
-
   function iconChecker(isComplete: boolean){
   	if(isComplete){
     	return (
@@ -34,6 +34,9 @@ const Dashboard = () => {
       	</div>
     	);
 	}
+    <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
+		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
+  */
 
   return (
     <main>
@@ -71,8 +74,6 @@ const Dashboard = () => {
             <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
             <div className="card-inner">
               <p className="font-bold text-title">Department Info</p>
-              <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
-							<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
             </div>
           </div>
 

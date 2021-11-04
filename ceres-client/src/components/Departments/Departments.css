@@ -1,7 +1,7 @@
 /*
 Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizontal_black_fixed
 */
-.background{
+.background {
   background-color: #f5f5f5;
   width: 100%;
   height: 100%;
@@ -25,12 +25,12 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-h2{
+h2 {
   font-family: Arial;
   font-size: 30px;
   text-align: center;
 }
-p{
+p {
   font-family: Arial;
   font-size: 25px;
   text-align: left;
@@ -38,7 +38,7 @@ p{
   position: relative;
   margin-left: 12px;
 }
-header{
+header {
   list-style-type: none;
   padding: 10px 10px;
   background-color: rgb(255, 255, 255);
@@ -47,13 +47,13 @@ header{
   left: 0;
   width: 100%;
 }
-.department-logo{
+.department-logo {
   height: 35px;
   width: 140px;
   margin: 6px;
   margin-left: 10px;
 }
-.logout-button{
+.logout-button {
   background-color: rgb(245, 245, 245);
   font-family: Arial;
   color: rgb(0, 0, 0);
@@ -70,7 +70,7 @@ header{
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-.admin-button{
+.admin-button {
   background-color: #823b8a;
   font-family: Arial;
   color: rgb(255, 255, 255);
@@ -87,16 +87,15 @@ header{
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-@media only screen and (max-width: 1140px){
+@media only screen and (max-width: 1140px) {
   .cards {
     display: grid;
     grid-template-columns: 1fr;
     gap: 40px;
     margin: 80px 200px;
   }
-
 }
-@media only screen and (max-width: 770px){
+@media only screen and (max-width: 770px) {
   .cards {
     display: grid;
     grid-template-columns: 1fr;

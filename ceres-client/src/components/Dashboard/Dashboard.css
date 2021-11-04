@@ -59,7 +59,6 @@ dashboard {
   text-align: center;
   align-items: center;
   justify-content: space-between;
-  
 }
 
 .card1 {
@@ -98,7 +97,7 @@ dashboard {
   font-size: 14px;
 }
 
-.add-button{
+.add-button {
   background-color: #59b030;
   color: white;
   border: none;
@@ -111,13 +110,13 @@ dashboard {
   margin-bottom: 6px;
   width: 80%;
   position: absolute;
-  bottom: 10%;  
-  left: 50%; 
+  bottom: 10%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.add-button:hover{
+.add-button:hover {
   background-color: #3a791c;
   color: white;
   border: none;
@@ -130,13 +129,13 @@ dashboard {
   margin-bottom: 6px;
   width: 80%;
   position: absolute;
-  bottom: 10%;  
-  left: 50%; 
+  bottom: 10%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.view-button{
+.view-button {
   background-color: #009cc4;
   color: white;
   border: none;
@@ -148,13 +147,13 @@ dashboard {
   margin-top: 6px;
   width: 80%;
   position: absolute;
-  bottom: 0%;  
-  left: 50%; 
+  bottom: 0%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.view-button:hover{
+.view-button:hover {
   background-color: #117088;
   color: white;
   border: none;
@@ -166,13 +165,13 @@ dashboard {
   margin-top: 6px;
   width: 80%;
   position: absolute;
-  bottom: 0%;  
-  left: 50%; 
+  bottom: 0%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.filler-image{
+.filler-image {
   border: 2px solid black;
 }
 
