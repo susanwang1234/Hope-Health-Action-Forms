@@ -1,13 +1,12 @@
 /*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
 
 .blocks-form {
-  padding: 10px;
+  padding: 25px 25px 36px 25px;
   margin-right: auto;
   margin-left: auto;
   margin-top: 20px;
   width: 80%;
-  height: 100%;
-  padding: 25px;
+  height: 80%;
   border-radius: 5px;
   background: #ffffff;
   box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.19), 6px 6px 20px 6px rgba(0, 0, 0, 0.19);
@@ -17,6 +16,8 @@
   font-weight: bold;
   text-align: center;
 }
+
+
 
 .margin-left-50px {
   margin-left: 50px;
@@ -30,19 +31,20 @@
   width: 20% !important;
 }
 
+
+
 .field-invalid-border {
   box-shadow: 0px 0px 2px 2px red;  
 }
 
-.button-form {
-  /*height: 100%;
-  margin-top: 25px;
-  margin-left: 100px;*/
-  margin-top: 100px;
-}
-
 .required {
   color: red;
+}
+
+
+.button-form {
+  position: relative;
+  bottom: 10px;
 }
 
 .view-submit-form-button{
@@ -70,5 +72,33 @@
   text-align: center;
   border-radius: 5px;
   float: right;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.view-cancel-form-button{
+  background-color: #555555;
+  font-weight: bold;
+  font-family: Arial;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  float: left;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.view-cancel-form-button:hover{
+  background-color: #555555;
+  font-family: Arial;
+  font-weight: bold;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  float: left;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

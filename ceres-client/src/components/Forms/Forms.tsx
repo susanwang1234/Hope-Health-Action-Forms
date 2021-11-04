@@ -61,18 +61,18 @@ function Forms() {
   const getMonthAndTitle: any = (part_of_title: any) => {
     //Citation: https://www.w3schools.com/jsref/jsref_getmonth.asp
     const month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
+    month[0] = "JANUARY";
+    month[1] = "FEBRUARY";
+    month[2] = "MARCH";
+    month[3] = "APRIL";
+    month[4] = "MAY";
+    month[5] = "JUNE";
+    month[6] = "JULY";
+    month[7] = "AUGUST";
+    month[8] = "SEPTEMBER";
+    month[9] = "OCTOBER";
+    month[10] = "NOVEMBER";
+    month[11] = "DECEMBER";
 
     const month_index = new Date().getMonth();
     let nameOfMonth = month[month_index];
@@ -85,10 +85,13 @@ function Forms() {
         <Navbar />
         <div>
           <div className="blocks-form">
-            <Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label>
+          <div className="title-form"><Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label></div>
             <Form>
               {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
               <div className="button-form">
+                <button className="view-cancel-form-button" onClick={(e) => {e.preventDefault(); window.location.href='/dashboard';}}>
+                  Cancel
+                </button>
                 <button className="view-submit-form-button" onClick={(e) => handleSave(e)}>
                   Submit
                 </button>
