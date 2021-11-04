@@ -1,0 +1,49 @@
+import { Knex } from 'knex';
+
+export async function insertCaseStudyQuestions(knex: Knex): Promise<void> {
+  await insertQuestionsFromPatientStory(knex);
+  await insertStaffRecognitionQuestions(knex);
+  await insertTrainingSessionQuestions(knex);
+  await insertEquipmentReceivedQuestions(knex);
+}
+
+async function insertQuestionsFromPatientStory(knex: Knex): Promise<void> {
+  await knex('CaseStudyQuestion').insert([
+    { id: 1, label: "Patient's name?", inputType: 'text', responseType: 'string' },
+    { id: 2, label: "Patient's age?", inputType: 'text', responseType: 'string' },
+    { id: 3, label: 'Where is the patient from?', inputType: 'text', responseType: 'string' },
+    { id: 4, label: 'Why did the patient choose to come to HCBH?', inputType: 'text', responseType: 'string' },
+    { id: 5, label: 'What was their diagnosis?', inputType: 'text', responseType: 'string' },
+    { id: 6, label: 'Story', inputType: 'textarea', responseType: 'string' }
+  ]);
+}
+
+async function insertStaffRecognitionQuestions(knex: Knex): Promise<void> {
+  await knex('CaseStudyQuestion').insert([
+    { id: 7, label: 'Staff name', inputType: 'text', responseType: 'string' },
+    { id: 8, label: 'Role/Job Title', inputType: 'text', responseType: 'string' },
+    { id: 9, label: 'What department does this staff member work in?', inputType: 'text', responseType: 'string' },
+    { id: 10, label: 'How long have they been working at HCBH?', inputType: 'text', responseType: 'string' },
+    { id: 11, label: 'What do they enjoy most about working at HCBH', inputType: 'text', responseType: 'string' }
+  ]);
+}
+
+async function insertTrainingSessionQuestions(knex: Knex): Promise<void> {
+  await knex('CaseStudyQuestion').insert([
+    { id: 12, label: 'Training date?', inputType: 'text', responseType: 'string' },
+    { id: 13, label: 'What was the training on?', inputType: 'text', responseType: 'string' },
+    { id: 14, label: 'Who conducted the training?', inputType: 'text', responseType: 'string' },
+    { id: 15, label: 'Who attended the training?', inputType: 'text', responseType: 'string' },
+    { id: 16, label: 'How will the training benefit HCBH and its staff?', inputType: 'text', responseType: 'string' }
+  ]);
+}
+
+async function insertEquipmentReceivedQuestions(knex: Knex): Promise<void> {
+  await knex('CaseStudyQuestion').insert([
+    { id: 17, label: 'What equipment was received?', inputType: 'text', responseType: 'string' },
+    { id: 18, label: 'What department recevied the equipment?', inputType: 'text', responseType: 'string' },
+    { id: 19, label: 'Who was the equipment from?', inputType: 'text', responseType: 'string' },
+    { id: 20, label: 'Was the equipment donated or purchased?', inputType: 'text', responseType: 'string' },
+    { id: 21, label: 'What does this new equipment do?', inputType: 'text', responseType: 'string' }
+  ]);
+}
