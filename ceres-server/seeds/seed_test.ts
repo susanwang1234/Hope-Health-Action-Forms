@@ -5,9 +5,11 @@ import { insertTestRehabDepartmentQuestions } from './inserts-test/insert_test_r
 import { insertTestNICUPaedsDepartmentQuestions } from './inserts-test/insert_test_nicupaeds_department_questions';
 import { insertTestRoles } from './inserts-test/insert_test_roles';
 import { insertTestUsers } from './inserts-test/insert_test_users';
+import { insertTestCaseStudyTypes } from './inserts-test/insert_test_case_study_types';
 
 export async function seed(knex: Knex): Promise<void> {
   // Delete all existing entries, keeping in mind of foreign key constraints
+  await knex('CaseStudyType').del();
   await knex('Dummies').del();
   await knex('Rehab_Report').del();
   await knex('User').del();
@@ -23,4 +25,5 @@ export async function seed(knex: Knex): Promise<void> {
   await insertTestNICUPaedsDepartmentQuestions(knex);
   await insertTestRoles(knex);
   await insertTestUsers(knex);
+  await insertTestCaseStudyTypes(knex);
 }
