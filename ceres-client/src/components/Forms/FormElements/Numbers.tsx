@@ -39,32 +39,28 @@ const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_v
 
   return (
     <div>
-      <Row>
-          <Form.Label column lg={2}>
-            {heading}
-          </Form.Label>
-        <Col>
-          <Form.Control
-            className={numberClassName}
-            size="sm"
-            type="number"
-            id="number-entry"
-            name="number-entry"
-            min="0"
-            max="9999999999"
-            maxLength={10}
-            placeholder={my_field_placeholder ? my_field_placeholder : ''}
-            value={parseInt(my_field_value, 10)}
-            onInput={(event: any) => {
-              let onInputEvent = event.target;
-              if (onInputEvent.maxLength < onInputEvent.value.length) {
-                onInputEvent.value = onInputEvent.value.slice(0, onInputEvent.maxLength);
-              }
-              handleChange(my_field_id, event);
-            }}
-          />
-        </Col>
-      </Row>
+        <Form.Label column lg={2}>
+          {heading}
+        </Form.Label>
+        <Form.Control
+          className={numberClassName}
+          size="sm"
+          type="number"
+          id="number-entry"
+          name="number-entry"
+          min="0"
+          max="9999999999"
+          maxLength={10}
+          placeholder={my_field_placeholder ? my_field_placeholder : ''}
+          value={parseInt(my_field_value, 10)}
+          onInput={(event: any) => {
+            let onInputEvent = event.target;
+            if (onInputEvent.maxLength < onInputEvent.value.length) {
+              onInputEvent.value = onInputEvent.value.slice(0, onInputEvent.maxLength);
+            }
+            handleChange(my_field_id, event);
+          }}
+        />
       <br />
     </div>
   );

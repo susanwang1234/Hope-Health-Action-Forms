@@ -8,6 +8,7 @@ import Element from './Elements';
 import { FormContext } from './FormContext';
 
 import JSONfile from './jsonForms/rehabForm.json';
+import '../../App.css';
 
 // console.log('JSONfile', JSONfile);
 
@@ -56,25 +57,46 @@ function Forms() {
     console.log(elements);
   };
 
+
+  const getMonthAndTitle: any = (part_of_title: any) => {
+    //Citation: https://www.w3schools.com/jsref/jsref_getmonth.asp
+    const month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    const month_index = new Date().getMonth();
+    let nameOfMonth = month[month_index];
+    return nameOfMonth + " " + part_of_title;
+  };
+
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
         <Navbar />
         <div>
           <div className="blocks-form">
-            <Form.Label column="lg">{page_label}</Form.Label>
+            <Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label>
             <Form>
               {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
-              <div className="button-form">
-                <Button variant="primary" onClick={(e) => handleSave(e)}>
-                  Save
-                </Button>{' '}
-              </div>
+                <button className="view-submit-form-button" onClick={(e) => handleSave(e)}>
+                  Submit
+                </button>
             </Form>
           </div>
         </div>
       </main>
     </FormContext.Provider>
+    
   );
 }
 
