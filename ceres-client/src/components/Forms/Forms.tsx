@@ -6,9 +6,9 @@ import { Button, Form, Row, Col, Nav } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Element from './Elements';
 import { FormContext } from './FormContext';
-
 import JSONfile from './jsonForms/rehabForm.json';
 import '../../App.css';
+import ToggleSwitch from './ToggleSwitch'
 
 // console.log('JSONfile', JSONfile);
 
@@ -83,6 +83,9 @@ function Forms() {
     <FormContext.Provider value={{ handleChange }}>
       <main>
         <Navbar />
+        <React.Fragment>
+        <ToggleSwitch label="MSPP Data only" />
+      </React.Fragment>
         <div>
           <div className="blocks-form">
           <div className="title-form"><Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label></div>
@@ -98,6 +101,7 @@ function Forms() {
               </div>
             </Form>
           </div>
+
         </div>
       </main>
     </FormContext.Provider>
