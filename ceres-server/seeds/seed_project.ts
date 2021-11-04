@@ -10,13 +10,17 @@ import { insertDummies } from './inserts/insert_dummies';
 
 export async function seed(knex: Knex): Promise<void> {
   // Delete all existing entries, keeping in mind of foreign key constraints
-  await knex('Dummies').del();
-  await knex('Rehab_Report').del();
-  await knex('User').del();
-  await knex('Role').del();
-  await knex('DepartmentQuestion').del();
-  await knex('Department').del();
-  await knex('Question').del();
+  await knex.raw('SET FOREIGN_KEY_CHECKS=0;');
+  await knex('Dummies').truncate();
+  await knex('Rehab_Report').truncate();
+  await knex('User').truncate();
+  await knex('Role').truncate();
+  await knex('FormResponse').truncate();
+  await knex('Form').truncate();
+  await knex('DepartmentQuestion').truncate();
+  await knex('Department').truncate();
+  await knex('Question').truncate();
+  await knex.raw('SET FOREIGN_KEY_CHECKS=1;');
 
   // Insert seed entries
   await insertQuestions(knex);
