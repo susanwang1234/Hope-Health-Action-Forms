@@ -59,34 +59,30 @@ function Departments() {
   //Purpose of slice is so that "all departments" does not get generate into a card
   return (
     <div className="background">
-      <div className="headerbar">
+      <header>
         <img src={logo} className="department-logo"></img>
-        <button type="submit" onClick={() => onClick(1, '/')} className="logout-button">
-          Log Out
-        </button>
-        <button type="submit" className="admin-button">
-          Admin Options
-        </button>
-      </div>
-      <div className="card-container">
-        <div className="cards">
-          {departmentState.departments.slice(1).map((department: any, index: any) => {
-            return (
-              <div className="individual-card">
-                <div className="inside-card">
-                  <h2>
-                    <b>{department.name}</b>
-                  </h2>
-                  <div className="text">{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</div>
-                  <div className="text">{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</div>
-                  <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
-                    View Department
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+      </header>
+      <button type="submit" onClick={() => onClick(1, '/')} className="logout-button">
+        Log Out
+      </button>
+      <button type="submit" className="admin-button">
+        Admin Options
+      </button>
+      <div className="cards">
+        {departmentState.departments.slice(1).map((department: any, index: any) => {
+          return (
+            <div className="individual-card">
+              <h2>
+                <b>{department.name}</b>
+              </h2>
+              <p>{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</p>
+              <p>{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</p>
+              <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
+                View Department
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

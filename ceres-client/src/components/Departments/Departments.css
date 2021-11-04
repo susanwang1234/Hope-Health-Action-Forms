@@ -7,9 +7,6 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   height: 100%;
   min-height: 100vh;
 }
-.card-container {
-  padding: auto;
-}
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -28,12 +25,12 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-.inside-card{
+h2{
   font-family: Arial;
   font-size: 30px;
   text-align: center;
 }
-.text{
+p{
   font-family: Arial;
   font-size: 25px;
   text-align: left;
@@ -41,7 +38,7 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   position: relative;
   margin-left: 12px;
 }
-.headerbar {
+header{
   list-style-type: none;
   padding: 10px 10px;
   background-color: rgb(255, 255, 255);
@@ -69,7 +66,7 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   border-color: #d6d6d6;
   width: 100px;
   position: absolute;
-  top: 30%;
+  top: 20px;
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
@@ -86,7 +83,7 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   border-color: #d6d6d6;
   width: 150px;
   position: absolute;
-  top: 120%;
+  top: 80px;
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
