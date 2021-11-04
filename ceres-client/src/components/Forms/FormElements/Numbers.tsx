@@ -10,12 +10,25 @@ const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_v
   const { handleChange }: any = useContext(FormContext);
 
   let heading: any = { my_field_label };
+  
   if (my_field_mandatory === true) {
     heading = (
       <>
         {my_field_label} <div className="required">(Required)</div>
       </>
     );
+  }
+  else {
+    heading = (
+    <>
+      {my_field_label}
+    </>
+    );
+  }
+
+  let numberClassName = "width-20-percent";
+  if(my_field_value === null && my_field_mandatory == true){
+    numberClassName = numberClassName + " field-invalid-border"
   }
 
   return (
@@ -26,7 +39,7 @@ const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_v
         </Form.Label>
         <Col>
           <Form.Control
-            className="width-20-percent"
+            className={numberClassName}
             size="sm"
             type="number"
             id="number-entry"

@@ -1,30 +1,32 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
-import { departmentFormError } from 'test/testTools/errorMessages';
+import { departmentNegativeOrNanInputError, departmentDNEError } from 'shared/errorMessages';
+import { isInvalidInput } from './requestTemplates/isInvalidInput';
 
-const NAMESPACE = 'Department Form';
+const NAMESPACE = 'Department Form Control';
+const TABLE_NAME = 'Department Form';
 
 const getDepartmentFormById = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, 'FETCHING DEPARTMENT FORM');
+  logging.info(NAMESPACE, `GETTING A ${TABLE_NAME.toUpperCase} BY ID`);
   const departmentId: number = +req.params.id;
-  if (!departmentId || departmentId < 0) {
-    res.status(400).send({ error: 'Incorrect usage for /departmentForm/:id , id must be a positive integer' });
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
     return;
   }
 
   try {
-    const questions = await Knex.select('Department.*', 'Question.*', 'DepartmentQuestion.*')
+    const retrievedQuestions = await Knex.select('Department.*', 'Question.*', 'DepartmentQuestion.*')
       .from('DepartmentQuestion')
       .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
       .join('Department', 'DepartmentQuestion.departmentId', '=', 'Department.id')
       .where('Department.id', departmentId);
-    logging.info(NAMESPACE, `FETCHED DEPARTMENT FORM FOR DEPARTMENT ${departmentId}`, questions);
-    if (!questions.length) {
-      res.status(404).send(departmentFormError);
+    logging.info(NAMESPACE, `GOT ${TABLE_NAME.toUpperCase} FOR DEPARTMENT ${departmentId}`, retrievedQuestions);
+    if (!retrievedQuestions.length) {
+      res.status(404).send(departmentDNEError);
       return;
     }
-    res.send(questions);
+    res.send(retrievedQuestions);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
     res.status(500).send(error);
