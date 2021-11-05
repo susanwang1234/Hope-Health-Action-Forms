@@ -420,6 +420,39 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Form",
+      "item": [
+        {
+          "name": "GET forms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/form/:departmentId",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form", ":id"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST form",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/form",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form"]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
