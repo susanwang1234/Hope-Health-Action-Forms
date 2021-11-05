@@ -1,5 +1,4 @@
-import './CaseStudy.css';
-import Navbar from '../Navbar/Navbar';
+import './CaseStudySubmit.css';
 import { useHistory } from 'react-router-dom';
 import React, { useContext } from 'react';
 import { UserContext } from '../../UserContext';
