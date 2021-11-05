@@ -1,4 +1,3 @@
-import { type, userInfo } from 'os';
 import React, { useState, createContext } from 'react';
 
 export type AuthUser = {

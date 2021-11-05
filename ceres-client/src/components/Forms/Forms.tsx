@@ -59,7 +59,6 @@ function Forms() {
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
-        <Navbar />
         <div>
           <div className="blocks-form">
             <Form.Label column="lg">{page_label}</Form.Label>
