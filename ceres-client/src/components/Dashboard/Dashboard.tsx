@@ -1,8 +1,7 @@
 import '../../App.css';
 import './Dashboard.css';
-import Navbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';

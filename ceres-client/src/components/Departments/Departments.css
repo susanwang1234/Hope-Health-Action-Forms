@@ -25,12 +25,12 @@ Citation: https://www.w3schools.com/css/tryit.asp?filename=trycss_navbar_horizon
   position: relative;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-h2 {
+.inside-card {
   font-family: Arial;
   font-size: 30px;
   text-align: center;
 }
-p {
+.inside-text {
   font-family: Arial;
   font-size: 25px;
   text-align: left;
@@ -38,7 +38,7 @@ p {
   position: relative;
   margin-left: 12px;
 }
-header {
+.department-header {
   list-style-type: none;
   padding: 10px 10px;
   background-color: rgb(255, 255, 255);

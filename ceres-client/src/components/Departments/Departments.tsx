@@ -59,7 +59,7 @@ function Departments() {
   //Purpose of slice is so that "all departments" does not get generate into a card
   return (
     <div className="background">
-      <header>
+      <header className="department-header">
         <img src={logo} alt="Department Logo" className="department-logo"></img>
       </header>
       <button type="submit" onClick={() => onClick(1, '/')} className="logout-button">
@@ -72,11 +72,11 @@ function Departments() {
         {departmentState.departments.slice(1).map((department: any, index: any) => {
           return (
             <div className="individual-card">
-              <h2>
+              <h2 className="inside-card">
                 <b>{department.name}</b>
               </h2>
-              <p>{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</p>
-              <p>{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</p>
+              <p className="inside-text">{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</p>
+              <p className="inside-text">{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</p>
               <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
                 View Department
               </button>
