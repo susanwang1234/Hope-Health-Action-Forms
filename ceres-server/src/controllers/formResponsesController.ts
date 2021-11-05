@@ -24,11 +24,11 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
       .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
       .where('formId', formId);
     logging.info(NAMESPACE, `GOT FORM RESPONSES FOR FORM ${formId}`, retrievedResponses);
-    res.send(retrievedResponses);
     if (!retrievedResponses.length) {
       res.status(404).send(formDNEError);
       return;
     }
+    res.send(retrievedResponses);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
     res.status(500).send(error);
