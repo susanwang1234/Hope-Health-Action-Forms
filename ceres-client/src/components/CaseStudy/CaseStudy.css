@@ -16,7 +16,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .headerbar {
   list-style-type: none;
   padding: 10px 10px;
@@ -26,14 +25,14 @@
   width: 100%;
 }
 
-.department_logo{
+.department_logo {
   height: 35px;
   width: 140px;
   margin: 6px;
   margin-left: 10px;
 }
 
-.logout_button{
+.logout_button {
   background-color: rgb(245, 245, 245);
   font-family: Arial;
   color: rgb(0, 0, 0);
@@ -50,7 +49,3 @@
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
-
-
-
-
