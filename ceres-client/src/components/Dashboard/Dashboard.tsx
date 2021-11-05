@@ -25,8 +25,7 @@ const Dashboard = () => {
     
     <div className='App'>
       
-      <style>{'body { background-color: #f1f0f1; }'}</style>
-      <header>
+      <header className="nav-header">
         <GiHamburgerMenu onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt='Logo' className='logo'/>
       </header>

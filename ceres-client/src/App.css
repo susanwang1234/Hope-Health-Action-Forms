@@ -14,14 +14,13 @@ body {
   color: #efeaea;
 }
 
-header {
+.nav-header {
   /* Nav bar */
   padding: 20px;
   background: #ffffff;
   color: #91908e; 
   height: auto;
   display:flex;
-  
 }
 
 header svg {

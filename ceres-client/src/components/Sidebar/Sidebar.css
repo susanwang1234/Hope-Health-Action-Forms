@@ -18,7 +18,7 @@
   left: 0;
 }
 
-.sideLink {
+.side-link {
   /* Links to other pages */
   color: #91908e !important;
   padding-left: 0px !important;
@@ -27,7 +27,7 @@
   align-items: center !important;
 }
 
-.dropLink {
+.drop-link {
     /* Links that descend from a dropdown button */
     color: #91908e;
     padding-left: 40px;
@@ -42,7 +42,7 @@ ul lu a.active {
   color: #555555;
 }
 
-.sideButton {
+.side-button {
   /* Dropdown button */
   background: white !important;
   color: #91908e !important;
@@ -57,14 +57,14 @@ ul lu a.active {
   align-items: center !important;
 }
 
-.sideButton:focus {
+.side-button:focus {
   background-color: white !important;
   color: #555555 !important;
   box-shadow: none !important;
   display: flex !important;
 }
 
-.sideButton:hover {
+.side-button:hover {
   background: #e7e7e7 !important;
   color: #555555 !important;
   box-shadow: none !important;
