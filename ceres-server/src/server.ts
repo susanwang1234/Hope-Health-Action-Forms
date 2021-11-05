@@ -4,6 +4,7 @@ import cors from 'cors';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
+import authenticationRoutes from './routes/authenticationRoute';
 import dashboardRoutes from './routes/dashboardRoute';
 import departmentRoutes from './routes/departmentRoute';
 import dummyRoutes from './routes/dummyRoute';
@@ -80,6 +81,7 @@ export function enableRoutes(router: Application) {
   router.use('', dashboardRoutes);
   router.use('/department', departmentRoutes);
   router.use('/dummy', dummyRoutes);
+  router.use('/auth', authenticationRoutes);
   router.use('/rehab-report', rehabReportRoutes);
   router.use('/department-form', departmentFormRoutes);
   router.use('/role', roleRoutes);

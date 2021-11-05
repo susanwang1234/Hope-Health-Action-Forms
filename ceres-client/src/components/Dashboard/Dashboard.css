@@ -2,14 +2,10 @@
 /*Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position*/
 /*Citation: https://www.w3schools.com/css/css3_buttons.asp*/
 
-dashboard {
-  background: #f3f4f6;
-  grid-area: main;
-  overflow-y: auto;
-}
-
 .dashboard-container {
   padding: 20px 35px;
+  display: flex;
+  flex: 0;
 }
 
 .dashboard-title {
@@ -36,7 +32,7 @@ dashboard {
 }
 
 .dashboard-cards {
-  display: grid;
+  display:flex;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
   margin: 20px 0;
@@ -60,42 +56,6 @@ dashboard {
   align-items: center;
   justify-content: space-between;
   
-}
-
-.card1 {
-  background: #d1ecf1;
-  color: #35a4ba;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.card2 {
-  background: #d2f9ee;
-  color: #38e1b0;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.card3 {
-  background: #d6d8d9;
-  color: #3a3e41;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.card4 {
-  background: #fddcdf;
-  color: #f65a6f;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
 }
 
 .add-button{
