@@ -8,7 +8,7 @@ import { Department } from 'db/models/departmentModel';
 export const getItems = async (req: Request, res: Response, next: NextFunction, NAMESPACE: string, TABLE_NAME: string) => {
   logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase}`);
   try {
-    let items: User[] | Role[] | Department[] = await Knex.select('*').from(TABLE_NAME);
+    const items: User[] | Role[] | Department[] = await Knex.select('*').from(TABLE_NAME);
     logging.info(NAMESPACE, `Retrieved ${TABLE_NAME.toUpperCase}:`, items);
     res.status(200).send(items);
   } catch (error: any) {

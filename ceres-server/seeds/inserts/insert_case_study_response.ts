@@ -14,6 +14,6 @@ export async function insertCaseStudyResponse(knex: Knex): Promise<void> {
   await knex('CaseStudyResponse').insert([{ id: 11, caseStudyTypeQuestionId: 11, caseStudyId: 2, response: 'Long enough' }]);
   await knex('CaseStudyResponse').insert([{ id: 12, caseStudyTypeQuestionId: 12, caseStudyId: 2, response: 'I like to help people' }]);
   await knex('CaseStudyResponse').insert([
-    { id: 13, caseStudyTypeQuestionId: 7, caseStudyId: 2, response: 'Staff01 is a nurse from the Rehab Department. She has been working there for "long enough"' }
+    { id: 13, caseStudyTypeQuestionId: 13, caseStudyId: 2, response: 'Staff01 is a nurse from the Rehab Department. She has been working there for long enough' }
   ]);
 }

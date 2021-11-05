@@ -8,7 +8,11 @@ const TABLE_NAME = 'Case Studies';
 const getCaseStudies = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase}`);
   try {
-    let retrievedCaseStudies = await Knex.select('*').from(TABLE_NAME);
+    const retrievedCaseStudies = await Knex.select('CaseStudy.*', 'CaseStudyResponse.response')
+      .from('CaseStudy')
+      .join('CaseStudyResponse', 'CaseStudy.id', '=', 'CaseStudyResponse.caseStudyId')
+      .join('CaseStudyTypeQuestion', 'CaseStudyResponse.caseStudyTypeQuestionId', '=', 'CaseStudyTypeQuestion.id')
+      .where('CaseStudyTypeQuestion.caseStudyQuestionId', '=', '7');
     logging.info(NAMESPACE, `Retrieved ${TABLE_NAME.toUpperCase}:`, retrievedCaseStudies);
     res.status(200).send(retrievedCaseStudies);
   } catch (error: any) {
