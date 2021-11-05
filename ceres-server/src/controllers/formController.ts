@@ -19,4 +19,22 @@ const createNewForm = async (req: Request, res: Response, next: NextFunction) =>
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
 };
 
-export default { createNewForm };
+const getAllFormsByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
+  logging.info(NAMESPACE, 'GETTING LIST OF FORMS FOR A CERTAIN DEPARTMENT');
+  const departmentId: number = +req.params.departmentId;
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+
+  try {
+    const forms = await Knex.select('*').from('Form').where('departmentId', '=', departmentId);
+    logging.info(NAMESPACE, `Got forms for department ${departmentId}`, forms);
+    res.status(200).send(forms);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error.message);
+  }
+};
+
+export default { createNewForm, getAllFormsByDepartmentId };
