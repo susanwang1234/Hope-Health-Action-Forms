@@ -9,6 +9,7 @@ import departmentRoutes from './routes/departmentRoute';
 import dummyRoutes from './routes/dummyRoute';
 import rehabReportRoutes from './routes/rehabReportRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
+import caseStudiesRoutes from './routes/caseStudiesRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
 import routes from './routes/indexRoute';
@@ -83,6 +84,7 @@ export function enableRoutes(router: Application) {
   router.use('/department-form', departmentFormRoutes);
   router.use('/role', roleRoutes);
   router.use('/user', userRoutes);
+  router.use('/case-studies', caseStudiesRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

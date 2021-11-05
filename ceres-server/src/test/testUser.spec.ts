@@ -310,41 +310,41 @@ describe('testDeleteUserSuccess', () => {
 
 validateUserPropertiesAndFields('testValidateDeleteUserSuccess', 'Validate there are 2 rows of properties', 'Validate there are 2 rows of fields');
 
-// Test 7: DELETE request (All users, Success)
-describe('testDeleteUsersSuccess', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
-  });
-  after('Close a working server', () => {
-    httpServer.close();
-  });
-  it('Validate error code for deleted user', (done) => {
-    chai
-      .request(testApp)
-      .delete('/user')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(204);
-        done();
-      });
-  });
-  it('Validate there are no users left', (done) => {
-    chai
-      .request(testApp)
-      .get('/user')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('array').with.lengthOf(0);
-        done();
-      });
-  });
-});
+// // Test 7: DELETE request (All users, Success)
+// describe('testDeleteUsersSuccess', () => {
+//   let testApp: Application;
+//   let httpServer: http.Server;
+//   before('Create a working server', () => {
+//     testApp = createServer();
+//     sendFirstRequest(testApp);
+//     enableLogging(testApp, 'Test Server');
+//     enableRoutes(testApp);
+//     enableErrorHandling(testApp);
+//     httpServer = http.createServer(testApp);
+//     httpServer.listen(PORT);
+//   });
+//   after('Close a working server', () => {
+//     httpServer.close();
+//   });
+//   it('Validate error code for deleted user', (done) => {
+//     chai
+//       .request(testApp)
+//       .delete('/user')
+//       .end((err: any, res: any) => {
+//         expect(err).to.be.null;
+//         expect(res).to.have.status(204);
+//         done();
+//       });
+//   });
+//   it('Validate there are no users left', (done) => {
+//     chai
+//       .request(testApp)
+//       .get('/user')
+//       .end((err: any, res: any) => {
+//         expect(err).to.be.null;
+//         expect(res).to.have.status(200);
+//         expect(res.body).to.be.an('array').with.lengthOf(0);
+//         done();
+//       });
+//   });
+// });
