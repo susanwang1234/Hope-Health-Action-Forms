@@ -25,7 +25,7 @@
   border-radius: 0.25rem;
 }
 
-.grey-blocks-form {
+.blocks-form {
   padding: 10px;
   margin-right: auto;
   margin-left: auto;
@@ -53,6 +53,10 @@
 
 .width-20-percent {
   width: 20% !important;
+}
+
+.field-invalid-border {
+  box-shadow: 0px 0px 2px 2px red;  
 }
 
 .button-form {

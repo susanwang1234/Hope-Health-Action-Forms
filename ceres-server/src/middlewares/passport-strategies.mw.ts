@@ -1,60 +1,42 @@
-import * as userModel from '../db/models/user';
-import { User as myUser } from '../db/types/user';
+import { User as myUser } from '../db/types/userType';
 import passport from 'passport';
-import * as PassportLocal from 'passport-local';
 import PassportJWT from 'passport-jwt';
-import bcrypt from 'bcryptjs';
-import { Payload } from '../types';
 import config from '../config/config';
+import logging from '../config/logging';
+import { Knex } from '../db/mysql';
+import { Request } from 'express';
+import userModel from '../db/models/userModel';
 
-passport.serializeUser((user: myUser, done) => {
-  if (user.pwd) {
-    delete user.pwd; // immediately delete from object incase of incorrect usage
+const NAMESPACE = 'PASSPORT MIDDLEWARE';
+
+const cookieExtractor = (req: Request) => {
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies['access_token'];
   }
-  done(null, user);
+  return token;
+};
+
+const jwtOptions = {
+  jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: config.jwt.secret
+};
+
+const strategyAll = new PassportJWT.Strategy(jwtOptions, async (payload, done) => {
+  logging.info(NAMESPACE, 'jwt verification: incoming payload', payload);
+  const id = payload.sub;
+
+  try {
+    const user: myUser = await userModel.findOne('User.id', id);
+
+    if (!user) {
+      return done(null, false);
+    } else {
+      user.password && delete user.password; // delete so that password is not propagated
+      return done(null, user);
+    }
+  } catch (error) {
+    done(error, false);
+  }
 });
-passport.deserializeUser((user: myUser, done) => done(null, user));
-
-passport.use(
-  new PassportLocal.Strategy({}, async (username, password, done) => {
-    try {
-      userModel.findOne(username, async (err: Error, user: myUser) => {
-        if (err) {
-          throw new Error('error from user query');
-        }
-
-        if (user === undefined) {
-          done(null, false);
-          return;
-        }
-
-        const isMatch = user.pwd === undefined ? false : await bcrypt.compare(password, user.pwd);
-
-        if (isMatch) {
-          delete user.pwd; // immediately remove password incase of incorrect jwt usage
-          done(null, user);
-        } else {
-          done(null, false);
-        }
-      });
-    } catch (error) {
-      done(null, false);
-    }
-  })
-);
-
-passport.use(
-  new PassportJWT.Strategy(
-    {
-      jwtFromRequest: PassportJWT.ExtractJwt.fromAuthHeaderAsBearerToken(),
-      secretOrKey: config.jwt.secret
-    },
-    (payload: Payload, done) => {
-      try {
-        done(null, payload);
-      } catch (error) {
-        done(error);
-      }
-    }
-  )
-);
+passport.use('authAll', strategyAll);

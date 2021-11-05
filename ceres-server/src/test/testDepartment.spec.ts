@@ -7,6 +7,10 @@ const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
+let id = 0;
+
+const departments = ['All Departments', 'Rehab', 'NICUPaeds'];
+
 // Test 1: GET request
 describe('testGetDepartmentSuccess', () => {
   let testApp: Application;
@@ -44,10 +48,10 @@ describe('testGetDepartmentSuccess', () => {
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
-        expect(res.body[0].id).to.deep.equal(1);
-        expect(res.body[0].name).to.deep.equal('Rehab');
-        expect(res.body[1].id).to.deep.equal(2);
-        expect(res.body[1].name).to.deep.equal('NICUPaeds');
+        res.body.forEach((item: any) => {
+          expect(item.id).to.deep.equal(++id);
+          expect(item.name).to.deep.equal(departments[id - 1]);
+        });
         done();
       });
   });
