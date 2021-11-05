@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "ed3d8061-ddae-464b-b35c-dacc12ebab98",
+    "_postman_id": "497a541a-7df7-408c-a851-46c439f63ed6",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -51,6 +51,45 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["api", "secrets"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Case Studies",
+      "item": [
+        {
+          "name": "GET case studies",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/case-studies",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-studies"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get a case study",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/case-studies/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-studies", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
             }
           },
           "response": []
