@@ -60,7 +60,7 @@ function Departments() {
   return (
     <div className="background">
       <header>
-        <img src={logo} className="department-logo"></img>
+        <img src={logo} alt="Department Logo" className="department-logo"></img>
       </header>
       <button type="submit" onClick={() => onClick(1, '/')} className="logout-button">
         Log Out
