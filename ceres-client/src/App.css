@@ -23,7 +23,7 @@ body {
   display:flex;
 }
 
-header svg {
+.svg-hamburger {
   /* Hamburger */
   font-size: 30px;
   cursor: pointer;
