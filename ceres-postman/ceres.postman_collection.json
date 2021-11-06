@@ -93,6 +93,122 @@
             }
           },
           "response": []
+        },
+        {
+          "name": "GET case study types",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/case-study-types",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-study-types"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET case study questions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/case-study-questions/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-study-questions", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Default",
+      "item": [
+        {
+          "name": "GET homepage message",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": [""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Department",
+      "item": [
+        {
+          "name": "GET departments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/department",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["department"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "DepartmentForm",
+      "item": [
+        {
+          "name": "GET department forms",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/department-form/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["department-form", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Role",
+      "item": [
+        {
+          "name": "GET roles",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/role",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["role"]
+            }
+          },
+          "response": []
         }
       ]
     },
@@ -195,88 +311,6 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["user"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Role",
-      "item": [
-        {
-          "name": "GET roles",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/role",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["role"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Department",
-      "item": [
-        {
-          "name": "GET departments",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "DepartmentForm",
-      "item": [
-        {
-          "name": "GET department forms",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department-form/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department-form", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Default",
-      "item": [
-        {
-          "name": "GET homepage message",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": [""]
             }
           },
           "response": []
