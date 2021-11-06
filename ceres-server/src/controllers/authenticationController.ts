@@ -3,6 +3,7 @@ import { User as myUser } from '../db/types/userType';
 import logging from '../config/logging';
 import authUtil from '../utils/authHelper';
 import userModel from 'db/models/userModel';
+import config from '../config/config';
 
 const NAMESPACE = 'Authentication';
 
@@ -24,14 +25,20 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
       if (isValid) {
         delete user.password;
         const tokenObject = authUtil.issueJWT(user);
-        res.cookie('jwt', tokenObject.token, { httpOnly: true, sameSite: true });
-        return res.status(200).json({ isAuthenticated: true, user: user });
+        const cookieName = 'jwt';
+
+        if (config.environement.nodeEnvironment === 'production') {
+          res.cookie(cookieName, tokenObject.token, { httpOnly: true, sameSite: 'none' });
+        } else {
+          res.cookie(cookieName, tokenObject.token, { httpOnly: true, sameSite: true });
+        }
+        return res.status(200).json({ isAuthenticated: true, user: user, msg: 'success' });
       }
     }
     return res.status(401).json({ isAuthenticated: false, msg: 'Entered incorrect username or password' });
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
-    res.status(500).json({ message: 'Server error from login' });
+    res.status(500).json({ isAuthenticated: false, message: 'Server error from login' });
   }
 };
 

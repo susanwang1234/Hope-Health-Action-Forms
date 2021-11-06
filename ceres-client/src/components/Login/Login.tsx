@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import Logo from './../../images/Logo.png';
 import display from './../../images/CBR_training_March 21.png';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import { useEffect } from 'react';
-import http from '../../services/httpService';
+import authService from '../../services/authService';
 
 interface FormData {
   username: string;
@@ -14,8 +14,21 @@ interface FormData {
   remember: boolean;
 }
 
+const logout = async () => {
+  try {
+    const response = await authService.logout();
+    console.log(response.data);
+  } catch (error: any) {
+    console.log(error);
+  }
+};
+
 function Login() {
   let history = useHistory();
+
+  const [user, setUser] = useState(null);
+  const [message, setMessage] = useState(null);
+  const userContext = useContext(UserContext);
 
   const {
     register,
@@ -23,27 +36,27 @@ function Login() {
     formState: { errors }
   } = useForm<FormData>({ mode: 'onChange' });
 
+  const postLogin = async (loginUser: any) => {
+    const data = await authService.login(loginUser);
+    const { isAuthenticated } = data;
+    if (isAuthenticated) {
+      // history.push('/dashboard');
+    } else {
+      const { msg } = data;
+      // do something with error message
+    }
+  };
+
   const onSubmit = handleSubmit(({ username, password, remember }) => {
     const user = {
       username,
       password
     };
 
-    const postLogin = async (user: any) => {
-      try {
-        const url = '/auth/login';
-        const response = await http.post(url, user);
-        const { data } = response;
-        history.push('/dashboard');
-      } catch (error: any) {
-        console.log(error.response);
-      }
-    };
+    // Todo: validate user
 
     postLogin(user);
   });
-
-  const userContext = useContext(UserContext);
 
   useEffect(() => {
     if (userContext) {
