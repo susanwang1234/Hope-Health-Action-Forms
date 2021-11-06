@@ -15,12 +15,6 @@ const ReportElement = (props: any) => {
 }
 export default ReportElement;
 
-function makeDateShort(date: string) : string{
-  if(date.length > 10){
-    const subDate = date.substring(0, 10) 
-    return subDate;
-  }
-  else{
-    return date;
-  }
+function makeDateShort(date: string): string {
+  return date.length > 10 ? date.substring(0, 10) : date;
 }

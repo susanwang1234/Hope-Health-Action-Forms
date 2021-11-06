@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import './dataPage.css';
-import ReportElement from '../ReportElement';
-import ReportData from '../ReportData';
+import './DataPage.css';
+import ReportElement from './ReportElement';
+import ReportData from './ReportData';
 import NavBar from '../../components/Navbar/Navbar';
 
 
