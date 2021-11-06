@@ -1,8 +1,8 @@
-import '../App.css';
+import '../../App.css';
 
 const ReportData = (props: any) =>{
 
-  const updateButton = <button className="update-button ">Update data</button>
+  const updateButton = <button form="daForm" className="update-button">Update data</button>
   const cancelButton = <button className="cancel-button" onClick={() => props.setEditStatus(false)}>Cancel</button>
   const editButton = <button className=" edit-button" onClick={() => props.setEditStatus(true)}>Edit</button>
   if (props.data === null) {
@@ -23,7 +23,7 @@ const ReportData = (props: any) =>{
           <p className="px-3 text-gray-500">report ID: {props.data.id}</p>
         </div>
         <p className="mx-3 font-bold text-center">form for department X date Y</p>
-        <form className="displaying-form-elements">
+        <form id={"daForm"} className="displaying-form-elements" onSubmit={props.submitFunc}>
           {pairs.map((pair: string[], index: number) => (
             (pair[0] !== "id" && pair[0] !== "curr_date") && 
             <div>

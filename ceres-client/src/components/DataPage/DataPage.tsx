@@ -7,8 +7,10 @@ import NavBar from '../../components/Navbar/Navbar';
 
 
 
+
 const DataPage = () => {
       const [isLoaded, setIsLoaded] = useState(false);
+      const [empltyFields, setEmptyFields] = useState<number[]>([]);
       const [reports, setReports] = useState([
         {
         "id": 2,
@@ -91,6 +93,32 @@ const DataPage = () => {
       setEditStatus(value);
     }
 
+    const markEmptyfields = (dataObj: any): void => {
+      const empltyFildsIndexes : number[] = [];
+      const values = Object.values(dataObj);
+      for(let i = 0; i <values.length; i++){
+        if(values[i] === ""){
+          empltyFildsIndexes.push(i);
+        }
+      }
+      setEmptyFields(empltyFildsIndexes);
+      empltyFildsIndexes.map((i) => console.log(i));
+    }
+      
+
+    const handleSubmission = (event: Event) =>{
+      console.log("submit");
+      if (validateEntries(displayingData)) {
+        makeFieldsNumerical(displayingData);
+
+        //send them
+      }
+      else{
+      markEmptyfields(displayingData);
+      alert("All fields are required. please fill them up!");
+      event.preventDefault();
+      }
+    }
     //2
     // useEffect (() => {
     //   const url = 'http://localhost:8080/rehab_report/get/rehab_report';
@@ -138,10 +166,30 @@ const DataPage = () => {
             </ul>
             <button className="button add-report-button text-white w-80">Add Report</button>
           </div>
-          <ReportData changeEntry={changeEntry} data={displayingData} editStatus={editStatus} setEditStatus={switchEditMode} />
+          <ReportData changeEntry={changeEntry} data={displayingData}
+           editStatus={editStatus} setEditStatus={switchEditMode} submitFunc={handleSubmission}/>
         </div>
       </React.Fragment>
     );
   }
 
 export default DataPage;
+
+function makeFieldsNumerical(dataObj: any): void {
+  const values: any[] = Object.values(dataObj);
+  for(let i = 0; i < values.length; i++){
+    values[i] = parseInt(values[i]);
+  }
+  const keys = Object.keys(dataObj)
+  keys.map((key, index) => dataObj[key] = values[index])
+}
+
+function validateEntries(dataObj : any) : boolean{
+  const values = Object.values(dataObj);
+  for(let i = 0; i <values.length; i++){
+    if(values[i] === ""){
+      return false;
+    }
+  }
+  return true
+}

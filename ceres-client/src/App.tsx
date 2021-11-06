@@ -6,9 +6,10 @@ import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudy from './components/CaseStudy/CaseStudy';
 import { UserContextProvider } from './UserContext';
 import Forms from './components/Forms/Forms';
+import SubmitPage from './components/newForm/newFrom'
 
 function App() {
-  return (
+return(
     <Router>
       <Switch>
         <UserContextProvider> 
