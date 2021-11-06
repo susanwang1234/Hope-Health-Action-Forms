@@ -134,7 +134,7 @@ describe('testEditUserFailure', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Throw error code 404 for user with a negative number', (done) => {
+  it('Throw error code 400 for user with a negative number', (done) => {
     chai
       .request(testApp)
       .put('/user/-1')
@@ -256,7 +256,7 @@ describe('testDeleteUserFailure', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Throw error code 404 for user with a negative number', (done) => {
+  it('Throw error code 400 for user with a negative number', (done) => {
     chai
       .request(testApp)
       .delete('/user/-1')
