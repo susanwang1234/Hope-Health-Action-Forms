@@ -192,3 +192,21 @@
 .checkbox:checked + .label .switch {
   right: 0px;
 }
+
+
+
+
+
+
+
+
+
+
+
+.displaying-form-elements{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: 1em;
+  overflow-y: scroll;
+  max-height: 25em;
+}
