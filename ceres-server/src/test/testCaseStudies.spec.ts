@@ -121,11 +121,11 @@ describe('testGetCaseStudySuccess', () => {
   let httpServer: http.Server;
   let count = 0;
   const label = [
-    'Staff name',
-    'Role/Job Title',
+    'Staff name?',
+    'Role/Job Title?',
     'What department does this staff member work in?',
     'How long have they been working at HCBH?',
-    'What do they enjoy most about working at HCBH',
+    'What do they enjoy most about working at HCBH?',
     'Story'
   ];
   const response = ['Name is staff01', 'Nurse', 'Rehab', 'Long enough', 'I like to help people', 'Staff01 is a nurse from the Rehab Department. She has been working there for long enough'];

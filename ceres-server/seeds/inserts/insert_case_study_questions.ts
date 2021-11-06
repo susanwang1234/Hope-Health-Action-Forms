@@ -21,11 +21,11 @@ async function insertQuestionsFromPatientStory(knex: Knex): Promise<void> {
 
 async function insertQuestionsFromStaffRecognition(knex: Knex): Promise<void> {
   await knex('CaseStudyQuestion').insert([
-    { id: 8, label: 'Staff name', inputType: 'text', responseType: 'string' },
-    { id: 9, label: 'Role/Job Title', inputType: 'text', responseType: 'string' },
+    { id: 8, label: 'Staff name?', inputType: 'text', responseType: 'string' },
+    { id: 9, label: 'Role/Job Title?', inputType: 'text', responseType: 'string' },
     { id: 10, label: 'What department does this staff member work in?', inputType: 'text', responseType: 'string' },
     { id: 11, label: 'How long have they been working at HCBH?', inputType: 'text', responseType: 'string' },
-    { id: 12, label: 'What do they enjoy most about working at HCBH', inputType: 'text', responseType: 'string' }
+    { id: 12, label: 'What do they enjoy most about working at HCBH?', inputType: 'text', responseType: 'string' }
   ]);
 }
 
