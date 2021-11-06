@@ -58,7 +58,7 @@ function Departments() {
   }
   //Purpose of slice is so that "all departments" does not get generate into a card
   return (
-    <div className="background">
+    <div className="department-background">
       <header className="department-header">
         <img src={logo} alt="Department Logo" className="department-logo"></img>
       </header>

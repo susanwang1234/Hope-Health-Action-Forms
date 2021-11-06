@@ -1,27 +1,37 @@
 import './CaseStudySubmit.css';
 import { useHistory } from 'react-router-dom';
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import logo from '../../images/navlogo.png';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import Sidebar from '../Sidebar/Sidebar';
 
 import data_dummy from './DummyDataCS.json';
 
-const CaseStudy = () => {
-  let history = useHistory();
-  const onClick = () => {};
-  const userContext = useContext(UserContext);
-
-  console.log('Username (Case Study) is ', userContext.user?.role);
-  console.log('Department (Case Study) is ', userContext.user?.department);
-  return (
-    <div className="w-full h-full flex flex-col">
+/*
       <div className="headerbar">
         <img src={logo} className="department_logo"></img>
         <button type="submit" className="logout_button">
           Log Out
         </button>
       </div>
-      <div className="flex w-full flex-col h-screen justify-center items-center bg-gray-100">
+*/
+const CaseStudySubmit = () => {
+  let history = useHistory();
+  const onClick = () => {};
+  const userContext = useContext(UserContext);
+  const [showNav, setShowNav] = useState(false);
+
+  console.log('Username (Case Study) is ', userContext.user?.role);
+  console.log('Department (Case Study) is ', userContext.user?.department);
+  return (
+    <div className="casestudy-background">
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
+      <Sidebar show={showNav} />
+      <div className="flex w-full flex-col h-screen justify-center items-center">
         <div>abcd</div>
         <div className="flex flex-col w-8/12 shadow-2xl h-8/12 border p-8 bg-white">
           <h1 className="text-center">Current Case Study</h1>
@@ -58,7 +68,7 @@ const CaseStudy = () => {
   );
 };
 
-export default CaseStudy;
+export default CaseStudySubmit;
 
 {
   /* 
