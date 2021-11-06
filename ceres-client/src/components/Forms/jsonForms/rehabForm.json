@@ -1,6 +1,6 @@
 [
   {
-    "page_label": "REHAB MSPP REPORT",
+    "pageLabel": "REHAB MSPP REPORT",
     "fields": [
       {
         "fieldID": "bedsAvailable",
