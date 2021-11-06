@@ -11,7 +11,8 @@ import dummyRoutes from './routes/dummyRoute';
 import rehabReportRoutes from './routes/rehabReportRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
 import caseStudiesRoutes from './routes/caseStudiesRoute';
-import caseStudyTypeRoutes from './routes/caseStudyTypeRoute';
+import caseStudyTypesRoutes from './routes/caseStudyTypesRoute';
+import caseStudyQuestionsRoutes from './routes/caseStudyQuestionsRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
 import routes from './routes/indexRoute';
@@ -88,7 +89,8 @@ export function enableRoutes(router: Application) {
   router.use('/role', roleRoutes);
   router.use('/user', userRoutes);
   router.use('/case-studies', caseStudiesRoutes);
-  router.use('/case-study-types', caseStudyTypeRoutes);
+  router.use('/case-study-types', caseStudyTypesRoutes);
+  router.use('/case-study-questions', caseStudyQuestionsRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

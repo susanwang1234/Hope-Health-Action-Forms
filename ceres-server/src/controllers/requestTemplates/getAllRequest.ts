@@ -7,7 +7,7 @@ import { Department } from 'db/models/departmentModel';
 import { CaseStudyType } from 'db/models/caseStudyTypeModel';
 
 export const getItems = async (req: Request, res: Response, next: NextFunction, NAMESPACE: string, TABLE_NAME: string) => {
-  logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase()}`);
+  logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase()}S`);
   try {
     const items: User[] | Role[] | Department[] | CaseStudyType[] = await Knex.select('*').from(TABLE_NAME);
     logging.info(NAMESPACE, `RETRIEVED ${TABLE_NAME.toUpperCase()}S:`, items);
