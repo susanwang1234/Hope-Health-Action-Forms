@@ -1,8 +1,8 @@
 import React, { useState, createContext } from 'react';
 
 export type AuthUser = {
-  name: string;
-  department: string;
+  role: number;
+  department: number;
 };
 
 type UserContextType = {
