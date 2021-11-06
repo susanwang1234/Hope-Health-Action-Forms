@@ -69,10 +69,10 @@ function Forms() {
     <FormContext.Provider value={{ handleChange }}>
       <main>
         <Navbar />
-        <React.Fragment>
-          <ToggleSwitch label="MSPP Data only" />
-        </React.Fragment>
-        <div>
+        <div className="outer-block">
+          <React.Fragment>
+            <ToggleSwitch label="MSPP Data only" />
+          </React.Fragment>
           <div className="blocks-form">
             <div className="title-form">
               <Form.Label column="lg">{getMonthAndTitle(pageLabel)}</Form.Label>
