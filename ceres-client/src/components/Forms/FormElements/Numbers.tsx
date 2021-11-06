@@ -23,7 +23,7 @@ function createHeading(fieldLabel: any, fieldMandatory: any) {
 }
 
 function getClassName(fieldValue: any, fieldMandatory: any) {
-  let numberClassName = 'width-20-percent';
+  let numberClassName = 'width-40-percent';
   if (fieldValue === null && fieldMandatory == true) {
     numberClassName = numberClassName + ' field-invalid-border';
   }
