@@ -209,7 +209,7 @@ describe('testEditUserSuccess', () => {
   it('Validate edited user properties and fields', (done) => {
     chai
       .request(testApp)
-      .put('/user/1')
+      .put('/user/3')
       .set('content-type', 'application/json')
       .send({
         username: 'hospitalAdmin',
@@ -233,10 +233,10 @@ describe('testEditUserSuccess', () => {
         expect(res.body[0].roleId).to.deep.equal(2);
         done();
       });
-    usernames[0] = 'hospitalAdmin';
-    passwords[0] = '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm';
-    departmentIds[0] = 1;
-    roleIds[0] = 2;
+    usernames[2] = 'hospitalAdmin';
+    passwords[2] = '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm';
+    departmentIds[2] = 1;
+    roleIds[2] = 2;
   });
 });
 
