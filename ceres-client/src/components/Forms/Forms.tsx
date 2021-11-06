@@ -70,15 +70,13 @@ function Forms() {
       <main>
         <Navbar />
         <div className="outer-block">
-          <React.Fragment>
-            <ToggleSwitch label="MSPP Data only" />
-          </React.Fragment>
+          <ToggleSwitch label="MSPP Data only" />
           <div className="blocks-form">
             <div className="title-form">
               <Form.Label column="lg">{getMonthAndTitle(pageLabel)}</Form.Label>
             </div>
             <Form>
-              {fields ? fields.map((field: any, key: any) => <Element key={key} field={field} />) : null}
+              <div className="scroll-box">{fields ? fields.map((field: any, key: any) => <Element key={key} field={field} />) : null}</div>
               <div className="button-form">
                 <button
                   className="view-cancel-form-button"
