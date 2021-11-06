@@ -1,6 +1,6 @@
 import logging from 'config/logging';
 import { Knex } from 'db/mysql';
-import { Request, Response, NextFunction, response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
