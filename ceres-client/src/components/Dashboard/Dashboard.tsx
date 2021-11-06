@@ -1,9 +1,12 @@
+import '../../App.css';
 import './Dashboard.css';
-import Navbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
-import display from './../../images/original_artwork.jpg';
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
+import Sidebar from '../Sidebar/Sidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import logo from '../../images/navlogo.png';
+import display from './../../images/original_artwork.jpg';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
@@ -15,25 +18,39 @@ const Dashboard = () => {
 
   const userContext = useContext(UserContext);
 
-  console.log('Username (Dashboard) is ' , userContext.user?.name)
-  console.log('Department (Dashboard) is ' , userContext.user?.department)
+  console.log('Username (Dashboard) is ', userContext.user?.role);
+  console.log('Department (Dashboard) is ', userContext.user?.department);
+  /*
+leave for later
+  var departmentIndex = userContext.user?.department;
+  function iconChecker(isComplete: boolean){
+  	if(isComplete){
+    	return (
+      	<div className="checkmark-icon">
+        	<div className="checkmark"></div>
+      	</div>
+    	);}
+    	return(
+      	<div className="alert-icon">
+        	<div className="alert"></div>
+      	</div>
+    	);
+	}
+    <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
+		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
+  */
+  const [showNav, setShowNav] = useState(false);
 
   return (
-    <main>
-      <Navbar />
+    <div className="App">
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
+      <Sidebar show={showNav} />
       <div className="dashboard-container">
-        {/* <!-- MAIN TITLE STARTS HERE --> */}
-
-        <div className="dashboard-title">
-          <div className="dashboard-greeting">
-            <h1>Hope Health Action</h1>
-            <p>Dashboard</p>
-          </div>
-        </div>
-
-        {/* <!-- MAIN TITLE ENDS HERE --> */}
-
         {/* <!-- MAIN CARDS STARTS HERE --> */}
+
         <div className="dashboard-cards">
           <div className="card">
             <i className="fa fa-user-o fa-2x text-lightblue" aria-hidden="true"></i>
@@ -54,7 +71,6 @@ const Dashboard = () => {
             <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
             <div className="card-inner">
               <p className="font-bold text-title">Department Info</p>
-              <p className="text-primary-p">Information about your department will appear here.</p>
             </div>
           </div>
 
@@ -83,7 +99,7 @@ const Dashboard = () => {
         </div>
         {/* <!-- MAIN CARDS ENDS HERE --> */}
       </div>
-    </main>
+    </div>
   );
 };
 
