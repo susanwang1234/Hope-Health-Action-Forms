@@ -29,7 +29,7 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
 
   try {
     const forms = await Knex.select('*').from('Form').where('departmentId', '=', departmentId);
-    logging.info(NAMESPACE, `Got forms for department ${departmentId}`, forms);
+    logging.info(NAMESPACE, `GOT FORMS FOR DEPARTMENT ${departmentId}`, forms);
     res.status(200).send(forms);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
