@@ -49,12 +49,49 @@
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.card-inner {
-  display: inline;
+.title{
   font-size: 25px;
   text-align: center;
+}
+
+.heading{
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.align-right{
+  float: right;
+}
+
+.align-left {
+  float: left;
+}
+
+.due-content{
+  margin-top: 20px;
+}
+
+.width-40-percent {
+  width: 40%;
+}
+
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+.card-inner {
+  display: inline;
   align-items: center;
   justify-content: space-between;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.19), 6px 6px 20px 6px rgba(0, 0, 0, 0.19);
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .add-button {
@@ -131,8 +168,17 @@
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.filler-image {
+.profile-pic {
   border: 2px solid black;
+  height: 40%;
+  width: 40%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.employee-paragraph {
+  margin-right: auto;
+  margin-left: auto;
 }
 
 @media only screen and (max-width: 855px) {

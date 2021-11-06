@@ -6,7 +6,12 @@ import { UserContext } from '../../UserContext';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import display from './../../images/original_artwork.jpg';
+import profilePic from './../../images/original_artwork.jpg';
+import leaderboard from './../../images/leaderboard.jpg';
+import Calendar from 'react-calendar';
+import { IoIosAlert } from 'react-icons/io';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
+
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
@@ -40,6 +45,7 @@ leave for later
 		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
   */
   const [showNav, setShowNav] = useState(false);
+  const [value, onChange] = useState(new Date());
 
   return (
     <div className="App">
@@ -53,50 +59,43 @@ leave for later
 
         <div className="dashboard-cards">
           <div className="card">
-            <i className="fa fa-user-o fa-2x text-lightblue" aria-hidden="true"></i>
+            <p className="title">To Do</p>
             <div className="card-inner">
-              <p className="font-bold text-title">Case Study</p>
-              <img src={display} alt="Display" className="filler-image"></img>
-              <p className="text-primary-p">Cool case information here or maybe a short summary.</p>
-              <button type="submit" onClick={onClick} className="view-button">
-                Current Case Studies
-              </button>
-              <button type="submit" onClick={onClick} className="add-button">
-                + Add Case Study
-              </button>
+              <div className="align-left">
+                <div className="due-content">
+                  <IoIosCheckmarkCircle className="icon"/> Case Study <br />
+                  Due October 31 2021
+                </div>
+                <div className="due-content">
+                  <IoIosAlert className="icon"/> MSPP Report <br />
+                  Due October 31 2021 <br />
+                </div>
+              </div>
+              <div className="align-right">
+                <Calendar onChange={onChange} value={value} />
+              </div>
+            </div>
+
+            <p className="title">Leaderboard</p>
+            <div className="card-inner">
+              <img src={leaderboard} alt="leaderboard"></img>
             </div>
           </div>
 
           <div className="card">
-            <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">Department Info</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <i className="fa fa-video-camera fa-2x text-yellow" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">Employee of the Month</p>
-              <img src={display} alt="Display" className="filler-image"></img>
-              <p className="text-primary-p">Information about employee of the month.</p>
-              <button type="submit" className="view-button">
-                Current Employee
-              </button>
-              <button type="submit" className="add-button">
-                + Add Employee
-              </button>
-            </div>
-          </div>
-
-          <div className="card">
-            <i className="fa fa-thumbs-up fa-2x text-green" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">To Do</p>
-              <p className="text-primary-p">Dynamic list goes here.</p>
+            <p className="title">Employee of the Month</p>
+            <div className="card-inner width-40-percent">
+              <img src={profilePic} alt="profile pic" className="profile-pic"></img>
+              <h1 className="heading">Name: Zack Cody</h1>
+              <h1 className="heading">Department: Maternity</h1>
+              <p className="text-primary-p employee-paragraph">
+                Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is
+                employee of the month. Go Zack!
+              </p>
             </div>
           </div>
         </div>
+
         {/* <!-- MAIN CARDS ENDS HERE --> */}
       </div>
     </div>
