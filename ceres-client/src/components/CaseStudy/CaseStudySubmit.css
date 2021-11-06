@@ -56,3 +56,21 @@
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
+
+select {
+  background-color: white;
+  font-family: Arial;
+  color: rgb(170, 170, 170);
+  outline: none;
+  font-size: 20px;
+  padding: 6px 10px;
+  text-align: left;
+  border-radius: 5px;
+  position: relative;
+  width: 60%;
+  margin: 6px;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+option:first-child {
+  display: none;
+}

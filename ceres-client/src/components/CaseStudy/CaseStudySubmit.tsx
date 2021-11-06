@@ -5,6 +5,7 @@ import { UserContext } from '../../UserContext';
 import logo from '../../images/navlogo.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Sidebar from '../Sidebar/Sidebar';
+import CaseStudyTypes from '../CaseStudy/DummyCaseStudyTypes.json';
 
 import data_dummy from './DummyDataCS.json';
 
@@ -15,6 +16,20 @@ import data_dummy from './DummyDataCS.json';
           Log Out
         </button>
       </div>
+       <select>
+              <option>Select a Case Study</option>
+              {CaseStudyTypes.map((Types, index) => {
+                return <option>{Types.name}</option>;
+              })}
+            </select>
+            <div className="dropdown">
+              <button className="dropbtn">Select a Case Study</button>
+              <div className="dropdown-content">
+                {CaseStudyTypes.map((Types, index) => {
+                  return <a>{Types.name}</a>;
+                })}
+              </div>
+            </div>
 */
 const CaseStudySubmit = () => {
   let history = useHistory();
@@ -35,8 +50,14 @@ const CaseStudySubmit = () => {
         <div>abcd</div>
         <div className="flex flex-col w-8/12 shadow-2xl h-8/12 border p-8 bg-white">
           <h1 className="text-center">Current Case Study</h1>
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-around">
             <h2 className="mb-4">Type of Case Study</h2>
+            <select>
+              <option>Select a Case Study</option>
+              {CaseStudyTypes.map((Types, index) => {
+                return <option>{Types.name}</option>;
+              })}
+            </select>
             <input placeholder="Dropdown" />
             <h1>Current Case Study</h1>
 
