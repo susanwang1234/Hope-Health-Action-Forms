@@ -175,3 +175,51 @@ describe('testGetCaseStudySuccess', () => {
       });
   });
 });
+
+// Test 3: GET request (List of case study types)
+describe('testGetCaseStudyTypesSuccess', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  let id = 0;
+  const caseStudyTypes = ['Patient Story', 'Staff Recognition', 'Training Session', 'Equipment Received', 'Other Story'];
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableRoutes(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Validate case study types request properties', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-study-types')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        res.body.forEach((item: any) => {
+          expect(item).to.be.an('object');
+          expect(item).to.have.deep.property('id');
+          expect(item).to.have.deep.property('name');
+        });
+        done();
+      });
+  });
+  it('Validate case study types request fields', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-study-types')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        res.body.forEach((item: any) => {
+          expect(item.id).to.deep.equal(++id);
+          expect(item.name).to.deep.equal(caseStudyTypes[id - 1]);
+        });
+        done();
+      });
+  });
+});
