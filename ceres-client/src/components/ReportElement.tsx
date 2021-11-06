@@ -1,19 +1,17 @@
 import React from 'react';
-class ReportElement extends React.Component<any, any> {
-  render() {
+const ReportElement = (props: any) => {
     return (
       <React.Fragment>
         <li className="report-in-list">
           <p className="m-auto">
-            {makeDateShort(this.props.data.curr_date)}
+            {makeDateShort(props.data.curr_date)}
           </p>
-          <button className="report-view-button font-bold text-white px-3" onClick={() => this.props.onClick()}>
+          <button className="report-view-button font-bold text-white px-3" onClick={() => props.onClick()}>
             View
           </button>
         </li>
       </React.Fragment>
     );
-  }
 }
 export default ReportElement;
 
