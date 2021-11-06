@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "497a541a-7df7-408c-a851-46c439f63ed6",
+    "_postman_id": "a22f8451-b1bc-44f3-9c6a-9bf73ae711fb",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -75,7 +75,7 @@
           "response": []
         },
         {
-          "name": "Get a case study",
+          "name": "GET a case study",
           "request": {
             "method": "GET",
             "header": [],
