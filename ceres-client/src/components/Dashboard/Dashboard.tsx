@@ -11,6 +11,8 @@ import leaderboard from './../../images/leaderboard.jpg';
 import Calendar from 'react-calendar';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { IoIosInformationCircle } from 'react-icons/io';
+import { Alert } from 'react-bootstrap';
 
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
@@ -47,6 +49,11 @@ leave for later
   const [showNav, setShowNav] = useState(false);
   const [value, onChange] = useState(new Date());
 
+  const instructions = (event: any) => {
+    alert('Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.');
+
+  }
+
   return (
     <div className="App">
       <header className="nav-header">
@@ -76,8 +83,10 @@ leave for later
               </div>
             </div>
 
+            
             <p className="title">Leaderboard</p>
             <div className="card-inner">
+            <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)}/>
               <img src={leaderboard} alt="leaderboard"></img>
             </div>
           </div>

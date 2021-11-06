@@ -39,10 +39,9 @@
 }
 
 .card {
-  display: inline;
-  flex-direction: column;
+  /*display: inline;
+  flex-direction: column;*/
   /* justify-content: space-around; */
-  height: 600px;
   padding: 25px;
   border-radius: 5px;
   background: #ffffff;
@@ -179,6 +178,8 @@
 .employee-paragraph {
   margin-right: auto;
   margin-left: auto;
+  overflow: scroll;
+  width: 70%;
 }
 
 @media only screen and (max-width: 855px) {
