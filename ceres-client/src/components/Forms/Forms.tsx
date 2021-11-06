@@ -19,17 +19,17 @@ function Forms() {
   useEffect(() => {
     return setElements(JSONfile[0]);
   }, []);
-  const { fields, page_label }: any = elements ?? {};
+  const { fields, pageLabel }: any = elements ?? {};
 
   const handleSave = (event: any) => {
-    let can_submit: boolean = true;
+    let canSubmit: boolean = true;
     elements.fields.forEach((field: any) => {
-      if (field.field_value === null && field.field_mandatory) {
-        can_submit = false;
+      if (field.fieldValue === null && field.fieldMandatory) {
+        canSubmit = false;
       }
     });
 
-    if (can_submit) {
+    if (canSubmit) {
       alert('Your changes have been saved.');
     } else {
       alert('Error: You have not filled all the required fields.');
@@ -40,15 +40,15 @@ function Forms() {
     console.log(elements);
   };
 
-  //Updates the key field_value in the JSON object
+  //Updates the key fieldValue in the JSON object
   const handleChange: any = (id: any, event: any) => {
     const newElements = { ...elements };
     newElements.fields.forEach((field: any) => {
-      const { field_type, field_id } = field;
-      if (id === field_id) {
-        switch (field_type) {
+      const { fieldType, fieldID } = field;
+      if (id === fieldID) {
+        switch (fieldType) {
           default:
-            field['field_value'] = event.target.valueAsNumber;
+            field['fieldValue'] = event.target.valueAsNumber;
             break;
         }
       }
@@ -57,12 +57,12 @@ function Forms() {
     console.log(elements);
   };
 
-  const getMonthAndTitle: any = (part_of_title: any) => {
+  const getMonthAndTitle: any = (partOfTitle: any) => {
     //Citation: https://www.w3schools.com/jsref/jsref_getmonth.asp
     const month = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
     const month_index = new Date().getMonth();
     let nameOfMonth = month[month_index];
-    return nameOfMonth + ' ' + part_of_title;
+    return nameOfMonth + ' ' + partOfTitle;
   };
 
   return (
@@ -75,10 +75,10 @@ function Forms() {
         <div>
           <div className="blocks-form">
             <div className="title-form">
-              <Form.Label column="lg">{getMonthAndTitle(page_label)}</Form.Label>
+              <Form.Label column="lg">{getMonthAndTitle(pageLabel)}</Form.Label>
             </div>
             <Form>
-              {fields ? fields.map((my_field: any, my_key: any) => <Element key={my_key} field={my_field} />) : null}
+              {fields ? fields.map((field: any, key: any) => <Element key={key} field={field} />) : null}
               <div className="button-form">
                 <button
                   className="view-cancel-form-button"
