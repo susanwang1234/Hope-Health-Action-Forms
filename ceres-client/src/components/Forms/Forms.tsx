@@ -65,6 +65,54 @@ function Forms() {
     return nameOfMonth + ' ' + partOfTitle;
   };
 
+/*
+  class DataPage extends React.Component<any[], any> {
+    constructor(props: any[]) {
+      super(props);
+      this.state = {
+        isLoaded: false,
+        reports: [],
+        displayingData: null,
+        indexOfSelectedReport: null
+      };
+    }
+    async componentDidMount() {
+      const url = 'http://localhost:8080/rehab_report/get/rehab_report';
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Fetched Rehab Reports are: ' + data);
+        this.setState({
+          isLoaded: true,
+          reports: data
+        });
+      } catch (error) {
+        console.log('Error: Unable to fetch from ' + url);
+        this.setState({
+          isLoaded: true,
+          error
+        });
+      }
+    }
+  }
+
+  class DataReport extends React.Component<any, any> {
+    render(){
+      let keys = Object.keys(this.props.data);
+      let values: string[] = Object.values(this.props.data);
+      let pairs: string[][] = [];
+      for (let i = 0; i < keys.length; i++) {
+        let pair: string[] = [keys[i], values[i]];
+        pairs.push(pair);
+      }
+
+    }
+
+
+
+  }*/
+  
+  
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
