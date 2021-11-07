@@ -67,7 +67,7 @@ leave for later
         <div className="dashboard-cards">
           <div className="card">
             <p className="title">To Do</p>
-            <div className="card-inner">
+            <div className="card-inner width-700px">
               <div className="align-left">
                 <div className="due-content">
                   <IoIosCheckmarkCircle className="icon"/> Case Study <br />
@@ -85,7 +85,7 @@ leave for later
 
             
             <p className="title">Leaderboard</p>
-            <div className="card-inner">
+            <div className="card-inner width-700px">
             <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)}/>
               <img src={leaderboard} alt="leaderboard"></img>
             </div>
@@ -93,7 +93,7 @@ leave for later
 
           <div className="card">
             <p className="title">Employee of the Month</p>
-            <div className="card-inner width-40-percent">
+            <div className="card-inner width-400px height-700px">
               <img src={profilePic} alt="profile pic" className="profile-pic"></img>
               <h1 className="heading">Name: Zack Cody</h1>
               <h1 className="heading">Department: Maternity</h1>
