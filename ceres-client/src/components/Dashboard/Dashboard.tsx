@@ -47,6 +47,7 @@ leave for later
 		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
   */
   const [showNav, setShowNav] = useState(false);
+  const [date, setDate] : any = useState(new Date());
 
   const instructions = (event: any) => {
     alert(
@@ -55,36 +56,21 @@ leave for later
   };
 
   //CITATION: https://blog.logrocket.com/react-calendar-tutorial-build-customize-calendar/
-  const generateCalendar = () => {
-    const [date, setDate] = useState(new Date());
-
+  function generateCalendar() {
     return (
-      <div className='app'>
-      <h1 className='text-center'>React Calendar with Range</h1>
-      <div className='calendar-container'>
+      <div className="app">
+      <div className="calendar-container">
         <Calendar
           onChange={setDate}
           value={date}
           selectRange={true}
+          /* className="calendar-size" */
         />
       </div>
-      {date.length > 0 ? (
-        <p className='text-center'>
-          <span className='bold'>Start:</span>{' '}
-          {date[0].toDateString()}
-          &nbsp;|&nbsp;
-          <span className='bold'>End:</span> {date[1].toDateString()}
-        </p>
-      ) : (
-        <p className='text-center'>
-          <span className='bold'>Default selected date:</span>{' '}
-          {date.toDateString()}
-        </p>
-      )}
     </div>
   );
-    )
-  }
+}
+
 
   return (
     <div className="App">
@@ -111,7 +97,7 @@ leave for later
                 </div>
               </div>
               <div className="align-right">
-                <Calendar onChange={onChange} value={value} />
+                {generateCalendar()}
               </div>
             </div>
 

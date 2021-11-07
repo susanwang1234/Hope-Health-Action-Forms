@@ -45,7 +45,7 @@
   padding: 0 !important;
   border-radius: 5px;
   background-color: #f5f5f5 !important;
-  /*border-color: #f5f5f5 !important;*/
+  border-color: #f5f5f5 !important;
 }
 
 .title {
@@ -60,27 +60,15 @@
 }
 
 .align-right {
-  float: right;
+  float: right !important;
 }
 
 .align-left {
-  float: left;
+  float: left !important;
 }
 
 .due-content {
   margin-top: 20px;
-}
-
-.width-40-percent {
-  width: 40%;
-}
-
-.width-70-percent {
-  width: 70%;
-}
-
-.width-80-percent {
-  width: 80%;
 }
 
 .width-100-percent {
@@ -91,13 +79,10 @@
   height: 100%;
 }
 
-.height-60-percent {
-  height: 40%;
+.calendar-size{
+  width: 40% !important;
 }
 
-.height-80-percent {
-  height: 80%;
-}
 
 .leaderboard{
   height: 100%;
