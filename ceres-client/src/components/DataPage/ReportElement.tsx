@@ -4,7 +4,7 @@ const ReportElement = (props: any) => {
       <React.Fragment>
         <li className="report-in-list">
           <p className="m-auto">
-            {makeDateShort(props.data.curr_date)}
+            {makeDateShort(props.data.createdAt)}
           </p>
           <button className="report-view-button font-bold text-white px-3" onClick={() => props.onClick()}>
             View
