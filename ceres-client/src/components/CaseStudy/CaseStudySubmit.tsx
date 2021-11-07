@@ -5,6 +5,7 @@ import { UserContext } from '../../UserContext';
 import logo from '../../images/navlogo.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Sidebar from '../Sidebar/Sidebar';
+import gray_person from '../../images/gray_person.jpg';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -69,7 +70,6 @@ const CaseStudySubmit = () => {
       </header>
       <Sidebar show={showNav} />
       <div className="flex w-full flex-col h-screen justify-center items-center">
-        <div>abcd</div>
         <div className="flex flex-col w-8/12 shadow-2xl h-8/12 border p-8 bg-white">
           <h1 className="text-center">Current Case Study</h1>
           <div className="flex flex-col justify-around">
@@ -83,7 +83,22 @@ const CaseStudySubmit = () => {
               })}
             </select>
             <h2>{selectedOption}</h2>
+
+            <div className = "photo">
+              <h2 className="mb-4">Upload Photo</h2>
+              <div>
+                <div className = "person_image float-left">
+                  <img src={gray_person} alt="Person" />
+                </div>
+                <div className = "float-left">
+                  <input type="checkbox" />
+                  <p>This person has given permission to share their story <br/>and photo in HHA communications, including online platforms.</p>
+                  <input type="file" />
+                </div>
+              </div>
+            </div>
             <h2>Questions for Type</h2>
+            
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div className="inside-text-case-study">
