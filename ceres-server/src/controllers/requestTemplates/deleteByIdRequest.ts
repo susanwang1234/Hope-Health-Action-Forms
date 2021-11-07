@@ -4,7 +4,7 @@ import { Knex } from '../../db/mysql';
 import { isInvalidInput } from './isInvalidInput';
 
 export const deleteItemById = async (req: Request, res: Response, next: NextFunction, NAMESPACE: string, TABLE_NAME: string, negativeOrNanInputError: object, dneError: object) => {
-  logging.info(NAMESPACE, `DELETING A ${TABLE_NAME.toUpperCase} BY ID`);
+  logging.info(NAMESPACE, `DELETING A ${TABLE_NAME.toUpperCase()} BY ID`);
   const itemId: number = +req.params.id;
   if (isInvalidInput(itemId)) {
     res.status(400).send(negativeOrNanInputError);
@@ -17,7 +17,7 @@ export const deleteItemById = async (req: Request, res: Response, next: NextFunc
       res.status(404).send(dneError);
       return;
     }
-    logging.info(NAMESPACE, `DELETED ${TABLE_NAME.toUpperCase} WITH ID ${itemId}`, deleteByItemId);
+    logging.info(NAMESPACE, `DELETED ${TABLE_NAME.toUpperCase()} WITH ID ${itemId}`, deleteByItemId);
     res.sendStatus(204);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
