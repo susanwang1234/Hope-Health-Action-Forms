@@ -13,6 +13,7 @@ type UserContextType = {
   isAuthenticated: boolean;
   setUser: (user: AuthUser | null) => void;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
+  logout: () => void;
 };
 
 type UserContextProviderProps = {
@@ -23,7 +24,8 @@ export const UserContext = createContext({
   user: null,
   setUser: (user: AuthUser | null) => {},
   isAuthenticated: false,
-  setIsAuthenticated: (isAuthenticated: boolean) => {}
+  setIsAuthenticated: (isAuthenticated: boolean) => {},
+  logout: () => {}
 } as UserContextType);
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
@@ -31,19 +33,26 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const logoutHandler = async () => {
+    const data = await AuthService.logout();
+    setIsAuthenticated(data.isAuthenticated);
+    setUser(data.user);
+  };
+
   useEffect(() => {
     AuthService.isAuthenticated().then((data) => {
       setUser(data.user);
       setIsAuthenticated(data.isAuthenticated);
       setIsLoaded(true);
     });
-  }, []);
+  }, [setIsAuthenticated]);
 
   const contextValue: UserContextType = {
     user: user,
     setUser: setUser,
     isAuthenticated: isAuthenticated,
-    setIsAuthenticated: setIsAuthenticated
+    setIsAuthenticated: setIsAuthenticated,
+    logout: logoutHandler
   };
 
   return <div>{!isLoaded ? null : <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>}</div>;
