@@ -4,6 +4,7 @@ import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudy from './components/CaseStudy/CaseStudy';
+import Departments from './components/Departments/Departments';
 import { UserContextProvider } from './UserContext';
 import Forms from './components/Forms/Forms';
 import SubmitPage from './components/newForm/newFrom'
@@ -18,6 +19,7 @@ return(
           <Route path="/submit-report" component={Forms}></Route>
           <Route path="/data-page" component={DataPage}></Route>
           <Route path="/case-study" component={CaseStudy}></Route>
+          <Route path="/departments" component={Departments}></Route>
         </UserContextProvider>
       </Switch>
     </Router>

@@ -9,7 +9,7 @@ chai.use(chaiHttp);
 
 let id = 0;
 
-const departments = ['Rehab', 'NICUPaeds'];
+const departments = ['All Departments', 'Rehab', 'NICUPaeds'];
 
 // Test 1: GET request
 describe('testGetDepartmentSuccess', () => {

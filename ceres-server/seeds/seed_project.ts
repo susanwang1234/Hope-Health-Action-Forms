@@ -7,16 +7,24 @@ import { insertUsers } from './inserts/insert_users';
 import { insertRoles } from './inserts/insert_roles';
 import { insertRehabReports } from './inserts/insert_rehab_reports';
 import { insertDummies } from './inserts/insert_dummies';
+import { insertCaseStudyTypes } from './inserts/insert_case_study_types';
+import { insertCaseStudyQuestions } from './inserts/insert_case_study_questions';
+import { insertCaseStudyTypeQuestions } from './inserts/insert_case_study_type_questions';
 
 export async function seed(knex: Knex): Promise<void> {
   // Delete all existing entries, keeping in mind of foreign key constraints
-  await knex('Dummies').del();
-  await knex('Rehab_Report').del();
-  await knex('User').del();
-  await knex('Role').del();
-  await knex('DepartmentQuestion').del();
-  await knex('Department').del();
-  await knex('Question').del();
+  await knex.raw('SET FOREIGN_KEY_CHECKS=0;');
+  await knex('CaseStudyTypeQuestion').truncate();
+  await knex('CaseStudyQuestion').truncate();
+  await knex('CaseStudyType').truncate();
+  await knex('Dummies').truncate();
+  await knex('Rehab_Report').truncate();
+  await knex('User').truncate();
+  await knex('Role').truncate();
+  await knex('DepartmentQuestion').truncate();
+  await knex('Department').truncate();
+  await knex('Question').truncate();
+  await knex.raw('SET FOREIGN_KEY_CHECKS=1;');
 
   // Insert seed entries
   await insertQuestions(knex);
@@ -27,4 +35,7 @@ export async function seed(knex: Knex): Promise<void> {
   await insertUsers(knex);
   await insertRehabReports(knex);
   await insertDummies(knex);
+  await insertCaseStudyTypes(knex);
+  await insertCaseStudyQuestions(knex);
+  await insertCaseStudyTypeQuestions(knex);
 }

@@ -1,9 +1,12 @@
+import '../../App.css';
 import './Dashboard.css';
-import Navbar from '../Navbar/Navbar';
 import { useHistory } from 'react-router-dom';
-import display from './../../images/original_artwork.jpg';
-import React, { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
+import Sidebar from '../Sidebar/Sidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import logo from '../../images/navlogo.png';
+import display from './../../images/original_artwork.jpg';
 // Citation: https://github.com/mustafaerden/react-admin-dashboard
 
 const Dashboard = () => {
@@ -15,36 +18,50 @@ const Dashboard = () => {
 
   const userContext = useContext(UserContext);
 
-  console.log('Username (Dashboard) is ' , userContext.user?.name)
-  console.log('Department (Dashboard) is ' , userContext.user?.department)
+  console.log('Username (Dashboard) is ', userContext.user?.role);
+  console.log('Department (Dashboard) is ', userContext.user?.department);
+  /*
+leave for later
+  var departmentIndex = userContext.user?.department;
+  function iconChecker(isComplete: boolean){
+  	if(isComplete){
+    	return (
+      	<div className="checkmark-icon">
+        	<div className="checkmark"></div>
+      	</div>
+    	);}
+    	return(
+      	<div className="alert-icon">
+        	<div className="alert"></div>
+      	</div>
+    	);
+	}
+    <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
+		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
+  */
+  const [showNav, setShowNav] = useState(false);
 
   return (
-    <main>
-      <Navbar />
-      <div className="dashboard__container">
-        {/* <!-- MAIN TITLE STARTS HERE --> */}
-
-        <div className="dashboard__title">
-          <div className="dashboard__greeting">
-            <h1>Hope Health Action</h1>
-            <p>Dashboard</p>
-          </div>
-        </div>
-
-        {/* <!-- MAIN TITLE ENDS HERE --> */}
-
+    <div className="App">
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
+      <Sidebar show={showNav} />
+      <div className="dashboard-container">
         {/* <!-- MAIN CARDS STARTS HERE --> */}
-        <div className="dashboard__cards">
+
+        <div className="dashboard-cards">
           <div className="card">
             <i className="fa fa-user-o fa-2x text-lightblue" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">Case Study</p>
-              <img src={display} alt="Display" className="filler_image"></img>
+              <img src={display} alt="Display" className="filler-image"></img>
               <p className="text-primary-p">Cool case information here or maybe a short summary.</p>
-              <button type="submit" onClick={onClick} className="view_button">
+              <button type="submit" onClick={onClick} className="view-button">
                 Current Case Studies
               </button>
-              <button type="submit" onClick={onClick} className="add_button">
+              <button type="submit" onClick={onClick} className="add-button">
                 + Add Case Study
               </button>
             </div>
@@ -52,22 +69,21 @@ const Dashboard = () => {
 
           <div className="card">
             <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">Department Info</p>
-              <p className="text-primary-p">Information about your department will appear here.</p>
             </div>
           </div>
 
           <div className="card">
             <i className="fa fa-video-camera fa-2x text-yellow" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">Employee of the Month</p>
-              <img src={display} alt="Display" className="filler_image"></img>
+              <img src={display} alt="Display" className="filler-image"></img>
               <p className="text-primary-p">Information about employee of the month.</p>
-              <button type="submit" className="view_button">
+              <button type="submit" className="view-button">
                 Current Employee
               </button>
-              <button type="submit" className="add_button">
+              <button type="submit" className="add-button">
                 + Add Employee
               </button>
             </div>
@@ -75,7 +91,7 @@ const Dashboard = () => {
 
           <div className="card">
             <i className="fa fa-thumbs-up fa-2x text-green" aria-hidden="true"></i>
-            <div className="card_inner">
+            <div className="card-inner">
               <p className="font-bold text-title">To Do</p>
               <p className="text-primary-p">Dynamic list goes here.</p>
             </div>
@@ -83,7 +99,7 @@ const Dashboard = () => {
         </div>
         {/* <!-- MAIN CARDS ENDS HERE --> */}
       </div>
-    </main>
+    </div>
   );
 };
 
