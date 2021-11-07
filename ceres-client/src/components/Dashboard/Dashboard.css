@@ -168,8 +168,6 @@
 
 .profile-pic {
   border: 2px solid black;
-  /* height: 40%; */
-  /* width: 40%; */
   margin-right: auto;
   margin-left: auto;
 }
@@ -177,7 +175,6 @@
 .employee-paragraph {
   margin-right: auto;
   margin-left: auto;
-  /* overflow: scroll; */
   width: 70%;
 }
 
