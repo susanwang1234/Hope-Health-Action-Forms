@@ -12,6 +12,9 @@ import dummyRoutes from './routes/dummyRoute';
 import formRoutes from './routes/formRoute';
 import formResponsesRoutes from './routes/formResponsesRoute';
 import rehabReportRoutes from './routes/rehabReportRoute';
+import caseStudiesRoutes from './routes/caseStudiesRoute';
+import caseStudyTypesRoutes from './routes/caseStudyTypesRoute';
+import caseStudyQuestionsRoutes from './routes/caseStudyQuestionsRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
 import routes from './routes/indexRoute';
@@ -89,6 +92,9 @@ export function enableRoutes(router: Application) {
   router.use('/user', userRoutes);
   router.use('/form', formRoutes);
   router.use('/form-responses', formResponsesRoutes);
+  router.use('/case-studies', caseStudiesRoutes);
+  router.use('/case-study-types', caseStudyTypesRoutes);
+  router.use('/case-study-questions', caseStudyQuestionsRoutes);
 }
 
 export function enableErrorHandling(router: Application) {
