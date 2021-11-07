@@ -68,31 +68,28 @@ const CaseStudySubmit = () => {
         <button className="logout-button">Log Out</button>
       </header>
       <Sidebar show={showNav} />
-      <div className="flex w-full flex-col h-screen justify-center items-center">
-        <div>abcd</div>
-        <div className="flex flex-col w-8/12 shadow-2xl h-8/12 border p-8 bg-white">
-          <h1 className="text-center">Current Case Study</h1>
-          <div className="flex flex-col justify-around">
-            <h2 className="mb-4">Type of Case Study</h2>
-            <select className="minimal" onChange={selectChange}>
-              <option selected disabled>
-                --Select a Case Study type--
-              </option>
-              {caseStudyType.types.map((Types: any, index: any) => {
-                return <option value={Types.id}>{Types.name}</option>;
-              })}
-            </select>
-            <h2>{selectedOption}</h2>
-            <h2>Questions for Type</h2>
-            {caseStudyQuestions.questions.map((Questions: any, index: any) => {
-              return (
-                <div className="inside-text-case-study">
-                  <h2 className="questions">{Questions.label}</h2>
-                  <input placeholder="Type here..."></input>
-                </div>
-              );
+      <div className="cards-casestudy">
+        <div className="casestudy-single-card">
+          <h2 className="inside-card -mt-10 mb-8">
+            <b>Current Case Study</b>
+          </h2>
+          <p className="inside-text-case-study">Type of Case Study</p>
+          <select className="minimal" onChange={selectChange}>
+            <option selected disabled>
+              --Select a Case Study type--
+            </option>
+            {caseStudyType.types.map((Types: any, index: any) => {
+              return <option value={Types.id}>{Types.name}</option>;
             })}
-          </div>
+          </select>
+          {caseStudyQuestions.questions.map((Questions: any, index: any) => {
+            return (
+              <div>
+                <p className="inside-text-case-study">{Questions.label}</p>
+                <textarea className="response" placeholder="Type here..."></textarea>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
@@ -100,7 +97,3 @@ const CaseStudySubmit = () => {
 };
 
 export default CaseStudySubmit;
-
-function value(value: any): void {
-  throw new Error('Function not implemented.');
-}

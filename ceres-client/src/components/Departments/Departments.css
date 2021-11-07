@@ -40,6 +40,7 @@ CSS Classes
   min-height: 100vh;
   padding: 30px;
   width: 100%;
+  overflow: hidden;
 }
 .department-header {
   background-color: rgb(255, 255, 255);
@@ -68,12 +69,7 @@ CSS Classes
   padding: 25px;
   position: relative;
 }
-.inside-card {
-  font-family: Arial;
-  font-size: 30px;
-  text-align: center;
-}
-.inside-text {
+p.inside-text {
   font-family: Arial;
   font-size: 25px;
   margin: 6px;
