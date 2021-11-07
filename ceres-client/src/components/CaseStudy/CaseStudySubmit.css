@@ -8,6 +8,7 @@ CSS Classes
 - h2.questions
 - inside-text-case-study
 - logout-button
+- person_image
 - select
 - select.minimal
 */
@@ -89,6 +90,10 @@ textarea.response {
   right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
+.person_image {
+  height: 130px;
+  width: 140px;
+}
 select {
   appearance: none;
   background-color: white;
@@ -115,3 +120,7 @@ select.minimal {
   background-repeat: no-repeat;
   margin: 4px;
 }
+
+
+
+
