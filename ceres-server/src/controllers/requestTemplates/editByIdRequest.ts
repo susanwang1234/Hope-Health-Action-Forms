@@ -13,7 +13,7 @@ export const editItemById = async (
   dneError: object,
   inputtedReqBody: object
 ) => {
-  logging.info(NAMESPACE, `EDITING A ${TABLE_NAME.toUpperCase} BY ID`);
+  logging.info(NAMESPACE, `EDITING A ${TABLE_NAME.toUpperCase()} BY ID`);
   const itemId: number = +req.params.id;
   if (isInvalidInput(itemId)) {
     res.status(400).send(negativeOrNanInputError);
@@ -27,7 +27,7 @@ export const editItemById = async (
       return;
     }
     const retrieveEditedItem = await Knex.select('*').from(TABLE_NAME).where('id', '=', itemId);
-    logging.info(NAMESPACE, `EDITED ${TABLE_NAME.toUpperCase} WITH ID ${itemId}`, retrieveEditedItem);
+    logging.info(NAMESPACE, `EDITED ${TABLE_NAME.toUpperCase()} WITH ID ${itemId}`, retrieveEditedItem);
     res.status(201).send(retrieveEditedItem);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
