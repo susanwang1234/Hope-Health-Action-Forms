@@ -4,12 +4,13 @@ import { Knex } from '../../db/mysql';
 import { User } from '../../db/models/appUserModel';
 import { Role } from '../../db/models/roleModel';
 import { Department } from 'db/models/departmentModel';
+import { CaseStudyType } from 'db/models/caseStudyTypeModel';
 
 export const getItems = async (req: Request, res: Response, next: NextFunction, NAMESPACE: string, TABLE_NAME: string) => {
-  logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase}`);
+  logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase()}S`);
   try {
-    let items: User[] | Role[] | Department[] = await Knex.select('*').from(TABLE_NAME);
-    logging.info(NAMESPACE, `Retrieved ${TABLE_NAME.toUpperCase}:`, items);
+    const items: User[] | Role[] | Department[] | CaseStudyType[] = await Knex.select('*').from(TABLE_NAME);
+    logging.info(NAMESPACE, `RETRIEVED ${TABLE_NAME.toUpperCase()}S:`, items);
     res.status(200).send(items);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
