@@ -1,51 +1,139 @@
-/*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
-/*Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position*/
-/*Citation: https://www.w3schools.com/css/css3_buttons.asp*/
+/*
+  Citations: 
+    https://github.com/mustafaerden/react-admin-dashboard
+    https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position
+    https://www.w3schools.com/css/css3_buttons.asp*
 
-.dashboard-container {
-  padding: 20px 35px;
-  display: flex;
-  flex: 0;
-  background-color: #f5f5f5;
+  CSS Classes
+  - align-left
+  - align-right
+  - card
+  - card-inner
+  - center-content
+  - dashboard-cards
+  - dashboard-container
+  - due-content
+  - employee-paragraph
+  - fill-space-left
+  - fill-space-left
+  - heading-1
+  - height-100-percent
+  - icon
+  - leaderboard
+  - profile-pic
+  - responsive-calendar
+  - responsive-leaderboard
+  - title
+  - width-100-percent
+
+  Responsive CSS Classes
+  - dashboard-cards
+*/
+
+.align-left {
+  float: left !important;
 }
 
-.dashboard-title {
-  display: flex;
+.align-right {
+  float: right !important;
+}
+
+.card {
+  background-color: #f5f5f5 !important;
+  border-color: #f5f5f5 !important;
+  border-radius: 5px;
+  flex: 1;
+  margin: 0 !important;
+}
+
+.card-inner {
   align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.19), 6px 6px 20px 6px rgba(0, 0, 0, 0.19);
+  display: inline;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
 }
 
-.dashboard-title > img {
-  max-height: 100px;
-  object-fit: contain;
-  margin-right: 20px;
-}
-
-.dashboard-greeting > h1 {
-  font-size: 24px;
-  color: #2e4a66;
-  margin-bottom: 5px;
-}
-
-.dashboard-greeting > p {
-  font-size: 14px;
-  font-weight: 700;
-  color: #a5aaad;
+.center-content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .dashboard-cards {
   display: flex;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
-  /*margin: 20px 0;*/
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-.card {
-  /*padding: 25px;*/
-  margin: 0 !important;
-  padding: 0 !important;
-  border-radius: 5px;
-  background-color: #f5f5f5 !important;
-  border-color: #f5f5f5 !important;
+.dashboard-container {
+  background-color: #f5f5f5;
+  display: flex;
+  height: 100%;
+  padding: 20px 35px;
+}
+
+.due-content {
+  margin-top: 20px;
+}
+
+.employee-paragraph {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: justify;
+  text-indent: 30px;
+}
+
+.fill-space-left {
+  padding-left: 10%;
+}
+
+.fill-space-right {
+  padding-right: 10%;
+}
+
+.heading-1 {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.height-100-percent {
+  height: 100%;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+}
+
+.leaderboard {
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-pic {
+  border: 2px solid black;
+  height: auto;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.responsive-calendar {
+  font-size: 80%;
+}
+
+.responsive-leaderboard {
+  height: auto;
+  text-align: center;
+  width: 470px;
 }
 
 .title {
@@ -53,155 +141,14 @@
   text-align: center;
 }
 
-.heading {
-  text-align: center;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.align-right {
-  float: right !important;
-}
-
-.align-left {
-  float: left !important;
-}
-
-.due-content {
-  margin-top: 20px;
-}
-
 .width-100-percent {
   width: 100%;
 }
 
-.height-100-percent {
-  height: 100%;
-}
-
-.calendar-size{
-  width: 40% !important;
-}
-
-
-.leaderboard{
-  height: 100%;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.icon {
-  width: 30px;
-  height: 30px;
-}
-
-.card-inner {
-  display: inline;
-  align-items: center;
-  justify-content: space-between;
-  padding: 25px;
-  margin-bottom: 25px;
-  border-radius: 5px;
-  box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.19), 6px 6px 20px 6px rgba(0, 0, 0, 0.19);
-  margin-right: auto;
-  margin-left: auto;
-  background-color: #ffffff;
-}
-
-.add-button {
-  background-color: #59b030;
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 4px 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: 80%;
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
-}
-
-.add-button:hover {
-  background-color: #3a791c;
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 4px 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: 80%;
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
-}
-
-.view-button {
-  background-color: #009cc4;
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 4px 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-top: 6px;
-  width: 80%;
-  position: absolute;
-  bottom: 0%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
-}
-
-.view-button:hover {
-  background-color: #117088;
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 4px 10px;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: 500;
-  margin-top: 6px;
-  width: 80%;
-  position: absolute;
-  bottom: 0%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
-}
-
-.profile-pic {
-  border: 2px solid black;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.employee-paragraph {
-  margin-right: auto;
-  margin-left: auto;
-}
-
 @media only screen and (max-width: 855px) {
   .dashboard-cards {
-    grid-template-columns: 1fr;
     gap: 10px;
-    margin-bottom: 0;
-  }
-
-  .charts {
     grid-template-columns: 1fr;
-    margin-top: 30px;
+    margin-bottom: 0;
   }
 }
