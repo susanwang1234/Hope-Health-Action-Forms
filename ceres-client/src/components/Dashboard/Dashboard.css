@@ -47,7 +47,8 @@
   /* justify-content: space-around; */
   padding: 25px;
   border-radius: 5px;
-  background: #f5f5f5;
+  background-color: #f5f5f5 !important;
+  border-color:#f5f5f5 !important;
   /*background: #ffffff;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;*/
 }
@@ -106,6 +107,7 @@
   box-shadow: 0px 4px 8px 6px rgba(0, 0, 0, 0.19), 6px 6px 20px 6px rgba(0, 0, 0, 0.19);
   margin-right: auto;
   margin-left: auto;
+  background-color: #ffffff;
 }
 
 .add-button {
