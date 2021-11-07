@@ -50,9 +50,10 @@ leave for later
   const [value, onChange] = useState(new Date());
 
   const instructions = (event: any) => {
-    alert('Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.');
-
-  }
+    alert(
+      'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
+    );
+  };
 
   return (
     <div className="App">
@@ -70,11 +71,11 @@ leave for later
             <div className="card-inner">
               <div className="align-left">
                 <div className="due-content">
-                  <IoIosCheckmarkCircle className="icon"/> Case Study <br />
+                  <IoIosCheckmarkCircle className="icon" /> Case Study <br />
                   Due October 31 2021
                 </div>
                 <div className="due-content">
-                  <IoIosAlert className="icon"/> MSPP Report <br />
+                  <IoIosAlert className="icon" /> MSPP Report <br />
                   Due October 31 2021 <br />
                 </div>
               </div>
@@ -83,17 +84,16 @@ leave for later
               </div>
             </div>
 
-            
             <p className="title">Leaderboard</p>
             <div className="card-inner">
-            <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)}/>
+              <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
               <img src={leaderboard} alt="leaderboard"></img>
             </div>
           </div>
 
           <div className="card">
             <p className="title">Employee of the Month</p>
-            <div className="card-inner width-40-percent">
+            <div className="card-inner">
               <img src={profilePic} alt="profile pic" className="profile-pic"></img>
               <h1 className="heading">Name: Zack Cody</h1>
               <h1 className="heading">Department: Maternity</h1>
