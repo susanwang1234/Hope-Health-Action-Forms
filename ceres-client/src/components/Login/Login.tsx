@@ -13,22 +13,9 @@ interface FormData {
   remember: boolean;
 }
 
-const logout = async () => {
-  try {
-    const response = await AuthService.logout();
-    console.log(response.data);
-  } catch (error: any) {
-    console.log(error);
-  }
-};
-
 function Login() {
   const userCtx = useContext(UserContext);
   let history = useHistory();
-
-  const [user, setUser] = useState(null);
-  const [message, setMessage] = useState(null);
-  const userContext = useContext(UserContext);
 
   const {
     register,

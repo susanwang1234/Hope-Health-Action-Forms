@@ -1,8 +1,10 @@
 import '../../App.css';
 import './Dashboard.css';
+
 import { useHistory } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
+
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -16,10 +18,8 @@ const Dashboard = () => {
     history.push('/case-study');
   };
 
-  const userContext = useContext(UserContext);
+  const userCtx = useContext(UserContext);
 
-  console.log('Username (Dashboard) is ', userContext.user?.role);
-  console.log('Department (Dashboard) is ', userContext.user?.department);
   /*
 leave for later
   var departmentIndex = userContext.user?.department;

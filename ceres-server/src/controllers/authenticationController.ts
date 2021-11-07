@@ -51,7 +51,7 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
 
 const logout = (req: Request, res: Response, next: NextFunction) => {
   res.clearCookie('jwt');
-  res.status(200).json({ sucess: true });
+  res.status(200).json({ success: true, isAuthenticated: false, user: null });
 };
 
 export default { login, logout, authenticate };

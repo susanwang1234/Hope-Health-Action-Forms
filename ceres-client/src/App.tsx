@@ -6,17 +6,19 @@ import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudy from './components/CaseStudy/CaseStudy';
 import Departments from './components/Departments/Departments';
 import Forms from './components/Forms/Forms';
+import PrivateRoute from './hocs/PrivateRoute';
+import UnPrivateRoute from './hocs/UnprivateRoutes';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/" component={Login} />
-        <Route path="/dashboard" component={Dashboard}></Route>
-        <Route path="/submit-report" component={Forms}></Route>
-        <Route path="/data-page" component={DataPage}></Route>
-        <Route path="/case-study" component={CaseStudy}></Route>
-        <Route path="/departments" component={Departments}></Route>
+        <UnPrivateRoute exact path="/" component={Login} />
+        <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
+        <PrivateRoute path="/submit-report" component={Forms}></PrivateRoute>
+        <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
+        <PrivateRoute path="/case-study" component={CaseStudy}></PrivateRoute>
+        <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
       </Switch>
     </Router>
   );
