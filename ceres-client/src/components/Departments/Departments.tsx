@@ -19,7 +19,6 @@ function Departments() {
   };
 
   const [departmentState, setDepartmentState] = useState({
-    isLoaded: false,
     departments: []
   });
 
@@ -33,7 +32,6 @@ function Departments() {
         const data = await response.json();
         console.log('Fetched Departments: ' + data);
         setDepartmentState({
-          isLoaded: true,
           departments: data
         });
       } catch (error: any) {
