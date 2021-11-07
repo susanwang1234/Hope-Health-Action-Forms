@@ -1,6 +1,6 @@
 import './CaseStudies.css';
 import '../../App.css';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../UserContext';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -10,11 +10,33 @@ import photo from './../../images/original_artwork.jpg';
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
 
-  console.log('Username (Case Study) is ', userContext.user?.role);
-  console.log('Department (Case Study) is ', userContext.user?.department);
-
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
+
+  const [caseStudyState, setCaseStudyState] = useState({
+    isLoaded: false,
+    caseStudies: []
+  });
+
+  useEffect(() => {
+    getData();
+
+    async function getData() {
+      const url = 'http://localhost:8080/case-studies';
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Fetched Case Studies: ' + data);
+        setCaseStudyState({
+          isLoaded: true,
+          caseStudies: data
+        });
+      } catch (error: any) {
+        console.log('Error: Unable to fetch from ' + url);
+      }
+    }
+  }, [setCaseStudyState]);
+
   return (
     <div className="App">
       <header className="nav-header">
@@ -68,36 +90,25 @@ const CaseStudy = () => {
 
               <div className="case-study-block-container">
                 {/* Dynamically insert case study blocks here */}
-                <table className="case-study-block">
-                  <tr>
-                    <td className="case-study-block-image">
-                      <img src={photo} width="150px" height="150px"></img>
-                    </td>
-                    <td className="case-study-block-text">
-                      <h1>Title name</h1>
-                      <h5>October 28 2021</h5>
-                      <p>Case study brief summary describing what they did...dashdhaskjdhashdkjashkdjhaaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhaskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhskjhdkjashdkjashkj dhajhdkjahkdjhajkhdkjashjdhkjashkdjaskhdjkashdkahskjdhjkashdkjashjkdhaskhdkahkahdjkashdkjhakjdhakjshdkashdkahkshdakjshdkajshdkjashdkjahkjdhaskjhdaskjhdajkshdkjas</p>
-                      <button></button>
-                    </td>
-                    <td className="case-study-block-button">
-                      <button className="button">View</button>
-                    </td>
-                  </tr>
-                </table>
-                <table className="case-study-block">
-                  <tr>
-                    <td>
-                      <img src={photo} width="150px" height="150px"></img>
-                    </td>
-                  </tr>
-                </table>
-                <table className="case-study-block">
-                  <tr>
-                    <td>
-                      <img src={photo} width="150px" height="150px"></img>
-                    </td>
-                  </tr>
-                </table>
+                {caseStudyState.caseStudies.map((caseStudies: any, index: any) => {
+                  return (
+                    <table className="case-study-block">
+                      <tr>
+                        <td className="case-study-block-image">
+                          <img src={photo} width="150px" height="150px"></img>
+                        </td>
+                        <td className="case-study-block-text">
+                          <h2>{caseStudies.title}</h2>
+                          <h5>{caseStudies.createdAt}</h5>
+                          <p>{caseStudies.response}</p>
+                        </td>
+                        <td className="case-study-block-button">
+                          <button className="button">View</button>
+                        </td>
+                      </tr>
+                    </table>
+                  );
+                })}
               </div>
             </td>
           </tr>
