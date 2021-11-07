@@ -4,11 +4,15 @@ import './DataPage.css';
 import ReportElement from './ReportElement';
 import ReportData from './ReportData';
 import NavBar from '../../components/Navbar/Navbar';
+import Sidebar from '../Sidebar/Sidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import logo from '../../images/navlogo.png';
 
 
 
 
 const DataPage = () => {
+      document.body.style.backgroundColor = "#f5f5f5"
       const [isLoaded, setIsLoaded] = useState(false);
       const [empltyFields, setEmptyFields] = useState<number[]>([]);
       const [reports, setReports] = useState([
@@ -68,6 +72,8 @@ const DataPage = () => {
     const [displayingData, setDisplayingData] = useState<any>(null);
     const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
     const [editStatus,setEditStatus] = useState(false);
+    const [showNav, setShowNav] = useState(false);
+
 
     const changeEntry = (index: number, event: any) => {
       let eventValue: string = event.target.value;
@@ -155,8 +161,12 @@ const DataPage = () => {
   // })
     return (
       <React.Fragment>
-        <NavBar />
-        <div className="flex">
+        <header className="nav-header">
+          <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+          <img src={logo} alt="Logo" className="logo" />
+        </header> 
+        <div className="flex justify-center">
+          <Sidebar show={showNav} /> 
           <div className=" data-list border-black font-bold text-center p-4 m-6 row-span-3 bg-gray-300 relative rounded">
             <h4 className="text-center">Submitted Reports</h4>
             <ul className="list-of-reports">
@@ -164,7 +174,6 @@ const DataPage = () => {
                 <ReportElement data={report} onClick={() => handleClick(index)} />
               ))}
             </ul>
-            <button className="button add-report-button text-white w-80">Add Report</button>
           </div>
           <ReportData changeEntry={changeEntry} data={displayingData}
            editStatus={editStatus} setEditStatus={switchEditMode} 

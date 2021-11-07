@@ -7,6 +7,7 @@
     background: #ffffff;
     box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
+
 .list-of-reports{
     overflow:auto;
     padding: 0em;
@@ -47,11 +48,12 @@
     border-radius: 0.25rem;
     border: 0.5px solid rgb(199, 199, 199);
     box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+    background-color: white;
   }
   
   .displaying-form-elements{
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     row-gap: 1em;
     overflow-y: scroll;
     max-height: 25em;
@@ -62,6 +64,7 @@
     background-color: #FBFBFB;
     display: flex;
     padding: 4px;
+    min-width: 17rem ;
   }
   
   .report-view-button{
@@ -95,7 +98,6 @@
     color: white;
     border-radius: 0.25rem;
     background-color: #4AA9C9;
-    padding: 6px;
     margin: 0.75rem;
     width: 7rem;
     font-weight: bold;

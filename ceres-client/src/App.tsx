@@ -7,7 +7,6 @@ import CaseStudy from './components/CaseStudy/CaseStudy';
 import Departments from './components/Departments/Departments';
 import { UserContextProvider } from './UserContext';
 import Forms from './components/Forms/Forms';
-import SubmitPage from './components/newForm/newFrom'
 
 function App() {
 return(
