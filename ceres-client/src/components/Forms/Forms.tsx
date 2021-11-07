@@ -1,8 +1,7 @@
 import './Forms.css';
-import Navbar from '../Navbar/Navbar';
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, Row, Col, Nav } from 'react-bootstrap';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Element from './Elements';
 import { FormContext } from './FormContext';

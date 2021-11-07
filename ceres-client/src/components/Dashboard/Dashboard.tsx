@@ -20,25 +20,6 @@ const Dashboard = () => {
 
   console.log('Username (Dashboard) is ', userContext.user?.role);
   console.log('Department (Dashboard) is ', userContext.user?.department);
-  /*
-leave for later
-  var departmentIndex = userContext.user?.department;
-  function iconChecker(isComplete: boolean){
-  	if(isComplete){
-    	return (
-      	<div className="checkmark-icon">
-        	<div className="checkmark"></div>
-      	</div>
-    	);}
-    	return(
-      	<div className="alert-icon">
-        	<div className="alert"></div>
-      	</div>
-    	);
-	}
-    <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
-		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
-  */
   const [showNav, setShowNav] = useState(false);
 
   return (

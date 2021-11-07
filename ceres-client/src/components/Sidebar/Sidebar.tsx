@@ -30,7 +30,7 @@ const Sidebar = ({ show }: any) => {
           </Link>
         </li>
         <li>
-          <Link to="/case-study" className="side-link">
+          <Link to="/case-studies" className="side-link">
             <IoIosJournal />
             Case Studies
           </Link>
