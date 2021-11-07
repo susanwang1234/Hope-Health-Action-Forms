@@ -16,7 +16,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     logging.info(NAMESPACE, 'Retrieved from db', user);
 
     if (!user) {
-      return res.status(401).json({ isAuthenticated: false, msg: 'User not found' });
+      res.status(401).json({ isAuthenticated: false, msg: 'User not found' });
+      return;
     }
 
     if (user.password) {
@@ -32,7 +33,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         } else {
           res.cookie(cookieName, tokenObject.token, { httpOnly: true, sameSite: true });
         }
-        return res.status(200).json({ isAuthenticated: true, user: user, msg: 'success' });
+        res.status(200).json({ isAuthenticated: true, user: user, msg: 'success' });
+        return;
       }
     }
     return res.status(401).json({ isAuthenticated: false, msg: 'Entered incorrect username or password' });

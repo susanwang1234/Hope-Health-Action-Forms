@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 
 const baseApiUrl = 'http://localhost:8080';
 
-const authService = {
+const AuthService = {
   login: (user: loginInfoType): Promise<any> => {
     return axios
       .post(baseApiUrl + '/auth/login', user)
@@ -22,7 +22,7 @@ const authService = {
 
   isAuthenticated: (): Promise<any> => {
     return axios
-      .get('/auth/authenticate')
+      .get(baseApiUrl + '/auth/authenticate')
       .then((res) => res.data)
       .catch((error) => {
         return { isAuthenticated: false, user: null };
@@ -30,4 +30,4 @@ const authService = {
   }
 };
 
-export default authService;
+export default AuthService;

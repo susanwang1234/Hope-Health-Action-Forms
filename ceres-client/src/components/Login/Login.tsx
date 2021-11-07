@@ -5,8 +5,7 @@ import display from './../../images/CBR_training_March 21.png';
 import { useHistory } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
-import { useEffect } from 'react';
-import authService from '../../services/authService';
+import AuthService from '../../services/authService';
 
 interface FormData {
   username: string;
@@ -16,7 +15,7 @@ interface FormData {
 
 const logout = async () => {
   try {
-    const response = await authService.logout();
+    const response = await AuthService.logout();
     console.log(response.data);
   } catch (error: any) {
     console.log(error);
@@ -24,6 +23,7 @@ const logout = async () => {
 };
 
 function Login() {
+  const userCtx = useContext(UserContext);
   let history = useHistory();
 
   const [user, setUser] = useState(null);
@@ -37,10 +37,12 @@ function Login() {
   } = useForm<FormData>({ mode: 'onChange' });
 
   const postLogin = async (loginUser: any) => {
-    const data = await authService.login(loginUser);
+    const data = await AuthService.login(loginUser);
     const { isAuthenticated } = data;
     if (isAuthenticated) {
-      // history.push('/dashboard');
+      userCtx.setUser(data.user);
+      userCtx.setIsAuthenticated(isAuthenticated);
+      history.push('/dashboard');
     } else {
       const { msg } = data;
       // do something with error message
@@ -57,15 +59,6 @@ function Login() {
 
     postLogin(user);
   });
-
-  useEffect(() => {
-    if (userContext) {
-      userContext.setUser({ role: 1, department: 2 });
-    }
-  }, []);
-
-  console.log('Username (Login) is ', userContext.user?.role);
-  console.log('Department (Login) is ', userContext.user?.department);
 
   return (
     <div className="flex xl:flex-row flex-col">
