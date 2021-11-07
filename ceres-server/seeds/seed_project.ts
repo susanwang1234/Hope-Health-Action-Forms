@@ -21,6 +21,8 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('Rehab_Report').truncate();
   await knex('User').truncate();
   await knex('Role').truncate();
+  await knex('FormResponse').truncate();
+  await knex('Form').truncate();
   await knex('DepartmentQuestion').truncate();
   await knex('Department').truncate();
   await knex('Question').truncate();

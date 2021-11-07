@@ -7,13 +7,13 @@ export const editItemById = async (
   req: Request,
   res: Response,
   next: NextFunction,
-  NAMESPACE: string,
-  TABLE_NAME: string,
+  namespace: string,
+  tableName: string,
   negativeOrNanInputError: object,
   dneError: object,
   inputtedReqBody: object
 ) => {
-  logging.info(NAMESPACE, `EDITING A ${TABLE_NAME.toUpperCase} BY ID`);
+  logging.info(namespace, `EDITING A ${tableName.toUpperCase} BY ID`);
   const itemId: number = +req.params.id;
   if (isInvalidInput(itemId)) {
     res.status(400).send(negativeOrNanInputError);
@@ -21,16 +21,42 @@ export const editItemById = async (
   }
 
   try {
-    const editByItemId = await Knex.update(inputtedReqBody).into(TABLE_NAME).where('id', '=', itemId);
+    const editByItemId = await Knex.update(inputtedReqBody).into(tableName).where('id', '=', itemId);
     if (!editByItemId) {
       res.status(404).send(dneError);
       return;
     }
-    const retrieveEditedItem = await Knex.select('*').from(TABLE_NAME).where('id', '=', itemId);
-    logging.info(NAMESPACE, `EDITED ${TABLE_NAME.toUpperCase} WITH ID ${itemId}`, retrieveEditedItem);
-    res.status(201).send(retrieveEditedItem);
+    const retrievedEditedItem = await Knex.select('*').from(tableName).where('id', '=', itemId);
+    logging.info(namespace, `EDITED ${tableName.toUpperCase} WITH ID ${itemId}`, retrievedEditedItem);
+    res.status(201).send(retrievedEditedItem);
   } catch (error: any) {
-    logging.error(NAMESPACE, error.message, error);
+    logging.error(namespace, error.message, error);
+    res.status(500).send(error);
+  }
+};
+
+export const editItemsById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+  namespace: string,
+  tableName: string,
+  negativeOrNanInputError: object,
+  dneError: object,
+  itemsToUpdate: object[]
+) => {
+  logging.info(namespace, `EDITING INSTANCES OF ${tableName.toUpperCase()}`);
+  try {
+    const editedItemsIds = await Promise.all(
+      itemsToUpdate.map(async (item: any) => {
+        return Knex.update(item).into(tableName).where('id', '=', item.id);
+      })
+    );
+    const retrievedEditedItems = await Knex.select('*').from(tableName).whereIn('id', editedItemsIds);
+    logging.info(namespace, `EDITED ${tableName.toUpperCase()} ROWS WITH IDS IN ${editedItemsIds}`, retrievedEditedItems);
+    res.status(201).send(retrievedEditedItems);
+  } catch (error: any) {
+    logging.error(namespace, error.message, error);
     res.status(500).send(error);
   }
 };
