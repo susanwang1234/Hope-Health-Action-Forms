@@ -2,12 +2,12 @@ import logging from '../../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../../db/mysql';
 
-export const createItem = async (req: Request, res: Response, next: NextFunction, namespace: string, tableName: string, inputtedReqBody: object) => {
-  logging.info(namespace, `CREATING A ${tableName.toUpperCase}`);
+export const createItem = async (req: Request, res: Response, next: NextFunction, NAMESPACE: string, TABLE_NAME: string, inputtedReqBody: object) => {
+  logging.info(NAMESPACE, `CREATING A ${TABLE_NAME.toUpperCase()}`);
   try {
-    const createdItem = await Knex.insert(inputtedReqBody).into(tableName);
-    const retrievedCreatedItem = await Knex.select('*').from(tableName).where('id', '=', createdItem);
-    logging.info(namespace, `CREATED ${tableName.toUpperCase}`, retrievedCreatedItem);
+    const createItem = await Knex.insert(inputtedReqBody).into(TABLE_NAME);
+    const retrievedCreatedItem = await Knex.select('*').from(TABLE_NAME).where('id', '=', createItem);
+    logging.info(NAMESPACE, 'CREATED ${TABLE_NAME.toUpperCase()}', retrievedCreatedItem);
     res.status(201).send(retrievedCreatedItem);
   } catch (error: any) {
     logging.error(namespace, error.message, error);
