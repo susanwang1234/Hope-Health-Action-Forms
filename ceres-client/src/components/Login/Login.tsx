@@ -60,11 +60,11 @@ function Login() {
 
   useEffect(() => {
     if (userContext) {
-      userContext.setUser({ name: 'Ritika', department: 'comp science' });
+      userContext.setUser({ role: 1, department: 2 });
     }
   }, []);
 
-  console.log('Username (Login) is ', userContext.user?.name);
+  console.log('Username (Login) is ', userContext.user?.role);
   console.log('Department (Login) is ', userContext.user?.department);
 
   return (

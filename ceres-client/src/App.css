@@ -1,23 +1,32 @@
-/* .App {
+ .App {
   text-align: center;
-} */
+} 
 
-/*
-Citation: https://css.gg/check-o
-Citation: https://css.gg/danger
-Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position
-Citation: https://www.w3schools.com/css/css3_buttons.asp
-*/
+.logo {
+  padding-left: 10px;
+  width: 140px;
+}
 
-.button{
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  border-radius: 0.25rem;
-  font: bold;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
-  padding-right: 1rem;
-  padding-left: 1rem;
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #efeaea;
+}
+
+.nav-header {
+  /* Nav bar */
+  padding: 20px;
+  background: #ffffff;
+  color: #91908e; 
+  height: auto;
+  display:flex;
+}
+
+.svg-hamburger {
+  /* Hamburger */
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .report-in-list{
@@ -26,7 +35,6 @@ Citation: https://www.w3schools.com/css/css3_buttons.asp
   display: block;
   align-self: center;
   padding: 10px;
-  
 }
 
 .report-in-list:hover{
@@ -38,26 +46,6 @@ Citation: https://www.w3schools.com/css/css3_buttons.asp
   padding: 10px;
 }
 
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  padding: 10px;
-}
-
-nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 7vh;
-  background-color: rgb(116, 116, 116);
-}
-.nav-links {
-  display: flex;
-  justify-content: space-around;
-  width: 50%;
-  color: white;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -67,17 +55,6 @@ nav {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {

@@ -2,14 +2,10 @@
 /*Citation: https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position*/
 /*Citation: https://www.w3schools.com/css/css3_buttons.asp*/
 
-dashboard {
-  background: #f3f4f6;
-  grid-area: main;
-  overflow-y: auto;
-}
-
 .dashboard-container {
   padding: 20px 35px;
+  display: flex;
+  flex: 0;
 }
 
 .dashboard-title {
@@ -36,7 +32,7 @@ dashboard {
 }
 
 .dashboard-cards {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 30px;
   margin: 20px 0;
@@ -59,46 +55,9 @@ dashboard {
   text-align: center;
   align-items: center;
   justify-content: space-between;
-  
 }
 
-.card1 {
-  background: #d1ecf1;
-  color: #35a4ba;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.card2 {
-  background: #d2f9ee;
-  color: #38e1b0;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.card3 {
-  background: #d6d8d9;
-  color: #3a3e41;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.card4 {
-  background: #fddcdf;
-  color: #f65a6f;
-  text-align: center;
-  padding: 25px;
-  border-radius: 5px;
-  font-size: 14px;
-}
-
-.add-button{
+.add-button {
   background-color: #59b030;
   color: white;
   border: none;
@@ -111,13 +70,13 @@ dashboard {
   margin-bottom: 6px;
   width: 80%;
   position: absolute;
-  bottom: 10%;  
-  left: 50%; 
+  bottom: 10%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.add-button:hover{
+.add-button:hover {
   background-color: #3a791c;
   color: white;
   border: none;
@@ -130,13 +89,13 @@ dashboard {
   margin-bottom: 6px;
   width: 80%;
   position: absolute;
-  bottom: 10%;  
-  left: 50%; 
+  bottom: 10%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.view-button{
+.view-button {
   background-color: #009cc4;
   color: white;
   border: none;
@@ -148,13 +107,13 @@ dashboard {
   margin-top: 6px;
   width: 80%;
   position: absolute;
-  bottom: 0%;  
-  left: 50%; 
+  bottom: 0%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.view-button:hover{
+.view-button:hover {
   background-color: #117088;
   color: white;
   border: none;
@@ -166,13 +125,13 @@ dashboard {
   margin-top: 6px;
   width: 80%;
   position: absolute;
-  bottom: 0%;  
-  left: 50%; 
+  bottom: 0%;
+  left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.filler-image{
+.filler-image {
   border: 2px solid black;
 }
 
