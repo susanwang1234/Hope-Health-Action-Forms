@@ -80,6 +80,7 @@ const DataPage = () => {
       let keys = Object.keys(displayingData)
       setDisplayingData({...displayingData, [keys[index]]: proccesedValue?.join("")});
       }
+      markEmptyfields(displayingData);
     }
 
     function handleClick(index: any): void {
@@ -110,7 +111,6 @@ const DataPage = () => {
       console.log("submit");
       if (validateEntries(displayingData)) {
         makeFieldsNumerical(displayingData);
-
         //send them
       }
       else{
@@ -167,7 +167,8 @@ const DataPage = () => {
             <button className="button add-report-button text-white w-80">Add Report</button>
           </div>
           <ReportData changeEntry={changeEntry} data={displayingData}
-           editStatus={editStatus} setEditStatus={switchEditMode} submitFunc={handleSubmission}/>
+           editStatus={editStatus} setEditStatus={switchEditMode} 
+           submitFunc={handleSubmission} empltyFields={empltyFields}/>
         </div>
       </React.Fragment>
     );

@@ -19,6 +19,13 @@
     background-color: rgb(241, 241, 241);
   }
 
+  .input-box-empty{
+    border: 2px solid rgb(202, 0, 0);
+    text-align: center;
+    border-radius: 0.25rem;
+    background-color: rgb(241, 241, 241);
+  }
+
   .report-data-buttons{
       display: flex;
       justify-content: space-between;

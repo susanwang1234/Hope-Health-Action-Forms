@@ -21,7 +21,7 @@ return(
         </UserContextProvider>
       </Switch>
     </Router>
-  );
+);
 }
 
 export default App;

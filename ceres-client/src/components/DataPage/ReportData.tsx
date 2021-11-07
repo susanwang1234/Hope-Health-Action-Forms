@@ -26,10 +26,10 @@ const ReportData = (props: any) =>{
         <form id={"daForm"} className="displaying-form-elements" onSubmit={props.submitFunc}>
           {pairs.map((pair: string[], index: number) => (
             (pair[0] !== "id" && pair[0] !== "curr_date") && 
-            <div>
+            <div key={index}>
               <label className="mx-3">{pair[0]}</label>
               <br></br>
-              <input key={index} className="input-box mx-3" type = "text" value = {pair[1]}
+              <input key={index} className={(props.empltyFields.includes(index))?"input-box-empty":"input-box mx-3"} type = "text" value = {pair[1]}
                readOnly={!props.editStatus} onChange={(event) => props.changeEntry(index, event)}></input>
             </div>
           ))}
