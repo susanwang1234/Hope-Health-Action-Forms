@@ -14,7 +14,7 @@ interface FormData {
 }
 
 function Login() {
-  const userCtx = useContext(UserContext);
+  const userContext = useContext(UserContext);
   let history = useHistory();
 
   const {
@@ -27,8 +27,8 @@ function Login() {
     const data = await AuthService.login(loginUser);
     const { isAuthenticated } = data;
     if (isAuthenticated) {
-      userCtx.setUser(data.user);
-      userCtx.setIsAuthenticated(isAuthenticated);
+      userContext.setUser(data.user);
+      userContext.setIsAuthenticated(isAuthenticated);
       history.push('/dashboard');
     } else {
       const { msg } = data;

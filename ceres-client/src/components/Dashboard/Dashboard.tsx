@@ -18,7 +18,7 @@ const Dashboard = () => {
     history.push('/case-study');
   };
 
-  const userCtx = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   /*
 leave for later

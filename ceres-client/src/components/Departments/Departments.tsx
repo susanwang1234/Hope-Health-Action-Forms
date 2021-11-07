@@ -12,13 +12,13 @@ import AuthService from '../../services/authService';
 
 function Departments() {
   let history = useHistory();
-  const userCtx = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
     if (data.success) {
-      userCtx.setUser(null);
-      userCtx.setIsAuthenticated(false);
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
     }
     history.push('/');
   };
