@@ -3,10 +3,9 @@ import { useForm } from 'react-hook-form';
 import Logo from './../../images/Logo.png';
 import display from './../../images/CBR_training_March 21.png';
 import { useHistory } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
-import { useEffect } from 'react';
-import http from '../../services/httpService';
+import AuthService from '../../services/authService';
 
 interface FormData {
   username: string;
@@ -15,6 +14,7 @@ interface FormData {
 }
 
 function Login() {
+  const userContext = useContext(UserContext);
   let history = useHistory();
 
   const {
@@ -23,36 +23,41 @@ function Login() {
     formState: { errors }
   } = useForm<FormData>({ mode: 'onChange' });
 
+  const postLogin = async (loginUser: any) => {
+    const data = await AuthService.login(loginUser);
+    const { isAuthenticated } = data;
+    if (isAuthenticated) {
+      userContext.setUser(data.user);
+      userContext.setIsAuthenticated(isAuthenticated);
+      history.push('/dashboard');
+    } else {
+      const { msg } = data;
+      window.alert("Invalid Username or Password");
+      // do something with error message
+    }
+  };
+
   const onSubmit = handleSubmit(({ username, password, remember }) => {
     const user = {
       username,
       password
     };
 
-    const postLogin = async (user: any) => {
-      try {
-        const url = '/auth/login';
-        const response = await http.post(url, user);
-        const { data } = response;
-        history.push('/dashboard');
-      } catch (error: any) {
-        console.log(error.response);
-      }
-    };
+    // Todo: validate user
 
     postLogin(user);
   });
 
-  const userContext = useContext(UserContext);
+  if(userContext.user?.username != null){
+    
+    console.log('(Login Page)  Username is ' , userContext.user?.username)
+    console.log('(Login Page) ID is ' , userContext.user?.id)
+    console.log('(Login Page) Department Id is ' , userContext.user?.departmentId)
+    console.log('(Login Page) Role ID is ' , userContext.user?.roleId)
+  }
 
-  useEffect(() => {
-    if (userContext) {
-      userContext.setUser({ role: 1, department: 2 });
-    }
-  }, []);
 
-  console.log('Username (Login) is ', userContext.user?.role);
-  console.log('Department (Login) is ', userContext.user?.department);
+
 
   return (
     <div className="flex xl:flex-row flex-col">

@@ -1,14 +1,17 @@
 import './Forms.css';
-import Navbar from '../Navbar/Navbar';
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, Row, Col, Nav } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Element from './Elements';
 import { FormContext } from './FormContext';
 import JSONfile from './jsonForms/rehabForm.json';
 import '../../App.css';
 import ToggleSwitch from './ToggleSwitch';
+
+import Sidebar from '../Sidebar/Sidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import logo from '../../images/navlogo.png';
 
 // console.log('JSONfile', JSONfile);
 
@@ -64,12 +67,17 @@ function Forms() {
     let nameOfMonth = month[month_index];
     return nameOfMonth + ' ' + partOfTitle;
   };
-  
- 
+
+  const [showNav, setShowNav] = useState(false);
+
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
-        <Navbar />
+        <header className="nav-header">
+          <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+          <img src={logo} alt="Logo" className="logo" />
+        </header>
+        <Sidebar show={showNav} />
         <div className="outer-block">
           <ToggleSwitch label="MSPP Data only" />
           <div className="blocks-form">

@@ -3,7 +3,6 @@ import '../../App.css';
 import './dataPage.css';
 import ReportElement from '../ReportElement';
 import ReportData from '../ReportData';
-import NavBar from '../../components/Navbar/Navbar';
 
 class DataPage extends React.Component<any[], any> {
   constructor(props: any[]) {
@@ -37,7 +36,6 @@ class DataPage extends React.Component<any[], any> {
   render() {
     return (
       <React.Fragment>
-        <NavBar />
         <div className="flex">
           <div className=" data-list border-black font-bold text-center p-4 m-6 row-span-3 bg-gray-300 relative rounded">
             <h4 className="text-center">Submitted Reports</h4>

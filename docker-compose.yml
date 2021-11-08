@@ -31,7 +31,6 @@ services:
     command: npm run dev
 
   ceres-database:
-    platform: linux/x86_64
     image: mysql:8.0
     build: ./ceres-database
     volumes:

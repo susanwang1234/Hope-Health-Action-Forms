@@ -41,7 +41,7 @@ describe('testGetDepartmentFormFailure', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Throw error code 404 for department with a negative number', (done) => {
+  it('Throw error code 400 for department with a negative number', (done) => {
     chai
       .request(testApp)
       .get('/department-form/-1')
