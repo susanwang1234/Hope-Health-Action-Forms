@@ -9,6 +9,7 @@
   - align-right
   - card
   - card-inner
+  - card-outer
   - center-content
   - dashboard-cards
   - dashboard-container
@@ -41,27 +42,7 @@
   float: right !important;
 }
 
-.card-outer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  padding: 25px;
-  border-radius: 5px;
-  background-color: transparent !important;
-  border-color: transparent !important;
-  flex: 1;
-  margin: 0 !important;
-}
 
-/*
-.card {
-  background-color: transparent !important;
-  border-color: transparent !important;
-  border-radius: 5px;
-  flex: 1;
-  margin: 0 !important;
-}
-*/
 .card-inner {
   align-items: center;
   background-color: #ffffff;
@@ -73,6 +54,18 @@
   margin-left: auto;
   margin-right: auto;
   padding: 25px;
+}
+
+.card-outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  border-radius: 5px;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  flex: 1;
+  margin: 0 !important;
 }
 
 .center-content {
