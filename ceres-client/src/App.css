@@ -1,6 +1,11 @@
 .App {
   text-align: center;
 }
+
+* {
+  font-family: Arial;
+}
+
 h2.inside-card {
   font-family: Arial;
   font-size: 30px;
