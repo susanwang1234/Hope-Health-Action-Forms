@@ -15,6 +15,14 @@
   margin-bottom: 10px;
 }
 
+.card-inner-case-study {
+  display: inline;
+  font-size: 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .radio-button {
   margin-right: 10px;
 }

@@ -50,7 +50,7 @@ const CaseStudy = () => {
           <tr>
             <td className="column-left">
               <div className="card">
-                <div className="card-inner">
+                <div className="card-inner-case-study">
                   <table className="filter-container">
                     <tr>
                       <td>
