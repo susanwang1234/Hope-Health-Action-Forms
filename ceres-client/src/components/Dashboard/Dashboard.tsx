@@ -58,13 +58,17 @@ leave for later
     return (
       <div className="app">
         <div className="calendar-container">
-          <Calendar onChange={setDate} value={date} selectRange={true} className="responsive-calendar" />
+          <Calendar onChange={setDate} value={date} selectRange={true} className="responsive-calendar flex-shrink"  />
         </div>
       </div>
     );
   }
 
   return (
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
     <div className="App">
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
@@ -86,7 +90,7 @@ leave for later
                   Due October 31 2021 <br />
                 </div>
               </div>
-              <div className="align-right">{generateCalendar()}</div>
+              <div className="align-right flex">{generateCalendar()}</div>
             </div>
 
             <p className="title">Leaderboard</p>
@@ -111,6 +115,7 @@ leave for later
         </div>
       </div>
     </div>
+    </html>
   );
 };
 

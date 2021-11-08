@@ -97,6 +97,16 @@
   padding-right: 10%;
 }
 
+.flex {
+  display: flex;
+}
+
+.flex-shrink{
+  max-width: 100% !important;
+  height: auto !important;
+  flex-shrink:3 !important;
+}
+
 .heading-1 {
   font-size: 20px;
   font-weight: bold;
@@ -151,4 +161,50 @@
     grid-template-columns: 1fr;
     margin-bottom: 0;
   }
+}
+
+/*CITATION: https://stackoverflow.com/questions/23081227/how-to-resize-div-and-contents-for-any-screen-size*/
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+/* Here you should set what size you want your div to be 
+when viewed on smartphone */
+/* Styles */
+.flex-shrink{
+  position: relative;
+  margin-left: 500px;
+  max-height: 50% !important;
+  max-width: 50% !important;
+  height: auto !important;
+  flex-shrink:3 !important;
+}
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+/* Styles */
+.flex-shrink{
+  position: relative;
+  margin-left: 500px;
+  max-height: 50% !important;
+  max-width: 50% !important;
+  height: auto !important;
+  flex-shrink:3 !important;
+}
+
+}
+
+/* Desktops and laptops ----------- */
+@media only screen 
+and (min-width : 1224px) {
+/* Styles */
+.flex-shrink{
+  max-height: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  flex-shrink:3 !important;
+}
+
 }
