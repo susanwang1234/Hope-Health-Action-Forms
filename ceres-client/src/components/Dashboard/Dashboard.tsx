@@ -13,7 +13,7 @@ const Dashboard = () => {
   let history = useHistory();
 
   const onClick = () => {
-    history.push('/case-study');
+    history.push('/case-studies/new');
   };
 
   const userContext = useContext(UserContext);
