@@ -1,3 +1,19 @@
+/*
+ CSS Classes
+  - container
+  - card
+  - card-inner-case-study
+  - radio-button
+  - button
+  - ...
+
+  Responsive CSS Classes
+  - dashboard-cards
+  - dashboard-container
+  - flex-shrink
+*/
+
+
 .container {
   width: 100% !important;
   text-align: center;
