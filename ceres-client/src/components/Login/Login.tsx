@@ -32,6 +32,7 @@ function Login() {
       history.push('/dashboard');
     } else {
       const { msg } = data;
+      window.alert("Invalid Username or Password");
       // do something with error message
     }
   };
