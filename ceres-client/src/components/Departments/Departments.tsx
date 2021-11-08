@@ -1,11 +1,12 @@
 import ToDoData from './ToDo.json';
 import './Departments.css';
 import '../../App.css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import logo from '../../images/navlogo.png';
 import { UserContext } from '../../UserContext';
 import { useContext } from 'react';
 import { useState, useEffect } from 'react';
+import AuthService from '../../services/authService';
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 
@@ -13,13 +14,20 @@ function Departments() {
   let history = useHistory();
   const userContext = useContext(UserContext);
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   const onClick = (departmentID: number, route: string) => {
-    userContext.setUser({ role: 1, department: departmentID });
     history.push(route);
   };
 
   const [departmentState, setDepartmentState] = useState({
-    isLoaded: false,
     departments: []
   });
 
@@ -33,7 +41,6 @@ function Departments() {
         const data = await response.json();
         console.log('Fetched Departments: ' + data);
         setDepartmentState({
-          isLoaded: true,
           departments: data
         });
       } catch (error: any) {
@@ -58,11 +65,11 @@ function Departments() {
   }
   //Purpose of slice is so that "all departments" does not get generate into a card
   return (
-    <div className="background">
+    <div className="department-background">
       <header className="department-header">
         <img src={logo} alt="Department Logo" className="department-logo"></img>
       </header>
-      <button type="submit" onClick={() => onClick(1, '/')} className="logout-button">
+      <button type="submit" onClick={onClickLogOutHandler} className="logout-button">
         Log Out
       </button>
       <button type="submit" className="admin-button">
