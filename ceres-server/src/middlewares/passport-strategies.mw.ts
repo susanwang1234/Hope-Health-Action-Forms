@@ -3,7 +3,6 @@ import passport from 'passport';
 import PassportJWT from 'passport-jwt';
 import config from '../config/config';
 import logging from '../config/logging';
-import { Knex } from '../db/mysql';
 import { Request } from 'express';
 import userModel from '../db/models/userModel';
 

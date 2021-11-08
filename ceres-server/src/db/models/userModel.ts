@@ -1,4 +1,3 @@
-import { User } from '../types/userType';
 import { Knex } from '../mysql';
 
 // template to find a user corresponding to any type of column value
