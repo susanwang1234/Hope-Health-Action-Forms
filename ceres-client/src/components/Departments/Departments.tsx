@@ -32,9 +32,9 @@ function Departments() {
   });
 
   useEffect(() => {
-    getData();
+    getDepartments();
 
-    async function getData() {
+    async function getDepartments() {
       const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
       const url = `${baseApiUrl}/department`;
       try {
@@ -65,12 +65,11 @@ function Departments() {
     );
   }
 
-  if(userContext.user?.username != null){
-    
-    console.log('(Departments Page)  Username is ' , userContext.user?.username)
-    console.log('(Departments Page) ID is ' , userContext.user?.id)
-    console.log('(Departments Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Departments Page) Role ID is ' , userContext.user?.roleId)
+  if (userContext.user?.username != null) {
+    console.log('(Departments Page)  Username is ', userContext.user?.username);
+    console.log('(Departments Page) ID is ', userContext.user?.id);
+    console.log('(Departments Page) Department Id is ', userContext.user?.departmentId);
+    console.log('(Departments Page) Role ID is ', userContext.user?.roleId);
   }
 
   //Purpose of slice is so that "all departments" does not get generate into a card

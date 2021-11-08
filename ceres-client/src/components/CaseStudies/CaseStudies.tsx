@@ -20,9 +20,9 @@ const CaseStudy = () => {
   });
 
   useEffect(() => {
-    getData();
+    getCaseStudies();
 
-    async function getData() {
+    async function getCaseStudies() {
       const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
       const url = `${baseApiUrl}/case-studies`;
       try {
@@ -39,11 +39,11 @@ const CaseStudy = () => {
     }
   }, [setCaseStudyState]);
 
-  if(userContext.user?.username != null){
-    console.log('(Case Study View Page)  Username is ' , userContext.user?.username)
-    console.log('(Case Study View Page) ID is ' , userContext.user?.id)
-    console.log('(Case Study View Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Departments Page) Role ID is ' , userContext.user?.roleId)
+  if (userContext.user?.username != null) {
+    console.log('(Case Study View Page)  Username is ', userContext.user?.username);
+    console.log('(Case Study View Page) ID is ', userContext.user?.id);
+    console.log('(Case Study View Page) Department Id is ', userContext.user?.departmentId);
+    console.log('(Departments Page) Role ID is ', userContext.user?.roleId);
   }
 
   return (
