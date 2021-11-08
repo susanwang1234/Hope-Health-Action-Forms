@@ -35,7 +35,8 @@ function Departments() {
     getData();
 
     async function getData() {
-      const url = 'http://localhost:8080/department';
+      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
+      const url = `${baseApiUrl}/department`;
       try {
         const response = await fetch(url);
         const data = await response.json();

@@ -23,7 +23,8 @@ const CaseStudy = () => {
     getData();
 
     async function getData() {
-      const url = 'http://localhost:8080/case-studies';
+      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
+      const url = `${baseApiUrl}/case-studies`;
       try {
         const response = await fetch(url);
         const data = await response.json();

@@ -23,7 +23,8 @@ const CaseStudySubmit = () => {
     questions: []
   });
   async function getQuestions(selectedOption: String | undefined) {
-    const url = 'http://localhost:8080/case-study-questions/' + selectedOption;
+    const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
+    const url = `${baseApiUrl}/case-study-questions/${selectedOption}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -39,7 +40,8 @@ const CaseStudySubmit = () => {
     getTypeData();
 
     async function getTypeData() {
-      const url = 'http://localhost:8080/case-study-types';
+      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
+      const url = `${baseApiUrl}/case-study-types`;
       try {
         const response = await fetch(url);
         const data = await response.json();

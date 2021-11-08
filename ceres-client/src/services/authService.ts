@@ -2,12 +2,12 @@ import { loginInfoType } from '../types/userAccountType';
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-const baseApiUrl = 'http://localhost:8080';
+const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
 
 const AuthService = {
   login: (user: loginInfoType): Promise<any> => {
     return axios
-      .post(baseApiUrl + '/auth/login', user)
+      .post(`${baseApiUrl}/auth/login`, user)
       .then((res) => res.data)
       .catch((error) => {
         if (error.response) {
@@ -17,12 +17,13 @@ const AuthService = {
   },
 
   logout: (): Promise<any> => {
-    return axios.get(baseApiUrl + '/auth/logout').then((res) => res.data);
+    return axios.get(`${baseApiUrl}/auth/logout`).then((res) => res.data);
   },
 
   isAuthenticated: (): Promise<any> => {
+    console.log(baseApiUrl);
     return axios
-      .get(baseApiUrl + '/auth/authenticate')
+      .get(`${baseApiUrl}/auth/authenticate`)
       .then((res) => res.data)
       .catch((error) => {
         return { isAuthenticated: false, user: null };
