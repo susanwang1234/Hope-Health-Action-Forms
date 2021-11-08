@@ -29,7 +29,7 @@ function Login() {
     if (isAuthenticated) {
       userContext.setUser(data.user);
       userContext.setIsAuthenticated(isAuthenticated);
-      history.push('/dashboard');
+      history.push('/departments');
     } else {
       const { msg } = data;
       window.alert("Invalid Username or Password");
