@@ -96,7 +96,7 @@ const CaseStudySubmit = () => {
             })}
           </select>
           <div className="photo">
-            <h2 className="mb-4">Upload Photo</h2>
+            <p className="inside-text-case-study">Upload Photo</p>
             <div>
               <div className="person_image float-left">
                 <img src={gray_person} alt="Person" />
@@ -119,6 +119,7 @@ const CaseStudySubmit = () => {
               </div>
             );
           })}
+          <button className="logout-button -top-0 -right-1%">Cancel</button>
         </div>
       </div>
     </div>
