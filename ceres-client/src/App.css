@@ -39,23 +39,6 @@ body {
   cursor: pointer;
 }
 
-.report-in-list {
-  border: 1px solid black;
-  background-color: rgb(179, 179, 179);
-  display: block;
-  align-self: center;
-  padding: 10px;
-}
-
-.report-in-list:hover {
-  background-color: rgb(39, 194, 221);
-}
-
-.edit-button:hover {
-  background-color: rgb(39, 194, 221);
-  padding: 10px;
-}
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -46,7 +46,7 @@ const DataPage = () => {
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} />
-        <div className=" data-list border-black font-bold text-center p-4 m-6 row-span-3 bg-gray-300 relative rounded">
+        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded">
           <h4 className="text-center">Submitted Reports</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (

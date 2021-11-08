@@ -1,7 +1,7 @@
 .data-list {
   margin: 2em;
   padding: 25px;
-  border: 1px solid blanchedalmond;
+  border: 1px solid rgb(204, 204, 204);
   height: 500px;
   border-radius: 5px;
   background: #ffffff;
@@ -77,14 +77,6 @@
   background-color: #e7e7e7;
 }
 
-.add-report-button {
-  background-color: #59b030;
-  font-weight: bold;
-}
-.add-report-button:hover {
-  background-color: rgb(79, 138, 79);
-}
-
 .report-view-button:hover {
   background-color: #62c8eb;
 }
@@ -99,6 +91,7 @@
   background-color: #4aa9c9;
   margin: 0.75rem;
   width: 7rem;
+  padding: 6px;
   font-weight: bold;
 }
 .update-button {

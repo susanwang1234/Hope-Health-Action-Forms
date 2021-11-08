@@ -7,9 +7,10 @@ const ReportData = (props: any) => {
   const [editStatus, setEditStatus] = useState(false);
 
   useEffect(() => {
-    const url = `http://localhost:8080/form-responses/${props.data.departmentId}`;
+    const url = `http://localhost:8080/form-responses/${props.data.id}`;
     const response: any = fetch(url)
       .then((response) => {
+        console.log(response);
         if (response.ok) {
           return response.json();
         }
@@ -47,6 +48,10 @@ const ReportData = (props: any) => {
     setEmptyFields(empltyFildsIndexes);
   };
 
+  // const forceUpdateHandler = () =>{
+  //   this?.forceUpdate();
+  // };
+
   const handleSubmission = (event: any) => {
     if (validateEntries(formEntries)) {
       const PUTEntries = createArrayEntriesToPut(formEntries);
@@ -74,7 +79,10 @@ const ReportData = (props: any) => {
     </button>
   );
   const cancelButton = (
-    <button className="cancel-button" onClick={() => setEditStatus(false)}>
+    <button className="cancel-button" onClick={() => {
+      setEditStatus(false);
+      // forceUpdateHandler;
+    }}>
       Cancel
     </button>
   );
@@ -91,7 +99,7 @@ const ReportData = (props: any) => {
         {editStatus === true ? <h2 className="edit-title">Edit Mode</h2> : <></>}
         <div className="data-header">
           <p className="px-3 text-gray-500">Date: {makeDateShort(props.data.createdAt)}</p>
-          <p className="px-3 text-gray-500">report ID: {props.data.departmentId}</p>
+          <p className="px-3 text-gray-500">report ID: {props.data.id}</p>
         </div>
         <p className="mx-3 font-bold text-center">Rehab department's report</p>
         <form id={'daForm'} className="displaying-form-elements" onSubmit={handleSubmission}>
