@@ -95,6 +95,7 @@ const CaseStudySubmit = () => {
               return <option value={Types.id}>{Types.name}</option>;
             })}
           </select>
+
           <div className="photo">
             <p className="inside-text-case-study">Upload Photo</p>
             <div>
@@ -111,15 +112,17 @@ const CaseStudySubmit = () => {
               </div>
             </div>
           </div>
-          {caseStudyQuestions.questions.map((Questions: any, index: any) => {
-            return (
-              <div>
-                <p className="inside-text-case-study">{Questions.label}</p>
-                <textarea className="response" placeholder="Type here..."></textarea>
-              </div>
-            );
-          })}
-          <button className="logout-button -top-0 -right-1%">Cancel</button>
+
+          <div className="w-full flex flex-col">
+            {caseStudyQuestions.questions.map((Questions: any, index: any) => {
+              return (
+                <div>
+                  <p className="inside-text-case-study">{Questions.label}</p>
+                  <textarea className="response" placeholder="Type here..."></textarea>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
