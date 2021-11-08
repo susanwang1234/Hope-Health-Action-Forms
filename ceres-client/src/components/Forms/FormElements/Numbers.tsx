@@ -6,59 +6,61 @@ import { FormContext } from '../FormContext';
 
 // Citation: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
-const Numbers = ({ my_field_id, my_field_label, my_field_placeholder, my_field_value, my_field_mandatory }: any) => {
-  const { handleChange }: any = useContext(FormContext);
+function createHeading(fieldLabel: any, fieldMandatory: any) {
+  let heading: any = { fieldLabel };
 
-  let heading: any = { my_field_label };
-  
-  if (my_field_mandatory === true) {
+  if (fieldMandatory === true) {
     heading = (
       <>
-        {my_field_label} <div className="required">(Required)</div>
+        {fieldLabel} <div className="required"> (Required)</div>
       </>
     );
-  }
-  else {
-    heading = (
-    <>
-      {my_field_label}
-    </>
-    );
+  } else {
+    heading = <>{fieldLabel}</>;
   }
 
-  let numberClassName = "width-20-percent";
-  if(my_field_value === null && my_field_mandatory == true){
-    numberClassName = numberClassName + " field-invalid-border"
+  return heading;
+}
+
+function getClassName(fieldValue: any, fieldMandatory: any) {
+  let numberClassName = 'width-40-percent';
+  if (fieldValue === null && fieldMandatory == true) {
+    numberClassName = numberClassName + ' field-invalid-border';
   }
+  return numberClassName;
+}
+
+const Numbers = ({ fieldID, fieldLabel, fieldPlaceholder, fieldValue, fieldMandatory }: any) => {
+  const { handleChange }: any = useContext(FormContext);
+
+  let heading = createHeading(fieldLabel, fieldMandatory);
+
+  let numberClassName = getClassName(fieldValue, fieldMandatory);
 
   return (
     <div>
-      <Row>
         <Form.Label column lg={2}>
           {heading}
         </Form.Label>
-        <Col>
-          <Form.Control
-            className={numberClassName}
-            size="sm"
-            type="number"
-            id="number-entry"
-            name="number-entry"
-            min="0"
-            max="9999999999"
-            maxLength={10}
-            placeholder={my_field_placeholder ? my_field_placeholder : ''}
-            value={parseInt(my_field_value, 10)}
-            onInput={(event: any) => {
-              let onInputEvent = event.target;
-              if (onInputEvent.maxLength < onInputEvent.value.length) {
-                onInputEvent.value = onInputEvent.value.slice(0, onInputEvent.maxLength);
-              }
-              handleChange(my_field_id, event);
-            }}
-          />
-        </Col>
-      </Row>
+        <Form.Control
+          className={numberClassName}
+          size="sm"
+          type="number"
+          id="number-entry"
+          name="number-entry"
+          min="0"
+          max="9999999999"
+          maxLength={10}
+          placeholder={fieldPlaceholder ? fieldPlaceholder : ''}
+          value={parseInt(fieldValue, 10)}
+          onInput={(event: any) => {
+            let onInputEvent = event.target;
+            if (onInputEvent.maxLength < onInputEvent.value.length) {
+              onInputEvent.value = onInputEvent.value.slice(0, onInputEvent.maxLength);
+            }
+            handleChange(fieldID, event);
+          }}
+        />
       <br />
     </div>
   );
