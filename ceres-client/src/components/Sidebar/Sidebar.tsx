@@ -3,12 +3,12 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { HiHome} from 'react-icons/hi';
+import { HiHome } from 'react-icons/hi';
 import { BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
 import { IoMdArrowDropdown } from 'react-icons/io';
-import { FaHistory } from 'react-icons/fa'
-import { ImStatsDots } from 'react-icons/im'
+import { FaHistory } from 'react-icons/fa';
+import { ImStatsDots } from 'react-icons/im';
 import './Sidebar.css';
 
 const Sidebar = ({ show }: any) => {

@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <UserContextProvider> 
+        <UserContextProvider>
           <Route exact path="/" component={Login} />
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/submit-report" component={Forms}></Route>
