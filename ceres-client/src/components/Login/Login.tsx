@@ -32,6 +32,7 @@ function Login() {
       history.push('/dashboard');
     } else {
       const { msg } = data;
+      window.alert("Invalid Username or Password");
       // do something with error message
     }
   };
@@ -46,6 +47,17 @@ function Login() {
 
     postLogin(user);
   });
+
+  if(userContext.user?.username != null){
+    
+    console.log('(Login Page)  Username is ' , userContext.user?.username)
+    console.log('(Login Page) ID is ' , userContext.user?.id)
+    console.log('(Login Page) Department Id is ' , userContext.user?.departmentId)
+    console.log('(Login Page) Role ID is ' , userContext.user?.roleId)
+  }
+
+
+
 
   return (
     <div className="flex xl:flex-row flex-col">

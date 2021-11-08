@@ -38,6 +38,13 @@ const CaseStudy = () => {
     }
   }, [setCaseStudyState]);
 
+  if(userContext.user?.username != null){
+    console.log('(Case Study View Page)  Username is ' , userContext.user?.username)
+    console.log('(Case Study View Page) ID is ' , userContext.user?.id)
+    console.log('(Case Study View Page) Department Id is ' , userContext.user?.departmentId)
+    console.log('(Departments Page) Role ID is ' , userContext.user?.roleId)
+  }
+
   return (
     <div className="App">
       <header className="nav-header">

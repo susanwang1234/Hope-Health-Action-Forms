@@ -45,6 +45,14 @@ const Dashboard = () => {
     );
   }
 
+  if(userContext.user?.username != null){
+    
+    console.log('(Dashboard Page)  Username is ' , userContext.user?.username)
+    console.log('(Dashboard Page) ID is ' , userContext.user?.id)
+    console.log('(Dashboard Page) Department Id is ' , userContext.user?.departmentId)
+    console.log('(Dashboard Page) Role ID is ' , userContext.user?.roleId)
+  }
+
   return (
     <html>
     <head>
