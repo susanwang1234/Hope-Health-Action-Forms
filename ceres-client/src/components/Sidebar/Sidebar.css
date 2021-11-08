@@ -51,9 +51,10 @@ ul lu a.active {
   font-size: 14px !important;
   font-family: Arial !important;
   border: none !important;
-  padding-left: 20px !important;
   display: flex !important;
   width: 100% !important;
+  margin-left: 0px !important;
+  padding-left: 0px !important;
   align-items: center !important;
 }
 

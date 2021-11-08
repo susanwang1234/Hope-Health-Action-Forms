@@ -1,11 +1,10 @@
 import './Forms.css';
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Form, Row, Col, Nav } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import Element from './Elements';
 import { FormContext } from './FormContext';
-
 import JSONfile from './jsonForms/rehabForm.json';
 
 // console.log('JSONfile', JSONfile);

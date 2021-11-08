@@ -27,25 +27,6 @@ const Dashboard = () => {
     history.push('/case-studies/new');
   };
   const userContext = useContext(UserContext);
-  /*
-leave for later
-  var departmentIndex = userContext.user?.department;
-  function iconChecker(isComplete: boolean){
-  	if(isComplete){
-    	return (
-      	<div className="checkmark-icon">
-        	<div className="checkmark"></div>
-      	</div>
-    	);}
-    	return(
-      	<div className="alert-icon">
-        	<div className="alert"></div>
-      	</div>
-    	);
-	}
-    <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
-		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
-  */
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
   const instructions = (event: any) => {
