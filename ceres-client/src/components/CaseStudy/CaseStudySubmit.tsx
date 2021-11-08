@@ -70,8 +70,6 @@ const CaseStudySubmit = () => {
     setShareImage(image);
   };
 
-  console.log('Username (Case Study) is ', userContext.user?.role);
-  console.log('Department (Case Study) is ', userContext.user?.department);
   return (
     <div className="casestudy-background">
       <header className="nav-header">
