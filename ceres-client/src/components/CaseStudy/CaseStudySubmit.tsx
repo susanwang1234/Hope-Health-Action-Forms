@@ -100,9 +100,9 @@ const CaseStudySubmit = () => {
             <p className="inside-text-case-study">Upload Photo</p>
             <div>
               <div className="person_image float-left">
-                <img src={gray_person} alt="Person" />
+                <img src={shareImage? URL.createObjectURL(shareImage):gray_person} alt="Person" />
               </div>
-              <div className="float-left">
+              <div className="float-left pl-10">
                 <input type="checkbox" />
                 <p>
                   This person has given permission to share their story <br />
@@ -113,7 +113,7 @@ const CaseStudySubmit = () => {
             </div>
           </div>
 
-          <div className ="w-full flex flex-col">
+          <div className ="w-full flex flex-col pt-10">
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
@@ -123,8 +123,6 @@ const CaseStudySubmit = () => {
               );
             })}
           </div>
-
-
         </div>
       </div>
     </div>
