@@ -1,47 +1,56 @@
 import '../../App.css';
 import './Dashboard.css';
+
 import { useHistory } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
+
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import display from './../../images/original_artwork.jpg';
-// Citation: https://github.com/mustafaerden/react-admin-dashboard
+import profilePic from './../../images/original_artwork.jpg';
+import leaderboard from './../../images/leaderboard.jpg';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { IoIosAlert } from 'react-icons/io';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { IoIosInformationCircle } from 'react-icons/io';
+
+/* Citations: 
+    https://github.com/mustafaerden/react-admin-dashboard
+    https://blog.logrocket.com/react-calendar-tutorial-build-customize-calendar/
+*/
 
 const Dashboard = () => {
   let history = useHistory();
-
   const onClick = () => {
-    history.push('/case-study');
+    history.push('/case-studies/new');
+  };
+  const userContext = useContext(UserContext);
+  const [showNav, setShowNav] = useState(false);
+  const [date, setDate]: any = useState(new Date());
+  const instructions = (event: any) => {
+    alert(
+      'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
+    );
   };
 
-  const userContext = useContext(UserContext);
-
-  console.log('Username (Dashboard) is ', userContext.user?.role);
-  console.log('Department (Dashboard) is ', userContext.user?.department);
-  /*
-leave for later
-  var departmentIndex = userContext.user?.department;
-  function iconChecker(isComplete: boolean){
-  	if(isComplete){
-    	return (
-      	<div className="checkmark-icon">
-        	<div className="checkmark"></div>
-      	</div>
-    	);}
-    	return(
-      	<div className="alert-icon">
-        	<div className="alert"></div>
-      	</div>
-    	);
-	}
-    <div className="text">{iconChecker(ToDoData[departmentIndex!-1].caseStudy)}Case Study</div>
-		<div className="text">{iconChecker(ToDoData[departmentIndex!-1].mspp)}MSPP Report</div>
-  */
-  const [showNav, setShowNav] = useState(false);
+  function generateCalendar() {
+    return (
+      <div className="app">
+        <div className="calendar-container">
+          <Calendar onChange={setDate} value={date} selectRange={true} className="responsive-calendar flex-shrink"  />
+        </div>
+      </div>
+    );
+  }
 
   return (
+    <html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <body>
     <div className="App">
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
@@ -49,57 +58,47 @@ leave for later
       </header>
       <Sidebar show={showNav} />
       <div className="dashboard-container">
-        {/* <!-- MAIN CARDS STARTS HERE --> */}
-
         <div className="dashboard-cards">
-          <div className="card">
-            <i className="fa fa-user-o fa-2x text-lightblue" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">Case Study</p>
-              <img src={display} alt="Display" className="filler-image"></img>
-              <p className="text-primary-p">Cool case information here or maybe a short summary.</p>
-              <button type="submit" onClick={onClick} className="view-button">
-                Current Case Studies
-              </button>
-              <button type="submit" onClick={onClick} className="add-button">
-                + Add Case Study
-              </button>
+          <div className="card-outer fill-space-left">
+            <p className="title">To Do</p>
+            <div className="card-inner width-100-percent">
+              <div className="align-left">
+                <div className="due-content">
+                  <IoIosCheckmarkCircle className="icon" /> Case Study <br />
+                  Due October 31 2021
+                </div>
+                <div className="due-content">
+                  <IoIosAlert className="icon" /> MSPP Report <br />
+                  Due October 31 2021 <br />
+                </div>
+              </div>
+              <div className="align-right flex">{generateCalendar()}</div>
+            </div>
+
+            <p className="title">Leaderboard</p>
+            <div className="card-inner width-100-percent">
+              <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
+              <img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>
             </div>
           </div>
 
-          <div className="card">
-            <i className="fa fa-calendar fa-2x text-red" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">Department Info</p>
-            </div>
-          </div>
-
-          <div className="card">
-            <i className="fa fa-video-camera fa-2x text-yellow" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">Employee of the Month</p>
-              <img src={display} alt="Display" className="filler-image"></img>
-              <p className="text-primary-p">Information about employee of the month.</p>
-              <button type="submit" className="view-button">
-                Current Employee
-              </button>
-              <button type="submit" className="add-button">
-                + Add Employee
-              </button>
-            </div>
-          </div>
-
-          <div className="card">
-            <i className="fa fa-thumbs-up fa-2x text-green" aria-hidden="true"></i>
-            <div className="card-inner">
-              <p className="font-bold text-title">To Do</p>
-              <p className="text-primary-p">Dynamic list goes here.</p>
+          <div className="card-outer fill-space-right">
+            <p className="title">Employee of the Month</p>
+            <div className="card-inner height-100-percent">
+              <img src={profilePic} alt="profile pic" className="profile-pic"></img>
+              <h1 className="heading-1">Name: Zack Cody</h1>
+              <h1 className="heading-1">Department: Maternity</h1>
+              <p className="text-primary-p employee-paragraph">
+                Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is
+                employee of the month. Go Zack!
+              </p>
             </div>
           </div>
         </div>
-        {/* <!-- MAIN CARDS ENDS HERE --> */}
       </div>
     </div>
+    </body>
+    </html>
   );
 };
 

@@ -1,7 +1,7 @@
 {
   "info": {
-    "_postman_id": "a22f8451-b1bc-44f3-9c6a-9bf73ae711fb",
-    "name": "ceres",
+    "_postman_id": "0255111b-9675-4782-963a-c7be042242ac",
+    "name": "Ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -51,6 +51,34 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["api", "secrets"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/auth/logout",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["auth", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "authenticate",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/auth/authenticate",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["auth", "authenticate"]
             }
           },
           "response": []

@@ -1,138 +1,143 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
 
-const ReportData = (props: any) =>{
+const ReportData = (props: any) => {
   const [formEntries, setFormEntries] = useState<any[]>([]);
   const [empltyFields, setEmptyFields] = useState<number[]>([]);
-  const [editStatus,setEditStatus] = useState(false);
+  const [editStatus, setEditStatus] = useState(false);
 
-  useEffect (() => {
+  useEffect(() => {
     const url = `http://localhost:8080/form-responses/${props.data.departmentId}`;
     const response: any = fetch(url)
-    .then(response => {
-      if (response.ok) {
-        return response.json();
-      }
-      console.log('Error: Unable to fetch from ' + url);
-      throw response;
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        console.log('Error: Unable to fetch from ' + url);
+        throw response;
       })
-    .then(data => {
-      setFormEntries(data);
-    })
-  }, [])
-  
+      .then((data) => {
+        setFormEntries(data);
+      });
+  }, []);
 
   const changeEntry = (index: number, event: any) => {
     let eventValue: string = event.target.value;
     let pattern = /\d/g;
-    let proccesedValue = eventValue.match(pattern)
+    let proccesedValue = eventValue.match(pattern);
     if (proccesedValue === null) {
-      proccesedValue = [""];
+      proccesedValue = [''];
     }
-    if(proccesedValue.length < 7){
-    let clonedEntries = [...formEntries];
-    let changedEntry = {...formEntries[index], response: proccesedValue?.join("")};
-    clonedEntries[index] = changedEntry;
-    setFormEntries(clonedEntries);
+    if (proccesedValue.length < 7) {
+      let clonedEntries = [...formEntries];
+      let changedEntry = { ...formEntries[index], response: proccesedValue?.join('') };
+      clonedEntries[index] = changedEntry;
+      setFormEntries(clonedEntries);
     }
-  }
+  };
 
   const markEmptyfields = (dataObj: any): void => {
-    const empltyFildsIndexes : number[] = [];
+    const empltyFildsIndexes: number[] = [];
     const values = Object.values(dataObj);
-    for(let i = 0; i <values.length; i++){
-      if(values[i] === ""){
+    for (let i = 0; i < values.length; i++) {
+      if (values[i] === '') {
         empltyFildsIndexes.push(i);
       }
     }
     setEmptyFields(empltyFildsIndexes);
-  }
+  };
 
-  const handleSubmission = (event: any) =>{
+  const handleSubmission = (event: any) => {
     if (validateEntries(formEntries)) {
       const PUTEntries = createArrayEntriesToPut(formEntries);
-      const formId : Number = props.data.id; 
-      fetch(`http://localhost:8080/form-responses/${formId}`,{
-      method: "PUT",
-      headers:{"Content-type": "application/json"},
-      body: JSON.stringify(PUTEntries)
-      }).then((response: any) =>response.json())
-      .then((data:any) => console.log(data))
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
-    else{
+      const formId: Number = props.data.id;
+      fetch(`http://localhost:8080/form-responses/${formId}`, {
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(PUTEntries)
+      })
+        .then((response: any) => response.json())
+        .then((data: any) => console.log(data))
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
       markEmptyfields(formEntries);
-      alert("All fields are required. please fill them up!");
+      alert('All fields are required. please fill them up!');
       event.preventDefault();
     }
-  }
+  };
 
-  const updateButton = <button form="daForm" className="update-button">
-    Update data
+  const updateButton = (
+    <button form="daForm" className="update-button">
+      Update data
     </button>
-  const cancelButton = <button className="cancel-button" onClick={() => setEditStatus(false)}>
-    Cancel
+  );
+  const cancelButton = (
+    <button className="cancel-button" onClick={() => setEditStatus(false)}>
+      Cancel
     </button>
-  const editButton = <button className=" edit-button" onClick={() => setEditStatus(true)}>
-    Edit
+  );
+  const editButton = (
+    <button className=" edit-button" onClick={() => setEditStatus(true)}>
+      Edit
     </button>
+  );
   if (props.data === null) {
     return <p className="m-60 font-bold text-xl">Select a report from the list</p>;
   } else {
     return (
       <div className="displaying-form">
-        {(editStatus === true) ? <h2 className="edit-title">Edit Mode</h2>:<></>}
+        {editStatus === true ? <h2 className="edit-title">Edit Mode</h2> : <></>}
         <div className="data-header">
-          <p className ="px-3 text-gray-500">Date: {makeDateShort(props.data.createdAt)}</p>
+          <p className="px-3 text-gray-500">Date: {makeDateShort(props.data.createdAt)}</p>
           <p className="px-3 text-gray-500">report ID: {props.data.departmentId}</p>
         </div>
         <p className="mx-3 font-bold text-center">Rehab department's report</p>
-        <form id={"daForm"} className="displaying-form-elements" onSubmit={handleSubmission}>
-          {formEntries.map((entry: any, index: number) => (
-            (entry.label !== "departmentId" && entry.label !== "createdAt") && 
-            <div>
-              <label className="mx-3">{entry.label}</label>
-              <br></br>
-              <input key={index} className={"input-box mx-3"} type = "text" value = {entry.response}
-               readOnly={!editStatus} onChange={(event) => changeEntry(index, event)}></input>
-            </div>
-          ))}
+        <form id={'daForm'} className="displaying-form-elements" onSubmit={handleSubmission}>
+          {formEntries.map(
+            (entry: any, index: number) =>
+              entry.label !== 'departmentId' &&
+              entry.label !== 'createdAt' && (
+                <div>
+                  <label className="mx-3">{entry.label}</label>
+                  <br></br>
+                  <input key={index} className={'input-box mx-3'} type="text" value={entry.response} readOnly={!editStatus} onChange={(event) => changeEntry(index, event)}></input>
+                </div>
+              )
+          )}
         </form>
         <div className="report-data-buttons">
-          {(editStatus === true) ? cancelButton:editButton}
-          {editStatus === true &&
-            updateButton
-          }
+          {editStatus === true ? cancelButton : editButton}
+          {editStatus === true && updateButton}
         </div>
       </div>
     );
   }
-}
+};
 export default ReportData;
 
 function makeDateShort(date: string): string {
   return date.length > 10 ? date.substring(0, 10) : date;
 }
 
-function validateEntries(dataEntries : any) : boolean{
-  for(let i = 0; i <dataEntries.length; i++){
-    if(dataEntries[i].response === ""){
+function validateEntries(dataEntries: any): boolean {
+  for (let i = 0; i < dataEntries.length; i++) {
+    if (dataEntries[i].response === '') {
       return false;
     }
   }
-  return true
+  return true;
 }
 
-function createArrayEntriesToPut(rawArray: any[]) : any[]{
-  let proccesedEntries =[];
-  for(let i=0; i< rawArray.length; i++){
+function createArrayEntriesToPut(rawArray: any[]): any[] {
+  let proccesedEntries = [];
+  for (let i = 0; i < rawArray.length; i++) {
     proccesedEntries[i] = {
       id: parseInt(rawArray[i].id),
       departmentQuestionId: parseInt(rawArray[i].departmentQuestionId),
       response: parseInt(rawArray[i].response)
-    } 
+    };
   }
   return proccesedEntries;
 }

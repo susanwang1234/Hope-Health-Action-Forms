@@ -13,12 +13,13 @@ const issueJWT = (user: myUser) => {
 
   const payload = {
     sub: user.id,
-    iat: Date.now()
+    iat: Date.now(),
+    expiresIn: expiresIn
   };
 
   const signedToken = jwt.sign(payload, config.jwt.secret, { expiresIn: expiresIn });
   return {
-    token: 'Bearer ' + signedToken,
+    token: signedToken,
     expiresIn: expiresIn
   };
 };

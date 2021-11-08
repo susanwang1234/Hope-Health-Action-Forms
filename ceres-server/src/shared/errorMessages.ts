@@ -6,6 +6,7 @@ function dneError(entity: string, errorMessage: string) {
   return { error: `${entity} ${errorMessage}` };
 }
 
+// TODO: Generalize these better so they can be used for more controllers
 const caseStudyNegativeOrNanInputError = negativeOrNanInputError('/case-studies/:id');
 const caseStudyDNEError = dneError('Case Study', 'does not exist');
 const caseStudyQuestionsNegativeOrNanInputError = negativeOrNanInputError('/case-study-questions/:id');
@@ -25,6 +26,8 @@ export {
   caseStudyQuestionsDNEError,
   departmentNegativeOrNanInputError,
   departmentDNEError,
+  formNegativeOrNanInputError,
+  formDNEError,
   userNegativeOrNanInputError,
   userDNEError,
   pageNotFoundError

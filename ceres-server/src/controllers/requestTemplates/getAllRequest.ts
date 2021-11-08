@@ -6,19 +6,11 @@ import { Role } from '../../db/models/roleModel';
 import { Department } from 'db/models/departmentModel';
 import { CaseStudyType } from 'db/models/caseStudyTypeModel';
 
-<<<<<<< HEAD
 export const getItems = async (req: Request, res: Response, next: NextFunction, namespace: string, tableName: string) => {
-  logging.info(namespace, `GETTING LIST OF ${tableName.toUpperCase}`);
+  logging.info(namespace, `GETTING LIST OF ${tableName.toUpperCase()}S`);
   try {
-    let items: User[] | Role[] | Department[] = await Knex.select('*').from(tableName);
-    logging.info(namespace, `Retrieved ${tableName.toUpperCase}:`, items);
-=======
-export const getItems = async (req: Request, res: Response, next: NextFunction, NAMESPACE: string, TABLE_NAME: string) => {
-  logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase()}S`);
-  try {
-    const items: User[] | Role[] | Department[] | CaseStudyType[] = await Knex.select('*').from(TABLE_NAME);
-    logging.info(NAMESPACE, `RETRIEVED ${TABLE_NAME.toUpperCase()}S:`, items);
->>>>>>> 05539d8bec76c6e9e3eea38bf5aa4e8f2c011e4d
+    const items: User[] | Role[] | Department[] | CaseStudyType[] = await Knex.select('*').from(tableName);
+    logging.info(namespace, `RETRIEVED ${tableName.toUpperCase()}S:`, items);
     res.status(200).send(items);
   } catch (error: any) {
     logging.error(namespace, error.message, error);
