@@ -83,21 +83,22 @@ const CaseStudy = () => {
                     </tr>
                   </table>
                 </div>
-                
               </div>
-              <Link to='/case-studies/new'><button className="button-new-case">+ Add Case Study</button></Link>
+              <Link to="/case-studies/new">
+                <button className="button-new-case">+ Add Case Study</button>
+              </Link>
             </td>
             <td className="column-right">
               <input className="input" type="text" placeholder="Search Case Studies..."></input>
 
               <div className="case-study-block-container">
                 {/* Dynamically insert case study blocks here */}
-                {caseStudyState.caseStudies.map((caseStudies: any, index: any) => {
+                {caseStudyState.caseStudies.map((caseStudies: any) => {
                   return (
                     <table className="case-study-block">
                       <tr>
                         <td className="case-study-block-image">
-                          <img src={photo} width="150px" height="150px"></img>
+                          <img src={photo} alt="" width="150px" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
                           <h2>{caseStudies.title}</h2>
@@ -105,8 +106,9 @@ const CaseStudy = () => {
                           <p>{caseStudies.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/${caseStudies.id}`}><button className="button">View</button></Link>
-                          
+                          <Link to={`/case-studies/${caseStudies.id}`}>
+                            <button className="button">View</button>
+                          </Link>
                         </td>
                       </tr>
                     </table>

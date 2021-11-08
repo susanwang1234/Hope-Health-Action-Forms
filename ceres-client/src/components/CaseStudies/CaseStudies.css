@@ -1,6 +1,6 @@
 .container {
-    width: 100% !important;
-    text-align: center;
+  width: 100% !important;
+  text-align: center;
 }
 
 .card {
@@ -12,7 +12,7 @@
   border-radius: 5px;
   background-color: white;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 
 .radio-button {
@@ -34,17 +34,17 @@
 }
 
 .button-new-case {
-    background-color: #009cc4;
-    font-weight: bold;
-    font-family: Arial;
-    color: white;
-    border: none;
-    font-size: 20px;
-    padding: 4px 10px;
-    text-align: center;
-    border-radius: 5px;
-    width: 325px;
-    box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: #009cc4;
+  font-weight: bold;
+  font-family: Arial;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: center;
+  border-radius: 5px;
+  width: 325px;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .input {
@@ -74,7 +74,7 @@ table {
 }
 
 .filter-container {
-    width: 275px;
+  width: 275px;
 }
 
 td {
@@ -83,43 +83,43 @@ td {
 }
 
 .column-right {
-    width: 100%;
+  width: 100%;
 }
 
 .case-study-block-container {
-    background-color: palegoldenrod;
+  background-color: palegoldenrod;
 }
 
 .case-study-block {
-    border: 10pt !important;
-    border-color: black !important;
-    display: flex;
-    text-align: left !important;
-    background-color: white;
+  border: 10pt !important;
+  border-color: black !important;
+  display: flex;
+  text-align: left !important;
+  background-color: white;
 }
 
 .case-study-block-image {
-    vertical-align: middle;
-    width: 300px;
+  vertical-align: middle;
+  width: 300px;
 }
 
 .case-study-block-text {
-    word-break: break-all;
-    width: 1000px !important;
-    height: auto;
-    margin-left: 0px !important;
-    text-align: left !important;
+  word-break: break-all;
+  width: 1000px !important;
+  height: auto;
+  margin-left: 0px !important;
+  text-align: left !important;
 }
 
 .case-study-block-button {
-    width:100px;
-    margin-left: 0px;
-    margin-right: auto;
-    text-align: center !important;
-    vertical-align:middle;
+  width: 100px;
+  margin-left: 0px;
+  margin-right: auto;
+  text-align: center !important;
+  vertical-align: middle;
 }
 
 .add-case-container {
-    vertical-align: top;
-    margin: 0px;
+  vertical-align: top;
+  margin: 0px;
 }
