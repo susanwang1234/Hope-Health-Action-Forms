@@ -1,3 +1,17 @@
+/*
+ CSS Classes
+  - container
+  - card
+  - card-inner-case-study
+  - radio-button
+  - button
+  - ...
+
+  Responsive CSS Classes
+  - ...
+*/
+
+
 .container {
   width: 100% !important;
   text-align: center;
@@ -13,6 +27,14 @@
   background-color: white;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
   margin-bottom: 10px;
+}
+
+.card-inner-case-study {
+  display: inline;
+  font-size: 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .radio-button {
