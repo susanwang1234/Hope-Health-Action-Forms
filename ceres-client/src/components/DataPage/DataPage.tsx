@@ -26,7 +26,8 @@ const DataPage = () => {
     getFormById();
 
     async function getFormById() {
-      const url = `http://localhost:8080/form/${2}`;
+      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
+      const url = `${baseApiUrl}/form/${2}`;
       try {
         const response = await fetch(url);
         const data = await response.json();

@@ -7,7 +7,8 @@ const ReportData = (props: any) => {
   const [editStatus, setEditStatus] = useState(false);
 
   useEffect(() => {
-    const url = `http://localhost:8080/form-responses/${props.data.id}`;
+    const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
+    const url = `${baseApiUrl}/form-responses/${props.data.id}`;
     const response: any = fetch(url)
       .then((response) => {
         console.log(response);
@@ -53,10 +54,13 @@ const ReportData = (props: any) => {
   // };
 
   const handleSubmission = (event: any) => {
+    event.preventDefault();
+
+    const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
     if (validateEntries(formEntries)) {
       const PUTEntries = createArrayEntriesToPut(formEntries);
       const formId: Number = props.data.id;
-      fetch(`http://localhost:8080/form-responses/${formId}`, {
+      fetch(`${baseApiUrl}/form-responses/${formId}`, {
         method: 'PUT',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(PUTEntries)
@@ -66,10 +70,10 @@ const ReportData = (props: any) => {
         .catch((error) => {
           console.error('Error:', error);
         });
+      setEditStatus(false);
     } else {
       markEmptyfields(formEntries);
       alert('All fields are required. please fill them up!');
-      event.preventDefault();
     }
   };
 
@@ -79,10 +83,13 @@ const ReportData = (props: any) => {
     </button>
   );
   const cancelButton = (
-    <button className="cancel-button" onClick={() => {
-      setEditStatus(false);
-      // forceUpdateHandler;
-    }}>
+    <button
+      className="cancel-button"
+      onClick={() => {
+        setEditStatus(false);
+        // forceUpdateHandler;
+      }}
+    >
       Cancel
     </button>
   );
