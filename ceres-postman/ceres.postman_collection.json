@@ -1,12 +1,8 @@
 {
   "info": {
-<<<<<<< HEAD
-    "_postman_id": "0255111b-9675-4782-963a-c7be042242ac",
-    "name": "Ceres",
-=======
+
     "_postman_id": "095eaa73-1752-4890-a4e0-1cad06920ad8",
     "name": "ceres",
->>>>>>> 612ea9032dcc8b58146e41a2836d1e07e2694078
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
