@@ -41,6 +41,19 @@
   float: right !important;
 }
 
+.card-outer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  border-radius: 5px;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  flex: 1;
+  margin: 0 !important;
+}
+
+/*
 .card {
   background-color: transparent !important;
   border-color: transparent !important;
@@ -48,7 +61,7 @@
   flex: 1;
   margin: 0 !important;
 }
-
+*/
 .card-inner {
   align-items: center;
   background-color: #ffffff;

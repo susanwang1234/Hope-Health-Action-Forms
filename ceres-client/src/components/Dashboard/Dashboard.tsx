@@ -59,7 +59,7 @@ const Dashboard = () => {
       <Sidebar show={showNav} />
       <div className="dashboard-container">
         <div className="dashboard-cards">
-          <div className="card fill-space-left">
+          <div className="card-outer fill-space-left">
             <p className="title">To Do</p>
             <div className="card-inner width-100-percent">
               <div className="align-left">
@@ -82,7 +82,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="card fill-space-right">
+          <div className="card-outer fill-space-right">
             <p className="title">Employee of the Month</p>
             <div className="card-inner height-100-percent">
               <img src={profilePic} alt="profile pic" className="profile-pic"></img>
