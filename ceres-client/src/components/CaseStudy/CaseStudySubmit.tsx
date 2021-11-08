@@ -124,7 +124,7 @@ const CaseStudySubmit = () => {
             })}
           </div>
           <button className="grey-button bottom-5 left-31">Cancel</button>
-          <button className="view-department-button">Submit</button>
+          <button className="blue-button bottom-5 right-20">Submit</button>
         </div>
       </div>
     </div>

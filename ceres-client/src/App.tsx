@@ -17,7 +17,7 @@ function App() {
           <Route path="/dashboard" component={Dashboard}></Route>
           <Route path="/submit-report" component={Forms}></Route>
           <Route path="/data-page" component={DataPage}></Route>
-          <Route path="/case-study" component={CaseStudySubmit}></Route>
+          <Route path="/case-studies/new" component={CaseStudySubmit}></Route>
           <Route path="/departments" component={Departments}></Route>
         </UserContextProvider>
       </Switch>
