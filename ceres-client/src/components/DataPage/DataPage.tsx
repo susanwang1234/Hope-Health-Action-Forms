@@ -9,28 +9,47 @@ class DataPage extends React.Component<any[], any> {
     super(props);
     this.state = {
       isLoaded: false,
-      reports: [],
+      reports: [
+        {
+          id: 1,
+          currDate: '2021-10-04T20:53:15.000Z',
+          bedsAvailable: 19,
+          bedDays: 434,
+          patientDays: 377,
+          hospitalised: 17,
+          discharged: 2,
+          selfDischarges: 1,
+          deathsBefore48: 1,
+          deathsAfter48: 0,
+          daysHospitalised: 334,
+          referrals: 0,
+          transfers: 0,
+          stays: 13,
+          admissions: 4,
+          outpatients: 16
+        },
+        {
+          id: 2,
+          currDate: '2021-10-05T07:44:04.000Z',
+          bedsAvailable: 22,
+          bedDays: 435,
+          patientDays: 378,
+          hospitalised: 17,
+          discharged: 2,
+          selfDischarges: 1,
+          deathsBefore48: 1,
+          deathsAfter48: 0,
+          daysHospitalised: 335,
+          referrals: 0,
+          transfers: 0,
+          stays: 13,
+          admissions: 4,
+          outpatients: 16
+        }
+      ],
       displayingData: null,
       indexOfSelectedReport: null
     };
-  }
-  async componentDidMount() {
-    const url = 'http://localhost:8080/rehab-report/get/rehab-report';
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log('Fetched Rehab Reports are: ' + data);
-      this.setState({
-        isLoaded: true,
-        reports: data
-      });
-    } catch (error) {
-      console.log('Error: Unable to fetch from ' + url);
-      this.setState({
-        isLoaded: true,
-        error
-      });
-    }
   }
 
   render() {

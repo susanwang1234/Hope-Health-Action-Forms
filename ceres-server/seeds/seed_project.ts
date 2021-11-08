@@ -5,8 +5,6 @@ import { insertNICUPaedsDepartmentQuestions } from './inserts/insert_nicupaeds_d
 import { insertDepartments } from './inserts/insert_departments';
 import { insertUsers } from './inserts/insert_users';
 import { insertRoles } from './inserts/insert_roles';
-import { insertRehabReports } from './inserts/insert_rehab_reports';
-import { insertDummies } from './inserts/insert_dummies';
 import { insertCaseStudyTypes } from './inserts/insert_case_study_types';
 import { insertCaseStudyQuestions } from './inserts/insert_case_study_questions';
 import { insertCaseStudyTypeQuestions } from './inserts/insert_case_study_type_questions';
@@ -21,8 +19,6 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('CaseStudyType').truncate();
   await knex('CaseStudyResponse').truncate();
   await knex('CaseStudy').truncate();
-  await knex('Dummies').truncate();
-  await knex('Rehab_Report').truncate();
   await knex('User').truncate();
   await knex('Role').truncate();
   await knex('FormResponse').truncate();
@@ -39,8 +35,6 @@ export async function seed(knex: Knex): Promise<void> {
   await insertNICUPaedsDepartmentQuestions(knex);
   await insertRoles(knex);
   await insertUsers(knex);
-  await insertRehabReports(knex);
-  await insertDummies(knex);
   await insertCaseStudyTypes(knex);
   await insertCaseStudyQuestions(knex);
   await insertCaseStudyTypeQuestions(knex);
