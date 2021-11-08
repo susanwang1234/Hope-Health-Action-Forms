@@ -20,9 +20,9 @@ const CaseStudy = () => {
   });
 
   useEffect(() => {
-    getData();
+    getCaseStudies();
 
-    async function getData() {
+    async function getCaseStudies() {
       const url = 'http://localhost:8080/case-studies';
       try {
         const response = await fetch(url);

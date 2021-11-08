@@ -32,9 +32,9 @@ function Departments() {
   });
 
   useEffect(() => {
-    getData();
+    getDepartments();
 
-    async function getData() {
+    async function getDepartments() {
       const url = 'http://localhost:8080/department';
       try {
         const response = await fetch(url);

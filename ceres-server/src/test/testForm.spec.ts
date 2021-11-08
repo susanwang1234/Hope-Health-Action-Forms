@@ -39,7 +39,7 @@ describe('createNewForm', () => {
         expect(res.body[0].id).to.deep.equal(1);
         expect(res.body[0]).to.have.deep.property('departmentId');
         expect(res.body[0].departmentId).to.deep.equal(1);
-        expect(res.body[0]).to.have.deep.property('created_at');
+        expect(res.body[0]).to.have.deep.property('createdAt');
         done();
       });
   });

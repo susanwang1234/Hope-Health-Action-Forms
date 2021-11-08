@@ -19,8 +19,6 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('CaseStudyType').truncate();
   await knex('CaseStudyResponse').truncate();
   await knex('CaseStudy').truncate();
-  await knex('Dummies').truncate();
-  await knex('Rehab_Report').truncate();
   await knex('User').truncate();
   await knex('Role').truncate();
   await knex('FormResponse').truncate();
