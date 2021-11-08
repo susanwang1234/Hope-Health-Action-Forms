@@ -1,78 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import './dataPage.css';
-import ReportElement from '../ReportElement';
-import ReportData from '../ReportData';
+import './DataPage.css';
+import ReportElement from './ReportElement';
+import ReportData from './ReportData';
+import Sidebar from '../Sidebar/Sidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import logo from '../../images/navlogo.png';
 
-class DataPage extends React.Component<any[], any> {
-  constructor(props: any[]) {
-    super(props);
-    this.state = {
-      isLoaded: false,
-      reports: [
-        {
-          id: 1,
-          currDate: '2021-10-04T20:53:15.000Z',
-          bedsAvailable: 19,
-          bedDays: 434,
-          patientDays: 377,
-          hospitalised: 17,
-          discharged: 2,
-          selfDischarges: 1,
-          deathsBefore48: 1,
-          deathsAfter48: 0,
-          daysHospitalised: 334,
-          referrals: 0,
-          transfers: 0,
-          stays: 13,
-          admissions: 4,
-          outpatients: 16
-        },
-        {
-          id: 2,
-          currDate: '2021-10-05T07:44:04.000Z',
-          bedsAvailable: 22,
-          bedDays: 435,
-          patientDays: 378,
-          hospitalised: 17,
-          discharged: 2,
-          selfDischarges: 1,
-          deathsBefore48: 1,
-          deathsAfter48: 0,
-          daysHospitalised: 335,
-          referrals: 0,
-          transfers: 0,
-          stays: 13,
-          admissions: 4,
-          outpatients: 16
-        }
-      ],
-      displayingData: null,
-      indexOfSelectedReport: null
-    };
+const DataPage = () => {
+  document.body.style.backgroundColor = '#f5f5f5';
+  const [reports, setReports] = useState([]);
+  const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
+  const [showNav, setShowNav] = useState(false);
+  const [displayingData, setDisplayingData] = useState(null);
+
+  function handleClick(index: any): void {
+    setDisplayingData(reports[index]);
   }
+  // const switchEditMode = (value: boolean): void => {
+  //   setDisplayingData(reports[indexOfSelectedReport])
+  //   setEditStatus(value);
+  // }
 
-  render() {
-    return (
-      <React.Fragment>
-        <div className="flex">
-          <div className=" data-list border-black font-bold text-center p-4 m-6 row-span-3 bg-gray-300 relative rounded">
-            <h4 className="text-center">Submitted Reports</h4>
-            <ul className="list-of-reports">
-              {this.state.reports.map((report: any, index: number) => (
-                <ReportElement data={report} onClick={() => this.handleClick(index)} />
-              ))}
-            </ul>
-            <button className=" button bg-green-400 text-white hover:bg-green-200 w-80">Add Report</button>
-          </div>
-          <ReportData data={this.state.displayingData} />
+  useEffect(() => {
+    getFormById();
+
+    async function getFormById() {
+      const url = `http://localhost:8080/form/${2}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log('Fetched Report:', data);
+        setReports(data);
+      } catch (error: any) {
+        console.log('Error: Unable to fetch from ' + url);
+      }
+    }
+  }, []);
+
+  return (
+    <React.Fragment>
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
+      <div className="flex justify-center">
+        <Sidebar show={showNav} />
+        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded">
+          <h4 className="text-center">Submitted Reports</h4>
+          <ul className="list-of-reports">
+            {reports.map((report: any, index: number) => (
+              <ReportElement data={report} onClick={() => handleClick(index)} />
+            ))}
+          </ul>
         </div>
-      </React.Fragment>
-    );
-  }
-  handleClick(index: number): void {
-    this.setState({ displayingData: this.state.reports[index], indexOfSelectedReport: index });
-  }
-}
+        {displayingData === null ? <p className="m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
+      </div>
+    </React.Fragment>
+  );
+};
 
 export default DataPage;

@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
