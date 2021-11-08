@@ -1,625 +1,806 @@
 {
-  "info": {
-    "_postman_id": "a22f8451-b1bc-44f3-9c6a-9bf73ae711fb",
-    "name": "ceres",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Authentication",
-      "item": [
-        {
-          "name": "Step 1: login request",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/auth/login",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["auth", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Step 2: attempt to access secret route",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVOYW1lIjoiYWRtaW4iLCJkZXBhcnRtZW50TmFtZSI6IlJlaGFiIiwiaWF0IjoxNjMzNzczMDc4LCJleHAiOjE2MzUwNjkwNzh9.X_0H_lpHhtrDdsQKC4Zngyq34KACQAZHiVMUCl0Jw5U",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/api/secrets",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["api", "secrets"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Case Studies",
-      "item": [
-        {
-          "name": "GET case studies",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/case-studies",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["case-studies"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET a case study",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/case-studies/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["case-studies", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET case study types",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/case-study-types",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["case-study-types"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET case study questions",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/case-study-questions/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["case-study-questions", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Default",
-      "item": [
-        {
-          "name": "GET homepage message",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": [""]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Department",
-      "item": [
-        {
-          "name": "GET departments",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "DepartmentForm",
-      "item": [
-        {
-          "name": "GET department forms",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/department-form/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["department-form", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Form",
-      "item": [
-        {
-          "name": "GET forms",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/form/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form", ":id"],
-              "variable": [
-                {
-                  "key": "id"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST form",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"departmentId\": 1\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/form",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "FormResponses",
-      "item": [
-        {
-          "name": "GET form responses by formId",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/form-responses/:formId",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form-responses", ":formId"],
-              "variable": [
-                {
-                  "key": "formId"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST form responses for a form",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "[\r\n { \"departmentQuestionId\": 1, \"response\": 19 },\r\n { \"departmentQuestionId\": 2, \"response\": 434 },\r\n { \"departmentQuestionId\": 3, \"response\": 377 },\r\n { \"departmentQuestionId\": 4, \"response\": 17 },\r\n { \"departmentQuestionId\": 5, \"response\": 2 },\r\n { \"departmentQuestionId\": 6, \"response\": 1 },\r\n { \"departmentQuestionId\": 7, \"response\": 0 },\r\n { \"departmentQuestionId\": 8, \"response\": 334 },\r\n { \"departmentQuestionId\": 9, \"response\": 0 },\r\n { \"departmentQuestionId\": 10, \"response\": 0 },\r\n { \"departmentQuestionId\": 11, \"response\": 1 },\r\n { \"departmentQuestionId\": 12, \"response\": 13 },\r\n { \"departmentQuestionId\": 13, \"response\": 4 }\r\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/form-responses/:formId",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form-responses", ":formId"],
-              "variable": [
-                {
-                  "key": "formId"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PUT form responses for a form",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "[\r\n { \"id\": 1, \"departmentQuestionId\": 1, \"response\": 20 },\r\n { \"id\": 2, \"departmentQuestionId\": 2, \"response\": 435 }\r\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/form-responses/:formId",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form-responses", ":formId"],
-              "variable": [
-                {
-                  "key": "formId"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Role",
-      "item": [
-        {
-          "name": "GET roles",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/role",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["role"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "User",
-      "item": [
-        {
-          "name": "GET users",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/user",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["user"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "POST a user",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"username\": \"departmentHead\",\r\n    \"password\": \"$2a$12$7bWbFzy6wdFRCG3JVp8JFe7PZTJ/X6FjwpY/769gMEVgbc9vvnggu\",\r\n    \"departmentId\": 3,\r\n    \"roleId\": 3\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/user",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["user"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PUT a user",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"username\": \"hospitalAdmin\",\r\n    \"password\": \"$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm\",\r\n    \"departmentId\": 1,\r\n    \"roleId\": 2\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/user/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["user", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE a user",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/user/:id",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["user", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE all users",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/user",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["user"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Dummy",
-      "item": [
-        {
-          "name": "POST a dummy",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"dummyName\": \"dummy99\",\r\n    \"dummyInfo\": 99\r\n}\r\n",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/dummy/create/dummy",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dummy", "create", "dummy"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE all dummies",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/dummy/delete/dummy",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dummy", "delete", "dummy"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET dummies",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/dummy/get/dummy",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dummy", "get", "dummy"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Rehab Report",
-      "item": [
-        {
-          "name": "POST a rehab report",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"currDate\": \"2021-10-6 16:27:08\",\r\n    \"bedsAvailable\": 21,\r\n    \"bedDays\": 436,\r\n    \"patientDays\": 379,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 2,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/rehab-report/create/rehab-report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab-report", "create", "rehab-report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "PUT a rehab report",
-          "request": {
-            "method": "PUT",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"id\": 2,\r\n    \"currDate\": \"2021-10-7 05:13:08\",\r\n    \"bedsAvailable\": 23,\r\n    \"bedDays\": 500,\r\n    \"patientDays\": 380,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 9,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/rehab-report/edit/rehab-report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab-report", "edit", "rehab-report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE all rehab reports",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/rehab-report/delete-all/rehab-report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab-report", "delete-all", "rehab-report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "DELETE a rehab report",
-          "request": {
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"rehabReportId\": 1\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/rehab-report/delete/rehab-report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab-report", "delete", "rehab-report"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "GET rehab reports",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/rehab-report/get/rehab-report",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["rehab-report", "get", "rehab-report"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Dashboard",
-      "item": [
-        {
-          "name": "GET dashboards",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/dashboard",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["dashboard"]
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+	"info": {
+		"_postman_id": "0255111b-9675-4782-963a-c7be042242ac",
+		"name": "Ceres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Step 1: login request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Step 2: attempt to access secret route",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVOYW1lIjoiYWRtaW4iLCJkZXBhcnRtZW50TmFtZSI6IlJlaGFiIiwiaWF0IjoxNjMzNzczMDc4LCJleHAiOjE2MzUwNjkwNzh9.X_0H_lpHhtrDdsQKC4Zngyq34KACQAZHiVMUCl0Jw5U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/secrets",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"secrets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/logout",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "authenticate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/auth/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Case Studies",
+			"item": [
+				{
+					"name": "GET case studies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/case-studies",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"case-studies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET a case study",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/case-studies/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"case-studies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET case study types",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/case-study-types",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"case-study-types"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET case study questions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/case-study-questions/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"case-study-questions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Default",
+			"item": [
+				{
+					"name": "GET homepage message",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Department",
+			"item": [
+				{
+					"name": "GET departments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/department",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"department"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "DepartmentForm",
+			"item": [
+				{
+					"name": "GET department forms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/department-form/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"department-form",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Form",
+			"item": [
+				{
+					"name": "GET forms",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/form/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"form",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"departmentId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/form",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"form"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "FormResponses",
+			"item": [
+				{
+					"name": "GET form responses by formId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/form-responses/:formId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"form-responses",
+								":formId"
+							],
+							"variable": [
+								{
+									"key": "formId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST form responses for a form",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n { \"departmentQuestionId\": 1, \"response\": 19 },\r\n { \"departmentQuestionId\": 2, \"response\": 434 },\r\n { \"departmentQuestionId\": 3, \"response\": 377 },\r\n { \"departmentQuestionId\": 4, \"response\": 17 },\r\n { \"departmentQuestionId\": 5, \"response\": 2 },\r\n { \"departmentQuestionId\": 6, \"response\": 1 },\r\n { \"departmentQuestionId\": 7, \"response\": 0 },\r\n { \"departmentQuestionId\": 8, \"response\": 334 },\r\n { \"departmentQuestionId\": 9, \"response\": 0 },\r\n { \"departmentQuestionId\": 10, \"response\": 0 },\r\n { \"departmentQuestionId\": 11, \"response\": 1 },\r\n { \"departmentQuestionId\": 12, \"response\": 13 },\r\n { \"departmentQuestionId\": 13, \"response\": 4 }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/form-responses/:formId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"form-responses",
+								":formId"
+							],
+							"variable": [
+								{
+									"key": "formId"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT form responses for a form",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n { \"id\": 1, \"departmentQuestionId\": 1, \"response\": 20 },\r\n { \"id\": 2, \"departmentQuestionId\": 2, \"response\": 435 }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/form-responses/:formId",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"form-responses",
+								":formId"
+							],
+							"variable": [
+								{
+									"key": "formId"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "GET roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/role",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"role"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "GET users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST a user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"departmentHead\",\r\n    \"password\": \"$2a$12$7bWbFzy6wdFRCG3JVp8JFe7PZTJ/X6FjwpY/769gMEVgbc9vvnggu\",\r\n    \"departmentId\": 3,\r\n    \"roleId\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT a user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"hospitalAdmin\",\r\n    \"password\": \"$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm\",\r\n    \"departmentId\": 1,\r\n    \"roleId\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/user/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE all users",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dummy",
+			"item": [
+				{
+					"name": "POST a dummy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dummyName\": \"dummy99\",\r\n    \"dummyInfo\": 99\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/dummy/create/dummy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dummy",
+								"create",
+								"dummy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE all dummies",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dummy/delete/dummy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dummy",
+								"delete",
+								"dummy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET dummies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dummy/get/dummy",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dummy",
+								"get",
+								"dummy"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rehab Report",
+			"item": [
+				{
+					"name": "POST a rehab report",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currDate\": \"2021-10-6 16:27:08\",\r\n    \"bedsAvailable\": 21,\r\n    \"bedDays\": 436,\r\n    \"patientDays\": 379,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 2,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rehab-report/create/rehab-report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab-report",
+								"create",
+								"rehab-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT a rehab report",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"currDate\": \"2021-10-7 05:13:08\",\r\n    \"bedsAvailable\": 23,\r\n    \"bedDays\": 500,\r\n    \"patientDays\": 380,\r\n    \"hospitalised\": 16,\r\n    \"discharged\": 9,\r\n    \"selfDischarges\": 1,\r\n    \"deathsBefore48\": 1,\r\n    \"deathsAfter48\": 1,\r\n    \"daysHospitalised\": 336,\r\n    \"referrals\": 0,\r\n    \"transfers\": 0,\r\n    \"stays\": 13,\r\n    \"admissions\": 4,\r\n    \"outpatients\": 16\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rehab-report/edit/rehab-report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab-report",
+								"edit",
+								"rehab-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE all rehab reports",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rehab-report/delete-all/rehab-report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab-report",
+								"delete-all",
+								"rehab-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE a rehab report",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rehabReportId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/rehab-report/delete/rehab-report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab-report",
+								"delete",
+								"rehab-report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET rehab reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/rehab-report/get/rehab-report",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rehab-report",
+								"get",
+								"rehab-report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "GET dashboards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/dashboard",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"dashboard"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }

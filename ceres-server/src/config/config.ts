@@ -23,15 +23,21 @@ const MYSQL = {
 };
 
 const JWT_SECRET = process.env.JWT_SECRET || 'this-is-a-dev-secret';
+const NODE_ENV = process.env.NODE_ENV || 'production';
 
 const JWT = {
   secret: JWT_SECRET
 };
 
+const ENV = {
+  nodeEnvironment: NODE_ENV
+};
+
 const config = {
   server: SERVER,
   database: MYSQL,
-  jwt: JWT
+  jwt: JWT,
+  environement: ENV
 };
 
 export default config;

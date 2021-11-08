@@ -1,4 +1,5 @@
 import './Forms.css';
+import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
