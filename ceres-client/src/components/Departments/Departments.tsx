@@ -20,7 +20,7 @@ function Departments() {
       userContext.setUser(null);
       userContext.setIsAuthenticated(false);
     }
-    history.push('/');
+    return <Redirect to="/" />;
   };
 
   const onClick = (departmentID: number, route: string) => {
