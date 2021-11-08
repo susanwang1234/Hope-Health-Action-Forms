@@ -73,7 +73,7 @@ textarea.response {
   display: inline-block;
   box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.2);
 }
-.logout-button {
+.grey-button {
   background-color: rgb(245, 245, 245);
   font-family: Arial;
   color: rgb(0, 0, 0);
@@ -86,8 +86,6 @@ textarea.response {
   border-color: #d6d6d6;
   width: 100px;
   position: absolute;
-  top: 30%;
-  right: 1%;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
 }
 .person_image {
@@ -120,7 +118,3 @@ select.minimal {
   background-repeat: no-repeat;
   margin: 4px;
 }
-
-
-
-

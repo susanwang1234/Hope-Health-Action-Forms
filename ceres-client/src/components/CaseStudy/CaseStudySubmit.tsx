@@ -78,7 +78,7 @@ const CaseStudySubmit = () => {
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
-        <button className="logout-button">Log Out</button>
+        <button className="grey-button top-2% right-2">Log Out</button>
       </header>
       <Sidebar show={showNav} />
       <div className="cards-casestudy">
@@ -112,7 +112,6 @@ const CaseStudySubmit = () => {
               </div>
             </div>
           </div>
-
           <div className="w-full flex flex-col">
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
@@ -123,6 +122,8 @@ const CaseStudySubmit = () => {
               );
             })}
           </div>
+          <button className="grey-button bottom-5 left-31">Cancel</button>
+          <button className="view-department-button">Submit</button>
         </div>
       </div>
     </div>
