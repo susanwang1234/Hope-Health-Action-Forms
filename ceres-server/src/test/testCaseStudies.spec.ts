@@ -9,7 +9,7 @@ const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
 // Test 1: GET request (List of case studies)
-describe('testGetCaseStudiesSuccess', () => {
+describe('getCaseStudies', () => {
   let testApp: Application;
   let httpServer: http.Server;
   let id = 0;
@@ -25,7 +25,7 @@ describe('testGetCaseStudiesSuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate case studies request properties', (done) => {
+  it('should get all case studies successfully', (done) => {
     chai
       .request(testApp)
       .get('/case-studies')
@@ -43,16 +43,6 @@ describe('testGetCaseStudiesSuccess', () => {
           expect(item).to.have.deep.property('createdAt');
           expect(item).to.have.deep.property('response');
         });
-        done();
-      });
-  });
-  it('Validate case studies request fields', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-studies')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
         res.body.forEach((item: any) => {
           expect(item.id).to.deep.equal(++id);
           expect(item.caseStudyTypeId).to.deep.equal(id);
@@ -66,57 +56,8 @@ describe('testGetCaseStudiesSuccess', () => {
   });
 });
 
-// Test 2: GET request (Failure, single case study)
-describe('testGetCaseStudyFailure', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableRoutes(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
-  });
-  after('Close a working server', () => {
-    httpServer.close();
-  });
-  it('Throw error code 400 for user with a negative number', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-studies/-1')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(caseStudyNegativeOrNanInputError));
-        done();
-      });
-  });
-  it('Throw error code 400 for invalid URL', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-studies/wow')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(caseStudyNegativeOrNanInputError));
-        done();
-      });
-  });
-  it('Throw error code 404 for case study yet to be created', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-studies/55')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(404);
-        expect(res.text).to.deep.equal(JSON.stringify(caseStudyDNEError));
-        done();
-      });
-  });
-});
-
-// Test 3: GET request (Success, single case study)
-describe('testGetCaseStudySuccess', () => {
+// Test 2: GET request (Single case study)
+describe('getCaseStudyById', () => {
   let testApp: Application;
   let httpServer: http.Server;
   let count = 0;
@@ -139,7 +80,40 @@ describe('testGetCaseStudySuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate the case study request properties', (done) => {
+  it('should return error code 400 for case study id that is negative or NaN', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-studies/-1')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyNegativeOrNanInputError));
+        done();
+      });
+  });
+  it('should return error code 400 for invalid URL', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-studies/wow')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyNegativeOrNanInputError));
+        done();
+      });
+  });
+  it('should return error code 404 for case study id yet to be created', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-studies/55')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyDNEError));
+        done();
+      });
+  });
+  it('should get a case study by case study id successfully', (done) => {
     chai
       .request(testApp)
       .get('/case-studies/2')
@@ -155,16 +129,6 @@ describe('testGetCaseStudySuccess', () => {
           expect(item).to.have.deep.property('label');
           expect(item).to.have.deep.property('response');
         });
-        done();
-      });
-  });
-  it('Validate the case study request fields', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-studies/2')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
         res.body.forEach((item: any) => {
           expect(item.title).to.deep.equal('Case Study Dummy 2');
           expect(item.name).to.deep.equal('Staff Recognition');
@@ -176,8 +140,8 @@ describe('testGetCaseStudySuccess', () => {
   });
 });
 
-// Test 4: GET request (List of case study types)
-describe('testGetCaseStudyTypesSuccess', () => {
+// Test 3: GET request (List of case study types)
+describe('getCaseStudyTypes', () => {
   let testApp: Application;
   let httpServer: http.Server;
   let id = 0;
@@ -192,7 +156,7 @@ describe('testGetCaseStudyTypesSuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate case study types request properties', (done) => {
+  it('should get all case study types successfully', (done) => {
     chai
       .request(testApp)
       .get('/case-study-types')
@@ -205,16 +169,6 @@ describe('testGetCaseStudyTypesSuccess', () => {
           expect(item).to.have.deep.property('id');
           expect(item).to.have.deep.property('name');
         });
-        done();
-      });
-  });
-  it('Validate case study types request fields', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-study-types')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
         res.body.forEach((item: any) => {
           expect(item.id).to.deep.equal(++id);
           expect(item.name).to.deep.equal(caseStudyTypes[id - 1]);
@@ -224,57 +178,8 @@ describe('testGetCaseStudyTypesSuccess', () => {
   });
 });
 
-// Test 5: GET request (Failure, List of case study questions)
+// Test 4: GET request (List of case study questions)
 describe('testGetCaseStudyQuestionsFailure', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableRoutes(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
-  });
-  after('Close a working server', () => {
-    httpServer.close();
-  });
-  it('Throw error code 400 for user with a negative number', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-study-questions/-1')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(caseStudyQuestionsNegativeOrNanInputError));
-        done();
-      });
-  });
-  it('Throw error code 400 for invalid URL', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-study-questions/wow')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(caseStudyQuestionsNegativeOrNanInputError));
-        done();
-      });
-  });
-  it('Throw error code 404 for case study questions yet to be created', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-study-questions/6')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(404);
-        expect(res.text).to.deep.equal(JSON.stringify(caseStudyQuestionsDNEError));
-        done();
-      });
-  });
-});
-
-// Test 6: GET request (Success, List of case study questions)
-describe('testGetCaseStudyQuestionsSuccess', () => {
   let testApp: Application;
   let httpServer: http.Server;
   const label = ['Training date?', 'What was the training on?', 'Who conducted the training?', 'Who attended the training?', 'How will the training benefit HCBH and its staff?', 'Story'];
@@ -291,7 +196,40 @@ describe('testGetCaseStudyQuestionsSuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate the case study questions request properties', (done) => {
+  it('should return error code 400 for case study questions id that is negative or NaN', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-study-questions/-1')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyQuestionsNegativeOrNanInputError));
+        done();
+      });
+  });
+  it('should return error code 400 for invalid URL', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-study-questions/wow')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyQuestionsNegativeOrNanInputError));
+        done();
+      });
+  });
+  it('should return error code 404 for case study questions id yet to be created', (done) => {
+    chai
+      .request(testApp)
+      .get('/case-study-questions/6')
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(404);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyQuestionsDNEError));
+        done();
+      });
+  });
+  it('should get case study questions by case study questions id successfully', (done) => {
     chai
       .request(testApp)
       .get('/case-study-questions/3')
@@ -309,16 +247,6 @@ describe('testGetCaseStudyQuestionsSuccess', () => {
           expect(item).to.have.deep.property('inputType');
           expect(item).to.have.deep.property('responseType');
         });
-        done();
-      });
-  });
-  it('Validate the case study questions request fields', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-study-questions/3')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
         res.body.forEach((item: any) => {
           expect(item.name).to.deep.equal('Training Session');
           expect(item.caseStudyTypeQuestionId).to.deep.equal(++id);
@@ -333,7 +261,7 @@ describe('testGetCaseStudyQuestionsSuccess', () => {
   });
 });
 
-// Test 7: POST request (Single case study)
+// Test 5: POST request (Single case study)
 describe('addCaseStudy', () => {
   let testApp: Application;
   let httpServer: http.Server;
@@ -373,6 +301,48 @@ describe('addCaseStudy', () => {
         expect(res.body[0].departmentId).to.deep.equal(1);
         expect(res.body[0].userId).to.deep.equal(1);
         expect(res.body[0].title).to.deep.equal('Case Study Dummy 3');
+        done();
+      });
+  });
+});
+
+// Test 6: POST request (Single case study response)
+describe('addCaseStudyResponse', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('should create case study response successfully', (done) => {
+    chai
+      .request(testApp)
+      .post('/case-study-responses')
+      .set('content-type', 'application/json')
+      .send({
+        caseStudyTypeQuestionId: 26,
+        caseStudyId: 3,
+        response: 'This is a fascinating story for insert other type of case studies'
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.be.an('object');
+        expect(res.body[0]).to.have.deep.property('caseStudyTypeQuestionId');
+        expect(res.body[0]).to.have.deep.property('caseStudyId');
+        expect(res.body[0]).to.have.deep.property('response');
+        expect(res.body[0].caseStudyTypeQuestionId).to.deep.equal(26);
+        expect(res.body[0].caseStudyId).to.deep.equal(3);
+        expect(res.body[0].response).to.deep.equal('This is a fascinating story for insert other type of case studies');
         done();
       });
   });
