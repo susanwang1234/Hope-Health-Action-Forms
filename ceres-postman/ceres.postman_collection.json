@@ -1,6 +1,5 @@
 {
   "info": {
-
     "_postman_id": "095eaa73-1752-4890-a4e0-1cad06920ad8",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -90,6 +89,205 @@
       "name": "Case Studies",
       "item": [
         {
+          "name": "POST a case study (Example)",
+          "item": [
+            {
+              "name": "Step 1: POST to CaseStudy table",
+              "item": [
+                {
+                  "name": "POST a case study of type 1",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{ \r\n    \"caseStudyTypeId\": 1, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"title\":  \"Case Study Dummy 4\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-studies",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-studies"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Step 2: POST to CaseStudyResponse table",
+              "item": [
+                {
+                  "name": "POST a response to \"Patient's name?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 1,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"Billy Bob\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "POST a response to \"Patient's age?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 2,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"55\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "POST a response to \"Where is the patient from?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 3,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"USA\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "POST a response to \"Why did the patient choose to come to HCBH?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 4,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"Unknown\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "POST a response to \"How long were they at HCBH?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 5,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"25 days\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "POST a response to \"What was their diagnogsis?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 6,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"They were sick\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "POST a response to \"Story?\"",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 7,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"Billy Bob is a 55 year old American man who was stuck at the HCBH for 25 days...\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
           "name": "GET case studies",
           "request": {
             "method": "GET",
@@ -143,16 +341,62 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/case-study-questions/:id",
+              "raw": "localhost:8080/case-studies-questions/:id",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["case-study-questions", ":id"],
+              "path": ["case-studies-questions", ":id"],
               "variable": [
                 {
                   "key": "id",
                   "value": ""
                 }
               ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST a case study",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/case-studies",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-studies"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST a case study response",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"caseStudyTypeQuestionId\": 26,\r\n    \"caseStudyId\": 3,\r\n    \"response\": \"This is a fascinating story for insert other type of case studies\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/case-study-responses",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-study-responses"]
             }
           },
           "response": []
@@ -251,7 +495,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"departmentId\": 1\r\n}",
+              "raw": "{\r\n    \"departmentId\": 2\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -278,13 +522,14 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/form-responses/:formId",
+              "raw": "localhost:8080/form-responses/:id",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["form-responses", ":formId"],
+              "path": ["form-responses", ":id"],
               "variable": [
                 {
-                  "key": "formId"
+                  "key": "id",
+                  "value": ""
                 }
               ]
             }
