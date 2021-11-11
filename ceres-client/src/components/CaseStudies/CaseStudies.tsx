@@ -7,6 +7,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import photo from './../../images/original_artwork.jpg';
 import { Link } from 'react-router-dom';
+import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
@@ -23,11 +24,10 @@ const CaseStudy = () => {
     getCaseStudies();
 
     async function getCaseStudies() {
-      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
-      const url = `${baseApiUrl}/case-studies`;
+      const url = '/case-studies';
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await httpService.get(url);
+        const data = response.data;
         console.log('Fetched Case Studies: ' + data);
         setCaseStudyState({
           isLoaded: true,

@@ -6,6 +6,7 @@ import logo from '../../images/navlogo.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Sidebar from '../Sidebar/Sidebar';
 import gray_person from '../../images/gray_person.jpg';
+import httpService from '../../services/httpService';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -23,11 +24,10 @@ const CaseStudySubmit = () => {
     questions: []
   });
   async function getQuestions(selectedOption: String | undefined) {
-    const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
-    const url = `${baseApiUrl}/case-study-questions/${selectedOption}`;
+    const url = `/case-study-questions/${selectedOption}`;
     try {
-      const response = await fetch(url);
-      const data = await response.json();
+      const response = await httpService.get(url);
+      const data = response.data;
       console.log('Fetched questions: ' + data);
       setCaseStudyQuestions({
         questions: data
@@ -40,11 +40,10 @@ const CaseStudySubmit = () => {
     getTypeData();
 
     async function getTypeData() {
-      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
-      const url = `${baseApiUrl}/case-study-types`;
+      const url = `/case-study-types`;
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await httpService.get(url);
+        const data = response.data;
         console.log('Fetched types: ' + data);
         setCaseStudyType({
           types: data

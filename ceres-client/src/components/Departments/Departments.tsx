@@ -7,6 +7,7 @@ import { UserContext } from '../../UserContext';
 import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import AuthService from '../../services/authService';
+import httpService from '../../services/httpService';
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 
@@ -35,11 +36,10 @@ function Departments() {
     getDepartments();
 
     async function getDepartments() {
-      const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
-      const url = `${baseApiUrl}/department`;
+      const url = '/department';
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await httpService.get(url);
+        const { data } = response;
         console.log('Fetched Departments: ' + data);
         setDepartmentState({
           departments: data

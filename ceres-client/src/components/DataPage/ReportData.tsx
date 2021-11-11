@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
+import httpService from '../../services/httpService';
 
 const ReportData = (props: any) => {
   const [formEntries, setFormEntries] = useState<any[]>([]);
@@ -7,19 +8,15 @@ const ReportData = (props: any) => {
   const [editStatus, setEditStatus] = useState(false);
 
   useEffect(() => {
-    const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
-    const url = `${baseApiUrl}/form-responses/${props.data.id}`;
-    const response: any = fetch(url)
+    const url = `/form-responses/${props.data.id}`;
+    const response: any = httpService
+      .get(url)
       .then((response) => {
         console.log(response);
-        if (response.ok) {
-          return response.json();
-        }
-        console.log('Error: Unable to fetch from ' + url);
-        throw response;
+        setFormEntries(response.data);
       })
-      .then((data) => {
-        setFormEntries(data);
+      .catch((error: any) => {
+        console.log('Error: Unable to fetch from ' + url);
       });
   }, []);
 
@@ -56,16 +53,12 @@ const ReportData = (props: any) => {
   const handleSubmission = (event: any) => {
     event.preventDefault();
 
-    const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
     if (validateEntries(formEntries)) {
       const PUTEntries = createArrayEntriesToPut(formEntries);
       const formId: Number = props.data.id;
-      fetch(`${baseApiUrl}/form-responses/${formId}`, {
-        method: 'PUT',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(PUTEntries)
-      })
-        .then((response: any) => response.json())
+      httpService
+        .put(`/form-responses/${formId}`, PUTEntries)
+        .then((response: any) => response.data)
         .then((data: any) => console.log(data))
         .catch((error) => {
           console.error('Error:', error);
