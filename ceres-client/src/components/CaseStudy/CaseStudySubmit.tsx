@@ -72,14 +72,6 @@ const CaseStudySubmit = () => {
     setShareImage(image);
   };
 
-  if(userContext.user?.username != null){
-    
-    console.log('(Case Study Submit Page)  Username is ' , userContext.user?.username)
-    console.log('(Case Study Submit Page) ID is ' , userContext.user?.id)
-    console.log('(Case Study Submit Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Case Study Submit Page) Role ID is ' , userContext.user?.roleId)
-  }
-
   return (
     <div className="casestudy-background">
       <header className="nav-header">

@@ -87,7 +87,6 @@ const ReportData = (props: any) => {
       className="cancel-button"
       onClick={() => {
         setEditStatus(false);
-        // forceUpdateHandler;
       }}
     >
       Cancel
