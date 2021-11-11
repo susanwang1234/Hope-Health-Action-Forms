@@ -1,6 +1,7 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
-const baseApiUrl = 'http://localhost:8080';
+const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
 
 const get = (url: string) => {
   return axios.get(baseApiUrl + url);
