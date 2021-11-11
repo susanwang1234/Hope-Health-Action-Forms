@@ -1,5 +1,5 @@
 import http from 'http';
-import { createServer, enableRoutes, sendFirstRequest } from '../server';
+import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
 import { caseStudyNegativeOrNanInputError, caseStudyDNEError, caseStudyQuestionsNegativeOrNanInputError, caseStudyQuestionsDNEError } from 'shared/errorMessages';
@@ -328,6 +328,51 @@ describe('testGetCaseStudyQuestionsSuccess', () => {
           expect(item.inputType).to.deep.equal(inputType[id - 14]);
           expect(item.responseType).to.deep.equal('string');
         });
+        done();
+      });
+  });
+});
+
+// Test 7: POST request (Single case study)
+describe('addCaseStudy', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('should create case study successfully', (done) => {
+    chai
+      .request(testApp)
+      .post('/case-studies')
+      .set('content-type', 'application/json')
+      .send({
+        caseStudyTypeId: 5,
+        departmentId: 1,
+        userId: 1,
+        title: 'Case Study Dummy 3'
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.be.an('object');
+        expect(res.body[0]).to.have.deep.property('caseStudyTypeId');
+        expect(res.body[0]).to.have.deep.property('departmentId');
+        expect(res.body[0]).to.have.deep.property('userId');
+        expect(res.body[0]).to.have.deep.property('title');
+        expect(res.body[0].caseStudyTypeId).to.deep.equal(5);
+        expect(res.body[0].departmentId).to.deep.equal(1);
+        expect(res.body[0].userId).to.deep.equal(1);
+        expect(res.body[0].title).to.deep.equal('Case Study Dummy 3');
         done();
       });
   });
