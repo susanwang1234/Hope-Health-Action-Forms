@@ -1,11 +1,17 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
+import { createItem } from './requestTemplates/createRequest';
 import { caseStudyNegativeOrNanInputError, caseStudyDNEError } from 'shared/errorMessages';
 import { isInvalidInput } from './requestTemplates/isInvalidInput';
 
 const NAMESPACE = 'Case Studies Control';
 const TABLE_NAME = 'Case Studies';
+
+const inputtedReqBody = (req: Request) => {
+  const { caseStudyTypeId, departmentId, userId, title } = req.body;
+  return { caseStudyTypeId: caseStudyTypeId, departmentId: departmentId, userId: userId, title: title };
+};
 
 const getCaseStudies = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase()}`);
@@ -51,4 +57,8 @@ const getCaseStudyById = async (req: Request, res: Response, next: NextFunction)
   }
 };
 
-export default { getCaseStudies, getCaseStudyById };
+const addCaseStudy = async (req: Request, res: Response, next: NextFunction) => {
+  await createItem(req, res, next, NAMESPACE, 'CaseStudy', inputtedReqBody(req));
+};
+
+export default { getCaseStudies, getCaseStudyById, addCaseStudy };

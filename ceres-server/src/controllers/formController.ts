@@ -5,7 +5,7 @@ import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './requestTemplates/isInvalidInput';
 import { departmentNegativeOrNanInputError } from 'shared/errorMessages';
 
-const NAMESPACE = 'Form';
+const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
 // TODO: Implement better error catching, start by using this for foreign key constraint errors
 const SQL_FOREIGN_KEY_CONSTRAINT_ERROR_CODE: number = 1452;

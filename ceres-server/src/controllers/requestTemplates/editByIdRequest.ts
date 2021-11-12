@@ -43,15 +43,24 @@ export const editItemsById = async (
   tableName: string,
   negativeOrNanInputError: object,
   dneError: object,
-  itemsToUpdate: object[]
+  itemsToUpdate: object[],
+  itemId: number
 ) => {
   logging.info(namespace, `EDITING INSTANCES OF ${tableName.toUpperCase()}`);
+  if (isInvalidInput(itemId)) {
+    res.status(400).send(negativeOrNanInputError);
+    return;
+  }
   try {
     const editedItemsIds = await Promise.all(
       itemsToUpdate.map(async (item: any) => {
         return Knex.update(item).into(tableName).where('id', '=', item.id);
       })
     );
+    if (!editedItemsIds) {
+      res.status(404).send(dneError);
+      return;
+    }
     const retrievedEditedItems = await Knex.select('*').from(tableName).whereIn('id', editedItemsIds);
     logging.info(namespace, `EDITED ${tableName.toUpperCase()} ROWS WITH IDS IN ${editedItemsIds}`, retrievedEditedItems);
     res.status(201).send(retrievedEditedItems);
