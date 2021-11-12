@@ -2,7 +2,13 @@ import http from 'http';
 import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
-import { caseStudyNegativeOrNanInputError, caseStudyDNEError, caseStudyQuestionsNegativeOrNanInputError, caseStudyQuestionsDNEError } from 'shared/errorMessages';
+import {
+  caseStudyNegativeOrNanInputError,
+  caseStudyDNEError,
+  caseStudyQuestionsNegativeOrNanInputError,
+  caseStudyQuestionsDNEError,
+  caseStudyResponsesNegativeOrNanInputError
+} from 'shared/errorMessages';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -321,6 +327,44 @@ describe('addCaseStudyResponse', () => {
   });
   after('Close a working server', () => {
     httpServer.close();
+  });
+  it('should return error code 400 for case study id that is negative or NaN', (done) => {
+    chai
+      .request(testApp)
+      .post('/case-study-responses/-1')
+      .set('content-type', 'application/json')
+      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyResponsesNegativeOrNanInputError));
+        done();
+      });
+  });
+  it('should return error code 400 for invalid URL', (done) => {
+    chai
+      .request(testApp)
+      .post('/case-study-responses/fdfsdf')
+      .set('content-type', 'application/json')
+      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(caseStudyResponsesNegativeOrNanInputError));
+        done();
+      });
+  });
+  it('should return error code 500 for case study id yet to be created', (done) => {
+    chai
+      .request(testApp)
+      .post('/case-study-responses/55')
+      .set('content-type', 'application/json')
+      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(500);
+        done();
+      });
   });
   it('should create case study response successfully', (done) => {
     chai
