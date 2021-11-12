@@ -313,7 +313,7 @@ describe('addCaseStudy', () => {
 });
 
 // Test 6: POST request (Single case study response)
-describe('addCaseStudyResponse', () => {
+describe('addCaseStudyResponsesByCaseStudyId', () => {
   let testApp: Application;
   let httpServer: http.Server;
   before('Create a working server', () => {

@@ -285,7 +285,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
+              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -308,7 +308,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 26, \"response\": \"This is a fascinating story for insert other type of case studies\" }\r\n]",
+              "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 26, \"response\": \"This is a sample story!\" }\r\n]",
               "options": {
                 "raw": {
                   "language": "json"
