@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "095eaa73-1752-4890-a4e0-1cad06920ad8",
+    "_postman_id": "2a2cd023-a975-4fa7-b46b-1ccf1cb6f658",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -89,7 +89,68 @@
       "name": "Case Studies",
       "item": [
         {
-          "name": "POST a case study (Example)",
+          "name": "POST a case study (Example 1)",
+          "item": [
+            {
+              "name": "Step 1: POST to CaseStudy table",
+              "item": [
+                {
+                  "name": "POST a case study of type 5",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-studies",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-studies"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Step 2: POST to CaseStudyResponse table",
+              "item": [
+                {
+                  "name": "POST responses to case study (id: 3)",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 26, \"response\": \"This is a fascinating story for insert other type of case studies\" }\r\n]",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/case-study-responses/3",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["case-study-responses", "3"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "POST a case study (Example 2)",
           "item": [
             {
               "name": "Step 1: POST to CaseStudy table",
@@ -123,13 +184,13 @@
               "name": "Step 2: POST to CaseStudyResponse table",
               "item": [
                 {
-                  "name": "POST a response to \"Patient's name?\"",
+                  "name": "POST responses to case study (id: 4)",
                   "request": {
                     "method": "POST",
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 1,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"Billy Bob\"\r\n}",
+                      "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 1, \"response\": \"Billy Bob\" },\r\n    { \"caseStudyTypeQuestionId\": 2, \"response\": \"55\" },\r\n    { \"caseStudyTypeQuestionId\": 3, \"response\": \"USA\" },\r\n    { \"caseStudyTypeQuestionId\": 4, \"response\": \"Unknown\" },\r\n    { \"caseStudyTypeQuestionId\": 5, \"response\": \"25 days\" },\r\n    { \"caseStudyTypeQuestionId\": 6, \"response\": \"They were sick\" },\r\n    { \"caseStudyTypeQuestionId\": 7, \"response\": \"Billy Bob is a 55 year old American man who was stuck at the HCBH for 25 days...\" }\r\n]",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -137,148 +198,10 @@
                       }
                     },
                     "url": {
-                      "raw": "localhost:8080/case-study-responses",
+                      "raw": "localhost:8080/case-study-responses/4",
                       "host": ["localhost"],
                       "port": "8080",
-                      "path": ["case-study-responses"]
-                    }
-                  },
-                  "response": []
-                },
-                {
-                  "name": "POST a response to \"Patient's age?\"",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 2,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"55\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses"]
-                    }
-                  },
-                  "response": []
-                },
-                {
-                  "name": "POST a response to \"Where is the patient from?\"",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 3,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"USA\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses"]
-                    }
-                  },
-                  "response": []
-                },
-                {
-                  "name": "POST a response to \"Why did the patient choose to come to HCBH?\"",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 4,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"Unknown\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses"]
-                    }
-                  },
-                  "response": []
-                },
-                {
-                  "name": "POST a response to \"How long were they at HCBH?\"",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 5,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"25 days\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses"]
-                    }
-                  },
-                  "response": []
-                },
-                {
-                  "name": "POST a response to \"What was their diagnogsis?\"",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 6,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"They were sick\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses"]
-                    }
-                  },
-                  "response": []
-                },
-                {
-                  "name": "POST a response to \"Story?\"",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{\r\n    \"caseStudyTypeQuestionId\": 7,\r\n    \"caseStudyId\": 4,\r\n    \"response\": \"Billy Bob is a 55 year old American man who was stuck at the HCBH for 25 days...\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
-                        }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses"]
+                      "path": ["case-study-responses", "4"]
                     }
                   },
                   "response": []
@@ -379,13 +302,13 @@
           "response": []
         },
         {
-          "name": "POST a case study response",
+          "name": "POST case study responses for a case study",
           "request": {
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"caseStudyTypeQuestionId\": 26,\r\n    \"caseStudyId\": 3,\r\n    \"response\": \"This is a fascinating story for insert other type of case studies\"\r\n}",
+              "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 26, \"response\": \"This is a fascinating story for insert other type of case studies\" }\r\n]",
               "options": {
                 "raw": {
                   "language": "json"
@@ -393,10 +316,16 @@
               }
             },
             "url": {
-              "raw": "localhost:8080/case-study-responses",
+              "raw": "localhost:8080/case-study-responses/:caseStudyId",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["case-study-responses"]
+              "path": ["case-study-responses", ":caseStudyId"],
+              "variable": [
+                {
+                  "key": "caseStudyId",
+                  "value": ""
+                }
+              ]
             }
           },
           "response": []
@@ -481,7 +410,8 @@
               "path": ["form", ":id"],
               "variable": [
                 {
-                  "key": "id"
+                  "key": "id",
+                  "value": ""
                 }
               ]
             }
@@ -543,7 +473,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "[\r\n { \"departmentQuestionId\": 1, \"response\": 19 },\r\n { \"departmentQuestionId\": 2, \"response\": 434 },\r\n { \"departmentQuestionId\": 3, \"response\": 377 },\r\n { \"departmentQuestionId\": 4, \"response\": 17 },\r\n { \"departmentQuestionId\": 5, \"response\": 2 },\r\n { \"departmentQuestionId\": 6, \"response\": 1 },\r\n { \"departmentQuestionId\": 7, \"response\": 0 },\r\n { \"departmentQuestionId\": 8, \"response\": 334 },\r\n { \"departmentQuestionId\": 9, \"response\": 0 },\r\n { \"departmentQuestionId\": 10, \"response\": 0 },\r\n { \"departmentQuestionId\": 11, \"response\": 1 },\r\n { \"departmentQuestionId\": 12, \"response\": 13 },\r\n { \"departmentQuestionId\": 13, \"response\": 4 }\r\n]",
+              "raw": "[\r\n    { \"departmentQuestionId\": 1, \"response\": 19 },\r\n    { \"departmentQuestionId\": 2, \"response\": 434 },\r\n    { \"departmentQuestionId\": 3, \"response\": 377 },\r\n    { \"departmentQuestionId\": 4, \"response\": 17 },\r\n    { \"departmentQuestionId\": 5, \"response\": 2 },\r\n    { \"departmentQuestionId\": 6, \"response\": 1 },\r\n    { \"departmentQuestionId\": 7, \"response\": 0 },\r\n    { \"departmentQuestionId\": 8, \"response\": 334 },\r\n    { \"departmentQuestionId\": 9, \"response\": 0 },\r\n    { \"departmentQuestionId\": 10, \"response\": 0 },\r\n    { \"departmentQuestionId\": 11, \"response\": 1 },\r\n    { \"departmentQuestionId\": 12, \"response\": 13 },\r\n    { \"departmentQuestionId\": 13, \"response\": 4 }\r\n]",
               "options": {
                 "raw": {
                   "language": "json"
@@ -557,7 +487,8 @@
               "path": ["form-responses", ":formId"],
               "variable": [
                 {
-                  "key": "formId"
+                  "key": "formId",
+                  "value": ""
                 }
               ]
             }
@@ -571,7 +502,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "[\r\n { \"id\": 1, \"departmentQuestionId\": 1, \"response\": 20 },\r\n { \"id\": 2, \"departmentQuestionId\": 2, \"response\": 435 }\r\n]",
+              "raw": "[\r\n    { \"id\": 1, \"departmentQuestionId\": 1, \"response\": 20 },\r\n    { \"id\": 2, \"departmentQuestionId\": 2, \"response\": 435 }\r\n]",
               "options": {
                 "raw": {
                   "language": "json"
@@ -585,7 +516,8 @@
               "path": ["form-responses", ":formId"],
               "variable": [
                 {
-                  "key": "formId"
+                  "key": "formId",
+                  "value": ""
                 }
               ]
             }
