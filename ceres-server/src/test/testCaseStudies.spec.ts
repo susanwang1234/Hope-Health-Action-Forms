@@ -325,13 +325,9 @@ describe('addCaseStudyResponse', () => {
   it('should create case study response successfully', (done) => {
     chai
       .request(testApp)
-      .post('/case-study-responses')
+      .post('/case-study-responses/3')
       .set('content-type', 'application/json')
-      .send({
-        caseStudyTypeQuestionId: 26,
-        caseStudyId: 3,
-        response: 'This is a fascinating story for insert other type of case studies'
-      })
+      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(201);
