@@ -6,7 +6,7 @@ import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
 import { isInvalidInput } from './requestTemplates/isInvalidInput';
 
-const NAMESPACE = 'Form Response';
+const NAMESPACE = 'Form Response Control';
 const TABLE_NAME = 'FormResponse';
 
 const getFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
@@ -41,7 +41,7 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
     return { ...formResponse, formId: formId };
   });
   const formResponseFKName = 'formId';
-  await createItems(req, res, next, NAMESPACE, TABLE_NAME, formResponses, formResponseFKName, formId);
+  await createItems(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formResponses, formResponseFKName, formId);
 };
 
 const editFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
@@ -49,7 +49,7 @@ const editFormResponsesByFormId = async (req: Request, res: Response, next: Next
   const responsesToEdit = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
-  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit);
+  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit, formId);
 };
 
 export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId };

@@ -11,6 +11,7 @@ const caseStudyNegativeOrNanInputError = negativeOrNanInputError('/case-studies/
 const caseStudyDNEError = dneError('Case Study', 'does not exist');
 const caseStudyQuestionsNegativeOrNanInputError = negativeOrNanInputError('/case-study-questions/:id');
 const caseStudyQuestionsDNEError = dneError('Case Study Questions', 'do not exist for this id');
+const caseStudyResponsesNegativeOrNanInputError = negativeOrNanInputError('/case-study-responses/:caseStudyId');
 const departmentNegativeOrNanInputError = negativeOrNanInputError('/department-form/:id');
 const departmentDNEError = dneError('Department', 'does not exist or its form structure is empty');
 const formNegativeOrNanInputError = negativeOrNanInputError('/form-responses/:formId');
@@ -24,6 +25,7 @@ export {
   caseStudyDNEError,
   caseStudyQuestionsNegativeOrNanInputError,
   caseStudyQuestionsDNEError,
+  caseStudyResponsesNegativeOrNanInputError,
   departmentNegativeOrNanInputError,
   departmentDNEError,
   formNegativeOrNanInputError,
