@@ -9,11 +9,13 @@ import gray_person from '../../images/gray_person.jpg';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
+let body;
 
 const CaseStudySubmit = () => {
   let history = useHistory();
   const onClick = () => {};
   const userContext = useContext(UserContext);
+  const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
   const [selectedOption, setSelectedOption] = useState<String>();
   const [caseStudyType, setCaseStudyType] = useState({
@@ -53,6 +55,26 @@ const CaseStudySubmit = () => {
     }
   }, [setCaseStudyType]);
 
+  const createCaseStudy = async () => {
+    body = {
+      caseStudyTypeId: selectedOption,
+      departmentId: userContext.user?.departmentId,
+      userId: userContext.user?.id,
+      title
+    };
+    try {
+      await fetch('http://localhost:8080/case-studies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }).then(() => {
+        console.log('Done');
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setSelectedOption(value);
@@ -70,12 +92,11 @@ const CaseStudySubmit = () => {
     setShareImage(image);
   };
 
-  if(userContext.user?.username != null){
-    
-    console.log('(Case Study Submit Page)  Username is ' , userContext.user?.username)
-    console.log('(Case Study Submit Page) ID is ' , userContext.user?.id)
-    console.log('(Case Study Submit Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Case Study Submit Page) Role ID is ' , userContext.user?.roleId)
+  if (userContext.user?.username != null) {
+    console.log('(Case Study Submit Page)  Username is ', userContext.user?.username);
+    console.log('(Case Study Submit Page) ID is ', userContext.user?.id);
+    console.log('(Case Study Submit Page) Department Id is ', userContext.user?.departmentId);
+    console.log('(Case Study Submit Page) Role ID is ', userContext.user?.roleId);
   }
 
   return (
@@ -100,7 +121,6 @@ const CaseStudySubmit = () => {
               return <option value={Types.id}>{Types.name}</option>;
             })}
           </select>
-
           <div className="photo">
             <p className="inside-text-case-study">Upload Photo</p>
             <div>
@@ -119,17 +139,21 @@ const CaseStudySubmit = () => {
           </div>
 
           <div className="w-full flex flex-col pt-10">
+            <label className="inside-text-case-study">Title of Case Study?</label>
+            <textarea value={title} onChange={(e) => setTitle(e.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
-                  <p className="inside-text-case-study">{Questions.label}</p>
+                  <label className="inside-text-case-study">{Questions.label}</label>
                   <textarea className="response" placeholder="Type here..."></textarea>
                 </div>
               );
             })}
+            <button className="grey-button bottom-5 left-31">Cancel</button>
+            <button onClick={createCaseStudy} className="blue-button bottom-5 right-20">
+              Submit
+            </button>
           </div>
-          <button className="grey-button bottom-5 left-31">Cancel</button>
-          <button className="blue-button bottom-5 right-20">Submit</button>
         </div>
       </div>
     </div>
