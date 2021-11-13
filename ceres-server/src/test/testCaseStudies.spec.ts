@@ -89,7 +89,7 @@ describe('getCaseStudyById', () => {
   it('should return error code 400 for case study id that is negative or NaN', (done) => {
     chai
       .request(testApp)
-      .get('/case-studies/-1')
+      .get('/case-study/-1')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
@@ -100,7 +100,7 @@ describe('getCaseStudyById', () => {
   it('should return error code 400 for invalid URL', (done) => {
     chai
       .request(testApp)
-      .get('/case-studies/wow')
+      .get('/case-study/wow')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
@@ -111,7 +111,7 @@ describe('getCaseStudyById', () => {
   it('should return error code 404 for case study id yet to be created', (done) => {
     chai
       .request(testApp)
-      .get('/case-studies/55')
+      .get('/case-study/55')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(404);
@@ -122,7 +122,7 @@ describe('getCaseStudyById', () => {
   it('should get a case study by case study id successfully', (done) => {
     chai
       .request(testApp)
-      .get('/case-studies/2')
+      .get('/case-study/2')
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -286,7 +286,7 @@ describe('addCaseStudy', () => {
   it('should create case study successfully', (done) => {
     chai
       .request(testApp)
-      .post('/case-studies')
+      .post('/case-study')
       .set('content-type', 'application/json')
       .send({
         caseStudyTypeId: 5,

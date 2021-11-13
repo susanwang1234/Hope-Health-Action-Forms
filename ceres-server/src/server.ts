@@ -9,6 +9,7 @@ import departmentRoutes from './routes/departmentRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
 import formRoutes from './routes/formRoute';
 import formResponsesRoutes from './routes/formResponsesRoute';
+import caseStudyRoutes from './routes/caseStudyRoute';
 import caseStudiesRoutes from './routes/caseStudiesRoute';
 import caseStudyTypesRoutes from './routes/caseStudyTypesRoute';
 import caseStudyQuestionsRoutes from './routes/caseStudyQuestionsRoute';
@@ -90,6 +91,7 @@ export function enableRoutes(router: Application) {
   router.use('/user', userRoutes);
   router.use('/form', formRoutes);
   router.use('/form-responses', formResponsesRoutes);
+  router.use('/case-study', caseStudyRoutes);
   router.use('/case-studies', caseStudiesRoutes);
   router.use('/case-study-types', caseStudyTypesRoutes);
   router.use('/case-study-questions', caseStudyQuestionsRoutes);
