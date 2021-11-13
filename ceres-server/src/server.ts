@@ -99,7 +99,7 @@ export function enableRoutes(router: Application) {
   router.use('/case-study-types', caseStudyTypesRoutes);
   router.use('/case-study-questions', caseStudyQuestionsRoutes);
   router.use('/case-study-responses', caseStudyResponsesRoutes);
-  router.use('image', imageRoutes);
+  router.use('/image', imageRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

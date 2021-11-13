@@ -3,10 +3,10 @@ import { Knex } from 'knex';
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable('Image', (table: Knex.CreateTableBuilder) => {
     table.increments();
-    table.string('imgFilename').unique().notNullable();
-    table.text('imgFilepath').notNullable();
-    table.text('imgMimetype').notNullable();
-    table.bigInteger('imgSize').notNullable();
+    table.string('filename').unique().notNullable();
+    table.text('Filepath').notNullable();
+    table.text('mimetype').notNullable();
+    table.bigInteger('size').notNullable();
   });
 }
 
