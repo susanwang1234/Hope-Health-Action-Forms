@@ -9,6 +9,7 @@ import departmentRoutes from './routes/departmentRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
 import formRoutes from './routes/formRoute';
 import formResponsesRoutes from './routes/formResponsesRoute';
+import imageRoutes from './routes/imageRoute';
 import caseStudyRoutes from './routes/caseStudyRoute';
 import caseStudiesRoutes from './routes/caseStudiesRoute';
 import caseStudyTypesRoutes from './routes/caseStudyTypesRoute';
@@ -73,8 +74,10 @@ export function enableLogging(router: Application, namespace: string) {
   });
 
   /** Parsing Requests */
+  const morgan = require('morgan');
   router.use(express.urlencoded({ extended: true }));
   router.use(express.json());
+  router.use(morgan('dev'));
   router.use(cookieParser());
 
   /** Passport Initialization */
@@ -96,6 +99,7 @@ export function enableRoutes(router: Application) {
   router.use('/case-study-types', caseStudyTypesRoutes);
   router.use('/case-study-questions', caseStudyQuestionsRoutes);
   router.use('/case-study-responses', caseStudyResponsesRoutes);
+  router.use('image', imageRoutes);
 }
 
 export function enableErrorHandling(router: Application) {
