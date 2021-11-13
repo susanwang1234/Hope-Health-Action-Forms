@@ -7,9 +7,11 @@ function dneError(entity: string, errorMessage: string) {
 }
 
 // TODO: Generalize these better so they can be used for more controllers
-const caseStudyNegativeOrNanInputError = negativeOrNanInputError('/case-studies/:id');
+const caseStudiesNegativeOrNanInputError = negativeOrNanInputError('/case-studies/:caseStudyTypeId');
+const caseStudiesDNEError = dneError('Case Studies', 'do not exist for this type of case study');
+const caseStudyNegativeOrNanInputError = negativeOrNanInputError('/case-study/:caseStudyId');
 const caseStudyDNEError = dneError('Case Study', 'does not exist');
-const caseStudyQuestionsNegativeOrNanInputError = negativeOrNanInputError('/case-study-questions/:id');
+const caseStudyQuestionsNegativeOrNanInputError = negativeOrNanInputError('/case-study-questions/:caseStudyTypeid');
 const caseStudyQuestionsDNEError = dneError('Case Study Questions', 'do not exist for this id');
 const caseStudyResponsesNegativeOrNanInputError = negativeOrNanInputError('/case-study-responses/:caseStudyId');
 const departmentNegativeOrNanInputError = negativeOrNanInputError('/department-form/:id');
@@ -21,6 +23,8 @@ const userDNEError = dneError('User', 'does not exist');
 const pageNotFoundError = { message: 'not found' };
 
 export {
+  caseStudiesNegativeOrNanInputError,
+  caseStudiesDNEError,
   caseStudyNegativeOrNanInputError,
   caseStudyDNEError,
   caseStudyQuestionsNegativeOrNanInputError,

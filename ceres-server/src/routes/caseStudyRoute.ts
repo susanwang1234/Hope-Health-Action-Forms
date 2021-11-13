@@ -3,7 +3,7 @@ import controller from '../controllers/caseStudyController';
 
 const router = express.Router();
 
-router.get('/:id', controller.getCaseStudyById);
+router.get('/:caseStudyId', controller.getCaseStudyById);
 router.post('', controller.addCaseStudy);
 
 export = router;

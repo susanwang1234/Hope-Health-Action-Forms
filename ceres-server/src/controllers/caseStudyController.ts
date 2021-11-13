@@ -15,7 +15,7 @@ const inputtedReqBody = (req: Request) => {
 
 const getCaseStudyById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING A ${TABLE_NAME.toUpperCase()} BY ID`);
-  const caseStudyId: number = +req.params.id;
+  const caseStudyId: number = +req.params.caseStudyId;
   if (isInvalidInput(caseStudyId)) {
     res.status(400).send(caseStudyNegativeOrNanInputError);
     return;
@@ -34,7 +34,7 @@ const getCaseStudyById = async (req: Request, res: Response, next: NextFunction)
       res.status(404).send(caseStudyDNEError);
       return;
     }
-    res.send(retrievedCaseStudy);
+    res.status(200).send(retrievedCaseStudy);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
     res.status(500).send(error);
