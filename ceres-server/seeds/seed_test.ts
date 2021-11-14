@@ -26,6 +26,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('DepartmentQuestion').truncate();
   await knex('Department').truncate();
   await knex('Question').truncate();
+  await knex('Image').truncate();
   await knex.raw('SET FOREIGN_KEY_CHECKS=1;');
 
   // Insert seed entries
