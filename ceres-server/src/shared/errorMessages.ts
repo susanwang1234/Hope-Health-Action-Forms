@@ -21,6 +21,8 @@ const formDNEError = dneError('Form', 'does not exist or its responses are empty
 const userNegativeOrNanInputError = negativeOrNanInputError('/user/:id');
 const userDNEError = dneError('User', 'does not exist');
 const pageNotFoundError = { message: 'not found' };
+const imageNegativeOrNanInputError = negativeOrNanInputError('/image/:id');
+const imageDNEError = dneError('Image', 'does not exist');
 
 export {
   caseStudiesNegativeOrNanInputError,
@@ -36,5 +38,7 @@ export {
   formDNEError,
   userNegativeOrNanInputError,
   userDNEError,
-  pageNotFoundError
+  pageNotFoundError,
+  imageNegativeOrNanInputError,
+  imageDNEError
 };

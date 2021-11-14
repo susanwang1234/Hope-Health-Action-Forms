@@ -15,6 +15,7 @@ const imageUpload = multer({
   })
 });
 
+router.get('/:id', controller.getImageById);
 router.post('', imageUpload.single('image'), controller.addImage);
 
 export = router;

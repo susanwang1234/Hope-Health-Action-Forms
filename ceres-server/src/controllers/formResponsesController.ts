@@ -10,7 +10,7 @@ const NAMESPACE = 'Form Response Control';
 const TABLE_NAME = 'FormResponse';
 
 const getFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `GETTING FORM RESPONSES FOR BY ID`);
+  logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY ID`);
   const formId: number = +req.params.formId;
   if (isInvalidInput(formId)) {
     res.status(400).send(formNegativeOrNanInputError);
