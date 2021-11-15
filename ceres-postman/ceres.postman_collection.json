@@ -547,6 +547,55 @@
       ]
     },
     {
+      "name": "Image",
+      "item": [
+        {
+          "name": "POST an image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "localhost:8080/image",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET an image by id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/image/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["image", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Role",
       "item": [
         {
