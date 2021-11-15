@@ -66,3 +66,36 @@ describe('getImageById', () => {
       });
   });
 });
+
+// Test 2: POST request (Single image)
+describe('addImage', () => {
+  let testApp: Application;
+  let httpServer: http.Server;
+  before('Create a working server', () => {
+    testApp = createServer();
+    sendFirstRequest(testApp);
+    enableLogging(testApp, 'Test Server');
+    enableRoutes(testApp);
+    enableErrorHandling(testApp);
+    httpServer = http.createServer(testApp);
+    httpServer.listen(PORT);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('should create image unsuccessfully', (done) => {
+    chai
+      .request(testApp)
+      .post('/image')
+      .set('content-type', 'application/json')
+      .send({
+        message: 'This should fail'
+      })
+      .end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(400);
+        expect(res.text).to.deep.equal(JSON.stringify(imageMimetypeError));
+        done();
+      });
+  });
+});
