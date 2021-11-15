@@ -9,8 +9,8 @@ const NAMESPACE = 'Case Study Control';
 const TABLE_NAME = 'CaseStudy';
 
 const inputtedReqBody = (req: Request) => {
-  const { caseStudyTypeId, departmentId, userId, title } = req.body;
-  return { caseStudyTypeId: caseStudyTypeId, departmentId: departmentId, userId: userId, title: title };
+  const { caseStudyTypeId, departmentId, userId, imageId, title } = req.body;
+  return { caseStudyTypeId: caseStudyTypeId, departmentId: departmentId, userId: userId, imageId: imageId, title: title };
 };
 
 const getCaseStudyById = async (req: Request, res: Response, next: NextFunction) => {
@@ -22,7 +22,7 @@ const getCaseStudyById = async (req: Request, res: Response, next: NextFunction)
   }
 
   try {
-    const retrievedCaseStudy = await Knex.select('CaseStudy.title', 'CaseStudyType.name', 'CaseStudy.createdAt', 'CaseStudyQuestion.label', 'CaseStudyResponse.response')
+    const retrievedCaseStudy = await Knex.select('CaseStudy.title', 'CaseStudyType.name', 'CaseStudy.imageId', 'CaseStudy.createdAt', 'CaseStudyQuestion.label', 'CaseStudyResponse.response')
       .from(TABLE_NAME)
       .join('CaseStudyResponse', 'CaseStudy.id', '=', 'CaseStudyResponse.caseStudyId')
       .join('CaseStudyTypeQuestion', 'CaseStudyResponse.caseStudyTypeQuestionId', '=', 'CaseStudyTypeQuestion.id')

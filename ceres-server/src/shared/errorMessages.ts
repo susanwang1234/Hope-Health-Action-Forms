@@ -25,7 +25,7 @@ const formDNEError = dneError('Form', 'does not exist or its responses are empty
 const userNegativeOrNanInputError = negativeOrNanInputError('/user/:id');
 const userDNEError = dneError('User', 'does not exist');
 const pageNotFoundError = { message: 'not found' };
-const imageNegativeOrNanInputError = negativeOrNanInputError('/image/:id');
+const imageNegativeOrNanInputError = negativeOrNanInputError('/image/:imageId');
 const imageDNEError = dneError('Image', 'does not exist');
 const imageMimetypeError = invalidExtension('Image', 'png, jpg, or jpeg');
 

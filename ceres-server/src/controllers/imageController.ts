@@ -14,7 +14,7 @@ const inputtedReqFile = (req: any, filepath: any, mimetype: any) => {
 
 const getImageById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING AN ${TABLE_NAME.toUpperCase()} BY ID`);
-  const imageId: number = +req.params.id;
+  const imageId: number = +req.params.imageId;
   if (isInvalidInput(imageId)) {
     res.status(400).send(imageNegativeOrNanInputError);
     return;
