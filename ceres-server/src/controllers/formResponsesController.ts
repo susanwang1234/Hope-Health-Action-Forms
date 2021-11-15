@@ -5,6 +5,7 @@ import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages'
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
 import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { FormResponse } from '../db/models/formResponseModel';
 
 const NAMESPACE = 'Form Response';
 const TABLE_NAME = 'FormResponse';
@@ -37,7 +38,7 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
 
 const addNewFormResponses = async (req: Request, res: Response, next: NextFunction) => {
   const formId: number = +req.params.formId;
-  const formResponses = req.body.map((formResponse: any) => {
+  const formResponses: FormResponse[] = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
   const formResponseFKName = 'formId';
