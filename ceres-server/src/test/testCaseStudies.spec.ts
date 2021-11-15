@@ -47,6 +47,7 @@ describe('getCaseStudies', () => {
           expect(item).to.have.deep.property('caseStudyTypeId');
           expect(item).to.have.deep.property('departmentId');
           expect(item).to.have.deep.property('userId');
+          expect(item).to.have.deep.property('imageId');
           expect(item).to.have.deep.property('title');
           expect(item).to.have.deep.property('createdAt');
           expect(item).to.have.deep.property('response');
@@ -56,6 +57,7 @@ describe('getCaseStudies', () => {
           expect(item.caseStudyTypeId).to.deep.equal(id);
           expect(item.departmentId).to.deep.equal(id);
           expect(item.userId).to.deep.equal(id);
+          expect(item.imageId).to.deep.equal(id);
           expect(item.title).to.deep.equal(title[id - 1]);
           expect(item.response).to.deep.equal(response[id - 1]);
         });
@@ -125,6 +127,7 @@ describe('getCaseStudiesByTypeId', () => {
           expect(item).to.have.deep.property('caseStudyTypeId');
           expect(item).to.have.deep.property('departmentId');
           expect(item).to.have.deep.property('userId');
+          expect(item).to.have.deep.property('imageId');
           expect(item).to.have.deep.property('title');
           expect(item).to.have.deep.property('createdAt');
           expect(item).to.have.deep.property('response');
@@ -134,6 +137,7 @@ describe('getCaseStudiesByTypeId', () => {
           expect(item.caseStudyTypeId).to.deep.equal(1);
           expect(item.departmentId).to.deep.equal(1);
           expect(item.userId).to.deep.equal(1);
+          expect(item.imageId).to.deep.equal(1);
           expect(item.title).to.deep.equal('Case Study Dummy 1');
           expect(item.response).to.deep.equal('Joe Doe is a 69 year old Canadian man who was stuck at the HCBH for 30 days...');
         });
@@ -211,6 +215,7 @@ describe('getCaseStudyById', () => {
           expect(item).to.be.an('object');
           expect(item).to.have.deep.property('title');
           expect(item).to.have.deep.property('name');
+          expect(item).to.have.deep.property('imageId');
           expect(item).to.have.deep.property('createdAt');
           expect(item).to.have.deep.property('label');
           expect(item).to.have.deep.property('response');
@@ -218,6 +223,7 @@ describe('getCaseStudyById', () => {
         res.body.forEach((item: any) => {
           expect(item.title).to.deep.equal('Case Study Dummy 2');
           expect(item.name).to.deep.equal('Staff Recognition');
+          expect(item.imageId).to.deep.equal(2);
           expect(item.label).to.deep.equal(label[count]);
           expect(item.response).to.deep.equal(response[count++]);
         });
@@ -371,6 +377,7 @@ describe('addCaseStudy', () => {
       .send({
         caseStudyTypeId: 5,
         departmentId: 1,
+        imageId: 1,
         userId: 1,
         title: 'Case Study Dummy 3'
       })
@@ -382,10 +389,12 @@ describe('addCaseStudy', () => {
         expect(res.body[0]).to.have.deep.property('caseStudyTypeId');
         expect(res.body[0]).to.have.deep.property('departmentId');
         expect(res.body[0]).to.have.deep.property('userId');
+        expect(res.body[0]).to.have.deep.property('imageId');
         expect(res.body[0]).to.have.deep.property('title');
         expect(res.body[0].caseStudyTypeId).to.deep.equal(5);
         expect(res.body[0].departmentId).to.deep.equal(1);
         expect(res.body[0].userId).to.deep.equal(1);
+        expect(res.body[0].imageId).to.deep.equal(1);
         expect(res.body[0].title).to.deep.equal('Case Study Dummy 3');
         done();
       });
