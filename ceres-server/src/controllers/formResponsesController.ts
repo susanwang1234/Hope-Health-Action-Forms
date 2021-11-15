@@ -42,8 +42,15 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
   const formResponses: FormResponse[] = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
-  const form: Form = await Knex.select('*').from('Form').where('id', '=', formId);
-  formResponses.forEach((formResponse: FormResponse) => {});
+  const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
+  const departmentQuestionIds: number[] = (await Knex.select('id').from('DepartmentQuestion').where('departmentId', '=', form.departmentId)).map((d: any) => d.id);
+  formResponses.forEach((formResponse: FormResponse) => {
+    if (!departmentQuestionIds.includes(formResponse.departmentQuestionId)) {
+      logging.error(NAMESPACE, `TRYING TO ADD RESPONSE FOR QUESTION NOT IN DEPARTMENT ${form.departmentId}`);
+      res.status(400).send({ error: 'All responses must belong to the correct department.' });
+      return;
+    }
+  });
   const formResponseFKName = 'formId';
   await createItems(req, res, next, NAMESPACE, TABLE_NAME, formResponses, formResponseFKName, formId);
 };
