@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "e674aa7f-f89a-4997-ae8d-04c2163149b0",
+    "_postman_id": "e4d55d20-aef5-4146-8f7b-be319ba5ab90",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -89,122 +89,314 @@
       "name": "Case Studies",
       "item": [
         {
-          "name": "POST a case study (Example 1)",
+          "name": "POST and GET a Case Study (Example 1)",
           "item": [
             {
-              "name": "Step 1: POST to CaseStudy table",
+              "name": "POST a case study (Step 1)",
               "item": [
                 {
-                  "name": "POST a case study of type 5",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
+                  "name": "Step 1.1: POST an image",
+                  "item": [
+                    {
+                      "name": "POST an image for case study of type 5",
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "key": "image",
+                              "type": "file",
+                              "src": []
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "localhost:8080/image",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["image"]
                         }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study"]
+                      },
+                      "response": []
                     }
-                  },
-                  "response": []
+                  ]
+                },
+                {
+                  "name": "Step 1.2: POST to CaseStudy table",
+                  "item": [
+                    {
+                      "name": "POST a case study of type 5",
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 3,\r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "localhost:8080/case-study",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-study"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Step 1.3: POST to CaseStudyResponse table",
+                  "item": [
+                    {
+                      "name": "POST responses to case study (id: 3)",
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 26, \"response\": \"This is a fascinating story for insert other type of case studies\" }\r\n]",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "localhost:8080/case-study-responses/3",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-study-responses", "3"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
                 }
               ]
             },
             {
-              "name": "Step 2: POST to CaseStudyResponse table",
+              "name": "GET case studies (Step 2)",
               "item": [
                 {
-                  "name": "POST responses to case study (id: 3)",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 26, \"response\": \"This is a fascinating story for insert other type of case studies\" }\r\n]",
-                      "options": {
-                        "raw": {
-                          "language": "json"
+                  "name": "Step 2.1 GET case studies",
+                  "item": [
+                    {
+                      "name": "GET updated list of case studies",
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "localhost:8080/case-studies",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-studies"]
                         }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses/3",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses", "3"]
+                      },
+                      "response": []
                     }
-                  },
-                  "response": []
+                  ]
+                },
+                {
+                  "name": "Step 2.2 GET case study by caseStudyId",
+                  "item": [
+                    {
+                      "name": "GET case study by caseStudyId of 3",
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "localhost:8080/case-study/3",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-study", "3"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Step 2.3 GET an image by image id",
+                  "item": [
+                    {
+                      "name": "GET an image by image id of 3",
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "localhost:8080/image/3",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["image", "3"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
                 }
               ]
             }
           ]
         },
         {
-          "name": "POST a case study (Example 2)",
+          "name": "POST and GET a Case Study (Example 2)",
           "item": [
             {
-              "name": "Step 1: POST to CaseStudy table",
+              "name": "POST a case study (Step 1)",
               "item": [
                 {
-                  "name": "POST a case study of type 1",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "{ \r\n    \"caseStudyTypeId\": 1, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"title\":  \"Case Study Dummy 4\"\r\n}",
-                      "options": {
-                        "raw": {
-                          "language": "json"
+                  "name": "Step 1.1: POST an image",
+                  "item": [
+                    {
+                      "name": "POST an image for case study of type 1",
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "key": "image",
+                              "type": "file",
+                              "src": []
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "localhost:8080/image",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["image"]
                         }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study"]
+                      },
+                      "response": []
                     }
-                  },
-                  "response": []
+                  ]
+                },
+                {
+                  "name": "Step 1.2: POST to CaseStudy table",
+                  "item": [
+                    {
+                      "name": "POST a case study of type 1",
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{ \r\n    \"caseStudyTypeId\": 1, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 4,\r\n    \"title\":  \"Case Study Dummy 4\"\r\n}",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "localhost:8080/case-study",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-study"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Step 1.3: POST to CaseStudyResponse table",
+                  "item": [
+                    {
+                      "name": "POST responses to case study (id: 4)",
+                      "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 1, \"response\": \"Billy Bob\" },\r\n    { \"caseStudyTypeQuestionId\": 2, \"response\": \"55\" },\r\n    { \"caseStudyTypeQuestionId\": 3, \"response\": \"USA\" },\r\n    { \"caseStudyTypeQuestionId\": 4, \"response\": \"Unknown\" },\r\n    { \"caseStudyTypeQuestionId\": 5, \"response\": \"25 days\" },\r\n    { \"caseStudyTypeQuestionId\": 6, \"response\": \"They were sick\" },\r\n    { \"caseStudyTypeQuestionId\": 7, \"response\": \"Billy Bob is a 55 year old American man who was stuck at the HCBH for 25 days...\" }\r\n]",
+                          "options": {
+                            "raw": {
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "localhost:8080/case-study-responses/4",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-study-responses", "4"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
                 }
               ]
             },
             {
-              "name": "Step 2: POST to CaseStudyResponse table",
+              "name": "GET case studies (Step 2)",
               "item": [
                 {
-                  "name": "POST responses to case study (id: 4)",
-                  "request": {
-                    "method": "POST",
-                    "header": [],
-                    "body": {
-                      "mode": "raw",
-                      "raw": "[\r\n    { \"caseStudyTypeQuestionId\": 1, \"response\": \"Billy Bob\" },\r\n    { \"caseStudyTypeQuestionId\": 2, \"response\": \"55\" },\r\n    { \"caseStudyTypeQuestionId\": 3, \"response\": \"USA\" },\r\n    { \"caseStudyTypeQuestionId\": 4, \"response\": \"Unknown\" },\r\n    { \"caseStudyTypeQuestionId\": 5, \"response\": \"25 days\" },\r\n    { \"caseStudyTypeQuestionId\": 6, \"response\": \"They were sick\" },\r\n    { \"caseStudyTypeQuestionId\": 7, \"response\": \"Billy Bob is a 55 year old American man who was stuck at the HCBH for 25 days...\" }\r\n]",
-                      "options": {
-                        "raw": {
-                          "language": "json"
+                  "name": "Step 2.1 GET case studies",
+                  "item": [
+                    {
+                      "name": "GET updated list of case studies",
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "localhost:8080/case-studies",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-studies"]
                         }
-                      }
-                    },
-                    "url": {
-                      "raw": "localhost:8080/case-study-responses/4",
-                      "host": ["localhost"],
-                      "port": "8080",
-                      "path": ["case-study-responses", "4"]
+                      },
+                      "response": []
                     }
-                  },
-                  "response": []
+                  ]
+                },
+                {
+                  "name": "Step 2.2 GET case study by caseStudyId",
+                  "item": [
+                    {
+                      "name": "GET case study by caseStudyId of 4",
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "localhost:8080/case-study/4",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["case-study", "4"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Step 2.3 GET an image by image id",
+                  "item": [
+                    {
+                      "name": "GET an image by image id of 4",
+                      "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                          "raw": "localhost:8080/image/4",
+                          "host": ["localhost"],
+                          "port": "8080",
+                          "path": ["image", "4"]
+                        }
+                      },
+                      "response": []
+                    }
+                  ]
                 }
               ]
             }
@@ -305,7 +497,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
+              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"imageId\": 5,\r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -574,18 +766,18 @@
           "response": []
         },
         {
-          "name": "GET an image by id",
+          "name": "GET an image by image id",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/image/:id",
+              "raw": "localhost:8080/image/:imageId",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["image", ":id"],
+              "path": ["image", ":imageId"],
               "variable": [
                 {
-                  "key": "id",
+                  "key": "imageId",
                   "value": ""
                 }
               ]
