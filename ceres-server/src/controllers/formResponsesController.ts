@@ -60,6 +60,15 @@ const editFormResponsesByFormId = async (req: Request, res: Response, next: Next
   const responsesToEdit = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
+  const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
+  const departmentQuestionIds: number[] = (await Knex.select('id').from('DepartmentQuestion').where('departmentId', '=', form.departmentId)).map((d: any) => d.id);
+  responsesToEdit.forEach((response: FormResponse) => {
+    if (!departmentQuestionIds.includes(response.departmentQuestionId)) {
+      logging.error(NAMESPACE, `TRYING TO EDIT RESPONSE FOR QUESTION NOT IN DEPARTMENT ${form.departmentId}`);
+      res.status(400).send({ error: 'All responses must belong to the correct department.' });
+      return;
+    }
+  });
   await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit);
 };
 
