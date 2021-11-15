@@ -2,7 +2,7 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { departmentNegativeOrNanInputError, departmentDNEError } from 'shared/errorMessages';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'Department Form Control';
 const TABLE_NAME = 'Department Form';

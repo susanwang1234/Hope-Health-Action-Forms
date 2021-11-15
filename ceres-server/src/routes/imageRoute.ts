@@ -1,19 +1,8 @@
 import express from 'express';
 import controller from '../controllers/imageController';
+import { imageUpload } from 'middlewares/multerValidation';
 
 const router = express.Router();
-const multer = require('multer');
-const path = 'assets/';
-const imageUpload = multer({
-  storage: multer.diskStorage({
-    destination: function (req: Request, file: any, cb: any) {
-      cb(null, path);
-    },
-    filename: function (req: Request, file: any, cb: any) {
-      cb(null, new Date().valueOf() + '_' + file.originalname);
-    }
-  })
-});
 
 router.get('/:id', controller.getImageById);
 router.post('', imageUpload.single('image'), controller.addImage);

@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
 import { caseStudyNegativeOrNanInputError, caseStudyDNEError } from 'shared/errorMessages';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'Case Study Control';
 const TABLE_NAME = 'CaseStudy';

@@ -22,20 +22,20 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import './middlewares/passport-strategies.mw.ts';
 
-export function createServer() {
+export const createServer = () => {
   /** Define Server */
   const router: Application = express();
   return router;
-}
+};
 
-export function sendFirstRequest(router: Application) {
+export const sendFirstRequest = (router: Application) => {
   /** Default Request */
   router.get('/', (req: Request, res: Response, next: NextFunction) => {
     res.send('Welcome to Team Ceres');
   });
-}
+};
 
-export function enableCors(router: Application) {
+export const enableCors = (router: Application) => {
   /** Enable CORS */
   const allowedOrigins = ['http://localhost:3000'];
 
@@ -59,9 +59,9 @@ export function enableCors(router: Application) {
     }
     next();
   });
-}
+};
 
-export function enableLogging(router: Application, namespace: string) {
+export const enableLogging = (router: Application, namespace: string) => {
   /** Logging Requests */
   router.use((req, res, next) => {
     logging.info(namespace, `METHOD - [${req.method}], URL - [${req.url}], IP - [${req.socket.remoteAddress}]`);
@@ -82,9 +82,9 @@ export function enableLogging(router: Application, namespace: string) {
 
   /** Passport Initialization */
   router.use(passport.initialize());
-}
+};
 
-export function enableRoutes(router: Application) {
+export const enableRoutes = (router: Application) => {
   /** Routes */
   router.use('', routes);
   router.use('/department', departmentRoutes);
@@ -100,9 +100,9 @@ export function enableRoutes(router: Application) {
   router.use('/case-study-questions', caseStudyQuestionsRoutes);
   router.use('/case-study-responses', caseStudyResponsesRoutes);
   router.use('/image', imageRoutes);
-}
+};
 
-export function enableErrorHandling(router: Application) {
+export const enableErrorHandling = (router: Application) => {
   /** Error Handling */
   router.use((req, res, next) => {
     const error = new Error('not found');
@@ -111,10 +111,10 @@ export function enableErrorHandling(router: Application) {
       message: error.message
     });
   });
-}
+};
 
-export function enableServerListening(router: Application, namespace: string) {
+export const enableServerListening = (router: Application, namespace: string) => {
   /** Create the server */
   const httpServer = http.createServer(router);
   httpServer.listen(config.server.port, () => logging.info(namespace, `Server running on ${config.server.hostname}:${config.server.port}`));
-}
+};

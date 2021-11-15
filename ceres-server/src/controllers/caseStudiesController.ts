@@ -1,7 +1,7 @@
 import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 import { caseStudiesNegativeOrNanInputError, caseStudiesDNEError } from 'shared/errorMessages';
 
 const NAMESPACE = 'Case Studies Control';

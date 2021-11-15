@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'Form Response Control';
 const TABLE_NAME = 'FormResponse';
