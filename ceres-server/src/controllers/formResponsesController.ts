@@ -5,6 +5,7 @@ import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages'
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
 import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { Form } from '../db/models/formModel';
 import { FormResponse } from '../db/models/formResponseModel';
 
 const NAMESPACE = 'Form Response';
@@ -41,6 +42,8 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
   const formResponses: FormResponse[] = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
+  const form: Form = await Knex.select('*').from('Form').where('id', '=', formId);
+  formResponses.forEach((formResponse: FormResponse) => {});
   const formResponseFKName = 'formId';
   await createItems(req, res, next, NAMESPACE, TABLE_NAME, formResponses, formResponseFKName, formId);
 };
