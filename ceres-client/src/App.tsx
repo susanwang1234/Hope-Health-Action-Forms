@@ -4,7 +4,8 @@ import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import CaseStudies from './components/CaseStudies/CaseStudies';
-import CaseStudySubmit from './components/CaseStudy/CaseStudySubmit';
+import CaseStudyInstance from './components/CaseStudyInstance/CaseStudyInstance';
+import CaseStudySubmit from './components/CaseStudySubmit/CaseStudySubmit';
 import Departments from './components/Departments/Departments';
 import Forms from './components/Forms/Forms';
 import PrivateRoute from './hocs/PrivateRoute';
@@ -19,6 +20,7 @@ function App() {
         <PrivateRoute path="/submit-report" component={Forms}></PrivateRoute>
         <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
         <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
+        <PrivateRoute exact path={"/case-studies/:id"} component={CaseStudyInstance}></PrivateRoute>
         <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
       </Switch>

@@ -55,7 +55,7 @@ const CaseStudy = () => {
       <div className="container">
         <table>
           <tr>
-            <td className="column-left">
+            <td>
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
