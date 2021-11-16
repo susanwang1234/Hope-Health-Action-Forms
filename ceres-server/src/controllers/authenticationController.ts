@@ -29,7 +29,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         const cookieName = 'jwt';
 
         if (config.environement.nodeEnvironment === 'production') {
-          res.cookie(cookieName, tokenObject.token, { httpOnly: true, sameSite: 'none' });
+          res.cookie(cookieName, tokenObject.token, { httpOnly: true, sameSite: true });
         } else {
           res.cookie(cookieName, tokenObject.token, { httpOnly: true, sameSite: true });
         }
