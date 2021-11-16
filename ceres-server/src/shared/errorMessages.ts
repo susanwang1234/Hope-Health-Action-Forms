@@ -28,6 +28,8 @@ const pageNotFoundError = { message: 'not found' };
 const imageNegativeOrNanInputError = negativeOrNanInputError('/image/:imageId');
 const imageDNEError = dneError('Image', 'does not exist');
 const imageMimetypeError = invalidExtension('Image', 'png, jpg, or jpeg');
+const employeeOfTheMonthNegativeOrNanInputError = negativeOrNanInputError('/employee-of-the-month/:id');
+const employeeOfTheMonthDNEError = dneError('Employee of the Month', 'does not exist');
 
 export {
   caseStudiesNegativeOrNanInputError,
@@ -46,5 +48,7 @@ export {
   pageNotFoundError,
   imageNegativeOrNanInputError,
   imageDNEError,
-  imageMimetypeError
+  imageMimetypeError,
+  employeeOfTheMonthNegativeOrNanInputError,
+  employeeOfTheMonthDNEError
 };
