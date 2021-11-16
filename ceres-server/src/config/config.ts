@@ -1,13 +1,16 @@
 import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 const SERVER_HOSTNAME = process.env.HOST_NAME || 'localhost';
 const SERVER_PORT = process.env.SERVER_PORT || 8080;
+const CORS_ORIGIN_URL = process.env.CORS_ORIGIN_URL || 'http://localhost:3000';
 
 const SERVER = {
   hostname: SERVER_HOSTNAME,
-  port: SERVER_PORT
+  port: SERVER_PORT,
+  corsOriginUrl: CORS_ORIGIN_URL
 };
 
 const MYSQL_HOST = process.env.MYSQL_HOST || 'ceres-database';

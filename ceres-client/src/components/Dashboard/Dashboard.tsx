@@ -39,73 +39,65 @@ const Dashboard = () => {
     return (
       <div className="app">
         <div className="calendar-container">
-          <Calendar onChange={setDate} value={date} selectRange={true} className="responsive-calendar flex-shrink"  />
+          <Calendar onChange={setDate} value={date} selectRange={true} className="responsive-calendar flex-shrink" />
         </div>
       </div>
     );
   }
 
-  if(userContext.user?.username != null){
-    
-    console.log('(Dashboard Page)  Username is ' , userContext.user?.username)
-    console.log('(Dashboard Page) ID is ' , userContext.user?.id)
-    console.log('(Dashboard Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Dashboard Page) Role ID is ' , userContext.user?.roleId)
-  }
-
   return (
     <html>
-    <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    </head>
-    <body>
-    <div className="App">
-      <header className="nav-header">
-        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
-        <img src={logo} alt="Logo" className="logo" />
-      </header>
-      <Sidebar show={showNav} />
-      <div className="dashboard-container">
-        <div className="dashboard-cards">
-          <div className="card-outer fill-space-left">
-            <p className="title">To Do</p>
-            <div className="card-inner width-100-percent">
-              <div className="align-left">
-                <div className="due-content">
-                  <IoIosCheckmarkCircle className="icon" /> Case Study <br />
-                  Due October 31 2021
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body>
+        <div className="App">
+          <header className="nav-header">
+            <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+            <img src={logo} alt="Logo" className="logo" />
+          </header>
+          <Sidebar show={showNav} />
+          <div className="dashboard-container">
+            <div className="dashboard-cards">
+              <div className="card-outer fill-space-left">
+                <p className="title">To Do</p>
+                <div className="card-inner width-100-percent">
+                  <div className="align-left">
+                    <div className="due-content">
+                      <IoIosCheckmarkCircle className="icon" /> Case Study <br />
+                      Due October 31 2021
+                    </div>
+                    <div className="due-content">
+                      <IoIosAlert className="icon" /> MSPP Report <br />
+                      Due October 31 2021 <br />
+                    </div>
+                  </div>
+                  <div className="align-right flex">{generateCalendar()}</div>
                 </div>
-                <div className="due-content">
-                  <IoIosAlert className="icon" /> MSPP Report <br />
-                  Due October 31 2021 <br />
+
+                <p className="title">Leaderboard</p>
+                <div className="card-inner width-100-percent">
+                  <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
+                  <img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>
                 </div>
               </div>
-              <div className="align-right flex">{generateCalendar()}</div>
-            </div>
 
-            <p className="title">Leaderboard</p>
-            <div className="card-inner width-100-percent">
-              <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
-              <img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>
-            </div>
-          </div>
-
-          <div className="card-outer fill-space-right">
-            <p className="title">Employee of the Month</p>
-            <div className="card-inner height-100-percent">
-              <img src={profilePic} alt="profile pic" className="profile-pic"></img>
-              <h1 className="heading-1">Name: Zack Cody</h1>
-              <h1 className="heading-1">Department: Maternity</h1>
-              <p className="text-primary-p employee-paragraph">
-                Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is
-                employee of the month. Go Zack!
-              </p>
+              <div className="card-outer fill-space-right">
+                <p className="title">Employee of the Month</p>
+                <div className="card-inner height-100-percent">
+                  <img src={profilePic} alt="profile pic" className="profile-pic"></img>
+                  <h1 className="heading-1">Name: Zack Cody</h1>
+                  <h1 className="heading-1">Department: Maternity</h1>
+                  <p className="text-primary-p employee-paragraph">
+                    Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is
+                    employee of the month. Go Zack!
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    </body>
+      </body>
     </html>
   );
 };

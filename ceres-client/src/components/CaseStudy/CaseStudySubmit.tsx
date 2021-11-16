@@ -10,6 +10,7 @@ import { StaffRecognition } from '../../models/staffRecognition';
 import { TrainingSession } from '../../models/trainingSession';
 import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
+import httpService from '../../services/httpService';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -27,10 +28,10 @@ const CaseStudySubmit = () => {
     questions: []
   });
   async function getQuestions(selectedOption: string | undefined) {
-    const url = 'http://localhost:8080/case-study-questions/' + selectedOption;
+    const url = `/case-study-questions/${selectedOption}`;
     try {
-      const response = await fetch(url);
-      const data = await response.json();
+      const response = await httpService.get(url);
+      const data = response.data;
       console.log('Fetched questions: ' + data);
       setCaseStudyQuestions({
         questions: data
@@ -43,10 +44,10 @@ const CaseStudySubmit = () => {
     getTypeData();
 
     async function getTypeData() {
-      const url = 'http://localhost:8080/case-study-types';
+      const url = `/case-study-types`;
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await httpService.get(url);
+        const data = response.data;
         console.log('Fetched types: ' + data);
         setCaseStudyType({
           types: data
@@ -112,13 +113,6 @@ const CaseStudySubmit = () => {
     }
     setShareImage(image);
   };
-
-  if (userContext.user?.username != null) {
-    console.log('(Case Study Submit Page)  Username is ', userContext.user?.username);
-    console.log('(Case Study Submit Page) ID is ', userContext.user?.id);
-    console.log('(Case Study Submit Page) Department Id is ', userContext.user?.departmentId);
-    console.log('(Case Study Submit Page) Role ID is ', userContext.user?.roleId);
-  }
 
   return (
     <div className="casestudy-background">
