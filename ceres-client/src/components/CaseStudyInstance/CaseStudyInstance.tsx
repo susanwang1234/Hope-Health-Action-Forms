@@ -21,7 +21,7 @@ const CaseStudy = () => {
 
   // Get case study ID from URL pathname
   var str = window.location.pathname;
-  var last = str.substring(str.lastIndexOf("/") + 1, str.length);
+  var last = str.substring(str.lastIndexOf('/') + 1, str.length);
   var caseId: number = +last;
 
   useEffect(() => {
@@ -52,21 +52,34 @@ const CaseStudy = () => {
       <Sidebar show={showNav} />
       <div className="container">
         <td className="column-right">
-
           <div className="case-study-block-container">
             {/* Dynamically insert case study information here */}
-            {caseStudyState.caseStudies.slice(caseId-1, caseId).map((caseStudy: any) => {
+            {caseStudyState.caseStudies.slice(caseId - 1, caseId).map((caseStudy: any) => {
               return (
                 <table className="case-study-block">
                   <tr>
                     <td className="case-study-block-image">
-                      <img src={photo} alt="" width="150px" height="150px"></img>
+                      <img className="case-study-img" src={photo} alt="" width="150px" height="150px"></img>
                     </td>
                     <td className="case-study-block-text">
-                      <h2>{caseStudy.title}</h2>
-                      <h5>{caseStudy.createdAt}</h5>
-                      <p>{caseStudy.response}</p>
+                      <h1 className="case-study-title">{caseStudy.title}</h1>
+                      <h5 className="case-study-date">{caseStudy.createdAt}</h5>
+                      <p className="case-study-desc">{caseStudy.response}</p>
                     </td>
+                  </tr>
+                  <tr>
+                    <td>
+                    <button
+                        className="view-cancel-form-button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.location.href = '/case-studies';
+                        }}
+                      >
+                        Return
+                      </button>
+                    </td>
+
                   </tr>
                 </table>
               );
