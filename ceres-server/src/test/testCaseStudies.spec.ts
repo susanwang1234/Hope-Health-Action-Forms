@@ -405,6 +405,7 @@ describe('addCaseStudy', () => {
 describe('addCaseStudyResponsesByCaseStudyId', () => {
   let testApp: Application;
   let httpServer: http.Server;
+  const resBody = [{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }];
   before('Create a working server', () => {
     testApp = createServer();
     sendFirstRequest(testApp);
@@ -422,7 +423,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
       .request(testApp)
       .post('/case-study-responses/-1')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
@@ -435,7 +436,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
       .request(testApp)
       .post('/case-study-responses/fdfsdf')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
@@ -448,7 +449,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
       .request(testApp)
       .post('/case-study-responses/55')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(500);
@@ -460,7 +461,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
       .request(testApp)
       .post('/case-study-responses/3')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(201);
