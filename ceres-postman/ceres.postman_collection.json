@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "e4d55d20-aef5-4146-8f7b-be319ba5ab90",
+    "_postman_id": "9622d1ca-f199-403c-b4ff-1dc8b4083cd8",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -133,7 +133,7 @@
                         "header": [],
                         "body": {
                           "mode": "raw",
-                          "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 3,\r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
+                          "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 4,\r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
                           "options": {
                             "raw": {
                               "language": "json"
@@ -226,15 +226,15 @@
                   "name": "Step 2.3 GET an image by image id",
                   "item": [
                     {
-                      "name": "GET an image by image id of 3",
+                      "name": "GET an image by image id of 4",
                       "request": {
                         "method": "GET",
                         "header": [],
                         "url": {
-                          "raw": "localhost:8080/image/3",
+                          "raw": "localhost:8080/image/4",
                           "host": ["localhost"],
                           "port": "8080",
-                          "path": ["image", "3"]
+                          "path": ["image", "4"]
                         }
                       },
                       "response": []
@@ -290,7 +290,7 @@
                         "header": [],
                         "body": {
                           "mode": "raw",
-                          "raw": "{ \r\n    \"caseStudyTypeId\": 1, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 4,\r\n    \"title\":  \"Case Study Dummy 4\"\r\n}",
+                          "raw": "{ \r\n    \"caseStudyTypeId\": 1, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 5,\r\n    \"title\":  \"Case Study Dummy 4\"\r\n}",
                           "options": {
                             "raw": {
                               "language": "json"
@@ -383,15 +383,15 @@
                   "name": "Step 2.3 GET an image by image id",
                   "item": [
                     {
-                      "name": "GET an image by image id of 4",
+                      "name": "GET an image by image id of 5",
                       "request": {
                         "method": "GET",
                         "header": [],
                         "url": {
-                          "raw": "localhost:8080/image/4",
+                          "raw": "localhost:8080/image/5",
                           "host": ["localhost"],
                           "port": "8080",
-                          "path": ["image", "4"]
+                          "path": ["image", "5"]
                         }
                       },
                       "response": []
@@ -595,6 +595,154 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["department-form", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Employee Of The Month",
+      "item": [
+        {
+          "name": "PUT AND GET an Employee of the Month (Example)",
+          "item": [
+            {
+              "name": "Step 1: POST an image",
+              "item": [
+                {
+                  "name": "POST an image for the new employee of the month",
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "image",
+                          "type": "file",
+                          "src": []
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "localhost:8080/image",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["image"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Step 2: PUT the employee of the month",
+              "item": [
+                {
+                  "name": "PUT the new employee of the month",
+                  "request": {
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"imageId\": 6,\r\n    \"name\": \"Jack Smith\",\r\n    \"department\": \"Community Health\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jack Smith did a fantastic job this month!\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "localhost:8080/employee-of-the-month/1",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["employee-of-the-month", "1"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Step 3: GET the employee of the month",
+              "item": [
+                {
+                  "name": "GET the new employee of the month",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "localhost:8080/employee-of-the-month",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["employee-of-the-month"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "Step 4: GET an image by image id",
+              "item": [
+                {
+                  "name": "GET an image for the employee of the month",
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "localhost:8080/image/6",
+                      "host": ["localhost"],
+                      "port": "8080",
+                      "path": ["image", "6"]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "GET the employee of the month",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/employee-of-the-month",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["employee-of-the-month"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT the employee of the month",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"department\": \"Community Health\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month!\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/employee-of-the-month/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["employee-of-the-month", ":id"],
               "variable": [
                 {
                   "key": "id",
