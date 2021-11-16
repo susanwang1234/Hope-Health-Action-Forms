@@ -25,7 +25,7 @@ export const createItems = async (
   itemsRetrievalFKName: string,
   itemsRetrievalFKValue: number
 ) => {
-  logging.info(namespace, `CREATING INSTANCES OF ${tableName.toUpperCase}`);
+  logging.info(namespace, `CREATING INSTANCES OF ${tableName.toUpperCase()}`);
   try {
     await Knex.insert(itemsToInsert).into(tableName);
     const retrievedCreatedItems = await Knex.select('*').from(tableName).where(`${itemsRetrievalFKName}`, '=', itemsRetrievalFKValue);
