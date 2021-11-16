@@ -19,14 +19,14 @@ const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<String>();
+  const [selectedOption, setSelectedOption] = useState<string>();
   const [caseStudyType, setCaseStudyType] = useState({
     types: []
   });
   const [caseStudyQuestions, setCaseStudyQuestions] = useState({
     questions: []
   });
-  async function getQuestions(selectedOption: String | undefined) {
+  async function getQuestions(selectedOption: string | undefined) {
     const url = 'http://localhost:8080/case-study-questions/' + selectedOption;
     try {
       const response = await fetch(url);
