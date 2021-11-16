@@ -62,7 +62,8 @@ const CaseStudySubmit = () => {
     body = {
       caseStudyTypeId: selectedOption,
       departmentId: userContext.user?.departmentId,
-      userId: userContext.user?.id,
+      userId: userContext.user?.id, 
+      imageId:1,
       title
     };
     try {
@@ -74,12 +75,37 @@ const CaseStudySubmit = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data[0].id);
+          console.log("success2: ", data[0])
           createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
         });
     } catch (error) {
       console.log(error);
     }
   };
+
+  // const saveImageForCaseStudy = async() =>{
+  //   body = {
+  //     filename: "1636882363421_diamond.jpg",
+  //     filepath: "assets/1636882363421_diamond.jpg",
+  //     mimetype: "image/jpeg",
+  //     size: 639309,
+  //   };
+  //   try{
+  //     await fetch('http://localhost:8080/image', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(body)
+  //     })
+  //      .then((response) => response.json())
+  //       .then((data) => {
+  //         console.log('Success:', data[0].id);
+  //         // createCaseStudy(data[0].id);
+  //       });
+  //   } catch (error){
+  //     console.log(error);
+  //   }
+  // };
+
   const createCaseStudyResponse = async (data: any, caseStudyTypeId: any) => {
     response = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
     try {
@@ -113,6 +139,10 @@ const CaseStudySubmit = () => {
     }
     setShareImage(image);
   };
+
+  // console.log(shareImage);
+  // console.log(shareImage[0]);
+  // console.log(shareImage[1]);
 
   return (
     <div className="casestudy-background">
