@@ -57,7 +57,7 @@ describe('getCaseStudies', () => {
           expect(item.caseStudyTypeId).to.deep.equal(id);
           expect(item.departmentId).to.deep.equal(id);
           expect(item.userId).to.deep.equal(id);
-          expect(item.imageId).to.deep.equal(id);
+          expect(item.imageId).to.deep.equal(id + 1);
           expect(item.title).to.deep.equal(title[id - 1]);
           expect(item.response).to.deep.equal(response[id - 1]);
         });
@@ -137,7 +137,7 @@ describe('getCaseStudiesByTypeId', () => {
           expect(item.caseStudyTypeId).to.deep.equal(1);
           expect(item.departmentId).to.deep.equal(1);
           expect(item.userId).to.deep.equal(1);
-          expect(item.imageId).to.deep.equal(1);
+          expect(item.imageId).to.deep.equal(2);
           expect(item.title).to.deep.equal('Case Study Dummy 1');
           expect(item.response).to.deep.equal('Joe Doe is a 69 year old Canadian man who was stuck at the HCBH for 30 days...');
         });
@@ -223,7 +223,7 @@ describe('getCaseStudyById', () => {
         res.body.forEach((item: any) => {
           expect(item.title).to.deep.equal('Case Study Dummy 2');
           expect(item.name).to.deep.equal('Staff Recognition');
-          expect(item.imageId).to.deep.equal(2);
+          expect(item.imageId).to.deep.equal(3);
           expect(item.label).to.deep.equal(label[count]);
           expect(item.response).to.deep.equal(response[count++]);
         });
