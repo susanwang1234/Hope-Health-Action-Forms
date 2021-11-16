@@ -1,5 +1,4 @@
 import './CaseStudySubmit.css';
-import { useHistory } from 'react-router-dom';
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import logo from '../../images/navlogo.png';
@@ -7,16 +6,21 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import Sidebar from '../Sidebar/Sidebar';
 import gray_person from '../../images/gray_person.jpg';
 import httpService from '../../services/httpService';
+import { PatientStory } from '../../models/patientStory';
+import { StaffRecognition } from '../../models/staffRecognition';
+import { TrainingSession } from '../../models/trainingSession';
+import { EquipmentReceived } from '../../models/equipmentReceived';
+import { OtherStory } from '../../models/otherStory';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
-
+let body;
+let response;
 const CaseStudySubmit = () => {
-  let history = useHistory();
-  const onClick = () => {};
   const userContext = useContext(UserContext);
+  const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<String>();
+  const [selectedOption, setSelectedOption] = useState<string>();
   const [caseStudyType, setCaseStudyType] = useState({
     types: []
   });
@@ -53,6 +57,45 @@ const CaseStudySubmit = () => {
       }
     }
   }, [setCaseStudyType]);
+
+  const createCaseStudy = async () => {
+    body = {
+      caseStudyTypeId: selectedOption,
+      departmentId: userContext.user?.departmentId,
+      userId: userContext.user?.id,
+      title
+    };
+    try {
+      await fetch('http://localhost:8080/case-studies', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Success:', data[0].id);
+          createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const createCaseStudyResponse = async (data: any, caseStudyTypeId: any) => {
+    response = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
+    try {
+      await fetch('http://localhost:8080/case-study-responses/' + data, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(response[caseStudyTypeId - 1])
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Test', data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
@@ -93,7 +136,6 @@ const CaseStudySubmit = () => {
               return <option value={Types.id}>{Types.name}</option>;
             })}
           </select>
-
           <div className="photo">
             <p className="inside-text-case-study">Upload Photo</p>
             <div>
@@ -112,17 +154,21 @@ const CaseStudySubmit = () => {
           </div>
 
           <div className="w-full flex flex-col pt-10">
+            <label className="inside-text-case-study">Title of Case Study?</label>
+            <textarea value={title} onChange={(e) => setTitle(e.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
-                  <p className="inside-text-case-study">{Questions.label}</p>
+                  <label className="inside-text-case-study">{Questions.label}</label>
                   <textarea className="response" placeholder="Type here..."></textarea>
                 </div>
               );
             })}
+            <button className="grey-button bottom-5 left-31">Cancel</button>
+            <button onClick={createCaseStudy} className="blue-button bottom-5 right-20">
+              Submit
+            </button>
           </div>
-          <button className="grey-button bottom-5 left-31">Cancel</button>
-          <button className="blue-button bottom-5 right-20">Submit</button>
         </div>
       </div>
     </div>
