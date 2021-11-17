@@ -1,7 +1,7 @@
 import logging from '../../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../../db/mysql';
-import { isInvalidInput } from './isInvalidInput';
+import { isInvalidInput } from '../controllerTools/isInvalidInput';
 
 export const deleteItemById = async (req: Request, res: Response, next: NextFunction, namespace: string, tableName: string, negativeOrNanInputError: object, dneError: object) => {
   logging.info(namespace, `DELETING A ${tableName.toUpperCase()} BY ID`);

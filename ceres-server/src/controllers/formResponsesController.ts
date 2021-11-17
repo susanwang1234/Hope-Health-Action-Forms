@@ -4,15 +4,15 @@ import { Request, Response, NextFunction } from 'express';
 import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
 import { Form } from '../db/models/formModel';
 import { FormResponse } from '../db/models/formResponseModel';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'Form Response Control';
 const TABLE_NAME = 'FormResponse';
 
 const getFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `GETTING FORM RESPONSES FOR BY ID`);
+  logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY ID`);
   const formId: number = +req.params.formId;
   if (isInvalidInput(formId)) {
     res.status(400).send(formNegativeOrNanInputError);
