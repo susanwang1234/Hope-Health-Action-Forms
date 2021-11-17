@@ -9,7 +9,7 @@ const TABLE_NAME = 'Case Study Questions';
 
 const getCaseStudyQuestionsById = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING A ${TABLE_NAME.toUpperCase()} BY ID`);
-  const caseStudyTypeId: number = +req.params.id;
+  const caseStudyTypeId: number = +req.params.caseStudyTypeId;
   if (isInvalidInput(caseStudyTypeId)) {
     res.status(400).send(caseStudyQuestionsNegativeOrNanInputError);
     return;
@@ -34,7 +34,7 @@ const getCaseStudyQuestionsById = async (req: Request, res: Response, next: Next
       res.status(404).send(caseStudyQuestionsDNEError);
       return;
     }
-    res.send(retrievedCaseStudyQuestions);
+    res.status(200).send(retrievedCaseStudyQuestions);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
     res.status(500).send(error);

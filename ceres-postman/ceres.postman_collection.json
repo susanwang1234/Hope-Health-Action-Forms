@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "2a2cd023-a975-4fa7-b46b-1ccf1cb6f658",
+    "_postman_id": "e674aa7f-f89a-4997-ae8d-04c2163149b0",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -109,10 +109,10 @@
                       }
                     },
                     "url": {
-                      "raw": "localhost:8080/case-studies",
+                      "raw": "localhost:8080/case-study",
                       "host": ["localhost"],
                       "port": "8080",
-                      "path": ["case-studies"]
+                      "path": ["case-study"]
                     }
                   },
                   "response": []
@@ -170,10 +170,10 @@
                       }
                     },
                     "url": {
-                      "raw": "localhost:8080/case-studies",
+                      "raw": "localhost:8080/case-study",
                       "host": ["localhost"],
                       "port": "8080",
-                      "path": ["case-studies"]
+                      "path": ["case-study"]
                     }
                   },
                   "response": []
@@ -225,18 +225,38 @@
           "response": []
         },
         {
-          "name": "GET a case study",
+          "name": "GET case studies by caseStudyTypeId",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/case-studies/:id",
+              "raw": "localhost:8080/case-studies/:caseStudyTypeId",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["case-studies", ":id"],
+              "path": ["case-studies", ":caseStudyTypeId"],
               "variable": [
                 {
-                  "key": "id",
+                  "key": "caseStudyTypeId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET a case study by caseStudyId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/case-study/:caseStudyId",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["case-study", ":caseStudyId"],
+              "variable": [
+                {
+                  "key": "caseStudyId",
                   "value": ""
                 }
               ]
@@ -259,18 +279,18 @@
           "response": []
         },
         {
-          "name": "GET case study questions",
+          "name": "GET case study questions by caseStudyTypeId",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/case-studies-questions/:id",
+              "raw": "localhost:8080/case-study-questions/:caseStudyTypeId",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["case-studies-questions", ":id"],
+              "path": ["case-study-questions", ":caseStudyTypeId"],
               "variable": [
                 {
-                  "key": "id",
+                  "key": "caseStudyTypeId",
                   "value": ""
                 }
               ]
@@ -293,10 +313,10 @@
               }
             },
             "url": {
-              "raw": "localhost:8080/case-studies",
+              "raw": "localhost:8080/case-study",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["case-studies"]
+              "path": ["case-study"]
             }
           },
           "response": []
