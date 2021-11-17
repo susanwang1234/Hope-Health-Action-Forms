@@ -42,8 +42,8 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
   const formResponses: FormResponse[] = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
-  const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
   try {
+    const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
     await validateFormResponsesBelongToCorrectDepartment(formResponses, form.departmentId);
   } catch (error: any) {
     res.status(400).send({ error: error.message });
@@ -58,8 +58,8 @@ const editFormResponsesByFormId = async (req: Request, res: Response, next: Next
   const responsesToEdit = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
-  const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
   try {
+    const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
     await validateFormResponsesBelongToCorrectDepartment(responsesToEdit, form.departmentId);
   } catch (error: any) {
     res.status(400).send({ error: error.message });
