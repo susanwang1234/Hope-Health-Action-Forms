@@ -63,7 +63,7 @@ const CaseStudySubmit = () => {
     body = {
       caseStudyTypeId: selectedOption,
       departmentId: userContext.user?.departmentId,
-      userId: userContext.user?.id, 
+      userId: userContext.user?.id,
       title
     };
     try {
@@ -82,35 +82,25 @@ const CaseStudySubmit = () => {
     }
   };
 
-  const saveImageForCaseStudy = async (e:any) =>{
+  const saveImageForCaseStudy = async (e: any) => {
     const url = 'http://localhost:8080/image';
     try {
       e.preventDefault();
-      // console.log(shareImage);
       const formData = new FormData();
-      formData.append("Image",shareImage);
+      formData.append('image', shareImage);
       const config = {
-          headers: {
-            'content-type': 'multipart/form-data'
+        headers: {
+          'content-type': 'multipart/form-data'
         }
       };
-      // await fetch(url ,{
-      //   method: 'POST',
-      //   headers: {'content-type': 'multipart/form-data' }
-      // })
-      //   .then((response) => {
-      //   console.log('success image uploaded');
-      //   createCaseStudy();
-      // })
-      axios.post(url,formData,config)
-        .then((response) => {
-          console.log('success image uploaded');
-          // createCaseStudy();
-        })
-    } catch (error){
+      axios.post(url, formData, config).then((response) => {
+        console.log('success image uploaded');
+        // createCaseStudy();
+      });
+    } catch (error) {
       console.error();
     }
-  }
+  };
 
   const createCaseStudyResponse = async (data: any, caseStudyTypeId: any) => {
     response = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
@@ -147,7 +137,6 @@ const CaseStudySubmit = () => {
   };
 
   // console.log(shareImage);
-
 
   // console.log(shareImage[0]);
   // console.log(shareImage[1]);
