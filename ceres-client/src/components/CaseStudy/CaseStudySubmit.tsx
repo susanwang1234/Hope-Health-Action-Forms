@@ -11,6 +11,8 @@ import { StaffRecognition } from '../../models/staffRecognition';
 import { TrainingSession } from '../../models/trainingSession';
 import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
+import AuthService from '../../services/authService';
+import { useHistory, Redirect } from 'react-router-dom';
 import axios from 'axios';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
@@ -58,6 +60,15 @@ const CaseStudySubmit = () => {
       }
     }
   }, [setCaseStudyType]);
+
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
 
   const createCaseStudy = async (imageId: number) => {
     body = {
@@ -148,7 +159,7 @@ const CaseStudySubmit = () => {
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
-        <button className="grey-button top-2% right-2">Log Out</button>
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">Log Out</button>
       </header>
       <Sidebar show={showNav} />
       <div className="cards-casestudy">
