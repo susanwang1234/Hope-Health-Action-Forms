@@ -93,10 +93,12 @@ const CaseStudySubmit = () => {
           'content-type': 'multipart/form-data'
         }
       };
-      axios.post(url, formData, config).then((response) => {
-        console.log('success image uploaded');
-        // createCaseStudy();
-      });
+      axios.post(url, formData, config).then((response) => console.log(response.data))
+
+      // .then((data) => {
+        // console.log('Success:', data[0].id);
+        // createCaseStudy(data[0].id, data[0].caseStudyTypeId);
+      // });
     } catch (error) {
       console.error();
     }
