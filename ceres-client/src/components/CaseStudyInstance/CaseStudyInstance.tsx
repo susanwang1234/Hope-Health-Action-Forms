@@ -19,6 +19,11 @@ const CaseStudy = () => {
     caseStudies: []
   });
 
+  const [caseStudyQuestionState, setCaseStudyQuestionState] = useState({
+    isLoaded: false,
+    caseStudyQuestions: []
+  });
+
   // Get case study ID from URL pathname
   var str = window.location.pathname;
   var last = str.substring(str.lastIndexOf('/') + 1, str.length);
@@ -43,6 +48,25 @@ const CaseStudy = () => {
     }
   }, [setCaseStudyState]);
 
+  useEffect(() => {
+    getCaseStudyQuestions();
+
+    async function getCaseStudyQuestions() {
+      const urlQuestions = 'http://localhost:8080/case-studies-questions/2';
+      try {
+        const response = await fetch(urlQuestions);
+        const dataQuestions = await response.json();
+        console.log('Fetched Case Study Questions: ' + dataQuestions);
+        setCaseStudyQuestionState({
+          isLoaded: true,
+          caseStudyQuestions: dataQuestions
+        });
+      } catch (error: any) {
+        console.log('Error: Unable to fetch from ' + urlQuestions);
+      }
+    }
+  }, [setCaseStudyQuestionState]);
+
   return (
     <div className="App">
       <header className="nav-header">
@@ -65,11 +89,20 @@ const CaseStudy = () => {
                       <h1 className="case-study-title">{caseStudy.title}</h1>
                       <h5 className="case-study-date">{caseStudy.createdAt}</h5>
                       <p className="case-study-desc">{caseStudy.response}</p>
+                      <h3>Questions:</h3>
+                      {/* Dynamically insert case study questions here */}
+                      {caseStudyQuestionState.caseStudyQuestions.map((caseStudyQuestion: any) => {
+                        return (
+                          <div>
+                            <p>{caseStudyQuestion.label}</p>
+                          </div>
+                        );
+                      })}
                     </td>
                   </tr>
                   <tr>
                     <td>
-                    <button
+                      <button
                         className="view-cancel-form-button"
                         onClick={(e) => {
                           e.preventDefault();
@@ -79,7 +112,6 @@ const CaseStudy = () => {
                         Return
                       </button>
                     </td>
-
                   </tr>
                 </table>
               );
