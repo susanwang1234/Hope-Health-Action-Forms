@@ -4,7 +4,7 @@ import { imageUpload } from 'middlewares/multerValidation';
 
 const router = express.Router();
 
-router.get('/:id', controller.getImageById);
+router.get('/:imageId', controller.getImageById);
 router.post('', imageUpload.single('image'), controller.addImage);
 
 export = router;

@@ -37,10 +37,10 @@ export async function seed(knex: Knex): Promise<void> {
   await insertNICUPaedsDepartmentQuestions(knex);
   await insertRoles(knex);
   await insertUsers(knex);
+  await insertImages(knex);
   await insertCaseStudyTypes(knex);
   await insertCaseStudyQuestions(knex);
   await insertCaseStudyTypeQuestions(knex);
   await insertCaseStudy(knex);
   await insertCaseStudyResponse(knex);
-  await insertImages(knex);
 }
