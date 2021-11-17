@@ -16,7 +16,7 @@ import axios from 'axios';
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
 let body;
-let response;
+let responseType;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
   const [title, setTitle] = useState('');
@@ -59,15 +59,16 @@ const CaseStudySubmit = () => {
     }
   }, [setCaseStudyType]);
 
-  const createCaseStudy = async () => {
+  const createCaseStudy = async (imageId: number) => {
     body = {
       caseStudyTypeId: selectedOption,
       departmentId: userContext.user?.departmentId,
       userId: userContext.user?.id,
+      imageId: imageId,
       title
     };
     try {
-      await fetch('http://localhost:8080/case-studies', {
+      await fetch('http://localhost:8080/case-study', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -75,6 +76,7 @@ const CaseStudySubmit = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data[0].id);
+          console.log('CaseStudyTypeId: ', data[0].caseStudyTypeId);
           createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
         });
     } catch (error) {
@@ -93,24 +95,27 @@ const CaseStudySubmit = () => {
           'content-type': 'multipart/form-data'
         }
       };
-      axios.post(url, formData, config).then((response) => console.log(response.data))
-
-      // .then((data) => {
-        // console.log('Success:', data[0].id);
-        // createCaseStudy(data[0].id, data[0].caseStudyTypeId);
-      // });
+      const storeResponseBody: any = [];
+      axios
+        .post(url, formData, config)
+        .then((response) => {
+          storeResponseBody.push(response.data);
+        })
+        .then(() => {
+          createCaseStudy(storeResponseBody[0][0].id);
+        });
     } catch (error) {
       console.error();
     }
   };
 
-  const createCaseStudyResponse = async (data: any, caseStudyTypeId: any) => {
-    response = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
+  const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
+    responseType = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
     try {
-      await fetch('http://localhost:8080/case-study-responses/' + data, {
+      await fetch('http://localhost:8080/case-study-responses/' + caseStudyId, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(response[caseStudyTypeId - 1])
+        body: JSON.stringify(responseType[caseStudyTypeId - 1])
       })
         .then((response) => response.json())
         .then((data) => {
@@ -137,11 +142,6 @@ const CaseStudySubmit = () => {
     }
     setShareImage(image);
   };
-
-  // console.log(shareImage);
-
-  // console.log(shareImage[0]);
-  // console.log(shareImage[1]);
 
   return (
     <div className="casestudy-background">
