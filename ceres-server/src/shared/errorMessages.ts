@@ -1,10 +1,14 @@
-function negativeOrNanInputError(url: string) {
+const negativeOrNanInputError = (url: string) => {
   return { error: `Incorrect usage for ${url}, id must be a positive integer` };
-}
+};
 
-function dneError(entity: string, errorMessage: string) {
+const dneError = (entity: string, errorMessage: string) => {
   return { error: `${entity} ${errorMessage}` };
-}
+};
+
+const invalidExtension = (entity: string, extensionTypes: string) => {
+  return { error: `${entity} must be of extension types ${extensionTypes}` };
+};
 
 // TODO: Generalize these better so they can be used for more controllers
 const caseStudiesNegativeOrNanInputError = negativeOrNanInputError('/case-studies/:caseStudyTypeId');
@@ -21,6 +25,9 @@ const formDNEError = dneError('Form', 'does not exist or its responses are empty
 const userNegativeOrNanInputError = negativeOrNanInputError('/user/:id');
 const userDNEError = dneError('User', 'does not exist');
 const pageNotFoundError = { message: 'not found' };
+const imageNegativeOrNanInputError = negativeOrNanInputError('/image/:id');
+const imageDNEError = dneError('Image', 'does not exist');
+const imageMimetypeError = invalidExtension('Image', 'png, jpg, or jpeg');
 
 export {
   caseStudiesNegativeOrNanInputError,
@@ -36,5 +43,8 @@ export {
   formDNEError,
   userNegativeOrNanInputError,
   userDNEError,
-  pageNotFoundError
+  pageNotFoundError,
+  imageNegativeOrNanInputError,
+  imageDNEError,
+  imageMimetypeError
 };

@@ -2,7 +2,7 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { caseStudyQuestionsNegativeOrNanInputError, caseStudyQuestionsDNEError } from 'shared/errorMessages';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'Case Study Questions Control';
 const TABLE_NAME = 'Case Study Questions';

@@ -2,7 +2,7 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
-import { isInvalidInput } from './requestTemplates/isInvalidInput';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 import { departmentNegativeOrNanInputError } from 'shared/errorMessages';
 
 const NAMESPACE = 'Form Control';
