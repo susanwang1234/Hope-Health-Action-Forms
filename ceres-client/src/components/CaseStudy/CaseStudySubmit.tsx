@@ -11,6 +11,7 @@ import { StaffRecognition } from '../../models/staffRecognition';
 import { TrainingSession } from '../../models/trainingSession';
 import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
+import axios from 'axios';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -63,7 +64,6 @@ const CaseStudySubmit = () => {
       caseStudyTypeId: selectedOption,
       departmentId: userContext.user?.departmentId,
       userId: userContext.user?.id, 
-      imageId:1,
       title
     };
     try {
@@ -75,7 +75,6 @@ const CaseStudySubmit = () => {
         .then((response) => response.json())
         .then((data) => {
           console.log('Success:', data[0].id);
-          console.log("success2: ", data[0])
           createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
         });
     } catch (error) {
@@ -83,28 +82,35 @@ const CaseStudySubmit = () => {
     }
   };
 
-  // const saveImageForCaseStudy = async() =>{
-  //   body = {
-  //     filename: "1636882363421_diamond.jpg",
-  //     filepath: "assets/1636882363421_diamond.jpg",
-  //     mimetype: "image/jpeg",
-  //     size: 639309,
-  //   };
-  //   try{
-  //     await fetch('http://localhost:8080/image', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(body)
-  //     })
-  //      .then((response) => response.json())
-  //       .then((data) => {
-  //         console.log('Success:', data[0].id);
-  //         // createCaseStudy(data[0].id);
-  //       });
-  //   } catch (error){
-  //     console.log(error);
-  //   }
-  // };
+  const saveImageForCaseStudy = async (e:any) =>{
+    const url = 'http://localhost:8080/image';
+    try {
+      e.preventDefault();
+      // console.log(shareImage);
+      const formData = new FormData();
+      formData.append("Image",shareImage);
+      const config = {
+          headers: {
+            'content-type': 'multipart/form-data'
+        }
+      };
+      // await fetch(url ,{
+      //   method: 'POST',
+      //   headers: {'content-type': 'multipart/form-data' }
+      // })
+      //   .then((response) => {
+      //   console.log('success image uploaded');
+      //   createCaseStudy();
+      // })
+      axios.post(url,formData,config)
+        .then((response) => {
+          console.log('success image uploaded');
+          // createCaseStudy();
+        })
+    } catch (error){
+      console.error();
+    }
+  }
 
   const createCaseStudyResponse = async (data: any, caseStudyTypeId: any) => {
     response = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
@@ -141,6 +147,8 @@ const CaseStudySubmit = () => {
   };
 
   // console.log(shareImage);
+
+
   // console.log(shareImage[0]);
   // console.log(shareImage[1]);
 
@@ -178,7 +186,7 @@ const CaseStudySubmit = () => {
                   This person has given permission to share their story <br />
                   and photo in HHA communications, including online platforms.
                 </p>
-                <input type="file" accept="image/gif, image/png, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
           </div>
@@ -195,7 +203,7 @@ const CaseStudySubmit = () => {
               );
             })}
             <button className="grey-button bottom-5 left-31">Cancel</button>
-            <button onClick={createCaseStudy} className="blue-button bottom-5 right-20">
+            <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>
