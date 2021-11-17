@@ -70,6 +70,11 @@ const CaseStudySubmit = () => {
     return <Redirect to="/" />;
   };
 
+  const onclickCancel = async(e:any) => {
+    e.preventDefault();
+    window.location.href = '/case-studies';
+  }
+
   const createCaseStudy = async (imageId: number) => {
     body = {
       caseStudyTypeId: selectedOption,
@@ -204,7 +209,7 @@ const CaseStudySubmit = () => {
                 </div>
               );
             })}
-            <button className="grey-button bottom-5 left-31">Cancel</button>
+            <button onClick={onclickCancel} className="grey-button bottom-5 left-31">Cancel</button>
             <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
               Submit
             </button>
