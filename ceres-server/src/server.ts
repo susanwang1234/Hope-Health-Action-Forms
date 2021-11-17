@@ -12,6 +12,7 @@ import formResponsesRoutes from './routes/formResponsesRoute';
 import caseStudiesRoutes from './routes/caseStudiesRoute';
 import caseStudyTypesRoutes from './routes/caseStudyTypesRoute';
 import caseStudyQuestionsRoutes from './routes/caseStudyQuestionsRoute';
+import caseStudyResponsesRoutes from './routes/caseStudiesResponsesRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
 import routes from './routes/indexRoute';
@@ -34,7 +35,8 @@ export function sendFirstRequest(router: Application) {
 
 export function enableCors(router: Application) {
   /** Enable CORS */
-  const allowedOrigins = ['http://localhost:3000'];
+  const allowedOrigins = config.server.corsOriginUrl;
+  logging.debug('origins', 'ALLOWED ORIGINS IS', allowedOrigins);
 
   /** Define allowed requests and URLs */
   const options: cors.CorsOptions = {
@@ -92,6 +94,7 @@ export function enableRoutes(router: Application) {
   router.use('/case-studies', caseStudiesRoutes);
   router.use('/case-study-types', caseStudyTypesRoutes);
   router.use('/case-study-questions', caseStudyQuestionsRoutes);
+  router.use('/case-study-responses', caseStudyResponsesRoutes);
 }
 
 export function enableErrorHandling(router: Application) {

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
+import httpService from '../../services/httpService';
 
 const ReportData = (props: any) => {
   const [formEntries, setFormEntries] = useState<any[]>([]);
@@ -7,18 +8,15 @@ const ReportData = (props: any) => {
   const [editStatus, setEditStatus] = useState(false);
 
   useEffect(() => {
-    const url = `http://localhost:8080/form-responses/${props.data.id}`;
-    const response: any = fetch(url)
+    const url = `/form-responses/${props.data.id}`;
+    const response: any = httpService
+      .get(url)
       .then((response) => {
         console.log(response);
-        if (response.ok) {
-          return response.json();
-        }
-        console.log('Error: Unable to fetch from ' + url);
-        throw response;
+        setFormEntries(response.data);
       })
-      .then((data) => {
-        setFormEntries(data);
+      .catch((error: any) => {
+        console.log('Error: Unable to fetch from ' + url);
       });
   }, []);
 
@@ -53,23 +51,22 @@ const ReportData = (props: any) => {
   // };
 
   const handleSubmission = (event: any) => {
+    event.preventDefault();
+
     if (validateEntries(formEntries)) {
       const PUTEntries = createArrayEntriesToPut(formEntries);
       const formId: Number = props.data.id;
-      fetch(`http://localhost:8080/form-responses/${formId}`, {
-        method: 'PUT',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(PUTEntries)
-      })
-        .then((response: any) => response.json())
+      httpService
+        .put(`/form-responses/${formId}`, PUTEntries)
+        .then((response: any) => response.data)
         .then((data: any) => console.log(data))
         .catch((error) => {
           console.error('Error:', error);
         });
+      setEditStatus(false);
     } else {
       markEmptyfields(formEntries);
       alert('All fields are required. please fill them up!');
-      event.preventDefault();
     }
   };
 
@@ -79,10 +76,12 @@ const ReportData = (props: any) => {
     </button>
   );
   const cancelButton = (
-    <button className="cancel-button" onClick={() => {
-      setEditStatus(false);
-      // forceUpdateHandler;
-    }}>
+    <button
+      className="cancel-button"
+      onClick={() => {
+        setEditStatus(false);
+      }}
+    >
       Cancel
     </button>
   );

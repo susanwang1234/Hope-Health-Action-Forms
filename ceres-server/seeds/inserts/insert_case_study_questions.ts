@@ -15,7 +15,7 @@ async function insertQuestionsFromPatientStory(knex: Knex): Promise<void> {
     { id: 4, label: 'Why did the patient choose to come to HCBH?', inputType: 'text', responseType: 'string' },
     { id: 5, label: 'How long were they at HCBH?', inputType: 'text', responseType: 'string' },
     { id: 6, label: 'What was their diagnosis?', inputType: 'text', responseType: 'string' },
-    { id: 7, label: 'Story', inputType: 'textarea', responseType: 'string' }
+    { id: 7, label: 'Story?', inputType: 'textarea', responseType: 'string' }
   ]);
 }
 

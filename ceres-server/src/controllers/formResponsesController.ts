@@ -8,7 +8,7 @@ import { isInvalidInput } from './requestTemplates/isInvalidInput';
 import { Form } from '../db/models/formModel';
 import { FormResponse } from '../db/models/formResponseModel';
 
-const NAMESPACE = 'Form Response';
+const NAMESPACE = 'Form Response Control';
 const TABLE_NAME = 'FormResponse';
 
 const getFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
@@ -50,7 +50,7 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
     return;
   }
   const formResponseFKName = 'formId';
-  await createItems(req, res, next, NAMESPACE, TABLE_NAME, formResponses, formResponseFKName, formId);
+  await createItems(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formResponses, formResponseFKName, formId);
 };
 
 const editFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
@@ -65,7 +65,7 @@ const editFormResponsesByFormId = async (req: Request, res: Response, next: Next
     res.status(400).send({ error: error.message });
     return;
   }
-  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit);
+  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit, formId);
 };
 
 const validateFormResponsesBelongToCorrectDepartment = async (formResponses: FormResponse[], departmentId: number) => {
