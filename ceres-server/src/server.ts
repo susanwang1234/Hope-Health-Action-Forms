@@ -4,18 +4,7 @@ import cors from 'cors';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import authenticationRoutes from './routes/authenticationRoute';
-import departmentRoutes from './routes/departmentRoute';
-import departmentFormRoutes from './routes/departmentFormRoute';
-import formRoutes from './routes/formRoute';
-import formResponsesRoutes from './routes/formResponsesRoute';
-import caseStudiesRoutes from './routes/caseStudiesRoute';
-import caseStudyTypesRoutes from './routes/caseStudyTypesRoute';
-import caseStudyQuestionsRoutes from './routes/caseStudyQuestionsRoute';
-import caseStudyResponsesRoutes from './routes/caseStudiesResponsesRoute';
-import roleRoutes from './routes/roleRoute';
-import userRoutes from './routes/userRoute';
-import routes from './routes/indexRoute';
+import { apiRouter, authRouter } from 'routes';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import './middlewares/passport-strategies.mw.ts';
@@ -83,18 +72,10 @@ export function enableLogging(router: Application, namespace: string) {
 
 export function enableRoutes(router: Application) {
   /** Routes */
-  router.use('', routes);
-  router.use('/department', departmentRoutes);
-  router.use('/department-form', departmentFormRoutes);
-  router.use('/auth', authenticationRoutes);
-  router.use('/role', roleRoutes);
-  router.use('/user', userRoutes);
-  router.use('/form', formRoutes);
-  router.use('/form-responses', formResponsesRoutes);
-  router.use('/case-studies', caseStudiesRoutes);
-  router.use('/case-study-types', caseStudyTypesRoutes);
-  router.use('/case-study-questions', caseStudyQuestionsRoutes);
-  router.use('/case-study-responses', caseStudyResponsesRoutes);
+  // order of route initialization matters
+
+  router.use('', authRouter); // IMPORTANT: authRouter must be above apiRouter b/c of authentication middleware
+  router.use('', apiRouter);
 }
 
 export function enableErrorHandling(router: Application) {
