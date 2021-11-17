@@ -7,6 +7,7 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import photo from './../../images/original_artwork.jpg';
 import { Link } from 'react-router-dom';
+import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
@@ -23,10 +24,10 @@ const CaseStudy = () => {
     getCaseStudies();
 
     async function getCaseStudies() {
-      const url = 'http://localhost:8080/case-studies';
+      const url = '/case-studies';
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await httpService.get(url);
+        const data = response.data;
         console.log('Fetched Case Studies: ' + data);
         setCaseStudyState({
           isLoaded: true,
@@ -37,13 +38,6 @@ const CaseStudy = () => {
       }
     }
   }, [setCaseStudyState]);
-
-  if(userContext.user?.username != null){
-    console.log('(Case Study View Page)  Username is ' , userContext.user?.username)
-    console.log('(Case Study View Page) ID is ' , userContext.user?.id)
-    console.log('(Case Study View Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Departments Page) Role ID is ' , userContext.user?.roleId)
-  }
 
   return (
     <div className="App">

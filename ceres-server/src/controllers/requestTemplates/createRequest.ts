@@ -1,7 +1,7 @@
 import logging from '../../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../../db/mysql';
-import { isInvalidInput } from './isInvalidInput';
+import { isInvalidInput } from '../controllerTools/isInvalidInput';
 
 export const createItem = async (req: Request, res: Response, next: NextFunction, namespace: string, tableName: string, inputtedReqBody: object) => {
   logging.info(namespace, `CREATING A ${tableName.toUpperCase()}`);

@@ -1,21 +1,22 @@
 import axios from 'axios';
+axios.defaults.withCredentials = true;
 
-const baseApiUrl = 'http://localhost:8080';
+const baseApiUrl = process.env.REACT_APP_DEPLOYMENT_API_URL || 'http://localhost:8080';
 
-const get = (url: string) => {
-  return axios.get(baseApiUrl + url);
+const get = (url: string, config: object = {}): Promise<any> => {
+  return axios.get(baseApiUrl + url, config);
 };
 
-const post = (url: string, obj: any) => {
-  return axios.post(baseApiUrl + url, obj);
+const post = (url: string, obj: any, config: object = {}): Promise<any> => {
+  return axios.post(baseApiUrl + url, obj, config);
 };
 
-const put = (url: string, obj: any) => {
-  return axios.put(baseApiUrl + url, obj);
+const put = (url: string, obj: any, config: object = {}): Promise<any> => {
+  return axios.put(baseApiUrl + url, obj, config);
 };
 
-const patch = (url: string, obj: any) => {
-  return axios.patch(baseApiUrl + url, obj);
+const patch = (url: string, obj: any, config: object = {}): Promise<any> => {
+  return axios.patch(baseApiUrl + url, obj, config);
 };
 
 export default {
