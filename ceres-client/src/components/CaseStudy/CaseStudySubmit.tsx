@@ -140,6 +140,9 @@ const CaseStudySubmit = () => {
     } catch (error) {
       console.log(error);
     }
+
+    window.alert("Case Study Submitted")
+    window.location.href = '/case-studies';
   };
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
