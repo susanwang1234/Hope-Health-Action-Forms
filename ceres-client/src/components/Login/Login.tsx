@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
+import { toast } from 'react-toastify';
 
 interface FormData {
   username: string;
@@ -32,8 +33,8 @@ function Login() {
       history.push('/departments');
     } else {
       const { msg } = data;
-      window.alert('Invalid Username or Password');
       // do something with error message
+      toast.error('Invalid Username or Password', {position: "top-center"})
     }
   };
 
