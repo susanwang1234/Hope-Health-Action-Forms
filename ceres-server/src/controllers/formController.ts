@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
-import { departmentNegativeOrNanInputError } from 'shared/errorMessages';
+import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
 
 const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
@@ -38,6 +38,11 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
 };
 
 const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) => {
+  const formId: number = +req.params.id;
+  if (isInvalidInput(formId)) {
+    res.status(400).send(formNegativeOrNanInputError);
+    return;
+  }
   res.send({ message: 'Request received' });
 };
 
