@@ -38,11 +38,17 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
 };
 
 const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) => {
-  const formId: number = +req.params.id;
+  const formId: number = +req.params.formId;
   if (isInvalidInput(formId)) {
     res.status(400).send(formNegativeOrNanInputError);
     return;
   }
+  const form = await Knex.select('Form.*', 'Department.name').from('Form').join('Department', 'Form.departmentId', '=', 'Department.id').first();
+  const formResponses = await Knex.select('*')
+    .from('FormResponse')
+    .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+    .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+    .where('FormResponse.formId', formId);
   res.send({ message: 'Request received' });
 };
 
