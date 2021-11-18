@@ -51,7 +51,7 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
     .where('FormResponse.formId', formId);
   const dataExporter: DataExporter = new DataExporter(form, formResponses);
-  dataExporter.formatDataIntoFile();
+  dataExporter.getFileToSendToUser();
   res.send({ message: 'Request received' });
 };
 

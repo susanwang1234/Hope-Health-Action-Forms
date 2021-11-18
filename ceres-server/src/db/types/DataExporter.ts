@@ -1,3 +1,6 @@
+const { createReadStream, createWriteStream } = require('fs');
+const { Transform } = require('json2csv');
+
 export class DataExporter {
   private form: any;
   private formResponses: any;
@@ -7,10 +10,22 @@ export class DataExporter {
     this.formResponses = formResponses;
   }
 
-  formatDataIntoFile(): void {
+  private formatDataIntoFile(): void {
     console.log('IN CLASS FORM:', this.form);
     console.log('IN CLASS FORM RESPONSES:', this.formResponses);
   }
 
-  sendFile() {}
+  getFileToSendToUser() {
+    const fields = ['field1', 'field2', 'field3'];
+    const opts = { fields };
+    const transformOpts = { highWaterMark: 16384, encoding: 'utf-8' };
+    const inputPath = 'test.json';
+    const outputPath = 'test.csv';
+
+    const input = createReadStream(inputPath, { encoding: 'utf8' });
+    const output = createWriteStream(outputPath, { encoding: 'utf8' });
+    const json2csv = new Transform(opts, transformOpts);
+
+    const processor = input.pipe(json2csv).pipe(output);
+  }
 }
