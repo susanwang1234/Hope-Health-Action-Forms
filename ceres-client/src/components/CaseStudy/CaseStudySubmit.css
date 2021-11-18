@@ -34,7 +34,7 @@ CSS Classes
   text-align: center;
   width: 100px;
 }
-.cards-casestudy {
+.cards-case-study {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;

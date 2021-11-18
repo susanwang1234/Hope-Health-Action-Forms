@@ -73,8 +73,8 @@ const CaseStudySubmit = () => {
     return <Redirect to="/" />;
   };
 
-  const onclickCancel = async(e:any) => {
-    e.preventDefault();
+  const onclickCancel = async(event:any) => {
+    event.preventDefault();
     window.location.href = '/case-studies';
   }
 
@@ -103,7 +103,7 @@ const CaseStudySubmit = () => {
     }
   };
 
-  const saveImageForCaseStudy = async (e: any) => {
+  const saveImageForCaseStudy = async (event: any) => {
 
     if(shareImage.length < 1){
       toast.error("Image not uploaded!! Please upload the image.");
@@ -117,7 +117,7 @@ const CaseStudySubmit = () => {
     
     const url = 'http://localhost:8080/image';
     try {
-      e.preventDefault();
+      event.preventDefault();
       const formData = new FormData();
       formData.append('image', shareImage);
       const config = {
@@ -183,7 +183,7 @@ const CaseStudySubmit = () => {
         <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">Log Out</button>
       </header>
       <Sidebar show={showNav} />
-      <div className="cards-casestudy">
+      <div className="cards-case-study">
         <div className="casestudy-single-card">
           <h2 className="inside-card -mt-10 mb-8">
             <b>Current Case Study</b>
