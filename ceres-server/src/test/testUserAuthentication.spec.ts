@@ -1,14 +1,15 @@
 import http from 'http';
-import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
-import PORT from './testTools/serverPort';
-import { attemptAuthentication, setupApp, setupHttpServer, testExportBefore } from './testTools/mochaHooks';
+import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
-// stupid test
+let testApp: Application;
+let httpServer: http.Server;
+let agent: any;
+
 // Test 1: Create a passing test
 describe('dummy testing test', () => {
   it('True should be True', (done) => {
@@ -19,18 +20,10 @@ describe('dummy testing test', () => {
 
 // test login failure
 describe('testUserLoginFailure', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-
   // create the running server to test on before running tests
   before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
   });
   // close the server down after completion of the tests
   after('Close a working server', () => {
@@ -57,18 +50,10 @@ describe('testUserLoginFailure', () => {
 
 // test login success
 describe('testUserLoginSuccess', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-
   // create the running server to test on before running tests
   before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
   });
   // close the server down after completion of the tests
   after('Close a working server', () => {
@@ -99,37 +84,6 @@ describe('testUserLoginSuccess', () => {
       });
   });
 });
-
-let testApp: Application;
-let httpServer: http.Server;
-let agent: any;
-
-// const testExportBefore = () => {
-//   // create the running server to test on before running tests
-//   before('Create a working server', (done) => {
-//     testApp = createServer();
-//     sendFirstRequest(testApp);
-//     enableLogging(testApp, 'Test Server');
-//     enableRoutes(testApp);
-//     enableErrorHandling(testApp);
-
-//     httpServer = http.createServer(testApp);
-//     httpServer.listen(PORT);
-
-//     agent = chai.request.agent(testApp);
-
-//     agent
-//       .post('/auth/login')
-//       .set('content-type', 'application/json')
-//       .send(userFail)
-//       .then(function (res: any) {
-//         done();
-//       })
-//       .catch(function (err: any) {
-//         done(err);
-//       });
-//   });
-// };
 
 // test authenticated dummy route
 describe('test authenticated route success', () => {
