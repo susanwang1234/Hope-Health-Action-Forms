@@ -37,4 +37,8 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
   }
 };
 
-export default { createNewForm, getAllFormsByDepartmentId };
+const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) => {
+  res.send({ message: 'Request received' });
+};
+
+export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv };
