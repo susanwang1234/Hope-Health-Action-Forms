@@ -38,7 +38,6 @@ const CaseStudySubmit = () => {
     try {
       const response = await httpService.get(url);
       const data = response.data;
-      console.log('Fetched questions: ' + data);
       setCaseStudyQuestions({
         questions: data
       });
@@ -54,7 +53,6 @@ const CaseStudySubmit = () => {
       try {
         const response = await httpService.get(url);
         const data = response.data;
-        console.log('Fetched types: ' + data);
         setCaseStudyType({
           types: data
         });
@@ -94,8 +92,6 @@ const CaseStudySubmit = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('Success:', data[0].id);
-          console.log('CaseStudyTypeId: ', data[0].caseStudyTypeId);
           createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
         });
     } catch (error) {
@@ -135,7 +131,7 @@ const CaseStudySubmit = () => {
           createCaseStudy(storeResponseBody[0][0].id);
         });
     } catch (error) {
-      console.error();
+      console.error(error);
     }
   };
 
@@ -149,7 +145,6 @@ const CaseStudySubmit = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('Test', data);
         });
     } catch (error) {
       console.log(error);
