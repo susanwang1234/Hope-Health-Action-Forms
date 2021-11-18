@@ -15,20 +15,19 @@ import httpService from '../../services/httpService';
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
 let body;
-let response;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>();
+  const [selectedCaseStudyType, setSelectedCaseStudyType] = useState<string>('Nothing selected');
   const [caseStudyType, setCaseStudyType] = useState({
     types: []
   });
   const [caseStudyQuestions, setCaseStudyQuestions] = useState({
     questions: []
   });
-  async function getQuestions(selectedOption: string | undefined) {
-    const url = `/case-study-questions/${selectedOption}`;
+  async function getQuestions(selectedCaseStudyType: string | undefined) {
+    const url = `/case-study-questions/${selectedCaseStudyType}`;
     try {
       const response = await httpService.get(url);
       const data = response.data;
@@ -60,11 +59,24 @@ const CaseStudySubmit = () => {
 
   const createCaseStudy = async () => {
     body = {
-      caseStudyTypeId: selectedOption,
+      caseStudyTypeId: selectedCaseStudyType,
       departmentId: userContext.user?.departmentId,
       userId: userContext.user?.id,
       title
     };
+    // const url = `/case-studies`;
+    // const response: any = httpService
+    // .post(url, body)
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .then((data) => {
+    //   console.log('Success', data[0].id);
+    //   createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
+    // })
+    // .catch((error: any) => {
+    //   console.log(error);
+    // })
     try {
       await fetch('http://localhost:8080/case-studies', {
         method: 'POST',
@@ -80,13 +92,17 @@ const CaseStudySubmit = () => {
       console.log(error);
     }
   };
-  const createCaseStudyResponse = async (data: any, caseStudyTypeId: any) => {
-    response = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
+  const createCaseStudyResponse = async (caseStudyId: any, caseStudyTypeId: any) => {
+    let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
+    let selectedCaseStudy = caseStudyTypeOptions[caseStudyTypeId - 1];
+
+    updateResponse(selectedCaseStudy);
+
     try {
-      await fetch('http://localhost:8080/case-study-responses/' + data, {
+      await fetch('http://localhost:8080/case-study-responses/' + caseStudyId, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(response[caseStudyTypeId - 1])
+        body: JSON.stringify(selectedCaseStudy)
       })
         .then((response) => response.json())
         .then((data) => {
@@ -97,9 +113,18 @@ const CaseStudySubmit = () => {
     }
   };
 
+  function updateResponse(selectedCaseStudy: any[]) {
+    var elementId;
+    for (let index = 0; index < selectedCaseStudy.length; index++) {
+      elementId = 'text-area-id-' + index;
+      selectedCaseStudy[index].response = (document.getElementById(elementId) as HTMLInputElement).value;
+      console.log(selectedCaseStudy[index]);
+    }
+  }
+
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    setSelectedOption(value);
+    setSelectedCaseStudyType(value);
     getQuestions(value);
   };
 
@@ -160,12 +185,12 @@ const CaseStudySubmit = () => {
               return (
                 <div>
                   <label className="inside-text-case-study">{Questions.label}</label>
-                  <textarea className="response" placeholder="Type here..."></textarea>
+                  <textarea id={'text-area-id-' + index} className="response" placeholder="Type response here..."></textarea>
                 </div>
               );
             })}
             <button className="grey-button bottom-5 left-31">Cancel</button>
-            <button onClick={createCaseStudy} className="blue-button bottom-5 right-20">
+            <button onClick={createCaseStudy} disabled={selectedCaseStudyType == 'Nothing selected'} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>

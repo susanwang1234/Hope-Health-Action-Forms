@@ -8,5 +8,5 @@ export const StaffRecognition: any[] = [
   { caseStudyTypeQuestionId: 10, response: '' },
   { caseStudyTypeQuestionId: 11, response: '' },
   { caseStudyTypeQuestionId: 12, response: '' },
-  { caseStudyTypeQuestionId: 7, response: '' }
+  { caseStudyTypeQuestionId: 13, response: '' }
 ];
