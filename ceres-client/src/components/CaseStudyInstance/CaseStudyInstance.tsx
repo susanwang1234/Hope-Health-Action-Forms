@@ -19,11 +19,6 @@ const CaseStudy = () => {
     caseStudies: []
   });
 
-  const [caseStudyQuestionState, setCaseStudyQuestionState] = useState({
-    isLoaded: false,
-    caseStudyQuestions: []
-  });
-
   // Get case study ID from URL pathname
   var str = window.location.pathname;
   var last = str.substring(str.lastIndexOf('/') + 1, str.length);
@@ -33,7 +28,7 @@ const CaseStudy = () => {
     getCaseStudies();
 
     async function getCaseStudies() {
-      const url = 'http://localhost:8080/case-studies';
+      const url = 'http://localhost:8080/case-study/' + caseId.toString();
       try {
         const response = await fetch(url);
         const data = await response.json();
@@ -47,25 +42,6 @@ const CaseStudy = () => {
       }
     }
   }, [setCaseStudyState]);
-
-  useEffect(() => {
-    getCaseStudyQuestions();
-
-    async function getCaseStudyQuestions() {
-      const urlQuestions = 'http://localhost:8080/case-studies-questions/2';
-      try {
-        const response = await fetch(urlQuestions);
-        const dataQuestions = await response.json();
-        console.log('Fetched Case Study Questions: ' + dataQuestions);
-        setCaseStudyQuestionState({
-          isLoaded: true,
-          caseStudyQuestions: dataQuestions
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + urlQuestions);
-      }
-    }
-  }, [setCaseStudyQuestionState]);
 
   return (
     <div className="App">
@@ -86,15 +62,15 @@ const CaseStudy = () => {
                       <img className="case-study-img" src={photo} alt="" width="150px" height="150px"></img>
                     </td>
                     <td className="case-study-block-text">
-                      <h1 className="case-study-title">{caseStudy.title}</h1>
+                      <h1 className="case-study-title">{caseStudy.name}: {caseStudy.title}</h1>
                       <h5 className="case-study-date">{caseStudy.createdAt}</h5>
-                      <p className="case-study-desc">{caseStudy.response}</p>
-                      <h3>Questions:</h3>
-                      {/* Dynamically insert case study questions here */}
-                      {caseStudyQuestionState.caseStudyQuestions.map((caseStudyQuestion: any) => {
+                      <h2 className="case-study-desc">{caseStudy.title}</h2>
+                      {/* Dynamically insert case study Q/A here */}
+                      {caseStudyState.caseStudies.map((caseStudy: any) => {
                         return (
                           <div>
-                            <p>{caseStudyQuestion.label}</p>
+                            <p className="question">{caseStudy.label}</p>
+                            <small className="response">{caseStudy.response}</small>
                           </div>
                         );
                       })}

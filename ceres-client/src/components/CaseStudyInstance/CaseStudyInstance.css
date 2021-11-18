@@ -82,13 +82,6 @@ td {
   color:lightgray
 }
 
-.case-study-desc {
-  color:black;
-  margin-left: 20px;
-  font-size: 16px;
-  font-style:normal;
-}
-
 .view-cancel-form-button{
   display: flex;
   background-color: #555555;
@@ -102,4 +95,16 @@ td {
   border-radius: 5px;
   float: right;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.question {
+  font-style: bold !important;
+  margin-top: 20px;
+}
+
+.response {
+  font-style: normal !important;
+  margin-left: 20px;
+  color: grey;
+  font-size: 16px;
 }
