@@ -4,6 +4,7 @@ import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
 import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
+import { DataExporter } from '../db/types/DataExporter';
 
 const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
@@ -49,6 +50,8 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
     .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
     .where('FormResponse.formId', formId);
+  const dataExporter: DataExporter = new DataExporter(form, formResponses);
+  dataExporter.formatDataIntoFile();
   res.send({ message: 'Request received' });
 };
 
