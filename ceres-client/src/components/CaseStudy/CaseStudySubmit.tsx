@@ -104,15 +104,14 @@ const CaseStudySubmit = () => {
   };
 
   const saveImageForCaseStudy = async (e: any) => {
-    if(!checkMark)
-    {
-      toast.error("Check Box isn't marked!! Please mark the checkbox.");
+
+    if(shareImage.length < 1){
+      toast.error("Image not uploaded!! Please upload the image.");
       return;
     }
 
-    if(shareImage.length < 1)
-    {
-      toast.error("Image not uploaded!! Please upload the image.");
+    if(!checkMark){
+      toast.error("Check Box isn't marked!! Please mark the checkbox.");
       return;
     }
     
