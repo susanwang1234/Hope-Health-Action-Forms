@@ -7,6 +7,7 @@ import { UserContext } from '../../UserContext';
 import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import AuthService from '../../services/authService';
+import httpService from '../../services/httpService';
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 
@@ -35,10 +36,10 @@ function Departments() {
     getDepartments();
 
     async function getDepartments() {
-      const url = 'http://localhost:8080/department';
+      const url = '/department';
       try {
-        const response = await fetch(url);
-        const data = await response.json();
+        const response = await httpService.get(url);
+        const { data } = response;
         console.log('Fetched Departments: ' + data);
         setDepartmentState({
           departments: data
@@ -62,14 +63,6 @@ function Departments() {
         <div className="alert"></div>
       </div>
     );
-  }
-
-  if(userContext.user?.username != null){
-    
-    console.log('(Departments Page)  Username is ' , userContext.user?.username)
-    console.log('(Departments Page) ID is ' , userContext.user?.id)
-    console.log('(Departments Page) Department Id is ' , userContext.user?.departmentId)
-    console.log('(Departments Page) Role ID is ' , userContext.user?.roleId)
   }
 
   //Purpose of slice is so that "all departments" does not get generate into a card

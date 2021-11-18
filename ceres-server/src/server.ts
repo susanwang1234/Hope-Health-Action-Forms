@@ -38,7 +38,8 @@ export const sendFirstRequest = (router: Application) => {
 
 export const enableCors = (router: Application) => {
   /** Enable CORS */
-  const allowedOrigins = ['http://localhost:3000'];
+  const allowedOrigins = config.server.corsOriginUrl;
+  logging.debug('origins', 'ALLOWED ORIGINS IS', allowedOrigins);
 
   /** Define allowed requests and URLs */
   const options: cors.CorsOptions = {
