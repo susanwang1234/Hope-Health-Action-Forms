@@ -39,7 +39,7 @@ export const setupHttpServer = (testApp: Application) => {
   return httpServer;
 };
 
-export const attemptAuthentication = (agent: any, userAccount: UserAccount = ADMIN, done: Mocha.Done) => {
+export const attemptAuthentication = (agent: any, done: Mocha.Done, userAccount: UserAccount = ADMIN) => {
   agent
     .post('/auth/login')
     .set('content-type', 'application/json')

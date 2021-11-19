@@ -16,7 +16,7 @@ describe('getFormResponsesByFormId', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -36,7 +36,7 @@ describe('addNewFormResponses', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -85,7 +85,7 @@ describe('editFormResponsesById', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {

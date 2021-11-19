@@ -26,7 +26,7 @@ const validateUserPropertiesAndFields = (testTitle: string, propertiesTitle: str
       httpServer = setupHttpServer(testApp);
       agent = chai.request.agent(testApp);
 
-      attemptAuthentication(agent, Accounts.ADMIN, done);
+      attemptAuthentication(agent, done, Accounts.ADMIN);
     });
 
     after('Close a working server', () => {
@@ -75,7 +75,7 @@ describe('testPostUserSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -117,7 +117,7 @@ describe('testEditUserFailure', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -183,7 +183,7 @@ describe('testEditUserSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -229,7 +229,7 @@ describe('testDeleteUserFailure', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -260,7 +260,7 @@ describe('testDeleteUserSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {

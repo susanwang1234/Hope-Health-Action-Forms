@@ -29,7 +29,7 @@ describe('getCaseStudies', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -74,7 +74,7 @@ describe('getCaseStudiesByTypeId', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -151,7 +151,7 @@ describe('getCaseStudyById', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -216,7 +216,7 @@ describe('getCaseStudyTypes', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -252,7 +252,7 @@ describe('testGetCaseStudyQuestionsFailure', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -318,7 +318,7 @@ describe('addCaseStudy', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
@@ -362,7 +362,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, Accounts.ADMIN, done);
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
 
   after('Close a working server', () => {
