@@ -1,7 +1,7 @@
 import logging from '../../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../../db/mysql';
-import { isInvalidInput } from './isInvalidInput';
+import { isInvalidInput } from '../controllerTools/isInvalidInput';
 
 export const editItemById = async (
   req: Request,
