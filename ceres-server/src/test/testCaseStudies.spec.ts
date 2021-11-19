@@ -1,6 +1,5 @@
 import http from 'http';
 import { Application } from 'express';
-import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
 import {
   caseStudyNegativeOrNanInputError,
   caseStudyDNEError,
@@ -8,6 +7,7 @@ import {
   caseStudyQuestionsDNEError,
   caseStudyResponsesNegativeOrNanInputError
 } from 'shared/errorMessages';
+import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -148,24 +148,21 @@ describe('getCaseStudyTypes', () => {
     httpServer.close();
   });
   it('should get all case study types successfully', (done) => {
-    chai
-      .request(testApp)
-      .get('/case-study-types')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(200);
-        expect(res.body).to.be.an('array');
-        res.body.forEach((item: any) => {
-          expect(item).to.be.an('object');
-          expect(item).to.have.deep.property('id');
-          expect(item).to.have.deep.property('name');
-        });
-        res.body.forEach((item: any) => {
-          expect(item.id).to.deep.equal(++id);
-          expect(item.name).to.deep.equal(caseStudyTypes[id - 1]);
-        });
-        done();
+    agent.get('/case-study-types').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('array');
+      res.body.forEach((item: any) => {
+        expect(item).to.be.an('object');
+        expect(item).to.have.deep.property('id');
+        expect(item).to.have.deep.property('name');
       });
+      res.body.forEach((item: any) => {
+        expect(item.id).to.deep.equal(++id);
+        expect(item.name).to.deep.equal(caseStudyTypes[id - 1]);
+      });
+      done();
+    });
   });
 });
 

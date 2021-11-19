@@ -19,7 +19,7 @@ authRouter.use('/auth', authenticationRoutes);
 
 export const apiRouter = Router();
 // authentication middleware on all api endpoints
-// apiRouter.use(passport.authenticate('authAll', { session: false }));
+apiRouter.use(passport.authenticate('authAll', { session: false }));
 
 apiRouter.use('', routes);
 apiRouter.use('/department', departmentRoutes);

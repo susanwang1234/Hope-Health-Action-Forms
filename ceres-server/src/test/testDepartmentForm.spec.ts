@@ -1,7 +1,5 @@
 import http from 'http';
-import { createServer, enableErrorHandling, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
-import PORT from './testTools/serverPort';
 import { departmentDNEError, departmentNegativeOrNanInputError, pageNotFoundError } from '../shared/errorMessages';
 import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
 const expect = require('chai').expect;

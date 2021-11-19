@@ -76,9 +76,6 @@ export function enableRoutes(router: Application) {
 
   router.use('', authRouter); // IMPORTANT: authRouter must be above apiRouter b/c of authentication middleware
   router.use('', apiRouter);
-  router.get('/testSecret', passport.authenticate('authAll', { session: false }), (req, res) => {
-    res.status(200).json({ msg: 'you got through!' });
-  });
 }
 
 export function enableErrorHandling(router: Application) {
