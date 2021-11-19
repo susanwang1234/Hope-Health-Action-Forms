@@ -1,5 +1,5 @@
 import http from 'http';
-import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
+import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
 import { Application } from 'express';
 const expect = require('chai').expect;
 const chai = require('chai');
@@ -16,7 +16,7 @@ describe('getFormResponsesByFormId', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -36,7 +36,7 @@ describe('addNewFormResponses', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -85,7 +85,7 @@ describe('editFormResponsesById', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {

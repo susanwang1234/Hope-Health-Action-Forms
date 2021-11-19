@@ -3,7 +3,7 @@ import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFir
 import { Application } from 'express';
 import PORT from './testTools/serverPort';
 import { imageNegativeOrNanInputError, imageDNEError, imageMimetypeError } from 'shared/errorMessages';
-import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
+import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -20,7 +20,7 @@ describe('getImageById', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -66,7 +66,7 @@ describe('addImage', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {

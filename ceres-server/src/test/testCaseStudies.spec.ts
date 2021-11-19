@@ -9,7 +9,7 @@ import {
   caseStudyQuestionsDNEError,
   caseStudyResponsesNegativeOrNanInputError
 } from 'shared/errorMessages';
-import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
+import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -29,7 +29,7 @@ describe('getCaseStudies', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -74,7 +74,7 @@ describe('getCaseStudiesByTypeId', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -151,7 +151,7 @@ describe('getCaseStudyById', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -216,7 +216,7 @@ describe('getCaseStudyTypes', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -252,7 +252,7 @@ describe('testGetCaseStudyQuestionsFailure', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -318,7 +318,7 @@ describe('addCaseStudy', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -362,7 +362,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {

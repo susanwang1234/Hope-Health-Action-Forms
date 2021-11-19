@@ -3,7 +3,7 @@
 import http from 'http';
 import { Application } from 'express';
 import { userDNEError, userNegativeOrNanInputError, pageNotFoundError } from '../shared/errorMessages';
-import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
+import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -26,7 +26,7 @@ const validateUserPropertiesAndFields = (testTitle: string, propertiesTitle: str
       httpServer = setupHttpServer(testApp);
       agent = chai.request.agent(testApp);
 
-      attemptAuthentication(agent, done);
+      attemptAuthentication(agent, Accounts.ADMIN, done);
     });
 
     after('Close a working server', () => {
@@ -75,7 +75,7 @@ describe('testPostUserSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -117,7 +117,7 @@ describe('testEditUserFailure', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -183,7 +183,7 @@ describe('testEditUserSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -229,7 +229,7 @@ describe('testDeleteUserFailure', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {
@@ -260,7 +260,7 @@ describe('testDeleteUserSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {

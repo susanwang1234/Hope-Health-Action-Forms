@@ -1,6 +1,6 @@
 import http from 'http';
 import { Application } from 'express';
-import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
+import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -20,7 +20,7 @@ describe('testGetRoleSuccess', () => {
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
 
-    attemptAuthentication(agent, done);
+    attemptAuthentication(agent, Accounts.ADMIN, done);
   });
 
   after('Close a working server', () => {

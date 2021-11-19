@@ -78,7 +78,7 @@ export const enableRoutes = (router: Application) => {
 
   router.use('', authRouter);
   // all routes below must be authenticated to be granted access
-  router.use(passport.authenticate('authAll', { session: false }));
+  // router.use(passport.authenticate('authAll', { session: false }));
   router.use('', apiRouter);
 };
 
