@@ -1,31 +1,30 @@
 import http from 'http';
-import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
-import PORT from './testTools/serverPort';
+import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
+let testApp: Application;
+let httpServer: http.Server;
+let agent: any;
+
 describe('createNewForm', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
 
   it('should create a new form successfully', (done) => {
-    chai
-      .request(testApp)
+    agent
       .post('/form')
       .set('Content-Type', 'application/json')
       .send({

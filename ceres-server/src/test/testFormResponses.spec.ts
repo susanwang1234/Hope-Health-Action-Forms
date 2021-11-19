@@ -1,24 +1,24 @@
 import http from 'http';
-import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
+import { attemptAuthentication, setupApp, setupHttpServer } from './testTools/mochaHooks';
 import { Application } from 'express';
-import PORT from './testTools/serverPort';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
 
+let testApp: Application;
+let httpServer: http.Server;
+let agent: any;
+
 describe('getFormResponsesByFormId', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
@@ -31,17 +31,14 @@ describe('getFormResponsesByFormId', () => {
 });
 
 describe('addNewFormResponses', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
@@ -51,8 +48,7 @@ describe('addNewFormResponses', () => {
       { departmentQuestionId: 1, response: 19 },
       { departmentQuestionId: 2, response: 12 }
     ];
-    chai
-      .request(testApp)
+    agent
       .post('/form-responses/1')
       .set('Content-Type', 'application/json')
       .send(formResponses)
@@ -84,17 +80,14 @@ describe('addNewFormResponses', () => {
 });
 
 describe('editFormResponsesById', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
