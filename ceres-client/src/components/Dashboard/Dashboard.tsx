@@ -1,10 +1,8 @@
 import '../../App.css';
 import './Dashboard.css';
-
 import { useHistory } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../UserContext';
-
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -15,6 +13,7 @@ import 'react-calendar/dist/Calendar.css';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
+import httpService from '../../services/httpService';
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -29,11 +28,35 @@ const Dashboard = () => {
   const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
+  const initialEmployeeOfTheMonth = {
+    id: 0,
+    imageId: 0,
+    name: '',
+    department: '',
+    departmentId: 0,
+    description: ''
+  };
+  const [employeeOfTheMonthState, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
     );
   };
+
+  useEffect(() => {
+    getEmployeeOfTheMonth();
+
+    async function getEmployeeOfTheMonth() {
+      const url = '/employee-of-the-month';
+      try {
+        const response = await httpService.get(url);
+        const { data } = response;
+        setEmployeeOfTheMonthState(data[0]);
+      } catch (error: any) {
+        console.log('Error: Unable to fetch from ' + url);
+      }
+    }
+  }, [setEmployeeOfTheMonthState]);
 
   function generateCalendar() {
     return (
@@ -86,12 +109,9 @@ const Dashboard = () => {
                 <p className="title">Employee of the Month</p>
                 <div className="card-inner height-100-percent">
                   <img src={profilePic} alt="profile pic" className="profile-pic"></img>
-                  <h1 className="heading-1">Name: Zack Cody</h1>
-                  <h1 className="heading-1">Department: Maternity</h1>
-                  <p className="text-primary-p employee-paragraph">
-                    Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is
-                    employee of the month. Go Zack!
-                  </p>
+                  <h1 className="heading-1">Name: {employeeOfTheMonthState.name}</h1>
+                  <h1 className="heading-1">Department: {employeeOfTheMonthState.department}</h1>
+                  <p className="text-primary-p employee-paragraph">{employeeOfTheMonthState.description}</p>
                 </div>
               </div>
             </div>
