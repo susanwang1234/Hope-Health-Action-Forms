@@ -95,7 +95,6 @@ describe('test authenticated route success', () => {
     attemptAuthentication(agent, done);
   });
 
-  // close the server down after completion of the tests
   after('Close a working server', () => {
     httpServer.close();
   });
