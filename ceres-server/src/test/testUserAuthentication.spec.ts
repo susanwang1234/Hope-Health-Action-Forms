@@ -85,9 +85,8 @@ describe('testUserLoginSuccess', () => {
   });
 });
 
-// test authenticated dummy route
-describe('test authenticated route success', () => {
-  before((done) => {
+describe('testAuthenticationStatus', () => {
+  before('Create a working server', (done) => {
     testApp = setupApp();
     httpServer = setupHttpServer(testApp);
     agent = chai.request.agent(testApp);
@@ -99,10 +98,16 @@ describe('test authenticated route success', () => {
     httpServer.close();
   });
 
-  it('Should Allow User to Access an Authenticated Route', (done) => {
-    agent.get('/api/secrets').end((err: any, res: any) => {
+  it('Should Maintain User Authentication Status', (done) => {
+    agent.get('/auth/authenticate').end((err: any, res: any) => {
       expect(err).to.be.null;
       expect(res).to.have.status(200);
+      expect(res.body).to.have.property('isAuthenticated');
+      expect(res.body).to.have.property('user');
+      expect(res.body.user).to.have.deep.property('id');
+      expect(res.body.user).to.have.deep.property('username');
+      expect(res.body.user).to.have.deep.property('departmentId');
+      expect(res.body.user).to.have.deep.property('roleId');
       done();
     });
   });
