@@ -15,16 +15,12 @@ import caseStudyQuestionsRoutes from './caseStudyQuestionsRoute';
 import caseStudyResponsesRoutes from './caseStudiesResponsesRoute';
 import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
-import routes from './indexRoute';
 
 export const authRouter = Router();
 authRouter.use('/auth', authenticationRoutes);
 
 export const apiRouter = Router();
-// authentication middleware on all api endpoints
-apiRouter.use(passport.authenticate('authAll', { session: false }));
 
-apiRouter.use('', routes);
 apiRouter.use('/department', departmentRoutes);
 apiRouter.use('/department-form', departmentFormRoutes);
 apiRouter.use('/role', roleRoutes);
