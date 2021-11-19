@@ -14,7 +14,7 @@ import httpService from '../../services/httpService';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
-let body;
+let caseStudy;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
   const [title, setTitle] = useState('');
@@ -58,59 +58,38 @@ const CaseStudySubmit = () => {
   }, [setCaseStudyType]);
 
   const createCaseStudy = async () => {
-    body = {
+    caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
       departmentId: userContext.user?.departmentId,
       userId: userContext.user?.id,
       title
     };
-    // const url = `/case-studies`;
-    // const response: any = httpService
-    // .post(url, body)
-    // .then((response) => {
-    //   console.log(response);
-    // })
-    // .then((data) => {
-    //   console.log('Success', data[0].id);
-    //   createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
-    // })
-    // .catch((error: any) => {
-    //   console.log(error);
-    // })
-    try {
-      await fetch('http://localhost:8080/case-studies', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+    const url = `/case-studies`;
+    httpService
+      .post(url, caseStudy)
+      .then((response: any) => response.data)
+      .then((data: any) => {
+        console.log('Success', data[0].id);
+        createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Success:', data[0].id);
-          createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
+
   const createCaseStudyResponse = async (caseStudyId: any, caseStudyTypeId: any) => {
     let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
-    let selectedCaseStudy = caseStudyTypeOptions[caseStudyTypeId - 1];
-
-    updateResponse(selectedCaseStudy);
-
-    try {
-      await fetch('http://localhost:8080/case-study-responses/' + caseStudyId, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(selectedCaseStudy)
+    let POSTresponses = caseStudyTypeOptions[caseStudyTypeId - 1];
+    updateResponse(POSTresponses);
+    httpService
+      .post(`/case-study-responses/${caseStudyId}`, POSTresponses)
+      .then((response: any) => response.data)
+      .then((data: any) => {
+        console.log('Test', data);
       })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log('Test', data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
 
   function updateResponse(selectedCaseStudy: any[]) {
@@ -118,7 +97,6 @@ const CaseStudySubmit = () => {
     for (let index = 0; index < selectedCaseStudy.length; index++) {
       elementId = 'text-area-id-' + index;
       selectedCaseStudy[index].response = (document.getElementById(elementId) as HTMLInputElement).value;
-      console.log(selectedCaseStudy[index]);
     }
   }
 
@@ -180,7 +158,7 @@ const CaseStudySubmit = () => {
 
           <div className="w-full flex flex-col pt-10">
             <label className="inside-text-case-study">Title of Case Study?</label>
-            <textarea value={title} onChange={(e) => setTitle(e.target.value)} className="response" placeholder="Type here..."></textarea>
+            <textarea value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
