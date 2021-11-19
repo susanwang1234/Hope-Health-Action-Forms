@@ -5,6 +5,8 @@ import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
 import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
 import { DataExporter } from '../db/types/DataExporter';
+import { CsvExportPolicy } from 'db/types/CsvExportPolicy';
+import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
 
 const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
@@ -50,9 +52,12 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
     .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
     .where('FormResponse.formId', formId);
+
   res.header('Content-Type', 'text/csv');
   res.attachment('test.csv');
-  const dataExporter: DataExporter = new DataExporter(form, formResponses);
+
+  const fileExportFormatPolicy: FileExportFormatPolicy = new CsvExportPolicy();
+  const dataExporter: DataExporter = new DataExporter(form, formResponses, fileExportFormatPolicy);
   await dataExporter.getFileToSendToUser(res);
   return;
 };

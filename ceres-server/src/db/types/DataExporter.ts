@@ -1,27 +1,21 @@
 const { Parser } = require('json2csv');
 const fs = require('fs');
 import { Response } from 'express';
+import { FileExportFormatPolicy } from './interfaces/FileExportFormatPolicy';
 
 export class DataExporter {
   private form: any;
   private formResponses: any;
+  private fileExportFormatPolicy: FileExportFormatPolicy;
 
-  constructor(form: any, formResponses: any) {
+  constructor(form: any, formResponses: any, fileExportFormatPolicy: FileExportFormatPolicy) {
     this.form = form;
     this.formResponses = formResponses;
+    this.fileExportFormatPolicy = fileExportFormatPolicy;
   }
 
-  private formatDataIntoFile(): void {
-    const fields = ['field1', 'field2', 'field3'];
-    const opts = { fields };
-    const inputObj = {
-      field1: 1,
-      field2: 2,
-      field3: 3
-    };
-
-    const json2csv = new Parser(opts);
-    const csv = json2csv.parse(inputObj);
+  private formatDataIntoFile(): string {
+    const csv: string = this.fileExportFormatPolicy.formatFile(this.form, this.formResponses);
     return csv;
   }
 
