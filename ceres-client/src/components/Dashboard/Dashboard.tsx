@@ -15,6 +15,7 @@ import 'react-calendar/dist/Calendar.css';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
+import Chart from "react-google-charts";
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -43,6 +44,43 @@ const Dashboard = () => {
         </div>
       </div>
     );
+  }
+
+  function generateLeaderboard() {
+    return (
+      <Chart
+  width={'500px'}
+  height={'300px'}
+  chartType="BarChart"
+  loader={<div>Loading Chart</div>}
+  data={[
+    [
+      'Element',
+      'Density',
+      { role: 'style' },
+      {
+        sourceColumn: 0,
+        role: 'annotation',
+        type: 'string',
+        calc: 'stringify',
+      },
+    ],
+    ['Copper', 8.94, '#b87333', null],
+    ['Silver', 10.49, 'silver', null],
+    ['Gold', 19.3, 'gold', null],
+    ['Platinum', 21.45, 'color: #e5e4e2', null],
+  ]}
+  options={{
+    title: 'Density of Precious Metals, in g/cm^3',
+    width: 600,
+    height: 400,
+    bar: { groupWidth: '95%' },
+    legend: { position: 'none' },
+  }}
+  // For tests
+  rootProps={{ 'data-testid': '6' }}
+/>
+    )
   }
 
   return (
