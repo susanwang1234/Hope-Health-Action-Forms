@@ -12,11 +12,6 @@ export class DataExporter {
   }
 
   private formatDataIntoFile(): void {
-    console.log('IN CLASS FORM:', this.form);
-    console.log('IN CLASS FORM RESPONSES:', this.formResponses);
-  }
-
-  async getFileToSendToUser(res: Response) {
     const fields = ['field1', 'field2', 'field3'];
     const opts = { fields };
     const inputObj = {
@@ -27,9 +22,11 @@ export class DataExporter {
 
     const json2csv = new Parser(opts);
     const csv = json2csv.parse(inputObj);
-    console.log('CSV:', csv);
-    res.header('Content-Type', 'text/csv');
-    res.attachment('test.csv');
+    return csv;
+  }
+
+  async getFileToSendToUser(res: Response) {
+    const csv = this.formatDataIntoFile();
     return res.send(csv);
   }
 }
