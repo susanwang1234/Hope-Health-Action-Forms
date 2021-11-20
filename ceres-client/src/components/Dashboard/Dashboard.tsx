@@ -108,12 +108,12 @@ const Dashboard = () => {
                 <div className="card-inner width-100-percent">
                   <div className="align-left">
                     <div className="due-content">
-                      <IoIosCheckmarkCircle className="icon" /> Case Study <br />
+                      <IoIosCheckmarkCircle className="icon icon-case-study" /> Case Study <br />
                       Due October 31 2021
                     </div>
                     <div className="due-content">
-                      <IoIosAlert className="icon" /> MSPP Report <br />
-                      Due October 31 2021 <br />
+                      <IoIosAlert className="icon icon-mspp-report" /> MSPP Report <br />
+                      <div className='due-in-red'>Due October 31 2021</div> <br />
                     </div>
                   </div>
                   <div className="align-right flex">{generateCalendar()}</div>
