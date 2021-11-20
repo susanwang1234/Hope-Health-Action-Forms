@@ -30,6 +30,9 @@ const Dashboard = () => {
   const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
+
+
+
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
@@ -49,15 +52,16 @@ const Dashboard = () => {
   function generateLeaderboard() {
     return (
       <Chart
-  width={'500px'}
-  height={'300px'}
+  width={'100%'}
+  height={'200px'}
   chartType="BarChart"
   loader={<div>Loading Chart</div>}
   data={[
     [
-      'Element',
-      'Density',
+      'Department',
+      'Points',
       { role: 'style' },
+      { role: 'style'},
       {
         sourceColumn: 0,
         role: 'annotation',
@@ -65,15 +69,13 @@ const Dashboard = () => {
         calc: 'stringify',
       },
     ],
-    ['Copper', 8.94, '#b87333', null],
-    ['Silver', 10.49, 'silver', null],
-    ['Gold', 19.3, 'gold', null],
-    ['Platinum', 21.45, 'color: #e5e4e2', null],
+    ['Rehab', 1, 'color: #764A90', 'opacity: 0.57', null],
+    ['Maternity', 2, 'color: #764A90', 'opacity: 0.57', null],
+    ['NCIUPaeds', 3, 'color: #764A90', 'opacity: 0.57', null],
+    ['Maternity', 4, 'color: #764A90', 'opacity: 0.57', null],
   ]}
   options={{
-    title: 'Density of Precious Metals, in g/cm^3',
-    width: 600,
-    height: 400,
+    title: 'Leaderboard',
     bar: { groupWidth: '95%' },
     legend: { position: 'none' },
   }}
