@@ -18,15 +18,11 @@ const DataPage = () => {
   function handleClick(index: any): void {
     setDisplayingData(reports[index]);
   }
-  // const switchEditMode = (value: boolean): void => {
-  //   setDisplayingData(reports[indexOfSelectedReport])
-  //   setEditStatus(value);
-  // }
 
   useEffect(() => {
-    getFormById();
+    getFormByDeptId();
 
-    async function getFormById() {
+    async function getFormByDeptId() {
       const url = `/form/${2}`;
       try {
         const response = await httpService.get(url);
@@ -47,7 +43,7 @@ const DataPage = () => {
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} />
-        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded">
+        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
           <h4 className="text-center">Submitted Reports</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (
