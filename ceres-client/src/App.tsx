@@ -15,7 +15,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <UnPrivateRoute exact path="/" component={DataPage} />
+        <UnPrivateRoute exact path="/" component={ThisMonth} />
         <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
         <PrivateRoute path="/submit-report" component={ThisMonth}></PrivateRoute>
         <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>

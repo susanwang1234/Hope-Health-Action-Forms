@@ -6,7 +6,6 @@ const ReportData = (props: any) => {
   const [formEntries, setFormEntries] = useState<any[]>([]);
   const [empltyFields, setEmptyFields] = useState<number[]>([]);
   const [editStatus, setEditStatus] = useState(false);
-
   useEffect(() => {
     const url = `/form-responses/${props.data.id}`;
     const response: any = httpService

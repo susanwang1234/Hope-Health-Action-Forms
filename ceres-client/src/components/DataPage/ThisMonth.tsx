@@ -26,6 +26,9 @@ const ThisMonth = () => {
           const data = response.data;
           console.log('Fetched Report:', data);
           setReports(data);
+          setDisplayingData(reports[thisMonthID])
+          console.log(reports);
+          console.log(displayingData)
         } catch (error: any) {
           console.log('Error: Unable to fetch from ' + url);
         }
@@ -33,8 +36,9 @@ const ThisMonth = () => {
 
     const getThisMonthId = () => {
         setThisMonthId(0);
-        
     }
+
+    console.log()
 
     return(
         <div>
