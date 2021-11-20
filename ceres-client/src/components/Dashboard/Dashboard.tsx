@@ -55,7 +55,7 @@ const Dashboard = () => {
       
       <div>
       <Chart
-  width={'100%'}
+  width={'95%'}
   height={'200px'}
   chartType="BarChart"
   loader={<div>Loading Chart</div>}
@@ -71,10 +71,10 @@ const Dashboard = () => {
         calc: 'stringify',
       },
     ],
-    ['Rehab', 1, 'color: #764A90', null],
-    ['Maternity', 2, 'color: #ae88c3', null],
-    ['NCIUPaeds', 3, 'color: #d0bbdd', null],
-    ['Maternity', 4, 'color: #f3eef6', null],
+    ['Rehab', 1, 'color: #764a90; opacity: 0.13', null],
+    ['Maternity', 2, 'color: #764a90; opacity: 1.0', null],
+    ['NCIUPaeds', 3, 'color: #764a90; opacity: 0.54', null],
+    ['Community Health', 4, 'color: #764a90; opacity: 0.70', null],
   ]}
   options={{
     //title: 'Leaderboard',
