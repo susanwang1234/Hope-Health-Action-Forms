@@ -3,6 +3,6 @@ import controller from '../controllers/caseStudyQuestionsController';
 
 const router = express.Router();
 
-router.get('/:id', controller.getCaseStudyQuestionsById);
+router.get('/:caseStudyTypeId', controller.getCaseStudyQuestionsById);
 
 export = router;

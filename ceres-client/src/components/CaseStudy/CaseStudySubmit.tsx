@@ -11,12 +11,17 @@ import { TrainingSession } from '../../models/trainingSession';
 import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
 import httpService from '../../services/httpService';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
 let caseStudy;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
+  const [shareImage, setShareImage] = useState('');
+  const [checkMark, SetCheckMark] = useState(false);
   const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState<string>('Nothing selected');
@@ -26,12 +31,12 @@ const CaseStudySubmit = () => {
   const [caseStudyQuestions, setCaseStudyQuestions] = useState({
     questions: []
   });
+
   async function getQuestions(selectedCaseStudyType: string | undefined) {
     const url = `/case-study-questions/${selectedCaseStudyType}`;
     try {
       const response = await httpService.get(url);
       const data = response.data;
-      console.log('Fetched questions: ' + data);
       setCaseStudyQuestions({
         questions: data
       });
@@ -39,6 +44,7 @@ const CaseStudySubmit = () => {
       console.log('Error: Unable to fetch from ' + url);
     }
   }
+
   useEffect(() => {
     getTypeData();
 
@@ -47,7 +53,6 @@ const CaseStudySubmit = () => {
       try {
         const response = await httpService.get(url);
         const data = response.data;
-        console.log('Fetched types: ' + data);
         setCaseStudyType({
           types: data
         });
@@ -57,19 +62,68 @@ const CaseStudySubmit = () => {
     }
   }, [setCaseStudyType]);
 
-  const createCaseStudy = async () => {
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
+  const onclickCancel = async (event: any) => {
+    event.preventDefault();
+    window.location.href = '/case-studies';
+  };
+
+  const saveImageForCaseStudy = async (event: any) => {
+    if (shareImage.length < 1) {
+      toast.error('Image not uploaded!! Please upload the image.');
+      return;
+    }
+
+    if (!checkMark) {
+      toast.error("Check Box isn't marked!! Please mark the checkbox.");
+      return;
+    }
+
+    const url = '/image';
+    try {
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append('image', shareImage);
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      };
+      const storeResponseBody: any = [];
+      httpService
+        .post(url, formData, config)
+        .then((response) => {
+          storeResponseBody.push(response.data);
+        })
+        .then(() => {
+          createCaseStudy(storeResponseBody[0][0].id);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createCaseStudy = async (imageId: number) => {
     caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
       departmentId: userContext.user?.departmentId,
       userId: userContext.user?.id,
+      imageId: imageId,
       title
     };
-    const url = `/case-studies`;
+    const url = `/case-study`;
     httpService
       .post(url, caseStudy)
       .then((response: any) => response.data)
       .then((data: any) => {
-        console.log('Success', data[0].id);
         createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
       })
       .catch((error: any) => {
@@ -77,19 +131,19 @@ const CaseStudySubmit = () => {
       });
   };
 
-  const createCaseStudyResponse = async (caseStudyId: any, caseStudyTypeId: any) => {
+  const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
     let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
     let POSTresponses = caseStudyTypeOptions[caseStudyTypeId - 1];
     updateResponse(POSTresponses);
     httpService
       .post(`/case-study-responses/${caseStudyId}`, POSTresponses)
       .then((response: any) => response.data)
-      .then((data: any) => {
-        console.log('Test', data);
-      })
+      .then((data: any) => data)
       .catch((error: any) => {
         console.log(error);
       });
+    toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
+    window.location.href = '/case-studies';
   };
 
   function updateResponse(selectedCaseStudy: any[]) {
@@ -106,10 +160,8 @@ const CaseStudySubmit = () => {
     getQuestions(value);
   };
 
-  const [shareImage, setShareImage] = useState('');
-
-  const handleChange = (e: any) => {
-    const image = e.target.files[0];
+  const handleChange = (event: any) => {
+    const image = event.target.files[0];
     if (image === '' || image === undefined) {
       alert(`not an image ,the file is a ${typeof image}`);
       return;
@@ -122,10 +174,12 @@ const CaseStudySubmit = () => {
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
-        <button className="grey-button top-2% right-2">Log Out</button>
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+          Log Out
+        </button>
       </header>
       <Sidebar show={showNav} />
-      <div className="cards-casestudy">
+      <div className="cards-case-study">
         <div className="casestudy-single-card">
           <h2 className="inside-card -mt-10 mb-8">
             <b>Current Case Study</b>
@@ -146,12 +200,12 @@ const CaseStudySubmit = () => {
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
               <div className="float-left pl-10">
-                <input type="checkbox" />
+                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
                 <p>
                   This person has given permission to share their story <br />
                   and photo in HHA communications, including online platforms.
                 </p>
-                <input type="file" accept="image/gif, image/png, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
           </div>
@@ -167,8 +221,10 @@ const CaseStudySubmit = () => {
                 </div>
               );
             })}
-            <button className="grey-button bottom-5 left-31">Cancel</button>
-            <button onClick={createCaseStudy} disabled={selectedCaseStudyType == 'Nothing selected'} className="blue-button bottom-5 right-20">
+            <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
+              Cancel
+            </button>
+            <button onClick={saveImageForCaseStudy} disabled={selectedCaseStudyType == 'Nothing selected'} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>
