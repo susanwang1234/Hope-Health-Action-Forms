@@ -20,6 +20,7 @@
   - heading-1
   - height-100-percent
   - icon
+  - instructions
   - leaderboard
   - profile-pic
   - responsive-calendar
@@ -128,6 +129,10 @@
 .icon {
   height: 30px;
   width: 30px;
+}
+
+.instructions {
+  cursor: pointer;
 }
 
 .leaderboard {

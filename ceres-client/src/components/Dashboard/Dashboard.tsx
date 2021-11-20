@@ -20,6 +20,7 @@ import Chart from "react-google-charts";
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
     https://blog.logrocket.com/react-calendar-tutorial-build-customize-calendar/
+    https://react-google-charts.com/bar-chart
 */
 
 const Dashboard = () => {
@@ -51,6 +52,8 @@ const Dashboard = () => {
 
   function generateLeaderboard() {
     return (
+      
+      
       <Chart
   width={'100%'}
   height={'200px'}
@@ -61,7 +64,6 @@ const Dashboard = () => {
       'Department',
       'Points',
       { role: 'style' },
-      { role: 'style'},
       {
         sourceColumn: 0,
         role: 'annotation',
@@ -69,13 +71,13 @@ const Dashboard = () => {
         calc: 'stringify',
       },
     ],
-    ['Rehab', 1, 'color: #764A90', 'opacity: 0.57', null],
-    ['Maternity', 2, 'color: #764A90', 'opacity: 0.57', null],
-    ['NCIUPaeds', 3, 'color: #764A90', 'opacity: 0.57', null],
-    ['Maternity', 4, 'color: #764A90', 'opacity: 0.57', null],
+    ['Rehab', 1, 'color: #764A90', null],
+    ['Maternity', 2, 'color: #ae88c3', null],
+    ['NCIUPaeds', 3, 'color: #d0bbdd', null],
+    ['Maternity', 4, 'color: #f3eef6', null],
   ]}
   options={{
-    title: 'Leaderboard',
+    //title: 'Leaderboard',
     bar: { groupWidth: '95%' },
     legend: { position: 'none' },
   }}
@@ -117,9 +119,9 @@ const Dashboard = () => {
 
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
-                  <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
+                  <IoIosInformationCircle className="align-right icon instructions" onClick={(e) => instructions(e)} />
                   {/*<img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>*/}
-                  {generateLeaderboard()}
+                  {/*generateLeaderboard()*/}
                 </div>
               </div>
 
