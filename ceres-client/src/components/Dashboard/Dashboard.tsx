@@ -53,7 +53,7 @@ const Dashboard = () => {
   function generateLeaderboard() {
     return (
       
-      
+      <div>
       <Chart
   width={'100%'}
   height={'200px'}
@@ -84,7 +84,9 @@ const Dashboard = () => {
   // For tests
   rootProps={{ 'data-testid': '6' }}
 />
+</div>
     )
+    
   }
 
   return (
@@ -120,8 +122,7 @@ const Dashboard = () => {
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
                   <IoIosInformationCircle className="align-right icon instructions" onClick={(e) => instructions(e)} />
-                  {/*<img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>*/}
-                  {/*generateLeaderboard()*/}
+                  {generateLeaderboard()}
                 </div>
               </div>
 
