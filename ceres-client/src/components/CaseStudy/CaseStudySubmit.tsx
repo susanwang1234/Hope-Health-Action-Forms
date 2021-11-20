@@ -134,11 +134,13 @@ const CaseStudySubmit = () => {
   const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
     let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
     let POSTresponses = caseStudyTypeOptions[caseStudyTypeId - 1];
-    updateResponse(POSTresponses);
+    updateResponse(POSTresponses, false);
     httpService
       .post(`/case-study-responses/${caseStudyId}`, POSTresponses)
       .then((response: any) => response.data)
-      .then((data: any) => data)
+      .then((data: any) => {
+        updateResponse(POSTresponses, true);
+      })
       .catch((error: any) => {
         console.log(error);
       });
@@ -146,11 +148,15 @@ const CaseStudySubmit = () => {
     window.location.href = '/case-studies';
   };
 
-  function updateResponse(selectedCaseStudy: any[]) {
+  function updateResponse(selectedCaseStudy: any[], empty: boolean) {
     var elementId;
     for (let index = 0; index < selectedCaseStudy.length; index++) {
-      elementId = 'text-area-id-' + index;
-      selectedCaseStudy[index].response = (document.getElementById(elementId) as HTMLInputElement).value;
+      if (!empty) {
+        elementId = 'text-area-id-' + index;
+        selectedCaseStudy[index].response = (document.getElementById(elementId) as HTMLInputElement).value;
+      } else {
+        selectedCaseStudy[index].response = '';
+      }
     }
   }
 
