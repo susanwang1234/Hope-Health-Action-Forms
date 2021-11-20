@@ -30,32 +30,46 @@ const Dashboard = () => {
   const [date, setDate]: any = useState(new Date());
   const initialEmployeeOfTheMonth = {
     id: 0,
-    imageId: 0,
+    imageId: 1,
     name: '',
     department: '',
     departmentId: 0,
     description: ''
   };
-  const [employeeOfTheMonthState, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
+  const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
+  const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
     );
   };
 
+  async function getEmployeeOfTheMonth() {
+    const url = '/employee-of-the-month';
+    try {
+      const response = await httpService.get(url);
+      const { data } = response;
+      setEmployeeOfTheMonthState(data[0]);
+      getEmployeeOfTheMonthImage();
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  async function getEmployeeOfTheMonthImage() {
+    const url = `/image/${employeeOfTheMonth.imageId}`;
+    try {
+      const response = await httpService.get(url);
+      const { data } = response;
+      console.log(data);
+      // setEmployeeOfTheMonthImageState(data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
   useEffect(() => {
     getEmployeeOfTheMonth();
-
-    async function getEmployeeOfTheMonth() {
-      const url = '/employee-of-the-month';
-      try {
-        const response = await httpService.get(url);
-        const { data } = response;
-        setEmployeeOfTheMonthState(data[0]);
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setEmployeeOfTheMonthState]);
 
   function generateCalendar() {
@@ -108,10 +122,10 @@ const Dashboard = () => {
               <div className="card-outer fill-space-right">
                 <p className="title">Employee of the Month</p>
                 <div className="card-inner height-100-percent">
-                  <img src={profilePic} alt="profile pic" className="profile-pic"></img>
-                  <h1 className="heading-1">Name: {employeeOfTheMonthState.name}</h1>
-                  <h1 className="heading-1">Department: {employeeOfTheMonthState.department}</h1>
-                  <p className="text-primary-p employee-paragraph">{employeeOfTheMonthState.description}</p>
+                  <img src={employeeOfTheMonthImage} alt="profile pic" className="profile-pic"></img>
+                  <h1 className="heading-1">Name: {employeeOfTheMonth.name}</h1>
+                  <h1 className="heading-1">Department: {employeeOfTheMonth.department}</h1>
+                  <p className="text-primary-p employee-paragraph">{employeeOfTheMonth.description}</p>
                 </div>
               </div>
             </div>
