@@ -124,7 +124,8 @@ const CaseStudySubmit = () => {
       .post(url, caseStudy)
       .then((response: any) => response.data)
       .then((data: any) => {
-        createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
+        const retrievedCaseStudy = data[0];
+        createCaseStudyResponse(retrievedCaseStudy.id, retrievedCaseStudy.caseStudyTypeId);
       })
       .catch((error: any) => {
         console.log(error);
@@ -149,7 +150,7 @@ const CaseStudySubmit = () => {
   };
 
   function updateResponse(selectedCaseStudy: any[], empty: boolean) {
-    var elementId;
+    let elementId;
     for (let index = 0; index < selectedCaseStudy.length; index++) {
       if (!empty) {
         elementId = 'text-area-id-' + index;
