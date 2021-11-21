@@ -1,5 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
 import Dashboard from './components/Dashboard/Dashboard';
@@ -13,6 +15,7 @@ import UnPrivateRoute from './hocs/UnprivateRoutes';
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <UnPrivateRoute exact path="/" component={Login} />
         <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
