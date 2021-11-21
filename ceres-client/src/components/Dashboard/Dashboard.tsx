@@ -116,7 +116,8 @@ const Dashboard = () => {
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
                   <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
-                  <img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>
+                  {/*<img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>*/}
+                  {generateLeaderboard()}
                 </div>
               </div>
 
