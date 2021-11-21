@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "9622d1ca-f199-403c-b4ff-1dc8b4083cd8",
+    "_postman_id": "0b8e8b8d-4008-4d3c-b9ac-bfda6776fe38",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -497,7 +497,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"imageId\": 5,\r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
+              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"imageId\": 1,\r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -731,7 +731,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"department\": \"Community Health\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month!\"\r\n}",
+              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was invovled with a lot of tasks at the hospital. She was took a lot of initiative to help out!\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -739,16 +739,10 @@
               }
             },
             "url": {
-              "raw": "localhost:8080/employee-of-the-month/:id",
+              "raw": "localhost:8080/employee-of-the-month/1",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["employee-of-the-month", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
+              "path": ["employee-of-the-month", "1"]
             }
           },
           "response": []

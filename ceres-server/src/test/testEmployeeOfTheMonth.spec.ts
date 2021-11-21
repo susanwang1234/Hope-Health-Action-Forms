@@ -126,13 +126,11 @@ describe('editEmployeeOfTheMonthById', () => {
         expect(res.body[0]).to.have.deep.property('id');
         expect(res.body[0]).to.have.deep.property('imageId');
         expect(res.body[0]).to.have.deep.property('name');
-        expect(res.body[0]).to.have.deep.property('department');
         expect(res.body[0]).to.have.deep.property('departmentId');
         expect(res.body[0]).to.have.deep.property('description');
         expect(res.body[0].id).to.deep.equal(1);
         expect(res.body[0].imageId).to.deep.equal(2);
         expect(res.body[0].name).to.deep.equal('Jenny Jennings');
-        expect(res.body[0].department).to.deep.equal('Community Health');
         expect(res.body[0].departmentId).to.deep.equal(5);
         expect(res.body[0].description).to.deep.equal('Jenny Jennings did a fantastic job this month!');
         done();
