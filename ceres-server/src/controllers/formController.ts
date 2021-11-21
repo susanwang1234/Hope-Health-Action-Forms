@@ -46,15 +46,21 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
     res.status(400).send(formNegativeOrNanInputError);
     return;
   }
-  const form = await Knex.select('Form.*', 'Department.name').from('Form').join('Department', 'Form.departmentId', '=', 'Department.id').first();
+  const form = await Knex.select('Form.id', Knex.raw('month(createdAt) AS month'), Knex.raw('year(createdAt) as year'), 'Department.name')
+    .from('Form')
+    .join('Department', 'Form.departmentId', '=', 'Department.id')
+    .where('Form.id', formId)
+    .first();
+
   const formResponses = await Knex.select('*')
     .from('FormResponse')
     .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
     .where('FormResponse.formId', formId);
 
+  const filename = `${form.id}${form.name}-report-${form.month}-${form.year}.csv`;
   res.header('Content-Type', 'text/csv');
-  res.attachment('test.csv');
+  res.attachment(filename);
 
   const fileExportFormatPolicy: FileExportFormatPolicy = new CsvFormatPolicy();
   const dataExporter: DataExporter = new DataExporter(form, formResponses, fileExportFormatPolicy);
