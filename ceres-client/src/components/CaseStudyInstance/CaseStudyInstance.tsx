@@ -1,16 +1,13 @@
 import './CaseStudyInstance.css';
 import '../../App.css';
-import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../UserContext';
+import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import photo from './../../images/original_artwork.jpg';
-import { Link } from 'react-router-dom';
+import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
-  const userContext = useContext(UserContext);
-
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
 
@@ -28,11 +25,10 @@ const CaseStudy = () => {
     getCaseStudies();
 
     async function getCaseStudies() {
-      const url = 'http://localhost:8080/case-study/' + caseId.toString();
+      const url = `/case-study/${caseId.toString()}`;
       try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log('Fetched Case Studies: ' + data);
+        const response = await httpService.get(url);
+        const data = response.data;
         setCaseStudyState({
           isLoaded: true,
           caseStudies: data
