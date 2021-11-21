@@ -34,7 +34,7 @@ CSS Classes
   text-align: center;
   width: 100px;
 }
-.cards-casestudy {
+.cards-case-study {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
@@ -80,7 +80,7 @@ h2.questions {
   font-family: Arial;
   font-size: 20px;
 }
-p.inside-text-case-study {
+label.inside-text-case-study {
   font-family: Arial;
   font-size: 20px;
   margin: 4px;
