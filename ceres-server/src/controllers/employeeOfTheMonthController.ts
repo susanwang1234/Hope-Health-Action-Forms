@@ -15,14 +15,7 @@ const inputtedReqBody = (req: Request) => {
 const getEmployeeOfTheMonth = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING LIST OF ${TABLE_NAME.toUpperCase()}S`);
   try {
-    const retrievedEmployeeOfTheMonth = await Knex.select(
-      `${TABLE_NAME}.id`,
-      `${TABLE_NAME}.imageId`,
-      `${TABLE_NAME}.name`,
-      'Department.name AS department',
-      `${TABLE_NAME}.departmentId`,
-      `${TABLE_NAME}.description`
-    )
+    const retrievedEmployeeOfTheMonth = await Knex.select(`${TABLE_NAME}.*`, 'Department.name AS department')
       .from(`${TABLE_NAME}`)
       .join('Department', `${TABLE_NAME}.departmentId`, '=', 'Department.id');
     logging.info(NAMESPACE, `RETRIEVED ${TABLE_NAME.toUpperCase()}:`, retrievedEmployeeOfTheMonth);
