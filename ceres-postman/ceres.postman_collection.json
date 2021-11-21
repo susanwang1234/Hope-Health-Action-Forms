@@ -497,7 +497,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"imageId\": 5,\r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
+              "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 2, \r\n    \"imageId\": 1,\r\n    \"title\":  \"Case Study Dummy ?\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -652,7 +652,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"imageId\": 6,\r\n    \"name\": \"Jack Smith\",\r\n    \"department\": \"Community Health\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jack Smith did a fantastic job this month!\"\r\n}",
+                      "raw": "{\r\n    \"imageId\": 6,\r\n    \"name\": \"Jack Smith\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jack Smith did a fantastic job this month!\"\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
@@ -731,7 +731,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"department\": \"Community Health\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was invovled with a lot of tasks at the hospital. She was took a lot of initiative to help out!\"\r\n}",
+              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was invovled with a lot of tasks at the hospital. She was took a lot of initiative to help out!\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
