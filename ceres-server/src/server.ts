@@ -54,6 +54,7 @@ export const enableCors = (router: Application) => {
   router.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', allowedOrigins); // TODO Change access where routes and ips predefined when deployed to production
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type Accept, Authorization,');
+    res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     if (req.method === 'OPTIONS') {
       res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
       return res.status(200).json({});

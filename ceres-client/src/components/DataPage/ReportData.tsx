@@ -86,7 +86,7 @@ const ReportData = (props: any) => {
     </button>
   );
   const editButton = (
-    <button className=" edit-button" onClick={() => setEditStatus(true)}>
+    <button className="edit-button" onClick={() => setEditStatus(true)}>
       Edit
     </button>
   );
@@ -156,12 +156,13 @@ function createArrayEntriesToPut(rawArray: any[]): any[] {
 }
 
 async function exportToCsv(formId: number): Promise<void> {
-  const csv = await httpService.get(`/form/${formId}/export-as-csv`);
-  const csvContent = 'data:text/csv;charset=utf-8,' + csv.data;
+  const res = await httpService.get(`/form/${formId}/export-as-csv`);
+  const csvContent = 'data:text/csv;charset=utf-8,' + res.data;
+  const filename = res.headers['content-disposition'].split('=')[1].replaceAll('"', '');
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement('a');
   link.setAttribute('href', encodedUri);
-  link.setAttribute('download', 'my_data.csv');
+  link.setAttribute('download', filename);
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
