@@ -16,6 +16,8 @@ import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
 import Chart from "react-google-charts";
+import { strictEqual } from 'assert';
+import { stringify } from 'querystring';
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -50,7 +52,15 @@ const Dashboard = () => {
     );
   }
 
-  function generateLeaderboard() {
+  function generateLeaderboard(LeaderboardJSON: any) {
+    
+    let departmentBars = [];
+    let lengthJSON = Object.keys(LeaderboardJSON.leaderboard).length;
+    for(let i=0; i<lengthJSON; i++) {
+      let opacityStr = 'opacity: ' + (1 / i).toString()
+      departmentBars.push([LeaderboardJSON.leaderboard.department[i], LeaderboardJSON.leaderboard.score[i], 'color: #764a90', opacityStr, null])
+    }
+
     return (
       
       <div>
@@ -71,10 +81,13 @@ const Dashboard = () => {
         calc: 'stringify',
       },
     ],
+    /*
     ['Rehab', 1, 'color: #764a90; opacity: 0.13', null],
     ['Maternity', 2, 'color: #764a90; opacity: 1.0', null],
     ['NCIUPaeds', 3, 'color: #764a90; opacity: 0.54', null],
     ['Community Health', 4, 'color: #764a90; opacity: 0.70', null],
+    */
+    departmentBars
   ]}
   options={{
     //title: 'Leaderboard',
@@ -88,6 +101,13 @@ const Dashboard = () => {
     )
     
   }
+
+  let JSONtext = '{"department":[' +
+                '{"department":"Rehab","score": 1 },' +
+                '{"department":"Maternity","score": 5 },' +
+                '{"department":" NCIUPaeds","score": 10' +
+                '{department:"Community Health","score": 4}]}';
+  const JSONobj = JSON.parse(JSONtext);
 
   return (
     <html>
@@ -122,7 +142,7 @@ const Dashboard = () => {
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
                   <IoIosInformationCircle className="align-right icon instructions" onClick={(e) => instructions(e)} />
-                  {generateLeaderboard()}
+                  {generateLeaderboard(JSONobj)}
                 </div>
               </div>
 
