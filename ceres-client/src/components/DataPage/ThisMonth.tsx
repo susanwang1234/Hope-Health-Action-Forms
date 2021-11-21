@@ -43,8 +43,10 @@ const ThisMonth = () => {
                 <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
                 <img src={logo} alt="Logo" className="logo" />
             </header>
+            <div className="flex justify-center">
             <Sidebar show={showNav} />
             {(displayingData == null) ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}
+            </div>
         </div>
     )
 }
