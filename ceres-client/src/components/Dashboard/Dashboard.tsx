@@ -50,19 +50,24 @@ const Dashboard = () => {
       const response = await httpService.get(url);
       const { data } = response;
       setEmployeeOfTheMonthState(data[0]);
-      getEmployeeOfTheMonthImage();
+      console.log('imageId: ' + employeeOfTheMonth.imageId);
+      await getEmployeeOfTheMonthImage(employeeOfTheMonth.imageId);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
   }
 
-  async function getEmployeeOfTheMonthImage() {
-    const url = `/image/${employeeOfTheMonth.imageId}`;
+  async function getEmployeeOfTheMonthImage(imageId: number) {
+    const url = `/image/${imageId}`;
     try {
-      const response = await httpService.get(url);
-      const { data } = response;
-      console.log(data);
-      // setEmployeeOfTheMonthImageState(data);
+      await httpService
+        .get(url, {
+          responseType: 'blob'
+        })
+        .then((res) => {
+          let imageURL = URL.createObjectURL(res.data);
+          setEmployeeOfTheMonthImageState(imageURL);
+        });
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
