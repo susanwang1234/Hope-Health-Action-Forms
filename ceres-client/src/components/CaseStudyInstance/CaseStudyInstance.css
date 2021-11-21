@@ -79,10 +79,10 @@ td {
 
 .case-study-date {
   margin-left: 40px;
-  color:lightgray
+  color: lightgray;
 }
 
-.view-cancel-form-button{
+.view-cancel-form-button {
   display: flex;
   background-color: #555555;
   font-weight: bold;

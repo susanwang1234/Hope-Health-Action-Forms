@@ -62,7 +62,9 @@ const CaseStudy = () => {
                       <img className="case-study-img" src={photo} alt="" width="150px" height="150px"></img>
                     </td>
                     <td className="case-study-block-text">
-                      <h1 className="case-study-title">{caseStudy.name}: {caseStudy.title}</h1>
+                      <h1 className="case-study-title">
+                        {caseStudy.name}: {caseStudy.title}
+                      </h1>
                       <h5 className="case-study-date">{caseStudy.createdAt}</h5>
                       <h2 className="case-study-desc">{caseStudy.title}</h2>
                       {/* Dynamically insert case study Q/A here */}
