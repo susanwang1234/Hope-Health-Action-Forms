@@ -25,6 +25,67 @@ import { stringify } from 'querystring';
     https://react-google-charts.com/bar-chart
 */
 
+class Leaderboard {
+
+  public json: any;
+
+  constructor(json: any) {
+    this.json = json;
+  }
+
+  private getBarData() {
+    let departmentBars = [];
+    let lengthJSON = Object.keys(this.json.leaderboard).length;
+    for(let i=0; i<lengthJSON; i++) {
+      let opacityValue = Math.round(1 / (i+1) * 100) / 100;
+      let opacityStr = 'opacity: ' + (opacityValue).toString() + ';'
+      departmentBars.push([this.json.leaderboard[i].department, this.json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null])
+    }
+
+    let barData = [ 
+      [
+        'Department',
+        'Points',
+        { role: 'style' },
+        {
+          sourceColumn: 0,
+          role: 'annotation',
+          type: 'string',
+          calc: 'stringify',
+        },
+      ]
+    ]
+    for(let i=0; i<lengthJSON; i++) {
+      barData.push(departmentBars[i])
+    }
+    return barData
+  }
+
+  public generateLeaderboard() {
+    let barData = this.getBarData();
+
+    return (
+      <div>
+      <Chart
+      width={'95%'}
+      height={'200px'}
+      chartType="BarChart"
+      loader={<div>Loading Chart</div>}
+      data = {barData}
+      options={{
+        //title: 'Leaderboard',
+        bar: { groupWidth: '95%' },
+        legend: { position: 'none' },
+      }}
+      // For tests
+      rootProps={{ 'data-testid': '6' }}
+      />
+      </div>
+      )
+    }
+
+}
+
 const Dashboard = () => {
   let history = useHistory();
   const onClick = () => {
@@ -52,80 +113,13 @@ const Dashboard = () => {
     );
   }
 
-  function generateLeaderboard(LeaderboardJSON: any) {
-    
-    let departmentBars = [];
-    let lengthJSON = Object.keys(LeaderboardJSON.leaderboard).length;
-    for(let i=0; i<lengthJSON; i++) {
-      let opacityStr = 'opacity: ' + (Math.round(1 / (i+1) * 100) / 100).toString() + ';'
-      departmentBars.push([LeaderboardJSON.leaderboard[i].department, LeaderboardJSON.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null])
-    }
-    console.log(departmentBars)
-    let barData = [ 
-      [
-        'Department',
-        'Points',
-        { role: 'style' },
-        {
-          sourceColumn: 0,
-          role: 'annotation',
-          type: 'string',
-          calc: 'stringify',
-        },
-      ]
-    ]
-    for(let i=0; i<lengthJSON; i++) {
-      barData.push(departmentBars[i])
-    }
-
-
-    return (
-      
-      <div>
-      <Chart
-  width={'95%'}
-  height={'200px'}
-  chartType="BarChart"
-  loader={<div>Loading Chart</div>}
-  /*
-  data={[
-    [
-      'Department',
-      'Points',
-      { role: 'style' },
-      {
-        sourceColumn: 0,
-        role: 'annotation',
-        type: 'string',
-        calc: 'stringify',
-      },
-    ],
-    ['Rehab', 1, 'color: #764a90; opacity: 0.13', null],
-    ['Maternity', 2, 'color: #764a90; opacity: 1.0', null],
-    ['NCIUPaeds', 3, 'color: #764a90; opacity: 0.54', null],
-    ['Community Health', 4, 'color: #764a90; opacity: 0.70', null],
-  ]}
-  */
-  data = {barData}
-  options={{
-    //title: 'Leaderboard',
-    bar: { groupWidth: '95%' },
-    legend: { position: 'none' },
-  }}
-  // For tests
-  rootProps={{ 'data-testid': '6' }}
-/>
-</div>
-    )
-    
-  }
-
   let JSONtext = '{"leaderboard":[' +
                 '{"department":"Rehab","score": 1 },' +
                 '{"department":"Maternity","score": 5 },' +
                 '{"department": "NCIUPaeds","score": 10},' +
                 '{"department":"Community Health","score": 4}]}';
   const JSONobj = JSON.parse(JSONtext);
+  let DashboardLeaderboard = new Leaderboard(JSONobj);
 
   return (
     <html>
@@ -160,7 +154,7 @@ const Dashboard = () => {
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
                   <IoIosInformationCircle className="align-right icon instructions" onClick={(e) => instructions(e)} />
-                  {generateLeaderboard(JSONobj)}
+                  {DashboardLeaderboard.generateLeaderboard()}
                 </div>
               </div>
 
