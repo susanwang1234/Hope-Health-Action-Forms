@@ -90,6 +90,21 @@ const ReportData = (props: any) => {
       Edit
     </button>
   );
+
+  const exportAsCsvButton = (
+    <button className="edit-button" onClick={async () => {
+      const csv = await httpService.get('/form/1/export-as-csv');
+      const csvContent = 'data:text/csv;charset=utf-8,' + csv.data;
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement('a');
+      link.setAttribute('href', encodedUri);
+      link.setAttribute('download', 'my_data.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }}>Export as CSV</button>
+  );
+
   if (props.data === null) {
     return <p className="m-60 font-bold text-xl">Select a report from the list</p>;
   } else {
@@ -116,6 +131,7 @@ const ReportData = (props: any) => {
         </form>
         <div className="report-data-buttons">
           {editStatus === true ? cancelButton : editButton}
+          {exportAsCsvButton}
           {editStatus === true && updateButton}
         </div>
       </div>
