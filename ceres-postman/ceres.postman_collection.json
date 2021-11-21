@@ -652,7 +652,7 @@
                     "header": [],
                     "body": {
                       "mode": "raw",
-                      "raw": "{\r\n    \"imageId\": 6,\r\n    \"name\": \"Jack Smith\",\r\n    \"department\": \"Community Health\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jack Smith did a fantastic job this month!\"\r\n}",
+                      "raw": "{\r\n    \"imageId\": 6,\r\n    \"name\": \"Jack Smith\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jack Smith did a fantastic job this month!\"\r\n}",
                       "options": {
                         "raw": {
                           "language": "json"
