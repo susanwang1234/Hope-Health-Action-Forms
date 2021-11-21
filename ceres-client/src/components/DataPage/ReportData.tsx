@@ -92,7 +92,7 @@ const ReportData = (props: any) => {
   );
 
   const exportAsCsvButton = (
-    <button className="edit-button" onClick={() => exportToCsv()}>Export as CSV</button>
+    <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>Export as CSV</button>
   );
 
   if (props.data === null) {
@@ -121,7 +121,7 @@ const ReportData = (props: any) => {
         </form>
         <div className="report-data-buttons">
           {editStatus === true ? cancelButton : editButton}
-          {exportAsCsvButton}
+          {!editStatus && exportAsCsvButton}
           {editStatus === true && updateButton}
         </div>
       </div>
@@ -155,8 +155,8 @@ function createArrayEntriesToPut(rawArray: any[]): any[] {
   return proccesedEntries;
 }
 
-async function exportToCsv() {
-  const csv = await httpService.get('/form/1/export-as-csv');
+async function exportToCsv(formId: number): Promise<void> {
+  const csv = await httpService.get(`/form/${formId}/export-as-csv`);
   const csvContent = 'data:text/csv;charset=utf-8,' + csv.data;
   const encodedUri = encodeURI(csvContent);
   const link = document.createElement('a');
