@@ -17,6 +17,7 @@ import caseStudyQuestionsRoutes from './routes/caseStudyQuestionsRoute';
 import caseStudyResponsesRoutes from './routes/caseStudiesResponsesRoute';
 import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
+import employeeOfTheMonthRoutes from './routes/employeeOfTheMonthRoute';
 import routes from './routes/indexRoute';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
@@ -101,6 +102,7 @@ export const enableRoutes = (router: Application) => {
   router.use('/case-study-questions', caseStudyQuestionsRoutes);
   router.use('/case-study-responses', caseStudyResponsesRoutes);
   router.use('/image', imageRoutes);
+  router.use('/employee-of-the-month', employeeOfTheMonthRoutes);
 };
 
 export const enableErrorHandling = (router: Application) => {
