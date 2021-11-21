@@ -111,7 +111,7 @@ Steps to run (From the ceres-server CLI terminal)
 <h3>Seed database</h3>
 Steps to run (From the ceres-server CLI terminal)
 
-- node_modules/.bin/knex seed:run<br>
+- node_modules/.bin/knex seed:run --specific seed_project.ts<br>
 
 <h3> Important notes </h3>
 <p>You only need to make a migration if you want to change the schema. You only need to make a seed if you want to change the default state of the database. Otherwise, just run the migration and seed the database to view the updated database.</p>
