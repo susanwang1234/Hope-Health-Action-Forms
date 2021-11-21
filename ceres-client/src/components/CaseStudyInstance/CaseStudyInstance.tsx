@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import photo from './../../images/original_artwork.jpg';
+import photo from './../../images/CBR_training_March 21.png';
 import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
   const [showNav, setShowNav] = useState(false);
+  const [caseStudyImage, setCaseStudyImageState] = useState(photo);
   document.body.style.backgroundColor = '#f5f5f5';
 
   const [caseStudyState, setCaseStudyState] = useState({
@@ -23,21 +24,37 @@ const CaseStudy = () => {
 
   useEffect(() => {
     getCaseStudies();
-
-    async function getCaseStudies() {
-      const url = `/case-study/${caseId.toString()}`;
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        setCaseStudyState({
-          isLoaded: true,
-          caseStudies: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setCaseStudyState]);
+
+  async function getCaseStudies() {
+    const url = `/case-study/${caseId.toString()}`;
+    try {
+      const response = await httpService.get(url);
+      const storeResponseBody: any = [response.data];
+      setCaseStudyState({
+        isLoaded: true,
+        caseStudies: response.data
+      });
+      getCaseStudyImage(storeResponseBody[0][0].imageId);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  async function getCaseStudyImage(imageId: number) {
+    const url = `/image/${imageId}`;
+    try {
+      await httpService
+        .get(url, {
+          responseType: 'blob'
+        })
+        .then((res) => {
+          setCaseStudyImageState(URL.createObjectURL(res.data));
+        });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
 
   return (
     <div className="App">
@@ -49,13 +66,12 @@ const CaseStudy = () => {
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">
-            {/* Dynamically insert case study information here */}
             {caseStudyState.caseStudies.slice(caseId - 1, caseId).map((caseStudy: any) => {
               return (
                 <table className="case-study-block">
                   <tr>
                     <td className="case-study-block-image">
-                      <img className="case-study-img" src={photo} alt="" width="150px" height="150px"></img>
+                      <img className="case-study-img" src={caseStudyImage} alt="" width="auto" height="150px"></img>
                     </td>
                     <td className="case-study-block-text">
                       <h1 className="case-study-title">
@@ -63,7 +79,6 @@ const CaseStudy = () => {
                       </h1>
                       <h5 className="case-study-date">{caseStudy.createdAt}</h5>
                       <h2 className="case-study-desc">{caseStudy.title}</h2>
-                      {/* Dynamically insert case study Q/A here */}
                       {caseStudyState.caseStudies.map((caseStudy: any) => {
                         return (
                           <div>
