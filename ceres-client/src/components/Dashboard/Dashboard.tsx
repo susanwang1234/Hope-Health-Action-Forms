@@ -1,12 +1,11 @@
 import '../../App.css';
 import './Dashboard.css';
-import { useHistory } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../UserContext';
+import initialEmployeeOfTheMonth from './initialEmployeeOfTheMonth.json';
+import { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import profilePic from './../../images/original_artwork.jpg';
+import profilePic from './../../images/gray_person.jpg';
 import leaderboard from './../../images/leaderboard.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -21,21 +20,8 @@ import httpService from '../../services/httpService';
 */
 
 const Dashboard = () => {
-  let history = useHistory();
-  const onClick = () => {
-    history.push('/case-studies/new');
-  };
-  const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
-  const initialEmployeeOfTheMonth = {
-    id: 0,
-    imageId: 1,
-    name: '',
-    department: '',
-    departmentId: 0,
-    description: ''
-  };
   const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
   const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
   const instructions = (event: any) => {
@@ -49,9 +35,9 @@ const Dashboard = () => {
     try {
       const response = await httpService.get(url);
       const { data } = response;
-      setEmployeeOfTheMonthState(data[0]);
-      console.log('imageId: ' + employeeOfTheMonth.imageId);
-      await getEmployeeOfTheMonthImage(employeeOfTheMonth.imageId);
+      const retrievedEmployeeOfTheMonth = data[0];
+      setEmployeeOfTheMonthState(retrievedEmployeeOfTheMonth);
+      await getEmployeeOfTheMonthImage(retrievedEmployeeOfTheMonth.imageId);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
@@ -65,8 +51,7 @@ const Dashboard = () => {
           responseType: 'blob'
         })
         .then((res) => {
-          let imageURL = URL.createObjectURL(res.data);
-          setEmployeeOfTheMonthImageState(imageURL);
+          setEmployeeOfTheMonthImageState(URL.createObjectURL(res.data));
         });
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
