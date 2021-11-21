@@ -37,11 +37,11 @@ class Leaderboard {
           this.json = json;
         }
         else {
-          throw "Inside the leaderboard key, there must be a JSON array with 2 keys called 'department' and 'score'."
+          throw "Inside the leaderboard key, there must be a JSON array with 2 keys called 'department' (string type) and 'score' (int type)."
         }
       }
       else {
-        throw "JSON syntax must be {'leaderboard': [{'department':'dept1','score',<number>}{'department'...}]}"
+        throw "JSON syntax must be {'leaderboard': [{'department':'dept1','score',<number>}{'department'...}]} where department is a string and number is an int"
       }
     }
     catch(err){
@@ -89,12 +89,11 @@ class Leaderboard {
       loader={<div>Loading Chart</div>}
       data = {barData}
       options={{
-        //title: 'Leaderboard',
         bar: { groupWidth: '95%' },
         legend: { position: 'none' },
       }}
       // For tests
-      rootProps={{ 'data-testid': '6' }}
+      rootProps={{ 'data-testid': '0' }}
       />
       </div>
       )
