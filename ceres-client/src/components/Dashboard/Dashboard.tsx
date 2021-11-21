@@ -30,7 +30,23 @@ class Leaderboard {
   public json: any;
 
   constructor(json: any) {
-    this.json = json;
+    try {
+      if (Object.keys(json)[0]=='leaderboard') {
+        let json_leaderboard = json.leaderboard[0];
+        if(Object.keys(json_leaderboard)[0]=='department' && Object.keys(json_leaderboard)[1]=='score') {
+          this.json = json;
+        }
+        else {
+          throw "Inside the leaderboard key, there must be a JSON array with 2 keys called 'department' and 'score'."
+        }
+      }
+      else {
+        throw "JSON syntax must be {'leaderboard': [{'department':'dept1','score',<number>}{'department'...}]}"
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   private getBarData() {
