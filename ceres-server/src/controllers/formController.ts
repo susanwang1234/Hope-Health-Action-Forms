@@ -4,7 +4,7 @@ import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
 import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
-import { DataExporter } from '../db/types/DataExporter';
+import { DataFormatter } from '../db/types/DataFormatter';
 import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
 import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
 
@@ -63,9 +63,9 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
   res.attachment(filename);
 
   const fileExportFormatPolicy: FileExportFormatPolicy = new CsvFormatPolicy();
-  const dataExporter: DataExporter = new DataExporter(form, formResponses, fileExportFormatPolicy);
-  await dataExporter.getFileToSendToUser(res);
-  return;
+  const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
+  const file = dataExporter.getFileToSendToUser();
+  res.send(file);
 };
 
 export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv };

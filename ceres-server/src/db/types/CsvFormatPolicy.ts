@@ -2,7 +2,7 @@ import { FileExportFormatPolicy } from './interfaces/FileExportFormatPolicy';
 const { Parser } = require('json2csv');
 
 export class CsvFormatPolicy implements FileExportFormatPolicy {
-  formatFile(form: any, formResponses: any): string {
+  formatFile(formResponses: any): string {
     const fields = formResponses.map((formResponse: any) => formResponse.label);
     const opts = { fields };
     const json2csv = new Parser(opts);
