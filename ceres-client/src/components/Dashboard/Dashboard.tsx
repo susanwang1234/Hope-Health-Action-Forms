@@ -57,9 +57,27 @@ const Dashboard = () => {
     let departmentBars = [];
     let lengthJSON = Object.keys(LeaderboardJSON.leaderboard).length;
     for(let i=0; i<lengthJSON; i++) {
-      let opacityStr = 'opacity: ' + (1 / i).toString()
-      departmentBars.push([LeaderboardJSON.leaderboard.department[i], LeaderboardJSON.leaderboard.score[i], 'color: #764a90', opacityStr, null])
+      let opacityStr = 'opacity: ' + (Math.round(1 / (i+1) * 100) / 100).toString() + ';'
+      departmentBars.push([LeaderboardJSON.leaderboard[i].department, LeaderboardJSON.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null])
     }
+    console.log(departmentBars)
+    let barData = [ 
+      [
+        'Department',
+        'Points',
+        { role: 'style' },
+        {
+          sourceColumn: 0,
+          role: 'annotation',
+          type: 'string',
+          calc: 'stringify',
+        },
+      ]
+    ]
+    for(let i=0; i<lengthJSON; i++) {
+      barData.push(departmentBars[i])
+    }
+
 
     return (
       
@@ -69,6 +87,7 @@ const Dashboard = () => {
   height={'200px'}
   chartType="BarChart"
   loader={<div>Loading Chart</div>}
+  /*
   data={[
     [
       'Department',
@@ -81,14 +100,13 @@ const Dashboard = () => {
         calc: 'stringify',
       },
     ],
-    /*
     ['Rehab', 1, 'color: #764a90; opacity: 0.13', null],
     ['Maternity', 2, 'color: #764a90; opacity: 1.0', null],
     ['NCIUPaeds', 3, 'color: #764a90; opacity: 0.54', null],
     ['Community Health', 4, 'color: #764a90; opacity: 0.70', null],
-    */
-    departmentBars
   ]}
+  */
+  data = {barData}
   options={{
     //title: 'Leaderboard',
     bar: { groupWidth: '95%' },
@@ -102,11 +120,11 @@ const Dashboard = () => {
     
   }
 
-  let JSONtext = '{"department":[' +
+  let JSONtext = '{"leaderboard":[' +
                 '{"department":"Rehab","score": 1 },' +
                 '{"department":"Maternity","score": 5 },' +
-                '{"department":" NCIUPaeds","score": 10' +
-                '{department:"Community Health","score": 4}]}';
+                '{"department": "NCIUPaeds","score": 10},' +
+                '{"department":"Community Health","score": 4}]}';
   const JSONobj = JSON.parse(JSONtext);
 
   return (
