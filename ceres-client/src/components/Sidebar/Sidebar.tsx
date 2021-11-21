@@ -42,7 +42,7 @@ const Sidebar = ({ show }: any) => {
           </Button>
           {open && (
             <li>
-              <Link to="/submit-report" className="drop-link" color="red">
+              <Link to="/this-month-report" className="drop-link" color="red">
                 <BsFillCalendarFill />
                 This Month's Report
               </Link>
