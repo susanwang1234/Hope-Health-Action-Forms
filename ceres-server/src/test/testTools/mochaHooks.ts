@@ -2,7 +2,6 @@ import http from 'http';
 import { Application } from 'express';
 import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../../server';
 import PORT from './serverPort';
-const chai = require('chai');
 
 interface UserAccount {
   username: string;

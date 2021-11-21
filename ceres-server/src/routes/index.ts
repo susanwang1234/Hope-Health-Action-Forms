@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import passport from 'passport';
 
 import authenticationRoutes from './authenticationRoute';
-
 import departmentRoutes from './departmentRoute';
 import departmentFormRoutes from './departmentFormRoute';
 import formRoutes from './formRoute';
