@@ -15,7 +15,7 @@ import 'react-calendar/dist/Calendar.css';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
-import Chart from "react-google-charts";
+import Chart from 'react-google-charts';
 import { strictEqual } from 'assert';
 import { stringify } from 'querystring';
 
@@ -26,39 +26,25 @@ import { stringify } from 'querystring';
 */
 
 class Leaderboard {
-
-  public json: any;
-
-  constructor(json: any) {
-    try {
-      if (Object.keys(json)[0]=='leaderboard') {
-        let json_leaderboard = json.leaderboard[0];
-        if(Object.keys(json_leaderboard)[0]=='department' && Object.keys(json_leaderboard)[1]=='score') {
-          this.json = json;
-        }
-        else {
-          throw "Inside the leaderboard key, there must be a JSON array with 2 keys called 'department' (string type) and 'score' (int type)."
-        }
-      }
-      else {
-        throw "JSON syntax must be {'leaderboard': [{'department':'dept1','score',<number>}{'department'...}]} where department is a string and number is an int"
-      }
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
-
   private getBarData() {
+    const json: any = {
+      leaderboard: [
+        { department: 'Rehab', score: 1 },
+        { department: 'Maternity', score: 5 },
+        { department: 'NCIUPaeds', score: 10 },
+        { department: 'Community Health', score: 4 }
+      ]
+    }; //dummy data
+
     let departmentBars = [];
-    let lengthJSON = Object.keys(this.json.leaderboard).length;
-    for(let i=0; i<lengthJSON; i++) {
-      let opacityValue = Math.round(1 / (i+1) * 100) / 100;
-      let opacityStr = 'opacity: ' + (opacityValue).toString() + ';'
-      departmentBars.push([this.json.leaderboard[i].department, this.json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null])
+    let lengthJSON = Object.keys(json.leaderboard).length;
+    for (let i = 0; i < lengthJSON; i++) {
+      let opacityValue = Math.round((1 / (i + 1)) * 100) / 100;
+      let opacityStr = 'opacity: ' + opacityValue.toString() + ';';
+      departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null]);
     }
 
-    let barData = [ 
+    let barData = [
       [
         'Department',
         'Points',
@@ -67,14 +53,14 @@ class Leaderboard {
           sourceColumn: 0,
           role: 'annotation',
           type: 'string',
-          calc: 'stringify',
-        },
+          calc: 'stringify'
+        }
       ]
-    ]
-    for(let i=0; i<lengthJSON; i++) {
-      barData.push(departmentBars[i])
+    ];
+    for (let i = 0; i < lengthJSON; i++) {
+      barData.push(departmentBars[i]);
     }
-    return barData
+    return barData;
   }
 
   public generateLeaderboard() {
@@ -82,23 +68,22 @@ class Leaderboard {
 
     return (
       <div>
-      <Chart
-      width={'95%'}
-      height={'200px'}
-      chartType="BarChart"
-      loader={<div>Loading Chart</div>}
-      data = {barData}
-      options={{
-        bar: { groupWidth: '95%' },
-        legend: { position: 'none' },
-      }}
-      // For tests
-      rootProps={{ 'data-testid': '0' }}
-      />
+        <Chart
+          width={'95%'}
+          height={'200px'}
+          chartType="BarChart"
+          loader={<div>Loading Chart</div>}
+          data={barData}
+          options={{
+            bar: { groupWidth: '95%' },
+            legend: { position: 'none' }
+          }}
+          // For tests
+          rootProps={{ 'data-testid': '0' }}
+        />
       </div>
-      )
-    }
-
+    );
+  }
 }
 
 const Dashboard = () => {
@@ -109,8 +94,6 @@ const Dashboard = () => {
   const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
-
-
 
   const instructions = (event: any) => {
     alert(
@@ -128,13 +111,7 @@ const Dashboard = () => {
     );
   }
 
-  let JSONtext = '{"leaderboard":[' +
-                '{"department":"Rehab","score": 1 },' +
-                '{"department":"Maternity","score": 5 },' +
-                '{"department": "NCIUPaeds","score": 10},' +
-                '{"department":"Community Health","score": 4}]}';
-  const JSONobj = JSON.parse(JSONtext);
-  let DashboardLeaderboard = new Leaderboard(JSONobj);
+  let DashboardLeaderboard = new Leaderboard();
 
   return (
     <html>
@@ -160,7 +137,7 @@ const Dashboard = () => {
                     </div>
                     <div className="due-content">
                       <IoIosAlert className="icon icon-mspp-report" /> MSPP Report <br />
-                      <div className='due-in-red'>Due October 31 2021</div> <br />
+                      <div className="due-in-red">Due October 31 2021</div> <br />
                     </div>
                   </div>
                   <div className="align-right flex">{generateCalendar()}</div>
