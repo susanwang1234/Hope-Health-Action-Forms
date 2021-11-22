@@ -124,7 +124,8 @@ const CaseStudySubmit = () => {
       .post(url, caseStudy)
       .then((response: any) => response.data)
       .then((data: any) => {
-        createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
+        const retrievedCaseStudy = data[0];
+        createCaseStudyResponse(retrievedCaseStudy.id, retrievedCaseStudy.caseStudyTypeId);
       })
       .catch((error: any) => {
         console.log(error);
@@ -140,16 +141,16 @@ const CaseStudySubmit = () => {
       .then((response: any) => response.data)
       .then((data: any) => {
         updateResponse(POSTresponses, true);
+        toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
+        window.location.href = '/case-studies';
       })
       .catch((error: any) => {
         console.log(error);
       });
-    toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
-    window.location.href = '/case-studies';
   };
 
   function updateResponse(selectedCaseStudy: any[], empty: boolean) {
-    var elementId;
+    let elementId;
     for (let index = 0; index < selectedCaseStudy.length; index++) {
       if (!empty) {
         elementId = 'text-area-id-' + index;
