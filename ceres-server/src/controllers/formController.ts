@@ -48,7 +48,7 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
   }
 
   try {
-    const form = await Knex.select('Form.id', Knex.raw('month(createdAt) AS month'), Knex.raw('year(createdAt) as year'), 'Department.name')
+    const form = await Knex.select(Knex.raw('month(createdAt) AS month'), Knex.raw('year(createdAt) as year'), 'Department.name')
       .from('Form')
       .join('Department', 'Form.departmentId', '=', 'Department.id')
       .where('Form.id', formId)
@@ -65,7 +65,7 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
       .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
       .where('FormResponse.formId', formId);
 
-    const filename = `${form.id}${form.name}-report-${form.month}-${form.year}.csv`;
+    const filename = `${form.name}-report-${form.month}-${form.year}.csv`;
     res.header('Content-Type', 'text/csv');
     res.attachment(filename);
 
