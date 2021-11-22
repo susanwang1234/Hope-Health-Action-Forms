@@ -50,6 +50,7 @@ const CaseStudy = () => {
         })
         .then((res) => {
           setCaseStudyImageState(URL.createObjectURL(res.data));
+          console.log(URL.createObjectURL(res.data));
         });
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
@@ -66,7 +67,7 @@ const CaseStudy = () => {
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">
-            {caseStudyState.caseStudies.slice(caseId - 1, caseId).map((caseStudy: any) => {
+            {caseStudyState.caseStudies.slice(0, 1).map((caseStudy: any) => {
               return (
                 <table className="case-study-block">
                   <tr>
