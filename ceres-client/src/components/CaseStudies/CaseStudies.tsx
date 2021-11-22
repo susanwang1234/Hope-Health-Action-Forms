@@ -1,6 +1,6 @@
 import './CaseStudies.css';
 import '../../App.css';
-import { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../UserContext';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -12,6 +12,7 @@ import httpService from '../../services/httpService';
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
 
+  const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('');
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
 
@@ -39,6 +40,29 @@ const CaseStudy = () => {
     }
   }, [setCaseStudyState]);
 
+  async function getCaseStudiesByType(caseStudyTypeId: any) {
+    const url = `/case-studies/${caseStudyTypeId}`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      console.log('Fetched Case Studies by type: ' + data);
+      setCaseStudyState({
+        isLoaded: true,
+        caseStudies: data
+      });
+    } catch (error: any) {
+      console.log('Error Unable to fetch from ' + url);
+    }
+  }
+
+  const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedCaseStudyType(event.target.value);
+    console.log(selectedCaseStudyType);
+    if (selectedCaseStudyType != '0') {
+      getCaseStudiesByType(selectedCaseStudyType);
+    }
+  };
+
   return (
     <div className="App">
       <header className="nav-header">
@@ -53,32 +77,38 @@ const CaseStudy = () => {
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
+                    <h1>{selectedCaseStudyType}</h1>
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="patient-story"></input>Patient Story
+                        <input className="radio-button" name="filter" type="radio" value="0" onChange={radioHandler}></input>All Case Studies
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="staff-recognition"></input>
+                        <input className="radio-button" name="filter" type="radio" value="1" onChange={radioHandler}></input>Patient Story
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input className="radio-button" name="filter" type="radio" value="2" onChange={radioHandler}></input>
                         Staff Recognition
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="trailing-session"></input>
-                        Trailing Session
+                        <input className="radio-button" name="filter" type="radio" value="3" onChange={radioHandler}></input>
+                        Training Session
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="equipment-received"></input>
+                        <input className="radio-button" name="filter" type="radio" value="4" onChange={radioHandler}></input>
                         Equipment Received
                       </td>
                     </tr>
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="other"></input>
+                        <input className="radio-button" name="filter" type="radio" value="5" onChange={radioHandler}></input>
                         Other
                       </td>
                     </tr>
