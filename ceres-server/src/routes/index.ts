@@ -13,6 +13,7 @@ import caseStudyQuestionsRoutes from './caseStudyQuestionsRoute';
 import caseStudyResponsesRoutes from './caseStudiesResponsesRoute';
 import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
+import employeeOfTheMonthRoutes from './employeeOfTheMonthRoute';
 
 export const authRouter = Router();
 authRouter.use('/auth', authenticationRoutes);
@@ -31,3 +32,4 @@ apiRouter.use('/case-study-types', caseStudyTypesRoutes);
 apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
+apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
