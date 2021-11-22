@@ -4,6 +4,8 @@ import { Request, Response, NextFunction } from 'express';
 import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
+import { Form } from '../db/models/formModel';
+import { FormResponse } from '../db/models/formResponseModel';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'Form Response Control';
@@ -37,9 +39,16 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
 
 const addNewFormResponses = async (req: Request, res: Response, next: NextFunction) => {
   const formId: number = +req.params.formId;
-  const formResponses = req.body.map((formResponse: any) => {
+  const formResponses: FormResponse[] = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
+  try {
+    const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
+    await validateFormResponsesBelongToCorrectDepartment(formResponses, form.departmentId);
+  } catch (error: any) {
+    res.status(400).send({ error: error.message });
+    return;
+  }
   const formResponseFKName = 'formId';
   await createItems(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formResponses, formResponseFKName, formId);
 };
@@ -49,7 +58,24 @@ const editFormResponsesByFormId = async (req: Request, res: Response, next: Next
   const responsesToEdit = req.body.map((formResponse: any) => {
     return { ...formResponse, formId: formId };
   });
+  try {
+    const form: Form = await Knex.select('*').from('Form').where('id', '=', formId).first();
+    await validateFormResponsesBelongToCorrectDepartment(responsesToEdit, form.departmentId);
+  } catch (error: any) {
+    res.status(400).send({ error: error.message });
+    return;
+  }
   await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit, formId);
+};
+
+const validateFormResponsesBelongToCorrectDepartment = async (formResponses: FormResponse[], departmentId: number) => {
+  const departmentQuestionsIds: number[] = (await Knex.select('id').from('DepartmentQuestion').where('departmentId', '=', departmentId)).map((dq: any) => dq.id);
+  for (const response of formResponses) {
+    if (!departmentQuestionsIds.includes(response.departmentQuestionId)) {
+      logging.error(NAMESPACE, `TRYING TO ADD OR EDIT RESPONSE FOR QUESTION NOT IN DEPARTMENT ${departmentId}`);
+      throw new Error('All responses must belong to the correct department.');
+    }
+  }
 };
 
 export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId };
