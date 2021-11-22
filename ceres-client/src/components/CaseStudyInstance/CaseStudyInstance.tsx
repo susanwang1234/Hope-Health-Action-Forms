@@ -43,6 +43,8 @@ const CaseStudy = () => {
     }
   }, [setCaseStudyState]);
 
+
+  console.log("Fetching case study of ID: " + (caseId-1));
   return (
     <div className="App">
       <header className="nav-header">
@@ -54,7 +56,7 @@ const CaseStudy = () => {
         <td className="column-right">
           <div className="case-study-block-container">
             {/* Dynamically insert case study information here */}
-            {caseStudyState.caseStudies.slice(caseId - 1, caseId).map((caseStudy: any) => {
+            {caseStudyState.caseStudies.slice(0,1).map((caseStudy: any) => {
               return (
                 <table className="case-study-block">
                   <tr>
