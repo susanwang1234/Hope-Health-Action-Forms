@@ -1,7 +1,6 @@
 import './CaseStudies.css';
 import '../../App.css';
-import React, { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../UserContext';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -9,10 +8,29 @@ import photo from './../../images/original_artwork.jpg';
 import { Link } from 'react-router-dom';
 import httpService from '../../services/httpService';
 
+/*
+  <tr>
+                      <td>
+                        <input className="radio-button" name="filter" type="radio" value="0" onChange={radioHandler}></input>All Case Studies
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        {caseStudyType.types.map((Types: any, index: number) => {
+                          return (
+                            <input className="radio-button" name="filter" type="radio" value={index + 1} onChange={radioHandler}>
+                              {Types.name}
+                            </input>
+                          );
+                        })}
+                      </td>
+                    </tr>
+*/
 const CaseStudy = () => {
-  const userContext = useContext(UserContext);
-
-  const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('');
+  const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
+  const [caseStudyType, setCaseStudyType] = useState({
+    types: []
+  });
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
 
@@ -23,22 +41,39 @@ const CaseStudy = () => {
 
   useEffect(() => {
     getCaseStudies();
-
-    async function getCaseStudies() {
-      const url = '/case-studies';
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        console.log('Fetched Case Studies: ' + data);
-        setCaseStudyState({
-          isLoaded: true,
-          caseStudies: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setCaseStudyState]);
+
+  async function getCaseStudies() {
+    const url = '/case-studies';
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      console.log('Fetched Case Studies: ' + data);
+      setCaseStudyState({
+        isLoaded: true,
+        caseStudies: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  // useEffect(() => {
+  //   getTypeData();
+
+  //   async function getTypeData() {
+  //     const url = `/case-study-types`;
+  //     try {
+  //       const response = await httpService.get(url);
+  //       const data = response.data;
+  //       setCaseStudyType({
+  //         types: data
+  //       });
+  //     } catch (error: any) {
+  //       console.log('Error: Unable to fetch from ' + url);
+  //     }
+  //   }
+  // }, [setCaseStudyType]);
 
   async function getCaseStudiesByType(caseStudyTypeId: any) {
     const url = `/case-studies/${caseStudyTypeId}`;
@@ -60,6 +95,8 @@ const CaseStudy = () => {
     console.log(selectedCaseStudyType);
     if (selectedCaseStudyType != '0') {
       getCaseStudiesByType(selectedCaseStudyType);
+    } else {
+      getCaseStudies();
     }
   };
 
@@ -77,10 +114,9 @@ const CaseStudy = () => {
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
-                    <h1>{selectedCaseStudyType}</h1>
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="0" onChange={radioHandler}></input>All Case Studies
+                        <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType == '0'} onChange={radioHandler}></input>All Case Studies
                       </td>
                     </tr>
                     <tr>
