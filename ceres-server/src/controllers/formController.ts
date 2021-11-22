@@ -78,4 +78,8 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv };
+const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) => {
+  res.send({ message: 'Request received' });
+};
+
+export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
