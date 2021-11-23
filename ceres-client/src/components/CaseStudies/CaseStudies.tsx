@@ -32,7 +32,6 @@ const CaseStudy = () => {
     try {
       const response = await httpService.get(url);
       const data = response.data;
-      console.log('Fetched Case Studies: ' + data);
       setCaseStudyState({
         isLoaded: true,
         caseStudies: data
@@ -55,7 +54,6 @@ const CaseStudy = () => {
     try {
       const response = await httpService.get(url);
       const data = response.data;
-      console.log('Fetched Case Studies: ' + data);
       setCaseStudyType({
         isLoaded: true,
         typesNew: data
@@ -70,7 +68,6 @@ const CaseStudy = () => {
     try {
       const response = await httpService.get(url);
       const data = response.data;
-      console.log('Fetched Case Studies by type: ' + data);
       setCaseStudyState({
         isLoaded: true,
         caseStudies: data
@@ -88,7 +85,7 @@ const CaseStudy = () => {
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSelectedCaseStudyType(value);
-    value != '0' ? getCaseStudiesByType(value) : getCaseStudies();
+    value !== '0' ? getCaseStudiesByType(value) : getCaseStudies();
   };
 
   return (
@@ -107,7 +104,7 @@ const CaseStudy = () => {
                   <table className="filter-container">
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType == '0'} onChange={radioButtonHandler}></input>All Case Studies
+                        <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>All Case Studies
                       </td>
                     </tr>
                     {caseStudyType.typesNew.map((Types: any) => {
