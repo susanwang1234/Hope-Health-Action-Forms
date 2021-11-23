@@ -7,29 +7,13 @@ import logo from '../../images/navlogo.png';
 import photo from './../../images/original_artwork.jpg';
 import { Link } from 'react-router-dom';
 import httpService from '../../services/httpService';
+import { toast } from 'react-toastify';
 
-/*
-  <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="0" onChange={radioHandler}></input>All Case Studies
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        {caseStudyType.types.map((Types: any, index: number) => {
-                          return (
-                            <input className="radio-button" name="filter" type="radio" value={index + 1} onChange={radioHandler}>
-                              {Types.name}
-                            </input>
-                          );
-                        })}
-                      </td>
-                    </tr>
-*/
 const CaseStudy = () => {
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
   const [caseStudyType, setCaseStudyType] = useState({
-    types: []
+    isLoaded: false,
+    typesNew: []
   });
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
@@ -55,25 +39,31 @@ const CaseStudy = () => {
       });
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
+      setCaseStudyState({
+        isLoaded: false,
+        caseStudies: []
+      });
     }
   }
 
-  // useEffect(() => {
-  //   getTypeData();
+  useEffect(() => {
+    getTypeData();
+  }, [setCaseStudyType]);
 
-  //   async function getTypeData() {
-  //     const url = `/case-study-types`;
-  //     try {
-  //       const response = await httpService.get(url);
-  //       const data = response.data;
-  //       setCaseStudyType({
-  //         types: data
-  //       });
-  //     } catch (error: any) {
-  //       console.log('Error: Unable to fetch from ' + url);
-  //     }
-  //   }
-  // }, [setCaseStudyType]);
+  async function getTypeData() {
+    const url = '/case-study-types';
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      console.log('Fetched Case Studies: ' + data);
+      setCaseStudyType({
+        isLoaded: true,
+        typesNew: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
 
   async function getCaseStudiesByType(caseStudyTypeId: any) {
     const url = `/case-studies/${caseStudyTypeId}`;
@@ -85,19 +75,21 @@ const CaseStudy = () => {
         isLoaded: true,
         caseStudies: data
       });
+      console.log('After setting state!');
     } catch (error: any) {
       console.log('Error Unable to fetch from ' + url);
+      toast.error('There are no case studies of this type.');
+      setCaseStudyState({
+        isLoaded: false,
+        caseStudies: []
+      });
     }
   }
 
   const radioHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedCaseStudyType(event.target.value);
-    console.log(selectedCaseStudyType);
-    if (selectedCaseStudyType != '0') {
-      getCaseStudiesByType(selectedCaseStudyType);
-    } else {
-      getCaseStudies();
-    }
+    const value = event.target.value;
+    setSelectedCaseStudyType(value);
+    value != '0' ? getCaseStudiesByType(value) : getCaseStudies();
   };
 
   return (
@@ -119,35 +111,16 @@ const CaseStudy = () => {
                         <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType == '0'} onChange={radioHandler}></input>All Case Studies
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="1" onChange={radioHandler}></input>Patient Story
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="2" onChange={radioHandler}></input>
-                        Staff Recognition
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="3" onChange={radioHandler}></input>
-                        Training Session
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="4" onChange={radioHandler}></input>
-                        Equipment Received
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="5" onChange={radioHandler}></input>
-                        Other
-                      </td>
-                    </tr>
+                    {caseStudyType.typesNew.map((Types: any) => {
+                      return (
+                        <tr>
+                          <td>
+                            <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioHandler}></input>
+                            {Types.name}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </table>
                 </div>
               </div>
