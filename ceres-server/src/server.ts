@@ -76,7 +76,6 @@ export const enableLogging = (router: Application, namespace: string) => {
 export const enableRoutes = (router: Application) => {
   /** Routes */
   // order of route initialization matters
-
   router.use('', authRouter);
   // all routes below must be authenticated to be granted access
   // router.use(passport.authenticate('authAll', { session: false }));
