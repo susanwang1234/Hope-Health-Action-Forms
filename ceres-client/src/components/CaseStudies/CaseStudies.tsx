@@ -8,13 +8,11 @@ import { Link } from 'react-router-dom';
 import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
-  const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
+  const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
-    isLoaded: false,
     caseStudies: []
   });
-
   const [caseStudyImageState, setCaseStudyImageState] = useState({
     caseStudiesImages: []
   });
@@ -27,18 +25,17 @@ const CaseStudy = () => {
     const url = '/case-studies';
     try {
       const response = await httpService.get(url);
-      const storeResponseBody: any = [response.data];
-      getAllCaseStudiesImages(storeResponseBody);
+      getAllCaseStudiesImages(response.data);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
   }
 
-  async function getAllCaseStudiesImages(storeResponseBody: any) {
+  async function getAllCaseStudiesImages(retrievedCaseStudies: any) {
     let url;
     let caseStudiesImages: any = [];
-    for (let i = 0; i < storeResponseBody[0].length; i++) {
-      url = `/image/${storeResponseBody[0][i].imageId}`;
+    for (let i = 0; i < retrievedCaseStudies.length; i++) {
+      url = `/image/${retrievedCaseStudies[i].imageId}`;
       try {
         await httpService
           .get(url, {
@@ -55,8 +52,7 @@ const CaseStudy = () => {
       caseStudiesImages: caseStudiesImages
     });
     setCaseStudyState({
-      isLoaded: true,
-      caseStudies: storeResponseBody[0]
+      caseStudies: retrievedCaseStudies
     });
   }
 
@@ -119,7 +115,7 @@ const CaseStudy = () => {
                     <table className="case-study-block">
                       <tr>
                         <td className="case-study-block-image">
-                          <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="width" height="150px"></img>
+                          <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
                           <h2>{caseStudy.title}</h2>
@@ -127,7 +123,7 @@ const CaseStudy = () => {
                           <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/${caseStudy.id}`}>
+                          <Link to={`/case-studies/view/${caseStudy.id}`}>
                             <button className="button">View</button>
                           </Link>
                         </td>

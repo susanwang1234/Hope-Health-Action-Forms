@@ -4,23 +4,18 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import photo from './../../images/CBR_training_March 21.png';
 import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
-  const [showNav, setShowNav] = useState(false);
-  const [caseStudyImage, setCaseStudyImageState] = useState(photo);
   document.body.style.backgroundColor = '#f5f5f5';
-
+  const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
-    isLoaded: false,
     caseStudies: []
   });
-
-  // Get case study ID from URL pathname
-  var str = window.location.pathname;
-  var last = str.substring(str.lastIndexOf('/') + 1, str.length);
-  var caseId: number = +last;
+  const [caseStudyImage, setCaseStudyImageState] = useState('');
+  const str = window.location.pathname;
+  const last = str.substring(str.lastIndexOf('/') + 1, str.length);
+  let caseId: number = +last;
 
   useEffect(() => {
     getCaseStudies();
@@ -30,12 +25,10 @@ const CaseStudy = () => {
     const url = `/case-study/${caseId.toString()}`;
     try {
       const response = await httpService.get(url);
-      const storeResponseBody: any = [response.data];
       setCaseStudyState({
-        isLoaded: true,
         caseStudies: response.data
       });
-      getCaseStudyImage(storeResponseBody[0][0].imageId);
+      getCaseStudyImage(response.data[0].imageId);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
@@ -50,7 +43,6 @@ const CaseStudy = () => {
         })
         .then((res) => {
           setCaseStudyImageState(URL.createObjectURL(res.data));
-          console.log(URL.createObjectURL(res.data));
         });
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
@@ -94,8 +86,8 @@ const CaseStudy = () => {
                     <td>
                       <button
                         className="view-cancel-form-button"
-                        onClick={(e) => {
-                          e.preventDefault();
+                        onClick={(event) => {
+                          event.preventDefault();
                           window.location.href = '/case-studies';
                         }}
                       >
