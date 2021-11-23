@@ -1,20 +1,18 @@
 import '../../App.css';
 import './Dashboard.css';
-
-import { useHistory } from 'react-router-dom';
-import { useContext, useState } from 'react';
-import { UserContext } from '../../UserContext';
-
+import initialEmployeeOfTheMonth from './initialEmployeeOfTheMonth.json';
+import { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import profilePic from './../../images/original_artwork.jpg';
+import profilePic from './../../images/gray_person.jpg';
 import leaderboard from './../../images/leaderboard.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
+import httpService from '../../services/httpService';
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -22,18 +20,47 @@ import { IoIosInformationCircle } from 'react-icons/io';
 */
 
 const Dashboard = () => {
-  let history = useHistory();
-  const onClick = () => {
-    history.push('/case-studies/new');
-  };
-  const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
+  const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
+  const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
     );
   };
+
+  async function getEmployeeOfTheMonth() {
+    const url = '/employee-of-the-month';
+    try {
+      const response = await httpService.get(url);
+      const { data } = response;
+      const retrievedEmployeeOfTheMonth = data[0];
+      setEmployeeOfTheMonthState(retrievedEmployeeOfTheMonth);
+      await getEmployeeOfTheMonthImage(retrievedEmployeeOfTheMonth.imageId);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  async function getEmployeeOfTheMonthImage(imageId: number) {
+    const url = `/image/${imageId}`;
+    try {
+      await httpService
+        .get(url, {
+          responseType: 'blob'
+        })
+        .then((res) => {
+          setEmployeeOfTheMonthImageState(URL.createObjectURL(res.data));
+        });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  useEffect(() => {
+    getEmployeeOfTheMonth();
+  }, [setEmployeeOfTheMonthState]);
 
   function generateCalendar() {
     return (
@@ -85,13 +112,10 @@ const Dashboard = () => {
               <div className="card-outer fill-space-right">
                 <p className="title">Employee of the Month</p>
                 <div className="card-inner height-100-percent">
-                  <img src={profilePic} alt="profile pic" className="profile-pic"></img>
-                  <h1 className="heading-1">Name: Zack Cody</h1>
-                  <h1 className="heading-1">Department: Maternity</h1>
-                  <p className="text-primary-p employee-paragraph">
-                    Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is
-                    employee of the month. Go Zack!
-                  </p>
+                  <img src={employeeOfTheMonthImage} alt="profile pic" className="profile-pic"></img>
+                  <h1 className="heading-1">Name: {employeeOfTheMonth.name}</h1>
+                  <h1 className="heading-1">Department: {employeeOfTheMonth.department}</h1>
+                  <p className="text-primary-p employee-paragraph">{employeeOfTheMonth.description}</p>
                 </div>
               </div>
             </div>
