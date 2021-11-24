@@ -7,6 +7,7 @@ import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from '
 import { DataFormatter } from '../db/types/DataFormatter';
 import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
 import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
+import { PdfFormatPolicy } from 'db/types/PdfFormatPolicy';
 const PDFDocument = require('pdfkit');
 
 const NAMESPACE = 'Form Control';
@@ -80,6 +81,22 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
 };
 
 const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) => {
+  const formId: number = +req.params.formId;
+  if (isInvalidInput(formId)) {
+    res.status(400).send(formNegativeOrNanInputError);
+    return;
+  }
+
+  const formResponses = await Knex.select('*')
+    .from('FormResponse')
+    .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+    .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+    .where('FormResponse.formId', formId);
+
+  const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy();
+  const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
+  const file = dataExporter.getFileToSendToUser();
+
   const stream = res.writeHead(200, {
     'Content-Type': 'application/pdf',
     'Content-Disposition': 'attachment; filename=test.pdf'
