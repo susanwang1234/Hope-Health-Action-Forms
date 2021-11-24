@@ -93,22 +93,9 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
     .where('FormResponse.formId', formId);
 
-  const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy();
+  const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
   const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
   const file = dataExporter.getFileToSendToUser();
-
-  const stream = res.writeHead(200, {
-    'Content-Type': 'application/pdf',
-    'Content-Disposition': 'attachment; filename=test.pdf'
-  });
-  const doc = new PDFDocument();
-  doc.fontSize(25).text('Some heading!');
-  doc.on('data', (chunk: any) => stream.write(chunk));
-  doc.on('end', () => {
-    console.log('CLOSING STREAM');
-    stream.end();
-  });
-  doc.end();
 };
 
 export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
