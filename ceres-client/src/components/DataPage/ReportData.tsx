@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import '../../App.css';
 import httpService from '../../services/httpService';
 
+
 const ReportData = (props: any) => {
+  const [fetchedFormEntries, setFetchedFormEntries] = useState <any[]>([]);
   const [formEntries, setFormEntries] = useState<any[]>([]);
   const [empltyFields, setEmptyFields] = useState<number[]>([]);
   const [editStatus, setEditStatus] = useState(false);
@@ -12,6 +14,7 @@ const ReportData = (props: any) => {
       .get(url)
       .then((response) => {
         console.log(response);
+        setFetchedFormEntries(response.data)
         setFormEntries(response.data);
       })
       .catch((error: any) => {
@@ -65,6 +68,10 @@ const ReportData = (props: any) => {
     }
   };
 
+  // const foceUpdate = () =>{
+  //   this.forceUpdate();
+  // }
+
   const updateButton = (
     <button form="daForm" className="update-button">
       Update data
@@ -74,6 +81,7 @@ const ReportData = (props: any) => {
     <button
       className="cancel-button"
       onClick={() => {
+        setFormEntries(fetchedFormEntries) 
         setEditStatus(false);
       }}
     >

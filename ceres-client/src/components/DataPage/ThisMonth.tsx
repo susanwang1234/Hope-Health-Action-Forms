@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
 import ReportData from './ReportData';
@@ -6,7 +6,6 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import Sidebar from '../Sidebar/Sidebar';
-
 
 const ThisMonth = () => {
     const [thisMonthID, setThisMonthId] = useState<number>(0);
