@@ -28,7 +28,8 @@ describe('createNewForm', () => {
       .post('/form')
       .set('Content-Type', 'application/json')
       .send({
-        departmentId: 1
+        departmentId: 1,
+        isSubmitted: false
       })
       .end((err: any, res: any) => {
         expect(err).to.be.null;
@@ -37,7 +38,9 @@ describe('createNewForm', () => {
         expect(res.body[0]).to.have.deep.property('id');
         expect(res.body[0].id).to.deep.equal(3);
         expect(res.body[0]).to.have.deep.property('departmentId');
+        expect(res.body[0]).to.have.deep.property('isSubmitted');
         expect(res.body[0].departmentId).to.deep.equal(1);
+        expect(res.body[0].isSubmitted).to.deep.equal(0);
         expect(res.body[0]).to.have.deep.property('createdAt');
         done();
       });

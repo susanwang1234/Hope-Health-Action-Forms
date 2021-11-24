@@ -2,8 +2,9 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
+import { editItemById } from './requestTemplates/editByIdRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
-import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
+import { departmentNegativeOrNanInputError, formNegativeOrNanInputError, formResponseNegativeOrNanInputError, formDNEError, formDepartmentNegativeOrNanInputError } from 'shared/errorMessages';
 import { DataFormatter } from '../db/types/DataFormatter';
 import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
 import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
@@ -12,6 +13,11 @@ const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
 // TODO: Implement better error catching, start by using this for foreign key constraint errors
 const SQL_FOREIGN_KEY_CONSTRAINT_ERROR_CODE: number = 1452;
+
+const inputtedReqBody = (req: Request) => {
+  const { isSubmitted } = req.body;
+  return { isSubmitted: isSubmitted };
+};
 
 const createNewForm = async (req: Request, res: Response, next: NextFunction) => {
   const departmentId: number = +req.body.departmentId;
@@ -22,11 +28,15 @@ const createNewForm = async (req: Request, res: Response, next: NextFunction) =>
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
 };
 
+const putFormById = async (req: Request, res: Response, next: NextFunction) => {
+  await editItemById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, inputtedReqBody(req));
+};
+
 const getAllFormsByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'GETTING LIST OF FORMS FOR A CERTAIN DEPARTMENT');
   const departmentId: number = +req.params.departmentId;
   if (isInvalidInput(departmentId)) {
-    res.status(400).send(departmentNegativeOrNanInputError);
+    res.status(400).send(formDepartmentNegativeOrNanInputError);
     return;
   }
 
@@ -43,7 +53,7 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
 const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) => {
   const formId: number = +req.params.formId;
   if (isInvalidInput(formId)) {
-    res.status(400).send(formNegativeOrNanInputError);
+    res.status(400).send(formResponseNegativeOrNanInputError);
     return;
   }
 
@@ -78,4 +88,4 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv };
+export default { createNewForm, putFormById, getAllFormsByDepartmentId, exportFormAsCsv };
