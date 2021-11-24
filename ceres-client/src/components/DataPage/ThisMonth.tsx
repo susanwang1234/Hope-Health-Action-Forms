@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
 import ReportData from './ReportData';
@@ -6,17 +6,19 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import Sidebar from '../Sidebar/Sidebar';
+import { UserContext } from '../../UserContext';
 
 const ThisMonth = () => {
     const [thisMonthID, setThisMonthId] = useState<number>(0);
     const [displayingData, setDisplayingData] = useState<any>(null);
     const [showNav, setShowNav] = useState(false);
     const [reports, setReports] = useState([]);
+    const userContext = useContext(UserContext);
 
     useEffect(() => {
         getFormByDeptId();
         async function getFormByDeptId() {
-            const url = `/form/${2}`;
+            const url = `/form/${userContext.user?.departmentId}`;
             try {
               const response = await httpService.get(url);
               const data = response.data;

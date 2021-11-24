@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
 import ReportElement from './ReportElement';
@@ -7,6 +7,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import { UserContext } from '../../UserContext';
 
 const DataPage = () => {
   document.body.style.backgroundColor = '#f5f5f5';
@@ -14,6 +15,7 @@ const DataPage = () => {
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
   const [displayingData, setDisplayingData] = useState(null);
+  const userContext = useContext(UserContext);
 
   function handleClick(index: any): void {
     setDisplayingData(reports[index]);
@@ -23,7 +25,7 @@ const DataPage = () => {
     getFormByDeptId();
 
     async function getFormByDeptId() {
-      const url = `/form/${2}`;
+      const url = `/form/${userContext.user?.departmentId}`;
       try {
         const response = await httpService.get(url);
         const data = response.data;
