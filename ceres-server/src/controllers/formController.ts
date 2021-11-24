@@ -7,6 +7,7 @@ import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from '
 import { DataFormatter } from '../db/types/DataFormatter';
 import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
 import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
+const PDFDocument = require('pdfkit');
 
 const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
@@ -79,7 +80,18 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
 };
 
 const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) => {
-  res.send({ message: 'Request received' });
+  const stream = res.writeHead(200, {
+    'Content-Type': 'application/pdf',
+    'Content-Disposition': 'attachment; filename=test.pdf'
+  });
+  const doc = new PDFDocument();
+  doc.fontSize(25).text('Some heading!');
+  doc.on('data', (chunk: any) => stream.write(chunk));
+  doc.on('end', () => {
+    console.log('CLOSING STREAM');
+    stream.end();
+  });
+  doc.end();
 };
 
 export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
