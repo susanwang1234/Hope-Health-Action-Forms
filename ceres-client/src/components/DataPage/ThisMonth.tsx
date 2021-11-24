@@ -28,6 +28,7 @@ const ThisMonth = () => {
             }
           }
     }, []);
+    
     useEffect(() =>{
         getThisMonthId();
         setDisplayingData(reports[thisMonthID])

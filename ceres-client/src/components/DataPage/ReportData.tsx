@@ -45,10 +45,6 @@ const ReportData = (props: any) => {
     setEmptyFields(empltyFildsIndexes);
   };
 
-  // const forceUpdateHandler = () =>{
-  //   this?.forceUpdate();
-  // };
-
   const handleSubmission = (event: any) => {
     event.preventDefault();
 
