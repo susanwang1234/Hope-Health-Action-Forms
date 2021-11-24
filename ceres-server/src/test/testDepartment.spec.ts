@@ -11,7 +11,7 @@ let httpServer: http.Server;
 let agent: any;
 let id = 0;
 
-const departments = ['All Departments', 'Rehab', 'NICUPaeds'];
+const departments = ['All Departments', 'Rehab', 'NICUPaeds', 'Maternity', 'Community Health'];
 
 // Test 1: GET request
 describe('testGetDepartmentSuccess', () => {
