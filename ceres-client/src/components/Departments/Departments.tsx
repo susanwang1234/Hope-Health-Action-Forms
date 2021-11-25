@@ -1,4 +1,3 @@
-import ToDoData from './ToDo.json';
 import './Departments.css';
 import '../../App.css';
 import { useHistory, Redirect } from 'react-router-dom';
@@ -28,6 +27,10 @@ function Departments() {
     history.push(route);
   };
 
+  const [toDoState, setToDoState] = useState<any>({
+    toDoReminders: []
+  });
+
   const [departmentState, setDepartmentState] = useState({
     departments: []
   });
@@ -36,15 +39,27 @@ function Departments() {
     getDepartments();
   }, [setDepartmentState]);
 
+  const getToDoStatus = async (retrievedDepartments: any) => {
+    const url = '/to-do';
+    try {
+      const response = await httpService.get(url);
+      setToDoState({
+        toDoReminders: response.data
+      });
+      setDepartmentState({
+        departments: retrievedDepartments
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
   const getDepartments = async () => {
     const url = '/department';
     try {
       const response = await httpService.get(url);
       const { data } = response;
-      console.log('Fetched Departments: ' + data);
-      setDepartmentState({
-        departments: data
-      });
+      getToDoStatus(data);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
@@ -65,7 +80,6 @@ function Departments() {
     );
   };
 
-  //Purpose of slice is so that "all departments" does not get generate into a card
   return (
     <div className="department-background">
       <header className="department-header">
@@ -84,8 +98,8 @@ function Departments() {
               <h2 className="inside-card">
                 <b>{department.name}</b>
               </h2>
-              <p className="inside-text">{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</p>
-              <p className="inside-text">{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</p>
+              <p className="inside-text">{iconChecker(toDoState.toDoReminders[department.id - 2].caseStudies)}Case Study</p>
+              <p className="inside-text">{iconChecker(toDoState.toDoReminders[department.id - 2].dataForm)}Data Form</p>
               <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
                 View Department
               </button>
