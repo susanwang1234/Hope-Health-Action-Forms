@@ -24,6 +24,9 @@ const Dashboard = () => {
   const [date, setDate]: any = useState(new Date());
   const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
   const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
+  const [toDo, setToDoState] = useState<any>({
+    toDoReminders: []
+  });
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completeing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
@@ -58,9 +61,26 @@ const Dashboard = () => {
     }
   };
 
+  const getToDoStatus = async () => {
+    const url = '/to-do';
+    try {
+      const response = await httpService.get(url);
+      console.log(response.data);
+      setToDoState({
+        toDoReminders: response.data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
   useEffect(() => {
     getEmployeeOfTheMonth();
   }, [setEmployeeOfTheMonthState]);
+
+  useEffect(() => {
+    getToDoStatus();
+  }, [setToDoState]);
 
   const generateCalendar = () => {
     return (
@@ -104,7 +124,7 @@ const Dashboard = () => {
 
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
-                  <IoIosInformationCircle className="align-right icon" onClick={(e) => instructions(e)} />
+                  <IoIosInformationCircle className="align-right icon" onClick={(event) => instructions(event)} />
                   <img className="responsive-leaderboard center-content" src={leaderboard} alt="leaderboard"></img>
                 </div>
               </div>
