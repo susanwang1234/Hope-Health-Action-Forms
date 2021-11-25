@@ -14,6 +14,10 @@ class Leaderboard {
           { department: 'Rehab', score: 1 },
           { department: 'Maternity', score: 5 },
           { department: 'NCIUPaeds', score: 10 },
+          { department: 'Community Health', score: 4 },
+          { department: 'Community Health', score: 4 },
+          { department: 'Community Health', score: 4 },
+          { department: 'Community Health', score: 4 },
           { department: 'Community Health', score: 4 }
         ]
       }; //dummy data
@@ -21,9 +25,10 @@ class Leaderboard {
       let departmentBars = [];
       let lengthJSON = Object.keys(json.leaderboard).length;
       for (let i = 0; i < lengthJSON; i++) {
-        let opacityValue = Math.round((1 / (i + 1)) * 100) / 100;
-        let opacityStr = 'opacity: ' + opacityValue.toString() + ';';
-        departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null]);
+        //let opacityValue = Math.round((1 / (i + 1)) * 100) / 100;
+        //let opacityStr = 'opacity: ' + opacityValue.toString() + ';';
+        //departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null]);
+        departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90;', null]);
       } 
   
       let barData = [
@@ -53,12 +58,12 @@ class Leaderboard {
         <div>
           <Chart
             width={'95%'}
-            height={'200px'}
-            chartType="Bar"
+            height={'100%'}
+            chartType="BarChart"
             loader={<div>Loading Chart</div>}
             data={barData}
             options={{
-              bar: { groupWidth: '95%' },
+              bar: { groupWidth: '50%' },
               legend: { position: 'none' }
             }}
             // For tests
