@@ -77,7 +77,7 @@ const CaseStudySubmit = () => {
     window.location.href = '/case-studies';
   };
 
-  const saveImageForCaseStudy = async (event: any) => {
+  const validationChecks= ()=>{
     if (selectedCaseStudyType === 'Nothing selected'){
       toast.error('Please select the Case Study type.');
       return;
@@ -105,6 +105,25 @@ const CaseStudySubmit = () => {
         return;
       }
     }
+
+    if(caseStudyQuestions.questions.length > 1){
+
+      let array:any = [];
+      array.push(caseStudyQuestions.questions[1]);
+      if(array[0].label === "Patient's age?"){
+        const age = (document.getElementById('text-area-id-1') as HTMLInputElement).value;
+        if(isNaN(Number(age))){
+          toast.error("Patent's Age can only be a number");
+          return;
+        }
+      }
+    }
+  }
+
+
+  const saveImageForCaseStudy = async (event: any) => {
+    
+    validationChecks();
 
     const url = '/image';
     try {
