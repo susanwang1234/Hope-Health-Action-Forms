@@ -1,43 +1,60 @@
 import './CaseStudies.css';
 import '../../App.css';
-import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../UserContext';
+import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import photo from './../../images/original_artwork.jpg';
 import { Link } from 'react-router-dom';
 import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
-  const userContext = useContext(UserContext);
-
-  const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
-
+  const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
-    isLoaded: false,
     caseStudies: []
+  });
+  const [caseStudyImageState, setCaseStudyImageState] = useState({
+    caseStudiesImages: []
   });
 
   useEffect(() => {
     getCaseStudies();
+  }, [setCaseStudyState]);
 
-    async function getCaseStudies() {
-      const url = '/case-studies';
+  async function getCaseStudies() {
+    const url = '/case-studies';
+    try {
+      const response = await httpService.get(url);
+      getAllCaseStudiesImages(response.data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  async function getAllCaseStudiesImages(retrievedCaseStudies: any) {
+    let url;
+    let caseStudiesImages: any = [];
+    for (let i = 0; i < retrievedCaseStudies.length; i++) {
+      url = `/image/${retrievedCaseStudies[i].imageId}`;
       try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        console.log('Fetched Case Studies: ' + data);
-        setCaseStudyState({
-          isLoaded: true,
-          caseStudies: data
-        });
+        await httpService
+          .get(url, {
+            responseType: 'blob'
+          })
+          .then((res) => {
+            caseStudiesImages.push(URL.createObjectURL(res.data));
+          });
       } catch (error: any) {
         console.log('Error: Unable to fetch from ' + url);
       }
     }
-  }, [setCaseStudyState]);
+    setCaseStudyImageState({
+      caseStudiesImages: caseStudiesImages
+    });
+    setCaseStudyState({
+      caseStudies: retrievedCaseStudies
+    });
+  }
 
   return (
     <div className="App">
@@ -93,21 +110,20 @@ const CaseStudy = () => {
               <input className="input" type="text" placeholder="Search Case Studies..."></input>
 
               <div className="case-study-block-container">
-                {/* Dynamically insert case study blocks here */}
-                {caseStudyState.caseStudies.map((caseStudies: any) => {
+                {caseStudyState.caseStudies.map((caseStudy: any) => {
                   return (
                     <table className="case-study-block">
                       <tr>
                         <td className="case-study-block-image">
-                          <img src={photo} alt="" width="150px" height="150px"></img>
+                          <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
-                          <h2>{caseStudies.title}</h2>
-                          <h5>{caseStudies.createdAt}</h5>
-                          <p>{caseStudies.response}</p>
+                          <h2>{caseStudy.title}</h2>
+                          <h5>{caseStudy.createdAt}</h5>
+                          <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/${caseStudies.id}`}>
+                          <Link to={`/case-studies/view/${caseStudy.id}`}>
                             <button className="button">View</button>
                           </Link>
                         </td>
