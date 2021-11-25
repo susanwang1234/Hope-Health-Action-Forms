@@ -8,5 +8,5 @@ export const TrainingSession: any[] = [
   { caseStudyTypeQuestionId: 16, response: '' },
   { caseStudyTypeQuestionId: 17, response: '' },
   { caseStudyTypeQuestionId: 18, response: '' },
-  { caseStudyTypeQuestionId: 7, response: '' }
+  { caseStudyTypeQuestionId: 19, response: '' }
 ];

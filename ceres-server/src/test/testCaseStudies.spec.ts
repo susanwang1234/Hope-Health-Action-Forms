@@ -56,7 +56,7 @@ describe('getCaseStudies', () => {
         expect(item.caseStudyTypeId).to.deep.equal(id);
         expect(item.departmentId).to.deep.equal(id);
         expect(item.userId).to.deep.equal(id);
-        expect(item.imageId).to.deep.equal(id);
+        expect(item.imageId).to.deep.equal(id + 1);
         expect(item.title).to.deep.equal(title[id - 1]);
         expect(item.response).to.deep.equal(response[id - 1]);
       });
@@ -125,7 +125,7 @@ describe('getCaseStudiesByTypeId', () => {
         expect(item.caseStudyTypeId).to.deep.equal(1);
         expect(item.departmentId).to.deep.equal(1);
         expect(item.userId).to.deep.equal(1);
-        expect(item.imageId).to.deep.equal(1);
+        expect(item.imageId).to.deep.equal(2);
         expect(item.title).to.deep.equal('Case Study Dummy 1');
         expect(item.response).to.deep.equal('Joe Doe is a 69 year old Canadian man who was stuck at the HCBH for 30 days...');
       });
@@ -198,7 +198,7 @@ describe('getCaseStudyById', () => {
       res.body.forEach((item: any) => {
         expect(item.title).to.deep.equal('Case Study Dummy 2');
         expect(item.name).to.deep.equal('Staff Recognition');
-        expect(item.imageId).to.deep.equal(2);
+        expect(item.imageId).to.deep.equal(3);
         expect(item.label).to.deep.equal(label[count]);
         expect(item.response).to.deep.equal(response[count++]);
       });
@@ -357,6 +357,7 @@ describe('addCaseStudy', () => {
 
 // Test 7: POST request (Single case study response)
 describe('addCaseStudyResponsesByCaseStudyId', () => {
+  const resBody = [{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }];
   before('Create a working server', (done) => {
     testApp = setupApp();
     httpServer = setupHttpServer(testApp);
@@ -372,7 +373,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
     agent
       .post('/case-study-responses/-1')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
@@ -384,7 +385,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
     agent
       .post('/case-study-responses/fdfsdf')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(400);
@@ -396,7 +397,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
     agent
       .post('/case-study-responses/55')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(500);
@@ -407,7 +408,7 @@ describe('addCaseStudyResponsesByCaseStudyId', () => {
     agent
       .post('/case-study-responses/3')
       .set('content-type', 'application/json')
-      .send([{ caseStudyTypeQuestionId: 26, response: 'This is a fascinating story for insert other type of case studies' }])
+      .send(resBody)
       .end((err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(201);
