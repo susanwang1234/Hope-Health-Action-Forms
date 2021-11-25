@@ -5,7 +5,7 @@ import roles from '../shared/userRoles';
 
 const router = express.Router();
 
-router.get('', authorize(roles.user, roles.hhaAdmin), controller.getUsers);
+router.get('', authorize(roles.hhaAdmin), controller.getUsers);
 router.post('', controller.createUser);
 router.put('/:id', controller.editUserById);
 router.delete('/:id', controller.deleteUserById);
