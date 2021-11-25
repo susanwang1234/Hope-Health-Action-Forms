@@ -10,7 +10,7 @@ let testApp: Application;
 let httpServer: http.Server;
 let agent: any;
 
-describe('Authorization As Admin', () => {
+describe('Authorization As hhaAdmin', () => {
   before('Create a working server', (done) => {
     testApp = setupApp();
     httpServer = setupHttpServer(testApp);
