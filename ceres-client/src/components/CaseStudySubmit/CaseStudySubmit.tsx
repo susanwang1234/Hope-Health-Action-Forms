@@ -31,6 +31,7 @@ const CaseStudySubmit = () => {
   const [caseStudyQuestions, setCaseStudyQuestions] = useState({
     questions: []
   });
+  
 
   useEffect(() => {
     getTypeData();
@@ -77,6 +78,11 @@ const CaseStudySubmit = () => {
   };
 
   const saveImageForCaseStudy = async (event: any) => {
+    if (selectedCaseStudyType === 'Nothing selected'){
+      toast.error('Please select the Case Study type.');
+      return;
+    }
+
     if (shareImage.length < 1) {
       toast.error('Image not uploaded!! Please upload the image.');
       return;
@@ -85,6 +91,19 @@ const CaseStudySubmit = () => {
     if (!checkMark) {
       toast.error("Check Box isn't marked!! Please mark the checkbox.");
       return;
+    }
+
+    if((document.getElementById('text-area-id-title') as HTMLInputElement).value == ''){
+      toast.error("Please Enter the title of Case Study.");
+      return;
+    }
+
+
+    for (let index = 0; index < caseStudyQuestions.questions.length; index++){
+      if((document.getElementById('text-area-id-'+ index) as HTMLInputElement).value == ''){
+        toast.error("Please Answer all the Questions.");
+        return;
+      }
     }
 
     const url = '/image';
@@ -213,7 +232,7 @@ const CaseStudySubmit = () => {
 
           <div className="w-full flex flex-col pt-10">
             <label className="inside-text-case-study">Title of Case Study?</label>
-            <textarea value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
+            <textarea id = {'text-area-id-title'} value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
@@ -225,7 +244,7 @@ const CaseStudySubmit = () => {
             <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
               Cancel
             </button>
-            <button onClick={saveImageForCaseStudy} disabled={selectedCaseStudyType === 'Nothing selected'} className="blue-button bottom-5 right-20">
+            <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>
