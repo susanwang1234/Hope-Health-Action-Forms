@@ -34,23 +34,23 @@ function Departments() {
 
   useEffect(() => {
     getDepartments();
-
-    async function getDepartments() {
-      const url = '/department';
-      try {
-        const response = await httpService.get(url);
-        const { data } = response;
-        console.log('Fetched Departments: ' + data);
-        setDepartmentState({
-          departments: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setDepartmentState]);
 
-  function iconChecker(isComplete: boolean) {
+  const getDepartments = async () => {
+    const url = '/department';
+    try {
+      const response = await httpService.get(url);
+      const { data } = response;
+      console.log('Fetched Departments: ' + data);
+      setDepartmentState({
+        departments: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const iconChecker = (isComplete: boolean) => {
     if (isComplete) {
       return (
         <div className="checkmark-icon">
@@ -63,7 +63,7 @@ function Departments() {
         <div className="alert"></div>
       </div>
     );
-  }
+  };
 
   //Purpose of slice is so that "all departments" does not get generate into a card
   return (

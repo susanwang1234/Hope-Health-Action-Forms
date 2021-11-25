@@ -30,7 +30,7 @@ const Dashboard = () => {
     );
   };
 
-  async function getEmployeeOfTheMonth() {
+  const getEmployeeOfTheMonth = async () => {
     const url = '/employee-of-the-month';
     try {
       const response = await httpService.get(url);
@@ -41,9 +41,9 @@ const Dashboard = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  async function getEmployeeOfTheMonthImage(imageId: number) {
+  const getEmployeeOfTheMonthImage = async (imageId: number) => {
     const url = `/image/${imageId}`;
     try {
       await httpService
@@ -56,13 +56,13 @@ const Dashboard = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
   useEffect(() => {
     getEmployeeOfTheMonth();
   }, [setEmployeeOfTheMonthState]);
 
-  function generateCalendar() {
+  const generateCalendar = () => {
     return (
       <div className="app">
         <div className="calendar-container">
@@ -70,7 +70,7 @@ const Dashboard = () => {
         </div>
       </div>
     );
-  }
+  };
 
   return (
     <html>

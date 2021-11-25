@@ -22,22 +22,22 @@ const CaseStudy = () => {
 
   useEffect(() => {
     getCaseStudies();
-
-    async function getCaseStudies() {
-      const url = '/case-studies';
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        console.log('Fetched Case Studies: ' + data);
-        setCaseStudyState({
-          isLoaded: true,
-          caseStudies: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setCaseStudyState]);
+
+  const getCaseStudies = async () => {
+    const url = '/case-studies';
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      console.log('Fetched Case Studies: ' + data);
+      setCaseStudyState({
+        isLoaded: true,
+        caseStudies: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
 
   return (
     <div className="App">

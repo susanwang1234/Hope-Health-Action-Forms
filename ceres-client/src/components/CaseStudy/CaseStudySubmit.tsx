@@ -32,7 +32,11 @@ const CaseStudySubmit = () => {
     questions: []
   });
 
-  async function getQuestions(selectedCaseStudyType: string | undefined) {
+  useEffect(() => {
+    getTypeData();
+  }, [setCaseStudyType]);
+
+  const getQuestions = async (selectedCaseStudyType: string | undefined) => {
     const url = `/case-study-questions/${selectedCaseStudyType}`;
     try {
       const response = await httpService.get(url);
@@ -43,24 +47,20 @@ const CaseStudySubmit = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  useEffect(() => {
-    getTypeData();
-
-    async function getTypeData() {
-      const url = `/case-study-types`;
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        setCaseStudyType({
-          types: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
+  const getTypeData = async () => {
+    const url = `/case-study-types`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setCaseStudyType({
+        types: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
     }
-  }, [setCaseStudyType]);
+  };
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -149,7 +149,7 @@ const CaseStudySubmit = () => {
       });
   };
 
-  function updateResponse(selectedCaseStudy: any[], empty: boolean) {
+  const updateResponse = (selectedCaseStudy: any[], empty: boolean) => {
     let elementId;
     for (let index = 0; index < selectedCaseStudy.length; index++) {
       if (!empty) {
@@ -159,7 +159,7 @@ const CaseStudySubmit = () => {
         selectedCaseStudy[index].response = '';
       }
     }
-  }
+  };
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
