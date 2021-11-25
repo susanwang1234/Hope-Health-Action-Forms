@@ -6,37 +6,80 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import photo from './../../images/original_artwork.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import httpService from '../../services/httpService';
+import { Button, Form } from 'react-bootstrap';
 
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
+  const searchQuery = "";
+  let history = useHistory();
 
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
 
-  const [caseStudyState, setCaseStudyState] = useState({
+  const [caseStudyState, setCaseStudyState] = useState<any>({
     isLoaded: false,
-    caseStudies: []
+    caseStudies: [],
+    caseStudiesOrig: []
   });
+
+  function search() {
+
+
+    caseStudyState.caseStudies = caseStudyState.caseStudiesOrig;
+    console.log("Setting : " + caseStudyState.caseStudies + " to: " + caseStudyState.caseStudiesOrig);
+
+    setCaseStudyState({
+      isLoaded: true,
+      caseStudies: caseStudyState.caseStudies,
+      caseStudiesOrig: caseStudyState.caseStudiesOrig
+    });
+
+    console.log("Search bar value: " + (document.getElementById("search-bar") as HTMLInputElement).value);
+
+    if ((document.getElementById("search-bar") as HTMLInputElement).value == "") {
+      
+      console.log("Refreshing case studies (search bar empty).")
+      getCaseStudies();
+
+    }
+
+    console.log("Iterating from 0 to " + caseStudyState.caseStudies.length);
+
+    for (var i = 0; i < caseStudyState.caseStudies.length; i++) {
+      try {
+        if (!caseStudyState.caseStudies[i].title.includes((document.getElementById("search-bar") as HTMLInputElement).value)) {
+          delete caseStudyState.caseStudies[i];
+        }
+      } catch (err) {
+        console.log(err);
+      }
+
+    }
+
+  }
+
+  async function getCaseStudies() {
+    const url = '/case-studies';
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      console.log('Fetched Case Studies: ' + data);
+      setCaseStudyState({
+        isLoaded: true,
+        caseStudies: data,
+        caseStudiesOrig: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
 
   useEffect(() => {
     getCaseStudies();
 
-    async function getCaseStudies() {
-      const url = '/case-studies';
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        console.log('Fetched Case Studies: ' + data);
-        setCaseStudyState({
-          isLoaded: true,
-          caseStudies: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
+
   }, [setCaseStudyState]);
 
   return (
@@ -90,8 +133,12 @@ const CaseStudy = () => {
               </Link>
             </td>
             <td className="column-right">
-              <input className="input" type="text" placeholder="Search Case Studies..."></input>
-
+              <Form>
+                <Form.Group className="mb-3" controlId="formSearch">
+                  <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
+                </Form.Group>
+                <Button variant="primary" type="button" onClick={() => search()}>Submit</Button>
+              </Form>
               <div className="case-study-block-container">
                 {/* Dynamically insert case study blocks here */}
                 {caseStudyState.caseStudies.map((caseStudies: any) => {
