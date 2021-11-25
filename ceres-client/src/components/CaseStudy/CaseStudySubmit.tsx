@@ -5,36 +5,35 @@ import logo from '../../images/navlogo.png';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import Sidebar from '../Sidebar/Sidebar';
 import gray_person from '../../images/gray_person.jpg';
-import httpService from '../../services/httpService';
 import { PatientStory } from '../../models/patientStory';
 import { StaffRecognition } from '../../models/staffRecognition';
 import { TrainingSession } from '../../models/trainingSession';
 import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
+import httpService from '../../services/httpService';
 import AuthService from '../../services/authService';
-import { useHistory, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import axios from 'axios';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
-let body;
-let responseType;
+let caseStudy;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
   const [shareImage, setShareImage] = useState('');
   const [checkMark, SetCheckMark] = useState(false);
   const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>();
+  const [selectedCaseStudyType, setSelectedCaseStudyType] = useState<string>('Nothing selected');
   const [caseStudyType, setCaseStudyType] = useState({
     types: []
   });
   const [caseStudyQuestions, setCaseStudyQuestions] = useState({
     questions: []
   });
-  async function getQuestions(selectedOption: String | undefined) {
-    const url = `/case-study-questions/${selectedOption}`;
+
+  async function getQuestions(selectedCaseStudyType: string | undefined) {
+    const url = `/case-study-questions/${selectedCaseStudyType}`;
     try {
       const response = await httpService.get(url);
       const data = response.data;
@@ -45,6 +44,7 @@ const CaseStudySubmit = () => {
       console.log('Error: Unable to fetch from ' + url);
     }
   }
+
   useEffect(() => {
     getTypeData();
 
@@ -71,47 +71,23 @@ const CaseStudySubmit = () => {
     return <Redirect to="/" />;
   };
 
-  const onclickCancel = async(event:any) => {
+  const onclickCancel = async (event: any) => {
     event.preventDefault();
     window.location.href = '/case-studies';
-  }
-
-  const createCaseStudy = async (imageId: number) => {
-    body = {
-      caseStudyTypeId: selectedOption,
-      departmentId: userContext.user?.departmentId,
-      userId: userContext.user?.id,
-      imageId: imageId,
-      title
-    };
-    try {
-      await fetch('http://localhost:8080/case-study', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          createCaseStudyResponse(data[0].id, data[0].caseStudyTypeId);
-        });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const saveImageForCaseStudy = async (event: any) => {
-
-    if(shareImage.length < 1){
-      toast.error("Image not uploaded!! Please upload the image.");
+    if (shareImage.length < 1) {
+      toast.error('Image not uploaded!! Please upload the image.');
       return;
     }
 
-    if(!checkMark){
+    if (!checkMark) {
       toast.error("Check Box isn't marked!! Please mark the checkbox.");
       return;
     }
-    
-    const url = 'http://localhost:8080/image';
+
+    const url = '/image';
     try {
       event.preventDefault();
       const formData = new FormData();
@@ -122,7 +98,7 @@ const CaseStudySubmit = () => {
         }
       };
       const storeResponseBody: any = [];
-      axios
+      httpService
         .post(url, formData, config)
         .then((response) => {
           storeResponseBody.push(response.data);
@@ -135,34 +111,64 @@ const CaseStudySubmit = () => {
     }
   };
 
-  const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
-    responseType = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
-    try {
-      await fetch('http://localhost:8080/case-study-responses/' + caseStudyId, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(responseType[caseStudyTypeId - 1])
+  const createCaseStudy = async (imageId: number) => {
+    caseStudy = {
+      caseStudyTypeId: selectedCaseStudyType,
+      departmentId: userContext.user?.departmentId,
+      userId: userContext.user?.id,
+      imageId: imageId,
+      title
+    };
+    const url = `/case-study`;
+    httpService
+      .post(url, caseStudy)
+      .then((response: any) => response.data)
+      .then((data: any) => {
+        const retrievedCaseStudy = data[0];
+        createCaseStudyResponse(retrievedCaseStudy.id, retrievedCaseStudy.caseStudyTypeId);
       })
-        .then((response) => response.json())
-        .then((data) => {
-        });
-    } catch (error) {
-      console.log(error);
-    }
-
-    toast.success("New Case Study Submitted", {position: "top-center", autoClose: 5000});
-    window.location.href = '/case-studies';
+      .catch((error: any) => {
+        console.log(error);
+      });
   };
+
+  const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
+    let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
+    let POSTresponses = caseStudyTypeOptions[caseStudyTypeId - 1];
+    updateResponse(POSTresponses, false);
+    httpService
+      .post(`/case-study-responses/${caseStudyId}`, POSTresponses)
+      .then((response: any) => response.data)
+      .then((data: any) => {
+        updateResponse(POSTresponses, true);
+        toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
+        window.location.href = '/case-studies';
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+  };
+
+  function updateResponse(selectedCaseStudy: any[], empty: boolean) {
+    let elementId;
+    for (let index = 0; index < selectedCaseStudy.length; index++) {
+      if (!empty) {
+        elementId = 'text-area-id-' + index;
+        selectedCaseStudy[index].response = (document.getElementById(elementId) as HTMLInputElement).value;
+      } else {
+        selectedCaseStudy[index].response = '';
+      }
+    }
+  }
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    setSelectedOption(value);
+    setSelectedCaseStudyType(value);
     getQuestions(value);
   };
 
-
-  const handleChange = (e: any) => {
-    const image = e.target.files[0];
+  const handleChange = (event: any) => {
+    const image = event.target.files[0];
     if (image === '' || image === undefined) {
       alert(`not an image ,the file is a ${typeof image}`);
       return;
@@ -175,7 +181,9 @@ const CaseStudySubmit = () => {
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
-        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">Log Out</button>
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+          Log Out
+        </button>
       </header>
       <Sidebar show={showNav} />
       <div className="cards-case-study">
@@ -199,7 +207,7 @@ const CaseStudySubmit = () => {
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
               <div className="float-left pl-10">
-                <input onChange = {() => SetCheckMark(!checkMark)} checked = {checkMark} type="checkbox" />
+                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
                 <p>
                   This person has given permission to share their story <br />
                   and photo in HHA communications, including online platforms.
@@ -211,17 +219,19 @@ const CaseStudySubmit = () => {
 
           <div className="w-full flex flex-col pt-10">
             <label className="inside-text-case-study">Title of Case Study?</label>
-            <textarea value={title} onChange={(e) => setTitle(e.target.value)} className="response" placeholder="Type here..."></textarea>
+            <textarea value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
                   <label className="inside-text-case-study">{Questions.label}</label>
-                  <textarea className="response" placeholder="Type here..."></textarea>
+                  <textarea id={'text-area-id-' + index} className="response" placeholder="Type response here..."></textarea>
                 </div>
               );
             })}
-            <button onClick={onclickCancel} className="grey-button bottom-5 left-31">Cancel</button>
-            <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
+            <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
+              Cancel
+            </button>
+            <button onClick={saveImageForCaseStudy} disabled={selectedCaseStudyType == 'Nothing selected'} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>

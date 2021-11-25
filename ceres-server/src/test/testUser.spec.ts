@@ -1,14 +1,17 @@
 'use strict';
 
 import http from 'http';
-import { createServer, enableErrorHandling, enableLogging, enableRoutes, sendFirstRequest } from '../server';
 import { Application } from 'express';
-import PORT from './testTools/serverPort';
 import { userDNEError, userNegativeOrNanInputError, pageNotFoundError } from '../shared/errorMessages';
+import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 chai.use(chaiHttp);
+
+let testApp: Application;
+let httpServer: http.Server;
+let agent: any;
 
 let usernames = ['admin', 'staff01'];
 let passwords = ['$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm', '$2a$12$Es2.DjFL5jKSukJjgXOubuP..MipNRcqM5KfzL49bdymFqAkB62r2'];
@@ -17,54 +20,47 @@ let roleIds = [1, 4];
 
 const validateUserPropertiesAndFields = (testTitle: string, propertiesTitle: string, fieldsTitle: string) => {
   describe(testTitle, () => {
-    let testApp: Application;
-    let httpServer: http.Server;
     let id = 0;
-    before('Create a working server', () => {
-      testApp = createServer();
-      sendFirstRequest(testApp);
-      enableRoutes(testApp);
-      httpServer = http.createServer(testApp);
-      httpServer.listen(PORT);
+    before('Create a working server', (done) => {
+      testApp = setupApp();
+      httpServer = setupHttpServer(testApp);
+      agent = chai.request.agent(testApp);
+
+      attemptAuthentication(agent, done, Accounts.ADMIN);
     });
+
     after('Close a working server', () => {
       httpServer.close();
     });
     it(propertiesTitle, (done) => {
-      chai
-        .request(testApp)
-        .get('/user')
-        .end((err: any, res: any) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          res.body.forEach((item: any) => {
-            expect(item).to.be.an('object');
-            expect(item).to.have.deep.property('id');
-            expect(item).to.have.deep.property('username');
-            expect(item).to.have.deep.property('password');
-            expect(item).to.have.deep.property('departmentId');
-            expect(item).to.have.deep.property('roleId');
-          });
-          done();
+      agent.get('/user').end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).to.be.an('array');
+        res.body.forEach((item: any) => {
+          expect(item).to.be.an('object');
+          expect(item).to.have.deep.property('id');
+          expect(item).to.have.deep.property('username');
+          expect(item).to.have.deep.property('password');
+          expect(item).to.have.deep.property('departmentId');
+          expect(item).to.have.deep.property('roleId');
         });
+        done();
+      });
     });
     it(fieldsTitle, (done) => {
-      chai
-        .request(testApp)
-        .get('/user')
-        .end((err: any, res: any) => {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          res.body.forEach((item: any) => {
-            expect(item.id).to.deep.equal(++id);
-            expect(item.username).to.deep.equal(usernames[id - 1]);
-            expect(item.password).to.deep.equal(passwords[id - 1]);
-            expect(item.departmentId).to.deep.equal(departmentIds[id - 1]);
-            expect(item.roleId).to.deep.equal(roleIds[id - 1]);
-          });
-          done();
+      agent.get('/user').end((err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        res.body.forEach((item: any) => {
+          expect(item.id).to.deep.equal(++id);
+          expect(item.username).to.deep.equal(usernames[id - 1]);
+          expect(item.password).to.deep.equal(passwords[id - 1]);
+          expect(item.departmentId).to.deep.equal(departmentIds[id - 1]);
+          expect(item.roleId).to.deep.equal(roleIds[id - 1]);
         });
+        done();
+      });
     });
   });
 };
@@ -74,23 +70,19 @@ validateUserPropertiesAndFields('testGetUserSuccess', 'Validate user request pro
 
 // Test 2: POST request
 describe('testPostUserSuccess', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
   it('Validate created user properties and fields', (done) => {
-    chai
-      .request(testApp)
+    agent
       .post('/user')
       .set('content-type', 'application/json')
       .send({
@@ -120,23 +112,19 @@ describe('testPostUserSuccess', () => {
 
 // Test 3: PUT request (Failure)
 describe('testEditUserFailure', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
   it('Throw error code 400 for user with a negative number', (done) => {
-    chai
-      .request(testApp)
+    agent
       .put('/user/-1')
       .set('content-type', 'application/json')
       .send({
@@ -153,8 +141,7 @@ describe('testEditUserFailure', () => {
       });
   });
   it('Throw error code 404 for invalid URL', (done) => {
-    chai
-      .request(testApp)
+    agent
       .put('/user/')
       .set('content-type', 'application/json')
       .send({
@@ -171,8 +158,7 @@ describe('testEditUserFailure', () => {
       });
   });
   it('Throw error code 404 for user yet to be created', (done) => {
-    chai
-      .request(testApp)
+    agent
       .put('/user/14')
       .set('content-type', 'application/json')
       .send({
@@ -192,23 +178,19 @@ describe('testEditUserFailure', () => {
 
 // Test 4: PUT request (Success)
 describe('testEditUserSuccess', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
   it('Validate edited user properties and fields', (done) => {
-    chai
-      .request(testApp)
+    agent
       .put('/user/3')
       .set('content-type', 'application/json')
       .send({
@@ -242,69 +224,54 @@ describe('testEditUserSuccess', () => {
 
 // Test 5: DELETE request (Single user, Failure)
 describe('testDeleteUserFailure', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
   it('Throw error code 400 for user with a negative number', (done) => {
-    chai
-      .request(testApp)
-      .delete('/user/-1')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(400);
-        expect(res.text).to.deep.equal(JSON.stringify(userNegativeOrNanInputError));
-        done();
-      });
+    agent.delete('/user/-1').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.text).to.deep.equal(JSON.stringify(userNegativeOrNanInputError));
+      done();
+    });
   });
   it('Throw error code 404 for user yet to be created', (done) => {
-    chai
-      .request(testApp)
-      .delete('/user/14')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(404);
-        expect(res.text).to.deep.equal(JSON.stringify(userDNEError));
-        done();
-      });
+    agent.delete('/user/14').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(404);
+      expect(res.text).to.deep.equal(JSON.stringify(userDNEError));
+      done();
+    });
   });
 });
 
 // Test 6: DELETE request (Single user, Success)
 describe('testDeleteUserSuccess', () => {
-  let testApp: Application;
-  let httpServer: http.Server;
-  before('Create a working server', () => {
-    testApp = createServer();
-    sendFirstRequest(testApp);
-    enableLogging(testApp, 'Test Server');
-    enableRoutes(testApp);
-    enableErrorHandling(testApp);
-    httpServer = http.createServer(testApp);
-    httpServer.listen(PORT);
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
   });
+
   after('Close a working server', () => {
     httpServer.close();
   });
   it('Validate error code for deleted user', (done) => {
-    chai
-      .request(testApp)
-      .delete('/user/3')
-      .end((err: any, res: any) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(204);
-        done();
-      });
+    agent.delete('/user/3').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(204);
+      done();
+    });
   });
 });
 
