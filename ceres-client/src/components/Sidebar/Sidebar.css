@@ -104,3 +104,8 @@ td {
   padding: 10px;
 }
 
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
