@@ -11,6 +11,7 @@ import Departments from './components/Departments/Departments';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import ThisMonth from './components/DataPage/ThisMonth';
+import MessageBoard from './components/MeesageBoard/MessageBoard';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
         <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
+        <PrivateRoute path="/messages" component={MessageBoard}></PrivateRoute>
       </Switch>
     </Router>
   );
