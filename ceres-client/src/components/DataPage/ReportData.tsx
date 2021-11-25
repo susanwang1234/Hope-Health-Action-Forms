@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import '../../App.css';
 import httpService from '../../services/httpService';
+import { toast } from 'react-toastify';
 
 const ReportData = (props: any) => {
   const [formEntries, setFormEntries] = useState<any[]>([]);
@@ -86,10 +87,15 @@ const ReportData = (props: any) => {
     </button>
   );
   const editButton = (
-    <button className=" edit-button" onClick={() => setEditStatus(true)}>
+    <button className="edit-button" onClick={() => setEditStatus(true)}>
       Edit
     </button>
   );
+
+  const exportAsCsvButton = (
+    <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>Export as CSV</button>
+  );
+
   if (props.data === null) {
     return <p className="m-60 font-bold text-xl">Select a report from the list</p>;
   } else {
@@ -116,6 +122,7 @@ const ReportData = (props: any) => {
         </form>
         <div className="report-data-buttons">
           {editStatus === true ? cancelButton : editButton}
+          {!editStatus && exportAsCsvButton}
           {editStatus === true && updateButton}
         </div>
       </div>
@@ -147,4 +154,21 @@ function createArrayEntriesToPut(rawArray: any[]): any[] {
     };
   }
   return proccesedEntries;
+}
+
+async function exportToCsv(formId: number): Promise<void> {
+  try {
+    const res = await httpService.get(`/form/${formId}/export-as-csv`);
+    const csvContent = 'data:text/csv;charset=utf-8,' + res.data;
+    const filename = res.headers['content-disposition'].split('=')[1].replaceAll('"', '');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', filename);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (error: any) {
+    toast.error("There was an error downloading the CSV.");
+  }
 }
