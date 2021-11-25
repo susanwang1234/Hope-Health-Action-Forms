@@ -77,7 +77,7 @@ ul {
 
 ul li {
   list-style-type: none;
-  padding-left: 0px;
+  padding-left: 5px;
 }
 
 ul li a {
@@ -104,8 +104,3 @@ td {
   padding: 10px;
 }
 
-body {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}

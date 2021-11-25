@@ -84,10 +84,6 @@ const ReportData = (props: any) => {
     }
   };
 
-  // const foceUpdate = () =>{
-  //   this.forceUpdate();
-  // }
-
   const updateButton = (
     <button form="daForm" className="update-button">
       Update data
