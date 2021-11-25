@@ -109,7 +109,7 @@ const Dashboard = () => {
 
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
-                  <IoIosInformationCircle className="align-right icon instructions" onClick={(e) => instructions(e)} />
+                  <IoIosInformationCircle className="align-right icon instructions" onClick={(instructionButtonEvent) => instructions(instructionButtonEvent)} />
                   {DashboardLeaderboard.generateLeaderboard()}
                 </div>
               </div>

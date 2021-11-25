@@ -6,6 +6,8 @@ import Chart from 'react-google-charts';
 */
 
 class Leaderboard {
+
+    //outputs bar data for the leaderboard
     private getBarData() {
       const json: any = {
         leaderboard: [
@@ -22,7 +24,7 @@ class Leaderboard {
         let opacityValue = Math.round((1 / (i + 1)) * 100) / 100;
         let opacityStr = 'opacity: ' + opacityValue.toString() + ';';
         departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null]);
-      }
+      } 
   
       let barData = [
         [
@@ -43,15 +45,16 @@ class Leaderboard {
       return barData;
     }
   
+    //outputs the html code coming from the imported google chart library
     public generateLeaderboard() {
       let barData = this.getBarData();
-  
+      
       return (
         <div>
           <Chart
             width={'95%'}
             height={'200px'}
-            chartType="BarChart"
+            chartType="Bar"
             loader={<div>Loading Chart</div>}
             data={barData}
             options={{
