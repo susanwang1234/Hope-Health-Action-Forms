@@ -1,50 +1,54 @@
 import './CaseStudyInstance.css';
 import '../../App.css';
-import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../UserContext';
+import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import photo from './../../images/original_artwork.jpg';
-import { Link } from 'react-router-dom';
+import httpService from '../../services/httpService';
 
 const CaseStudy = () => {
-  const userContext = useContext(UserContext);
-
-  const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
-
+  const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
-    isLoaded: false,
     caseStudies: []
   });
-
-  // Get case study ID from URL pathname
-  var str = window.location.pathname;
-  var last = str.substring(str.lastIndexOf('/') + 1, str.length);
-  var caseId: number = +last;
+  const [caseStudyImage, setCaseStudyImageState] = useState('');
+  const str = window.location.pathname;
+  const last = str.substring(str.lastIndexOf('/') + 1, str.length);
+  let caseId: number = +last;
 
   useEffect(() => {
     getCaseStudies();
-
-    async function getCaseStudies() {
-      const url = 'http://localhost:8080/case-study/' + caseId.toString();
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        console.log('Fetched Case Studies: ' + data);
-        setCaseStudyState({
-          isLoaded: true,
-          caseStudies: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setCaseStudyState]);
 
+  async function getCaseStudies() {
+    const url = `/case-study/${caseId.toString()}`;
+    try {
+      const response = await httpService.get(url);
+      setCaseStudyState({
+        caseStudies: response.data
+      });
+      getCaseStudyImage(response.data[0].imageId);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
 
-  console.log("Fetching case study of ID: " + (caseId-1));
+  async function getCaseStudyImage(imageId: number) {
+    const url = `/image/${imageId}`;
+    try {
+      await httpService
+        .get(url, {
+          responseType: 'blob'
+        })
+        .then((res) => {
+          setCaseStudyImageState(URL.createObjectURL(res.data));
+        });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
   return (
     <div className="App">
       <header className="nav-header">
@@ -55,13 +59,12 @@ const CaseStudy = () => {
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">
-            {/* Dynamically insert case study information here */}
-            {caseStudyState.caseStudies.slice(0,1).map((caseStudy: any) => {
+            {caseStudyState.caseStudies.slice(0, 1).map((caseStudy: any) => {
               return (
                 <table className="case-study-block">
                   <tr>
                     <td className="case-study-block-image">
-                      <img className="case-study-img" src={photo} alt="" width="150px" height="150px"></img>
+                      <img className="case-study-img" src={caseStudyImage} alt="" width="auto" height="150px"></img>
                     </td>
                     <td className="case-study-block-text">
                       <h1 className="case-study-title">
@@ -69,7 +72,6 @@ const CaseStudy = () => {
                       </h1>
                       <h5 className="case-study-date">{caseStudy.createdAt}</h5>
                       <h2 className="case-study-desc">{caseStudy.title}</h2>
-                      {/* Dynamically insert case study Q/A here */}
                       {caseStudyState.caseStudies.map((caseStudy: any) => {
                         return (
                           <div>
@@ -84,8 +86,8 @@ const CaseStudy = () => {
                     <td>
                       <button
                         className="view-cancel-form-button"
-                        onClick={(e) => {
-                          e.preventDefault();
+                        onClick={(event) => {
+                          event.preventDefault();
                           window.location.href = '/case-studies';
                         }}
                       >
