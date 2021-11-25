@@ -231,7 +231,7 @@ const CaseStudySubmit = () => {
             <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
               Cancel
             </button>
-            <button onClick={saveImageForCaseStudy} disabled={selectedCaseStudyType == 'Nothing selected'} className="blue-button bottom-5 right-20">
+            <button onClick={saveImageForCaseStudy} disabled={selectedCaseStudyType === 'Nothing selected'} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>

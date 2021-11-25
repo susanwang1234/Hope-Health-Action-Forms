@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter as Router, Switch } from 'react-router-dom';
-import { ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Login from './components/Login/Login';
 import DataPage from './components/DataPage/DataPage';
@@ -23,8 +23,8 @@ function App() {
         <PrivateRoute path="/submit-report" component={Forms}></PrivateRoute>
         <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
         <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
-        <PrivateRoute exact path={"/case-studies/:id"} component={CaseStudyInstance}></PrivateRoute>
-        <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
+        <PrivateRoute exact path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
+        <PrivateRoute exact path={'/case-studies/:id'} component={CaseStudyInstance}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
       </Switch>
     </Router>
