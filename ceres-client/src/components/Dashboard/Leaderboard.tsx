@@ -3,9 +3,19 @@ import Chart from 'react-google-charts';
 /*
     Citations:
     https://react-google-charts.com/bar-chart
+    https://www.codegrepper.com/code-examples/javascript/javascript+random+color+generator+never+repeat
 */
 
 class Leaderboard {
+
+  private generateRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 
     //outputs bar data for the leaderboard
     private getBarData() {
@@ -25,10 +35,8 @@ class Leaderboard {
       let departmentBars = [];
       let lengthJSON = Object.keys(json.leaderboard).length;
       for (let i = 0; i < lengthJSON; i++) {
-        //let opacityValue = Math.round((1 / (i + 1)) * 100) / 100;
-        //let opacityStr = 'opacity: ' + opacityValue.toString() + ';';
-        //departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90; ' + opacityStr, null]);
-        departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: #764a90;', null]);
+        var randomColor=this.generateRandomColor();
+        departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: ' + randomColor + ";", null]);
       } 
   
       let barData = [
@@ -55,7 +63,7 @@ class Leaderboard {
       let barData = this.getBarData();
       
       return (
-        <div>
+        <div style={{ display: 'flex' }}>
           <Chart
             width={'95%'}
             height={'100%'}
