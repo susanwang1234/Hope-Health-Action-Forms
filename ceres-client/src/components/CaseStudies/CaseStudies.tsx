@@ -131,6 +131,7 @@ const CaseStudy = () => {
                   Submit
                 </Button>
               </Form>
+              <p>Search results for "{(document.getElementById('search-bar') as HTMLInputElement).value}"</p>
               <div className="case-study-block-container">
                 {/* Dynamically insert case study blocks here */}
                 {caseStudyState.caseStudies.map((caseStudies: any) => {
