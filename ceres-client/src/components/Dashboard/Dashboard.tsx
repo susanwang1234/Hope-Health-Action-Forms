@@ -1,19 +1,18 @@
 import '../../App.css';
 import './Dashboard.css';
-import initialEmployeeOfTheMonth from './initialEmployeeOfTheMonth.json';
 import { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import profilePic from './../../images/gray_person.jpg';
 import leaderboard from './../../images/leaderboard.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
-import httpService from '../../services/httpService';
 import Leaderboard from './Leaderboard';
+import EmployeeOfTheMonth from './EmployeeOfTheMonth';
+
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -23,47 +22,14 @@ import Leaderboard from './Leaderboard';
 const Dashboard = () => {
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
-
-  const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
-  const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
-
+  
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
     );
   };
 
-  async function getEmployeeOfTheMonth() {
-    const url = '/employee-of-the-month';
-    try {
-      const response = await httpService.get(url);
-      const { data } = response;
-      const retrievedEmployeeOfTheMonth = data[0];
-      setEmployeeOfTheMonthState(retrievedEmployeeOfTheMonth);
-      await getEmployeeOfTheMonthImage(retrievedEmployeeOfTheMonth.imageId);
-    } catch (error: any) {
-      console.log('Error: Unable to fetch from ' + url);
-    }
-  }
-
-  async function getEmployeeOfTheMonthImage(imageId: number) {
-    const url = `/image/${imageId}`;
-    try {
-      await httpService
-        .get(url, {
-          responseType: 'blob'
-        })
-        .then((res) => {
-          setEmployeeOfTheMonthImageState(URL.createObjectURL(res.data));
-        });
-    } catch (error: any) {
-      console.log('Error: Unable to fetch from ' + url);
-    }
-  }
-
-  useEffect(() => {
-    getEmployeeOfTheMonth();
-  }, [setEmployeeOfTheMonthState]);
+  
 
   function generateCalendar() {
     return (
@@ -117,10 +83,7 @@ const Dashboard = () => {
               <div className="card-outer fill-space-right">
                 <p className="title">Employee of the Month</p>
                 <div className="card-inner height-100-percent">
-                  <img src={employeeOfTheMonthImage} alt="profile pic" className="profile-pic"></img>
-                  <h1 className="heading-1">Name: {employeeOfTheMonth.name}</h1>
-                  <h1 className="heading-1">Department: {employeeOfTheMonth.department}</h1>
-                  <p className="text-primary-p employee-paragraph">{employeeOfTheMonth.description}</p>
+                 {EmployeeOfTheMonth()}
                 </div>
               </div>
             </div>
