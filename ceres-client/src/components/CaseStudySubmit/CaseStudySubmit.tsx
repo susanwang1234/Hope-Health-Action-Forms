@@ -32,6 +32,19 @@ const CaseStudySubmit = () => {
     questions: []
   });
 
+  useEffect(() => {
+    getTypeData();
+  }, [setCaseStudyType]);
+
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   async function getQuestions(selectedCaseStudyType: string | undefined) {
     const url = `/case-study-questions/${selectedCaseStudyType}`;
     try {
@@ -45,31 +58,18 @@ const CaseStudySubmit = () => {
     }
   }
 
-  useEffect(() => {
-    getTypeData();
-
-    async function getTypeData() {
-      const url = `/case-study-types`;
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        setCaseStudyType({
-          types: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
+  async function getTypeData() {
+    const url = `/case-study-types`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setCaseStudyType({
+        types: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
     }
-  }, [setCaseStudyType]);
-
-  const onClickLogOutHandler = async () => {
-    const data = await AuthService.logout();
-    if (data.success) {
-      userContext.setUser(null);
-      userContext.setIsAuthenticated(false);
-    }
-    return <Redirect to="/" />;
-  };
+  }
 
   const onclickCancel = async (event: any) => {
     event.preventDefault();
@@ -97,15 +97,9 @@ const CaseStudySubmit = () => {
           'content-type': 'multipart/form-data'
         }
       };
-      const storeResponseBody: any = [];
-      httpService
-        .post(url, formData, config)
-        .then((response) => {
-          storeResponseBody.push(response.data);
-        })
-        .then(() => {
-          createCaseStudy(storeResponseBody[0][0].id);
-        });
+      httpService.post(url, formData, config).then((response) => {
+        createCaseStudy(response.data[0].id);
+      });
     } catch (error) {
       console.error(error);
     }
@@ -134,13 +128,13 @@ const CaseStudySubmit = () => {
 
   const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
     let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
-    let POSTresponses = caseStudyTypeOptions[caseStudyTypeId - 1];
-    updateResponse(POSTresponses, false);
+    let postResponses = caseStudyTypeOptions[caseStudyTypeId - 1];
+    updateResponse(postResponses, false);
     httpService
-      .post(`/case-study-responses/${caseStudyId}`, POSTresponses)
+      .post(`/case-study-responses/${caseStudyId}`, postResponses)
       .then((response: any) => response.data)
       .then((data: any) => {
-        updateResponse(POSTresponses, true);
+        updateResponse(postResponses, true);
         toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
         window.location.href = '/case-studies';
       })
