@@ -9,10 +9,11 @@ import photo from './../../images/original_artwork.jpg';
 import { Link, useHistory } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
+import { debug } from 'console';
 
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
-  const searchQuery = "";
+  const searchQuery = '';
   let history = useHistory();
 
   const [showNav, setShowNav] = useState(false);
@@ -25,10 +26,7 @@ const CaseStudy = () => {
   });
 
   function search() {
-
-
     caseStudyState.caseStudies = caseStudyState.caseStudiesOrig;
-    console.log("Setting : " + caseStudyState.caseStudies + " to: " + caseStudyState.caseStudiesOrig);
 
     setCaseStudyState({
       isLoaded: true,
@@ -36,41 +34,35 @@ const CaseStudy = () => {
       caseStudiesOrig: caseStudyState.caseStudiesOrig
     });
 
-    console.log("Search bar value: " + (document.getElementById("search-bar") as HTMLInputElement).value);
-
-    if ((document.getElementById("search-bar") as HTMLInputElement).value == "") {
-      
-      console.log("Refreshing case studies (search bar empty).")
-      getCaseStudies();
-
+    if ((document.getElementById('search-bar') as HTMLInputElement).value == '') {
+      caseStudyState.caseStudies = caseStudyState.caseStudiesOrig.slice(0);
     }
 
-    console.log("Iterating from 0 to " + caseStudyState.caseStudies.length);
-
-    for (var i = 0; i < caseStudyState.caseStudies.length; i++) {
-      try {
-        if (!caseStudyState.caseStudies[i].title.includes((document.getElementById("search-bar") as HTMLInputElement).value)) {
-          delete caseStudyState.caseStudies[i];
-        }
-      } catch (err) {
-        console.log(err);
-      }
-
+    function containsString(caseStudy: any) {
+      return caseStudy.title.toUpperCase().includes((document.getElementById('search-bar') as HTMLInputElement).value.toUpperCase());
     }
 
+    setCaseStudyState({
+      isLoaded: true,
+      caseStudies: caseStudyState.caseStudies.filter(containsString),
+      caseStudiesOrig: caseStudyState.caseStudiesOrig
+    });
   }
 
   async function getCaseStudies() {
     const url = '/case-studies';
     try {
       const response = await httpService.get(url);
-      const data = response.data;
-      console.log('Fetched Case Studies: ' + data);
+      const data1 = response.data;
+      const data2 = response.data;
+      console.log('Fetched Case Studies: ' + data1);
       setCaseStudyState({
         isLoaded: true,
-        caseStudies: data,
-        caseStudiesOrig: data
+        caseStudies: data1,
+        caseStudiesOrig: data2
       });
+      console.log('caseStudies: ' + caseStudyState.caseStudies);
+      console.log('caseStudyOrig: ' + caseStudyState.caseStudiesOrig);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
@@ -78,8 +70,6 @@ const CaseStudy = () => {
 
   useEffect(() => {
     getCaseStudies();
-
-
   }, [setCaseStudyState]);
 
   return (
@@ -137,7 +127,9 @@ const CaseStudy = () => {
                 <Form.Group className="mb-3" controlId="formSearch">
                   <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="button" onClick={() => search()}>Submit</Button>
+                <Button variant="primary" type="button" onClick={() => search()}>
+                  Submit
+                </Button>
               </Form>
               <div className="case-study-block-container">
                 {/* Dynamically insert case study blocks here */}
