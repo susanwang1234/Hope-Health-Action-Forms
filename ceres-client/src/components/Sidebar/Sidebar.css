@@ -3,8 +3,8 @@
   display: block;
   width: 240px;
   background: #ffffff;
-  position:absolute;
-  height:91vh;
+  position: absolute;
+  height: 100%;
   left: -100%;
   transition: all 0.3s;
   text-align: left;
@@ -28,15 +28,14 @@
 }
 
 .drop-link {
-    /* Links that descend from a dropdown button */
-    color: #91908e;
-    padding-left: 40px;
-    font-size: 14px;
-    
+  /* Links that descend from a dropdown button */
+  color: #91908e;
+  padding-left: 40px;
+  font-size: 14px;
 }
 
 ul li a:hover,
-ul lu a.active {
+ul li a.active {
   /* Sidebar link's being hovered */
   background: #e7e7e7;
   color: #555555;
