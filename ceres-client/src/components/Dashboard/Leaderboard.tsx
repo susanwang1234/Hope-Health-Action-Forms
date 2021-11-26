@@ -7,13 +7,18 @@ import Chart from 'react-google-charts';
 */
 
 const Leaderboard = () => {
-  function generateRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+
+  function stringToColor(str: String) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
-    return color;
+    var colour = '#';
+    for (var i = 0; i < 3; i++) {
+      var value = (hash >> (i * 8)) & 0xFF;
+      colour += ('00' + value.toString(16)).substr(-2);
+    }
+    return colour;
   }
 
   //outputs bar data for the leaderboard
@@ -24,17 +29,23 @@ const Leaderboard = () => {
         { department: 'Maternity', score: 5 },
         { department: 'NCIUPaeds', score: 10 },
         { department: 'Community Health', score: 4 },
+        { department: 'baheR', score: 4 },
         { department: 'Community Health', score: 4 },
         { department: 'Community Health', score: 4 },
         { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 }
+        { department: 'Community Health', score: 4 },
+        { department: 'Community Health', score: 4 },
+        { department: 'Community Health', score: 4 },
+        { department: 'Community Health', score: 4 },
+        { department: 'Community Health', score: 4 },
+        { department: 'Community Health', score: 4 },
       ]
     }; //dummy data
 
     let departmentBars = [];
     let lengthJSON = Object.keys(json.leaderboard).length;
     for (let i = 0; i < lengthJSON; i++) {
-      var randomColor = generateRandomColor();
+      var randomColor = stringToColor(json.leaderboard[i].department);
       departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: ' + randomColor + ';', null]);
     }
 
@@ -70,7 +81,14 @@ const Leaderboard = () => {
         data={barData}
         options={{
           bar: { groupWidth: '50%' },
-          legend: { position: 'none' }
+          legend: { position: 'none' },
+          vAxis : { 
+            textStyle : {
+                fontSize: '1%'
+            }
+    
+        }
+    
         }}
         // For tests
         rootProps={{ 'data-testid': '0' }}

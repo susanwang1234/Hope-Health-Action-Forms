@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import leaderboard from './../../images/leaderboard.jpg';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { IoIosAlert } from 'react-icons/io';
