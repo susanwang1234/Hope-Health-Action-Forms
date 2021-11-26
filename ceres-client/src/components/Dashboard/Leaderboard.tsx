@@ -1,9 +1,11 @@
+import { stringify } from 'querystring';
 import Chart from 'react-google-charts';
+import './Dashboard.css';
 
 /*
     Citations:
     https://react-google-charts.com/bar-chart
-    https://www.codegrepper.com/code-examples/javascript/javascript+random+color+generator+never+repeat
+    https://stackoverflow.com/questions/3426404/create-a-hexadecimal-colour-based-on-a-string-with-javascript
 */
 
 const Leaderboard = () => {
@@ -25,20 +27,10 @@ const Leaderboard = () => {
   function getBarData() {
     const json: any = {
       leaderboard: [
-        { department: 'Rehab', score: 1 },
+        { department: 'Rehab', score: 1},
         { department: 'Maternity', score: 5 },
-        { department: 'NCIUPaeds', score: 10 },
-        { department: 'Community Health', score: 4 },
-        { department: 'baheR', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
-        { department: 'Community Health', score: 4 },
+        { department: 'NICUPaeds', score: 10 },
+        { department: 'Community Health', score: 4 }
       ]
     }; //dummy data
 
@@ -46,7 +38,17 @@ const Leaderboard = () => {
     let lengthJSON = Object.keys(json.leaderboard).length;
     for (let i = 0; i < lengthJSON; i++) {
       var randomColor = stringToColor(json.leaderboard[i].department);
-      departmentBars.push([json.leaderboard[i].department, json.leaderboard[i].score, 'color: ' + randomColor + ';', null]);
+      let departmentName = json.leaderboard[i].department;
+      let score = json.leaderboard[i].score;
+      let departmentNamePartial = ""; 
+      if(departmentName.length >= 10) {
+        departmentNamePartial = departmentName.substring(0,9) + "..."; //if department name is over 10 characters, the name gets cut off when being displayed
+      }
+      else {
+        departmentNamePartial = departmentName;
+      }
+      let tooltipInfo = "<b>Department: </b>" + departmentName + '<br>' + "<b>Score: </b>" + (json.leaderboard[i].score).toString();
+      departmentBars.push([departmentNamePartial, score, 'color: ' + randomColor + ';', null, tooltipInfo]);
     }
 
     let barData = [
@@ -59,7 +61,8 @@ const Leaderboard = () => {
           role: 'annotation',
           type: 'string',
           calc: 'stringify'
-        }
+        },
+        { role: "tooltip", type: "string", p: { html: true } },
       ]
     ];
     for (let i = 0; i < lengthJSON; i++) {
@@ -73,8 +76,8 @@ const Leaderboard = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Chart
-        width={'95%'}
+      <Chart 
+        width={'100%'}
         height={'100%'}
         chartType="BarChart"
         loader={<div>Loading Chart</div>}
@@ -82,14 +85,10 @@ const Leaderboard = () => {
         options={{
           bar: { groupWidth: '50%' },
           legend: { position: 'none' },
-          vAxis : { 
-            textStyle : {
-                fontSize: '1%'
-            }
-    
+          tooltip: { isHtml: true, trigger: "visible"}
         }
     
-        }}
+        }
         // For tests
         rootProps={{ 'data-testid': '0' }}
       />

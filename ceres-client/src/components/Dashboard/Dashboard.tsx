@@ -70,9 +70,9 @@ const Dashboard = () => {
                   <div className="align-right flex">{generateCalendar()}</div>
                 </div>
 
-                <p className="title">Leaderboard</p>
+                <p className="title">Leaderboard
+                <IoIosInformationCircle className="align-right icon instructions" onClick={(instructionButtonEvent) => instructions(instructionButtonEvent)} /></p>
                 <div className="card-inner width-100-percent">
-                  <IoIosInformationCircle className="align-right icon instructions" onClick={(instructionButtonEvent) => instructions(instructionButtonEvent)} />
                   {Leaderboard()}
                 </div>
               </div>

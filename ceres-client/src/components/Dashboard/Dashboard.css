@@ -122,6 +122,10 @@
   max-width: 100% !important;
 }
 
+.google-visualization-tooltip {
+  white-space: nowrap !important;
+}
+
 .heading-1 {
   font-size: 20px;
   font-weight: bold;
