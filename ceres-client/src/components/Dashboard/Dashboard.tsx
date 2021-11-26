@@ -41,8 +41,6 @@ const Dashboard = () => {
     );
   }
 
-  let DashboardLeaderboard = new Leaderboard();
-
   return (
     <html>
       <head>
@@ -76,7 +74,7 @@ const Dashboard = () => {
                 <p className="title">Leaderboard</p>
                 <div className="card-inner width-100-percent">
                   <IoIosInformationCircle className="align-right icon instructions" onClick={(instructionButtonEvent) => instructions(instructionButtonEvent)} />
-                  {DashboardLeaderboard.generateLeaderboard()}
+                  {Leaderboard()}
                 </div>
               </div>
 
