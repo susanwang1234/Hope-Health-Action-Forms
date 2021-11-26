@@ -47,7 +47,7 @@ const Leaderboard = () => {
       else {
         departmentNamePartial = departmentName;
       }
-      let tooltipInfo = "<b>Department: </b>" + departmentName + '<br>' + "<b>Score: </b>" + (json.leaderboard[i].score).toString();
+      let tooltipInfo = "<p style='padding: 15px 10px 0 10px'>" + "<b>Department: </b>" + departmentName + '<br>' + "<b>Score: </b>" + (json.leaderboard[i].score).toString() + "</p>";
       departmentBars.push([departmentNamePartial, score, 'color: ' + randomColor + ';', null, tooltipInfo]);
     }
 
