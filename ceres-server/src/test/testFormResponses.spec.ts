@@ -49,7 +49,7 @@ describe('addNewFormResponses', () => {
       { departmentQuestionId: 2, response: 12 }
     ];
     agent
-      .post('/form-responses/1')
+      .post('/form-responses/3')
       .set('Content-Type', 'application/json')
       .send(formResponses)
       .end((err: any, res: any) => {
