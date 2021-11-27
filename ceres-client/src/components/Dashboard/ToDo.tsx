@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 
+/*
+  Citations:
+  https://blog.logrocket.com/react-calendar-tutorial-build-customize-calendar/
+*/
+
 const ToDo = () => {
 
     const [date, setDate]: any = useState(new Date());
