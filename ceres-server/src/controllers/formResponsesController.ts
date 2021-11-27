@@ -39,9 +39,21 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
 
 const getFormResponsesForLatestFormByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
   const departmentId: number = +req.params.departmentId;
+  logging.info(NAMESPACE, `GETTING FORM RESPONSES FOR LATEST FORM IN DEPARTMENT ${departmentId}`);
   if (isInvalidInput(departmentId)) {
     res.status(400).send(departmentNegativeOrNanInputError);
     return;
+  }
+
+  try {
+    const latestFormId = await Knex.select('id').from('Form').where('departmentId', departmentId).orderBy('createdAt', 'DESC').first();
+    if (!latestFormId) {
+      res.status(404).send({ error: 'Could not find any forms for requested department.' });
+      return;
+    }
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
   }
   res.send({ message: 'Request received' });
 };
