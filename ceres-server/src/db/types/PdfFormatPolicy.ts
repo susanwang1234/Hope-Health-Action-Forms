@@ -22,7 +22,14 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
       'Content-Disposition': 'attachment; filename=test.pdf'
     });
     const doc = new PDFDocument();
-    doc.fontSize(25).text('Some heading!');
+    doc.fontSize(20).text('Rehab report: Nov 2021', { align: 'center', underline: true, lineGap: 16 });
+    doc.fontSize(16);
+    formResponseLabelsAndValues.map((formResponse: any) => {
+      doc.text(`${formResponse.label}: ${formResponse.value}`, {
+        underline: true,
+        lineGap: 10
+      });
+    });
     doc.on('data', (chunk: any) => stream.write(chunk));
     doc.on('end', () => {
       console.log('CLOSING STREAM');
