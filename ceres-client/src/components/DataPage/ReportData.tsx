@@ -169,14 +169,7 @@ async function exportToCsv(formId: number): Promise<void> {
     const csvContent = 'data:text/csv;charset=utf-8,' + res.data;
     const filename = res.headers['content-disposition'].split('=')[1].replaceAll('"', '');
     const encodedUri = encodeURI(csvContent);
-
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', filename);
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    downloadFile(encodedUri, filename);
   } catch (error: any) {
     toast.error('There was an error downloading the CSV.');
   }
@@ -188,16 +181,20 @@ async function exportToPdf(formId: number): Promise<void> {
     const filename = res.headers['content-disposition'].split('=')[1];
     const file = [res.data];
     const blob = new Blob(file, { type: 'application/pdf' });
-
-    const link = document.createElement('a');
-    link.setAttribute('href', window.URL.createObjectURL(blob));
-    link.setAttribute('download', filename);
-
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const href = window.URL.createObjectURL(blob);
+    downloadFile(href, filename);
   } catch (error: any) {
     toast.error('There was an error downloading the PDF.');
   }
+}
+
+function downloadFile(href: any, filename: string) {
+  const link = document.createElement('a')
+  link.setAttribute('href', href);
+  link.setAttribute('download', filename);
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
