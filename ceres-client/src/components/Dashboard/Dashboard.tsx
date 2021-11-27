@@ -9,6 +9,9 @@ import { IoIosInformationCircle } from 'react-icons/io';
 import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
+import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import { render } from '@testing-library/react';
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -17,12 +20,43 @@ import ToDo from './ToDo';
 
 const Dashboard = () => {
   const [showNav, setShowNav] = useState(false);
+  const [show, setShow] = useState(true);
 
+  /*
   const instructions = (event: any) => {
     alert(
       'Here is how you get points:\n\n Each department will receive a point for completing and submitting their MSPP data for the month on time. \n\n Each department will receive a point everytime they submit a new case study. \n\n The Employee of the Month will receive 3 points for the department they reside in.'
     );
   };
+  */
+
+  function AlertDismissible() {
+    return (
+      <>
+        <Alert show={show} variant="success">
+          <Alert.Heading>How do I get points?</Alert.Heading>
+          <p>
+          'Here is how you get points:\n\n Each department will receive a point for completing and submitting their MSPP data for the month on time. 
+          \n\n Each department will receive a point everytime they submit a new case study. 
+          \n\n The Employee of the Month will receive 3 points for the department they reside in.'
+          </p>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button onClick={() => setShow(false)} variant="outline-success">
+              Close me y'all!
+            </Button>
+          </div>
+        </Alert>
+  
+        {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
+      </>
+    );
+  }
+
+  const instructions = (event: any) => {
+    render(<AlertDismissible/>);
+  };
+
 
   return (
     <html>
