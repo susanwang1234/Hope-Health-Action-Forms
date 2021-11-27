@@ -1,7 +1,7 @@
 import logging from 'config/logging';
 import { Knex } from 'db/mysql';
 import { Request, Response, NextFunction } from 'express';
-import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
+import { formNegativeOrNanInputError, formDNEError, departmentNegativeOrNanInputError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
 import { Form } from '../db/models/formModel';
@@ -35,6 +35,15 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
     logging.error(NAMESPACE, error.message, error);
     res.status(500).send(error);
   }
+};
+
+const getFormResponsesForLatestFormByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
+  const departmentId: number = +req.params.departmentId;
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+  res.send({ message: 'Request received' });
 };
 
 const addNewFormResponses = async (req: Request, res: Response, next: NextFunction) => {
@@ -78,4 +87,4 @@ const validateFormResponsesBelongToCorrectDepartment = async (formResponses: For
   }
 };
 
-export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId };
+export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId, getFormResponsesForLatestFormByDepartmentId };
