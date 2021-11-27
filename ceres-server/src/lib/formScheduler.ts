@@ -2,7 +2,7 @@ import createMonthlyForms from 'utils/formSchedulerHelper';
 
 const scheduler = require('node-schedule');
 
-export const scheduleMonthyForms = () => {
+export const scheduleMonthlyForms = () => {
   /** Use this for production */
   // let rule = new scheduler.RecurrenceRule();
   // rule.tz = 'America/Cancun';
