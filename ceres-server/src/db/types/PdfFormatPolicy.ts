@@ -10,19 +10,21 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
   }
 
   formatFile(formResponses: any): string {
+    if (!formResponses.length) throw new Error('Form responses cannot be empty.');
+    const { name, month, year } = formResponses[0];
+
     const formResponseLabelsAndValues = formResponses.map((current: any) => {
       const label: string = current.label;
       const value: string = current.response;
       return { label: label, value: value };
     });
-    console.log('formResponses', formResponseLabelsAndValues);
 
     const stream = this.res.writeHead(200, {
       'Content-Type': 'application/pdf',
       'Content-Disposition': 'attachment; filename=test.pdf'
     });
     const doc = new PDFDocument();
-    doc.fontSize(20).text('Rehab report: Nov 2021', { align: 'center', underline: true, lineGap: 16 });
+    doc.fontSize(20).text(`${month} ${year} ${name} report`, { align: 'center', underline: true, lineGap: 16 });
     doc.fontSize(16);
     formResponseLabelsAndValues.map((formResponse: any) => {
       doc.text(`${formResponse.label}: ${formResponse.value}`, {
@@ -37,6 +39,6 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
     });
     doc.end();
 
-    return '';
+    return 'SUCCESS';
   }
 }

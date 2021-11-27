@@ -87,15 +87,17 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
     return;
   }
 
-  const formResponses = await Knex.select('*')
+  const formResponses = await Knex.select('FormResponse.response', 'Question.label', 'Department.name', Knex.raw(`MONTHNAME(Form.createdAt) as month`), Knex.raw('year(Form.createdAt) as year'))
     .from('FormResponse')
     .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+    .join('Form', 'FormResponse.formId', 'Form.id')
+    .join('Department', 'Form.departmentId', 'Department.id')
     .where('FormResponse.formId', formId);
 
   const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
   const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
-  const file = dataExporter.getFileToSendToUser();
+  const pdfStatus = dataExporter.getFileToSendToUser();
 };
 
 export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
