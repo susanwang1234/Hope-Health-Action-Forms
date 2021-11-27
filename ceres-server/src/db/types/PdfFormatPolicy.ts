@@ -21,7 +21,7 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
 
     const stream = this.res.writeHead(200, {
       'Content-Type': 'application/pdf',
-      'Content-Disposition': 'attachment; filename=test.pdf'
+      'Content-Disposition': `attachment; filename=${month}${year}${name}report.pdf`
     });
     const doc = new PDFDocument();
     doc.fontSize(20).text(`${month} ${year} ${name} report`, { align: 'center', underline: true, lineGap: 16 });

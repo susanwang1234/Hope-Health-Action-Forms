@@ -93,7 +93,8 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
     .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
     .join('Form', 'FormResponse.formId', 'Form.id')
     .join('Department', 'Form.departmentId', 'Department.id')
-    .where('FormResponse.formId', formId);
+    .where('FormResponse.formId', formId)
+    .andWhere('Question.isMSPP', 1);
 
   const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
   const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
