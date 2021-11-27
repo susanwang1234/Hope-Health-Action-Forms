@@ -1,5 +1,6 @@
 import './Dashboard.css';
 import Calendar from "react-calendar";
+import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
