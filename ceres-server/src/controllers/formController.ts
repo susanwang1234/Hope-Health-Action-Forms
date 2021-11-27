@@ -8,7 +8,6 @@ import { DataFormatter } from '../db/types/DataFormatter';
 import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
 import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
 import { PdfFormatPolicy } from 'db/types/PdfFormatPolicy';
-const PDFDocument = require('pdfkit');
 
 const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
@@ -73,7 +72,7 @@ const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) 
 
     const fileExportFormatPolicy: FileExportFormatPolicy = new CsvFormatPolicy();
     const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
-    const file = dataExporter.getFileToSendToUser();
+    const file = dataExporter.getFileOrSendFileToUser();
     res.send(file);
   } catch (error: any) {
     res.status(500).send(error);
@@ -99,7 +98,7 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
 
     const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
     const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
-    dataExporter.getFileToSendToUser();
+    dataExporter.getFileOrSendFileToUser();
   } catch (error: any) {
     switch (error.message) {
       case 'Form responses cannot be empty.':

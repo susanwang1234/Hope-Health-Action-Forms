@@ -9,7 +9,7 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
     this.res = res;
   }
 
-  formatFile(formResponses: any): string {
+  formatOrSendFile(formResponses: any): string {
     if (!formResponses.length) throw new Error('Form responses cannot be empty.');
     const { name, month, year } = formResponses[0];
 
@@ -23,6 +23,7 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
       'Content-Type': 'application/pdf',
       'Content-Disposition': `attachment; filename=${month}${year}${name}report.pdf`
     });
+
     const doc = new PDFDocument();
     doc.fontSize(20).text(`${month} ${year} ${name} report`, { align: 'center', underline: true, lineGap: 16 });
     doc.fontSize(16);
@@ -32,9 +33,9 @@ export class PdfFormatPolicy implements FileExportFormatPolicy {
         lineGap: 10
       });
     });
+
     doc.on('data', (chunk: any) => stream.write(chunk));
     doc.on('end', () => {
-      console.log('CLOSING STREAM');
       stream.end();
     });
     doc.end();
