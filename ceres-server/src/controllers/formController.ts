@@ -87,18 +87,29 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
     return;
   }
 
-  const formResponses = await Knex.select('FormResponse.response', 'Question.label', 'Department.name', Knex.raw(`MONTHNAME(Form.createdAt) as month`), Knex.raw('year(Form.createdAt) as year'))
-    .from('FormResponse')
-    .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
-    .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
-    .join('Form', 'FormResponse.formId', 'Form.id')
-    .join('Department', 'Form.departmentId', 'Department.id')
-    .where('FormResponse.formId', formId)
-    .andWhere('Question.isMSPP', 1);
+  try {
+    const formResponses = await Knex.select('FormResponse.response', 'Question.label', 'Department.name', Knex.raw(`MONTHNAME(Form.createdAt) as month`), Knex.raw('year(Form.createdAt) as year'))
+      .from('FormResponse')
+      .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+      .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+      .join('Form', 'FormResponse.formId', 'Form.id')
+      .join('Department', 'Form.departmentId', 'Department.id')
+      .where('FormResponse.formId', formId)
+      .andWhere('Question.isMSPP', 1);
 
-  const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
-  const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
-  const pdfStatus = dataExporter.getFileToSendToUser();
+    const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
+    const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
+    dataExporter.getFileToSendToUser();
+  } catch (error: any) {
+    switch (error.message) {
+      case 'Form responses cannot be empty.':
+        res.status(400).send({ error: 'Error trying to export form to pdf' });
+        break;
+      default:
+        res.status(500).send(error);
+        break;
+    }
+  }
 };
 
 export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
