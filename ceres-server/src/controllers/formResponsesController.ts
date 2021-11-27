@@ -51,11 +51,22 @@ const getFormResponsesForLatestFormByDepartmentId = async (req: Request, res: Re
       res.status(404).send({ error: 'Could not find any forms for requested department.' });
       return;
     }
+
+    const retrievedResponses = await Knex.select('Question.*', 'DepartmentQuestion.isRequired', 'FormResponse.*')
+      .from('FormResponse')
+      .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+      .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+      .where('formId', latestFormId.id);
+    logging.info(NAMESPACE, `GOT FORM RESPONSES FOR FORM ${latestFormId.id}`, retrievedResponses);
+    if (!retrievedResponses.length) {
+      res.status(404).send(formDNEError);
+      return;
+    }
+    res.send(retrievedResponses);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
     res.status(500).send(error);
   }
-  res.send({ message: 'Request received' });
 };
 
 const addNewFormResponses = async (req: Request, res: Response, next: NextFunction) => {
