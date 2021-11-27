@@ -1,5 +1,7 @@
 const getTimeStamp = (): string => {
-  return new Date().toISOString();
+  return new Date().toLocaleString('en-US', {
+    timeZone: 'America/Cancun'
+  });
 };
 
 const info = (namespace: string, message: string, object?: any) => {

@@ -65,8 +65,8 @@ function Departments() {
     }
   };
 
-  const iconChecker = (isComplete: boolean) => {
-    if (isComplete) {
+  const iconChecker = (isComplete: number) => {
+    if (isComplete > 0) {
       return (
         <div className="checkmark-icon">
           <div className="checkmark"></div>

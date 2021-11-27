@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_PATH=./build node build/app.js",
     "build": "rm -rf build/ && prettier -- write src/ && tsc -p .",
-    "dev": "NODE_ENV=dev nodemon -r tsconfig-paths/register src/app.ts",
+    "dev": "NODE_ENV=dev TZ='America/Cancun' nodemon -r tsconfig-paths/register src/app.ts",
     "test": "NODE_ENV=test mocha --exit --timeout 10000 --check-leaks -r ts-node/register -r tsconfig-paths/register \"src/test/**/*.spec.ts\""
   },
   "author": "",
@@ -53,7 +53,6 @@
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.7.1",
     "supertest": "^6.1.6",
     "tsconfig-paths": "^3.11.0"
   }

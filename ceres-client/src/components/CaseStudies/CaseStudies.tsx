@@ -84,7 +84,7 @@ const CaseStudy = () => {
                     <tr>
                       <td>
                         <input className="radio-button" name="filter" type="radio" value="trailing-session"></input>
-                        Trailing Session
+                        Training Session
                       </td>
                     </tr>
                     <tr>
