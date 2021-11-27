@@ -23,8 +23,8 @@ function App() {
         <PrivateRoute path="/submit-report" component={Forms}></PrivateRoute>
         <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
         <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
-        <PrivateRoute exact path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
-        <PrivateRoute exact path={'/case-studies/:id'} component={CaseStudyInstance}></PrivateRoute>
+        <PrivateRoute exact path={'/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
+        <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
       </Switch>
     </Router>
