@@ -1,3 +1,3 @@
 export interface FileExportFormatPolicy {
-  formatFile(formResponses: any): string;
+  formatOrSendFile(formResponses: any): string;
 }
