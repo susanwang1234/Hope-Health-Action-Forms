@@ -17,8 +17,8 @@ function AdminEmployeeOfTheMonth() {
   const [shareImage, setShareImage] = useState('');
   const userContext = useContext(UserContext);
   const [selectedDepartment, setSelectedDepartment] = useState<string>('Nothing selected');
-  const [employeeName, setEmployeeName] = useState<string>();
-  const [employeeDescription, setEmployeeDescription] = useState<string>();
+  const [employeeName, setEmployeeName] = useState<string>('');
+  const [employeeDescription, setEmployeeDescription] = useState<string>('');
   const [departmentState, setDepartmentState] = useState({
     departments: []
   });
@@ -56,6 +56,10 @@ function AdminEmployeeOfTheMonth() {
   const saveImageForEmployeeOfTheMonth = async (event: any) => {
     if (shareImage.length < 1) {
       toast.error('Image not uploaded!! Please upload the image.');
+      return;
+    }
+    if (employeeName === '' || employeeDescription === '' || selectedDepartment === 'Nothing selected') {
+      toast.error('Please fill in all fields.');
       return;
     }
 
@@ -129,7 +133,7 @@ function AdminEmployeeOfTheMonth() {
             <b>New Employee of the Month</b>
           </h2>
           <div className="photo">
-            <p className="inside-text-case-study">Upload Photo</p>
+            <label className="inside-text-case-study">Upload Photo</label>
             <div>
               <div className="person_image float-left">
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
@@ -155,7 +159,7 @@ function AdminEmployeeOfTheMonth() {
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
-              <button onClick={saveImageForEmployeeOfTheMonth} disabled={selectedDepartment === 'Nothing selected'} className="blue-button bottom-5 right-20">
+              <button onClick={saveImageForEmployeeOfTheMonth} className="blue-button bottom-5 right-20">
                 Submit
               </button>
             </div>

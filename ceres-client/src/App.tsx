@@ -27,7 +27,7 @@ function App() {
         <PrivateRoute exact path={'/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
         <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
-        <PrivateRoute path="/employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
+        <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
       </Switch>
     </Router>
   );

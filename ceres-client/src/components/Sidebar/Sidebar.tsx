@@ -1,18 +1,27 @@
 /*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
 
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { HiHome } from 'react-icons/hi';
 import { BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
-import { IoMdArrowDropdown } from 'react-icons/io';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { FaHistory } from 'react-icons/fa';
 import { ImStatsDots } from 'react-icons/im';
+import { BsFileEarmarkTextFill } from 'react-icons/bs';
 import './Sidebar.css';
 
 const Sidebar = ({ show }: any) => {
   const [open, setOpen] = useState(false);
+  const [displayedArrowIcon, setDisplayedArrowIcon] = useState<ReactElement>();
+  useEffect(() => {
+    displayArrowIcon();
+  });
+  const displayArrowIcon = () => {
+    !open ? setDisplayedArrowIcon(<MdOutlineKeyboardArrowRight className="absolute right-0" />) : setDisplayedArrowIcon(<MdOutlineKeyboardArrowDown className="absolute right-0" />);
+  };
 
   return (
     <div className={show ? 'sidebar active' : 'sidebar'}>
@@ -20,7 +29,7 @@ const Sidebar = ({ show }: any) => {
         <li>
           <Link to="/dashboard" className="side-link">
             <HiHome />
-            Home
+            Dashbaord
           </Link>
         </li>
         <li>
@@ -37,8 +46,9 @@ const Sidebar = ({ show }: any) => {
         </li>
         <li>
           <Button className="side-button" onClick={() => setOpen(!open)}>
-            <IoMdArrowDropdown />
+            <BsFileEarmarkTextFill />
             Reports
+            {displayedArrowIcon}
           </Button>
           {open && (
             <li>

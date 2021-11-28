@@ -1,59 +1,87 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { IoMdCreate } from 'react-icons/io';
+import { MdAddBox } from 'react-icons/md';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { ReactElement, useEffect, useState } from 'react';
+import { BsFillPersonBadgeFill } from 'react-icons/bs';
+import { BsPersonPlusFill } from 'react-icons/bs';
+import { BsFillPersonLinesFill } from 'react-icons/bs';
+import { BsMegaphoneFill } from 'react-icons/bs';
+import { RiMenuAddFill } from 'react-icons/ri';
+import { RiMenuFill } from 'react-icons/ri';
+import { BsClipboardData } from 'react-icons/bs';
 import { Button } from 'react-bootstrap';
-import { IoMdArrowDropdown } from 'react-icons/io';
 import './Sidebar.css';
 /*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
 
 const AdminSidebar = ({ show }: any) => {
-  const [open, setOpen] = useState(false);
+  const [openCreate, setOpenCreate] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [displayedCreateArrowIcon, setDisplayedCreateArrowIcon] = useState<ReactElement>();
+  const [displayedEditArrowIcon, setDisplayedEditArrowIcon] = useState<ReactElement>();
 
+  useEffect(() => {
+    displayArrowIcon();
+  });
+
+  const displayArrowIcon = () => {
+    !openCreate ? setDisplayedCreateArrowIcon(<MdOutlineKeyboardArrowRight className="absolute right-0" />) : setDisplayedCreateArrowIcon(<MdOutlineKeyboardArrowDown className="absolute right-0" />);
+    !openEdit ? setDisplayedEditArrowIcon(<MdOutlineKeyboardArrowRight className="absolute right-0" />) : setDisplayedEditArrowIcon(<MdOutlineKeyboardArrowDown className="absolute right-0" />);
+  };
   return (
     <div className={show ? 'sidebar active' : 'sidebar'}>
       <ul>
         <li>
-          <Link to="/employee-of-the-month" className="side-link">
-            New Employee of the Month
-          </Link>
-        </li>
-        <li>
-          <Link to="/employee-of-the-month" className="side-link">
-            Edit Forms
-          </Link>
-        </li>
-        <li>
-          <Button className="side-button" onClick={() => setOpen(!open)}>
-            <IoMdArrowDropdown />
-            Create or Edit Users
+          <Button className="side-button" onClick={() => setOpenCreate(!openCreate)}>
+            <MdAddBox />
+            Create New
+            {displayedCreateArrowIcon}
           </Button>
-          {open && (
+          {openCreate && (
             <li>
-              <Link to="/employee-of-the-month" className="drop-link" color="red">
-                Create new user
+              <Link to="/new-user" className="drop-link" color="red">
+                <BsPersonPlusFill />
+                User
               </Link>
-              <Link to="/employee-of-the-month" className="drop-link">
-                Edit existing user
+              <Link to="/new-department" className="drop-link">
+                <RiMenuAddFill />
+                Department
+              </Link>
+              <Link to="/new-annoucenemnt" className="drop-link">
+                <BsMegaphoneFill />
+                Announcement
+              </Link>
+              <Link to="/new-employee-of-the-month" className="drop-link">
+                <BsFillPersonBadgeFill />
+                Employee of the Month
               </Link>
             </li>
           )}
         </li>
         <li>
-          <Button className="side-button" onClick={() => setOpen(!open)}>
-            <IoMdArrowDropdown />
-            Create or Edit Departments
+          <Button className="side-button" onClick={() => setOpenEdit(!openEdit)}>
+            <IoMdCreate />
+            Edit Exisiting
+            {displayedEditArrowIcon}
           </Button>
-          {open && (
+          {openEdit && (
             <li>
-              <Link to="/employee-of-the-month" className="drop-link" color="red">
-                Create new department
+              <Link to="/edit-user" className="drop-link" color="red">
+                <BsFillPersonLinesFill />
+                User
               </Link>
-              <Link to="/employee-of-the-month" className="drop-link">
-                Edit existing department
+              <Link to="/edit-department" className="drop-link">
+                <RiMenuFill />
+                Department
+              </Link>
+              <Link to="/edit-report" className="drop-link">
+                <BsClipboardData />
+                Data Report
               </Link>
             </li>
           )}
         </li>
-        <li></li>
       </ul>
     </div>
   );
