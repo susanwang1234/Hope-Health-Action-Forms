@@ -9,13 +9,13 @@ export class DataFormatter {
     this.fileExportFormatPolicy = fileExportFormatPolicy;
   }
 
-  private formatDataIntoFile(): string {
-    const fileString: string = this.fileExportFormatPolicy.formatFile(this.formResponses);
-    return fileString;
+  private formatDataOrSendFile(): string {
+    const fileStringOrMessage: string = this.fileExportFormatPolicy.formatOrSendFile(this.formResponses);
+    return fileStringOrMessage;
   }
 
-  getFileToSendToUser(): string {
-    const fileString = this.formatDataIntoFile();
-    return fileString;
+  getFileOrSendFileToUser(): string {
+    const fileStringOrMessage = this.formatDataOrSendFile();
+    return fileStringOrMessage;
   }
 }
