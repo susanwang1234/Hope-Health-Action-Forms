@@ -73,7 +73,9 @@ const CaseStudySubmit = () => {
     }
   }
 
-  const validationChecks= ()=>{
+
+  const saveImageForCaseStudy = async (event: any) => {
+
     if (selectedCaseStudyType === 'Nothing selected'){
       toast.error('Please select the Case Study type.');
       return;
@@ -114,13 +116,6 @@ const CaseStudySubmit = () => {
         }
       }
     }
-  }
-
-
-  const saveImageForCaseStudy = async (event: any) => {
-
-    validationChecks();
-
     const url = '/image';
     try {
       event.preventDefault();
