@@ -116,6 +116,7 @@ const CaseStudySubmit = () => {
         }
       }
     }
+    
     const url = '/image';
     try {
       event.preventDefault();
