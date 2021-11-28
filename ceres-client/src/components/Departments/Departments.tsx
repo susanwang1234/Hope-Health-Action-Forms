@@ -40,7 +40,6 @@ function Departments() {
       try {
         const response = await httpService.get(url);
         const { data } = response;
-        console.log('Fetched Departments: ' + data);
         setDepartmentState({
           departments: data
         });

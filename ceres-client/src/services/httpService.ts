@@ -19,9 +19,14 @@ const patch = (url: string, obj: any, config: object = {}): Promise<any> => {
   return axios.patch(baseApiUrl + url, obj, config);
 };
 
+const del = (url: string, config: object = {}): Promise<any> => {
+  return axios.delete(baseApiUrl + url, config);
+};
+
 export default {
   get,
   post,
   put,
-  patch
+  patch,
+  del
 };

@@ -1,35 +1,48 @@
 import './CaseStudies.css';
 import '../../App.css';
-import { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../UserContext';
+import { useState, useEffect, useContext } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import photo from './../../images/original_artwork.jpg';
 import { Link, useHistory } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
-import { debug } from 'console';
+import { UserContext } from '../../UserContext';
+import { toast } from 'react-toastify';
 
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
   const searchQuery = '';
   let history = useHistory();
+  let coolStr = "";
+
+  const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
+  const [caseStudyType, setCaseStudyType] = useState({
+    types: []
+  });
 
   const [showNav, setShowNav] = useState(false);
   document.body.style.backgroundColor = '#f5f5f5';
 
   const [caseStudyState, setCaseStudyState] = useState<any>({
-    isLoaded: false,
     caseStudies: [],
     caseStudiesOrig: []
   });
+  const [caseStudyImageState, setCaseStudyImageState] = useState({
+    caseStudiesImages: []
+  });
 
-  function search() {
+  const search = () =>  {
     caseStudyState.caseStudies = caseStudyState.caseStudiesOrig;
+    coolStr = (document.getElementById('search-bar') as HTMLInputElement).value;
+    if (coolStr === "") {
+      (document.getElementById('results-msg')!).innerHTML = "";
+    } else {
+      (document.getElementById('results-msg')!).innerHTML = "Search results for " + coolStr;
+    }
+    
 
     setCaseStudyState({
-      isLoaded: true,
       caseStudies: caseStudyState.caseStudies,
       caseStudiesOrig: caseStudyState.caseStudiesOrig
     });
@@ -43,7 +56,6 @@ const CaseStudy = () => {
     }
 
     setCaseStudyState({
-      isLoaded: true,
       caseStudies: caseStudyState.caseStudies.filter(containsString),
       caseStudiesOrig: caseStudyState.caseStudiesOrig
     });
@@ -55,22 +67,92 @@ const CaseStudy = () => {
       const response = await httpService.get(url);
       const data1 = response.data;
       const data2 = response.data;
+      
       console.log('Fetched Case Studies: ' + data1);
       setCaseStudyState({
-        isLoaded: true,
         caseStudies: data1,
         caseStudiesOrig: data2
       });
+      console.log('data1: ' + data1);
+      console.log('data2: ' + data2);
       console.log('caseStudies: ' + caseStudyState.caseStudies);
       console.log('caseStudyOrig: ' + caseStudyState.caseStudiesOrig);
+      getAllCaseStudiesImages(response.data);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
   }
 
+  async function getAllCaseStudiesImages(retrievedCaseStudies: any) {
+    let url;
+    let caseStudiesImages: any = [];
+    for (let i = 0; i < retrievedCaseStudies.length; i++) {
+      url = `/image/${retrievedCaseStudies[i].imageId}`;
+      try {
+        await httpService
+          .get(url, {
+            responseType: 'blob'
+          })
+          .then((res) => {
+            caseStudiesImages.push(URL.createObjectURL(res.data));
+          });
+      } catch (error: any) {
+        console.log('Error: Unable to fetch from ' + url);
+      }
+    }
+    setCaseStudyImageState({
+      caseStudiesImages: caseStudiesImages
+    });
+  }
+
   useEffect(() => {
     getCaseStudies();
   }, [setCaseStudyState]);
+
+  useEffect(() => {
+    getTypeData();
+  }, [setCaseStudyType]);
+
+  async function getTypeData() {
+    const url = '/case-study-types';
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setCaseStudyType({
+        types: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  }
+
+  async function getCaseStudiesByType(caseStudyTypeId: any) {
+    const url = `/case-studies/${caseStudyTypeId}`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setCaseStudyState({
+        caseStudies: data,
+        caseStudiesOrig: data
+      });
+    } catch (error: any) {
+      console.log('Error Unable to fetch from ' + url);
+      toast.error('There are no case studies of this type.');
+      setCaseStudyState({
+        caseStudies: [],
+        caseStudiesOrig: []
+      });
+    }
+  }
+
+  const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    toast.dismiss();
+    (document.getElementById('search-bar') as HTMLInputElement).value = "";
+    (document.getElementById('results-msg')!).innerHTML = "";
+    const value = event.target.value;
+    setSelectedCaseStudyType(value);
+    value !== '0' ? getCaseStudiesByType(value) : getCaseStudies();
+  };
 
   return (
     <div className="App">
@@ -82,39 +164,25 @@ const CaseStudy = () => {
       <div className="container">
         <table>
           <tr>
-            <td className="column-left">
+            <td>
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="patient-story"></input>Patient Story
+                        <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>All Case Studies
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="staff-recognition"></input>
-                        Staff Recognition
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="trailing-session"></input>
-                        Trailing Session
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="equipment-received"></input>
-                        Equipment Received
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <input className="radio-button" name="filter" type="radio" value="other"></input>
-                        Other
-                      </td>
-                    </tr>
+                    {caseStudyType.types.map((Types: any) => {
+                      return (
+                        <tr>
+                          <td>
+                            <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioButtonHandler}></input>
+                            {Types.name}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </table>
                 </div>
               </div>
@@ -131,23 +199,22 @@ const CaseStudy = () => {
                   Submit
                 </Button>
               </Form>
-              <p>Search results for "{(document.getElementById('search-bar') as HTMLInputElement).value}"</p>
+              <p id="results-msg"></p>
               <div className="case-study-block-container">
-                {/* Dynamically insert case study blocks here */}
-                {caseStudyState.caseStudies.map((caseStudies: any) => {
+                {caseStudyState.caseStudies.map((caseStudy: any) => {
                   return (
                     <table className="case-study-block">
                       <tr>
                         <td className="case-study-block-image">
-                          <img src={photo} alt="" width="150px" height="150px"></img>
+                          <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
-                          <h2>{caseStudies.title}</h2>
-                          <h5>{caseStudies.createdAt}</h5>
-                          <p>{caseStudies.response}</p>
+                          <h2>{caseStudy.title}</h2>
+                          <h5>{caseStudy.createdAt}</h5>
+                          <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/${caseStudies.id}`}>
+                          <Link to={`/case-studies/view/${caseStudy.id}`}>
                             <button className="button">View</button>
                           </Link>
                         </td>
