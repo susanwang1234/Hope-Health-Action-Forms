@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { UserContext } from '../../UserContext';
@@ -13,8 +13,7 @@ import { toast } from 'react-toastify';
 const CaseStudy = () => {
   const userContext = useContext(UserContext);
   const searchQuery = '';
-  let history = useHistory();
-  let coolStr = "";
+  let queryStr = "";
 
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
   const [caseStudyType, setCaseStudyType] = useState({
@@ -34,11 +33,11 @@ const CaseStudy = () => {
 
   const search = () =>  {
     caseStudyState.caseStudies = caseStudyState.caseStudiesOrig;
-    coolStr = (document.getElementById('search-bar') as HTMLInputElement).value;
-    if (coolStr === "") {
+    queryStr = (document.getElementById('search-bar') as HTMLInputElement).value;
+    if (queryStr === "") {
       (document.getElementById('results-msg')!).innerHTML = "";
     } else {
-      (document.getElementById('results-msg')!).innerHTML = "Search results for " + coolStr;
+      (document.getElementById('results-msg')!).innerHTML = "Search results for " + queryStr;
     }
     
 
@@ -51,7 +50,7 @@ const CaseStudy = () => {
       caseStudyState.caseStudies = caseStudyState.caseStudiesOrig.slice(0);
     }
 
-    function containsString(caseStudy: any) {
+    const containsString = (caseStudy: any) => {
       return caseStudy.title.toUpperCase().includes((document.getElementById('search-bar') as HTMLInputElement).value.toUpperCase());
     }
 
@@ -61,7 +60,7 @@ const CaseStudy = () => {
     });
   }
 
-  async function getCaseStudies() {
+  const getCaseStudies = async () => {
     const url = '/case-studies';
     try {
       const response = await httpService.get(url);
@@ -83,7 +82,7 @@ const CaseStudy = () => {
     }
   }
 
-  async function getAllCaseStudiesImages(retrievedCaseStudies: any) {
+  const getAllCaseStudiesImages = async(retrievedCaseStudies: any) => {
     let url;
     let caseStudiesImages: any = [];
     for (let i = 0; i < retrievedCaseStudies.length; i++) {
@@ -113,7 +112,7 @@ const CaseStudy = () => {
     getTypeData();
   }, [setCaseStudyType]);
 
-  async function getTypeData() {
+  const getTypeData = async () => {
     const url = '/case-study-types';
     try {
       const response = await httpService.get(url);
@@ -126,7 +125,7 @@ const CaseStudy = () => {
     }
   }
 
-  async function getCaseStudiesByType(caseStudyTypeId: any) {
+  const getCaseStudiesByType = async (caseStudyTypeId: any) => {
     const url = `/case-studies/${caseStudyTypeId}`;
     try {
       const response = await httpService.get(url);
