@@ -13,6 +13,7 @@ import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
 import httpService from '../../services/httpService';
+import { calculateDepartmentPoints } from './pointSystem';
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
@@ -24,6 +25,9 @@ const Dashboard = () => {
   const [date, setDate]: any = useState(new Date());
   const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
   const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
+  const [department, setDepartmentState] = useState<any>({
+    departments: []
+  });
   const [toDo, setToDoState] = useState<any>({
     toDoReminders: []
   });
@@ -37,8 +41,7 @@ const Dashboard = () => {
     const url = '/employee-of-the-month';
     try {
       const response = await httpService.get(url);
-      const { data } = response;
-      const retrievedEmployeeOfTheMonth = data[0];
+      const retrievedEmployeeOfTheMonth = response.data[0];
       setEmployeeOfTheMonthState(retrievedEmployeeOfTheMonth);
       await getEmployeeOfTheMonthImage(retrievedEmployeeOfTheMonth.imageId);
     } catch (error: any) {
@@ -65,10 +68,21 @@ const Dashboard = () => {
     const url = '/to-do';
     try {
       const response = await httpService.get(url);
-      console.log(response.data);
+      getDepartments(response.data);
       setToDoState({
         toDoReminders: response.data
       });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const getDepartments = async (departmentStatus: any[]) => {
+    const url = '/department';
+    try {
+      const response = await httpService.get(url);
+      const monthlyLeaderboard = calculateDepartmentPoints(response.data.slice(1), departmentStatus);
+      console.log(monthlyLeaderboard);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }

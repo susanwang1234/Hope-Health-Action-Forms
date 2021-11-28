@@ -16,7 +16,7 @@ const startServer = () => {
   enableRoutes(app);
   enableErrorHandling(app);
   enableServerListening(app, NAMESPACE);
-  scheduleMonthlyForms();
+  // scheduleMonthlyForms();
 };
 
 /** Start Ceres Server */
