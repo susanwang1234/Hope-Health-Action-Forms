@@ -166,7 +166,7 @@ const CaseStudySubmit = () => {
       .then((data: any) => {
         updateResponse(postResponses, true);
         toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
-        // window.location.href = '/case-studies';
+        window.location.href = '/case-studies';
       })
       .catch((error: any) => {
         console.log(error);
