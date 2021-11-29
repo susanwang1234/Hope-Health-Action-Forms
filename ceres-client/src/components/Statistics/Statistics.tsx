@@ -24,15 +24,14 @@ const StatisticsDashboard = () => {
   }, []);
 
   async function fetchData() {
-    const response = await httpService.get('/dataviz/2');
-    console.log('DATA:', response.data);
+    const url = `/dataviz/2?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
+    const response = await httpService.get(url);
     setDataForPlots(response.data.plotData);
     setQuestionLabels(response.data.questionLabels);
   }
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    console.log('VALUE:', value)
     setPlotIndex(+value);
   }
   
@@ -49,18 +48,18 @@ const StatisticsDashboard = () => {
         </div>
         <div className="date-filter">
           From
-          <select onChange={event => setStartMonth(event.target.value)}>
-            <option className="placeholder" selected disabled>Start Month</option>
+          <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
+            <option className="placeholder" value="" disabled>Start Month</option>
             {MONTHS.map(month => <option value={month}>{month}</option>)}
           </select>
           <input onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
           To
-          <select onChange={event => setEndMonth(event.target.value)}>
-            <option className="placeholder" selected disabled>End Month</option>
+          <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
+            <option className="placeholder" value="" disabled>End Month</option>
             {MONTHS.map(month => <option>{month}</option>)}
           </select>
           <input onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="End Year"></input>
-          <button>Search</button>
+          <button onClick={fetchData}>Search</button>
         </div>
         <div className="card question-list">
           <ul className="questionMenu">
