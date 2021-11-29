@@ -25,9 +25,13 @@ const StatisticsDashboard = () => {
 
   async function fetchData() {
     const url = `/dataviz/2?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
-    const response = await httpService.get(url);
-    setDataForPlots(response.data.plotData);
-    setQuestionLabels(response.data.questionLabels);
+    try {
+      const response = await httpService.get(url);
+      setDataForPlots(response.data.plotData);
+      setQuestionLabels(response.data.questionLabels);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from', url);
+    }
   }
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
