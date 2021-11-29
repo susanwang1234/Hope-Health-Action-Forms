@@ -1,5 +1,6 @@
 .questionMenu {
   background-color: white;
+  height: 100%;
 }
 
 .dashboard-title {
@@ -8,10 +9,12 @@
 
 .date-filter {
   grid-area: filter;
+  display: flex;
 }
 
 .question-list {
   grid-area: sidebar;
+  text-align: left;
 }
 
 .plot {
@@ -19,16 +22,24 @@
 }
 
 .grid-container {
+  padding: 1em;
   display: grid;
-  /* grid-template-columns: 1fr 2fr; */
+  grid-template-columns: 0.3fr 1.4fr;
+  grid-template-rows: 0.5fr 0.2fr 2.3fr;
+  gap: 11px 35px; 
   grid-template-areas:
     "header header"
-    "filter filter"
+    ". filter"
     "sidebar content"
     "sidebar content"
 }
 
 .radio-button {
   margin-right: 10px;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  font-weight: bold;
 }
 

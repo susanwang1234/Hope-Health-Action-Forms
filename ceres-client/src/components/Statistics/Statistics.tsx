@@ -7,11 +7,17 @@ import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import Plot from 'react-plotly.js';
 
+const MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+
 const StatisticsDashboard = () => {
   const [showNav, setShowNav] = useState(false);
   const [dataForPlots, setDataForPlots] = useState<any>([]);
   const [questionLabels, setQuestionLabels] = useState([]);
   const [plotIndex, setPlotIndex] = useState(0);
+  const [startMonth, setStartMonth] = useState('');
+  const [startYear, setStartYear] = useState(0);
+  const [endMonth, setEndMonth] = useState('');
+  const [endYear, setEndYear] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -42,7 +48,19 @@ const StatisticsDashboard = () => {
           Rehab Statistics
         </div>
         <div className="date-filter">
-          Filter Stuff
+          From
+          <select onChange={event => setStartMonth(event.target.value)}>
+            <option className="placeholder" selected disabled>Start Month</option>
+            {MONTHS.map(month => <option value={month}>{month}</option>)}
+          </select>
+          <input onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
+          To
+          <select onChange={event => setEndMonth(event.target.value)}>
+            <option className="placeholder" selected disabled>End Month</option>
+            {MONTHS.map(month => <option>{month}</option>)}
+          </select>
+          <input onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="End Year"></input>
+          <button>Search</button>
         </div>
         <div className="card question-list">
           <ul className="questionMenu">
