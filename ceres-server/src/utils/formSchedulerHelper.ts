@@ -19,7 +19,7 @@ const formResponseTemplate = (departmentQuestionId: number, formId: number) => {
 };
 
 const fillInFormResponseTemplate = (retrievedDepartmentQuestionIds: any, formId: number) => {
-  let formResponses: any[] = new Array();
+  let formResponses: any[] = [];
   retrievedDepartmentQuestionIds.forEach((item: any) => {
     formResponses.push(formResponseTemplate(item.id, formId));
   });

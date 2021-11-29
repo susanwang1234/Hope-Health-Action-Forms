@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "0b8e8b8d-4008-4d3c-b9ac-bfda6776fe38",
+    "_postman_id": "2bef3522-189e-499f-936e-4d75de01962b",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -792,6 +792,26 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["form-responses", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET form responses for a department's latest form",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/form-responses/latest/:departmentId",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form-responses", "latest", ":departmentId"],
               "variable": [
                 {
                   "key": "id",
