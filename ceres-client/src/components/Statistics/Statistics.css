@@ -1,3 +1,34 @@
 .questionMenu {
   background-color: white;
 }
+
+.dashboard-title {
+  grid-area: header;
+}
+
+.date-filter {
+  grid-area: filter;
+}
+
+.question-list {
+  grid-area: sidebar;
+}
+
+.plot {
+  grid-area: content;
+}
+
+.grid-container {
+  display: grid;
+  /* grid-template-columns: 1fr 2fr; */
+  grid-template-areas:
+    "header header"
+    "filter filter"
+    "sidebar content"
+    "sidebar content"
+}
+
+.radio-button {
+  margin-right: 10px;
+}
+

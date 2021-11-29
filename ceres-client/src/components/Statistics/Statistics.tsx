@@ -1,6 +1,6 @@
 import './Statistics.css';
 import '../../App.css';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -23,6 +23,12 @@ const StatisticsDashboard = () => {
     setDataForPlots(response.data.plotData);
     setQuestionLabels(response.data.questionLabels);
   }
+
+  const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    console.log('VALUE:', value)
+    setPlotIndex(+value);
+  }
   
   return (
     <div className="App">
@@ -31,28 +37,34 @@ const StatisticsDashboard = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <Sidebar show={showNav}></Sidebar>
-      {/* <div className="card"> */}
-        <ul className="questionMenu">
-          {questionLabels.map(label => <li>{label}</li>)}
-        </ul>
-      {/* </div> */}
-      <button onClick={() => {
-        const maxIndex = dataForPlots.length - 1;
-        setPlotIndex(plotIndex + 1 > maxIndex ? 0 : plotIndex + 1)
-      }}>Click me!</button>
-      {dataForPlots[0] &&
-      <Plot
-        data={[
-          {
-            x: dataForPlots[plotIndex].x,
-            y: dataForPlots[plotIndex].y,
-            type: 'scatter',
-            mode: 'lines+markers',
-          },
+      <div className="grid-container">
+        <div className="dashboard-title">
+          Rehab Statistics
+        </div>
+        <div className="date-filter">
+          Filter Stuff
+        </div>
+        <div className="card question-list">
+          <ul className="questionMenu">
+            {questionLabels.map((label, index) => <li><input className="radio-button" name="selected" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>)}
+          </ul>
+        </div>
+        <div className="plot">
+          {dataForPlots[0] &&
+          <Plot
+            data={[
+              {
+                x: dataForPlots[plotIndex].x,
+                y: dataForPlots[plotIndex].y,
+                type: 'scatter',
+                mode: 'lines+markers',
+              },
 
-        ]}
-        layout={ {title: questionLabels[plotIndex] } }
-      />}
+            ]}
+            layout={ {title: questionLabels[plotIndex] } }
+          />}
+        </div>
+      </div>
     </div>
   )
 }
