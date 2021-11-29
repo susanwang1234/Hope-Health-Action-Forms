@@ -12,7 +12,7 @@ import { toast } from 'react-toastify';
 import gray_person from '../../images/gray_person.jpg';
 
 let employeeOfTheMonth;
-function AdminEmployeeOfTheMonth() {
+const AdminEmployeeOfTheMonth = () => {
   const [showNav, setShowNav] = useState(false);
   const [shareImage, setShareImage] = useState('');
   const userContext = useContext(UserContext);
@@ -38,7 +38,7 @@ function AdminEmployeeOfTheMonth() {
 
   useEffect(() => {
     getDepartments();
-  });
+  }, [setDepartmentState]);
 
   const getDepartments = async () => {
     const url = '/department';
@@ -168,5 +168,5 @@ function AdminEmployeeOfTheMonth() {
       </div>
     </div>
   );
-}
+};
 export default AdminEmployeeOfTheMonth;

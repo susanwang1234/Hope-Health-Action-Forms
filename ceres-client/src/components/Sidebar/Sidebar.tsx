@@ -1,13 +1,11 @@
 /*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
 
 import { Link } from 'react-router-dom';
-import { ReactElement, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { HiHome } from 'react-icons/hi';
 import { BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { FaHistory } from 'react-icons/fa';
 import { ImStatsDots } from 'react-icons/im';
 import { BsFileEarmarkTextFill } from 'react-icons/bs';
@@ -15,14 +13,6 @@ import './Sidebar.css';
 
 const Sidebar = ({ show }: any) => {
   const [open, setOpen] = useState(false);
-  const [displayedArrowIcon, setDisplayedArrowIcon] = useState<ReactElement>();
-  useEffect(() => {
-    displayArrowIcon();
-  });
-  const displayArrowIcon = () => {
-    !open ? setDisplayedArrowIcon(<MdOutlineKeyboardArrowRight className="absolute right-0" />) : setDisplayedArrowIcon(<MdOutlineKeyboardArrowDown className="absolute right-0" />);
-  };
-
   return (
     <div className={show ? 'sidebar active' : 'sidebar'}>
       <ul>
@@ -48,7 +38,6 @@ const Sidebar = ({ show }: any) => {
           <Button className="side-button" onClick={() => setOpen(!open)}>
             <BsFileEarmarkTextFill />
             Reports
-            {displayedArrowIcon}
           </Button>
           {open && (
             <li>
