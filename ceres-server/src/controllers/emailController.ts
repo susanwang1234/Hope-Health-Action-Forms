@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { validationResult } from 'express-validator';
 import { getItems } from './requestTemplates/getAllRequest';
 import { createItem } from './requestTemplates/createRequest';
 import { editItemById } from './requestTemplates/editByIdRequest';
@@ -18,10 +19,18 @@ const getEmails = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const createEmail = async (req: Request, res: Response, next: NextFunction) => {
+  const emailErrors = validationResult(req);
+  if (!emailErrors.isEmpty()) {
+    return res.status(422).send({ errors: emailErrors.array() });
+  }
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, inputtedReqBody(req));
 };
 
 const editEmailById = async (req: Request, res: Response, next: NextFunction) => {
+  const emailErrors = validationResult(req);
+  if (!emailErrors.isEmpty()) {
+    return res.status(422).send({ errors: emailErrors.array() });
+  }
   await editItemById(req, res, next, NAMESPACE, TABLE_NAME, emailNegativeOrNanInputError, emailDNEError, inputtedReqBody(req));
 };
 
