@@ -18,11 +18,6 @@ const inputtedReqBody = (req: Request) => {
   return { username: username, password: password, departmentId: departmentId, roleId: roleId };
 };
 
-const isUsernameUnique = async (username: string) => {
-  const userFound = await userModel.findOne('User.username', username);
-  return userFound;
-};
-
 const getUsers = async (req: Request, res: Response, next: NextFunction) => {
   await getItems(req, res, next, NAMESPACE, TABLE_NAME);
 };
