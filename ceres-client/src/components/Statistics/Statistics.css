@@ -43,3 +43,21 @@
   font-weight: bold;
 }
 
+.statistics-dashboard-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: stretch;
+  height: 60vh;
+}
+
+.right-container {
+  width: 80%;
+}
+
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 85vh;
+}
