@@ -15,6 +15,7 @@ import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
 import employeeOfTheMonthRoutes from './employeeOfTheMonthRoute';
 import emailRoutes from './emailRoute';
+import forgotPasswordRoutes from './forgotPasswordRoute';
 
 export const authRouter = Router();
 authRouter.use('/auth', authenticationRoutes);
@@ -35,3 +36,4 @@ apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
 apiRouter.use('/email', emailRoutes);
+apiRouter.use('/forgot-password', forgotPasswordRoutes);
