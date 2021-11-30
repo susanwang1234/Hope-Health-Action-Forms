@@ -1,7 +1,7 @@
 import logging from 'config/logging';
 import { Knex } from 'db/mysql';
 import { Request, Response, NextFunction } from 'express';
-import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
+import { formNegativeOrNanInputError, formDNEError, departmentNegativeOrNanInputError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
 import { Form } from '../db/models/formModel';
@@ -26,6 +26,38 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
       .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
       .where('formId', formId);
     logging.info(NAMESPACE, `GOT FORM RESPONSES FOR FORM ${formId}`, retrievedResponses);
+    if (!retrievedResponses.length) {
+      res.status(404).send(formDNEError);
+      return;
+    }
+    res.send(retrievedResponses);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
+};
+
+const getFormResponsesForLatestFormByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
+  const departmentId: number = +req.params.departmentId;
+  logging.info(NAMESPACE, `GETTING FORM RESPONSES FOR LATEST FORM IN DEPARTMENT ${departmentId}`);
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+
+  try {
+    const latestFormId = await Knex.select('id').from('Form').where('departmentId', departmentId).orderBy('createdAt', 'DESC').first();
+    if (!latestFormId) {
+      res.status(404).send({ error: 'Could not find any forms for requested department.' });
+      return;
+    }
+
+    const retrievedResponses = await Knex.select('Question.*', 'DepartmentQuestion.isRequired', 'FormResponse.*')
+      .from('FormResponse')
+      .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+      .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+      .where('formId', latestFormId.id);
+    logging.info(NAMESPACE, `GOT FORM RESPONSES FOR FORM ${latestFormId.id}`, retrievedResponses);
     if (!retrievedResponses.length) {
       res.status(404).send(formDNEError);
       return;
@@ -78,4 +110,4 @@ const validateFormResponsesBelongToCorrectDepartment = async (formResponses: For
   }
 };
 
-export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId };
+export default { getFormResponsesByFormId, addNewFormResponses, editFormResponsesByFormId, getFormResponsesForLatestFormByDepartmentId };

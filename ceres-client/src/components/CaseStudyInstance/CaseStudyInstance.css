@@ -1,0 +1,110 @@
+.container {
+  width: 100% !important;
+  text-align: center;
+}
+
+.card {
+  text-align: center;
+  /* justify-content: space-around; */
+  height: auto;
+  width: auto;
+  padding: 25px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+  margin-bottom: 10px;
+}
+
+.card-inner-case-study {
+  display: inline;
+  font-size: 25px;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.radio-button {
+  margin-right: 10px;
+}
+
+.case-study-img {
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 10px #ededed, -5px -5px 13px #ffffff;
+}
+
+table {
+  display: block !important;
+  border: none !important;
+  outline: none !important;
+  margin: auto;
+}
+
+.filter-container {
+  width: 275px;
+}
+
+td {
+  vertical-align: top;
+  width: 350px;
+}
+
+.case-study-block-container {
+  background-color: palegoldenrod;
+}
+
+.case-study-block {
+  border: 10pt !important;
+  border-color: black !important;
+  display: flex;
+  text-align: left !important;
+  background-color: white;
+}
+
+.case-study-block-image {
+  vertical-align: middle;
+  width: 300px;
+}
+
+.case-study-block-text {
+  word-break: break-all;
+  width: 1000px !important;
+  height: auto;
+  text-align: left !important;
+}
+
+.case-study-title {
+  margin-left: 20px;
+}
+
+.case-study-date {
+  margin-left: 40px;
+  color: lightgray;
+}
+
+.view-cancel-form-button {
+  display: flex;
+  background-color: #555555;
+  font-weight: bold;
+  font-family: Arial;
+  color: white;
+  border: none;
+  font-size: 20px;
+  padding: 4px 10px;
+  text-align: right;
+  border-radius: 5px;
+  float: right;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.question {
+  font-style: bold !important;
+  margin-top: 20px;
+}
+
+.response {
+  font-style: normal !important;
+  margin-left: 20px;
+  color: grey;
+  font-size: 16px;
+}
