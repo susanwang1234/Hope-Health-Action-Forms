@@ -58,7 +58,7 @@ CSS Classes
   width: 140px;
 }
 .individual-card {
-  background-color: rgb(245, 245, 245);
+  background-color: white;
   border-color: #d6d6d6;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);

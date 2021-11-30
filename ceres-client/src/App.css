@@ -1,8 +1,11 @@
+.App {
+  text-align: center;
+  background-color: #f5f5f5;
+}
 
 * {
   font-family: Arial;
 }
-
 
 h2.inside-card {
   font-family: Arial;
@@ -15,7 +18,7 @@ h2.inside-card {
 }
 
 body {
-  background-color: #ebebeb;
+  background-color: #0f1066;
   box-sizing: border-box;
   margin: 0;
   padding: 0;

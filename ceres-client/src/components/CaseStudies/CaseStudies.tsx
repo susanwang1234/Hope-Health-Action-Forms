@@ -1,42 +1,74 @@
-import './CaseStudies.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
+import './CaseStudies.css';
 import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import { Link } from 'react-router-dom';
 import httpService from '../../services/httpService';
+import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const CaseStudy = () => {
+  let queryStr = '';
+  document.body.style.backgroundColor = '#f5f5f5';
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
   const [caseStudyType, setCaseStudyType] = useState({
     types: []
   });
-  document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
-  const [caseStudyState, setCaseStudyState] = useState({
-    caseStudies: []
+  const [caseStudyState, setCaseStudyState] = useState<any>({
+    caseStudies: [],
+    caseStudiesOrig: []
   });
   const [caseStudyImageState, setCaseStudyImageState] = useState({
     caseStudiesImages: []
   });
 
-  useEffect(() => {
-    getCaseStudies();
-  }, [setCaseStudyState]);
+  const search = () => {
+    caseStudyState.caseStudies = caseStudyState.caseStudiesOrig;
+    queryStr = (document.getElementById('search-bar') as HTMLInputElement).value;
+    if (queryStr === '') {
+      document.getElementById('results-msg')!.innerHTML = '';
+    } else {
+      document.getElementById('results-msg')!.innerHTML = 'Search results for ' + queryStr;
+    }
 
-  async function getCaseStudies() {
+    setCaseStudyState({
+      caseStudies: caseStudyState.caseStudies,
+      caseStudiesOrig: caseStudyState.caseStudiesOrig
+    });
+
+    if ((document.getElementById('search-bar') as HTMLInputElement).value == '') {
+      caseStudyState.caseStudies = caseStudyState.caseStudiesOrig.slice(0);
+    }
+
+    const containsString = (caseStudy: any) => {
+      return caseStudy.title.toUpperCase().includes((document.getElementById('search-bar') as HTMLInputElement).value.toUpperCase());
+    };
+
+    setCaseStudyState({
+      caseStudies: caseStudyState.caseStudies.filter(containsString),
+      caseStudiesOrig: caseStudyState.caseStudiesOrig
+    });
+  };
+
+  const getCaseStudies = async () => {
     const url = '/case-studies';
     try {
       const response = await httpService.get(url);
+      setCaseStudyState({
+        caseStudies: response.data,
+        caseStudiesOrig: response.data
+      });
       getAllCaseStudiesImages(response.data);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  async function getAllCaseStudiesImages(retrievedCaseStudies: any) {
+  const getAllCaseStudiesImages = async (retrievedCaseStudies: any) => {
     let url;
     let caseStudiesImages: any = [];
     for (let i = 0; i < retrievedCaseStudies.length; i++) {
@@ -56,16 +88,17 @@ const CaseStudy = () => {
     setCaseStudyImageState({
       caseStudiesImages: caseStudiesImages
     });
-    setCaseStudyState({
-      caseStudies: retrievedCaseStudies
-    });
-  }
+  };
+
+  useEffect(() => {
+    getCaseStudies();
+  }, [setCaseStudyState]);
 
   useEffect(() => {
     getTypeData();
   }, [setCaseStudyType]);
 
-  async function getTypeData() {
+  const getTypeData = async () => {
     const url = '/case-study-types';
     try {
       const response = await httpService.get(url);
@@ -76,26 +109,30 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  async function getCaseStudiesByType(caseStudyTypeId: any) {
+  const getCaseStudiesByType = async (caseStudyTypeId: any) => {
     const url = `/case-studies/${caseStudyTypeId}`;
     try {
       const response = await httpService.get(url);
-      const data = response.data;
       setCaseStudyState({
-        caseStudies: data
+        caseStudies: response.data,
+        caseStudiesOrig: response.data
       });
     } catch (error: any) {
       console.log('Error Unable to fetch from ' + url);
       toast.error('There are no case studies of this type.');
       setCaseStudyState({
-        caseStudies: []
+        caseStudies: [],
+        caseStudiesOrig: []
       });
     }
-  }
+  };
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    toast.dismiss();
+    (document.getElementById('search-bar') as HTMLInputElement).value = '';
+    document.getElementById('results-msg')!.innerHTML = '';
     const value = event.target.value;
     setSelectedCaseStudyType(value);
     value !== '0' ? getCaseStudiesByType(value) : getCaseStudies();
@@ -138,8 +175,15 @@ const CaseStudy = () => {
               </Link>
             </td>
             <td className="column-right">
-              <input className="input" type="text" placeholder="Search Case Studies..."></input>
-
+              <Form>
+                <Form.Group className="mb-3" controlId="formSearch">
+                  <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
+                </Form.Group>
+                <Button variant="primary" type="button" onClick={() => search()}>
+                  Submit
+                </Button>
+              </Form>
+              <p id="results-msg"></p>
               <div className="case-study-block-container">
                 {caseStudyState.caseStudies.map((caseStudy: any) => {
                   return (
@@ -149,8 +193,8 @@ const CaseStudy = () => {
                           <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
-                          <h2>{caseStudy.title}</h2>
-                          <h5>{caseStudy.createdAt}</h5>
+                          <h2 className="case-study-title">{caseStudy.title}</h2>
+                          <h5 className="case-study-date">{caseStudy.createdAt}</h5>
                           <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
