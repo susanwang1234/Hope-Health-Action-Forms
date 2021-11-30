@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
-import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
+import { departmentNegativeOrNanInputError, formDNEError, formNegativeOrNanInputError } from 'shared/errorMessages';
 import { DataFormatter } from '../db/types/DataFormatter';
 import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
 import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
@@ -23,6 +23,28 @@ const createNewForm = async (req: Request, res: Response, next: NextFunction) =>
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
 };
 
+const getLatestFormByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
+  const departmentId: number = +req.params.departmentId;
+  logging.info(NAMESPACE, `GETTING FORM FOR LATEST FORM IN DEPARTMENT ${departmentId}`);
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+
+  try {
+    const latestForm = await Knex.select('*').from('Form').where('departmentId', departmentId).orderBy('createdAt', 'DESC').first();
+    console.log('ddsddasxsa');
+    if (latestForm == 446) {
+      res.status(404).send({ error: 'Could not find any forms for requested department.' });
+      return;
+    }
+    res.send(latestForm);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
+};
+
 const getAllFormsByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'GETTING LIST OF FORMS FOR A CERTAIN DEPARTMENT');
   const departmentId: number = +req.params.departmentId;
@@ -30,7 +52,6 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
     res.status(400).send(departmentNegativeOrNanInputError);
     return;
   }
-
   try {
     const forms = await Knex.select('*').from('Form').where('departmentId', '=', departmentId);
     logging.info(NAMESPACE, `GOT FORMS FOR DEPARTMENT ${departmentId}`, forms);
@@ -111,4 +132,4 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
   }
 };
 
-export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
+export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf, getLatestFormByDepartmentId };
