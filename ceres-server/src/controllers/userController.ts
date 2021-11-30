@@ -5,6 +5,9 @@ import { editItemById } from './requestTemplates/editByIdRequest';
 import { deleteItemById } from './requestTemplates/deleteByIdRequest';
 import { deleteItems } from './requestTemplates/deleteAllRequest';
 import { userNegativeOrNanInputError, userDNEError } from 'shared/errorMessages';
+import authUtil from '../utils/authHelper';
+import userModel from '../db/models/userModel';
+import logging from '../config/logging';
 
 const NAMESPACE = 'User Control';
 const TABLE_NAME = 'User';
@@ -19,7 +22,20 @@ const getUsers = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  await createItem(req, res, next, NAMESPACE, TABLE_NAME, inputtedReqBody(req));
+  try {
+    const newUser = inputtedReqBody(req);
+    const userFound = await userModel.findOne('User.username', newUser.username);
+
+    if (userFound) {
+      res.status(400).send({ error: 'Username already exists' });
+      return;
+    }
+    newUser.password = await authUtil.hashPassword(newUser.password);
+    await createItem(req, res, next, NAMESPACE, TABLE_NAME, newUser);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
 };
 
 const editUserById = async (req: Request, res: Response, next: NextFunction) => {
