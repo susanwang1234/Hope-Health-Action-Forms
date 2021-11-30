@@ -1,5 +1,6 @@
-import './CaseStudies.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
+import './CaseStudies.css';
 import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -192,8 +193,8 @@ const CaseStudy = () => {
                           <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
-                          <h2>{caseStudy.title}</h2>
-                          <h5>{caseStudy.createdAt}</h5>
+                          <h2 className="case-study-title">{caseStudy.title}</h2>
+                          <h5 className="case-study-date">{caseStudy.createdAt}</h5>
                           <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">

@@ -13,7 +13,6 @@ import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import ThisMonth from './components/DataPage/ThisMonth';
 
-
 function App() {
   return (
     <Router>
@@ -21,13 +20,12 @@ function App() {
       <Switch>
         <UnPrivateRoute exact path="/" component={Login} />
         <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
-        <PrivateRoute path="/submit-report" component={ThisMonth}></PrivateRoute>
-        <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
-        <PrivateRoute path="/this-month-report" component={ThisMonth}></PrivateRoute>
         <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
         <PrivateRoute exact path={'/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
         <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
+        <PrivateRoute path="/this-month-report" component={ThisMonth}></PrivateRoute>
+        <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
       </Switch>
     </Router>
   );

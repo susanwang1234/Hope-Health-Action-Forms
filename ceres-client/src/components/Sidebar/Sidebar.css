@@ -3,8 +3,8 @@
   display: block;
   width: 240px;
   background: #ffffff;
-  position:absolute;
-  height:91vh;
+  position: absolute;
+  height: 91vh;
   left: -100%;
   transition: all 0.3s;
   text-align: left;
@@ -21,22 +21,21 @@
 .side-link {
   /* Links to other pages */
   color: #91908e !important;
-  padding-left: 0px !important;
-  margin-left: 0px;
+  padding-left: 10px !important;
+  margin-left: 10px;
   font-size: 14px !important;
   align-items: center !important;
 }
 
 .drop-link {
-    /* Links that descend from a dropdown button */
-    color: #91908e;
-    padding-left: 40px;
-    font-size: 14px;
-    
+  /* Links that descend from a dropdown button */
+  color: #91908e;
+  padding-left: 40px;
+  font-size: 14px;
 }
 
 ul li a:hover,
-ul li a.active {
+ul lu a.active {
   /* Sidebar link's being hovered */
   background: #e7e7e7;
   color: #555555;
@@ -47,6 +46,7 @@ ul li a.active {
   background: white !important;
   color: #91908e !important;
   border: none !important;
+  color: #91908e !important;
   font-size: 14px !important;
   font-family: Arial !important;
   border: none !important;
@@ -77,7 +77,7 @@ ul {
 
 ul li {
   list-style-type: none;
-  padding-left: 5px;
+  padding-left: 0px;
 }
 
 ul li a {
@@ -108,4 +108,5 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  color: #efeaea;
 }
