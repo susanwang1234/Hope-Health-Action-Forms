@@ -25,7 +25,7 @@ const DataPage = () => {
     getFormByDeptId();
 
     async function getFormByDeptId() {
-      const url = `/form/${userContext.user?.departmentId}`;
+      const url = `/form/${2}`;
       try {
         const response = await httpService.get(url);
         const data = response.data;

@@ -16,7 +16,7 @@ const ThisMonth = () => {
     useEffect(() => {
         getFormByDeptId();
         async function getFormByDeptId() {
-            const url = `/form/latest/${userContext.user?.departmentId}`;
+            const url = `/form/latest/${2}`;
             try {
               const response = await httpService.get(url);
               console.log(response)

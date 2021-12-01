@@ -773,6 +773,25 @@
           "response": []
         },
         {
+          "name": "GET lastest form for a department",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/form/latest/:departmentId",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form", "latest", ":departmentId"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          }
+        },
+        {
           "name": "POST form",
           "request": {
             "method": "POST",
@@ -819,25 +838,6 @@
             }
           },
           "response": []
-        },
-        {
-          "name": "GET lastest form for a department",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/form/latest/:departmentId",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form", "latest", ":departmentId"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": ""
-                }
-              ]
-            }
-          }
         },
         {
           "name": "POST form responses for a form",
