@@ -43,7 +43,6 @@ const editUserById = async (req: Request, res: Response, next: NextFunction) => 
   try {
     const editedUser = inputtedReqBody(req);
     const userFound = await userModel.findOne('User.username', editedUser.username);
-    let isSameUser: boolean = true;
 
     const userId: number = +req.params.id;
     if (isInvalidInput(userId)) {
@@ -51,6 +50,7 @@ const editUserById = async (req: Request, res: Response, next: NextFunction) => 
       return;
     }
 
+    let isSameUser: boolean = true;
     if (userFound) {
       isSameUser = userId === userFound.id;
     }
