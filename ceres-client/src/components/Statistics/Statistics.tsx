@@ -70,7 +70,7 @@ const StatisticsDashboard = () => {
         <div className="right-container">
           <div className="date-filter">
             <div className="date-from">
-              <div className="from-label">From</div>
+              <div className="filter-label">From:</div>
               <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
                 <option className="placeholder" value="" disabled>Start Month</option>
                 {MONTHS.map(month => <option value={month}>{month}</option>)}
@@ -78,7 +78,7 @@ const StatisticsDashboard = () => {
               <input className="test" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
             </div>
             <div className="date-to">
-              To
+              <div className="filter-label">To:</div>
               <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
                 <option className="placeholder" value="" disabled>End Month</option>
                 {MONTHS.map(month => <option>{month}</option>)}
