@@ -15,7 +15,6 @@ import { IoIosInformationCircle } from 'react-icons/io';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 
-
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
     https://blog.logrocket.com/react-calendar-tutorial-build-customize-calendar/
@@ -30,26 +29,10 @@ const Dashboard = () => {
     toDoReminders: []
   });
   const instructions = (event: any) => {
-    toast.info(
-      'Here is how you get points:',
-      {position: "top-center",
-       autoClose: 3000}
-    );
-    toast.info(
-      'Each department will receive a point for completeing and submitting their MSPP data for the month on time.',
-      {position: "top-center",
-       autoClose: 6000}
-    );
-    toast.info(
-      'Each department will receive a point everytime they submit a new case study.',
-      {position: "top-center",
-       autoClose: 9000}
-    );
-    toast.info(
-      'The Employee of the Month will receive 3 points for the department they reside in.',
-      {position: "top-center",
-       autoClose: 12000}
-    );
+    toast.info('Here is how you get points:', { position: 'top-center', autoClose: 3000 });
+    toast.info('Each department will receive a point for completeing and submitting their MSPP data for the month on time.', { position: 'top-center', autoClose: 6000 });
+    toast.info('Each department will receive a point everytime they submit a new case study.', { position: 'top-center', autoClose: 9000 });
+    toast.info('The Employee of the Month will receive 3 points for the department they reside in.', { position: 'top-center', autoClose: 12000 });
   };
 
   const getEmployeeOfTheMonth = async () => {
@@ -84,7 +67,6 @@ const Dashboard = () => {
     const url = '/to-do';
     try {
       const response = await httpService.get(url);
-      console.log(response.data);
       setToDoState({
         toDoReminders: response.data
       });

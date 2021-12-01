@@ -13,7 +13,6 @@ import httpService from '../../services/httpService';
 function Departments() {
   let history = useHistory();
   const userContext = useContext(UserContext);
-
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
     if (data.success) {
@@ -80,6 +79,16 @@ function Departments() {
     );
   };
 
+  const mapDepartment = (departmentId: number, toDoReminders: any[]) => {
+    toDoReminders.forEach((toDoReminder: any, index: number) => {
+      if (toDoReminder.departmentId === departmentId) {
+        console.log('Found at index: ' + index);
+        return index;
+      }
+    });
+    return -1;
+  };
+
   return (
     <div className="department-background">
       <header className="department-header">
@@ -93,12 +102,13 @@ function Departments() {
       </button>
       <div className="cards">
         {departmentState.departments.slice(1).map((department: any, index: any) => {
+          const number = mapDepartment(department.id, toDoState.toDoReminders);
           return (
             <div className="individual-card">
               <h2 className="inside-card">
                 <b>{department.name}</b>
               </h2>
-              <p className="inside-text">{iconChecker(toDoState.toDoReminders[department.id - 2].caseStudies)}Case Study</p>
+              <p className="inside-text">{iconChecker(toDoState.toDoReminders[number].caseStudies)}Case Study</p>
               <p className="inside-text">{iconChecker(toDoState.toDoReminders[department.id - 2].dataForm)}Data Form</p>
               <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
                 View Department
