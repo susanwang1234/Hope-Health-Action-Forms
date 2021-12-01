@@ -6,6 +6,7 @@ import initialEmployeeOfTheMonth from './initialEmployeeOfTheMonth.json';
 import profilePic from './../../images/gray_person.jpg';
 import React from 'react';
 
+
 const EmployeeOfTheMonth = () => {
   const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
   const [employeeOfTheMonthImage, setEmployeeOfTheMonthImageState] = useState(profilePic);
