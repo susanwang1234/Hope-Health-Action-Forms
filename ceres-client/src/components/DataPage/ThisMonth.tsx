@@ -9,10 +9,8 @@ import Sidebar from '../Sidebar/Sidebar';
 import { UserContext } from '../../UserContext';
 
 const ThisMonth = () => {
-    // const [thisMonthID, setThisMonthId] = useState<number>(0);
     const [displayingData, setDisplayingData] = useState<any>(null);
     const [showNav, setShowNav] = useState(false);
-    // const [thisMonthReport, setThisMonthReport] = useState([]);
     const userContext = useContext(UserContext);
 
     useEffect(() => {
