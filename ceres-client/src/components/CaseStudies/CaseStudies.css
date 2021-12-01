@@ -144,3 +144,15 @@ td {
   vertical-align: top;
   margin: 0px;
 }
+
+.search-bar{
+  width: 350px;
+}
+
+.submit-button{
+  padding: auto;
+}
+
+.radio-button-value{
+  font-size: 18px !important;
+}

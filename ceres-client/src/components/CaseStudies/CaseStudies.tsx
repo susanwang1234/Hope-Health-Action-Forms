@@ -151,14 +151,14 @@ const CaseStudy = () => {
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
-                    <tr>
+                    <tr className = "radio-button-value">
                       <td>
                         <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>All Case Studies
                       </td>
                     </tr>
                     {caseStudyType.types.map((Types: any) => {
                       return (
-                        <tr>
+                        <tr className = "radio-button-value">
                           <td>
                             <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioButtonHandler}></input>
                             {Types.name}
@@ -175,12 +175,18 @@ const CaseStudy = () => {
             </td>
             <td className="column-right">
               <Form>
-                <Form.Group className="mb-3" controlId="formSearch">
-                  <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
-                </Form.Group>
-                <Button variant="primary" type="button" onClick={() => search()}>
-                  Submit
-                </Button>
+                <div className = "flex">
+                  <div className = "search-bar">
+                    <Form.Group className="mb-3" controlId="formSearch">
+                      <Form.Control id="search-bar" type="search" placeholder="Search case studies..." ></Form.Control>
+                    </Form.Group>
+                  </div>
+                  <div className = "pl-4">
+                    <Button className = "submit-button" variant="primary" type="button" onClick={() => search()}>
+                      Submit
+                    </Button>
+                  </div>
+                </div>  
               </Form>
               <p id="results-msg"></p>
               <div className="case-study-block-container">
