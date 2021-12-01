@@ -16,6 +16,7 @@ import Instruction from './Instruction';
 
 const Dashboard = () => {
   const [showNav, setShowNav] = useState(false);
+  const [date, setDate]: any = useState(new Date());
 
   return (
     <>

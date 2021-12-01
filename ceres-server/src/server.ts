@@ -4,7 +4,7 @@ import cors from 'cors';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import { apiRouter, authRouter } from 'routes';
+import baseRouter from 'routes';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import './middlewares/passport-strategies.mw.ts';
@@ -76,10 +76,7 @@ export const enableLogging = (router: Application, namespace: string) => {
 export const enableRoutes = (router: Application) => {
   /** Routes */
   // order of route initialization matters
-  router.use('', authRouter);
-  // all routes below must be authenticated to be granted access
-  // router.use(passport.authenticate('authAll', { session: false }));
-  router.use('', apiRouter);
+  router.use(baseRouter);
 };
 
 export const enableErrorHandling = (router: Application) => {

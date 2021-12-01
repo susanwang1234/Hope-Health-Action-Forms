@@ -14,12 +14,14 @@ import caseStudyResponsesRoutes from './caseStudiesResponsesRoute';
 import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
 import employeeOfTheMonthRoutes from './employeeOfTheMonthRoute';
+import passport from 'passport';
 
-export const authRouter = Router();
+const authRouter = Router();
 authRouter.use('/auth', authenticationRoutes);
 
-export const apiRouter = Router();
-
+const apiRouter = Router();
+// all routes below must be authenticated to be granted access
+apiRouter.use(passport.authenticate('authAll', { session: false }));
 apiRouter.use('/department', departmentRoutes);
 apiRouter.use('/department-form', departmentFormRoutes);
 apiRouter.use('/role', roleRoutes);
@@ -33,3 +35,9 @@ apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
+
+const baseRouter = Router();
+baseRouter.use(authRouter);
+baseRouter.use(apiRouter);
+
+export default baseRouter;
