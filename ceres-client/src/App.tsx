@@ -13,6 +13,7 @@ import Forms from './components/Forms/Forms';
 import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
+import AdminCreateUser from './components/Admin/AdminCreateUser';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
+        <PrivateRoute path="/new-user" component={AdminCreateUser}></PrivateRoute>
       </Switch>
     </Router>
   );
