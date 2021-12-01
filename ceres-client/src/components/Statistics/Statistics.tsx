@@ -74,18 +74,18 @@ const StatisticsDashboard = () => {
               <div className="date-from">
                 <div className="filter-label">From:</div>
                 <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
-                  <option className="placeholder" value="" disabled>Start Month</option>
+                  <option value="" disabled>Month</option>
                   {MONTHS.map(month => <option value={month}>{month}</option>)}
                 </select>
-                <input className="filter-input" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
+                <input className="filter-input" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
               </div>
               <div className="date-to">
                 <div className="filter-label">To:</div>
                 <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
-                  <option className="placeholder" value="" disabled>End Month</option>
+                  <option value="" disabled>Month</option>
                   {MONTHS.map(month => <option>{month}</option>)}
                 </select>
-                <input className="filter-input" onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="End Year"></input>
+                <input className="filter-input" onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
               </div>
               <div className="statistic-buttons">
                 <button className="button" onClick={fetchData}>Search</button>

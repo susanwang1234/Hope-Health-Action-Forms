@@ -7,27 +7,12 @@
 }
 
 .question-list {
-  grid-area: sidebar;
   text-align: left;
 }
 
 .plot {
-  grid-area: content;
   height: 100%;
   width: 100%
-}
-
-.grid-container {
-  padding: 1em;
-  display: grid;
-  grid-template-columns: 0.3fr 1.4fr;
-  grid-template-rows: 0.5fr 0.2fr 2.3fr;
-  gap: 11px 35px; 
-  grid-template-areas:
-    "header header"
-    ". filter"
-    "sidebar content"
-    "sidebar content"
 }
 
 .radio-button {
@@ -86,10 +71,8 @@
   border-width: 1px;
   box-shadow: 0 4px 8px 0 rgba(110, 100, 100, 0.2);
   color: rgb(0, 0, 0);
-  display: grid;
   display: inline-block;
   font-family: Arial;
-  grid-template-areas: 'select';
   outline: none;
   margin: 4px;
   padding: 0.5em 3.5em 0.5em 1em;
