@@ -13,6 +13,7 @@ import gray_person from '../../images/gray_person.jpg';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
+  document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [shareImage, setShareImage] = useState('');
   const userContext = useContext(UserContext);
@@ -91,8 +92,7 @@ const AdminEmployeeOfTheMonth = () => {
     const url = '/employee-of-the-month/1';
     httpService
       .put(url, employeeOfTheMonth)
-      .then((response: any) => response.data)
-      .then((data: any) => {
+      .then(() => {
         toast.success('New Employee of the Month Submitted', { position: 'top-center', autoClose: 5000 });
         window.location.href = '/departments';
       })
@@ -116,7 +116,7 @@ const AdminEmployeeOfTheMonth = () => {
   };
 
   return (
-    <div className="casestudy-background">
+    <div>
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
