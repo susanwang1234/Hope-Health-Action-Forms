@@ -42,13 +42,8 @@ apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
-<<<<<<< HEAD
-apiRouter.use('/messages', messageBoardRoutes);
-apiRouter.use('/dataviz', dataVizRoutes);
-=======
 apiRouter.use('/dataviz', dataVizRoutes);
 apiRouter.use('/messages', messageBoardRoutes);
->>>>>>> 72cdeb8... 132: undo comments
 apiRouter.use('/to-do', todoRoutes);
 apiRouter.use('/email', emailRoutes);
 

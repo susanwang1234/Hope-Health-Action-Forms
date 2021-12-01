@@ -16,6 +16,7 @@ import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import ThisMonth from './components/DataPage/ThisMonth';
 
+import AdminCreateUser from './components/Admin/AdminCreateUser';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <PrivateRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
         <PrivateRoute path="/new-announcement" component={NewAnnouncement}></PrivateRoute>
+        <PrivateRoute path="/new-user" component={AdminCreateUser}></PrivateRoute>
       </Switch>
     </Router>
   );
