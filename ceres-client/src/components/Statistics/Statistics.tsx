@@ -92,7 +92,7 @@ const StatisticsDashboard = () => {
                 <button className="button">Reset</button>
               </div> 
             </div>
-              {(dataForPlots[0] &&
+              {dataForPlots[0] ?
               <Plot
                 className="plot statistics-card"
                 data={[
@@ -104,7 +104,7 @@ const StatisticsDashboard = () => {
                   }
                 ]}
                 layout={ {title: questionLabels[plotIndex] } }
-              />) || <Plot data={[{x: [], y: []}]} layout={ {} }/>}
+              /> : <Plot data={[{x: [], y: []}]} layout={ {} }/>}
             </div>
         </div>
       </div>
