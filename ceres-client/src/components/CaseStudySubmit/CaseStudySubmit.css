@@ -96,6 +96,7 @@ h2.questions {
   font-family: Arial;
   font-size: 20px;
 }
+.inside-text-case-study,
 label.inside-text-case-study {
   font-family: Arial;
   font-size: 20px;
@@ -127,13 +128,20 @@ select {
   padding: 0.5em 3.5em 0.5em 1em;
   width: 50%;
 }
-select.minimal {
+.minimal {
   background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
   background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
   background-repeat: no-repeat;
   background-size: 5px 5px, 5px 5px, 1px 1.5em;
   margin: 4px;
+  width: 400px !important;
 }
+.minimal>div{
+  border: 0.5px solid black !important;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 textarea.response {
   align-items: center;
   background-color: rgb(255, 255, 255);
@@ -153,3 +161,27 @@ textarea.response {
   text-align: left;
   width: 100%;
 }
+
+
+
+@media only screen and (max-width: 1028px){
+  .cards-case-study{
+    margin: 20px 150px;
+  }
+
+  .casestudy-single-card{
+    min-height: 70vh;
+  }
+
+  
+}
+
+
+@media only screen and (max-width: 600px){
+  
+}
+
+@media only screen and (max-width: 400px){
+  
+}
+

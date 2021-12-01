@@ -15,6 +15,9 @@ import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
+import Select from 'react-select'
+
+
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -36,6 +39,28 @@ const CaseStudySubmit = () => {
   useEffect(() => {
     getTypeData();
   }, [setCaseStudyType]);
+
+  const [loading, setLoading] = useState(true);
+  const [optionData, setOptionData] = useState([{}]);
+
+  useEffect(() => {
+    if(caseStudyType.types){
+      console.log("HGelo",caseStudyType.types.map((Types: any, index: any) => ({
+        value: Types.id, label: Types.name
+      })));
+      const data = caseStudyType.types.map((Types: any, index: any) => ({
+        value: Types.id, label: Types.name
+      }));
+      setOptionData(data);
+    }
+  }, [caseStudyType.types]);
+
+  useEffect(() => {
+    if(optionData.length>1){
+      setLoading(false);
+
+    }
+  }, [optionData]);
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -180,11 +205,12 @@ const CaseStudySubmit = () => {
     }
   };
 
-  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+  const selectChangeValues = (event: any) => {
+    const value = event.value;
     setSelectedCaseStudyType(value);
     getQuestions(value);
-  };
+    
+  }
 
   const handleChange = (event: any) => {
     const image = event.target.files[0];
@@ -214,6 +240,10 @@ const CaseStudySubmit = () => {
     window.location.href = '/case-studies';
   };
 
+  if(loading){
+    return <p>Loading....</p>
+  }
+
   return (
     <div className="casestudy-background">
       <header className="nav-header">
@@ -226,21 +256,14 @@ const CaseStudySubmit = () => {
       <Sidebar show={showNav} />
       <div className="cards-case-study">
         <div className="casestudy-single-card">
-          <h2 className="inside-card -mt-10 mb-8">
+          <h2 className="inside-card mt-10 mb-8">
             <b>Current Case Study</b>
           </h2>
           <p className="inside-text-case-study">Type of Case Study</p>
-          <select className="minimal" onChange={selectChange}>
-            <option selected disabled>
-              --Select a Case Study type--
-            </option>
-            {caseStudyType.types.map((Types: any, index: any) => {
-              return <option value={Types.id}>{Types.name}</option>;
-            })}
-          </select>
+          <Select className = "minimal" options={optionData} onChange={selectChangeValues} placeholder = "--Select a Case Study type--"/>
           <div className="photo">
             <p className="inside-text-case-study">Upload Photo</p>
-            <div>
+            <div className = "flex">
               <div className="person_image float-left">
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
