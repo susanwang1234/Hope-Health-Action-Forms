@@ -56,96 +56,59 @@ const StatisticsDashboard = () => {
       </header>
       <Sidebar show={showNav}></Sidebar>
       <div className="outer-container">
-      <div className="dashboard-title">
-          Rehab Statistics
+        <div className="dashboard-title statistics-card">
+            Rehab Statistics
         </div>
-      <div className="statistics-dashboard-container">
-        <div className="left-container statistics-card">
-          {/* <div className="card question-list"> */}
+        <div className="statistics-dashboard-container">
+          <div className="left-container statistics-card">
             <ul className="questionMenu">
-              {questionLabels.map((label, index) => <li><input className="radio-button" name="selected" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>)}
-            </ul>
-          {/* </div> */}
-        </div>
-        <div className="right-container">
-          <div className="date-filter">
-            <div className="date-from">
-              <div className="filter-label">From:</div>
-              <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
-                <option className="placeholder" value="" disabled>Start Month</option>
-                {MONTHS.map(month => <option value={month}>{month}</option>)}
-              </select>
-              <input className="test" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
-            </div>
-            <div className="date-to">
-              <div className="filter-label">To:</div>
-              <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
-                <option className="placeholder" value="" disabled>End Month</option>
-                {MONTHS.map(month => <option>{month}</option>)}
-              </select>
-              <input className="test" value={startYear} onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="End Year"></input>
-            </div>
-            <div className="statistic-buttons">
-              <button className="button" onClick={fetchData}>Search</button>
-              <button className="button">Reset</button>
-            </div> 
-          </div>
-            {dataForPlots[0] &&
-            <Plot
-              className="plot statistics-card"
-              data={[
-                {
-                  x: dataForPlots[plotIndex].x,
-                  y: dataForPlots[plotIndex].y,
-                  type: 'scatter',
-                  mode: 'lines+markers',
-                },
-
-              ]}
-              layout={ {title: questionLabels[plotIndex] } }
-            />}
-          </div>
-        {/* </div> */}
-      </div>
-        {/* <div className="date-filter">
-          From
-          <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
-            <option className="placeholder" value="" disabled>Start Month</option>
-            {MONTHS.map(month => <option value={month}>{month}</option>)}
-          </select>
-          <input onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
-          To
-          <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
-            <option className="placeholder" value="" disabled>End Month</option>
-            {MONTHS.map(month => <option>{month}</option>)}
-          </select>
-          <input id="startYear" value={startYear} onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="End Year"></input>
-          <button onClick={fetchData}>Search</button>
-          <button>Reset</button>
-        </div> */}
-        {/* <div className="card question-list">
-          <ul className="questionMenu">
-            {questionLabels.map((label, index) => <li><input className="radio-button" name="selected" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>)}
-          </ul>
-        </div> */}
-        {/* <div className="plot">
-          {dataForPlots[0] &&
-          <Plot
-            data={[
               {
-                x: dataForPlots[plotIndex].x,
-                y: dataForPlots[plotIndex].y,
-                type: 'scatter',
-                mode: 'lines+markers',
-              },
-
-            ]}
-            layout={ {title: questionLabels[plotIndex] } }
-          />} */}
-        {/* </div> */}
+                questionLabels.length ?
+                questionLabels.map((label, index) => <li><input className="radio-button" name="selected" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>):
+                'No Questions Found'
+              }
+            </ul>
+          </div>
+          <div className="right-container">
+            <div className="date-filter">
+              <div className="date-from">
+                <div className="filter-label">From:</div>
+                <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
+                  <option className="placeholder" value="" disabled>Start Month</option>
+                  {MONTHS.map(month => <option value={month}>{month}</option>)}
+                </select>
+                <input className="filter-input" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Start Year"></input>
+              </div>
+              <div className="date-to">
+                <div className="filter-label">To:</div>
+                <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
+                  <option className="placeholder" value="" disabled>End Month</option>
+                  {MONTHS.map(month => <option>{month}</option>)}
+                </select>
+                <input className="filter-input" onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="End Year"></input>
+              </div>
+              <div className="statistic-buttons">
+                <button className="button" onClick={fetchData}>Search</button>
+                <button className="button">Reset</button>
+              </div> 
+            </div>
+              {(dataForPlots[0] &&
+              <Plot
+                className="plot statistics-card"
+                data={[
+                  {
+                    x: dataForPlots[plotIndex].x,
+                    y: dataForPlots[plotIndex].y,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                  }
+                ]}
+                layout={ {title: questionLabels[plotIndex] } }
+              />) || <Plot data={[{x: [], y: []}]} layout={ {} }/>}
+            </div>
         </div>
       </div>
-    // {/* </div> */}
+    </div>
   )
 }
 

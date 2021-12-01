@@ -1,10 +1,9 @@
 .questionMenu {
   background-color: white;
   height: 100%;
-}
-
-.dashboard-title {
-  grid-area: header;
+  text-align: left;
+  padding: 10px;
+  font-weight: bold;
 }
 
 .question-list {
@@ -79,9 +78,8 @@
   align-items: center;
 }
 
-.test {
+.filter-input {
   align-items: center;
-  appearance: none;
   background-color: white;
   border-color: #d6d6d6;
   border-radius: 5px;
@@ -94,9 +92,7 @@
   grid-template-areas: 'select';
   outline: none;
   margin: 4px;
-  /* min-width: 290px; */
   padding: 0.5em 3.5em 0.5em 1em;
-  /* width: 50%; */
 }
 
 .filter-label {
