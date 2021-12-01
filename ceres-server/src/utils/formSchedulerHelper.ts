@@ -70,16 +70,16 @@ const createMonthlyForms = async () => {
   let listScheduledForms: ScheduledForms[] = [];
   let currScheduledForm: ScheduledForms;
   try {
-    const numDepartments = await Knex(NAMESPACE_DEPARTMENT).count('id AS total').first();
-    for (let departmentId = 2; departmentId <= numDepartments.total; departmentId++) {
+    const numDepartments = await Knex.select('id AS departmentId').from(NAMESPACE_DEPARTMENT).where('id', '>', 1);
+    for (let i = 0; i < numDepartments.length; i++) {
       currScheduledForm = {
-        departmentId: departmentId,
+        departmentId: numDepartments[i].departmentId,
         formId: 0,
         formResponsesCreated: 0
       };
       try {
-        currScheduledForm.formId = await createMonthlyForm(departmentId);
-        currScheduledForm.formResponsesCreated = await createMonthlyFormResponses(departmentId, currScheduledForm.formId);
+        currScheduledForm.formId = await createMonthlyForm(numDepartments[i].departmentId);
+        currScheduledForm.formResponsesCreated = await createMonthlyFormResponses(numDepartments[i].departmentId, currScheduledForm.formId);
         listScheduledForms.push(currScheduledForm);
       } catch (error: any) {
         logging.error(NAMESPACE, error.message, error);
