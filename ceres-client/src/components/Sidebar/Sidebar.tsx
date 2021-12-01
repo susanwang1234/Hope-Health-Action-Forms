@@ -6,21 +6,20 @@ import { Button } from 'react-bootstrap';
 import { HiHome } from 'react-icons/hi';
 import { BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
-import { IoMdArrowDropdown } from 'react-icons/io';
 import { FaHistory } from 'react-icons/fa';
 import { ImStatsDots } from 'react-icons/im';
+import { BsFileEarmarkTextFill } from 'react-icons/bs';
 import './Sidebar.css';
 
 const Sidebar = ({ show }: any) => {
   const [open, setOpen] = useState(false);
-
   return (
     <div className={show ? 'sidebar active' : 'sidebar'}>
       <ul>
         <li>
           <Link to="/dashboard" className="side-link">
             <HiHome />
-            Home
+            Dashbaord
           </Link>
         </li>
         <li>
@@ -37,7 +36,7 @@ const Sidebar = ({ show }: any) => {
         </li>
         <li>
           <Button className="side-button" onClick={() => setOpen(!open)}>
-            <IoMdArrowDropdown />
+            <BsFileEarmarkTextFill />
             Reports
           </Button>
           {open && (
