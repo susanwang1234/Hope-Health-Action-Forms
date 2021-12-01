@@ -32,8 +32,8 @@ const getLatestFormByDepartmentId = async (req: Request, res: Response, next: Ne
   }
 
   try {
-    const latestForm = await Knex.select('*').from('Form').where('departmentId', departmentId).orderBy('createdAt', 'DESC').first();
-    if (latestForm == 446) {
+    const latestForm = await Knex.select('*').from('Form').where('departmentId', '=', departmentId).orderBy('createdAt', 'DESC').first();
+    if (latestForm == null) {
       res.status(404).send({ error: 'Could not find any forms for requested department.' });
       return;
     }
