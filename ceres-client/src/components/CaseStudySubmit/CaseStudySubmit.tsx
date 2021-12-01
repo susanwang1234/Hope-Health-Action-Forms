@@ -249,7 +249,7 @@ const CaseStudySubmit = () => {
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
-        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
           Log Out
         </button>
       </header>
@@ -263,11 +263,11 @@ const CaseStudySubmit = () => {
           <Select className = "minimal" options={optionData} onChange={selectChangeValues} placeholder = "--Select a Case Study type--"/>
           <div className="photo">
             <p className="inside-text-case-study">Upload Photo</p>
-            <div className = "flex">
+            <div className = "photo-flex flex">
               <div className="person_image float-left">
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
-              <div className="float-left pl-10">
+              <div className="float-left input-declaration pl-10">
                 <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
                 <p className = "photo-text">
                   This person has given permission to share their story <br />
@@ -299,8 +299,8 @@ const CaseStudySubmit = () => {
                   <>
                     <div className="popup_modal flex flex-col">
                       <div className="popup_child pt-2">
-                        <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
-                        <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                        <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                        <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
                       </div>
 
                       <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
