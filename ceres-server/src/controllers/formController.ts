@@ -3,7 +3,11 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { createItem } from './requestTemplates/createRequest';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
-import { departmentNegativeOrNanInputError } from 'shared/errorMessages';
+import { departmentNegativeOrNanInputError, formNegativeOrNanInputError } from 'shared/errorMessages';
+import { DataFormatter } from '../db/types/DataFormatter';
+import { CsvFormatPolicy } from 'db/types/CsvFormatPolicy';
+import { FileExportFormatPolicy } from 'db/types/interfaces/FileExportFormatPolicy';
+import { PdfFormatPolicy } from 'db/types/PdfFormatPolicy';
 
 const NAMESPACE = 'Form Control';
 const TABLE_NAME = 'Form';
@@ -37,4 +41,74 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
   }
 };
 
-export default { createNewForm, getAllFormsByDepartmentId };
+const exportFormAsCsv = async (req: Request, res: Response, next: NextFunction) => {
+  const formId: number = +req.params.formId;
+  if (isInvalidInput(formId)) {
+    res.status(400).send(formNegativeOrNanInputError);
+    return;
+  }
+
+  try {
+    const form = await Knex.select(Knex.raw('month(createdAt) AS month'), Knex.raw('year(createdAt) as year'), 'Department.name')
+      .from('Form')
+      .join('Department', 'Form.departmentId', '=', 'Department.id')
+      .where('Form.id', formId)
+      .first();
+
+    if (!form) {
+      res.status(400).send({ message: 'Form does not exist' });
+      return;
+    }
+
+    const formResponses = await Knex.select('*')
+      .from('FormResponse')
+      .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+      .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+      .where('FormResponse.formId', formId);
+
+    const filename = `${form.name}-report-${form.month}-${form.year}.csv`;
+    res.header('Content-Type', 'text/csv');
+    res.attachment(filename);
+
+    const fileExportFormatPolicy: FileExportFormatPolicy = new CsvFormatPolicy();
+    const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
+    const file = dataExporter.getFileOrSendFileToUser();
+    res.send(file);
+  } catch (error: any) {
+    res.status(500).send(error);
+  }
+};
+
+const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) => {
+  const formId: number = +req.params.formId;
+  if (isInvalidInput(formId)) {
+    res.status(400).send(formNegativeOrNanInputError);
+    return;
+  }
+
+  try {
+    const formResponses = await Knex.select('FormResponse.response', 'Question.label', 'Department.name', Knex.raw(`MONTHNAME(Form.createdAt) as month`), Knex.raw('year(Form.createdAt) as year'))
+      .from('FormResponse')
+      .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
+      .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
+      .join('Form', 'FormResponse.formId', 'Form.id')
+      .join('Department', 'Form.departmentId', 'Department.id')
+      .where('FormResponse.formId', formId)
+      .andWhere('Question.isMSPP', 1);
+
+    const fileExportFormatPolicy: FileExportFormatPolicy = new PdfFormatPolicy(res);
+    const dataExporter: DataFormatter = new DataFormatter(formResponses, fileExportFormatPolicy);
+    dataExporter.getFileOrSendFileToUser();
+  } catch (error: any) {
+    switch (error.message) {
+      case 'Form responses cannot be empty.':
+        res.status(400).send({ error: 'Error trying to export form to pdf' });
+        break;
+      default:
+        res.status(500).send(error);
+        break;
+    }
+  }
+};
+
+export default { createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };

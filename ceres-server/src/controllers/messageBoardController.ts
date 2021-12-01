@@ -31,6 +31,6 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const createNewMessage = () => {};
+const createNewMessage = async (req: Request, res: Response, next: NextFunction) => {};
 
 export default { createNewMessage, getMessages };

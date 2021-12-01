@@ -4,6 +4,7 @@ import cors from 'cors';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
+<<<<<<< HEAD
 import authenticationRoutes from './routes/authenticationRoute';
 import departmentRoutes from './routes/departmentRoute';
 import departmentFormRoutes from './routes/departmentFormRoute';
@@ -19,6 +20,9 @@ import roleRoutes from './routes/roleRoute';
 import userRoutes from './routes/userRoute';
 import messageBoardRoute from './routes/messageBoardRoute';
 import routes from './routes/indexRoute';
+=======
+import baseRouter from 'routes';
+>>>>>>> ce963b7317435728285ecd05101b8608fb5f3bba
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import './middlewares/passport-strategies.mw.ts';
@@ -55,6 +59,7 @@ export const enableCors = (router: Application) => {
   router.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', allowedOrigins); // TODO Change access where routes and ips predefined when deployed to production
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type Accept, Authorization,');
+    res.header('Access-Control-Expose-Headers', 'Content-Disposition');
     if (req.method === 'OPTIONS') {
       res.header('Access-Control-Allow-Methods', 'GET PATCH DELETE POST PUT');
       return res.status(200).json({});
@@ -88,6 +93,7 @@ export const enableLogging = (router: Application, namespace: string) => {
 
 export const enableRoutes = (router: Application) => {
   /** Routes */
+<<<<<<< HEAD
   router.use('', routes);
   router.use('/department', departmentRoutes);
   router.use('/department-form', departmentFormRoutes);
@@ -103,6 +109,10 @@ export const enableRoutes = (router: Application) => {
   router.use('/case-study-responses', caseStudyResponsesRoutes);
   router.use('/image', imageRoutes);
   router.use('/messages', messageBoardRoute);
+=======
+  // order of route initialization matters
+  router.use(baseRouter);
+>>>>>>> ce963b7317435728285ecd05101b8608fb5f3bba
 };
 
 export const enableErrorHandling = (router: Application) => {
