@@ -303,7 +303,7 @@ const CaseStudySubmit = () => {
                         <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
                       </div>
 
-                      <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                      <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
                         <button onClick={OnClickNo} className="grey-button-popup w-full ">
                           No
                         </button>

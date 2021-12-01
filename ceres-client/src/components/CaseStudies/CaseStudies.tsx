@@ -144,10 +144,11 @@ const CaseStudy = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <Sidebar show={showNav} />
+
       <div className="container">
         <table>
           <tr>
-            <td>
+            <td className = "radio-column">
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
@@ -170,12 +171,14 @@ const CaseStudy = () => {
                 </div>
               </div>
               <Link to="/case-studies/new">
-                <button className="button-new-case">+ Add Case Study</button>
+                <div className = "button-div">
+                  <button className="button-new-case">+ Add Case Study</button>
+                </div>
               </Link>
             </td>
-            <td className="column-right">
+            <td className="column-right radio-column">
               <Form>
-                <div className = "flex">
+                <div className = "search-submit flex">
                   <div className = "search-bar">
                     <Form.Group className="mb-3" controlId="formSearch">
                       <Form.Control id="search-bar" type="search" placeholder="Search case studies..." ></Form.Control>
@@ -198,9 +201,9 @@ const CaseStudy = () => {
                           <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
-                          <h2>{caseStudy.title}</h2>
-                          <h5>{caseStudy.createdAt}</h5>
-                          <p>{caseStudy.response}</p>
+                          <h2 className = "case-study-title-heading">{caseStudy.title}</h2>
+                          <h5 className = "case-study-created-at">{caseStudy.createdAt}</h5>
+                          <p className = "case-study-response">{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
                           <Link to={`/case-studies/view/${caseStudy.id}`}>
