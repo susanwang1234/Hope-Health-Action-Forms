@@ -750,6 +750,54 @@
       ]
     },
     {
+      "name": "Message",
+      "item": [
+        {
+          "name": "GET messages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/messages/:departmentId",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["messages", ":departmentId"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST message",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"departmentId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/messages",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["messages"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Form",
       "item": [
         {

@@ -15,11 +15,7 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
     return;
   }
   try {
-    const retrievedResponses = await Knex.select('message_content.*', 'createdAt.*', 'author.*')
-      .from('Messages')
-      .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', '=', 'DepartmentQuestion.id')
-      .join('Question', 'DepartmentQuestion.questionId', '=', 'Question.id')
-      .where('Department.id', departmentId);
+    const retrievedResponses = await Knex.select('*').from('Messages').where('departmentId', '=', departmentId);
     if (!retrievedResponses.length) {
       res.status(404).send(formDNEError);
       return;

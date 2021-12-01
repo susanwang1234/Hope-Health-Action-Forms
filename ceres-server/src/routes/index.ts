@@ -14,6 +14,7 @@ import caseStudyResponsesRoutes from './caseStudiesResponsesRoute';
 import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
 import employeeOfTheMonthRoutes from './employeeOfTheMonthRoute';
+import messageBoardRoutes from './messageBoardRoute';
 import passport from 'passport';
 
 const authRouter = Router();
@@ -35,6 +36,7 @@ apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
+apiRouter.use('/messages', messageBoardRoutes);
 
 const baseRouter = Router();
 baseRouter.use(authRouter);
