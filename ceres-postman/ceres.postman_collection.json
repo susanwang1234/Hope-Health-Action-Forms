@@ -821,15 +821,15 @@
           "response": []
         },
         {
-          "name": "GET form responses for a department's latest form",
+          "name": "GET lastest form for a department",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "localhost:8080/form-responses/latest/:departmentId",
+              "raw": "localhost:8080/form/latest/:departmentId",
               "host": ["localhost"],
               "port": "8080",
-              "path": ["form-responses", "latest", ":departmentId"],
+              "path": ["form", "latest", ":departmentId"],
               "variable": [
                 {
                   "key": "id",
