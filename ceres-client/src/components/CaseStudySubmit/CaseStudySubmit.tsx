@@ -269,11 +269,11 @@ const CaseStudySubmit = () => {
               </div>
               <div className="float-left pl-10">
                 <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-                <p>
+                <p className = "photo-text">
                   This person has given permission to share their story <br />
                   and photo in HHA communications, including online platforms.
                 </p>
-                <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
           </div>

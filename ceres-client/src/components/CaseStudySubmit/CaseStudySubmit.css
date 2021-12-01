@@ -173,6 +173,21 @@ textarea.response {
     min-height: 70vh;
   }
 
+  .minimal {
+    width: 300px !important;
+  }
+
+  .photo-text{
+    font-size: 14px;
+  }
+
+  .input-photo{
+    font-size: 16px;
+  }
+
+  .inside-card{
+    margin-top: 0.5rem;
+  }
   
 }
 
