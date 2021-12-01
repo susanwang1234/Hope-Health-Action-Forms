@@ -1,12 +1,20 @@
 import './CaseStudyInstance.css';
 import '../../App.css';
-import { useState, useEffect } from 'react';
+import {useContext,  useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import { UserContext } from '../../UserContext';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+
+
 
 const CaseStudy = () => {
+
+  const userContext = useContext(UserContext);
+
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
@@ -49,11 +57,23 @@ const CaseStudy = () => {
     }
   }
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <div className="App">
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+          Log Out
+        </button>
       </header>
       <Sidebar show={showNav} />
       <div className="container">

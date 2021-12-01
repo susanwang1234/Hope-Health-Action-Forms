@@ -1,7 +1,7 @@
 import '../../App.css';
 import './Dashboard.css';
 import initialEmployeeOfTheMonth from './initialEmployeeOfTheMonth.json';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -14,6 +14,9 @@ import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { IoIosInformationCircle } from 'react-icons/io';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
+import { UserContext } from '../../UserContext';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
 
 
 /* Citations: 
@@ -22,6 +25,7 @@ import { toast } from 'react-toastify';
 */
 
 const Dashboard = () => {
+  const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [date, setDate]: any = useState(new Date());
   const [employeeOfTheMonth, setEmployeeOfTheMonthState] = useState(initialEmployeeOfTheMonth);
@@ -91,6 +95,15 @@ const Dashboard = () => {
     );
   }
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <html>
       <head>
@@ -101,6 +114,9 @@ const Dashboard = () => {
           <header className="nav-header">
             <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
             <img src={logo} alt="Logo" className="logo" />
+            <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+              Log Out
+            </button>
           </header>
           <Sidebar show={showNav} />
           <div className="dashboard-container">

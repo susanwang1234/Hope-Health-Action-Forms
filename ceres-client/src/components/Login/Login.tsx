@@ -38,7 +38,7 @@ function Login() {
     }
   };
 
-  const onSubmit = handleSubmit(({ username, password, remember }) => {
+  const onSubmit = handleSubmit(({ username, password }) => {
     const user = {
       username,
       password
