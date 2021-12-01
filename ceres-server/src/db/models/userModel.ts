@@ -6,7 +6,7 @@ const findOne = (columnName: string, val: any) => {
     .select(['User.id', 'User.username', 'User.password', 'Department.id as departmentId', 'Role.id as roleId', 'Role.name as roleName'])
     .leftJoin('Role', 'User.roleId', 'Role.id')
     .leftJoin('Department', 'User.departmentId', 'Department.id')
-    .where(Knex.raw('?? = ?', [columnName, val]))
+    .where(columnName, val)
     .first();
 };
 
