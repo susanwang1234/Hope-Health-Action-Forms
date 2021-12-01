@@ -4,7 +4,11 @@
   width: 240px;
   background: #ffffff;
   position: absolute;
+<<<<<<< HEAD
   height: 91vh;
+=======
+  height: 100%;
+>>>>>>> a0764ae0adc206367a612a4bf21f1ac4717a7172
   left: -100%;
   transition: all 0.3s;
   text-align: left;
@@ -30,12 +34,16 @@
 .drop-link {
   /* Links that descend from a dropdown button */
   color: #91908e;
+<<<<<<< HEAD
   padding-left: 40px;
+=======
+  padding-left: 20px;
+>>>>>>> a0764ae0adc206367a612a4bf21f1ac4717a7172
   font-size: 14px;
 }
 
 ul li a:hover,
-ul lu a.active {
+ul li a.active {
   /* Sidebar link's being hovered */
   background: #e7e7e7;
   color: #555555;

@@ -9,6 +9,7 @@ import CaseStudies from './components/CaseStudies/CaseStudies';
 import CaseStudyInstance from './components/CaseStudyInstance/CaseStudyInstance';
 import CaseStudySubmit from './components/CaseStudySubmit/CaseStudySubmit';
 import Departments from './components/Departments/Departments';
+import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import ThisMonth from './components/DataPage/ThisMonth';
@@ -26,6 +27,7 @@ function App() {
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/this-month-report" component={ThisMonth}></PrivateRoute>
         <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
+        <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
       </Switch>
     </Router>
   );
