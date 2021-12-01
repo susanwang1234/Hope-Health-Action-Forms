@@ -7,11 +7,6 @@
   grid-area: header;
 }
 
-.date-filter {
-  grid-area: filter;
-  display: flex;
-}
-
 .question-list {
   grid-area: sidebar;
   text-align: left;
@@ -19,6 +14,8 @@
 
 .plot {
   grid-area: content;
+  /* height: 100%; */
+  width: 100%
 }
 
 .grid-container {
@@ -51,6 +48,10 @@
   height: 60vh;
 }
 
+.statistics-card {
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .right-container {
   width: 80%;
 }
@@ -60,4 +61,34 @@
   flex-direction: column;
   justify-content: space-evenly;
   height: 85vh;
+}
+
+.date-filter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date-from {
+  display: flex;
+  align-items: center;
+}
+
+.test {
+  align-items: center;
+  appearance: none;
+  background-color: white;
+  border-color: #d6d6d6;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: 0 4px 8px 0 rgba(110, 100, 100, 0.2);
+  color: rgb(0, 0, 0);
+  display: grid;
+  display: inline-block;
+  font-family: Arial;
+  grid-template-areas: 'select';
+  outline: none;
+  margin: 4px;
+  /* min-width: 290px; */
+  padding: 0.5em 3.5em 0.5em 1em;
+  /* width: 50%; */
 }
