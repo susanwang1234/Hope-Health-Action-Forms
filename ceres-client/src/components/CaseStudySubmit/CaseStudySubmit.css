@@ -5,10 +5,12 @@ Citations:
 
 CSS Classes
 - blue-button
+- blue-button-popup
 - cards-casestudy
 - case-study-background
 - casestudy-single-card
 - grey-button
+- grey-button-popup
 - h2.questions
 - inside-text-case-study
 - person_image
@@ -20,6 +22,8 @@ CSS Classes
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.blue-button-popup,
 .blue-button {
   background-color: #009cc4;
   border: none;
@@ -34,6 +38,11 @@ CSS Classes
   text-align: center;
   width: 100px;
 }
+
+.blue-button-popup{
+  position:relative
+}
+
 .cards-case-study {
   display: grid;
   grid-template-columns: 1fr;
@@ -61,6 +70,8 @@ CSS Classes
   position: relative;
   width: 100%;
 }
+
+.grey-button-popup,
 .grey-button {
   background-color: rgb(245, 245, 245);
   border-color: #d6d6d6;
@@ -76,6 +87,11 @@ CSS Classes
   text-align: center;
   width: 100px;
 }
+
+.grey-button-popup{
+  position:relative
+}
+
 h2.questions {
   font-family: Arial;
   font-size: 20px;

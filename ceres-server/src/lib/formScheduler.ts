@@ -10,14 +10,12 @@ export const scheduleMonthlyForms = () => {
   // rule.hour = 0;
   // rule.minute = 0;
   // rule.second = 0;
-
   // scheduler.scheduleJob(rule, () => {
   //   createMonthlyForms();
   // });
-
   /** Use this for testing the scheduler */
-  const demoTest = scheduler.scheduleJob('*/1 * * * *', () => {
-    createMonthlyForms();
-    demoTest.cancel();
-  });
+  // const demoTest = scheduler.scheduleJob('*/1 * * * *', () => {
+  //   createMonthlyForms();
+  //   demoTest.cancel();
+  // });
 };

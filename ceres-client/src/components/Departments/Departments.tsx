@@ -7,12 +7,15 @@ import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import AuthService from '../../services/authService';
 import httpService from '../../services/httpService';
+import AdminSidebar from '../Sidebar/AdminSidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 
 function Departments() {
   let history = useHistory();
   const userContext = useContext(UserContext);
+  const [showNav, setShowNav] = useState(false);
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -81,31 +84,34 @@ function Departments() {
   };
 
   return (
-    <div className="department-background">
-      <header className="department-header">
-        <img src={logo} alt="Department Logo" className="department-logo"></img>
+    <div>
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+          Log Out
+        </button>
       </header>
-      <button type="submit" onClick={onClickLogOutHandler} className="logout-button">
-        Log Out
-      </button>
-      <button type="submit" className="admin-button">
-        Admin Options
-      </button>
-      <div className="cards">
-        {departmentState.departments.slice(1).map((department: any, index: any) => {
-          return (
-            <div className="individual-card">
-              <h2 className="inside-card">
-                <b>{department.name}</b>
-              </h2>
-              <p className="inside-text">{iconChecker(toDoState.toDoReminders[department.id - 2].caseStudies)}Case Study</p>
-              <p className="inside-text">{iconChecker(toDoState.toDoReminders[department.id - 2].dataForm)}Data Form</p>
-              <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
-                View Department
-              </button>
-            </div>
-          );
-        })}
+      <div className="flex h-full">
+        <AdminSidebar show={showNav} />
+      </div>
+      <div className="department-background">
+        <div className="cards">
+          {departmentState.departments.slice(1).map((department: any, index: any) => {
+            return (
+              <div className="individual-card">
+                <h2 className="inside-card">
+                  <b>{department.name}</b>
+                </h2>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].caseStudies)}Case Study</p>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].dataForm)}MSPP Report</p>
+                <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
+                  View Department
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
