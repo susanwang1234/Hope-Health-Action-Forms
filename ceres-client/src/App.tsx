@@ -11,6 +11,7 @@ import CaseStudySubmit from './components/CaseStudySubmit/CaseStudySubmit';
 import Departments from './components/Departments/Departments';
 import Forms from './components/Forms/Forms';
 import StatisticsDashboard from './components/Statistics/Statistics';
+import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 
@@ -28,6 +29,7 @@ function App() {
         <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/statistics" component={StatisticsDashboard}></PrivateRoute>
+        <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
       </Switch>
     </Router>
   );
