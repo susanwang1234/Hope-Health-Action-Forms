@@ -9,6 +9,8 @@ import Sidebar from '../Sidebar/Sidebar';
 import { UserContext } from '../../UserContext';
 
 const ThisMonth = () => {
+    document.body.style.backgroundColor = '#f5f5f5';
+
     const [displayingData, setDisplayingData] = useState<any>(null);
     const [showNav, setShowNav] = useState(false);
     const userContext = useContext(UserContext);

@@ -11,6 +11,7 @@ import { UserContext } from '../../UserContext';
 
 const DataPage = () => {
   document.body.style.backgroundColor = '#f5f5f5';
+  
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
