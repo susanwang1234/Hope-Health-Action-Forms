@@ -14,6 +14,7 @@ import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth'
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import AdminCreateUser from './components/Admin/AdminCreateUser';
+import AdminEditUser from './components/Admin/AdminEditUser';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
         <PrivateRoute path="/new-user" component={AdminCreateUser}></PrivateRoute>
+        <PrivateRoute path="/edit-user" component={AdminEditUser}></PrivateRoute>
       </Switch>
     </Router>
   );

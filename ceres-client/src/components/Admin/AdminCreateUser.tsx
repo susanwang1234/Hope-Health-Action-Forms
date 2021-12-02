@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
 */
 
-let newUser;
 const AdminCreateUser = () => {
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
@@ -101,7 +100,7 @@ const AdminCreateUser = () => {
       toast.error('Passwords do not match');
       return;
     }
-    newUser = {
+    let newUser = {
       username: username,
       password: password,
       departmentId: departmentId,

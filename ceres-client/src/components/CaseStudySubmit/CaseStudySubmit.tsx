@@ -18,7 +18,6 @@ import Popup from './PopUpModal/Popup';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
-let caseStudy;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);
   const [shareImage, setShareImage] = useState('');
@@ -131,7 +130,7 @@ const CaseStudySubmit = () => {
   };
 
   const createCaseStudy = async (imageId: number) => {
-    caseStudy = {
+    let caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
       departmentId: userContext.user?.departmentId,
       userId: userContext.user?.id,
