@@ -3,6 +3,7 @@
 
 /** Import Modules */
 import { Application } from 'express';
+import { scheduleMonthlyForms } from 'lib/formScheduler';
 import { createServer, sendFirstRequest, enableCors, enableLogging, enableRoutes, enableErrorHandling, enableServerListening } from 'server';
 
 /** Create instance of Server */
@@ -15,6 +16,7 @@ const startServer = () => {
   enableRoutes(app);
   enableErrorHandling(app);
   enableServerListening(app, NAMESPACE);
+  scheduleMonthlyForms();
 };
 
 /** Start Ceres Server */

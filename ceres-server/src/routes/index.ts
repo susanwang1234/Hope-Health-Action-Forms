@@ -13,6 +13,7 @@ import caseStudyResponsesRoutes from './caseStudiesResponsesRoute';
 import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
 import employeeOfTheMonthRoutes from './employeeOfTheMonthRoute';
+import todoRoutes from './todoRoute';
 import emailRoutes from './emailRoute';
 import forgotPasswordRoutes from './forgotPasswordRoute';
 import passport from 'passport';
@@ -39,6 +40,7 @@ apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
+apiRouter.use('/to-do', todoRoutes);
 apiRouter.use('/email', emailRoutes);
 
 const baseRouter = Router();
