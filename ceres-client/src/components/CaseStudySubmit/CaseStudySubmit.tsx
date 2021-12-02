@@ -19,6 +19,9 @@ import { departmentParam } from '../../types/departmentParamType';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
 let caseStudy;
+/*
+Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
+*/
 const CaseStudySubmit = () => {
   const { deptID } = useParams<departmentParam>();
   const userContext = useContext(UserContext);
@@ -132,7 +135,7 @@ const CaseStudySubmit = () => {
   };
 
   const createCaseStudy = async (imageId: number) => {
-    caseStudy = {
+    let caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
       departmentId: deptID,
       userId: userContext.user?.id,
