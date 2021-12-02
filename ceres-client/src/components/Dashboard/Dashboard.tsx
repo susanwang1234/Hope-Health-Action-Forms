@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
-import { calculateDepartmentPoints } from './pointSystem';
+import { calculateDepartmentPoints } from './util/pointSystem';
 import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
@@ -68,7 +68,7 @@ const Dashboard = () => {
               <div className="dashboard-cards">
                 <div className="card-outer fill-space-left">
                   <p className="title">To Do</p>
-                  <div className="card-inner width-100-percent">{ToDo()}</div>
+                  <div className="card-inner width-100-percent">{ToDo(toDo.toDoReminders)}</div>
                   <p className="title">
                     Leaderboard
                     <div className="align-right icon instructions">{Instruction()}</div>

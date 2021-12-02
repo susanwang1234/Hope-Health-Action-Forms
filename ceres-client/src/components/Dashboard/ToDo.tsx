@@ -4,9 +4,11 @@ import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import { IoIosAlert } from 'react-icons/io';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { ToDoStatus } from '../../models/toDoStatus';
+import { currDate } from './util/timezone';
 
-const ToDo = () => {
-  const [date, setDate]: any = useState(new Date());
+const ToDo = (toDoReminders: ToDoStatus) => {
+  const [date, setDate]: any = useState(currDate);
 
   function generateCalendar() {
     return (
