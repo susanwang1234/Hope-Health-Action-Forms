@@ -7,14 +7,17 @@ import { useContext, useEffect } from 'react';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import '../CaseStudySubmit/CaseStudySubmit.css';
+import '../Admin/Admin.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
+import { set } from 'react-hook-form';
 
 let newUser;
 const AdminCreateUser = () => {
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
+  const [userIsAdmin, setUserIsAdmin] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [repeatedPassword, setRepeatedPassword] = useState<string>('');
@@ -110,10 +113,20 @@ const AdminCreateUser = () => {
       })
       .catch((error: any) => {
         console.log(error);
-        if (error === 'Username already exists') {
-          toast.error('Username already exists');
-        }
+        //toast.error(error);
       });
+  };
+
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setRoleId(value);
+    if (value === '1') {
+      setUserIsAdmin(true);
+      setDepartmentId('1');
+      toast.info('Admins do not belong to a specific department');
+    } else {
+      setUserIsAdmin(false);
+    }
   };
 
   return (
@@ -134,8 +147,8 @@ const AdminCreateUser = () => {
             <b>Create a New User</b>
           </h2>
           <div className="w-full flex flex-col pt-10">
-            <label className="inside-text-case-study">Role</label>
-            <select className="minimal" onChange={(event) => setRoleId(event.target.value)}>
+            <label className="admin-inside-text">Role</label>
+            <select className="minimal self-center" onChange={selectChange}>
               <option selected disabled>
                 --Select a Role--
               </option>
@@ -144,8 +157,8 @@ const AdminCreateUser = () => {
               })}
             </select>
             <h1>{roleId}</h1>
-            <label className="inside-text-case-study">Department</label>
-            <select className="minimal" onChange={(event) => setDepartmentId(event.target.value)}>
+            <label className="admin-inside-text">Department</label>
+            <select className="minimal self-center" disabled={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
               <option selected disabled>
                 --Select a Department--
               </option>
@@ -154,14 +167,14 @@ const AdminCreateUser = () => {
               })}
             </select>
             <h1>{departmentId}</h1>
-            <label className="inside-text-case-study">Username</label>
-            <input value={username} onChange={(event) => setUsername(event.target.value)} className="response" placeholder="Type here..."></input>
+            <label className="admin-inside-text">Username</label>
+            <input value={username} onChange={(event) => setUsername(event.target.value)} className="admin-response" placeholder="Type here..."></input>
             <h1>{username}</h1>
-            <label className="inside-text-case-study">Password</label>
-            <input value={password} type="password" onChange={(event) => setPassword(event.target.value)} className="response" placeholder="Type here..."></input>
+            <label className="admin-inside-text">Password</label>
+            <input value={password} type="password" onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
             <h1>{password}</h1>
-            <label className="inside-text-case-study">Repeat Password</label>
-            <input value={repeatedPassword} onChange={(event) => setRepeatedPassword(event.target.value)} className="response" type="password" placeholder="Type here..."></input>
+            <label className="admin-inside-text">Repeat Password</label>
+            <input value={repeatedPassword} onChange={(event) => setRepeatedPassword(event.target.value)} className="admin-response" type="password" placeholder="Type here..."></input>
             <h1>{repeatedPassword}</h1>
             <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
               Cancel
