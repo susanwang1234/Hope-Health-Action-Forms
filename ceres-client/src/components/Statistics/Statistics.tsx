@@ -41,7 +41,7 @@ const StatisticsDashboard = () => {
     setStartYear(0);
     setEndMonth('');
     setEndYear(0);
-    // fetchData();
+    fetchData();
   }
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +67,8 @@ const StatisticsDashboard = () => {
                 questionLabels.length ?
                 questionLabels.map((label, index) => {
                   const question = index === plotIndex ?
-                    <li><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler} checked></input>{label}</li>
-                    : <li><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>
+                    <li key={label}><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler} checked></input>{label}</li>
+                    : <li key={label}><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>
                   return question;
                 }):
                 'No Questions Found'
@@ -81,7 +81,7 @@ const StatisticsDashboard = () => {
                 <div className="filter-label">From:</div>
                 <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
                   <option value="" disabled>Month</option>
-                  {MONTHS.map(month => <option value={month}>{month}</option>)}
+                  {MONTHS.map(month => <option key={month} value={month}>{month}</option>)}
                 </select>
                 <input className="filter-input" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
               </div>
@@ -89,7 +89,7 @@ const StatisticsDashboard = () => {
                 <div className="filter-label">To:</div>
                 <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
                   <option value="" disabled>Month</option>
-                  {MONTHS.map(month => <option>{month}</option>)}
+                  {MONTHS.map(month => <option key={month}>{month}</option>)}
                 </select>
                 <input className="filter-input" onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
               </div>
