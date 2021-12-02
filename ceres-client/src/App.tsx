@@ -32,7 +32,6 @@ function App() {
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
-        <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
         <PrivateRoute path="/new-announcement" component={NewAnnouncement}></PrivateRoute>
       </Switch>
     </Router>
