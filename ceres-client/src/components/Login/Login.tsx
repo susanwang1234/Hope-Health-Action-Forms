@@ -75,7 +75,6 @@ function Login() {
                 name="username"
                 type="text"
               />
-              {errors.username && 'Username is invalid'}
             </div>
 
             <div>

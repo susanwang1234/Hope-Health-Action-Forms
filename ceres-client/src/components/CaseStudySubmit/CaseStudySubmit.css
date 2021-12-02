@@ -191,6 +191,12 @@ textarea.response {
   
 }
 
+@media only screen and (max-width: 830px){
+  .photo-text{
+    font-size: 12px;
+  }
+
+}
 
 @media only screen and (max-width: 600px){
   .cards-case-study{
@@ -223,9 +229,7 @@ textarea.response {
   label.inside-text-case-study {
     font-size: 16px;
   }
-  .photo-text{
-    font-size: 12px;
-  }
+  
   .input-photo{
     font-size: 12px;
   }

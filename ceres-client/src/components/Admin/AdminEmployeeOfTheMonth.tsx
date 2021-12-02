@@ -10,10 +10,12 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 import gray_person from '../../images/gray_person.jpg';
+import Popup from '../CaseStudySubmit/PopUpModal/Popup';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
   document.body.style.backgroundColor = '#f5f5f5';
+  const [checkMark, SetCheckMark] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [shareImage, setShareImage] = useState('');
   const userContext = useContext(UserContext);
@@ -32,10 +34,7 @@ const AdminEmployeeOfTheMonth = () => {
     }
     return <Redirect to="/" />;
   };
-  const onclickCancel = async (event: any) => {
-    event.preventDefault();
-    window.location.href = '/departments';
-  };
+  
 
   useEffect(() => {
     getDepartments();
@@ -59,6 +58,12 @@ const AdminEmployeeOfTheMonth = () => {
       toast.error('Image not uploaded!! Please upload the image.');
       return;
     }
+
+    if (!checkMark) {
+      toast.error("Check Box isn't marked!! Please mark the checkbox.");
+      return;
+    }
+    
     if (employeeName === '' || employeeDescription === '' || selectedDepartment === 'Nothing selected') {
       toast.error('Please fill in all fields.');
       return;
@@ -115,6 +120,25 @@ const AdminEmployeeOfTheMonth = () => {
     setSelectedDepartment(value);
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onclickCancel = async (event: any) => {
+    setIsOpen(true);
+  };
+
+  const OnClickNo = async (event: any) => {
+    setIsOpen(false);
+  };
+
+  const OnClickYes = async (event: any) => {
+    event.preventDefault();
+    window.location.href = '/departments';
+  };
+
   return (
     <div>
       <header className="nav-header">
@@ -139,6 +163,11 @@ const AdminEmployeeOfTheMonth = () => {
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
               <div className="float-left pl-10">
+                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
+                <p className = "photo-text">
+                  This person has given permission to share their story <br />
+                  and photo in HHA communications, including online platforms.
+                </p>
                 <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
@@ -159,6 +188,30 @@ const AdminEmployeeOfTheMonth = () => {
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
+              {isOpen && (
+                <Popup
+                  content={
+                    <>
+                      <div className="popup_modal flex flex-col">
+                        <div className="popup_child pt-2">
+                          <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                          <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
+                        </div>
+
+                        <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
+                          <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                            No
+                          </button>
+                          <button onClick={OnClickYes} className="blue-button-popup w-full">
+                            Yes
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  }
+                  handleClose={togglePopup}
+                />
+              )}
               <button onClick={saveImageForEmployeeOfTheMonth} className="blue-button bottom-5 right-20">
                 Submit
               </button>
