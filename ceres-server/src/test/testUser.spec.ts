@@ -4,6 +4,7 @@ import http from 'http';
 import { Application } from 'express';
 import { userDNEError, userNegativeOrNanInputError, pageNotFoundError } from '../shared/errorMessages';
 import { attemptAuthentication, setupApp, setupHttpServer, Accounts } from './testTools/mochaHooks';
+import authUtil from '../utils/authHelper';
 const expect = require('chai').expect;
 const chai = require('chai');
 const chaiHttp = require('chai-http');
@@ -87,11 +88,11 @@ describe('testPostUserSuccess', () => {
       .set('content-type', 'application/json')
       .send({
         username: 'departmentHead',
-        password: '$2a$12$7bWbFzy6wdFRCG3JVp8JFe7PZTJ/X6FjwpY/769gMEVgbc9vvnggu',
+        password: 'cheesePlease',
         departmentId: 3,
         roleId: 3
       })
-      .end((err: any, res: any) => {
+      .end(async (err: any, res: any) => {
         expect(err).to.be.null;
         expect(res).to.have.status(201);
         expect(res.body).to.be.an('array');
@@ -102,7 +103,7 @@ describe('testPostUserSuccess', () => {
         expect(res.body[0]).to.have.deep.property('departmentId');
         expect(res.body[0]).to.have.deep.property('roleId');
         expect(res.body[0].username).to.deep.equal('departmentHead');
-        expect(res.body[0].password).to.deep.equal('$2a$12$7bWbFzy6wdFRCG3JVp8JFe7PZTJ/X6FjwpY/769gMEVgbc9vvnggu');
+        expect(true === (await authUtil.validPassword('cheesePlease', res.body[0].password)));
         expect(res.body[0].departmentId).to.deep.equal(3);
         expect(res.body[0].roleId).to.deep.equal(3);
         done();

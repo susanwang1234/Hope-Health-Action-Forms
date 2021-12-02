@@ -32,6 +32,8 @@ const imageDNEError = dneError('Image', 'does not exist');
 const imageMimetypeError = invalidExtension('Image', 'png, jpg, or jpeg');
 const employeeOfTheMonthNegativeOrNanInputError = negativeOrNanInputError('/employee-of-the-month/:id');
 const employeeOfTheMonthDNEError = dneError('Employee of the Month', 'does not exist');
+const emailNegativeOrNanInputError = negativeOrNanInputError('/email/:id');
+const emailDNEError = dneError('Email', 'does not exist');
 
 export {
   caseStudiesNegativeOrNanInputError,
@@ -54,5 +56,7 @@ export {
   imageDNEError,
   imageMimetypeError,
   employeeOfTheMonthNegativeOrNanInputError,
-  employeeOfTheMonthDNEError
+  employeeOfTheMonthDNEError,
+  emailNegativeOrNanInputError,
+  emailDNEError
 };
