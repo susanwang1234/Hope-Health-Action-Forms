@@ -10,7 +10,9 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import '../Admin/Admin.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
-import { set } from 'react-hook-form';
+/*
+Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
+*/
 
 let newUser;
 const AdminCreateUser = () => {
@@ -19,6 +21,7 @@ const AdminCreateUser = () => {
   const userContext = useContext(UserContext);
   const [userIsAdmin, setUserIsAdmin] = useState<boolean>(false);
   const [username, setUsername] = useState<string>('');
+  const [passwordShown, setPasswordShown] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [repeatedPassword, setRepeatedPassword] = useState<string>('');
   const [departmentId, setDepartmentId] = useState<string>('Nothing selected');
@@ -109,11 +112,11 @@ const AdminCreateUser = () => {
       .post(url, newUser)
       .then(() => {
         toast.success('New User Created', { position: 'top-center', autoClose: 5000 });
-        //window.location.href = '/departments';
+        window.location.href = '/departments';
       })
       .catch((error: any) => {
         console.log(error);
-        //toast.error(error);
+        toast.error(error.response.data.error);
       });
   };
 
@@ -127,6 +130,10 @@ const AdminCreateUser = () => {
     } else {
       setUserIsAdmin(false);
     }
+  };
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
   };
 
   return (
@@ -153,10 +160,9 @@ const AdminCreateUser = () => {
                 --Select a Role--
               </option>
               {roleState.roles.map((roleName: any) => {
-                return <option value={roleName.id}>{roleName.name}</option>;
+                return <option value={roleName.id}>{roleName.label}</option>;
               })}
             </select>
-            <h1>{roleId}</h1>
             <label className="admin-inside-text">Department</label>
             <select className="minimal self-center" disabled={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
               <option selected disabled>
@@ -166,16 +172,22 @@ const AdminCreateUser = () => {
                 return <option value={departmentName.id}>{departmentName.name}</option>;
               })}
             </select>
-            <h1>{departmentId}</h1>
             <label className="admin-inside-text">Username</label>
             <input value={username} onChange={(event) => setUsername(event.target.value)} className="admin-response" placeholder="Type here..."></input>
-            <h1>{username}</h1>
             <label className="admin-inside-text">Password</label>
-            <input value={password} type="password" onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
-            <h1>{password}</h1>
+            <input value={password} type={passwordShown ? 'text' : 'password'} onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
             <label className="admin-inside-text">Repeat Password</label>
-            <input value={repeatedPassword} onChange={(event) => setRepeatedPassword(event.target.value)} className="admin-response" type="password" placeholder="Type here..."></input>
-            <h1>{repeatedPassword}</h1>
+            <input
+              value={repeatedPassword}
+              onChange={(event) => setRepeatedPassword(event.target.value)}
+              className="admin-response"
+              type={passwordShown ? 'text' : 'password'}
+              placeholder="Type here..."
+            ></input>
+            <div className="self-center w-50">
+              <input className="float-left mr-2 mt-1" onChange={togglePassword} type="checkbox" />
+              <p>Show password</p>
+            </div>
             <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
               Cancel
             </button>

@@ -120,7 +120,7 @@ const CaseStudy = () => {
       });
     } catch (error: any) {
       console.log('Error Unable to fetch from ' + url);
-      toast.error('There are no case studies of this type.');
+      toast.error(error.response.data.error);
       setCaseStudyState({
         caseStudies: [],
         caseStudiesOrig: []
