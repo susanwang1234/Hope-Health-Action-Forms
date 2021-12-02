@@ -32,7 +32,7 @@
     "webpack": "^4.44.2"
   },
   "scripts": {
-    "start": "TZ='America/Cancun' craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"

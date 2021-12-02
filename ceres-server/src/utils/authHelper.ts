@@ -1,7 +1,13 @@
-import bcrypt from 'bcryptjs';
+import bcrypt, { hash } from 'bcryptjs';
 import { User as myUser } from '../db/types/userType';
 import * as jwt from 'jsonwebtoken';
 import config from '../config/config';
+
+const hashPassword = async (plaintextPassword: string) => {
+  const salt = await bcrypt.genSalt(12);
+  const hash = await bcrypt.hash(plaintextPassword, salt);
+  return hash;
+};
 
 const validPassword = async (candidate: string, hash: string) => {
   const isValid = await bcrypt.compare(candidate, hash);
@@ -25,6 +31,7 @@ const issueJWT = (user: myUser) => {
 };
 
 const authUtil = {
+  hashPassword,
   validPassword,
   issueJWT
 };
