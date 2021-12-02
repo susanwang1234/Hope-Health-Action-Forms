@@ -241,6 +241,10 @@ textarea.response {
   select{
     padding: 0.5em 1em 0.5em 1em;
   }
+  .logout-button{
+    font-size: 10px !important;
+    width: 90px !important;
+  }
 }
 
 @media only screen and (max-width: 400px){
