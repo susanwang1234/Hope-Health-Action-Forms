@@ -38,8 +38,8 @@ describe('getEmployeeOfTheMonth', () => {
       expect(res.body[0].id).to.deep.equal(1);
       expect(res.body[0].imageId).to.deep.equal(1);
       expect(res.body[0].name).to.deep.equal('Zack Cody');
-      expect(res.body[0].department).to.deep.equal('Maternity');
-      expect(res.body[0].departmentId).to.deep.equal(4);
+      expect(res.body[0].department).to.deep.equal('Rehab');
+      expect(res.body[0].departmentId).to.deep.equal(2);
       expect(res.body[0].description).to.deep.equal(
         'Zack works in the maternity department at Hope Health Action delivering children. He is so good at delivering children he delivered 300 children this month ALONE. This is why he is employee of the month. Go Zack!'
       );
@@ -54,7 +54,7 @@ describe('editEmployeeOfTheMonthById', () => {
     imageId: 2,
     name: 'Jenny Jennings',
     department: 'Community Health',
-    departmentId: 5,
+    departmentId: 3,
     description: 'Jenny Jennings did a fantastic job this month!'
   };
   before('Create a working server', (done) => {
@@ -121,7 +121,7 @@ describe('editEmployeeOfTheMonthById', () => {
         expect(res.body[0].id).to.deep.equal(1);
         expect(res.body[0].imageId).to.deep.equal(2);
         expect(res.body[0].name).to.deep.equal('Jenny Jennings');
-        expect(res.body[0].departmentId).to.deep.equal(5);
+        expect(res.body[0].departmentId).to.deep.equal(3);
         expect(res.body[0].description).to.deep.equal('Jenny Jennings did a fantastic job this month!');
         done();
       });

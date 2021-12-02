@@ -5,6 +5,10 @@ import { editItemById } from './requestTemplates/editByIdRequest';
 import { deleteItemById } from './requestTemplates/deleteByIdRequest';
 import { deleteItems } from './requestTemplates/deleteAllRequest';
 import { userNegativeOrNanInputError, userDNEError } from 'shared/errorMessages';
+import authUtil from '../utils/authHelper';
+import userModel from '../db/models/userModel';
+import logging from '../config/logging';
+import { isInvalidInput } from './controllerTools/isInvalidInput';
 
 const NAMESPACE = 'User Control';
 const TABLE_NAME = 'User';
@@ -19,11 +23,48 @@ const getUsers = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const createUser = async (req: Request, res: Response, next: NextFunction) => {
-  await createItem(req, res, next, NAMESPACE, TABLE_NAME, inputtedReqBody(req));
+  try {
+    const newUser = inputtedReqBody(req);
+    const userFound = await userModel.findOne('User.username', newUser.username);
+
+    if (userFound) {
+      res.status(400).send({ error: 'Username already exists' });
+      return;
+    }
+    newUser.password = await authUtil.hashPassword(newUser.password);
+    await createItem(req, res, next, NAMESPACE, TABLE_NAME, newUser);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
 };
 
 const editUserById = async (req: Request, res: Response, next: NextFunction) => {
-  await editItemById(req, res, next, NAMESPACE, TABLE_NAME, userNegativeOrNanInputError, userDNEError, inputtedReqBody(req));
+  try {
+    const editedUser = inputtedReqBody(req);
+    const userFound = await userModel.findOne('User.username', editedUser.username);
+
+    const userId: number = +req.params.id;
+    if (isInvalidInput(userId)) {
+      res.status(400).send(userNegativeOrNanInputError);
+      return;
+    }
+
+    let isSameUser: boolean = true;
+    if (userFound) {
+      isSameUser = userId === userFound.id;
+    }
+
+    if (!isSameUser) {
+      res.status(400).send({ error: 'Username already in use by other account' });
+      return;
+    }
+    editedUser.password = await authUtil.hashPassword(editedUser.password);
+    await editItemById(req, res, next, NAMESPACE, TABLE_NAME, userNegativeOrNanInputError, userDNEError, editedUser);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
 };
 
 const deleteUserById = async (req: Request, res: Response, next: NextFunction) => {

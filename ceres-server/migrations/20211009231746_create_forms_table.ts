@@ -5,6 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments();
     table.integer('departmentId').unsigned().notNullable().references('id').inTable('Department');
     table.timestamp('createdAt').defaultTo(knex.fn.now());
+    table.boolean('isSubmitted');
   });
 }
 
