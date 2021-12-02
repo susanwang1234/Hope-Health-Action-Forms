@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import authenticationRoutes from './authenticationRoute';
 import departmentRoutes from './departmentRoute';
 import departmentFormRoutes from './departmentFormRoute';
@@ -14,10 +13,15 @@ import caseStudyResponsesRoutes from './caseStudiesResponsesRoute';
 import roleRoutes from './roleRoute';
 import userRoutes from './userRoute';
 import employeeOfTheMonthRoutes from './employeeOfTheMonthRoute';
+import emailRoutes from './emailRoute';
+import forgotPasswordRoutes from './forgotPasswordRoute';
 import passport from 'passport';
 
 const authRouter = Router();
 authRouter.use('/auth', authenticationRoutes);
+
+const forgotPasswordRouter = Router();
+forgotPasswordRouter.use('/forgot-password', forgotPasswordRoutes);
 
 const apiRouter = Router();
 // all routes below must be authenticated to be granted access
@@ -35,9 +39,11 @@ apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
+apiRouter.use('/email', emailRoutes);
 
 const baseRouter = Router();
 baseRouter.use(authRouter);
+baseRouter.use(forgotPasswordRouter);
 baseRouter.use(apiRouter);
 
 export default baseRouter;
