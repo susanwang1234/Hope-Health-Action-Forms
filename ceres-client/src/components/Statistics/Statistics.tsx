@@ -30,6 +30,7 @@ const StatisticsDashboard = () => {
       const response = await httpService.get(url);
       setDataForPlots(response.data.plotData);
       setQuestionLabels(response.data.questionLabels);
+      if (plotIndex >= questionLabels.length) setPlotIndex(0);
     } catch (error: any) {
       console.log('Error: Unable to fetch from', url);
     }
@@ -64,7 +65,12 @@ const StatisticsDashboard = () => {
             <ul className="questionMenu">
               {
                 questionLabels.length ?
-                questionLabels.map((label, index) => <li><input className="radio-button" name="selected" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>):
+                questionLabels.map((label, index) => {
+                  const question = index === plotIndex ?
+                    <li><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler} checked></input>{label}</li>
+                    : <li><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>
+                  return question;
+                }):
                 'No Questions Found'
               }
             </ul>
@@ -97,8 +103,8 @@ const StatisticsDashboard = () => {
                 className="plot statistics-card"
                 data={[
                   {
-                    x: dataForPlots[plotIndex].x,
-                    y: dataForPlots[plotIndex].y,
+                    x: dataForPlots[plotIndex] ? dataForPlots[plotIndex].x : dataForPlots[0].x,
+                    y: dataForPlots[plotIndex] ? dataForPlots[plotIndex].y : dataForPlots[0].y,
                     type: 'scatter',
                     mode: 'lines+markers',
                   }
