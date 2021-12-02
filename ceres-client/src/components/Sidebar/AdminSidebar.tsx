@@ -11,6 +11,11 @@ const AdminSidebar = ({ show }: any) => {
     <div className={show ? 'sidebar active' : 'sidebar'}>
       <ul>
         <li>
+          <Link to="/departments" className="side-link">
+            Departments
+          </Link>
+        </li>
+        <li>
           <Button value="create-new" className="side-button" onClick={() => setOpenCreate(!openCreate)}>
             Create New
           </Button>
