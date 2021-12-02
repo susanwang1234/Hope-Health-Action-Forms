@@ -12,6 +12,7 @@ let agent: any;
 let id = 0;
 
 const roles = ['hhaAdmin', 'hospitalAdmin', 'departmentHead', 'user'];
+const labels = ['HHA Admin', 'Hospital Admin', 'Department Head', 'Staff'];
 
 // Test 1: GET request
 describe('testGetRoleSuccess', () => {
@@ -35,6 +36,7 @@ describe('testGetRoleSuccess', () => {
         expect(item).to.be.an('object');
         expect(item).to.have.deep.property('id');
         expect(item).to.have.deep.property('name');
+        expect(item).to.have.deep.property('label');
       });
       done();
     });
@@ -46,6 +48,7 @@ describe('testGetRoleSuccess', () => {
       res.body.forEach((item: any) => {
         expect(item.id).to.deep.equal(++id);
         expect(item.name).to.deep.equal(roles[id - 1]);
+        expect(item.label).to.deep.equal(labels[id - 1]);
       });
       done();
     });
