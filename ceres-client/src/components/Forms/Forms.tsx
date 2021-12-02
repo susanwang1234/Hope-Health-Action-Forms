@@ -1,13 +1,15 @@
 import './Forms.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Form } from 'react-bootstrap';
-import { useState, useEffect } from 'react';
+import {useContext, useState, useEffect } from 'react';
+import { UserContext } from '../../UserContext';
 import Element from './Elements';
 import { FormContext } from './FormContext';
 import JSONfile from './jsonForms/rehabForm.json';
 import '../../App.css';
 import ToggleSwitch from './ToggleSwitch';
-
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -17,6 +19,7 @@ import logo from '../../images/navlogo.png';
 // Citation for dynamic forms, updating JSON fields, the JSON structure, and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
 function Forms() {
+  const userContext = useContext(UserContext);
   const [elements, setElements] = useState<any | null>(null);
   useEffect(() => {
     return setElements(JSONfile[0]);
@@ -69,12 +72,24 @@ function Forms() {
 
   const [showNav, setShowNav] = useState(false);
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <FormContext.Provider value={{ handleChange }}>
       <main>
         <header className="nav-header">
           <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
           <img src={logo} alt="Logo" className="logo" />
+          <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+            Log Out
+          </button>
         </header>
         <Sidebar show={showNav} />
         <div className="outer-block">

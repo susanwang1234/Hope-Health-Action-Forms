@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
 import ReportElement from './ReportElement';
@@ -7,6 +7,9 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+import { UserContext } from '../../UserContext';
 
 const DataPage = () => {
   document.body.style.backgroundColor = '#f5f5f5';
@@ -14,6 +17,7 @@ const DataPage = () => {
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
   const [displayingData, setDisplayingData] = useState(null);
+  const userContext = useContext(UserContext);
 
   function handleClick(index: any): void {
     setDisplayingData(reports[index]);
@@ -39,11 +43,23 @@ const DataPage = () => {
     }
   }, []);
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <React.Fragment>
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+           Log Out
+        </button>
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} />
