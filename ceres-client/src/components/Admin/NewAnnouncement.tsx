@@ -10,7 +10,6 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 
-let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
     document.body.style.backgroundColor = '#f5f5f5';
     const [showNav, setShowNav] = useState(false);
