@@ -9,8 +9,6 @@ import AuthService from '../../services/authService';
 import httpService from '../../services/httpService';
 import AdminSidebar from '../Sidebar/AdminSidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
-//source for checkmark icon:https://css.gg/check-o
-//source for alert icon: https://css.gg/danger
 
 function Departments() {
   let history = useHistory();

@@ -21,7 +21,7 @@ const CaseStudy = () => {
     getCaseStudies();
   }, [setCaseStudyState]);
 
-  async function getCaseStudies() {
+  const getCaseStudies = async () => {
     const url = `/case-study/${caseId.toString()}`;
     try {
       const response = await httpService.get(url);
@@ -32,9 +32,9 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  async function getCaseStudyImage(imageId: number) {
+  const getCaseStudyImage = async (imageId: number) => {
     const url = `/image/${imageId}`;
     try {
       await httpService
@@ -47,7 +47,7 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
   return (
     <div className="App">

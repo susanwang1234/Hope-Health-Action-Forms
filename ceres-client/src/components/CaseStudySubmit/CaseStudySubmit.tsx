@@ -15,9 +15,7 @@ import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
-/*
-Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
-*/
+
 let caseStudy;
 const CaseStudySubmit = () => {
   const userContext = useContext(UserContext);

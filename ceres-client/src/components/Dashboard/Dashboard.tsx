@@ -14,11 +14,11 @@ import Instruction from './Instruction';
 
 const Dashboard = () => {
   const [showNav, setShowNav] = useState(false);
-  const [department, setDepartmentState] = useState<any>({
-    departments: []
-  });
   const [toDo, setToDoState] = useState<any>({
     toDoReminders: []
+  });
+  const [pointSystem, setPointSystem] = useState<any>({
+    monthlyPointSystem: []
   });
 
   const getToDoStatus = async () => {
@@ -38,8 +38,9 @@ const Dashboard = () => {
     const url = '/department';
     try {
       const response = await httpService.get(url);
-      const monthlyLeaderboard = calculateDepartmentPoints(response.data.slice(1), departmentStatus);
-      console.log(monthlyLeaderboard);
+      setPointSystem({
+        monthlyPointSystem: calculateDepartmentPoints(response.data.slice(1), departmentStatus)
+      });
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
@@ -67,12 +68,11 @@ const Dashboard = () => {
                 <div className="card-outer fill-space-left">
                   <p className="title">To Do</p>
                   <div className="card-inner width-100-percent">{ToDo()}</div>
-
                   <p className="title">
                     Leaderboard
                     <div className="align-right icon instructions">{Instruction()}</div>
                   </p>
-                  <div className="card-inner width-100-percent">{Leaderboard()}</div>
+                  <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
                 </div>
                 <div className="card-outer fill-space-right">
                   <p className="title">Employee of the Month</p>

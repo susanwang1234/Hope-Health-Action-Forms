@@ -1,9 +1,4 @@
 /*
-  Citations: 
-    https://github.com/mustafaerden/react-admin-dashboard
-    https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position
-    https://www.w3schools.com/css/css3_buttons.asp*
-
   CSS Classes
   - align-left
   - align-right
@@ -145,7 +140,7 @@
   color: green;
 }
 
-.icon-mspp-report{
+.icon-mspp-report {
   color: red;
 }
 
