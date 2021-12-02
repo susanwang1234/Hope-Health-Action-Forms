@@ -21,7 +21,7 @@ const AdminSidebar = ({ show }: any) => {
               <Link to="/new-department" className="drop-link">
                 Department
               </Link>
-              <Link to="/new-annoucenemnt" className="drop-link">
+              <Link to="/new-announcement" className="drop-link">
                 Announcement
               </Link>
               <Link to="/new-employee-of-the-month" className="drop-link">
