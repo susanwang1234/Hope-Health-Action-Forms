@@ -15,8 +15,11 @@ const AdminCreateUser = () => {
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
-  const [checkMark, SetCheckMark] = useState(false);
-  const [selectedDepartment, setSelectedDepartment] = useState<string>('Nothing selected');
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [repeatedPassword, setRepeatedPassword] = useState<string>('');
+  const [departmentId, setDepartmentId] = useState<string>('Nothing selected');
+  const [roleId, setRoleId] = useState<string>('');
   const [departmentState, setDepartmentState] = useState({
     departments: []
   });
@@ -71,28 +74,46 @@ const AdminCreateUser = () => {
     }
   };
 
-  // const createUser = async () => {
-  //     newUser = {
-  //       username: ,
-  //       password: ,
-  //       departmentId: ,
-  //       roleId:
-  //     }
-  //   const url = '/user';
-  //   httpService
-  //     .post(url, newUser)
-  //     .then(() => {
-  //       toast.success('New Employee of the Month Submitted', { position: 'top-center', autoClose: 5000 });
-  //       window.location.href = '/departments';
-  //     })
-  //     .catch((error: any) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setSelectedDepartment(value);
+  const createUser = async () => {
+    if (roleId === '') {
+      toast.error('Role not selected');
+      return;
+    }
+    if (departmentId === 'Nothing selected') {
+      toast.error('Department not selected');
+      return;
+    }
+    if (username === '' || password === '' || repeatedPassword === '') {
+      toast.error('Please fill in all fields.');
+      return;
+    }
+    if (username.length < 5) {
+      toast.error('Username too short');
+      return;
+    }
+    if (password != repeatedPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+    newUser = {
+      username: username,
+      password: password,
+      departmentId: departmentId,
+      roleId: roleId
+    };
+    const url = '/user';
+    httpService
+      .post(url, newUser)
+      .then(() => {
+        toast.success('New User Created', { position: 'top-center', autoClose: 5000 });
+        //window.location.href = '/departments';
+      })
+      .catch((error: any) => {
+        console.log(error);
+        if (error === 'Username already exists') {
+          toast.error('Username already exists');
+        }
+      });
   };
 
   return (
@@ -113,12 +134,8 @@ const AdminCreateUser = () => {
             <b>Create a New User</b>
           </h2>
           <div className="w-full flex flex-col pt-10">
-            <div>
-              <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-              <p>New user is an admin.</p>
-            </div>
             <label className="inside-text-case-study">Role</label>
-            <select className="minimal">
+            <select className="minimal" onChange={(event) => setRoleId(event.target.value)}>
               <option selected disabled>
                 --Select a Role--
               </option>
@@ -126,8 +143,9 @@ const AdminCreateUser = () => {
                 return <option value={roleName.id}>{roleName.name}</option>;
               })}
             </select>
+            <h1>{roleId}</h1>
             <label className="inside-text-case-study">Department</label>
-            <select className="minimal" disabled={checkMark} onChange={selectChange}>
+            <select className="minimal" onChange={(event) => setDepartmentId(event.target.value)}>
               <option selected disabled>
                 --Select a Department--
               </option>
@@ -135,16 +153,22 @@ const AdminCreateUser = () => {
                 return <option value={departmentName.id}>{departmentName.name}</option>;
               })}
             </select>
+            <h1>{departmentId}</h1>
             <label className="inside-text-case-study">Username</label>
-            <textarea className="response" placeholder="Type here..."></textarea>
+            <input value={username} onChange={(event) => setUsername(event.target.value)} className="response" placeholder="Type here..."></input>
+            <h1>{username}</h1>
             <label className="inside-text-case-study">Password</label>
-            <textarea className="response" placeholder="Type here..."></textarea>
+            <input value={password} type="password" onChange={(event) => setPassword(event.target.value)} className="response" placeholder="Type here..."></input>
+            <h1>{password}</h1>
             <label className="inside-text-case-study">Repeat Password</label>
-            <textarea className="response" placeholder="Type here..."></textarea>
+            <input value={repeatedPassword} onChange={(event) => setRepeatedPassword(event.target.value)} className="response" type="password" placeholder="Type here..."></input>
+            <h1>{repeatedPassword}</h1>
             <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
               Cancel
             </button>
-            <button className="blue-button bottom-5 right-20">Submit</button>
+            <button onClick={createUser} className="blue-button bottom-5 right-20">
+              Submit
+            </button>
           </div>
         </div>
       </div>
