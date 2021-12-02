@@ -12,10 +12,10 @@ export const calculateDepartmentPoints = (departments: Department[], departmentS
   departments.forEach((department: Department, index: number) => {
     leaderboardDepartment = {
       department: '',
-      score: 0
+      points: 0
     };
     leaderboardDepartment.department = department.name;
-    leaderboardDepartment.score += calculateScore(departmentStatus[index]);
+    leaderboardDepartment.points += calculateScore(departmentStatus[index]);
     monthlyLeaderboard.push(leaderboardDepartment);
   });
   return monthlyLeaderboard;

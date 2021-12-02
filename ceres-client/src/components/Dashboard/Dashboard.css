@@ -2,6 +2,7 @@
   CSS Classes
   - align-left
   - align-right
+  - bar-data
   - card-inner
   - card-outer
   - center-content
@@ -20,6 +21,9 @@
   - icon-mspp-report
   - instructions
   - leaderboard
+  - leaderboard-container
+  - leaderboard-title
+  - pop-up-label
   - profile-pic
   - responsive-calendar
   - responsive-leaderboard
@@ -38,6 +42,11 @@
 
 .align-right {
   float: right !important;
+}
+
+.bar-data {
+  padding: 15px 10px 0 10px;
+  text-align: left;
 }
 
 .card-inner {
@@ -152,6 +161,20 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.leaderboard-container {
+  text-align: center;
+  width: 100%;
+}
+
+.leaderboard-title {
+  display: inline;
+  font-weight: bold;
+}
+
+.pop-up-label {
+  font-weight: bold;
 }
 
 .profile-pic {

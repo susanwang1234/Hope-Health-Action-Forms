@@ -13,6 +13,7 @@ import ToDo from './ToDo';
 import Instruction from './Instruction';
 
 const Dashboard = () => {
+  document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [toDo, setToDoState] = useState<any>({
     toDoReminders: []
