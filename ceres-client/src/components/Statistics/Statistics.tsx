@@ -35,13 +35,13 @@ const StatisticsDashboard = () => {
     }
   }
 
-  // function resetDateFilter() {
-  //   setStartMonth('');
-  //   setStartYear(0);
-  //   setEndMonth('');
-  //   setEndYear(0);
-  //   // fetchData();
-  // }
+  function resetDateFilter() {
+    setStartMonth('');
+    setStartYear(0);
+    setEndMonth('');
+    setEndYear(0);
+    // fetchData();
+  }
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -55,10 +55,10 @@ const StatisticsDashboard = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <Sidebar show={showNav}></Sidebar>
-      <div className="outer-container">
         <div className="dashboard-title statistics-card">
             Rehab Statistics
         </div>
+      <div className="outer-container">
         <div className="statistics-dashboard-container">
           <div className="left-container statistics-card">
             <ul className="questionMenu">
@@ -89,7 +89,7 @@ const StatisticsDashboard = () => {
               </div>
               <div className="statistic-buttons">
                 <button className="button" onClick={fetchData}>Search</button>
-                <button className="button">Reset</button>
+                <button className="button" onClick={resetDateFilter}>Reset</button>
               </div> 
             </div>
               {dataForPlots[0] ?
