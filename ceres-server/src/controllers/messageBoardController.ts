@@ -3,13 +3,14 @@ import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
 import { departmentNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
+import { createItem } from './requestTemplates/createRequest';
 
 const NAMESPACE = 'Message Control';
 const TABLE_NAME = 'Messages';
 
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY ID`);
-  const departmentId: number = +req.params.departmentId;
+  const departmentId: number = +req.body.departmentId;
   if (isInvalidInput(departmentId)) {
     res.status(400).send(departmentNegativeOrNanInputError);
     return;
@@ -27,6 +28,13 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const createNewMessage = async (req: Request, res: Response, next: NextFunction) => {};
+const createNewMessage = async (req: Request, res: Response, next: NextFunction) => {
+  const departmentId: number = +req.params.departmentId;
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+  await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
+};
 
 export default { createNewMessage, getMessages };
