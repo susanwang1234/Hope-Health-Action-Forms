@@ -51,7 +51,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
       setUser(data.user);
       setIsAuthenticated(data.isAuthenticated);
       if (data.user) {
-        data.user.roleName === 'user' ? setCurrentDepartmentIDLocation(1) : setCurrentDepartmentIDLocation(data.user.roleId);
+        data.user.roleName !== 'user' ? setCurrentDepartmentIDLocation(1) : setCurrentDepartmentIDLocation(data.user.roleId);
       } else {
         setCurrentDepartmentIDLocation(null);
       }

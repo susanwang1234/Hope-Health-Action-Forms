@@ -4,12 +4,12 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
-const CaseStudy = () => {
+const CaseStudy = (props: any) => {
   let queryStr = '';
   document.body.style.backgroundColor = '#f5f5f5';
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
@@ -120,7 +120,7 @@ const CaseStudy = () => {
       });
     } catch (error: any) {
       console.log('Error Unable to fetch from ' + url);
-      toast.error('There are no case studies of this type.');
+      toast.error(error.response.data.error);
       setCaseStudyState({
         caseStudies: [],
         caseStudiesOrig: []
