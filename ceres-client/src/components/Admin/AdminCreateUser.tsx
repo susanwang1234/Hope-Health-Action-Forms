@@ -122,7 +122,7 @@ const AdminCreateUser = () => {
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setRoleId(value);
-    if (value === '1') {
+    if (value === '1' || value === '2') {
       setUserIsAdmin(true);
       setDepartmentId('1');
       toast.info('Admins do not belong to a specific department');
@@ -154,7 +154,7 @@ const AdminCreateUser = () => {
           </h2>
           <div className="w-full flex flex-col pt-10">
             <label className="admin-inside-text">Role</label>
-            <select className="minimal self-center" onChange={selectChange}>
+            <select className="admin-drop-down-minimal self-center" onChange={selectChange}>
               <option selected disabled>
                 --Select a Role--
               </option>
@@ -162,8 +162,10 @@ const AdminCreateUser = () => {
                 return <option value={roleName.id}>{roleName.label}</option>;
               })}
             </select>
-            <label className="admin-inside-text">Department</label>
-            <select className="minimal self-center" disabled={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
+            <label hidden={userIsAdmin} className="admin-inside-text">
+              Department
+            </label>
+            <select className="admin-drop-down-minimal self-center" hidden={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
               <option selected disabled>
                 --Select a Department--
               </option>
