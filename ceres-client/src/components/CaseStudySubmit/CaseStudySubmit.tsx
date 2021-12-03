@@ -136,7 +136,7 @@ const CaseStudySubmit = () => {
   const createCaseStudy = async (imageId: number) => {
     caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
-      departmentId: userContext.user?.departmentId,
+      departmentId: deptID,
       userId: userContext.user?.id,
       imageId: imageId,
       title
@@ -164,7 +164,7 @@ const CaseStudySubmit = () => {
       .then(() => {
         updateResponse(postResponses, true);
         toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
-        window.location.href = '/case-studies';
+        window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
       })
       .catch((error: any) => {
         console.log(error);
