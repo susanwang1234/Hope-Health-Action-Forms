@@ -59,8 +59,8 @@ const editUserById = async (req: Request, res: Response, next: NextFunction) => 
       res.status(400).send({ error: 'Username already in use by other account' });
       return;
     }
-    const passwordChanged = editedUser.password === (await userModel.findOne('User.id', userId));
-    if (passwordChanged) {
+
+    if (editedUser.password !== userFound.password) {
       editedUser.password = await authUtil.hashPassword(editedUser.password);
     }
     await editItemById(req, res, next, NAMESPACE, TABLE_NAME, userNegativeOrNanInputError, userDNEError, editedUser);
