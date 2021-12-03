@@ -30,7 +30,7 @@ const DataPage = () => {
     getFormById();
 
     async function getFormById() {
-      const url = `/form/${2}`;
+      const url = `/form/${deptID}`;
       try {
         const response = await httpService.get(url);
         const data = response.data;
