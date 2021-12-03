@@ -11,6 +11,7 @@ import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 import gray_person from '../../images/gray_person.jpg';
 import Popup from '../CaseStudySubmit/PopUpModal/Popup';
+import '../Admin/AdminEmployeeOfTheMonth.css';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
@@ -153,7 +154,7 @@ const AdminEmployeeOfTheMonth = () => {
       </div>
       <div className="cards-case-study">
         <div className="casestudy-single-card">
-          <h2 className="inside-card -mt-10 mb-8">
+          <h2 className="inside-card -mt-10 mb-8 employee-heading">
             <b>New Employee of the Month</b>
           </h2>
           <div className="photo">
@@ -162,13 +163,13 @@ const AdminEmployeeOfTheMonth = () => {
               <div className="person_image float-left">
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
-              <div className="float-left pl-10">
+              <div className="float-left pl-10 declarartion-checkbox">
                 <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
                 <p className = "photo-text">
                   This person has given permission to share their story <br />
                   and photo in HHA communications, including online platforms.
                 </p>
-                <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
             <div className="w-full flex flex-col pt-10">

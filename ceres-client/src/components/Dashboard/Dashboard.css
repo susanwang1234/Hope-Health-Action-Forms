@@ -210,24 +210,6 @@
   }
 }
 
-/*CITATION: https://stackoverflow.com/questions/23081227/how-to-resize-div-and-contents-for-any-screen-size*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
-  .dashboard-container {
-    background-color: #f5f5f5;
-    display: flex;
-    padding: 20px 35px;
-    width: 300%;
-  }
-  /* Smartphone ----------- */
-  .flex-shrink {
-    flex-shrink: 3 !important;
-    height: auto !important;
-    margin-left: 500px;
-    max-height: 50% !important;
-    max-width: 50% !important;
-    position: relative;
-  }
-}
 
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -238,6 +220,26 @@
     width: 150%;
   }
   /* Styles */
+  .flex-shrink {
+    flex-shrink: 3 !important;
+    height: auto !important;
+    margin-left: 500px;
+    max-height: 50% !important;
+    max-width: 50% !important;
+    position: relative;
+  }
+}
+
+
+/*CITATION: https://stackoverflow.com/questions/23081227/how-to-resize-div-and-contents-for-any-screen-size*/
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .dashboard-container {
+    background-color: #f5f5f5;
+    display: flex;
+    padding: 20px 35px;
+    width: 300%;
+  }
+  /* Smartphone ----------- */
   .flex-shrink {
     flex-shrink: 3 !important;
     height: auto !important;
