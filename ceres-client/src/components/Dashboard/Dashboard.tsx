@@ -49,20 +49,24 @@ const Dashboard = () => {
           </header>
           <Sidebar show={showNav} />
           <div className="dashboard-container">
-            <div className="dashboard-cards">
-              <div className="card-outer fill-space-left">
-                <p className="title">To Do</p>
-                <div className="card-inner width-100-percent">{ToDo()}</div>
+            <div className="dashboard-cards flex lg:flex-row flex-col">
+              <div className="equal-width">
+                <div className="flex flex-col w-full">
+                  <p className="title">To Do</p>
+                  <div className="card-inner width-100-percent">{ToDo()}</div>
 
-                <p className="title">
-                  Leaderboard
-                  <div className="align-right icon instructions">{Instruction()}</div>
-                </p>
-                <div className="card-inner width-100-percent">{Leaderboard()}</div>
+                  <p className="title mt-6">
+                    Leaderboard
+                    <div className="align-right icon instructions">{Instruction()}</div>
+                  </p>
+                  <div className="card-inner width-100-percent">{Leaderboard()}</div>
+                </div>
               </div>
-              <div className="card-outer fill-space-right">
-                <p className="title">Employee of the Month</p>
-                <div className="card-inner height-100-percent">{EmployeeOfTheMonth()}</div>
+              <div className="equal-width lg:pl-14 mt-6 lg:mt-0">
+              <div className="flex flex-col w-full">
+                  <p className="title whitesapce-nowrap">Employee of the Month</p>
+                  <div className="">{EmployeeOfTheMonth()}</div>
+                </div>
               </div>
             </div>
           </div>
