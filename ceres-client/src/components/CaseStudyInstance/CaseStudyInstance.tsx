@@ -59,7 +59,7 @@ const CaseStudy = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <Sidebar show={showNav} departmentID={parseInt(deptID)} />
+      <Sidebar show={showNav} departmentID={deptID} />
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">

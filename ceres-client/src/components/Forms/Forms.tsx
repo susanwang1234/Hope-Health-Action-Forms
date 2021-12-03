@@ -79,7 +79,7 @@ function Forms() {
           <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
           <img src={logo} alt="Logo" className="logo" />
         </header>
-        <Sidebar show={showNav} departmentID={parseInt(deptID)} />
+        <Sidebar show={showNav} departmentID={deptID} />
         <div className="outer-block">
           <ToggleSwitch label="MSPP Data only" />
           <div className="blocks-form">

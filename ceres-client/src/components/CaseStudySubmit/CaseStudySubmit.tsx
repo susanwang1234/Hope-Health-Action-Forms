@@ -226,7 +226,7 @@ const CaseStudySubmit = () => {
           Log Out
         </button>
       </header>
-      <Sidebar show={showNav} departmentID={parseInt(deptID)} />
+      <Sidebar show={showNav} departmentID={deptID} />
       <div className="cards-case-study">
         <div className="casestudy-single-card">
           <h2 className="inside-card -mt-10 mb-8">

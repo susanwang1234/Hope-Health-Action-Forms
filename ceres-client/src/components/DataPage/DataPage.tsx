@@ -49,7 +49,7 @@ const DataPage = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <div className="flex justify-center">
-        <Sidebar show={showNav} departmentID={parseInt(deptID)} />
+        <Sidebar show={showNav} departmentID={deptID} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded">
           <h4 className="text-center">Submitted Reports</h4>
           <ul className="list-of-reports">
