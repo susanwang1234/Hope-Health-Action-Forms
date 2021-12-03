@@ -7,8 +7,11 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const DataPage = () => {
+  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
@@ -46,7 +49,7 @@ const DataPage = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <div className="flex justify-center">
-        <Sidebar show={showNav} />
+        <Sidebar show={showNav} departmentID={parseInt(deptID)} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded">
           <h4 className="text-center">Submitted Reports</h4>
           <ul className="list-of-reports">

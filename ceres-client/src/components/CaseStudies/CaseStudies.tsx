@@ -8,8 +8,10 @@ import { Link, useParams } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { departmentParam } from '../../types/departmentParamType';
 
 const CaseStudy = (props: any) => {
+  const { deptID } = useParams<departmentParam>();
   let queryStr = '';
   document.body.style.backgroundColor = '#f5f5f5';
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
@@ -143,7 +145,7 @@ const CaseStudy = (props: any) => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={parseInt(deptID)} />
       <div className="container">
         <table>
           <tr>

@@ -7,16 +7,18 @@ import { FormContext } from './FormContext';
 import JSONfile from './jsonForms/rehabForm.json';
 import '../../App.css';
 import ToggleSwitch from './ToggleSwitch';
-
+import { useParams } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
+import { departmentParam } from '../../types/departmentParamType';
 
 // console.log('JSONfile', JSONfile);
 
 // Citation for dynamic forms, updating JSON fields, the JSON structure, and debugging the console.log output: https://medium.com/swlh/how-to-generate-dynamic-form-from-json-with-react-5d70386bb38b
 
 function Forms() {
+  const { deptID } = useParams<departmentParam>();
   const [elements, setElements] = useState<any | null>(null);
   useEffect(() => {
     return setElements(JSONfile[0]);
@@ -76,7 +78,7 @@ function Forms() {
           <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
           <img src={logo} alt="Logo" className="logo" />
         </header>
-        <Sidebar show={showNav} />
+        <Sidebar show={showNav} departmentID={parseInt(deptID)} />
         <div className="outer-block">
           <ToggleSwitch label="MSPP Data only" />
           <div className="blocks-form">

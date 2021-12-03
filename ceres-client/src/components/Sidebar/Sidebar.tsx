@@ -11,25 +11,29 @@ import { ImStatsDots } from 'react-icons/im';
 import { BsFileEarmarkTextFill } from 'react-icons/bs';
 import './Sidebar.css';
 
-const Sidebar = ({ show }: any) => {
+const createDashboardIDPath = (departmentID: number) => {
+  return `/dashboard/${departmentID}`;
+};
+
+const Sidebar = ({ show, departmentID }: any) => {
   const [open, setOpen] = useState(false);
   return (
     <div className={show ? 'sidebar active' : 'sidebar'}>
       <ul>
         <li>
-          <Link to="/dashboard" className="side-link">
+          <Link to={{ pathname: createDashboardIDPath(departmentID), state: { currentDeparmentID: departmentID } }} className="side-link">
             <HiHome />
             Dashbaord
           </Link>
         </li>
         <li>
-          <Link to="/departments" className="side-link">
+          <Link to={{ pathname: '/departments', state: { currentDeparmentID: departmentID } }} className="side-link">
             <BsPencilSquare />
             Departments
           </Link>
         </li>
         <li>
-          <Link to="/case-studies" className="side-link">
+          <Link to={{ pathname: createDashboardIDPath(departmentID) + '/case-studies', state: { currentDeparmentID: departmentID } }} className="side-link">
             <IoIosJournal />
             Case Studies
           </Link>
@@ -41,15 +45,15 @@ const Sidebar = ({ show }: any) => {
           </Button>
           {open && (
             <li>
-              <Link to="/submit-report" className="drop-link" color="red">
+              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/submit-report', state: { currentDeparmentID: departmentID } }} className="drop-link" color="red">
                 <BsFillCalendarFill />
                 This Month's Report
               </Link>
-              <Link to="/data-page" className="drop-link">
+              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/data-page', state: { currentDeparmentID: departmentID } }} className="drop-link">
                 <FaHistory />
                 Previous Reports
               </Link>
-              <Link to="/statistics" className="drop-link">
+              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/statistics', state: { currentDeparmentID: departmentID } }} className="drop-link">
                 <ImStatsDots />
                 Statistics
               </Link>

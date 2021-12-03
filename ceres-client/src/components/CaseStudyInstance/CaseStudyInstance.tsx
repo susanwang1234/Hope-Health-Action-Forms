@@ -5,8 +5,11 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const CaseStudy = () => {
+  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
@@ -55,7 +58,7 @@ const CaseStudy = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={parseInt(deptID)} />
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">

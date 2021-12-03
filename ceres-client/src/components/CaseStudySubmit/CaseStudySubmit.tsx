@@ -12,14 +12,16 @@ import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
 import httpService from '../../services/httpService';
 import AuthService from '../../services/authService';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
+import { departmentParam } from '../../types/departmentParamType';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
 let caseStudy;
 const CaseStudySubmit = () => {
+  const { deptID } = useParams<departmentParam>();
   const userContext = useContext(UserContext);
   const [shareImage, setShareImage] = useState('');
   const [checkMark, SetCheckMark] = useState(false);
@@ -223,7 +225,7 @@ const CaseStudySubmit = () => {
           Log Out
         </button>
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={parseInt(deptID)} />
       <div className="cards-case-study">
         <div className="casestudy-single-card">
           <h2 className="inside-card -mt-10 mb-8">
