@@ -6,13 +6,16 @@ export type AuthUser = {
   username: string;
   departmentId: number;
   roleId: number;
+  currentDepartmentIDLocation: number;
 };
 
 type UserContextType = {
   user: AuthUser | null;
   isAuthenticated: boolean;
+  currentDepartmentIDLocation: number | null;
   setUser: (user: AuthUser | null) => void;
   setIsAuthenticated: (isAuthenticated: boolean) => void;
+  setCurrentDepartmentIDLocation: (departmentID: number) => void;
   logout: () => void;
 };
 
@@ -25,6 +28,8 @@ export const UserContext = createContext({
   setUser: (user: AuthUser | null) => {},
   isAuthenticated: false,
   setIsAuthenticated: (isAuthenticated: boolean) => {},
+  currentDepartmentIDLocation: null,
+  setCurrentDepartmentIDLocation: (departmentID: number) => {},
   logout: () => {}
 } as UserContextType);
 
@@ -32,6 +37,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [currentDepartmentIDLocation, setCurrentDepartmentIDLocation] = useState<number | null>(null);
 
   const logoutHandler = async () => {
     const data = await AuthService.logout();
@@ -41,8 +47,14 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
 
   useEffect(() => {
     AuthService.isAuthenticated().then((data) => {
+      console.log('WHAT I GOT', data.user);
       setUser(data.user);
       setIsAuthenticated(data.isAuthenticated);
+      if (data.user) {
+        data.user.roleName === 'user' ? setCurrentDepartmentIDLocation(1) : setCurrentDepartmentIDLocation(data.user.roleId);
+      } else {
+        setCurrentDepartmentIDLocation(null);
+      }
       setIsLoaded(true);
     });
   }, [setIsAuthenticated]);
@@ -52,6 +64,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
     setUser: setUser,
     isAuthenticated: isAuthenticated,
     setIsAuthenticated: setIsAuthenticated,
+    currentDepartmentIDLocation: currentDepartmentIDLocation,
+    setCurrentDepartmentIDLocation: setCurrentDepartmentIDLocation,
     logout: logoutHandler
   };
 
