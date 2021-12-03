@@ -9,11 +9,8 @@ import { IoIosJournal } from 'react-icons/io';
 import { FaHistory } from 'react-icons/fa';
 import { ImStatsDots } from 'react-icons/im';
 import { BsFileEarmarkTextFill } from 'react-icons/bs';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 import './Sidebar.css';
-
-const createDashboardIDPath = (departmentID: number) => {
-  return `/dashboard/${departmentID}`;
-};
 
 const Sidebar = ({ show, departmentID }: any) => {
   const [open, setOpen] = useState(false);

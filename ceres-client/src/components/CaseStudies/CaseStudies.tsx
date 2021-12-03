@@ -9,6 +9,7 @@ import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
 const CaseStudy = (props: any) => {
   const { deptID } = useParams<departmentParam>();
@@ -171,7 +172,7 @@ const CaseStudy = (props: any) => {
                   </table>
                 </div>
               </div>
-              <Link to="/case-studies/new">
+              <Link to={`${createDashboardIDPath(deptID)}/case-studies/new`}>
                 <button className="button-new-case">+ Add Case Study</button>
               </Link>
             </td>
@@ -199,7 +200,7 @@ const CaseStudy = (props: any) => {
                           <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/view/${caseStudy.id}`}>
+                          <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>
                             <button className="button">View</button>
                           </Link>
                         </td>

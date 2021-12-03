@@ -12,6 +12,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
 // console.log('JSONfile', JSONfile);
 
@@ -92,7 +93,7 @@ function Forms() {
                   className="view-cancel-form-button"
                   onClick={(e) => {
                     e.preventDefault();
-                    window.location.href = '/dashboard';
+                    window.location.href = `${createDashboardIDPath(deptID)}/dashboard`;
                   }}
                 >
                   Cancel

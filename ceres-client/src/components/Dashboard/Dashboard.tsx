@@ -9,12 +9,11 @@ import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
 import Instruction from './Instruction';
 import { useParams } from 'react-router-dom';
-import {departmentParam} from '../../types/departmentParamType'
+import { departmentParam } from '../../types/departmentParamType';
 
 /* Citations: 
     https://github.com/mustafaerden/react-admin-dashboard
 */
-
 
 const Dashboard = (props: any) => {
   const [showNav, setShowNav] = useState(false);
@@ -33,7 +32,7 @@ const Dashboard = (props: any) => {
               <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
               <img src={logo} alt="Logo" className="logo" />
             </header>
-            <Sidebar show={showNav} departmentID={parseInt(deptID)} />
+            <Sidebar show={showNav} departmentID={deptID} />
             <div className="dashboard-container">
               <div className="dashboard-cards">
                 <div className="card-outer fill-space-left">

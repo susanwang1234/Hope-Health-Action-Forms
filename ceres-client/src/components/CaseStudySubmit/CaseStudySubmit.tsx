@@ -16,6 +16,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
 import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -213,7 +214,7 @@ const CaseStudySubmit = () => {
 
   const OnClickYes = async (event: any) => {
     event.preventDefault();
-    window.location.href = '/case-studies';
+    window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
   };
 
   return (

@@ -7,6 +7,7 @@ import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
 const CaseStudy = () => {
   const { deptID } = useParams<departmentParam>();
@@ -91,7 +92,7 @@ const CaseStudy = () => {
                         className="view-cancel-form-button"
                         onClick={(event) => {
                           event.preventDefault();
-                          window.location.href = '/case-studies';
+                          window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
                         }}
                       >
                         Return
