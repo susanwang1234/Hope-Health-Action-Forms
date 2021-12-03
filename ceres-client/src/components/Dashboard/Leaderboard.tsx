@@ -1,4 +1,3 @@
-import { stringify } from 'querystring';
 import Chart from 'react-google-charts';
 import './Dashboard.css';
 
@@ -9,7 +8,6 @@ import './Dashboard.css';
 */
 
 const Leaderboard = () => {
-
   function stringToColor(str: String) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -17,7 +15,7 @@ const Leaderboard = () => {
     }
     let colour = '#';
     for (let i = 0; i < 3; i++) {
-      let value = (hash >> (i * 8)) & 0xFF;
+      let value = (hash >> (i * 8)) & 0xff;
       colour += ('00' + value.toString(16)).substr(-2);
     }
     return colour;
@@ -27,7 +25,7 @@ const Leaderboard = () => {
   function getBarData() {
     const json: any = {
       leaderboard: [
-        { department: 'Rehab', score: 1},
+        { department: 'Rehab', score: 1 },
         { department: 'Maternity', score: 5 },
         { department: 'NICUPaeds', score: 10 },
         { department: 'Community Health', score: 4 }
@@ -40,14 +38,13 @@ const Leaderboard = () => {
       var randomColor = stringToColor(json.leaderboard[i].department);
       let departmentName = json.leaderboard[i].department;
       let score = json.leaderboard[i].score;
-      let departmentNamePartial = ""; 
-      if(departmentName.length >= 10) {
-        departmentNamePartial = departmentName.substring(0,9) + "..."; //if department name is over 10 characters, the name gets cut off when being displayed
-      }
-      else {
+      let departmentNamePartial = '';
+      if (departmentName.length >= 10) {
+        departmentNamePartial = departmentName.substring(0, 9) + '...'; //if department name is over 10 characters, the name gets cut off when being displayed
+      } else {
         departmentNamePartial = departmentName;
       }
-      let tooltipInfo = "<p style='padding: 15px 10px 0 10px'>" + "<b>Department: </b>" + departmentName + '<br>' + "<b>Score: </b>" + (json.leaderboard[i].score).toString() + "</p>";
+      let tooltipInfo = "<p style='padding: 15px 10px 0 10px'>" + '<b>Department: </b>' + departmentName + '<br>' + '<b>Score: </b>' + json.leaderboard[i].score.toString() + '</p>';
       departmentBars.push([departmentNamePartial, score, 'color: ' + randomColor + ';', null, tooltipInfo]);
     }
 
@@ -62,7 +59,7 @@ const Leaderboard = () => {
           type: 'string',
           calc: 'stringify'
         },
-        { role: "tooltip", type: "string", p: { html: true } },
+        { role: 'tooltip', type: 'string', p: { html: true } }
       ]
     ];
     for (let i = 0; i < lengthJSON; i++) {
@@ -76,7 +73,7 @@ const Leaderboard = () => {
 
   return (
     <div style={{ display: 'flex' }}>
-      <Chart 
+      <Chart
         width={'100%'}
         height={'100%'}
         chartType="BarChart"
@@ -85,10 +82,8 @@ const Leaderboard = () => {
         options={{
           bar: { groupWidth: '50%' },
           legend: { position: 'none' },
-          tooltip: { isHtml: true, trigger: "visible"}
-        }
-    
-        }
+          tooltip: { isHtml: true, trigger: 'visible' }
+        }}
         // For tests
         rootProps={{ 'data-testid': '0' }}
       />
