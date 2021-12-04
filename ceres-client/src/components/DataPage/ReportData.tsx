@@ -108,12 +108,16 @@ const ReportData = (props: any) => {
   );
 
   const exportAsCsvButton = (
-    <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>Export as CSV</button>
+    <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>
+      Export as CSV
+    </button>
   );
 
   const exportAsPdfButton = (
-    <button className="edit-button" onClick={() => exportToPdf(props.data.id)}>Export as PDF</button>
-  )
+    <button className="edit-button" onClick={() => exportToPdf(props.data.id)}>
+      Export as PDF
+    </button>
+  );
 
   if (props.data === null) {
     return <p className="m-60 font-bold text-xl">Select a report from the list</p>;
@@ -204,7 +208,7 @@ async function exportToPdf(formId: number): Promise<void> {
 }
 
 function downloadFile(href: any, filename: string) {
-  const link = document.createElement('a')
+  const link = document.createElement('a');
   link.setAttribute('href', href);
   link.setAttribute('download', filename);
 
@@ -212,4 +216,3 @@ function downloadFile(href: any, filename: string) {
   link.click();
   document.body.removeChild(link);
 }
-

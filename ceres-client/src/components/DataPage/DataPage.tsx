@@ -8,8 +8,11 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import { UserContext } from '../../UserContext';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const DataPage = () => {
+  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
   
   const [reports, setReports] = useState([]);
@@ -26,7 +29,7 @@ const DataPage = () => {
     getFormByDeptId();
 
     async function getFormByDeptId() {
-      const url = `/form/${2}`;
+      const url = `/form/${deptID}`;
       try {
         const response = await httpService.get(url);
         const data = response.data;
