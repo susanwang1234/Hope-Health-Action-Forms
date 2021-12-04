@@ -20,7 +20,7 @@ const ThisMonth = () => {
   useEffect(() => {
     getFormByDeptId();
     async function getFormByDeptId() {
-      const url = `/form/latest/${2}`;
+      const url = `/form/latest/${deptID}`;
       try {
         const response = await httpService.get(url);
         console.log(response);
