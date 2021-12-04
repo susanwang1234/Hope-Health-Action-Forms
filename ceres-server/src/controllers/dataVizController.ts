@@ -19,7 +19,7 @@ const getDataForPlots = async (req: Request, res: Response, next: NextFunction) 
       .join('DepartmentQuestion', 'FormResponse.departmentQuestionId', 'DepartmentQuestion.id')
       .join('Question', 'DepartmentQuestion.questionId', 'Question.id')
       .join('Form', 'FormResponse.formId', 'Form.id')
-      .orderBy('departmentQuestionId', 'createdAt')
+      .orderBy(['departmentQuestionId', 'createdAt'])
       .where('Form.departmentId', departmentId)
       .where('Question.responseType', 'number');
 

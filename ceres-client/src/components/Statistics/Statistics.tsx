@@ -8,6 +8,7 @@ import httpService from '../../services/httpService';
 import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
+import { toast } from 'react-toastify';
 
 const MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
@@ -45,6 +46,10 @@ const StatisticsDashboard = () => {
   }
 
   async function fetchData() {
+    if (invalidDateFilter()) {
+      return;
+    }
+    
     const url = `/dataviz/${deptID}?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
     try {
       const response = await httpService.get(url);
@@ -65,6 +70,17 @@ const StatisticsDashboard = () => {
     setSearching(true);
     document.querySelectorAll('input').forEach(input => input.value='');
     document.querySelectorAll('select').forEach(input => input.value ='');
+  }
+
+  function invalidDateFilter(): boolean {
+    if ((startMonth && !startYear) || (!startMonth && startYear)) {
+      toast.error('Please ensure From Month and From Year are both filled in or both not filled in.');
+      return true;
+    } else if ((endMonth && !endYear) || (!endMonth && endYear)) {
+      toast.error('Please ensure To Month and To Year are both filled in or both not filled in.');
+      return true;
+    }
+    return false;
   }
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
