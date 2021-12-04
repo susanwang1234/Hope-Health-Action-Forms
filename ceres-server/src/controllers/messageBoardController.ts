@@ -2,18 +2,31 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
-import { departmentNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
+import { departmentNegativeOrNanInputError, formDNEError, departmentDNEError } from 'shared/errorMessages';
 import { createItem } from './requestTemplates/createRequest';
 
 const NAMESPACE = 'Message Control';
 const TABLE_NAME = 'Messages';
 
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
-  logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY ID`);
+  logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY DEPARTMENT ID`);
   const departmentId: number = +req.params.departmentId;
   if (isInvalidInput(departmentId)) {
     console.log(departmentId);
     res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+
+  let departmentExists = false;
+  const departmentIds: any[] = await Knex.select('id').from('Department');
+  for (let i = 0; i < departmentIds.length; i++) {
+    if (departmentIds[i].id == departmentId) {
+      departmentExists = true;
+      break;
+    }
+  }
+  if (!departmentExists) {
+    res.status(404).send(departmentDNEError);
     return;
   }
   try {
