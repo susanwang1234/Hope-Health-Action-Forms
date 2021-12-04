@@ -40,7 +40,7 @@ const Sidebar = ({ show, departmentID }: any) => {
             <BsFileEarmarkTextFill />
             Reports
           </Button>
-          {open && (
+          {open && ( 
             <li>
               <Link to={{ pathname: createDashboardIDPath(departmentID) + '/submit-report', state: { currentDeparmentID: departmentID } }} className="drop-link" color="red">
                 <BsFillCalendarFill />
