@@ -44,38 +44,6 @@ label.admin-inside-text {
   position: relative;
   overflow-y: scroll;
 }
-select.admin-drop-down {
-  align-items: center;
-  appearance: none;
-  background-color: white;
-  border-color: #d6d6d6;
-  border-radius: 5px;
-  border-width: 1px;
-  box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.2);
-  color: rgb(0, 0, 0);
-  display: grid;
-  display: inline-block;
-  font-family: Arial;
-  grid-template-areas: 'select';
-  outline: none;
-  margin: 4px;
-  min-width: 290px;
-  padding: 0.5em 3.5em 0.5em 1em;
-  width: 50%;
-}
-select.admin-drop-down-minimal {
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-  background-repeat: no-repeat;
-  background-size: 5px 5px, 5px 5px, 1px 1.5em;
-  margin: 4px;
-}
-select.admin-drop-down-minimal:disabled {
-  background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
-  background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
-  background-repeat: no-repeat;
-  background-size: 5px 5px, 5px 5px, 1px 1.5em;
-  margin: 4px;
-  background-color: rgb(224, 224, 224);
-  color: rgb(151, 151, 151);
+option:first-child {
+  display: none;
 }
