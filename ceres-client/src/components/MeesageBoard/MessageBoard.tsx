@@ -11,17 +11,27 @@ const MessageBoard = () => {
     const [showNav, setShowNav] = useState(false);
     const [messages, setMessages] = useState<any[]>([
         {
+            content: "Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!",
+            createdAt: "12/23/2021",
+            author: "alireza ahmadi"
+        },
+        {
+            content: "We support and stand by @HaitiCancerCenter in their fight aigains cancer! #go_away_cancer ",
+            createdAt: "12/23/2021",
+            author: "alireza ahmadi"
+        },
+        {
             content: "fkd jfdd dsdsa dhasdusd dasuds sudgsafd adsdhf dfad9s dudhsa saud9hsduc fuee fdds dwfeud  asdqud sdgfa dsdsag9sad asdsa9dsd sad9s dasdasds9d sd 9sd sad9 sad asf",
             createdAt: "12/23/2021",
             author: "alireza ahmadi"
         },
         {
-            content: "fkd jfdd dsdsa dhasdusd dasuds sudgsafd adsdhf dfad9s dudhsa saud9hsduc fuee fdds dwfeud  asdqud sdgfa dsdsag9sad asdsa9dsd sad9s dasdasds9d sd 9sd sad9 sad asf dlfajba dfbas hkasbd ",
+            content: "Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!",
             createdAt: "12/23/2021",
             author: "alireza ahmadi"
         },
         {
-            content: "fkd jfdd dsdsa dhasdusd dasuds sudgsafd adsdhf dfad9s dudhsa saud9hsduc fuee fdds dwfeud  asdqud sdgfa dsdsag9sad asdsa9dsd sad9s dasdasds9d sd 9sd sad9 sad asf",
+            content: "Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!",
             createdAt: "12/23/2021",
             author: "alireza ahmadi"
         }
@@ -40,25 +50,22 @@ const MessageBoard = () => {
       });
     },[])
     return(
-        
-        <div>
+        <div className={"ki"}>
             <header className="nav-header">
                 <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
                 <img src={logo} alt="Logo" className="logo" />
             </header>
             <Sidebar show={showNav} />
-            <div className = "message-board grid">
-                <h1 className={"announcements-title"}>Announcements</h1>
-                <ul>
+            <div className = "message-board">
+                <h1 className={"announcements-title"}>Department Announcements</h1>
+                <ul className={"message-list"}>
                     {
                     messages.map(message => {
                         return<li className="message">
-                            <div>
                                 {message.content}
-                            </div>
                             <div className="message-footer">
                                 <div>Posted by: {message.author}</div>
-                                <div className="px-3">{message.createdAt}</div>
+                                <div className="px-3">{makeDateShort(message.createdAt)}</div>
                             </div>
                         </li>
                     })
@@ -69,3 +76,7 @@ const MessageBoard = () => {
     )
 }
 export default MessageBoard
+
+function makeDateShort(date: string): string {
+    return date.length > 10 ? date.substring(0, 10) : date;
+  }

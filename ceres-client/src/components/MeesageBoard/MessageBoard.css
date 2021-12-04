@@ -5,21 +5,41 @@
     margin-bottom: 3rem;
     box-shadow: 5px 5px 13px #afafaf, -5px -5px 13px #ffffff;
     background-color: #fbfbfb;
-    border-radius: 0.25rem;
-    width: 70px;
+    border-radius: 0.45rem;
+    width: 45rem;
+    height: 30rem;
+    justify-self: center;
+    margin: 0 auto 0 auto;
+    
 }
 .message-footer{
     display: flex;
     justify-content: space-between;
-    color: rgb(92, 92, 92); 
+    color: rgb(116, 116, 116); 
+    font-size: 14px;
 }
+
 .announcements-title{
     text-align: center;
     font-size: 28px;
     padding-bottom: 6px;
+    font-weight: bold;
+    color: #823b8a;
+    padding-top: 6px;
 }
 
 .message{
-    border: 1px solid rgb(109, 109, 109);
+    border: 1px solid rgb(206, 206, 206);
+    background-color: white;
+    padding: 7px;
+    margin: 2px;
+    border-radius: 0.35rem;
+    box-shadow: 2px 2px 3px #afafaf, -2px -2px 3px #ffffff;
+}
+
+.message-list{
+    overflow-y: scroll;
     border-radius: 0.25rem;
+    padding: 10px;
+    max-height: 25rem;
 }
