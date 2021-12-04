@@ -1,39 +1,34 @@
 import './Dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { ToDoStatus } from '../../models/toDoStatus';
-import { currDate } from './util/timezone';
 import { useState, useEffect } from 'react';
+import { currDate, currMonth, currMonthLastDate, currMonthLastDay, months } from './util/timezone';
+import initialToDoStatus from './util/initialToDoStatus.json';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 import httpService from '../../services/httpService';
+import { ToDoStatus } from '../../models/toDoStatus';
 
 const ToDo = () => {
-  const [toDo, setToDoState] = useState<any>({
-    toDoReminders: []
-  });
+  const { deptID } = useParams<departmentParam>();
+  const [toDo, setToDoState] = useState(initialToDoStatus);
+  const ERROR_CODE = -1;
+
+  const getDepartmentId = (toDoStatus: ToDoStatus[], currentDepartment: number) => {
+    for (let index in toDoStatus) {
+      if (toDoStatus[index].departmentId === currentDepartment) return index;
+    }
+    return ERROR_CODE;
+  };
 
   const getToDoStatus = async () => {
     const url = '/to-do';
     try {
       const response = await httpService.get(url);
-      setToDoState({
-        toDoReminders: response.data
-      });
+      setToDoState(response.data[getDepartmentId(response.data, parseInt(deptID))]);
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  };
-  useEffect(() => {
-    getToDoStatus();
-  }, [setToDoState]);
-
-  const generateCalendar = () => {
-    return (
-      <div className="app">
-        <div className="calendar-container">
-          <Calendar value={currDate} selectRange={true} className="responsive-calendar flex-shrink" />
-        </div>
-      </div>
-    );
   };
 
   const iconChecker = (isComplete: number) => {
@@ -51,12 +46,31 @@ const ToDo = () => {
     );
   };
 
+  useEffect(() => {
+    getToDoStatus();
+  }, [setToDoState]);
+
+  const generateCalendar = () => {
+    return (
+      <div className="app">
+        <div className="calendar-container">
+          <Calendar value={currMonthLastDate} selectRange={true} className="responsive-calendar flex-shrink" />
+        </div>
+      </div>
+    );
+  };
+
   return (
     <>
       <div className="align-left">
-        {/* {iconChecker(toDo.toDoReminders[0].caseStudies)} Hello */}
-        {/* <p className="inside-text">{iconChecker(toDo.toDoReminders[0].caseStudies)}Case Study</p> */}
-        {/* <p className="inside-text">{iconChecker(toDoState.toDoReminders[0].dataForm)}MSPP Report</p> */}
+        <p className="inside-text">{iconChecker(toDo.caseStudies)}Case Study</p>
+        <p className="text-indent">
+          Due on {months[currMonth]} {currMonthLastDay}
+        </p>
+        <p className="inside-text">{iconChecker(Number(toDo.dataForm))}Data Form</p>
+        <p className="text-indent">
+          Due on {months[currMonth]} {currMonthLastDay}
+        </p>
       </div>
       <div className="align-right flex">{generateCalendar()}</div>
     </>

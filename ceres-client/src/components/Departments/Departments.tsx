@@ -25,7 +25,7 @@ function Departments() {
   };
 
   const onClick = (departmentID: number, route: string) => {
-    history.push(route);
+    history.push(route + '/' + departmentID);
   };
 
   const [toDoState, setToDoState] = useState<any>({

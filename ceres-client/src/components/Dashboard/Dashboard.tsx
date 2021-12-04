@@ -11,10 +11,13 @@ import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
 import Instruction from './Instruction';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const Dashboard = () => {
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
+  const { deptID } = useParams<departmentParam>();
   const [toDo, setToDoState] = useState<any>({
     toDoReminders: []
   });
@@ -63,7 +66,7 @@ const Dashboard = () => {
               <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
               <img src={logo} alt="Logo" className="logo" />
             </header>
-            <Sidebar show={showNav} />
+            <Sidebar show={showNav} departmentID={deptID} />
             <div className="dashboard-container">
               <div className="dashboard-cards">
                 <div className="card-outer fill-space-left">

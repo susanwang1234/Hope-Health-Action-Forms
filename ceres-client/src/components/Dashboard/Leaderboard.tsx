@@ -2,7 +2,7 @@ import Chart from 'react-google-charts';
 import './Dashboard.css';
 import { barDataLabel } from '../../models/barDataLabel';
 import { LeaderboardDepartment } from '../../models/leaderboardDepartment';
-import { currDate } from './util/timezone';
+import { currMonth, months } from './util/timezone';
 
 const Leaderboard = (pointSystem: LeaderboardDepartment[]) => {
   const createColor = (departmentName: string) => {
@@ -43,8 +43,7 @@ const Leaderboard = (pointSystem: LeaderboardDepartment[]) => {
   };
 
   const getThisMonth = () => {
-    const months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    return months[currDate.getMonth()];
+    return months[currMonth];
   };
 
   return (

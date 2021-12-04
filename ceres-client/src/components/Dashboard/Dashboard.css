@@ -27,6 +27,7 @@
   - profile-pic
   - responsive-calendar
   - responsive-leaderboard
+  - text-indent
   - title
   - width-100-percent
 
@@ -193,6 +194,10 @@
   height: auto;
   text-align: center;
   width: 470px;
+}
+
+.text-indent {
+  text-indent: 30px;
 }
 
 .title {
