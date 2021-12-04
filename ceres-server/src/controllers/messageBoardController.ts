@@ -17,16 +17,10 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
     return;
   }
 
-  let departmentExists = false;
-  const departmentIds: any[] = await Knex.select('id').from('Department');
-  for (let i = 0; i < departmentIds.length; i++) {
-    if (departmentIds[i].id == departmentId) {
-      departmentExists = true;
-      break;
-    }
-  }
-  if (!departmentExists) {
-    res.status(404).send(departmentDNEError);
+  const retrievedDepartmentId: any[] = await Knex.select('id').from('Department').where('id', '=', departmentId);
+
+  if (!retrievedDepartmentId.length) {
+    res.status(400).send(departmentDNEError);
     return;
   }
   try {
