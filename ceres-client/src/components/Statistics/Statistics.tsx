@@ -78,7 +78,7 @@ const StatisticsDashboard = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <Sidebar show={showNav}></Sidebar>
+      <Sidebar show={showNav} departmentID={deptID}></Sidebar>
         <div className="dashboard-title statistics-card">
           {departmentName} Statistics
         </div>
