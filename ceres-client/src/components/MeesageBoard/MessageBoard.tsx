@@ -40,13 +40,15 @@ const MessageBoard = () => {
       });
     },[])
     return(
+        
         <div>
             <header className="nav-header">
                 <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
                 <img src={logo} alt="Logo" className="logo" />
             </header>
-            <div className = "message-board">
-                <Sidebar show={showNav} />
+            <Sidebar show={showNav} />
+            <div className = "message-board grid">
+                <h1 className={"announcements-title"}>Announcements</h1>
                 <ul>
                     {
                     messages.map(message => {

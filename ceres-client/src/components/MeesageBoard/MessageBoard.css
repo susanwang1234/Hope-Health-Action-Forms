@@ -4,15 +4,22 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
     box-shadow: 5px 5px 13px #afafaf, -5px -5px 13px #ffffff;
+    background-color: #fbfbfb;
+    border-radius: 0.25rem;
+    width: 70px;
 }
 .message-footer{
     display: flex;
     justify-content: space-between;
     color: rgb(92, 92, 92); 
 }
+.announcements-title{
+    text-align: center;
+    font-size: 28px;
+    padding-bottom: 6px;
+}
 
 .message{
     border: 1px solid rgb(109, 109, 109);
     border-radius: 0.25rem;
-    background-color: #fbfbfb;
 }
