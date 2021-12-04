@@ -10,8 +10,9 @@ const TABLE_NAME = 'Messages';
 
 const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY ID`);
-  const departmentId: number = +req.body.departmentId;
+  const departmentId: number = +req.params.departmentId;
   if (isInvalidInput(departmentId)) {
+    console.log(departmentId);
     res.status(400).send(departmentNegativeOrNanInputError);
     return;
   }
@@ -29,7 +30,7 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const createNewMessage = async (req: Request, res: Response, next: NextFunction) => {
-  const departmentId: number = +req.params.departmentId;
+  const departmentId: number = +req.body.departmentId;
   if (isInvalidInput(departmentId)) {
     res.status(400).send(departmentNegativeOrNanInputError);
     return;

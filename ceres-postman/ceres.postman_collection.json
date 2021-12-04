@@ -779,7 +779,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"departmentId\": 2\r\n}",
+              "raw": "{\r\n    \"departmentId\": 2,\r\n    \"author\": \"admin\",\r\n    \"messageContent\":\"hello world this is test\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
