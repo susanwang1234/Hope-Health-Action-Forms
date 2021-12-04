@@ -154,10 +154,8 @@ const AdminCreateUser = () => {
           </h2>
           <div className="w-full flex flex-col pt-10">
             <label className="admin-inside-text">Role</label>
-            <select className="admin-drop-down-minimal self-center" onChange={selectChange}>
-              <option selected disabled>
-                --Select a Role--
-              </option>
+            <select className="minimal self-center" onChange={selectChange}>
+              <option selected>--Select a Role--</option>
               {roleState.roles.map((roleName: any) => {
                 return <option value={roleName.id}>{roleName.label}</option>;
               })}
@@ -165,10 +163,8 @@ const AdminCreateUser = () => {
             <label hidden={userIsAdmin} className="admin-inside-text">
               Department
             </label>
-            <select className="admin-drop-down-minimal self-center" hidden={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
-              <option selected disabled>
-                --Select a Department--
-              </option>
+            <select className="minimal self-center" hidden={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
+              <option selected>--Select a Department--</option>
               {departmentState.departments.slice(1).map((departmentName: any) => {
                 return <option value={departmentName.id}>{departmentName.name}</option>;
               })}
