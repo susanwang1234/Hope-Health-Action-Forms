@@ -13,6 +13,7 @@
   - dashboard-cards
   - dashboard-container
   - due-content
+  - due-in-red
   - employee-paragraph
   - fill-space-left
   - fill-space-left
@@ -20,6 +21,9 @@
   - heading-1
   - height-100-percent
   - icon
+  - icon-case-study
+  - icon-mspp-report
+  - instructions
   - leaderboard
   - profile-pic
   - responsive-calendar
@@ -88,6 +92,10 @@
   margin-top: 20px;
 }
 
+.due-in-red {
+  color: red;
+}
+
 .employee-paragraph {
   margin-left: auto;
   margin-right: auto;
@@ -114,6 +122,10 @@
   max-width: 100% !important;
 }
 
+.google-visualization-tooltip {
+  white-space: nowrap !important;
+}
+
 .heading-1 {
   font-size: 20px;
   font-weight: bold;
@@ -127,6 +139,18 @@
 .icon {
   height: 30px;
   width: 30px;
+}
+
+.icon-case-study {
+  color: green;
+}
+
+.icon-mspp-report{
+  color: red;
+}
+
+.instructions {
+  cursor: pointer;
 }
 
 .leaderboard {

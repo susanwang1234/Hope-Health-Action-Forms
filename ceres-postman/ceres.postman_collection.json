@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "0b8e8b8d-4008-4d3c-b9ac-bfda6776fe38",
+    "_postman_id": "2bef3522-189e-499f-936e-4d75de01962b",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -9,7 +9,7 @@
       "name": "Authentication",
       "item": [
         {
-          "name": "Step 1: login request",
+          "name": "Login",
           "request": {
             "method": "POST",
             "header": [],
@@ -32,45 +32,7 @@
           "response": []
         },
         {
-          "name": "Step 2: attempt to access secret route",
-          "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhZG1pbiIsInJvbGVOYW1lIjoiYWRtaW4iLCJkZXBhcnRtZW50TmFtZSI6IlJlaGFiIiwiaWF0IjoxNjMzNzczMDc4LCJleHAiOjE2MzUwNjkwNzh9.X_0H_lpHhtrDdsQKC4Zngyq34KACQAZHiVMUCl0Jw5U",
-                  "type": "string"
-                }
-              ]
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/api/secrets",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["api", "secrets"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "logout",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "localhost:8080/auth/logout",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["auth", "logout"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "authenticate",
+          "name": "Authenticate",
           "request": {
             "method": "GET",
             "header": [],
@@ -79,6 +41,20 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["auth", "authenticate"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/auth/logout",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["auth", "logout"]
             }
           },
           "response": []
@@ -133,7 +109,7 @@
                         "header": [],
                         "body": {
                           "mode": "raw",
-                          "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 1, \r\n    \"userId\": 1, \r\n    \"imageId\": 4,\r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
+                          "raw": "{ \r\n    \"caseStudyTypeId\": 5, \r\n    \"departmentId\": 2, \r\n    \"userId\": 1, \r\n    \"imageId\": 4,\r\n    \"title\":  \"Case Study Dummy 3\"\r\n}",
                           "options": {
                             "raw": {
                               "language": "json"
@@ -608,6 +584,97 @@
       ]
     },
     {
+      "name": "Email",
+      "item": [
+        {
+          "name": "GET all emails",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/email",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["email"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST an email",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"testing@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/email",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["email"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT an email",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"testing222@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/email/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["email", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE an email",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/email/:id",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["email", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
       "name": "Employee Of The Month",
       "item": [
         {
@@ -731,7 +798,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was invovled with a lot of tasks at the hospital. She was took a lot of initiative to help out!\"\r\n}",
+              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was involved with a lot of tasks at the hospital. She took a lot of initiative to help out!\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -797,14 +864,72 @@
         }
       ]
     },
+
+    {
+      "name": "Forgot Password",
+      "item": [
+        {
+          "name": "POST an email for forgot password",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"staff01\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/forgot-password",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["forgot-password"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
     {
       "name": "Form",
       "item": [
         {
-          "name": "GET forms",
+          "name": "GET forms by departmentId",
           "request": {
             "method": "GET",
             "header": [],
+            "url": {
+              "raw": "localhost:8080/form/:departmentId",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form", ":departmentId"],
+              "variable": [
+                {
+                  "key": "departmentId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT form by id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"isSubmitted\": true\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
             "url": {
               "raw": "localhost:8080/form/:id",
               "host": ["localhost"],
@@ -819,34 +944,11 @@
             }
           },
           "response": []
-        },
-        {
-          "name": "POST form",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"departmentId\": 2\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/form",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form"]
-            }
-          },
-          "response": []
         }
       ]
     },
     {
-      "name": "FormResponses",
+      "name": "Form Responses",
       "item": [
         {
           "name": "GET form responses by formId",
@@ -885,34 +987,6 @@
                 }
               ]
             }
-          }
-        },
-        {
-          "name": "POST form responses for a form",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "[\r\n    { \"departmentQuestionId\": 1, \"response\": 19 },\r\n    { \"departmentQuestionId\": 2, \"response\": 434 },\r\n    { \"departmentQuestionId\": 3, \"response\": 377 },\r\n    { \"departmentQuestionId\": 4, \"response\": 17 },\r\n    { \"departmentQuestionId\": 5, \"response\": 2 },\r\n    { \"departmentQuestionId\": 6, \"response\": 1 },\r\n    { \"departmentQuestionId\": 7, \"response\": 0 },\r\n    { \"departmentQuestionId\": 8, \"response\": 334 },\r\n    { \"departmentQuestionId\": 9, \"response\": 0 },\r\n    { \"departmentQuestionId\": 10, \"response\": 0 },\r\n    { \"departmentQuestionId\": 11, \"response\": 1 },\r\n    { \"departmentQuestionId\": 12, \"response\": 13 },\r\n    { \"departmentQuestionId\": 13, \"response\": 4 }\r\n]",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "localhost:8080/form-responses/:formId",
-              "host": ["localhost"],
-              "port": "8080",
-              "path": ["form-responses", ":formId"],
-              "variable": [
-                {
-                  "key": "formId",
-                  "value": ""
-                }
-              ]
-            }
           },
           "response": []
         },
@@ -941,6 +1015,57 @@
                   "value": ""
                 }
               ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Form/FormResponses (Testing Purposes Only)",
+      "item": [
+        {
+          "name": "POST form",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"departmentId\": 2,\r\n    \"isSubmitted\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/form",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST form responses for a form",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    { \"departmentQuestionId\": 1, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 2, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 3, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 4, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 5, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 6, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 7, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 8, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 9, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 10, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 11, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 12, \"response\": \"\" },\r\n    { \"departmentQuestionId\": 13, \"response\": \"\" }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:8080/form-responses/1",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["form-responses", "1"]
             }
           },
           "response": []
@@ -1009,6 +1134,25 @@
               "host": ["localhost"],
               "port": "8080",
               "path": ["role"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "To-Do",
+      "item": [
+        {
+          "name": "GET to-do status of each department",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:8080/to-do",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["to-do"]
             }
           },
           "response": []
