@@ -14,6 +14,7 @@ import httpService from '../../services/httpService';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Popup from './PopUpModal/Popup';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -32,34 +33,8 @@ const CaseStudySubmit = () => {
     questions: []
   });
 
-  async function getQuestions(selectedCaseStudyType: string | undefined) {
-    const url = `/case-study-questions/${selectedCaseStudyType}`;
-    try {
-      const response = await httpService.get(url);
-      const data = response.data;
-      setCaseStudyQuestions({
-        questions: data
-      });
-    } catch (error: any) {
-      console.log('Error: Unable to fetch from ' + url);
-    }
-  }
-
   useEffect(() => {
     getTypeData();
-
-    async function getTypeData() {
-      const url = `/case-study-types`;
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        setCaseStudyType({
-          types: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setCaseStudyType]);
 
   const onClickLogOutHandler = async () => {
@@ -71,12 +46,38 @@ const CaseStudySubmit = () => {
     return <Redirect to="/" />;
   };
 
-  const onclickCancel = async (event: any) => {
-    event.preventDefault();
-    window.location.href = '/case-studies';
+  const getQuestions = async (selectedCaseStudyType: string | undefined) => {
+    const url = `/case-study-questions/${selectedCaseStudyType}`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setCaseStudyQuestions({
+        questions: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const getTypeData = async () => {
+    const url = `/case-study-types`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setCaseStudyType({
+        types: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
   };
 
   const saveImageForCaseStudy = async (event: any) => {
+    if (selectedCaseStudyType === 'Nothing selected') {
+      toast.error('Please select the Case Study type.');
+      return;
+    }
+
     if (shareImage.length < 1) {
       toast.error('Image not uploaded!! Please upload the image.');
       return;
@@ -85,6 +86,30 @@ const CaseStudySubmit = () => {
     if (!checkMark) {
       toast.error("Check Box isn't marked!! Please mark the checkbox.");
       return;
+    }
+
+    if ((document.getElementById('text-area-id-title') as HTMLInputElement).value === '') {
+      toast.error('Please Enter the title of Case Study.');
+      return;
+    }
+
+    for (let index = 0; index < caseStudyQuestions.questions.length; index++) {
+      if ((document.getElementById('text-area-id-' + index) as HTMLInputElement).value === '') {
+        toast.error('Please Answer all the Questions.');
+        return;
+      }
+    }
+
+    if (caseStudyQuestions.questions.length > 1) {
+      let array: any = [];
+      array.push(caseStudyQuestions.questions[1]);
+      if (array[0].label === "Patient's age?") {
+        const age = (document.getElementById('text-area-id-1') as HTMLInputElement).value;
+        if (isNaN(Number(age))) {
+          toast.error("Patent's Age can only be a number");
+          return;
+        }
+      }
     }
 
     const url = '/image';
@@ -97,15 +122,9 @@ const CaseStudySubmit = () => {
           'content-type': 'multipart/form-data'
         }
       };
-      const storeResponseBody: any = [];
-      httpService
-        .post(url, formData, config)
-        .then((response) => {
-          storeResponseBody.push(response.data);
-        })
-        .then(() => {
-          createCaseStudy(storeResponseBody[0][0].id);
-        });
+      httpService.post(url, formData, config).then((response) => {
+        createCaseStudy(response.data[0].id);
+      });
     } catch (error) {
       console.error(error);
     }
@@ -134,13 +153,13 @@ const CaseStudySubmit = () => {
 
   const createCaseStudyResponse = async (caseStudyId: number, caseStudyTypeId: any) => {
     let caseStudyTypeOptions = [PatientStory, StaffRecognition, TrainingSession, EquipmentReceived, OtherStory];
-    let POSTresponses = caseStudyTypeOptions[caseStudyTypeId - 1];
-    updateResponse(POSTresponses, false);
+    let postResponses = caseStudyTypeOptions[caseStudyTypeId - 1];
+    updateResponse(postResponses, false);
     httpService
-      .post(`/case-study-responses/${caseStudyId}`, POSTresponses)
+      .post(`/case-study-responses/${caseStudyId}`, postResponses)
       .then((response: any) => response.data)
-      .then((data: any) => {
-        updateResponse(POSTresponses, true);
+      .then(() => {
+        updateResponse(postResponses, true);
         toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
         window.location.href = '/case-studies';
       })
@@ -149,7 +168,7 @@ const CaseStudySubmit = () => {
       });
   };
 
-  function updateResponse(selectedCaseStudy: any[], empty: boolean) {
+  const updateResponse = (selectedCaseStudy: any[], empty: boolean) => {
     let elementId;
     for (let index = 0; index < selectedCaseStudy.length; index++) {
       if (!empty) {
@@ -159,7 +178,7 @@ const CaseStudySubmit = () => {
         selectedCaseStudy[index].response = '';
       }
     }
-  }
+  };
 
   const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
@@ -174,6 +193,25 @@ const CaseStudySubmit = () => {
       return;
     }
     setShareImage(image);
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickCancel = async (event: any) => {
+    setIsOpen(true);
+  };
+
+  const OnClickNo = async (event: any) => {
+    setIsOpen(false);
+  };
+
+  const OnClickYes = async (event: any) => {
+    event.preventDefault();
+    window.location.href = '/case-studies';
   };
 
   return (
@@ -219,7 +257,7 @@ const CaseStudySubmit = () => {
 
           <div className="w-full flex flex-col pt-10">
             <label className="inside-text-case-study">Title of Case Study?</label>
-            <textarea value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
+            <textarea id={'text-area-id-title'} value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
               return (
                 <div>
@@ -228,10 +266,35 @@ const CaseStudySubmit = () => {
                 </div>
               );
             })}
-            <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
+
+            <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
               Cancel
             </button>
-            <button onClick={saveImageForCaseStudy} disabled={selectedCaseStudyType == 'Nothing selected'} className="blue-button bottom-5 right-20">
+            {isOpen && (
+              <Popup
+                content={
+                  <>
+                    <div className="popup_modal flex flex-col">
+                      <div className="popup_child pt-2">
+                        <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                        <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                      </div>
+
+                      <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                        <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                          No
+                        </button>
+                        <button onClick={OnClickYes} className="blue-button-popup w-full">
+                          Yes
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                }
+                handleClose={togglePopup}
+              />
+            )}
+            <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
               Submit
             </button>
           </div>

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
 import ReportElement from './ReportElement';
@@ -11,6 +11,7 @@ import { UserContext } from '../../UserContext';
 
 const DataPage = () => {
   document.body.style.backgroundColor = '#f5f5f5';
+  
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
@@ -25,7 +26,7 @@ const DataPage = () => {
     getFormByDeptId();
 
     async function getFormByDeptId() {
-      const url = `/form/${userContext.user?.departmentId}`;
+      const url = `/form/${2}`;
       try {
         const response = await httpService.get(url);
         const data = response.data;

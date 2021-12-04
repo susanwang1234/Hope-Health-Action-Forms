@@ -11,15 +11,14 @@
   - ...
 */
 
-
 .container {
-  width: 100% !important;
+  font-weight: bold;
   text-align: center;
+  width: 100% !important;
 }
 
 .card {
   text-align: center;
-  /* justify-content: space-around; */
   height: auto;
   width: auto;
   padding: 25px;
@@ -109,7 +108,7 @@ td {
 }
 
 .case-study-block-container {
-  background-color: palegoldenrod;
+  padding-top: 15px;
 }
 
 .case-study-block {
@@ -118,6 +117,20 @@ td {
   display: flex;
   text-align: left !important;
   background-color: white;
+}
+
+.case-study-title {
+  text-align: left;
+  font-size: 2rem;
+  font-weight: 500;
+  padding-bottom: 5px;
+}
+
+.case-study-date {
+  color: black;
+  font-size: 1.25rem;
+  font-weight: 500;
+  padding-bottom: 5px;
 }
 
 .case-study-block-image {

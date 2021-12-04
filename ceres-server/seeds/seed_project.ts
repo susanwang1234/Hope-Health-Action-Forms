@@ -12,6 +12,9 @@ import { insertCaseStudy } from './inserts/insert_case_study';
 import { insertCaseStudyResponse } from './inserts/insert_case_study_responses';
 import { insertImages } from './inserts/insert_images';
 import { insertEmployeeOfTheMonth } from './inserts/insert_employee_of_the_month';
+import { insertForm } from './inserts/insert_form';
+import { insertFormResponse } from './inserts/insert_form_responses';
+import { insertEmails } from './inserts/insert_email';
 
 export async function seed(knex: Knex): Promise<void> {
   // Delete all existing entries, keeping in mind of foreign key constraints
@@ -30,6 +33,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('Question').truncate();
   await knex('Image').truncate();
   await knex('EmployeeOfTheMonth').truncate();
+  await knex('Email').truncate();
   await knex.raw('SET FOREIGN_KEY_CHECKS=1;');
 
   // Insert seed entries
@@ -46,4 +50,7 @@ export async function seed(knex: Knex): Promise<void> {
   await insertCaseStudy(knex);
   await insertCaseStudyResponse(knex);
   await insertEmployeeOfTheMonth(knex);
+  await insertForm(knex);
+  await insertFormResponse(knex);
+  await insertEmails(knex);
 }

@@ -1,4 +1,3 @@
-import ToDoData from './ToDo.json';
 import './Departments.css';
 import '../../App.css';
 import { useHistory, Redirect } from 'react-router-dom';
@@ -8,12 +7,15 @@ import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import AuthService from '../../services/authService';
 import httpService from '../../services/httpService';
+import AdminSidebar from '../Sidebar/AdminSidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
 //source for checkmark icon:https://css.gg/check-o
 //source for alert icon: https://css.gg/danger
 
 function Departments() {
   let history = useHistory();
   const userContext = useContext(UserContext);
+  const [showNav, setShowNav] = useState(false);
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -28,30 +30,46 @@ function Departments() {
     history.push(route);
   };
 
+  const [toDoState, setToDoState] = useState<any>({
+    toDoReminders: []
+  });
+
   const [departmentState, setDepartmentState] = useState({
     departments: []
   });
 
   useEffect(() => {
     getDepartments();
-
-    async function getDepartments() {
-      const url = '/department';
-      try {
-        const response = await httpService.get(url);
-        const { data } = response;
-        console.log('Fetched Departments: ' + data);
-        setDepartmentState({
-          departments: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setDepartmentState]);
 
-  function iconChecker(isComplete: boolean) {
-    if (isComplete) {
+  const getToDoStatus = async (retrievedDepartments: any) => {
+    const url = '/to-do';
+    try {
+      const response = await httpService.get(url);
+      setToDoState({
+        toDoReminders: response.data
+      });
+      setDepartmentState({
+        departments: retrievedDepartments
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const getDepartments = async () => {
+    const url = '/department';
+    try {
+      const response = await httpService.get(url);
+      const { data } = response;
+      getToDoStatus(data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const iconChecker = (isComplete: number) => {
+    if (isComplete > 0) {
       return (
         <div className="checkmark-icon">
           <div className="checkmark"></div>
@@ -63,35 +81,37 @@ function Departments() {
         <div className="alert"></div>
       </div>
     );
-  }
+  };
 
-  //Purpose of slice is so that "all departments" does not get generate into a card
   return (
-    <div className="department-background">
-      <header className="department-header">
-        <img src={logo} alt="Department Logo" className="department-logo"></img>
+    <div>
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+          Log Out
+        </button>
       </header>
-      <button type="submit" onClick={onClickLogOutHandler} className="logout-button">
-        Log Out
-      </button>
-      <button type="submit" className="admin-button">
-        Admin Options
-      </button>
-      <div className="cards">
-        {departmentState.departments.slice(1).map((department: any, index: any) => {
-          return (
-            <div className="individual-card">
-              <h2 className="inside-card">
-                <b>{department.name}</b>
-              </h2>
-              <p className="inside-text">{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</p>
-              <p className="inside-text">{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</p>
-              <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
-                View Department
-              </button>
-            </div>
-          );
-        })}
+      <div className="flex h-full">
+        <AdminSidebar show={showNav} />
+      </div>
+      <div className="department-background">
+        <div className="cards">
+          {departmentState.departments.slice(1).map((department: any, index: any) => {
+            return (
+              <div className="individual-card">
+                <h2 className="inside-card">
+                  <b>{department.name}</b>
+                </h2>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].caseStudies)}Case Study</p>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].dataForm)}MSPP Report</p>
+                <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
+                  View Department
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

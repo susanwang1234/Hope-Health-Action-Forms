@@ -1,7 +1,7 @@
 import logging from 'config/logging';
 import { Knex } from 'db/mysql';
 import { Request, Response, NextFunction } from 'express';
-import { formNegativeOrNanInputError, formDNEError } from 'shared/errorMessages';
+import { formResponseNegativeOrNanInputError, formDNEError, departmentNegativeOrNanInputError } from 'shared/errorMessages';
 import { createItems } from './requestTemplates/createRequest';
 import { editItemsById } from './requestTemplates/editByIdRequest';
 import { Form } from '../db/models/formModel';
@@ -15,7 +15,7 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
   logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY ID`);
   const formId: number = +req.params.formId;
   if (isInvalidInput(formId)) {
-    res.status(400).send(formNegativeOrNanInputError);
+    res.status(400).send(formResponseNegativeOrNanInputError);
     return;
   }
 
@@ -50,7 +50,7 @@ const addNewFormResponses = async (req: Request, res: Response, next: NextFuncti
     return;
   }
   const formResponseFKName = 'formId';
-  await createItems(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formResponses, formResponseFKName, formId);
+  await createItems(req, res, next, NAMESPACE, TABLE_NAME, formResponseNegativeOrNanInputError, formResponses, formResponseFKName, formId);
 };
 
 const editFormResponsesByFormId = async (req: Request, res: Response, next: NextFunction) => {
@@ -65,7 +65,7 @@ const editFormResponsesByFormId = async (req: Request, res: Response, next: Next
     res.status(400).send({ error: error.message });
     return;
   }
-  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, responsesToEdit, formId);
+  await editItemsById(req, res, next, NAMESPACE, TABLE_NAME, formResponseNegativeOrNanInputError, formDNEError, responsesToEdit, formId);
 };
 
 const validateFormResponsesBelongToCorrectDepartment = async (formResponses: FormResponse[], departmentId: number) => {

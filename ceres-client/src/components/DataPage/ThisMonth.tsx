@@ -9,36 +9,28 @@ import Sidebar from '../Sidebar/Sidebar';
 import { UserContext } from '../../UserContext';
 
 const ThisMonth = () => {
-    const [thisMonthID, setThisMonthId] = useState<number>(0);
+    document.body.style.backgroundColor = '#f5f5f5';
+
     const [displayingData, setDisplayingData] = useState<any>(null);
     const [showNav, setShowNav] = useState(false);
-    const [reports, setReports] = useState([]);
     const userContext = useContext(UserContext);
 
     useEffect(() => {
         getFormByDeptId();
         async function getFormByDeptId() {
-            const url = `/form/${userContext.user?.departmentId}`;
+            const url = `/form/latest/${2}`;
             try {
               const response = await httpService.get(url);
+              console.log(response)
               const data = response.data;
               console.log('Fetched Report:', data);
-              setReports(data);
+              setDisplayingData(data);
             } catch (error: any) {
               console.log('Error: Unable to fetch from ' + url);
             }
           }
     }, []);
     
-    useEffect(() =>{
-        getThisMonthId();
-        setDisplayingData(reports[thisMonthID])
-    }, [reports])
-
-    const getThisMonthId = () => {
-        setThisMonthId(0);
-    }
-
     return(
         <div>
             <header className="nav-header">
