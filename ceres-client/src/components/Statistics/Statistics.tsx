@@ -19,29 +19,33 @@ const StatisticsDashboard = () => {
   const [startYear, setStartYear] = useState(0);
   const [endMonth, setEndMonth] = useState('');
   const [endYear, setEndYear] = useState(0);
+  const [isSearching, setSearching] = useState(false);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [isSearching]);
 
   async function fetchData() {
     const url = `/dataviz/2?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
     try {
+      console.log('IN FETCH DATA')
       const response = await httpService.get(url);
+      console.log('RESPONSE:', response);
       setDataForPlots(response.data.plotData);
       setQuestionLabels(response.data.questionLabels);
       if (plotIndex >= questionLabels.length) setPlotIndex(0);
     } catch (error: any) {
       console.log('Error: Unable to fetch from', url);
     }
+    setSearching(false)
   }
 
-  function resetDateFilter() {
+  async function resetDateFilter() {
     setStartMonth('');
     setStartYear(0);
     setEndMonth('');
     setEndYear(0);
-    fetchData();
+    setSearching(true);
   }
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
