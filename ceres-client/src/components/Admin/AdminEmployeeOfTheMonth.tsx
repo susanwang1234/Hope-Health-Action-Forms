@@ -10,6 +10,7 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 import gray_person from '../../images/gray_person.jpg';
+import { departmentParam } from '../../types/departmentParamType';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
@@ -34,6 +35,7 @@ const AdminEmployeeOfTheMonth = () => {
   };
   const onclickCancel = async (event: any) => {
     event.preventDefault();
+
     window.location.href = '/departments';
   };
 

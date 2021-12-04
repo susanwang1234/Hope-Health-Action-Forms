@@ -12,13 +12,16 @@ import { EquipmentReceived } from '../../models/equipmentReceived';
 import { OtherStory } from '../../models/otherStory';
 import httpService from '../../services/httpService';
 import AuthService from '../../services/authService';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
+import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
 const CaseStudySubmit = () => {
+  const { deptID } = useParams<departmentParam>();
   const userContext = useContext(UserContext);
   const [shareImage, setShareImage] = useState('');
   const [checkMark, SetCheckMark] = useState(false);
@@ -132,7 +135,7 @@ const CaseStudySubmit = () => {
   const createCaseStudy = async (imageId: number) => {
     let caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
-      departmentId: userContext.user?.departmentId,
+      departmentId: deptID,
       userId: userContext.user?.id,
       imageId: imageId,
       title
@@ -160,7 +163,7 @@ const CaseStudySubmit = () => {
       .then(() => {
         updateResponse(postResponses, true);
         toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
-        window.location.href = '/case-studies';
+        window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
       })
       .catch((error: any) => {
         console.log(error);
@@ -210,7 +213,7 @@ const CaseStudySubmit = () => {
 
   const OnClickYes = async (event: any) => {
     event.preventDefault();
-    window.location.href = '/case-studies';
+    window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
   };
 
   return (
@@ -222,7 +225,7 @@ const CaseStudySubmit = () => {
           Log Out
         </button>
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={deptID} />
       <div className="cards-case-study">
         <div className="casestudy-single-card">
           <h2 className="inside-card -mt-10 mb-8">
