@@ -23,7 +23,7 @@ const Leaderboard = (pointSystem: LeaderboardDepartment[]) => {
       item.department.length >= 10 ? item.department.substring(0, 9).concat('...') : item.department,
       item.points,
       `${item.points} `.concat(item.points === 1 ? 'point' : 'points'),
-      'color: ' + createColor(item.department) + ';',
+      'color: '.concat(createColor(item.department)).concat(';'),
       "<p class='bar-data'>"
         .concat("<em class='pop-up-label'>Department: </em>")
         .concat(item.department)
