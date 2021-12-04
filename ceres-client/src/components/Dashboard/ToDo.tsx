@@ -1,36 +1,62 @@
 import './Dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { useState } from 'react';
-import { IoIosAlert } from 'react-icons/io';
-import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { ToDoStatus } from '../../models/toDoStatus';
 import { currDate } from './util/timezone';
+import { useState, useEffect } from 'react';
+import httpService from '../../services/httpService';
 
-const ToDo = (toDoReminders: ToDoStatus) => {
-  const [date, setDate]: any = useState(currDate);
+const ToDo = () => {
+  const [toDo, setToDoState] = useState<any>({
+    toDoReminders: []
+  });
 
-  function generateCalendar() {
+  const getToDoStatus = async () => {
+    const url = '/to-do';
+    try {
+      const response = await httpService.get(url);
+      setToDoState({
+        toDoReminders: response.data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+  useEffect(() => {
+    getToDoStatus();
+  }, [setToDoState]);
+
+  const generateCalendar = () => {
     return (
       <div className="app">
         <div className="calendar-container">
-          <Calendar onChange={setDate} value={date} selectRange={true} className="responsive-calendar flex-shrink" />
+          <Calendar value={currDate} selectRange={true} className="responsive-calendar flex-shrink" />
         </div>
       </div>
     );
-  }
+  };
+
+  const iconChecker = (isComplete: number) => {
+    if (isComplete > 0) {
+      return (
+        <div className="checkmark-icon">
+          <div className="checkmark"></div>
+        </div>
+      );
+    }
+    return (
+      <div className="alert-icon">
+        <div className="alert"></div>
+      </div>
+    );
+  };
 
   return (
     <>
       <div className="align-left">
-        <div className="due-content">
-          <IoIosCheckmarkCircle className="icon icon-case-study" /> Case Study <br />
-          Due Oct 31 2021
-        </div>
-        <div className="due-content">
-          <IoIosAlert className="icon icon-mspp-report" /> Monthly Data Report <br />
-          <div className="due-in-red">Due Dec 25 2021</div> <br />
-        </div>
+        {/* {iconChecker(toDo.toDoReminders[0].caseStudies)} Hello */}
+        {/* <p className="inside-text">{iconChecker(toDo.toDoReminders[0].caseStudies)}Case Study</p> */}
+        {/* <p className="inside-text">{iconChecker(toDoState.toDoReminders[0].dataForm)}MSPP Report</p> */}
       </div>
       <div className="align-right flex">{generateCalendar()}</div>
     </>

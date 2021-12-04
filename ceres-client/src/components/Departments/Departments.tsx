@@ -102,7 +102,7 @@ function Departments() {
                   <b>{department.name}</b>
                 </h2>
                 <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].caseStudies)}Case Study</p>
-                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].dataForm)}MSPP Report</p>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].dataForm)}Data Form</p>
                 <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
                   View Department
                 </button>

@@ -68,7 +68,7 @@ const Dashboard = () => {
               <div className="dashboard-cards">
                 <div className="card-outer fill-space-left">
                   <p className="title">To Do</p>
-                  <div className="card-inner width-100-percent">{ToDo(toDo.toDoReminders)}</div>
+                  <div className="card-inner width-100-percent">{ToDo()}</div>
                   <p className="title">
                     Leaderboard
                     <div className="align-right icon instructions">{Instruction()}</div>
