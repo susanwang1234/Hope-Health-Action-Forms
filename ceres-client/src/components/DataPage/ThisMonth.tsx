@@ -7,41 +7,43 @@ import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import Sidebar from '../Sidebar/Sidebar';
 import { UserContext } from '../../UserContext';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const ThisMonth = () => {
-    document.body.style.backgroundColor = '#f5f5f5';
+  document.body.style.backgroundColor = '#f5f5f5';
+  const { deptID } = useParams<departmentParam>();
+  const [displayingData, setDisplayingData] = useState<any>(null);
+  const [showNav, setShowNav] = useState(false);
+  const userContext = useContext(UserContext);
 
-    const [displayingData, setDisplayingData] = useState<any>(null);
-    const [showNav, setShowNav] = useState(false);
-    const userContext = useContext(UserContext);
+  useEffect(() => {
+    getFormByDeptId();
+    async function getFormByDeptId() {
+      const url = `/form/latest/${2}`;
+      try {
+        const response = await httpService.get(url);
+        console.log(response);
+        const data = response.data;
+        console.log('Fetched Report:', data);
+        setDisplayingData(data);
+      } catch (error: any) {
+        console.log('Error: Unable to fetch from ' + url);
+      }
+    }
+  }, []);
 
-    useEffect(() => {
-        getFormByDeptId();
-        async function getFormByDeptId() {
-            const url = `/form/latest/${2}`;
-            try {
-              const response = await httpService.get(url);
-              console.log(response)
-              const data = response.data;
-              console.log('Fetched Report:', data);
-              setDisplayingData(data);
-            } catch (error: any) {
-              console.log('Error: Unable to fetch from ' + url);
-            }
-          }
-    }, []);
-    
-    return(
-        <div>
-            <header className="nav-header">
-                <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
-                <img src={logo} alt="Logo" className="logo" />
-            </header>
-            <div className="flex justify-center">
-            <Sidebar show={showNav} />
-            {(displayingData == null) ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}
-            </div>
-        </div>
-    )
-}
-export default ThisMonth
+  return (
+    <div>
+      <header className="nav-header">
+        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+        <img src={logo} alt="Logo" className="logo" />
+      </header>
+      <div className="flex justify-center">
+        <Sidebar show={showNav} departmentID={deptID} />
+        {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}
+      </div>
+    </div>
+  );
+};
+export default ThisMonth;
