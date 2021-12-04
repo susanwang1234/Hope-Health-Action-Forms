@@ -7,11 +7,12 @@ import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
+import { departmentParam } from '../../types/departmentParamType';
 
 const MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
 
 const StatisticsDashboard = () => {
-  const { departmentId } = useParams<{ departmentId: string }>();
+  const { deptID } = useParams<departmentParam>();
   const [departmentName, setDepartmentName] = useState('');
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
@@ -34,7 +35,7 @@ const StatisticsDashboard = () => {
 
 
   async function getDepartmentName() {
-    const url = `/department/${departmentId}`;
+    const url = `/department/${deptID}`;
     try {
       const response = await httpService.get(url);
       setDepartmentName(response.data.name);
@@ -44,7 +45,7 @@ const StatisticsDashboard = () => {
   }
 
   async function fetchData() {
-    const url = `/dataviz/${departmentId}?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
+    const url = `/dataviz/${deptID}?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
     try {
       const response = await httpService.get(url);
       setDataForPlots(response.data.plotData);
@@ -70,7 +71,7 @@ const StatisticsDashboard = () => {
     const value = event.target.value;
     setPlotIndex(+value);
   }
-  
+
   return (
     <div className="App">
       <header className="nav-header">

@@ -41,6 +41,7 @@ apiRouter.use('/case-study-questions', caseStudyQuestionsRoutes);
 apiRouter.use('/case-study-responses', caseStudyResponsesRoutes);
 apiRouter.use('/image', imageRoutes);
 apiRouter.use('/employee-of-the-month', employeeOfTheMonthRoutes);
+apiRouter.use('/dataviz', dataVizRoutes);
 apiRouter.use('/to-do', todoRoutes);
 apiRouter.use('/email', emailRoutes);
 
