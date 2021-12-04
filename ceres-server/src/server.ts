@@ -4,7 +4,6 @@ import cors from 'cors';
 import express, { Application, Request, Response, NextFunction } from 'express';
 import logging from './config/logging';
 import config from './config/config';
-import routes from './routes/index';
 import baseRouter from 'routes';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
@@ -76,7 +75,6 @@ export const enableLogging = (router: Application, namespace: string) => {
 
 export const enableRoutes = (router: Application) => {
   /** Routes */
-  router.use('', routes);
   // order of route initialization matters
   router.use(baseRouter);
 };

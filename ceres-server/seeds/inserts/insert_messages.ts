@@ -9,7 +9,7 @@ export async function insertMessages(knex: Knex): Promise<void> {
         'Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!',
       departmentId: 2
     },
-    { id: 2, author: 'admin', message_Content: 'We support and stand by @HaitiCancerCenter in their fight aigains cancer! #go_away_cancer', departmentId: 2 },
+    { id: 2, author: 'admin', messageContent: 'We support and stand by @HaitiCancerCenter in their fight aigains cancer! #go_away_cancer', departmentId: 2 },
     {
       id: 3,
       author: 'admin',
