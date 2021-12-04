@@ -1,10 +1,9 @@
-import ToDoData from './ToDo.json';
 import './Departments.css';
 import '../../App.css';
 import { useHistory, Redirect } from 'react-router-dom';
 import logo from '../../images/navlogo.png';
 import { UserContext } from '../../UserContext';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import AuthService from '../../services/authService';
 import httpService from '../../services/httpService';
@@ -28,8 +27,12 @@ function Departments() {
   };
 
   const onClick = (departmentID: number, route: string) => {
-    history.push(route);
+    history.push(route + '/' + departmentID);
   };
+
+  const [toDoState, setToDoState] = useState<any>({
+    toDoReminders: []
+  });
 
   const [departmentState, setDepartmentState] = useState({
     departments: []
@@ -37,23 +40,36 @@ function Departments() {
 
   useEffect(() => {
     getDepartments();
-
-    async function getDepartments() {
-      const url = '/department';
-      try {
-        const response = await httpService.get(url);
-        const { data } = response;
-        setDepartmentState({
-          departments: data
-        });
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, [setDepartmentState]);
 
-  function iconChecker(isComplete: boolean) {
-    if (isComplete) {
+  const getToDoStatus = async (retrievedDepartments: any) => {
+    const url = '/to-do';
+    try {
+      const response = await httpService.get(url);
+      setToDoState({
+        toDoReminders: response.data
+      });
+      setDepartmentState({
+        departments: retrievedDepartments
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const getDepartments = async () => {
+    const url = '/department';
+    try {
+      const response = await httpService.get(url);
+      const { data } = response;
+      getToDoStatus(data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const iconChecker = (isComplete: number) => {
+    if (isComplete > 0) {
       return (
         <div className="checkmark-icon">
           <div className="checkmark"></div>
@@ -65,9 +81,8 @@ function Departments() {
         <div className="alert"></div>
       </div>
     );
-  }
+  };
 
-  //Purpose of slice is so that "all departments" does not get generate into a card
   return (
     <div>
       <header className="nav-header">
@@ -88,8 +103,8 @@ function Departments() {
                 <h2 className="inside-card">
                   <b>{department.name}</b>
                 </h2>
-                <p className="inside-text">{iconChecker(ToDoData[index + 1].caseStudy)}Case Study</p>
-                <p className="inside-text">{iconChecker(ToDoData[index + 1].mspp)}MSPP Report</p>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].caseStudies)}Case Study</p>
+                <p className="inside-text">{iconChecker(toDoState.toDoReminders[index].dataForm)}MSPP Report</p>
                 <button type="submit" onClick={() => onClick(department.id, '/dashboard')} className="view-department-button">
                   View Department
                 </button>

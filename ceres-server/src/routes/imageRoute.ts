@@ -1,6 +1,6 @@
 import express from 'express';
 import controller from '../controllers/imageController';
-import { imageUpload } from 'middlewares/multerValidation';
+import { imageUpload } from 'middlewares/multerValidation.mw';
 
 const router = express.Router();
 

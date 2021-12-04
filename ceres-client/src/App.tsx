@@ -21,12 +21,12 @@ function App() {
       <ToastContainer />
       <Switch>
         <UnPrivateRoute exact path="/" component={Login} />
-        <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
-        <PrivateRoute path="/submit-report" component={Forms}></PrivateRoute>
-        <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
-        <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
-        <PrivateRoute exact path={'/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
-        <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID" component={Dashboard}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/submit-report" component={Forms}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/data-page" component={DataPage}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></PrivateRoute>
+        <PrivateRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/statistics/:departmentId" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
