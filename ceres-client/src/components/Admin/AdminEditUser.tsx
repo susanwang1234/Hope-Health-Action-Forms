@@ -10,8 +10,10 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import '../Admin/Admin.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
+import Popup from '../CaseStudySubmit/PopUpModal/Popup';
 /*
 Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
+Cite: https://css.gg/pen
 */
 
 const AdminEditUser = () => {
@@ -79,7 +81,7 @@ const AdminEditUser = () => {
       .put(url, editedUser)
       .then(() => {
         toast.success('User Edited', { position: 'top-center', autoClose: 5000 });
-        setUserShown(false);
+        window.location.href = '/departments';
       })
       .catch((error: any) => {
         console.log(error);
@@ -127,6 +129,26 @@ const AdminEditUser = () => {
     }
     return <Redirect to="/" />;
   };
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickCancel = async (event: any) => {
+    setIsOpen(true);
+  };
+
+  const OnClickNo = async (event: any) => {
+    setIsOpen(false);
+  };
+
+  const OnClickYes = async (event: any) => {
+    event.preventDefault();
+    setUserShown(false);
+    setIsOpen(false);
+    toast.dismiss();
+  };
   const updateFields = (currentId: number, currentDepartment: string, currentRole: string, currentPassword: string, currentUsername: string) => {
     setUserId(currentId);
     setCurrentUser({
@@ -136,6 +158,7 @@ const AdminEditUser = () => {
       currentPassword: currentPassword
     });
     setUserShown(true);
+    toast.info('Fields that are left unselected or empty will default to their previously saved values');
   };
   const fillEmptyFieldsWithExisitingFields = () => {
     if (state.stateRoleId === '' && state.stateDepartmentId === '' && state.stateUsername === '' && state.statePassword === '') {
@@ -153,7 +176,12 @@ const AdminEditUser = () => {
     testUserName = state.stateUsername === '' ? currentUser.currentUsername : state.stateUsername;
 
     if (state.stateUsername.length < 5 && state.stateUsername !== '') {
-      toast.error('Username too short');
+      toast.error('Username too short, must be minimum 5 characters');
+      return;
+    }
+
+    if (state.stateUsername.length > 25) {
+      toast.error('Username too long, must be maximum 25 characters');
       return;
     }
 
@@ -193,28 +221,12 @@ const AdminEditUser = () => {
       <div className="flex h-full">
         <AdminSidebar show={showNav} />
       </div>
-      <div className="admin-cards">
-        <div className="admin-individual-card">
-          <h2 className="inside-card">Select a User</h2>
-          <ul>
-            {userState.users.map((singleUser: any) => {
-              if (singleUser.roleId !== 1) {
-                return (
-                  <li>
-                    <h2>{singleUser.username}</h2>
-                    <button onClick={() => updateFields(singleUser.id, singleUser.departmentId, singleUser.roleId, singleUser.password, singleUser.username)}>Edit</button>
-                  </li>
-                );
-              }
-              return;
-            })}
-          </ul>
-        </div>
-        <div className="admin-individual-card">
+      <div className="cards-case-study">
+        <div className="casestudy-single-card">
           {userShown ? (
             <div>
               <h2 className="inside-card -mt-10 mb-8">
-                <b>Edit User</b>
+                <b>Edit {currentUser.currentUsername}</b>
               </h2>
               <div className="w-full flex flex-col pt-10">
                 <label className="admin-inside-text">Role</label>
@@ -261,16 +273,61 @@ const AdminEditUser = () => {
                   <p>Show password</p>
                 </div>
               </div>
-              <p>Fields that are left unselected or empty will default to their previous selections.</p>
-              <button onClick={() => setUserShown(false)} className="grey-button">
+              <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
-              <button onClick={() => fillEmptyFieldsWithExisitingFields()} className="blue-button">
+              {isOpen && (
+                <Popup
+                  content={
+                    <>
+                      <div className="popup_modal flex flex-col">
+                        <div className="popup_child pt-2">
+                          <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                          <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                        </div>
+
+                        <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                          <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                            No
+                          </button>
+                          <button onClick={OnClickYes} className="blue-button-popup w-full">
+                            Yes
+                          </button>
+                        </div>
+                      </div>
+                    </>
+                  }
+                  handleClose={togglePopup}
+                />
+              )}
+              <button onClick={() => fillEmptyFieldsWithExisitingFields()} className="blue-button bottom-5 right-20">
                 Save
               </button>
             </div>
           ) : (
-            <p>Select a User from the List</p>
+            <div>
+              <h2 className="inside-card -mt-10 mb-8">
+                <b>Select a User</b>
+              </h2>
+              <button onClick={() => (window.location.href = '/departments')} className="grey-button bottom-5 left-31">
+                Cancel
+              </button>
+              <div className="box-inside-for-overflow">
+                <ul>
+                  {userState.users.map((singleUser: any) => {
+                    if (singleUser.roleId !== 1) {
+                      return (
+                        <li className="alternate-background-colours">
+                          <label className="admin-inside-text">{singleUser.username}</label>
+                          <button className="gg-pen" onClick={() => updateFields(singleUser.id, singleUser.departmentId, singleUser.roleId, singleUser.password, singleUser.username)} />
+                        </li>
+                      );
+                    }
+                    return;
+                  })}
+                </ul>
+              </div>
+            </div>
           )}
         </div>
       </div>

@@ -25,25 +25,15 @@ label.admin-inside-text {
   text-align: left;
   width: 50%;
 }
-.admin-cards {
-  display: grid;
-  gap: 40px;
-  grid-template-columns: 1fr 1fr;
-  margin: 95px 200px;
-}
-.admin-individual-card {
-  background-color: rgb(255, 255, 255);
-  border-color: #d6d6d6;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
-  display: inline;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-around;
-  padding: 25px;
-  position: relative;
-  overflow-y: scroll;
-}
 option:first-child {
   display: none;
+}
+.box-inside-for-overflow {
+  height: 80vh;
+  width: 60vw;
+  padding: 20px;
+  overflow-y: scroll;
+}
+li.alternate-background-colours:nth-child(odd) {
+  background-color: #fafafa;
 }

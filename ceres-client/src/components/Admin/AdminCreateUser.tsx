@@ -10,6 +10,7 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import '../Admin/Admin.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
+import Popup from '../CaseStudySubmit/PopUpModal/Popup';
 /*
 Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
 */
@@ -40,7 +41,21 @@ const AdminCreateUser = () => {
     }
     return <Redirect to="/" />;
   };
-  const onclickCancel = async (event: any) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onClickCancel = async (event: any) => {
+    setIsOpen(true);
+  };
+
+  const OnClickNo = async (event: any) => {
+    setIsOpen(false);
+  };
+
+  const OnClickYes = async (event: any) => {
     event.preventDefault();
     window.location.href = '/departments';
   };
@@ -185,9 +200,33 @@ const AdminCreateUser = () => {
               <input className="float-left mr-2 mt-1" onChange={togglePassword} type="checkbox" />
               <p>Show password</p>
             </div>
-            <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
+            <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
               Cancel
             </button>
+            {isOpen && (
+              <Popup
+                content={
+                  <>
+                    <div className="popup_modal flex flex-col">
+                      <div className="popup_child pt-2">
+                        <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                        <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                      </div>
+
+                      <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                        <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                          No
+                        </button>
+                        <button onClick={OnClickYes} className="blue-button-popup w-full">
+                          Yes
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                }
+                handleClose={togglePopup}
+              />
+            )}
             <button onClick={createUser} className="blue-button bottom-5 right-20">
               Submit
             </button>
