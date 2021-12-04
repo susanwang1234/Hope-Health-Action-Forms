@@ -2,7 +2,7 @@ import './Dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState, useEffect } from 'react';
-import { currDate, currMonth, currMonthLastDate, currMonthLastDay, months } from './util/timezone';
+import { currMonth, currMonthLastDate, currMonthLastDay, months } from './util/timezone';
 import initialToDoStatus from './util/initialToDoStatus.json';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';

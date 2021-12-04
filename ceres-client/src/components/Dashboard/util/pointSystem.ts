@@ -3,7 +3,7 @@ import { Department } from '../../../models/department';
 import { ToDoStatus } from '../../../models/toDoStatus';
 
 const calculateScore = (currDepartmentStatus: ToDoStatus) => {
-  return currDepartmentStatus.caseStudies + Number(currDepartmentStatus.dataForm);
+  return currDepartmentStatus.caseStudies + Number(currDepartmentStatus.dataForm) + Number(currDepartmentStatus.employeeOfTheMonth) * 3;
 };
 
 export const calculateDepartmentPoints = (departments: Department[], departmentStatus: ToDoStatus[]) => {
