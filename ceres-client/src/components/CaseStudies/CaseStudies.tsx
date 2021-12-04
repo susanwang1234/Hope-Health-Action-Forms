@@ -4,12 +4,15 @@ import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
-const CaseStudy = () => {
+const CaseStudy = (props: any) => {
+  const { deptID } = useParams<departmentParam>();
   let queryStr = '';
   document.body.style.backgroundColor = '#f5f5f5';
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
@@ -120,7 +123,7 @@ const CaseStudy = () => {
       });
     } catch (error: any) {
       console.log('Error Unable to fetch from ' + url);
-      toast.error('There are no case studies of this type.');
+      toast.error(error.response.data.error);
       setCaseStudyState({
         caseStudies: [],
         caseStudiesOrig: []
@@ -143,7 +146,7 @@ const CaseStudy = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={deptID} />
       <div className="container">
         <table>
           <tr>
@@ -169,7 +172,7 @@ const CaseStudy = () => {
                   </table>
                 </div>
               </div>
-              <Link to="/case-studies/new">
+              <Link to={`${createDashboardIDPath(deptID)}/case-studies/new`}>
                 <button className="button-new-case">+ Add Case Study</button>
               </Link>
             </td>
@@ -197,7 +200,7 @@ const CaseStudy = () => {
                           <p>{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/view/${caseStudy.id}`}>
+                          <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>
                             <button className="button">View</button>
                           </Link>
                         </td>
