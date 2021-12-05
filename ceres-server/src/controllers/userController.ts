@@ -42,7 +42,7 @@ const createUser = async (req: Request, res: Response, next: NextFunction) => {
 const editUserById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const editedUser = inputtedReqBody(req);
-    const userFound = await userModel.findOne('User.username', editedUser.username);
+    const userFoundFromUsername = await userModel.findOne('User.username', editedUser.username);
 
     const userId: number = +req.params.id;
     if (isInvalidInput(userId)) {
@@ -50,16 +50,24 @@ const editUserById = async (req: Request, res: Response, next: NextFunction) => 
       return;
     }
 
-    let isSameUser: boolean = true;
-    if (userFound) {
-      isSameUser = userId === userFound.id;
+    if (userFoundFromUsername) {
+      const isSameUser = userId === userFoundFromUsername.id;
+
+      if (!isSameUser) {
+        res.status(400).send({ error: 'Username already in use by other account' });
+        return;
+      }
     }
 
-    if (!isSameUser) {
-      res.status(400).send({ error: 'Username already in use by other account' });
+    const userFoundById = await userModel.findOne('User.id', userId);
+    if (!userFoundById) {
+      res.status(404).send(userDNEError);
       return;
     }
-    editedUser.password = await authUtil.hashPassword(editedUser.password);
+
+    if (editedUser.password !== userFoundById.password) {
+      editedUser.password = await authUtil.hashPassword(editedUser.password);
+    }
     await editItemById(req, res, next, NAMESPACE, TABLE_NAME, userNegativeOrNanInputError, userDNEError, editedUser);
   } catch (error: any) {
     logging.error(NAMESPACE, error.message, error);
