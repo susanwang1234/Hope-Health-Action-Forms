@@ -5,40 +5,17 @@ import './MessageBoard.css'
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import Sidebar from '../Sidebar/Sidebar';
+import { departmentParam } from '../../types/departmentParamType';
+import { useParams } from 'react-router-dom';
 
 
 const MessageBoard = () => {
     const [showNav, setShowNav] = useState(false);
-    const [messages, setMessages] = useState<any[]>([
-        {
-            content: "Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!",
-            createdAt: "12/23/2021",
-            author: "alireza ahmadi"
-        },
-        {
-            content: "We support and stand by @HaitiCancerCenter in their fight aigains cancer! #go_away_cancer ",
-            createdAt: "12/23/2021",
-            author: "alireza ahmadi"
-        },
-        {
-            content: "fkd jfdd dsdsa dhasdusd dasuds sudgsafd adsdhf dfad9s dudhsa saud9hsduc fuee fdds dwfeud  asdqud sdgfa dsdsag9sad asdsa9dsd sad9s dasdasds9d sd 9sd sad9 sad asf",
-            createdAt: "12/23/2021",
-            author: "alireza ahmadi"
-        },
-        {
-            content: "Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!",
-            createdAt: "12/23/2021",
-            author: "alireza ahmadi"
-        },
-        {
-            content: "Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!",
-            createdAt: "12/23/2021",
-            author: "alireza ahmadi"
-        }
-    ]);
+    const [messages, setMessages] = useState<any[]>([]);
+    const { deptID } = useParams<departmentParam>();
 
     useEffect(() => {
-        const url = "./Messages"
+        const url = `/Messages/${deptID}/`
         const response: any = httpService
       .get(url)
       .then((response) => {
@@ -62,7 +39,7 @@ const MessageBoard = () => {
                     {
                     messages.map(message => {
                         return<li className="message">
-                                {message.content}
+                                {message.messageContent}
                             <div className="message-footer">
                                 <div>Posted by: {message.author}</div>
                                 <div className="px-3">{makeDateShort(message.createdAt)}</div>

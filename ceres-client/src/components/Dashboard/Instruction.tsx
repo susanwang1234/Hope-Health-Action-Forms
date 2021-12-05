@@ -5,14 +5,6 @@ import Button from 'react-bootstrap/Button';
 import { render } from '@testing-library/react';
 import { useState } from 'react';
 
-/*
-Citations:
-    https://react-bootstrap.github.io/components/alerts/
-    https://css-tricks.com/quick-css-trick-how-to-center-an-object-exactly-in-the-center/
-    https://stackoverflow.com/questions/7130397/how-do-i-make-a-div-full-screen
-    https://stackoverflow.com/questions/3514784/what-is-the-best-way-to-detect-a-mobile-device
-*/
-
 const Instruction = () => {
   function isMobileOrTablet(): boolean {
     let isMobileOrTablet = window.matchMedia('only screen and (max-width: 1024px)').matches;

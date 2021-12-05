@@ -5,8 +5,12 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
 const CaseStudy = () => {
+  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
@@ -21,7 +25,7 @@ const CaseStudy = () => {
     getCaseStudies();
   }, [setCaseStudyState]);
 
-  async function getCaseStudies() {
+  const getCaseStudies = async () => {
     const url = `/case-study/${caseId.toString()}`;
     try {
       const response = await httpService.get(url);
@@ -32,9 +36,9 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  async function getCaseStudyImage(imageId: number) {
+  const getCaseStudyImage = async (imageId: number) => {
     const url = `/image/${imageId}`;
     try {
       await httpService
@@ -47,7 +51,7 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
   return (
     <div className="App">
@@ -55,7 +59,7 @@ const CaseStudy = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={deptID} />
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">
@@ -88,7 +92,7 @@ const CaseStudy = () => {
                         className="view-cancel-form-button"
                         onClick={(event) => {
                           event.preventDefault();
-                          window.location.href = '/case-studies';
+                          window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
                         }}
                       >
                         Return
