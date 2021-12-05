@@ -190,15 +190,47 @@ describe('testEditUserSuccess', () => {
   after('Close a working server', () => {
     httpServer.close();
   });
-  it('Validate edited user properties and fields', (done) => {
+  it('Validate edited user properties and fields when password', (done) => {
     agent
       .put('/user/3')
       .set('content-type', 'application/json')
       .send({
         username: 'hospitalAdmin',
-        password: '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm',
+        password: 'newPassword',
         departmentId: 1,
         roleId: 2
+      })
+      .end(async (err: any, res: any) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(201);
+        expect(res.body).to.be.an('array');
+        expect(res.body[0]).to.be.an('object');
+        expect(res.body[0]).to.have.deep.property('id');
+        expect(res.body[0]).to.have.deep.property('username');
+        expect(res.body[0]).to.have.deep.property('password');
+        expect(res.body[0]).to.have.deep.property('departmentId');
+        expect(res.body[0]).to.have.deep.property('roleId');
+        expect(res.body[0].username).to.deep.equal('hospitalAdmin');
+        expect(true === (await authUtil.validPassword('newPassword', res.body[0].password)));
+        expect(res.body[0].departmentId).to.deep.equal(1);
+        expect(res.body[0].roleId).to.deep.equal(2);
+        done();
+      });
+    usernames[2] = 'hospitalAdmin';
+    passwords[2] = '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm';
+    departmentIds[2] = 1;
+    roleIds[2] = 2;
+  });
+
+  it('Validate edited user properties and fields when password has not changed in put', (done) => {
+    agent
+      .put('/user/2')
+      .set('content-type', 'application/json')
+      .send({
+        username: usernames[1],
+        password: passwords[1],
+        departmentId: departmentIds[1],
+        roleId: roleIds[1]
       })
       .end((err: any, res: any) => {
         expect(err).to.be.null;
@@ -210,16 +242,12 @@ describe('testEditUserSuccess', () => {
         expect(res.body[0]).to.have.deep.property('password');
         expect(res.body[0]).to.have.deep.property('departmentId');
         expect(res.body[0]).to.have.deep.property('roleId');
-        expect(res.body[0].username).to.deep.equal('hospitalAdmin');
-        expect(res.body[0].password).to.deep.equal('$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm');
-        expect(res.body[0].departmentId).to.deep.equal(1);
-        expect(res.body[0].roleId).to.deep.equal(2);
+        expect(res.body[0].username).to.deep.equal('staff01');
+        expect(res.body[0].password === passwords[1]);
+        expect(res.body[0].departmentId).to.deep.equal(2);
+        expect(res.body[0].roleId).to.deep.equal(4);
         done();
       });
-    usernames[2] = 'hospitalAdmin';
-    passwords[2] = '$2b$12$kUy4kEGLkdmB9hgSxtyOYetqixdHXOWOa/OSNKcYopCZVhQogwjOm';
-    departmentIds[2] = 1;
-    roleIds[2] = 2;
   });
 });
 
