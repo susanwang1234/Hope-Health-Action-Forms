@@ -33,7 +33,7 @@ const StatisticsDashboard = () => {
     fetchData();
   }, [isSearching]);
 
-  async function getDepartmentName() {
+  const getDepartmentName = async () => {
     const url = `/department/${deptID}`;
     try {
       const response = await httpService.get(url);
@@ -41,9 +41,9 @@ const StatisticsDashboard = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from', url);
     }
-  }
+  };
 
-  async function fetchData() {
+  const fetchData = async () => {
     if (invalidDateFilter()) {
       return;
     }
@@ -58,9 +58,9 @@ const StatisticsDashboard = () => {
       console.log('Error: Unable to fetch from', url);
     }
     setSearching(false);
-  }
+  };
 
-  async function resetDateFilter() {
+  const resetDateFilter = async () => {
     setStartMonth('');
     setStartYear(0);
     setEndMonth('');
@@ -68,9 +68,9 @@ const StatisticsDashboard = () => {
     setSearching(true);
     document.querySelectorAll('input').forEach((input) => (input.value = ''));
     document.querySelectorAll('select').forEach((input) => (input.value = ''));
-  }
+  };
 
-  function invalidDateFilter(): boolean {
+  const invalidDateFilter = (): boolean => {
     if ((startMonth && !startYear) || (!startMonth && startYear)) {
       toast.error('Please ensure From Month and From Year are both filled in or both not filled in.');
       return true;
@@ -79,7 +79,7 @@ const StatisticsDashboard = () => {
       return true;
     }
     return false;
-  }
+  };
 
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
