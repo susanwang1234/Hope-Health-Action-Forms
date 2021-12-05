@@ -9,6 +9,7 @@ import CaseStudies from './components/CaseStudies/CaseStudies';
 import CaseStudyInstance from './components/CaseStudyInstance/CaseStudyInstance';
 import CaseStudySubmit from './components/CaseStudySubmit/CaseStudySubmit';
 import Departments from './components/Departments/Departments';
+import StatisticsDashboard from './components/Statistics/Statistics';
 import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import AdminCreateUser from './components/Admin/AdminCreateUser';
@@ -30,6 +31,7 @@ function App() {
         <DashboardRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></DashboardRoute>
         <DashboardRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></DashboardRoute>
+        <DashboardRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></DashboardRoute>
         <AdminRoute path="/departments" component={Departments}></AdminRoute>
         <AdminRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></AdminRoute>
         <AdminRoute path="/new-user" component={AdminCreateUser}></AdminRoute>
