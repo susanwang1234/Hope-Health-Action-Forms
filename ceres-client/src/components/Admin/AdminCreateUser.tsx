@@ -115,7 +115,7 @@ const AdminCreateUser = () => {
       toast.error('Username too long, must be maximum 25 characters');
       return;
     }
-    if (password != repeatedPassword) {
+    if (password !== repeatedPassword) {
       toast.error('Passwords do not match');
       return;
     }
