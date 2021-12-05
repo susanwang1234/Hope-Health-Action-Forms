@@ -32,16 +32,31 @@ const AdminEmployeeOfTheMonth = () => {
       };
 
 
-    const saveAnnouncement = async (event: any) => {
-      if (announcement === '') {
-        toast.error('Please fill in all fields.');
+    const saveAnnouncement = async () => {
+      if (announcement.length === 0) {
+        toast.error('Please write an announcement.');
         return;
       }
 
-
-
-
-    }
+      const url = '/messages';
+      const user = userContext.user;
+      let newAnnouncement = {
+        messageContent: announcement,
+        author: user,
+        departmentID: 2
+      }
+      
+      httpService
+      .post(url, newAnnouncement)
+      .then(() => {
+        toast.success('New Announcement Posted', { position: 'top-center', autoClose: 5000 });
+        window.location.href = '/announcements';
+      })
+      .catch((error: any) => {
+        console.log(error);
+        toast.error(error.response.data.error);
+      });
+    };
     
     return(
         <div>
