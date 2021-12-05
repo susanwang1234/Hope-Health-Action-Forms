@@ -76,22 +76,34 @@ const CaseStudy = () => {
         </button>
       </header>
       <Sidebar show={showNav} />
+
+
+
+
+      <div className = "w-full flex justify-center">
       <div className="container">
         <td className="column-right">
           <div className="case-study-block-container">
             {caseStudyState.caseStudies.slice(0, 1).map((caseStudy: any) => {
               return (
                 <table className="case-study-block">
-                  <tr>
+
+                  <tr className="case-study-block-text-heading">
+                    <h1 className="case-study-title">
+                      {caseStudy.name}: {caseStudy.title}
+                    </h1>
+                    <h5 className="case-study-date">{caseStudy.createdAt}</h5>
+                    <h2 className="case-study-desc">{caseStudy.title}</h2> 
+                  </tr>
+
+                  <tr className = "">
                     <td className="case-study-block-image">
                       <img className="case-study-img" src={caseStudyImage} alt="" width="auto" height="150px"></img>
                     </td>
+                  </tr>
+                  <tr className = "">
                     <td className="case-study-block-text">
-                      <h1 className="case-study-title">
-                        {caseStudy.name}: {caseStudy.title}
-                      </h1>
-                      <h5 className="case-study-date">{caseStudy.createdAt}</h5>
-                      <h2 className="case-study-desc">{caseStudy.title}</h2>
+                     
                       {caseStudyState.caseStudies.map((caseStudy: any) => {
                         return (
                           <div>
@@ -120,6 +132,7 @@ const CaseStudy = () => {
             })}
           </div>
         </td>
+      </div>
       </div>
     </div>
   );
