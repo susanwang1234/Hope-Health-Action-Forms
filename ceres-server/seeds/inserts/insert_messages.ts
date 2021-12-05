@@ -13,7 +13,7 @@ export async function insertMessages(knex: Knex): Promise<void> {
     {
       id: 3,
       author: 'admin',
-      messageContent: 'dfud fiash aisu wr0uas gfgia 0ehda ahfasa gvjxc w0sdvha 0f sasdh afasug as sia dfg awru vlzn cvpzxi bsfpihg  pdvbjfs sfbjpzs bshfsdi dagpibh aehtey',
+      messageContent: 'Goodevening all. I just wanted to remind everyone that the deadline for Rehab forms are due tommorow. lets make sure we have them ready. Thanks!',
       departmentId: 2
     }
   ]);
