@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import httpService from '../../services/httpService';
 import '../../App.css';
 import './Dashboard.css';
-import initialEmployeeOfTheMonth from './initialEmployeeOfTheMonth.json';
+import initialEmployeeOfTheMonth from '../../util/initialEmployeeOfTheMonth.json';
 import profilePic from './../../images/gray_person.jpg';
 
 const EmployeeOfTheMonth = () => {

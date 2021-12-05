@@ -9,10 +9,11 @@ import CaseStudies from './components/CaseStudies/CaseStudies';
 import CaseStudyInstance from './components/CaseStudyInstance/CaseStudyInstance';
 import CaseStudySubmit from './components/CaseStudySubmit/CaseStudySubmit';
 import Departments from './components/Departments/Departments';
-import Forms from './components/Forms/Forms';
+import StatisticsDashboard from './components/Statistics/Statistics';
 import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
+import ThisMonth from './components/DataPage/ThisMonth';
 
 function App() {
   return (
@@ -20,13 +21,14 @@ function App() {
       <ToastContainer />
       <Switch>
         <UnPrivateRoute exact path="/" component={Login} />
-        <PrivateRoute path="/dashboard" component={Dashboard}></PrivateRoute>
-        <PrivateRoute path="/submit-report" component={Forms}></PrivateRoute>
-        <PrivateRoute path="/data-page" component={DataPage}></PrivateRoute>
-        <PrivateRoute exact path="/case-studies" component={CaseStudies}></PrivateRoute>
-        <PrivateRoute exact path={'/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
-        <PrivateRoute path="/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID" component={Dashboard}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/submit-report" component={ThisMonth}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/data-page" component={DataPage}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></PrivateRoute>
+        <PrivateRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
+        <PrivateRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
       </Switch>
     </Router>

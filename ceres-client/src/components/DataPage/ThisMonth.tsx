@@ -1,40 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
-import ReportElement from './ReportElement';
 import ReportData from './ReportData';
-import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import Sidebar from '../Sidebar/Sidebar';
 import { UserContext } from '../../UserContext';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 
-const DataPage = () => {
-  const { deptID } = useParams<departmentParam>();
+const ThisMonth = () => {
   document.body.style.backgroundColor = '#f5f5f5';
-
-  const [reports, setReports] = useState([]);
-  const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
+  const { deptID } = useParams<departmentParam>();
+  const [displayingData, setDisplayingData] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
-  const [displayingData, setDisplayingData] = useState(null);
   const userContext = useContext(UserContext);
-
-  function handleClick(index: any): void {
-    setDisplayingData(reports[index]);
-  }
 
   useEffect(() => {
     getFormByDeptId();
-
     async function getFormByDeptId() {
-      const url = `/form/${deptID}`;
+      const url = `/form/latest/${deptID}`;
       try {
         const response = await httpService.get(url);
+        console.log(response);
         const data = response.data;
         console.log('Fetched Report:', data);
-        setReports(data);
+        setDisplayingData(data);
       } catch (error: any) {
         console.log('Error: Unable to fetch from ' + url);
       }
@@ -42,25 +34,16 @@ const DataPage = () => {
   }, []);
 
   return (
-    <React.Fragment>
+    <div>
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
-        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
-          <h4 className="text-center">Submitted Reports</h4>
-          <ul className="list-of-reports">
-            {reports.map((report: any, index: number) => (
-              <ReportElement data={report} onClick={() => handleClick(index)} />
-            ))}
-          </ul>
-        </div>
-        {displayingData === null ? <p className="m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
+        {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}
       </div>
-    </React.Fragment>
+    </div>
   );
 };
-
-export default DataPage;
+export default ThisMonth;
