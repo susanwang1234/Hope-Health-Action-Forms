@@ -6,7 +6,7 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
-import { calculateDepartmentPoints } from '../../util/pointSystem';
+import { calculateDepartmentPoints } from '../../utils/pointSystem';
 import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';

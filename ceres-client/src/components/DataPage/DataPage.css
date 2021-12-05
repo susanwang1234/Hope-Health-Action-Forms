@@ -1,5 +1,6 @@
 .data-list {
   margin: 2em;
+  overflow: auto;
   padding: 25px;
   border: 1px solid rgb(204, 204, 204);
   height: 500px;
@@ -10,6 +11,7 @@
 
 .list-of-reports {
   overflow: auto;
+  overflow-x: hidden;
   padding: 0em;
   max-height: 23rem;
 }
@@ -36,7 +38,7 @@
   background-color: #e57200;
   color: white;
   justify-self: stretch;
-  text-align:center;
+  text-align: center;
   border-radius: 0.25rem;
   font-weight: bold;
   height: 30px;

@@ -14,7 +14,6 @@ const DataPage = () => {
   document.body.style.backgroundColor = '#f5f5f5';
   const { deptID } = useParams<departmentParam>();
   const [reports, setReports] = useState([]);
-  const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
   const [displayingData, setDisplayingData] = useState(null);
 
@@ -43,17 +42,17 @@ const DataPage = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
-      <div className="flex justify-center">
+      <div className="flex justify-center hide-overflow">
         <Sidebar show={showNav} departmentID={deptID} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
-          <h4 className="text-center">All Reports</h4>
+          <h4 className="text-center">All Forms</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (
               <ReportElement data={report} onClick={() => handleClick(index)} />
             ))}
           </ul>
         </div>
-        {displayingData === null ? <p className="m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
+        {displayingData === null ? <p className="m-60 font-bold text-xl">Select a form from the list</p> : <ReportData data={displayingData} />}
       </div>
     </React.Fragment>
   );

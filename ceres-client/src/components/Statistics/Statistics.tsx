@@ -9,7 +9,7 @@ import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
 import { toast } from 'react-toastify';
-import { MONTHS } from '../../util/timezone';
+import { MONTHS } from '../../utils/timezone';
 
 const StatisticsDashboard = () => {
   const { deptID } = useParams<departmentParam>();

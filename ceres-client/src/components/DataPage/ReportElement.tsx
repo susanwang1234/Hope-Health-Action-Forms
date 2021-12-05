@@ -1,4 +1,6 @@
 import React from 'react';
+import { MONTHS } from '../../utils/timezone';
+
 const ReportElement = (props: any) => {
   return (
     <React.Fragment>
@@ -13,6 +15,6 @@ const ReportElement = (props: any) => {
 };
 export default ReportElement;
 
-function makeDateShort(date: string): string {
-  return date.length > 10 ? date.substring(0, 10) : date;
-}
+export const makeDateShort = (date: string): string => {
+  return MONTHS[parseInt(date.substring(5, 7)) - 1].concat(' ').concat(date.substring(0, 4));
+};
