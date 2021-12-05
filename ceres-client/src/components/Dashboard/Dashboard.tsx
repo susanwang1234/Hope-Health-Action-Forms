@@ -70,17 +70,20 @@ const Dashboard = () => {
             <div className="dashboard-container">
               <div className="dashboard-cards">
                 <div className="card-outer fill-space-left">
-                  <p className="title">To Do</p>
-                  <div className="card-inner width-100-percent">{ToDo()}</div>
-                  <p className="title">
-                    Leaderboard
+                  <div className="card-inner width-100-percent">
+                    <p className="title">To Do</p>
+                    {ToDo()}
+                  </div>
+                  <p>
                     <div className="align-right icon instructions">{Instruction()}</div>
                   </p>
                   <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
                 </div>
                 <div className="card-outer fill-space-right">
-                  <p className="title">Employee of the Month</p>
-                  <div className="card-inner height-100-percent">{EmployeeOfTheMonth()}</div>
+                  <div className="card-inner height-100-percent">
+                    <p className="title">Employee of the Month</p>
+                    {EmployeeOfTheMonth()}
+                  </div>
                 </div>
               </div>
             </div>

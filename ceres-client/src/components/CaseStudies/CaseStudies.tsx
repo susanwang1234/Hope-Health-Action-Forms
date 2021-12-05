@@ -157,7 +157,10 @@ const CaseStudy = (props: any) => {
                   <table className="filter-container">
                     <tr>
                       <td>
-                        <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>All Case Studies
+                        <div>
+                          <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>
+                          <h2 className="radio-button-text">All Case Studies</h2>
+                        </div>
                       </td>
                     </tr>
                     {caseStudyType.types.map((Types: any) => {
@@ -165,7 +168,7 @@ const CaseStudy = (props: any) => {
                         <tr>
                           <td>
                             <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioButtonHandler}></input>
-                            {Types.name}
+                            <h2 className="radio-button-text">{Types.name}</h2>
                           </td>
                         </tr>
                       );
@@ -182,7 +185,7 @@ const CaseStudy = (props: any) => {
                 <Form.Group className="mb-3" controlId="formSearch">
                   <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
                 </Form.Group>
-                <Button variant="primary" type="button" onClick={() => search()}>
+                <Button className="button" variant="primary" type="button" onClick={() => search()}>
                   Submit
                 </Button>
               </Form>
@@ -198,7 +201,7 @@ const CaseStudy = (props: any) => {
                         <td className="case-study-block-text">
                           <h2 className="case-study-title">{caseStudy.title}</h2>
                           <h5 className="case-study-date">{caseStudy.createdAt}</h5>
-                          <p>{caseStudy.response}</p>
+                          <p className="case-study-response">{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
                           <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>

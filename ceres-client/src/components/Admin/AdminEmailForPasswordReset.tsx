@@ -10,6 +10,9 @@ import '../../App.css';
 import '../Admin/Admin.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
+/*
+Cite: https://stackoverflow.com/questions/41348459/regex-in-react-email-validation
+*/
 
 const AdminEmailForPasswordReset = () => {
   document.body.style.backgroundColor = '#f5f5f5';

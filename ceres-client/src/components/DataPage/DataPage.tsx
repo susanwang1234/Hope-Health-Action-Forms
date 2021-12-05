@@ -50,7 +50,7 @@ const DataPage = () => {
       <div className="flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
-          <h4 className="text-center">Submitted Reports</h4>
+          <h4 className="text-center mb-4 text-xl">Submitted Reports</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (
               <ReportElement data={report} onClick={() => handleClick(index)} />

@@ -4,9 +4,8 @@ import '../../App.css';
 import httpService from '../../services/httpService';
 import { UserContext } from '../../UserContext';
 
-
 const ReportData = (props: any) => {
-  const [fetchedFormEntries, setFetchedFormEntries] = useState <any[]>([]);
+  const [fetchedFormEntries, setFetchedFormEntries] = useState<any[]>([]);
   const [formEntries, setFormEntries] = useState<any[]>([]);
   const [empltyFields, setEmptyFields] = useState<number[]>([]);
   const [editStatus, setEditStatus] = useState(false);
@@ -19,24 +18,23 @@ const ReportData = (props: any) => {
       .get(url)
       .then((response) => {
         console.log(response);
-        setFetchedFormEntries(response.data)
+        setFetchedFormEntries(response.data);
         setFormEntries(response.data);
       })
       .catch((error: any) => {
         console.log('Error: Unable to fetch from ' + url);
       });
     const respones2: any = httpService
-    .get('/department')
+      .get('/department')
       .then((response) => {
         console.log(response);
         const departments = response;
         const userDepartmentEntry = departments.find((entry: any) => entry.id == userContext.user?.departmentId);
-        setUserDepartment(userDepartmentEntry[0].name)
+        setUserDepartment(userDepartmentEntry[0].name);
       })
       .catch((error: any) => {
         console.log('Error: Unable to fetch from /department');
       });
-      
   }, []);
 
   const changeEntry = (index: number, event: any) => {
@@ -94,7 +92,7 @@ const ReportData = (props: any) => {
     <button
       className="cancel-button"
       onClick={() => {
-        setFormEntries(fetchedFormEntries) 
+        setFormEntries(fetchedFormEntries);
         setEditStatus(false);
       }}
     >
@@ -129,7 +127,7 @@ const ReportData = (props: any) => {
           <p className="px-3 text-gray-500">Date: {makeDateShort(props.data.createdAt)}</p>
           <p className="px-3 text-gray-500">report ID: {props.data.id}</p>
         </div>
-        <p className="mx-3 font-bold text-center">{userDepartment} department's report</p>
+        <p className="mx-3 font-bold text-xl text-center">{userDepartment} department's report</p>
         <form id={'daForm'} className="displaying-form-elements" onSubmit={handleSubmission}>
           {formEntries.map(
             (entry: any, index: number) =>
