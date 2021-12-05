@@ -61,17 +61,17 @@ const DataPage = () => {
            Log Out
         </button>
       </header>
-      <div className="flex justify-center">
+      <div className="list-view-report flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
-          <h4 className="text-center">Submitted Reports</h4>
+          <h4 className="text-center pb-3">Submitted Reports</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (
               <ReportElement data={report} onClick={() => handleClick(index)} />
             ))}
           </ul>
         </div>
-        {displayingData === null ? <p className="m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
+        {displayingData === null ? <p className="select-text m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
       </div>
     </React.Fragment>
   );
