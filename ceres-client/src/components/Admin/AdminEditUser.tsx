@@ -15,33 +15,13 @@ import Popup from '../CaseStudySubmit/PopUpModal/Popup';
 Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
 Cite: https://css.gg/pen
 */
-
 const AdminEditUser = () => {
   document.body.style.backgroundColor = '#f5f5f5';
-  const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
+  const [showNav, setShowNav] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [userIsAdmin, setUserIsAdmin] = useState<boolean>(false);
-  const [userId, setUserId] = useState<number>(0);
   const [passwordShown, setPasswordShown] = useState<boolean>(false);
-  const [userShown, setUserShown] = useState<boolean>(false);
-  const [state, setState] = useState({
-    stateUsername: '',
-    statePassword: '',
-    stateRepeatedPassword: '',
-    stateRoleId: '',
-    stateDepartmentId: ''
-  });
-  let testRoleId: string;
-  let testDepartmentId: string;
-  let testPasswordId: string;
-  let testUserName: string;
-
-  const [currentUser, setCurrentUser] = useState({
-    currentUsername: '',
-    currentPassword: '',
-    currentDepartment: '',
-    currentRole: ''
-  });
   const [departmentState, setDepartmentState] = useState({
     departments: []
   });
@@ -50,6 +30,21 @@ const AdminEditUser = () => {
   });
   const [userState, setUserState] = useState({
     users: []
+  });
+  const [updateUserValues, setUpdateUserValues] = useState({
+    updateUsername: '',
+    updatePassword: '',
+    updateRepeatedPassword: '',
+    updateRoleId: '',
+    updateDepartmentId: ''
+  });
+  const [originalUserValues, setOriginalUserValues] = useState({
+    originalUsername: '',
+    originalPassword: '',
+    originalDepartment: '',
+    originalRole: '',
+    userShown: false,
+    userId: 0
   });
 
   useEffect(() => {
@@ -69,25 +64,6 @@ const AdminEditUser = () => {
     }
   };
 
-  const editUser = async (userId: number) => {
-    const url = `/user/${userId}`;
-    let editedUser = {
-      username: testUserName,
-      password: testPasswordId,
-      departmentId: testDepartmentId,
-      roleId: testRoleId
-    };
-    httpService
-      .put(url, editedUser)
-      .then(() => {
-        toast.success('User Edited', { position: 'top-center', autoClose: 5000 });
-        window.location.href = '/departments';
-      })
-      .catch((error: any) => {
-        console.log(error);
-        toast.error(error.response.data.error);
-      });
-  };
   useEffect(() => {
     getDepartments();
   }, [setDepartmentState]);
@@ -121,6 +97,86 @@ const AdminEditUser = () => {
       console.log('Error: Unable to fetch from ' + url);
     }
   };
+
+  const handleChange = (event: any) => {
+    //Purpose of replace method is to not allow users to input spaces for usernames and passwords
+    setUpdateUserValues({
+      ...updateUserValues,
+      [event.target.name]: event.target.value.replace(/\s/g, '')
+    });
+
+    if (event.target.name === 'updateRoleId') {
+      let checkRoleIdValueForAdmim = event.target.value;
+      checkRoleIdValueForAdmim === '1' || checkRoleIdValueForAdmim == '2' ? setUserIsAdmin(true) : setUserIsAdmin(false);
+    }
+  };
+
+  const updateNewValues = () => {
+    //Empty form
+    if (updateUserValues.updateRoleId === '' && updateUserValues.updateDepartmentId === '' && updateUserValues.updateUsername === '' && updateUserValues.updatePassword === '') {
+      toast.error('No savable changes made');
+      return;
+    }
+
+    if (updateUserValues.updateUsername.length < 5 && updateUserValues.updateUsername !== '') {
+      toast.error('Username too short, must be minimum 5 characters');
+      return;
+    }
+
+    if (updateUserValues.updateUsername.length > 25) {
+      toast.error('Username too long, must be maximum 25 characters');
+      return;
+    }
+
+    if (updateUserValues.updatePassword !== updateUserValues.updateRepeatedPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    if (updateUserValues.updateRoleId === '') {
+      updateUserValues.updateRoleId = originalUserValues.originalRole;
+    }
+
+    if (updateUserValues.updateDepartmentId === '') {
+      updateUserValues.updateDepartmentId = originalUserValues.originalDepartment;
+    }
+
+    //User is an admin
+    if (updateUserValues.updateRoleId === '1' || updateUserValues.updateRoleId === '2') {
+      updateUserValues.updateDepartmentId = '1';
+    }
+
+    if (updateUserValues.updateUsername === '') {
+      updateUserValues.updateUsername = originalUserValues.originalUsername;
+    }
+
+    if (updateUserValues.updatePassword === '' && updateUserValues.updateRepeatedPassword === '') {
+      updateUserValues.updatePassword = originalUserValues.originalPassword;
+    }
+
+    editUser(originalUserValues.userId);
+  };
+
+  const editUser = async (userId: number) => {
+    const url = `/user/${userId}`;
+    let editedUser = {
+      username: updateUserValues.updateUsername,
+      password: updateUserValues.updatePassword,
+      departmentId: updateUserValues.updateDepartmentId,
+      roleId: updateUserValues.updateRoleId
+    };
+    httpService
+      .put(url, editedUser)
+      .then(() => {
+        toast.success('User Edited', { position: 'top-center', autoClose: 5000 });
+        window.location.href = '/departments';
+      })
+      .catch((error: any) => {
+        console.log(error);
+        toast.error(error.response.data.error);
+      });
+  };
+
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
     if (data.success) {
@@ -129,7 +185,6 @@ const AdminEditUser = () => {
     }
     return <Redirect to="/" />;
   };
-  const [isOpen, setIsOpen] = useState(false);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -145,70 +200,18 @@ const AdminEditUser = () => {
 
   const OnClickYes = async (event: any) => {
     event.preventDefault();
-    setUserShown(false);
+    setOriginalUserValues({
+      ...originalUserValues,
+      userShown: false
+    });
     setIsOpen(false);
     toast.dismiss();
   };
-  const updateFields = (currentId: number, currentDepartment: string, currentRole: string, currentPassword: string, currentUsername: string) => {
-    setUserId(currentId);
-    setCurrentUser({
-      currentDepartment: currentDepartment,
-      currentRole: currentRole,
-      currentUsername: currentUsername,
-      currentPassword: currentPassword
-    });
-    setUserShown(true);
-    toast.info('Fields that are left unselected or empty will default to their previously saved values');
-  };
-  const fillEmptyFieldsWithExisitingFields = () => {
-    if (state.stateRoleId === '' && state.stateDepartmentId === '' && state.stateUsername === '' && state.statePassword === '') {
-      toast.error('No changes made');
-      return;
-    }
-    testRoleId = state.stateRoleId === '' ? currentUser.currentRole : state.stateRoleId;
 
-    testDepartmentId = state.stateDepartmentId === '' ? currentUser.currentDepartment : state.stateDepartmentId;
-
-    if (state.stateRoleId === '1' || state.stateRoleId === '2') {
-      testDepartmentId = '1';
-    }
-
-    testUserName = state.stateUsername === '' ? currentUser.currentUsername : state.stateUsername;
-
-    if (state.stateUsername.length < 5 && state.stateUsername !== '') {
-      toast.error('Username too short, must be minimum 5 characters');
-      return;
-    }
-
-    if (state.stateUsername.length > 25) {
-      toast.error('Username too long, must be maximum 25 characters');
-      return;
-    }
-
-    if (state.statePassword !== state.stateRepeatedPassword) {
-      toast.error('Passwords do not match');
-      return;
-    }
-
-    testPasswordId = state.statePassword === '' && state.stateRepeatedPassword === '' ? currentUser.currentPassword : state.statePassword;
-
-    editUser(userId);
-  };
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
-  const handleChange = (event: any) => {
-    //Purpose of replace method is to not allow users to input spaces for usernames and passwords
-    setState({
-      ...state,
-      [event.target.name]: event.target.value.replace(/\s/g, '')
-    });
 
-    if (event.target.name === 'stateRoleId') {
-      let checkRoleIdValueForAdmim = event.target.value;
-      checkRoleIdValueForAdmim === '1' || checkRoleIdValueForAdmim == '2' ? setUserIsAdmin(true) : setUserIsAdmin(false);
-    }
-  };
   return (
     <div>
       <header className="nav-header">
@@ -223,57 +226,55 @@ const AdminEditUser = () => {
       </div>
       <div className="cards-case-study">
         <div className="casestudy-single-card">
-          {userShown ? (
+          {originalUserValues.userShown ? (
             <div>
               <h2 className="inside-card -mt-10 mb-8">
-                <b>Edit {currentUser.currentUsername}</b>
+                <b>Edit {originalUserValues.originalUsername}</b>
               </h2>
               <div className="w-full flex flex-col pt-10">
+                <p>Fields that are left unselected or empty will default to their previously saved values</p>
                 <label className="admin-inside-text">Role</label>
-                <select className="minimal self-center" name="stateRoleId" value={state.stateRoleId} onChange={handleChange}>
+                <select className="minimal self-center" name="updateRoleId" value={updateUserValues.updateRoleId} onChange={handleChange}>
                   <option selected>--Select a New Role--</option>
                   {roleState.roles.map((roleName: any) => {
                     return <option value={roleName.id}>{roleName.label}</option>;
                   })}
                 </select>
-                <label hidden={userIsAdmin} className="admin-inside-text">
+                <label className="admin-inside-text" hidden={userIsAdmin}>
                   Department
                 </label>
-                <select className="minimal self-center" hidden={userIsAdmin} name="stateDepartmentId" value={state.stateDepartmentId} onChange={handleChange}>
+                <select className="minimal self-center" name="updateDepartmentId" value={updateUserValues.updateDepartmentId} hidden={userIsAdmin} onChange={handleChange}>
                   <option selected>--Select a New Department--</option>
                   {departmentState.departments.slice(1).map((departmentName: any) => {
                     return <option value={departmentName.id}>{departmentName.name}</option>;
                   })}
                 </select>
-
                 <label className="admin-inside-text">Username</label>
-                <input name="stateUsername" value={state.stateUsername} onChange={handleChange} className="admin-response" placeholder="Type new username..."></input>
+                <input className="admin-response" name="updateUsername" value={updateUserValues.updateUsername} placeholder="Type new username..." onChange={handleChange}></input>
                 <label className="admin-inside-text">Password</label>
                 <input
-                  name="statePassword"
-                  value={state.statePassword}
-                  onChange={handleChange}
-                  type={passwordShown ? 'text' : 'password'}
                   className="admin-response"
+                  name="updatePassword"
+                  value={updateUserValues.updatePassword}
+                  type={passwordShown ? 'text' : 'password'}
                   placeholder="Type new password..."
+                  onChange={handleChange}
                 ></input>
-
                 <label className="admin-inside-text">Repeat Password</label>
                 <input
-                  name="stateRepeatedPassword"
-                  value={state.stateRepeatedPassword}
-                  onChange={handleChange}
                   className="admin-response"
+                  name="updateRepeatedPassword"
+                  value={updateUserValues.updateRepeatedPassword}
                   type={passwordShown ? 'text' : 'password'}
                   placeholder="Type new password..."
+                  onChange={handleChange}
                 ></input>
-
                 <div className="self-center w-50">
-                  <input className="float-left mr-2 mt-1" onChange={togglePassword} type="checkbox" />
+                  <input className="float-left mr-2 mt-1" type="checkbox" onChange={togglePassword} />
                   <p>Show password</p>
                 </div>
               </div>
-              <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
+              <button className="grey-button bottom-5 left-31" onClick={onClickCancel}>
                 Cancel
               </button>
               {isOpen && (
@@ -287,10 +288,10 @@ const AdminEditUser = () => {
                         </div>
 
                         <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
-                          <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                          <button className="grey-button-popup w-full" onClick={OnClickNo}>
                             No
                           </button>
-                          <button onClick={OnClickYes} className="blue-button-popup w-full">
+                          <button className="blue-button-popup w-full" onClick={OnClickYes}>
                             Yes
                           </button>
                         </div>
@@ -300,7 +301,7 @@ const AdminEditUser = () => {
                   handleClose={togglePopup}
                 />
               )}
-              <button onClick={() => fillEmptyFieldsWithExisitingFields()} className="blue-button bottom-5 right-20">
+              <button className="blue-button bottom-5 right-20" onClick={() => updateNewValues()}>
                 Save
               </button>
             </div>
@@ -309,17 +310,29 @@ const AdminEditUser = () => {
               <h2 className="inside-card -mt-10 mb-8">
                 <b>Select a User</b>
               </h2>
-              <button onClick={() => (window.location.href = '/departments')} className="grey-button bottom-5 left-31">
+              <button className="grey-button bottom-5 left-31" onClick={() => (window.location.href = '/departments')}>
                 Cancel
               </button>
               <div className="box-inside-for-overflow">
                 <ul>
-                  {userState.users.map((singleUser: any) => {
-                    if (singleUser.roleId !== 1) {
+                  {userState.users.map((selectedUser: any) => {
+                    if (selectedUser.roleId !== 1 && selectedUser.roleId !== 2) {
                       return (
                         <li className="alternate-background-colours">
-                          <label className="admin-inside-text">{singleUser.username}</label>
-                          <button className="gg-pen" onClick={() => updateFields(singleUser.id, singleUser.departmentId, singleUser.roleId, singleUser.password, singleUser.username)} />
+                          <label className="admin-inside-text">{selectedUser.username}</label>
+                          <button
+                            className="gg-pen"
+                            onClick={() =>
+                              setOriginalUserValues({
+                                originalUsername: selectedUser.username,
+                                originalPassword: selectedUser.password,
+                                originalDepartment: selectedUser.departmentId,
+                                originalRole: selectedUser.roleId,
+                                userShown: true,
+                                userId: selectedUser.id
+                              })
+                            }
+                          />
                         </li>
                       );
                     }

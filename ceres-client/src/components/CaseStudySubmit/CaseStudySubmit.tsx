@@ -231,33 +231,32 @@ const CaseStudySubmit = () => {
           <h2 className="inside-card -mt-10 mb-8">
             <b>Current Case Study</b>
           </h2>
-          <p className="inside-text-case-study">Type of Case Study</p>
-          <select className="minimal" onChange={selectChange}>
-            <option selected disabled>
-              --Select a Case Study type--
-            </option>
-            {caseStudyType.types.map((Types: any, index: any) => {
-              return <option value={Types.id}>{Types.name}</option>;
-            })}
-          </select>
-          <div className="photo">
-            <p className="inside-text-case-study">Upload Photo</p>
-            <div>
-              <div className="person_image float-left">
-                <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
-              </div>
-              <div className="float-left pl-10">
-                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-                <p>
-                  This person has given permission to share their story <br />
-                  and photo in HHA communications, including online platforms.
-                </p>
-                <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+          <div className="w-full flex flex-col pt-10">
+            <label className="inside-text-case-study">Type of Case Study</label>
+            <select className="minimal" onChange={selectChange}>
+              <option selected disabled>
+                --Select a Case Study type--
+              </option>
+              {caseStudyType.types.map((Types: any, index: any) => {
+                return <option value={Types.id}>{Types.name}</option>;
+              })}
+            </select>
+            <div className="photo">
+              <label className="inside-text-case-study">Upload Photo</label>
+              <div>
+                <div className="person_image float-left">
+                  <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
+                </div>
+                <div className="float-left pl-10">
+                  <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
+                  <p>
+                    This person has given permission to share their story <br />
+                    and photo in HHA communications, including online platforms.
+                  </p>
+                  <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="w-full flex flex-col pt-10">
             <label className="inside-text-case-study">Title of Case Study?</label>
             <textarea id={'text-area-id-title'} value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
