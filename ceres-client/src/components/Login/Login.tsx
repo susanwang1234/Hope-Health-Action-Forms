@@ -62,11 +62,10 @@ function Login() {
     setIsOpen(!isOpen);
   };
 
-  const sendUsernameToResetPassword = () => {
+  const sendUsernameToResetPassword = async () => {
     let postUsername = { username: usernameForPasswordReset };
     httpService
       .post(`/forgot-password`, postUsername)
-      .then((response: any) => response.data)
       .then(() => {
         setIsOpen(true);
         toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });

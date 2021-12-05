@@ -45,6 +45,9 @@ const AdminSidebar = ({ show }: any) => {
               <Link to="/edit-report" className="drop-link">
                 Data Report
               </Link>
+              <Link to="/edit-emails" className="drop-link">
+                Emails
+              </Link>
             </li>
           )}
         </li>
