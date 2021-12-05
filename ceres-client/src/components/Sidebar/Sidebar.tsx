@@ -19,7 +19,7 @@ const Sidebar = ({ show }: any) => {
         <li>
           <Link to="/dashboard" className="side-link">
             <HiHome />
-            Dashbaord
+            Dashboard
           </Link>
         </li>
         <li>
