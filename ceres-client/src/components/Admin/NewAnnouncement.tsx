@@ -11,6 +11,7 @@ import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 
 const NewAnnouncement = () => {
+  /*
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
@@ -99,7 +100,7 @@ const NewAnnouncement = () => {
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
-              <button onClick={NewAnnouncement} className="blue-button bottom-5 right-20">
+              <button onClick={saveAnnouncement} className="blue-button bottom-5 right-20">
                 Submit
               </button>
             </div>
@@ -108,5 +109,6 @@ const NewAnnouncement = () => {
       </div>
     </div>
   );
+  */
 };
 export default NewAnnouncement;
