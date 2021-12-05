@@ -1,12 +1,8 @@
 /*
-  Citations: 
-    https://github.com/mustafaerden/react-admin-dashboard
-    https://www.codegrepper.com/code-examples/css/how+to+center+a+button+css+with+absolute+position
-    https://www.w3schools.com/css/css3_buttons.asp*
-
   CSS Classes
   - align-left
   - align-right
+  - bar-data
   - card-inner
   - card-outer
   - center-content
@@ -25,9 +21,13 @@
   - icon-mspp-report
   - instructions
   - leaderboard
+  - leaderboard-container
+  - leaderboard-title
+  - pop-up-label
   - profile-pic
   - responsive-calendar
   - responsive-leaderboard
+  - text-indent
   - title
   - width-100-percent
 
@@ -43,6 +43,11 @@
 
 .align-right {
   float: right !important;
+}
+
+.bar-data {
+  padding: 15px 10px 0 10px;
+  text-align: left;
 }
 
 .card-inner {
@@ -150,7 +155,7 @@
   color: green;
 }
 
-.icon-mspp-report{
+.icon-mspp-report {
   color: red;
 }
 
@@ -162,6 +167,20 @@
   height: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.leaderboard-container {
+  text-align: center;
+  width: 100%;
+}
+
+.leaderboard-title {
+  display: inline;
+  font-weight: bold;
+}
+
+.pop-up-label {
+  font-weight: bold;
 }
 
 .profile-pic {
@@ -181,6 +200,10 @@
   height: auto;
   text-align: center;
   width: 100%;
+}
+
+.text-indent {
+  text-indent: 30px;
 }
 
 .title {

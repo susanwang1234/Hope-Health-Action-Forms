@@ -1,20 +1,27 @@
-import './CaseStudies.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
 import {useContext, useState, useEffect } from 'react';
+import './CaseStudies.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
+import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
 
-const CaseStudy = () => {
+
+
+const CaseStudy = (props: any) => {
   const userContext = useContext(UserContext);
+
+  const { deptID } = useParams<departmentParam>();
   let queryStr = '';
   document.body.style.backgroundColor = '#f5f5f5';
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
@@ -125,7 +132,7 @@ const CaseStudy = () => {
       });
     } catch (error: any) {
       console.log('Error Unable to fetch from ' + url);
-      toast.error('There are no case studies of this type.');
+      toast.error(error.response.data.error);
       setCaseStudyState({
         caseStudies: [],
         caseStudiesOrig: []
@@ -160,8 +167,7 @@ const CaseStudy = () => {
           Log Out
         </button>
       </header>
-      <Sidebar show={showNav} />
-
+      <Sidebar show={showNav} departmentID={deptID} />
       <div className="container">
         <table>
           <tr>
@@ -187,7 +193,7 @@ const CaseStudy = () => {
                   </table>
                 </div>
               </div>
-              <Link to="/case-studies/new">
+              <Link to={`${createDashboardIDPath(deptID)}/case-studies/new`}>
                 <div className = "button-div">
                   <button className="button-new-case">+ Add Case Study</button>
                 </div>
@@ -223,7 +229,7 @@ const CaseStudy = () => {
                           <p className = "case-study-response">{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
-                          <Link to={`/case-studies/view/${caseStudy.id}`}>
+                          <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>
                             <button className="button">View</button>
                           </Link>
                         </td>

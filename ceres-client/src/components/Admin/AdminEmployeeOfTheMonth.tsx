@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import gray_person from '../../images/gray_person.jpg';
 import Popup from '../CaseStudySubmit/PopUpModal/Popup';
 import '../Admin/AdminEmployeeOfTheMonth.css';
+import { departmentParam } from '../../types/departmentParamType';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {

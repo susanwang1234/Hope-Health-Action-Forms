@@ -12,6 +12,8 @@ import { insertCaseStudy } from './inserts/insert_case_study';
 import { insertCaseStudyResponse } from './inserts/insert_case_study_responses';
 import { insertImages } from './inserts/insert_images';
 import { insertEmployeeOfTheMonth } from './inserts/insert_employee_of_the_month';
+import { insertForm } from './inserts/insert_form';
+import { insertFormResponse } from './inserts/insert_form_responses';
 import { insertEmails } from './inserts/insert_email';
 
 export async function seed(knex: Knex): Promise<void> {
@@ -48,5 +50,7 @@ export async function seed(knex: Knex): Promise<void> {
   await insertCaseStudy(knex);
   await insertCaseStudyResponse(knex);
   await insertEmployeeOfTheMonth(knex);
+  await insertForm(knex);
+  await insertFormResponse(knex);
   await insertEmails(knex);
 }

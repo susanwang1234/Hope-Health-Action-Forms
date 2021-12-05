@@ -8,13 +8,18 @@ import httpService from '../../services/httpService';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
+import { createDashboardIDPath } from '../../utils/urlParamUtil';
+
+
 
 
 
 const CaseStudy = () => {
-
   const userContext = useContext(UserContext);
 
+  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [caseStudyState, setCaseStudyState] = useState({
@@ -29,7 +34,7 @@ const CaseStudy = () => {
     getCaseStudies();
   }, [setCaseStudyState]);
 
-  async function getCaseStudies() {
+  const getCaseStudies = async () => {
     const url = `/case-study/${caseId.toString()}`;
     try {
       const response = await httpService.get(url);
@@ -40,9 +45,9 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
-  async function getCaseStudyImage(imageId: number) {
+  const getCaseStudyImage = async (imageId: number) => {
     const url = `/image/${imageId}`;
     try {
       await httpService
@@ -55,7 +60,7 @@ const CaseStudy = () => {
     } catch (error: any) {
       console.log('Error: Unable to fetch from ' + url);
     }
-  }
+  };
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -75,7 +80,7 @@ const CaseStudy = () => {
           Log Out
         </button>
       </header>
-      <Sidebar show={showNav} />
+      <Sidebar show={showNav} departmentID={deptID} />
 
 
 
@@ -120,7 +125,7 @@ const CaseStudy = () => {
                         className="view-cancel-form-button"
                         onClick={(event) => {
                           event.preventDefault();
-                          window.location.href = '/case-studies';
+                          window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
                         }}
                       >
                         Return

@@ -1,27 +1,63 @@
 import '../../App.css';
 import './Dashboard.css';
-import { useContext, useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { useContext, useState,  useEffect } from 'react';
 import logo from '../../images/navlogo.png';
 import 'react-calendar/dist/Calendar.css';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
+import 'react-calendar/dist/Calendar.css';
+import Sidebar from '../Sidebar/Sidebar';
+import { GiHamburgerMenu } from 'react-icons/gi';
+import httpService from '../../services/httpService';
+import { calculateDepartmentPoints } from '../../util/pointSystem';
 import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
 import Instruction from './Instruction';
-
-
-/* Citations: 
-    https://github.com/mustafaerden/react-admin-dashboard
-*/
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const Dashboard = () => {
   const userContext = useContext(UserContext);
+  document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
-  const [date, setDate]: any = useState(new Date());
+  const { deptID } = useParams<departmentParam>();
+  const [toDo, setToDoState] = useState<any>({
+    toDoReminders: []
+  });
+  const [pointSystem, setPointSystem] = useState<any>({
+    monthlyPointSystem: []
+  });
+
+  const getToDoStatus = async () => {
+    const url = '/to-do';
+    try {
+      const response = await httpService.get(url);
+      getDepartments(response.data);
+      setToDoState({
+        toDoReminders: response.data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  const getDepartments = async (departmentStatus: any[]) => {
+    const url = '/department';
+    try {
+      const response = await httpService.get(url);
+      setPointSystem({
+        monthlyPointSystem: calculateDepartmentPoints(response.data.slice(1), departmentStatus)
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
+  useEffect(() => {
+    getToDoStatus();
+  }, [setToDoState]);
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -47,7 +83,7 @@ const Dashboard = () => {
               Log Out
             </button>
           </header>
-          <Sidebar show={showNav} />
+          <Sidebar show={showNav} departmentID={deptID} />
           <div className="dashboard-container">
             <div className="dashboard-cards flex lg:flex-row flex-col">
               <div className="equal-width">
@@ -59,7 +95,7 @@ const Dashboard = () => {
                     Leaderboard
                     <div className="align-right icon instructions">{Instruction()}</div>
                   </p>
-                  <div className="card-inner width-100-percent">{Leaderboard()}</div>
+                  <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
                 </div>
               </div>
               <div className="equal-width lg:pl-14 mt-6 lg:mt-0">
@@ -70,9 +106,9 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-        </div>
-      </body>
-    </html>
+          </div>
+        </body>
+      </html>
     </>
   );
 };

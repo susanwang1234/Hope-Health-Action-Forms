@@ -10,9 +10,13 @@ import httpService from '../../services/httpService';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
+import { useParams } from 'react-router-dom';
+import { departmentParam } from '../../types/departmentParamType';
 
 const DataPage = () => {
+  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
+
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
@@ -22,16 +26,12 @@ const DataPage = () => {
   function handleClick(index: any): void {
     setDisplayingData(reports[index]);
   }
-  // const switchEditMode = (value: boolean): void => {
-  //   setDisplayingData(reports[indexOfSelectedReport])
-  //   setEditStatus(value);
-  // }
 
   useEffect(() => {
-    getFormById();
+    getFormByDeptId();
 
-    async function getFormById() {
-      const url = `/form/${2}`;
+    async function getFormByDeptId() {
+      const url = `/form/${deptID}`;
       try {
         const response = await httpService.get(url);
         const data = response.data;
@@ -62,8 +62,8 @@ const DataPage = () => {
         </button>
       </header>
       <div className="flex justify-center">
-        <Sidebar show={showNav} />
-        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded">
+        <Sidebar show={showNav} departmentID={deptID} />
+        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
           <h4 className="text-center">Submitted Reports</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (
