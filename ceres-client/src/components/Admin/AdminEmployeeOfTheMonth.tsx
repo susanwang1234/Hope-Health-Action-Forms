@@ -14,7 +14,6 @@ import { departmentParam } from '../../types/departmentParamType';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
-  //test
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [shareImage, setShareImage] = useState('');
