@@ -49,12 +49,6 @@ const saveAnnouncement = async () => {
   httpService
     .post(url_add, config)
     .then(() => {
-      httpService.put(url_put,config).then(() => {
-        console.log("Can now fetch announcement via get request.")
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
       toast.success('New announcement added');
     })
     .catch((error: any) => {
@@ -62,8 +56,6 @@ const saveAnnouncement = async () => {
       toast.error(error.response.data.error);
     });
 };
-
-
 
   return (
     <div>
