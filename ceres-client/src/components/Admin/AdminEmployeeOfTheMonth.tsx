@@ -12,8 +12,10 @@ import { toast } from 'react-toastify';
 import gray_person from '../../images/gray_person.jpg';
 import { departmentParam } from '../../types/departmentParamType';
 
+
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
+  /*
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const [shareImage, setShareImage] = useState('');
@@ -165,5 +167,6 @@ const AdminEmployeeOfTheMonth = () => {
       </div>
     </div>
   );
+  */
 };
 export default AdminEmployeeOfTheMonth;

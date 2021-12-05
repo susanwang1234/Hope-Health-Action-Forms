@@ -11,7 +11,7 @@ import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 
 const NewAnnouncement = () => {
-  /*
+  
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
@@ -32,6 +32,7 @@ const NewAnnouncement = () => {
     window.location.href = '/departments';
   };
  
+  /*
   const saveAnnouncement = async () => {
     const url = `/messages`;
     if (announcement.trim() === '') {
@@ -41,13 +42,13 @@ const NewAnnouncement = () => {
 
     const config = {
       headers: {
-        'content-type': 'multipart/form-data'
+        'content-type': 'application/json'
       }
     };
 
     try {
-      httpService.post(url, null, config).then((response) => {
-        createAnnouncement(response.data[0].id);
+      httpService.post(url, new FormData(), config).then(() => {
+        createAnnouncement();
       });
     } catch (error) {
       console.error(error);
@@ -55,7 +56,7 @@ const NewAnnouncement = () => {
   };
 
   
-  const createAnnouncement = async (id: number) => {
+  const createAnnouncement = async () => {
     const url = `/messages/2`;
 
     let newAnnouncement = {
@@ -75,6 +76,51 @@ const NewAnnouncement = () => {
         toast.error(error.response.data.error);
       });
   };
+*/
+
+const saveAnnouncement = async () => {
+  const url_add = `/messages`;
+  const url_put = `/messages/2`;
+  if (announcement.trim() === '') {
+    toast.error('Please write an announcement.');
+    return;
+  }
+
+  const config = {
+      departmentId: user?.departmentId,
+      author: user?.username,
+      messageContent: announcement
+    }
+
+  httpService
+    .post(url_add, config)
+    .then(() => {
+      httpService.put(url_put,config).then(() => {
+        console.log("Can now fetch announcement via get request.")
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
+      toast.success('New announcement added');
+    })
+    .catch((error: any) => {
+      console.log(error);
+      toast.error(error.response.data.error);
+    });
+
+    /*
+    httpService
+    .put(url_put, config)
+    .then(() => {
+      console.log("Can now fetch announcement via get request.")
+    })
+    .catch((error: any) => {
+      console.log(error);
+    });
+    */
+};
+
+
 
   return (
     <div>
@@ -109,6 +155,6 @@ const NewAnnouncement = () => {
       </div>
     </div>
   );
-  */
+  
 };
 export default NewAnnouncement;
