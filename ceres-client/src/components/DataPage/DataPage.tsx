@@ -1,45 +1,41 @@
-import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
+import React, { useEffect, useState } from 'react';
 import ReportElement from './ReportElement';
 import ReportData from './ReportData';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
-import { UserContext } from '../../UserContext';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 
 const DataPage = () => {
-  const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
-
+  const { deptID } = useParams<departmentParam>();
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
   const [displayingData, setDisplayingData] = useState(null);
-  const userContext = useContext(UserContext);
 
-  function handleClick(index: any): void {
+  const handleClick = (index: any): void => {
     setDisplayingData(reports[index]);
-  }
+  };
+
+  const getFormByDeptId = async () => {
+    const url = `/form/${deptID}`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setReports(data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
 
   useEffect(() => {
     getFormByDeptId();
-
-    async function getFormByDeptId() {
-      const url = `/form/${deptID}`;
-      try {
-        const response = await httpService.get(url);
-        const data = response.data;
-        console.log('Fetched Report:', data);
-        setReports(data);
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
-  }, []);
+  }, [setReports]);
 
   return (
     <React.Fragment>
@@ -50,7 +46,7 @@ const DataPage = () => {
       <div className="flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
-          <h4 className="text-center">Submitted Reports</h4>
+          <h4 className="text-center">All Reports</h4>
           <ul className="list-of-reports">
             {reports.map((report: any, index: number) => (
               <ReportElement data={report} onClick={() => handleClick(index)} />
