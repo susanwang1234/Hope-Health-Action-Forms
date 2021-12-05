@@ -14,7 +14,7 @@ import { departmentParam } from '../../types/departmentParamType';
 const DataPage = () => {
   const { deptID } = useParams<departmentParam>();
   document.body.style.backgroundColor = '#f5f5f5';
-  
+
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
@@ -48,7 +48,7 @@ const DataPage = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <div className="flex justify-center">
-        <Sidebar show={showNav} />
+        <Sidebar show={showNav} departmentID={deptID} />
         <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
           <h4 className="text-center">Submitted Reports</h4>
           <ul className="list-of-reports">
