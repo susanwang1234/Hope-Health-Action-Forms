@@ -5,14 +5,14 @@ import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
-//import Plot from 'react-plotly.js';
+import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
 import { toast } from 'react-toastify';
 import { MONTHS } from '../../util/timezone';
 
 const StatisticsDashboard = () => {
-  /*
+  
   const { deptID } = useParams<departmentParam>();
   const [departmentName, setDepartmentName] = useState('');
   document.body.style.backgroundColor = '#f5f5f5';
@@ -176,7 +176,7 @@ const StatisticsDashboard = () => {
       </div>
     </div>
   );
-  */
+  
 };
 
 export default StatisticsDashboard;
