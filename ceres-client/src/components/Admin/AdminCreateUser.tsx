@@ -108,7 +108,11 @@ const AdminCreateUser = () => {
       return;
     }
     if (username.length < 5) {
-      toast.error('Username too short');
+      toast.error('Username too short, must be minimum 5 characters');
+      return;
+    }
+    if (username.length > 25) {
+      toast.error('Username too long, must be maximum 25 characters');
       return;
     }
     if (password != repeatedPassword) {
