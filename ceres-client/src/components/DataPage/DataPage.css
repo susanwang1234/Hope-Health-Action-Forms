@@ -9,7 +9,7 @@
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.list-of-reports {
+.list-of-forms {
   overflow: auto;
   overflow-x: hidden;
   padding: 0em;
@@ -29,7 +29,7 @@
   background-color: rgb(241, 241, 241);
 }
 
-.report-data-buttons {
+.form-data-buttons {
   display: flex;
   justify-content: space-between;
 }
@@ -62,7 +62,7 @@
   max-height: 25em;
 }
 
-.report-in-list {
+.form-in-list {
   border: 0.5px solid rgb(161, 161, 161);
   background-color: #fbfbfb;
   display: flex;
@@ -70,18 +70,18 @@
   min-width: 17rem;
 }
 
-.report-view-button {
+.form-view-button {
   background-color: #4aa9c9;
   float: right;
   padding: 6px;
   border-radius: 0.25rem;
   box-shadow: 1px 3px 5px rgb(211, 211, 211);
 }
-.report-in-list:nth-child(even) {
+.form-in-list:nth-child(even) {
   background-color: #e7e7e7;
 }
 
-.report-view-button:hover {
+.form-view-button:hover {
   background-color: #62c8eb;
 }
 

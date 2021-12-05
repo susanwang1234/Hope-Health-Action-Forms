@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
-import ReportData from './ReportData';
+import FormData from './FormData';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
@@ -25,7 +25,7 @@ const ThisMonth = () => {
         const response = await httpService.get(url);
         console.log(response);
         const data = response.data;
-        console.log('Fetched Report:', data);
+        console.log('Fetched Form:', data);
         setDisplayingData(data);
       } catch (error: any) {
         console.log('Error: Unable to fetch from ' + url);
@@ -41,7 +41,7 @@ const ThisMonth = () => {
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
-        {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}
+        {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <FormData data={displayingData} />}
       </div>
     </div>
   );

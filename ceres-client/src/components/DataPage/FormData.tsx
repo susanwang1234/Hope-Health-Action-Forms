@@ -5,9 +5,9 @@ import { Department } from '../../models/department';
 import httpService from '../../services/httpService';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
-import { makeDateShort } from './ReportElement';
+import { makeDateShort } from './FormElement';
 
-const ReportData = (props: any) => {
+const FormData = (props: any) => {
   const { deptID } = useParams<departmentParam>();
   const [fetchedFormEntries, setFetchedFormEntries] = useState<any[]>([]);
   const [formEntries, setFormEntries] = useState<any[]>([]);
@@ -67,14 +67,14 @@ const ReportData = (props: any) => {
   };
 
   const markEmptyfields = (dataObj: any): void => {
-    const empltyFildsIndexes: number[] = [];
+    const emptyFieldsIndexes: number[] = [];
     const values = Object.values(dataObj);
     for (let i = 0; i < values.length; i++) {
       if (values[i] === '') {
-        empltyFildsIndexes.push(i);
+        emptyFieldsIndexes.push(i);
       }
     }
-    setEmptyFields(empltyFildsIndexes);
+    setEmptyFields(emptyFieldsIndexes);
   };
 
   const validateEntries = (dataEntries: any): boolean => {
@@ -106,7 +106,7 @@ const ReportData = (props: any) => {
     }
   };
 
-  function createArrayEntriesToPut(rawArray: any[]): any[] {
+  const createArrayEntriesToPut = (rawArray: any[]): any[] => {
     let proccesedEntries = [];
     for (let i = 0; i < rawArray.length; i++) {
       proccesedEntries[i] = {
@@ -116,7 +116,7 @@ const ReportData = (props: any) => {
       };
     }
     return proccesedEntries;
-  }
+  };
 
   const exportToCsv = async (formId: number): Promise<void> => {
     try {
@@ -154,7 +154,7 @@ const ReportData = (props: any) => {
   };
 
   const updateButton = (
-    <button form="daForm" className="update-button">
+    <button form="data-form" className="update-button">
       Update data
     </button>
   );
@@ -190,17 +190,16 @@ const ReportData = (props: any) => {
   );
 
   if (props.data === null) {
-    return <p className="m-60 font-bold text-xl">Select a report from the list</p>;
+    return <p className="m-60 font-bold text-xl">Select a form from the list</p>;
   } else {
     return (
       <div className="displaying-form">
         {editStatus === true ? <h2 className="edit-title">Edit Mode</h2> : <></>}
         <div className="data-header">
           <p className="px-3 text-gray-500">Form Dated: {makeDateShort(props.data.createdAt)}</p>
-          <p className="px-3 text-gray-500">Form ID: {props.data.id}</p>
         </div>
         <p className="mx-3 font-bold text-center">{userDepartment} Department's Data Form</p>
-        <form id={'daForm'} className="displaying-form-elements" onSubmit={handleSubmission}>
+        <form id={'data-form'} className="displaying-form-elements" onSubmit={handleSubmission}>
           {formEntries.map(
             (entry: any, index: number) =>
               entry.label !== 'departmentId' &&
@@ -213,7 +212,7 @@ const ReportData = (props: any) => {
               )
           )}
         </form>
-        <div className="report-data-buttons">
+        <div className="form-data-buttons">
           {editStatus === true ? cancelButton : editButton}
           <div className="export-buttons">
             {!editStatus && exportAsCsvButton}
@@ -225,4 +224,4 @@ const ReportData = (props: any) => {
     );
   }
 };
-export default ReportData;
+export default FormData;
