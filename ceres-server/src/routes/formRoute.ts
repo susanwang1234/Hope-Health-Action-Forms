@@ -8,5 +8,6 @@ router.put('/:id', controller.putFormById);
 router.get('/:departmentId', controller.getAllFormsByDepartmentId);
 router.get('/:formId/export-as-csv', controller.exportFormAsCsv);
 router.get('/:formId/export-as-pdf', controller.exportFormAsPdf);
+router.get('/latest/:departmentId', controller.getLatestFormByDepartmentId);
 
 export = router;
