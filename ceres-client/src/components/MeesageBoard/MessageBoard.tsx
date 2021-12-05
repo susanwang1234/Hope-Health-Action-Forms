@@ -37,7 +37,7 @@ const MessageBoard = () => {
                 <h1 className={"announcements-title"}>Department Announcements</h1>
                 <ul className={"message-list"}>
                     {
-                    messages.map(message => {
+                        messages.length == 0 ?<h2 className={"no-message"}>No announcements currently available </h2>: messages.map(message => {
                         return<li className="message">
                                 {message.messageContent}
                             <div className="message-footer">

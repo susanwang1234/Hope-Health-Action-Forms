@@ -19,6 +19,14 @@
     font-size: 14px;
 }
 
+.no-message{
+    font-size: x-large;
+    font-weight: bold;
+    color: rgb(129, 129, 129);
+    text-align: center;
+    padding: 10rem;
+}
+
 .announcements-title{
     text-align: center;
     font-size: 28px;
