@@ -16,13 +16,6 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
     res.status(400).send(departmentNegativeOrNanInputError);
     return;
   }
-
-  const retrievedDepartmentId: any[] = await Knex.select('id').from('Department').where('id', '=', departmentId);
-
-  if (!retrievedDepartmentId.length) {
-    res.status(400).send(departmentDNEError);
-    return;
-  }
   try {
     const retrievedResponses = await Knex.select('*').from('Messages').where('departmentId', '=', departmentId);
     if (!retrievedResponses.length) {
@@ -40,6 +33,12 @@ const createNewMessage = async (req: Request, res: Response, next: NextFunction)
   const departmentId: number = +req.body.departmentId;
   if (isInvalidInput(departmentId)) {
     res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+  const retrievedDepartmentId: any[] = await Knex.select('id').from('Department').where('id', '=', departmentId);
+
+  if (!retrievedDepartmentId.length) {
+    res.status(404).send(departmentDNEError);
     return;
   }
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
