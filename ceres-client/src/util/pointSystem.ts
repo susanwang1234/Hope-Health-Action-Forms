@@ -1,6 +1,6 @@
-import { LeaderboardDepartment } from '../../../models/leaderboardDepartment';
-import { Department } from '../../../models/department';
-import { ToDoStatus } from '../../../models/toDoStatus';
+import { LeaderboardDepartment } from '../models/leaderboardDepartment';
+import { Department } from '../models/department';
+import { ToDoStatus } from '../models/toDoStatus';
 
 const calculateScore = (currDepartmentStatus: ToDoStatus) => {
   return currDepartmentStatus.caseStudies + Number(currDepartmentStatus.dataForm) + Number(currDepartmentStatus.employeeOfTheMonth) * 3;
