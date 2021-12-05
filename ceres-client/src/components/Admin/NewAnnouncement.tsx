@@ -14,7 +14,6 @@ const AdminEmployeeOfTheMonth = () => {
     document.body.style.backgroundColor = '#f5f5f5';
     const [showNav, setShowNav] = useState(false);
     const userContext = useContext(UserContext);
-    const [title, setTitle] = useState<string>('');
     const [announcement, setAnnouncement] = useState<string>('');
 
 
@@ -31,6 +30,18 @@ const AdminEmployeeOfTheMonth = () => {
         event.preventDefault();
         window.location.href = '/departments';
       };
+
+
+    const saveAnnouncement = async (event: any) => {
+      if (announcement === '') {
+        toast.error('Please fill in all fields.');
+        return;
+      }
+
+
+
+
+    }
     
     return(
         <div>
@@ -51,14 +62,12 @@ const AdminEmployeeOfTheMonth = () => {
           </h2>
           <div className="announcement">
             <div className="w-full flex flex-col pt-10">
-              <label className="inside-text-case-study">Title</label>
-              <textarea value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
               <label className="inside-text-case-study">Post your announcement here</label>
               <textarea value={announcement} onChange={(event) => setAnnouncement(event.target.value)} className="response" style={{height:"450px"}} placeholder="Type here..."></textarea>
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
-              <button className="blue-button bottom-5 right-20">
+              <button onClick={saveAnnouncement} className="blue-button bottom-5 right-20">
                 Submit
               </button>
             </div>
