@@ -29,6 +29,26 @@ const createNewForm = async (req: Request, res: Response, next: NextFunction) =>
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
 };
 
+const getLatestFormByDepartmentId = async (req: Request, res: Response, next: NextFunction) => {
+  const departmentId: number = +req.params.departmentId;
+  logging.info(NAMESPACE, `GETTING FORM FOR LATEST FORM IN DEPARTMENT ${departmentId}`);
+  if (isInvalidInput(departmentId)) {
+    res.status(400).send(departmentNegativeOrNanInputError);
+    return;
+  }
+
+  try {
+    const latestForm = await Knex.select('*').from('Form').where('departmentId', '=', departmentId).orderBy('createdAt', 'DESC').first();
+    if (latestForm == null) {
+      res.status(404).send({ error: 'Could not find any forms for requested department.' });
+      return;
+    }
+    res.send(latestForm);
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
+};
 const putFormById = async (req: Request, res: Response, next: NextFunction) => {
   await editItemById(req, res, next, NAMESPACE, TABLE_NAME, formNegativeOrNanInputError, formDNEError, inputtedReqBody(req));
 };
@@ -40,7 +60,6 @@ const getAllFormsByDepartmentId = async (req: Request, res: Response, next: Next
     res.status(400).send(formDepartmentNegativeOrNanInputError);
     return;
   }
-
   try {
     const forms = await Knex.select('*').from('Form').where('departmentId', '=', departmentId);
     logging.info(NAMESPACE, `GOT FORMS FOR DEPARTMENT ${departmentId}`, forms);
@@ -120,5 +139,4 @@ const exportFormAsPdf = async (req: Request, res: Response, next: NextFunction) 
     }
   }
 };
-
-export default { createNewForm, putFormById, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf };
+export default { putFormById, createNewForm, getAllFormsByDepartmentId, exportFormAsCsv, exportFormAsPdf, getLatestFormByDepartmentId };

@@ -9,8 +9,7 @@ import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
 import { toast } from 'react-toastify';
-
-const MONTHS = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+import { MONTHS } from '../../util/timezone';
 
 const StatisticsDashboard = () => {
   const { deptID } = useParams<departmentParam>();
@@ -34,7 +33,6 @@ const StatisticsDashboard = () => {
     fetchData();
   }, [isSearching]);
 
-
   async function getDepartmentName() {
     const url = `/department/${deptID}`;
     try {
@@ -49,8 +47,8 @@ const StatisticsDashboard = () => {
     if (invalidDateFilter()) {
       return;
     }
-    
-    const url = `/dataviz/${deptID}?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`
+
+    const url = `/dataviz/${deptID}?startMonth=${startMonth}&startYear=${startYear}&endMonth=${endMonth}&endYear=${endYear};`;
     try {
       const response = await httpService.get(url);
       setDataForPlots(response.data.plotData);
@@ -68,8 +66,8 @@ const StatisticsDashboard = () => {
     setEndMonth('');
     setEndYear(0);
     setSearching(true);
-    document.querySelectorAll('input').forEach(input => input.value='');
-    document.querySelectorAll('select').forEach(input => input.value ='');
+    document.querySelectorAll('input').forEach((input) => (input.value = ''));
+    document.querySelectorAll('select').forEach((input) => (input.value = ''));
   }
 
   function invalidDateFilter(): boolean {
@@ -86,7 +84,7 @@ const StatisticsDashboard = () => {
   const radioButtonHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setPlotIndex(+value);
-  }
+  };
 
   return (
     <div className="App">
@@ -95,49 +93,68 @@ const StatisticsDashboard = () => {
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <Sidebar show={showNav} departmentID={deptID}></Sidebar>
-        <div className="dashboard-title statistics-card">
-          {departmentName} Statistics
-        </div>
+      <div className="dashboard-title statistics-card">{departmentName} Statistics</div>
       <div className="outer-container">
         <div className="statistics-dashboard-container">
           <div className="left-container statistics-card">
             <ul className="questionMenu">
-              {
-                questionLabels.length ?
-                questionLabels.map((label, index) => {
-                  const question = index === plotIndex ?
-                    <li key={label}><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler} checked></input>{label}</li>
-                    : <li key={label}><input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler}></input>{label}</li>
-                  return question;
-                }):
-                'No Questions Found'
-              }
+              {questionLabels.length
+                ? questionLabels.map((label, index) => {
+                    const question =
+                      index === plotIndex ? (
+                        <li key={label}>
+                          <input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler} checked></input>
+                          {label}
+                        </li>
+                      ) : (
+                        <li key={label}>
+                          <input className="radio-button" name="question" type="radio" value={index} onChange={radioButtonHandler}></input>
+                          {label}
+                        </li>
+                      );
+                    return question;
+                  })
+                : 'No Questions Found'}
             </ul>
           </div>
           <div className="right-container">
             <div className="date-filter">
               <div className="date-from">
                 <div className="filter-label">From:</div>
-                <select defaultValue="" onChange={event => setStartMonth(event.target.value)}>
-                  <option value="" disabled>Month</option>
-                  {MONTHS.map(month => <option key={month} value={month}>{month}</option>)}
+                <select defaultValue="" onChange={(event) => setStartMonth(event.target.value)}>
+                  <option value="" disabled>
+                    Month
+                  </option>
+                  {MONTHS.map((month: string) => (
+                    <option key={month} value={month}>
+                      {month}
+                    </option>
+                  ))}
                 </select>
-                <input className="filter-input" onChange={event => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
+                <input className="filter-input" onChange={(event) => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
               </div>
               <div className="date-to">
                 <div className="filter-label">To:</div>
-                <select defaultValue="" onChange={event => setEndMonth(event.target.value)}>
-                  <option value="" disabled>Month</option>
-                  {MONTHS.map(month => <option key={month}>{month}</option>)}
+                <select defaultValue="" onChange={(event) => setEndMonth(event.target.value)}>
+                  <option value="" disabled>
+                    Month
+                  </option>
+                  {MONTHS.map((month: string) => (
+                    <option key={month}>{month}</option>
+                  ))}
                 </select>
-                <input className="filter-input" onChange={event => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
+                <input className="filter-input" onChange={(event) => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
               </div>
               <div className="statistic-buttons">
-                <button className="button" onClick={fetchData}>Search</button>
-                <button className="button" onClick={resetDateFilter}>Reset</button>
-              </div> 
+                <button className="button" onClick={fetchData}>
+                  Search
+                </button>
+                <button className="button" onClick={resetDateFilter}>
+                  Reset
+                </button>
+              </div>
             </div>
-              {dataForPlots[0] ?
+            {dataForPlots[0] ? (
               <Plot
                 className="plot statistics-card"
                 data={[
@@ -145,16 +162,19 @@ const StatisticsDashboard = () => {
                     x: dataForPlots[plotIndex] ? dataForPlots[plotIndex].x : dataForPlots[0].x,
                     y: dataForPlots[plotIndex] ? dataForPlots[plotIndex].y : dataForPlots[0].y,
                     type: 'scatter',
-                    mode: 'lines+markers',
+                    mode: 'lines+markers'
                   }
                 ]}
-                layout={ {title: questionLabels[plotIndex] } }
-              /> : <Plot data={[{x: [], y: []}]} layout={ {} }/>}
-            </div>
+                layout={{ title: questionLabels[plotIndex] }}
+              />
+            ) : (
+              <Plot data={[{ x: [], y: [] }]} layout={{}} />
+            )}
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default StatisticsDashboard;

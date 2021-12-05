@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import './Sidebar.css';
-/*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
 
 const AdminSidebar = ({ show }: any) => {
   const [openCreate, setOpenCreate] = useState(false);
