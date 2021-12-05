@@ -31,52 +31,6 @@ const NewAnnouncement = () => {
     event.preventDefault();
     window.location.href = '/departments';
   };
- 
-  /*
-  const saveAnnouncement = async () => {
-    const url = `/messages`;
-    if (announcement.trim() === '') {
-      toast.error('Please write an announcement.');
-      return;
-    }
-
-    const config = {
-      headers: {
-        'content-type': 'application/json'
-      }
-    };
-
-    try {
-      httpService.post(url, new FormData(), config).then(() => {
-        createAnnouncement();
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  
-  const createAnnouncement = async () => {
-    const url = `/messages/2`;
-
-    let newAnnouncement = {
-      departmentId: user?.departmentId,
-      author: user?.id,
-      messageContent: announcement
-    };
-
-    httpService
-      .put(url, newAnnouncement)
-      .then(() => {
-        toast.success('New announcement posted', { position: 'top-center', autoClose: 5000 });
-        window.location.href = '/announcements';
-      })
-      .catch((error: any) => {
-        console.log(error);
-        toast.error(error.response.data.error);
-      });
-  };
-*/
 
 const saveAnnouncement = async () => {
   const url_add = `/messages`;
