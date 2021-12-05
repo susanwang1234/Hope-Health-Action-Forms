@@ -1,5 +1,3 @@
-/*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
-
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
@@ -40,7 +38,7 @@ const Sidebar = ({ show, departmentID }: any) => {
             <BsFileEarmarkTextFill />
             Reports
           </Button>
-          {open && (
+          {open && ( 
             <li>
               <Link to={{ pathname: createDashboardIDPath(departmentID) + '/submit-report', state: { currentDeparmentID: departmentID } }} className="drop-link" color="red">
                 <BsFillCalendarFill />

@@ -9,12 +9,12 @@ import CaseStudies from './components/CaseStudies/CaseStudies';
 import CaseStudyInstance from './components/CaseStudyInstance/CaseStudyInstance';
 import CaseStudySubmit from './components/CaseStudySubmit/CaseStudySubmit';
 import Departments from './components/Departments/Departments';
-import Forms from './components/Forms/Forms';
 import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
 import AdminCreateUser from './components/Admin/AdminCreateUser';
 import AdminEditUser from './components/Admin/AdminEditUser';
+import ThisMonth from './components/DataPage/ThisMonth';
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       <Switch>
         <UnPrivateRoute exact path="/" component={Login} />
         <PrivateRoute exact path="/dashboard/:deptID" component={Dashboard}></PrivateRoute>
-        <PrivateRoute exact path="/dashboard/:deptID/submit-report" component={Forms}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/submit-report" component={ThisMonth}></PrivateRoute>
         <PrivateRoute exact path="/dashboard/:deptID/data-page" component={DataPage}></PrivateRoute>
         <PrivateRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></PrivateRoute>
         <PrivateRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>

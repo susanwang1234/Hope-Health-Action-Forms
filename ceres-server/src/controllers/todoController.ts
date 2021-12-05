@@ -36,6 +36,17 @@ const getCaseStudies = async (req: Request, res: Response, next: NextFunction, d
   }
 };
 
+const getEmployeeOfTheMonthStatus = async (req: Request, res: Response, next: NextFunction, departmentId: number) => {
+  try {
+    const retrievedEmployeeOfTheMonth = await Knex.select('*').from('EmployeeOfTheMonth').where('departmentId', '=', departmentId);
+    logging.info(NAMESPACE, `CHECKING IF EMPLOYEE OF THE MONTH OF ${currMonth} HAS DEPARTMENT ID ${departmentId}`, retrievedEmployeeOfTheMonth);
+    return retrievedEmployeeOfTheMonth.length;
+  } catch (error: any) {
+    logging.error(NAMESPACE, error.message, error);
+    res.status(500).send(error);
+  }
+};
+
 const getToDoStatus = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, 'GETTING THE TO-DO STATUS FOR EACH DEPARTMENT');
   let listToDoStatus: ToDo[] = [];
@@ -46,11 +57,13 @@ const getToDoStatus = async (req: Request, res: Response, next: NextFunction) =>
       currToDoStatus = {
         departmentId: departmentId,
         dataForm: false,
-        caseStudies: 0
+        caseStudies: 0,
+        employeeOfTheMonth: false
       };
       try {
         currToDoStatus.dataForm = await getFormStatus(req, res, next, departmentId);
         currToDoStatus.caseStudies = await getCaseStudies(req, res, next, departmentId);
+        currToDoStatus.employeeOfTheMonth = await getEmployeeOfTheMonthStatus(req, res, next, departmentId);
         listToDoStatus.push(currToDoStatus);
       } catch (error: any) {
         logging.error(NAMESPACE, error.message, error);

@@ -1,6 +1,6 @@
 {
   "info": {
-    "_postman_id": "2bef3522-189e-499f-936e-4d75de01962b",
+    "_postman_id": "aec5c8c2-e5a1-4003-b925-f27940b55d62",
     "name": "ceres",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -798,7 +798,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"departmentId\": 5,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was involved with a lot of tasks at the hospital. She took a lot of initiative to help out!\"\r\n}",
+              "raw": "{\r\n    \"imageId\": 2,\r\n    \"name\": \"Jenny Jennings\",\r\n    \"departmentId\": 3,\r\n    \"description\": \"Jenny Jennings did a fantastic job this month! She was involved with a lot of tasks at the hospital. She took a lot of initiative to help out!\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"

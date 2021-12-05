@@ -35,11 +35,13 @@ describe('getToDoStatus', () => {
         expect(item).to.have.deep.property('departmentId');
         expect(item).to.have.deep.property('dataForm');
         expect(item).to.have.deep.property('caseStudies');
+        expect(item).to.have.deep.property('employeeOfTheMonth');
       });
       res.body.forEach((item: any) => {
         expect(item.departmentId).to.deep.equal(++id);
         expect(item.dataForm).to.deep.equal(0);
         expect(item.caseStudies).to.deep.equal(caseStudies[id - 2]);
+        expect(item.employeeOfTheMonth).to.deep.equal(caseStudies[id - 2]);
       });
       done();
     });
