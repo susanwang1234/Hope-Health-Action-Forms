@@ -107,7 +107,7 @@ const AdminEditUser = () => {
 
     if (event.target.name === 'updateRoleId') {
       let checkRoleIdValueForAdmim = event.target.value;
-      checkRoleIdValueForAdmim === '1' || checkRoleIdValueForAdmim == '2' ? setUserIsAdmin(true) : setUserIsAdmin(false);
+      checkRoleIdValueForAdmim === '1' || checkRoleIdValueForAdmim === '2' ? setUserIsAdmin(true) : setUserIsAdmin(false);
     }
   };
 
