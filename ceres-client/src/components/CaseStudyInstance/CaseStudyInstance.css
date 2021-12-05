@@ -222,6 +222,17 @@ td {
   .container{
     max-width: 375px !important;
   } 
+  .question {
+    font-style: bold !important;
+    margin-top: 16px;
+  }
+  
+  .response {
+    font-style: normal !important;
+    margin-left: 20px;
+    color: grey;
+    font-size: 13px;
+  }
 }
 
 
