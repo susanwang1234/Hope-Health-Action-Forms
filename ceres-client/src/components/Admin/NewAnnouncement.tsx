@@ -10,7 +10,7 @@ import '../CaseStudySubmit/CaseStudySubmit.css';
 import httpService from '../../services/httpService';
 import { toast } from 'react-toastify';
 
-const AdminEmployeeOfTheMonth = () => {
+const NewAnnouncement = () => {
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
@@ -30,7 +30,7 @@ const AdminEmployeeOfTheMonth = () => {
     event.preventDefault();
     window.location.href = '/departments';
   };
-
+ 
   const saveAnnouncement = async () => {
     const url = `/messages`;
     if (announcement.trim() === '') {
@@ -99,7 +99,7 @@ const AdminEmployeeOfTheMonth = () => {
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
-              <button onClick={saveAnnouncement} className="blue-button bottom-5 right-20">
+              <button onClick={NewAnnouncement} className="blue-button bottom-5 right-20">
                 Submit
               </button>
             </div>
@@ -109,4 +109,4 @@ const AdminEmployeeOfTheMonth = () => {
     </div>
   );
 };
-export default AdminEmployeeOfTheMonth;
+export default NewAnnouncement;
