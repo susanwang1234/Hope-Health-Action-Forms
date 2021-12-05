@@ -177,7 +177,7 @@ const AdminEmployeeOfTheMonth = () => {
               <label className="inside-text-case-study">What is their name?</label>
               <textarea value={employeeName} onChange={(event) => setEmployeeName(event.target.value)} className="response" placeholder="Type here..."></textarea>
               <label className="inside-text-case-study">What department do they work in?</label>
-              <select className="minimal" onChange={selectChange}>
+              <select className="minimal" onChange={(event) => setSelectedDepartment(event.target.value)}>
                 <option selected disabled>
                   --Select a Department--
                 </option>

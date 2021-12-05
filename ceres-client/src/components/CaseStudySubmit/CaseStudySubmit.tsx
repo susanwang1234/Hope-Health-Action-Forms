@@ -23,8 +23,9 @@ Citation: https://www.kindacode.com/article/react-typescript-handling-select-onc
 */
 import { departmentParam } from '../../types/departmentParamType';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
-
-let caseStudy;
+/*
+Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
+*/
 const CaseStudySubmit = () => {
   const { deptID } = useParams<departmentParam>();
   const userContext = useContext(UserContext);
@@ -160,7 +161,7 @@ const CaseStudySubmit = () => {
   };
 
   const createCaseStudy = async (imageId: number) => {
-    caseStudy = {
+    let caseStudy = {
       caseStudyTypeId: selectedCaseStudyType,
       departmentId: deptID,
       userId: userContext.user?.id,
@@ -280,9 +281,6 @@ const CaseStudySubmit = () => {
                 <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
-          </div>
-
-          <div className="w-full flex flex-col pt-10">
             <label className="inside-text-case-study">Title of Case Study?</label>
             <textarea id={'text-area-id-title'} value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
             {caseStudyQuestions.questions.map((Questions: any, index: any) => {
