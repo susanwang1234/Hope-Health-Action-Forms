@@ -2,8 +2,8 @@ import './Dashboard.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState, useEffect } from 'react';
-import { currMonth, currMonthLastDate, currMonthLastDay, months } from './util/timezone';
-import initialToDoStatus from './util/initialToDoStatus.json';
+import { currMonth, currMonthLastDate, currMonthLastDay, MONTHS } from '../../util/timezone';
+import initialToDoStatus from '../../util/initialToDoStatus.json';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 import httpService from '../../services/httpService';
@@ -65,11 +65,11 @@ const ToDo = () => {
       <div className="align-left">
         <p className="inside-text">{iconChecker(toDo.caseStudies)}Case Study</p>
         <p className="text-indent">
-          Due on {months[currMonth]} {currMonthLastDay}
+          Due on {MONTHS[currMonth]} {currMonthLastDay}
         </p>
         <p className="inside-text">{iconChecker(Number(toDo.dataForm))}Data Form</p>
         <p className="text-indent">
-          Due on {months[currMonth]} {currMonthLastDay}
+          Due on {MONTHS[currMonth]} {currMonthLastDay}
         </p>
       </div>
       <div className="align-right flex">{generateCalendar()}</div>
