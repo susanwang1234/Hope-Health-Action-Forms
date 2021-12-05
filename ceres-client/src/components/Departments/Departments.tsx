@@ -81,6 +81,8 @@ function Departments() {
     );
   };
 
+  console.log("DDDuserContext.user: " + userContext.user);
+
   return (
     <div>
       <header className="nav-header">

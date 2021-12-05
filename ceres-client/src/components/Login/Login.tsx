@@ -30,7 +30,17 @@ function Login() {
     if (isAuthenticated) {
       userContext.setUser(data.user);
       userContext.setIsAuthenticated(isAuthenticated);
-      history.push('/departments');
+      console.log("data.user.roleId: " + data.user.roleId);
+
+      if (data.user.roleId != 4) {
+        history.push('/departments');
+      } else {
+        let link = "/dashboard/" + data.user.departmentId.toString();
+        console.log("going to: " + link)
+        history.push(link);
+      }
+
+      
     } else {
       const { msg } = data;
       // do something with error message

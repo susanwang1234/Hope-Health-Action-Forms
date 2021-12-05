@@ -63,11 +63,11 @@ const ToDo = () => {
   return (
     <>
       <div className="align-left">
-        <p className="inside-text">{iconChecker(toDo.caseStudies)}Case Study</p>
+        <p className="inside-text">{iconChecker(toDo?.caseStudies)}Case Study</p>
         <p className="text-indent">
           Due on {months[currMonth]} {currMonthLastDay}
         </p>
-        <p className="inside-text">{iconChecker(Number(toDo.dataForm))}Data Form</p>
+        <p className="inside-text">{iconChecker(Number(toDo?.dataForm))}Data Form</p>
         <p className="text-indent">
           Due on {months[currMonth]} {currMonthLastDay}
         </p>

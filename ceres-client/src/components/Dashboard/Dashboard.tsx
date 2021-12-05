@@ -1,7 +1,7 @@
 import '../../App.css';
 import './Dashboard.css';
 import 'react-calendar/dist/Calendar.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -11,8 +11,10 @@ import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
 import Instruction from './Instruction';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
+import AuthService from '../../services/authService';
+import { UserContext } from '../../UserContext';
 
 const Dashboard = () => {
   document.body.style.backgroundColor = '#f5f5f5';
@@ -24,6 +26,16 @@ const Dashboard = () => {
   const [pointSystem, setPointSystem] = useState<any>({
     monthlyPointSystem: []
   });
+  const userContext = useContext(UserContext);
+
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
 
   const getToDoStatus = async () => {
     const url = '/to-do';
@@ -62,9 +74,13 @@ const Dashboard = () => {
         </head>
         <body>
           <div className="App">
+            
             <header className="nav-header">
               <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
               <img src={logo} alt="Logo" className="logo" />
+              <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+                Log Out
+              </button>
             </header>
             <Sidebar show={showNav} departmentID={deptID} />
             <div className="dashboard-container">
