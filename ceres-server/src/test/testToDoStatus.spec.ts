@@ -39,7 +39,7 @@ describe('getToDoStatus', () => {
       });
       res.body.forEach((item: any) => {
         expect(item.departmentId).to.deep.equal(++id);
-        expect(item.dataForm).to.deep.equal(0);
+        expect(item.dataForm).to.deep.equal(1);
         expect(item.caseStudies).to.deep.equal(caseStudies[id - 2]);
         expect(item.employeeOfTheMonth).to.deep.equal(caseStudies[id - 2]);
       });
