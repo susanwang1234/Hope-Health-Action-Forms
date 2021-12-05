@@ -137,7 +137,7 @@ const AdminEmailForPasswordReset = () => {
                 return (
                   <li className="alternate-background-colours">
                     <p>
-                      <input className="admin-inner-text" id={'input-id-' + index} defaultValue={Emails.email} disabled={true} onChange={(event) => setEditEmail(event.target.value)}></input>
+                      <input className="admin-inner-input-text" id={'input-id-' + index} defaultValue={Emails.email} disabled={true} onChange={(event) => setEditEmail(event.target.value)}></input>
                       <button className="gg-pen" onClick={() => editCurrentEmail(index)} />
                       <button className="gg-close" onClick={() => deleteAnEmail(Emails.id)} />
                       <button className="button-text" onClick={() => validateEmailAddress(index, Emails.id)}>
@@ -149,7 +149,7 @@ const AdminEmailForPasswordReset = () => {
               })}
               <li className="alternate-background-colours">
                 <p>
-                  <input className="admin-inner-text" id={'input-id-' + adminEmails.emails.length} defaultValue={''} onChange={(event) => setNewEmail(event.target.value)}></input>
+                  <input className="admin-inner-input-text" id={'input-id-' + adminEmails.emails.length} defaultValue={''} onChange={(event) => setNewEmail(event.target.value)}></input>
                   <button className="button-text" onClick={() => validateEmailAddress(adminEmails.emails.length)}>
                     Submit
                   </button>
