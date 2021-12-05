@@ -13,11 +13,10 @@ import StatisticsDashboard from './components/Statistics/Statistics';
 import AdminEmployeeOfTheMonth from './components/Admin/AdminEmployeeOfTheMonth';
 import PrivateRoute from './hocs/PrivateRoute';
 import UnPrivateRoute from './hocs/UnprivateRoutes';
-import ThisMonth from './components/DataPage/ThisMonth';
-import NewAnnouncement from './components/Admin/NewAnnouncement';
-
 import AdminCreateUser from './components/Admin/AdminCreateUser';
 import AdminEditUser from './components/Admin/AdminEditUser';
+import ThisMonth from './components/DataPage/ThisMonth';
+import NewAnnouncement from './components/Admin/NewAnnouncement';
 
 function App() {
   return (
