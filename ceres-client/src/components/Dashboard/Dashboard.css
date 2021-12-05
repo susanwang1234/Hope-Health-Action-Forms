@@ -84,9 +84,18 @@
 
 .dashboard-cards {
   display: flex;
-  gap: 30px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  box-sizing: border-box;
+
 }
+
+.equal-width{
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+
 
 .dashboard-container {
   background-color: #f5f5f5;
@@ -121,11 +130,7 @@
   display: flex;
 }
 
-.flex-shrink {
-  flex-shrink: 3 !important;
-  height: auto !important;
-  max-width: 100% !important;
-}
+
 
 .google-visualization-tooltip {
   white-space: nowrap !important;
@@ -181,7 +186,8 @@
 .profile-pic {
   border: 2px solid black;
   height: auto;
-  width: 300px;
+  width: 200px;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -193,7 +199,7 @@
 .responsive-leaderboard {
   height: auto;
   text-align: center;
-  width: 470px;
+  width: 100%;
 }
 
 .text-indent {
@@ -209,48 +215,54 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 855px) {
-  .dashboard-cards {
-    gap: 10px;
-    grid-template-columns: 1fr;
-    margin-bottom: 0;
-  }
+.grey-button {
+  background-color: rgb(245, 245, 245);
+  border-color: #d6d6d6;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
+  color: rgb(0, 0, 0);
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 4px 10px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
 }
 
-/*CITATION: https://stackoverflow.com/questions/23081227/how-to-resize-div-and-contents-for-any-screen-size*/
-@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+
+@media only screen and (max-width: 1024px){
   .dashboard-container {
-    background-color: #f5f5f5;
-    display: flex;
-    padding: 20px 35px;
-    width: 300%;
+    padding: 20px 55px;
   }
-  /* Smartphone ----------- */
-  .flex-shrink {
-    flex-shrink: 3 !important;
-    height: auto !important;
-    margin-left: 500px;
-    max-height: 50% !important;
-    max-width: 50% !important;
-    position: relative;
-  }
+  
 }
 
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+@media only screen and (max-width: 740px){
   .dashboard-container {
-    background-color: #f5f5f5;
-    display: flex;
-    padding: 20px 35px;
-    width: 150%;
+    padding: 20px 30px;
   }
-  /* Styles */
-  .flex-shrink {
-    flex-shrink: 3 !important;
-    height: auto !important;
-    margin-left: 500px;
-    max-height: 50% !important;
-    max-width: 50% !important;
-    position: relative;
+
+  .calendar-container{
+    width:300px;
+    max-width:300px;
   }
+
+  .profile-pic {
+    width: 150px;
+  } 
+}
+
+@media only screen and (max-width: 440px){
+
+  .calendar-container{
+    margin-top: 15px;
+    width:230px;
+    max-width:230px;
+  }
+
+  .profile-pic {
+    width: 120px;
+  } 
 }

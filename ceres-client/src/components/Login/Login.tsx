@@ -38,7 +38,7 @@ function Login() {
     }
   };
 
-  const onSubmit = handleSubmit(({ username, password, remember }) => {
+  const onSubmit = handleSubmit(({ username, password }) => {
     const user = {
       username,
       password
@@ -75,7 +75,6 @@ function Login() {
                 name="username"
                 type="text"
               />
-              {errors.username && 'Username is invalid'}
             </div>
 
             <div>

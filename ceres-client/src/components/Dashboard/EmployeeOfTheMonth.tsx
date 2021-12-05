@@ -42,12 +42,12 @@ const EmployeeOfTheMonth = () => {
   }, [setEmployeeOfTheMonthState]);
 
   return (
-    <>
+    <div className="flex flex-col w-full card-inner">
       <img src={employeeOfTheMonthImage} alt="profile pic" className="profile-pic"></img>
-      <h1 className="heading-1">Name: {employeeOfTheMonth.name}</h1>
-      <h1 className="heading-1">Department: {employeeOfTheMonth.department}</h1>
-      <p className="text-primary-p employee-paragraph">{employeeOfTheMonth.description}</p>
-    </>
+      <h1 className="text-base sm:text-xl md:text-2xl">Name: {employeeOfTheMonth.name}</h1>
+      <h1 className="text-base sm:text-xl md:text-2xl">Department: {employeeOfTheMonth.department}</h1>
+      <p className="text-sm sm:text-lg md:text-xl">{employeeOfTheMonth.description}</p>
+    </div>
   );
 };
 
