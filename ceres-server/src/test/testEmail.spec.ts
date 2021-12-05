@@ -193,3 +193,57 @@ describe('editEmailById', () => {
       });
   });
 });
+
+// Test 4: DELETE request
+describe('deleteEmailById', () => {
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
+  });
+
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('should return error code 400 for id that is negative or NaN', (done) => {
+    agent.delete('/email/-1').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.text).to.deep.equal(JSON.stringify(emailNegativeOrNanInputError));
+      done();
+    });
+  });
+  it('should return error code 400 for invalid URL', (done) => {
+    agent.delete('/email/fdfdfd').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(400);
+      expect(res.text).to.deep.equal(JSON.stringify(emailNegativeOrNanInputError));
+      done();
+    });
+  });
+  it('should return error code 404 for invalid URL', (done) => {
+    agent.delete('/email/').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(404);
+      expect(res.text).to.deep.equal(JSON.stringify(pageNotFoundError));
+      done();
+    });
+  });
+  it('should return error code 404 for an email yet to be created', (done) => {
+    agent.delete('/email/14').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(404);
+      expect(res.text).to.deep.equal(JSON.stringify(emailDNEError));
+      done();
+    });
+  });
+  it('should delete an email successfully', (done) => {
+    agent.delete('/email/1').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(204);
+      done();
+    });
+  });
+});
