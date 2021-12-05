@@ -34,7 +34,7 @@ const NewAnnouncement = () => {
 
 const saveAnnouncement = async () => {
   const url_add = `/messages`;
-  const url_put = `/messages/2`;
+  const url_put = `/messages/` + user?.departmentId;
   if (announcement.trim() === '') {
     toast.error('Please write an announcement.');
     return;
@@ -61,17 +61,6 @@ const saveAnnouncement = async () => {
       console.log(error);
       toast.error(error.response.data.error);
     });
-
-    /*
-    httpService
-    .put(url_put, config)
-    .then(() => {
-      console.log("Can now fetch announcement via get request.")
-    })
-    .catch((error: any) => {
-      console.log(error);
-    });
-    */
 };
 
 
