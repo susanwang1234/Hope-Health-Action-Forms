@@ -1,5 +1,3 @@
-/*Citation: https://github.com/mustafaerden/react-admin-dashboard*/
-
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';

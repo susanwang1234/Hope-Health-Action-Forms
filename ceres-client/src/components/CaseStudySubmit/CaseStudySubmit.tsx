@@ -17,9 +17,7 @@ import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
 import { departmentParam } from '../../types/departmentParamType';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
-/*
-Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
-*/
+
 let caseStudy;
 const CaseStudySubmit = () => {
   const { deptID } = useParams<departmentParam>();
