@@ -29,13 +29,7 @@ const Dashboard = () => {
   const userContext = useContext(UserContext);
 
   const onClickLogOutHandler = async () => {
-    const data = await AuthService.logout();
-    if (data.success) {
-      
-      userContext.setIsAuthenticated(false);
-      userContext.setUser(null);
-      console.log("Deauthenticated user!")
-    }
+    await userContext.logout();
     return <Redirect to="/" />;
   };
 
