@@ -9,5 +9,8 @@ export async function insertForm(knex: Knex): Promise<void> {
     rehabForms.push({ createdAt: `2021-${i - 2}-01 00:00:00`, ...formFields });
   }
 
+  // December 2021 form
+  rehabForms.push({ createdAt: '2021-12-01 00:00:00', ...formFields });
+
   await knex('Form').insert(rehabForms);
 }

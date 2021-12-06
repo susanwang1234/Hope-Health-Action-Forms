@@ -21,7 +21,7 @@ const Sidebar = ({ show, departmentID }: any) => {
         <li>
           <Link to={{ pathname: createDashboardIDPath(departmentID), state: { currentDeparmentID: departmentID } }} className="side-link">
             <HiHome />
-            Dashbaord
+            Dashboard
           </Link>
         </li>
         <li>
@@ -43,15 +43,15 @@ const Sidebar = ({ show, departmentID }: any) => {
           </Button>
           {open && (
             <li>
-              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/submit-report', state: { currentDeparmentID: departmentID } }} className="drop-link" color="red">
+              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/data-form/current', state: { currentDeparmentID: departmentID } }} className="drop-link" color="red">
                 <BsFillCalendarFill />
-                This Month's Report
+                This Month's Form
               </Link>
-              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/data-page', state: { currentDeparmentID: departmentID } }} className="drop-link">
+              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/data-form', state: { currentDeparmentID: departmentID } }} className="drop-link">
                 <FaHistory />
-                Previous Reports
+                Previous Forms
               </Link>
-              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/statistics', state: { currentDeparmentID: departmentID } }} className="drop-link">
+              <Link to={{ pathname: createDashboardIDPath(departmentID) + '/data-form/statistics', state: { currentDeparmentID: departmentID } }} className="drop-link">
                 <ImStatsDots />
                 Statistics
               </Link>

@@ -68,11 +68,11 @@ function Login() {
       .post(`/forgot-password`, postUsername)
       .then(() => {
         setIsOpen(true);
-        toast.success('New Case Study Submitted', { position: 'top-center', autoClose: 5000 });
+        toast.success('Email Sent!!', { position: 'top-center', autoClose: 5000 });
       })
       .catch((error: any) => {
         console.log(error);
-      });
+      }); 
   };
 
   return (

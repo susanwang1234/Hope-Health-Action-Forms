@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import './DataPage.css';
-import ReportData from './ReportData';
+import FormData from './FormData';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
@@ -14,24 +14,24 @@ import { Redirect } from 'react-router-dom';
 
 const ThisMonth = () => {
   const { deptID } = useParams<departmentParam>();
+  document.body.style.backgroundColor = '#f5f5f5';
   const [displayingData, setDisplayingData] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
 
+  const getFormByDeptId = async () => {
+    const url = `/form/latest/${deptID}`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setDisplayingData(data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
   useEffect(() => {
     getFormByDeptId();
-    async function getFormByDeptId() {
-      const url = `/form/latest/${deptID}`;
-      try {
-        const response = await httpService.get(url);
-        console.log(response);
-        const data = response.data;
-        console.log('Fetched Report:', data);
-        setDisplayingData(data);
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, []);
 
   const onClickLogOutHandler = async () => {
@@ -54,7 +54,7 @@ const ThisMonth = () => {
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
-        <div className="global-background">{displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}</div>
+        {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <FormData data={displayingData} />}
       </div>
     </div>
   );
