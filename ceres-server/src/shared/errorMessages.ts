@@ -20,6 +20,7 @@ const caseStudyQuestionsDNEError = dneError('Case Study Questions', 'do not exis
 const caseStudyResponsesNegativeOrNanInputError = negativeOrNanInputError('/case-study-responses/:caseStudyId');
 const departmentNegativeOrNanInputError = negativeOrNanInputError('/department-form/:id');
 const messageDepartmentNegativeOrNanInputError = negativeOrNanInputError('/messages/:departmentId');
+const messageDepartmentDNEError = dneError('Department', 'does not exist or it has no messages');
 const departmentDNEError = dneError('Department', 'does not exist or its form structure is empty');
 const formNegativeOrNanInputError = negativeOrNanInputError('/form/:id');
 const formDepartmentNegativeOrNanInputError = negativeOrNanInputError('/form/:departmentId');
@@ -46,6 +47,7 @@ export {
   caseStudyResponsesNegativeOrNanInputError,
   departmentNegativeOrNanInputError,
   messageDepartmentNegativeOrNanInputError,
+  messageDepartmentDNEError,
   departmentDNEError,
   formNegativeOrNanInputError,
   formDepartmentNegativeOrNanInputError,

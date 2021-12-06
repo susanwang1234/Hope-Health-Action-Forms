@@ -2,7 +2,7 @@ import logging from '../config/logging';
 import { Request, Response, NextFunction } from 'express';
 import { Knex } from '../db/mysql';
 import { isInvalidInput } from './controllerTools/isInvalidInput';
-import { messageDepartmentNegativeOrNanInputError, departmentDNEError } from 'shared/errorMessages';
+import { departmentDNEError, messageDepartmentNegativeOrNanInputError, messageDepartmentDNEError } from 'shared/errorMessages';
 import { createItem } from './requestTemplates/createRequest';
 
 const NAMESPACE = 'Message Control';
@@ -37,7 +37,7 @@ const createNewMessage = async (req: Request, res: Response, next: NextFunction)
   const retrievedDepartmentId: any[] = await Knex.select('id').from('Department').where('id', '=', departmentId);
 
   if (!retrievedDepartmentId.length) {
-    res.status(404).send(departmentDNEError);
+    res.status(404).send(messageDepartmentDNEError);
     return;
   }
   await createItem(req, res, next, NAMESPACE, TABLE_NAME, req.body);
