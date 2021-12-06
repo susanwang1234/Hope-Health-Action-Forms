@@ -15,6 +15,24 @@ export async function insertMessages(knex: Knex): Promise<void> {
       author: 'admin',
       messageContent: 'Goodevening all. I just wanted to remind everyone that the deadline for Rehab forms are due tommorow. lets make sure we have them ready. Thanks!',
       departmentId: 2
+    },
+    {
+      id: 4,
+      author: 'admin',
+      messageContent: 'This is my message from dept id 1.',
+      departmentId: 3
+    },
+    {
+      id: 5,
+      author: 'admin',
+      messageContent: 'This is my message from dept id 1. Hello world. ',
+      departmentId: 3
+    },
+    {
+      id: 6,
+      author: 'admin',
+      messageContent: 'This is my message from dept id 1. Testing 1 2 3. ',
+      departmentId: 3
     }
   ]);
 }
