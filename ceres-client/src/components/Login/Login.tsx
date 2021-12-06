@@ -1,4 +1,5 @@
 import '../../App.css';
+import '../Login/Login.css';
 import { useForm } from 'react-hook-form';
 import Logo from './../../images/Logo.png';
 import display from './../../images/CBR_training_March 21.png';
@@ -136,7 +137,7 @@ function Login() {
               />
             )}
             <div>
-              <button className="transform hover:bg-blue-800 hover:font-bold submit-button">Submit</button>
+              <button className="login-submit-button type=button">Submit</button>
             </div>
           </form>
         </div>

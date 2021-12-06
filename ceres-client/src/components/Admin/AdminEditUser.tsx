@@ -232,7 +232,7 @@ const AdminEditUser = () => {
                 <b>Edit {originalUserValues.originalUsername}</b>
               </h2>
               <div className=" card-info w-full flex flex-col pt-10">
-                <p className = "message">Fields that are left unselected or empty will default to their previously saved values</p>
+                <p className="info-message">Fields that are left unselected or empty will default to their previously saved values</p>
                 <label className="admin-inner-text">Role</label>
                 <select className="minimal self-center" name="updateRoleId" value={updateUserValues.updateRoleId} onChange={handleChange}>
                   <option selected>--Select a New Role--</option>
