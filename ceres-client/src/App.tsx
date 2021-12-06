@@ -17,6 +17,7 @@ import AdminCreateUser from './components/Admin/AdminCreateUser';
 import AdminEditUser from './components/Admin/AdminEditUser';
 import ThisMonth from './components/DataPage/ThisMonth';
 import MessageBoard from './components/MeesageBoard/MessageBoard';
+import AdminEmailForPasswordReset from './components/Admin/AdminEmailForPasswordReset';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
+        <PrivateRoute path="/edit-emails" component={AdminEmailForPasswordReset}></PrivateRoute>
         <PrivateRoute path="/new-user" component={AdminCreateUser}></PrivateRoute>
         <PrivateRoute path="/edit-user" component={AdminEditUser}></PrivateRoute>
       </Switch>
