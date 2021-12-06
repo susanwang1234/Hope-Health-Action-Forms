@@ -4,7 +4,7 @@ CSS Classes
 - close-icon
 - popup-box
 */
- 
+
 .box {
   background: #fff;
   border: 1px solid #999;
@@ -16,11 +16,11 @@ CSS Classes
   overflow: visible;
   padding: 20px;
   position: relative;
-  top:10%;
+  top: 10%;
   width: 400px;
-  z-index:100;
+  z-index: 100;
 }
- 
+
 .close-icon {
   background: #ededed;
   border: 1px solid #999;
@@ -31,9 +31,9 @@ CSS Classes
   height: 25px;
   line-height: 20px;
   position: absolute;
-  right:-16px;
+  right: -16px;
   text-align: center;
-  top:-22px;
+  top: -22px;
   width: 25px;
   z-index: 110;
 }
@@ -45,13 +45,11 @@ CSS Classes
   position: fixed;
   top: 0;
   width: 100%;
-  z-index:100;
+  z-index: 100;
 }
 
-
-@media only screen and (max-width: 600px){
-  .box{
+@media only screen and (max-width: 600px) {
+  .box {
     width: 300px;
   }
-  
 }
