@@ -94,6 +94,10 @@ li.alternate-background-colours:nth-child(odd) {
   margin-top: 10px;
 }
 
+.email-inner{
+  text-align: left !important;
+}
+
 
 @media only screen and (max-width: 900px){
   .admin-inside-text,.admin-inner-text{
@@ -112,10 +116,18 @@ li.alternate-background-colours:nth-child(odd) {
 
 }
 
+@media only screen and (max-width: 780px){
+  .email-inner{
+    font-size: 20px !important;
+  }
+}
+
 @media only screen and (max-width: 700px){
   .admin-response{
     width: 80%;
   }
+
+
 }
 
 @media only screen and (max-width: 600px){
@@ -126,7 +138,27 @@ li.alternate-background-colours:nth-child(odd) {
   .message{
     font-size: 15px;
   }
+
+  .email-inner{
+    font-size: 16px !important;
+  }
+
+  .email-card-single{
+    margin: 20px 30px;
+  }
+
+  .email-card-casestudy{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .box-inside-for-overflow-email{
+    padding: 0px !important;
+  }
+
 }
+
+
 
 @media only screen and (max-width: 450px){
   .admin-response{
