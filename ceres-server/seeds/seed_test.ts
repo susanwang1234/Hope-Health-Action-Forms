@@ -11,6 +11,7 @@ import { insertTestCaseStudyTypeQuestions } from './inserts-test/insert_test_cas
 import { insertTestCaseStudy } from './inserts-test/insert_test_case_study';
 import { insertTestCaseStudyResponse } from './inserts-test/insert_test_case_study_responses';
 import { insertTestImages } from './inserts-test/insert_test_images';
+import { insertTestMessages } from './inserts-test/insert_test_messages';
 import { insertTestEmployeeOfTheMonth } from './inserts-test/insert_test_employee_of_the_month';
 import { insertTestForm } from './inserts-test/insert_test_form';
 import { insertTestFormResponse } from './inserts-test/insert_test_form_responses';
@@ -32,6 +33,7 @@ export async function seed(knex: Knex): Promise<void> {
   await knex('Department').truncate();
   await knex('Question').truncate();
   await knex('Image').truncate();
+  await knex('Messages').truncate();
   await knex('EmployeeOfTheMonth').truncate();
   await knex('Email').truncate();
   await knex.raw('SET FOREIGN_KEY_CHECKS=1;');
@@ -49,6 +51,7 @@ export async function seed(knex: Knex): Promise<void> {
   await insertTestCaseStudyTypeQuestions(knex);
   await insertTestCaseStudy(knex);
   await insertTestCaseStudyResponse(knex);
+  await insertTestMessages(knex);
   await insertTestEmployeeOfTheMonth(knex);
   await insertTestForm(knex);
   await insertTestFormResponse(knex);
