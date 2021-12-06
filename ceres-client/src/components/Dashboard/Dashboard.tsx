@@ -1,10 +1,13 @@
 import '../../App.css';
 import './Dashboard.css';
+import { useContext, useState,  useEffect } from 'react';
+import logo from '../../images/navlogo.png';
 import 'react-calendar/dist/Calendar.css';
-import { useState, useEffect, useContext } from 'react';
+import { UserContext } from '../../UserContext';
+import AuthService from '../../services/authService';
+import 'react-calendar/dist/Calendar.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import { calculateDepartmentPoints } from '../../util/pointSystem';
 import Leaderboard from './Leaderboard';
@@ -13,10 +16,9 @@ import ToDo from './ToDo';
 import Instruction from './Instruction';
 import { Redirect, useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
-import AuthService from '../../services/authService';
-import { UserContext } from '../../UserContext';
 
 const Dashboard = () => {
+  const userContext = useContext(UserContext);
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const { deptID } = useParams<departmentParam>();
@@ -26,7 +28,6 @@ const Dashboard = () => {
   const [pointSystem, setPointSystem] = useState<any>({
     monthlyPointSystem: []
   });
-  const userContext = useContext(UserContext);
 
   const onClickLogOutHandler = async () => {
     await userContext.logout();
@@ -64,38 +65,42 @@ const Dashboard = () => {
 
   return (
     <>
-      <html>
-        <head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        </head>
-        <body>
-          <div className="App">
-            
-            <header className="nav-header">
-              <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
-              <img src={logo} alt="Logo" className="logo" />
-              <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
-                Log Out
-              </button>
-            </header>
-            <Sidebar show={showNav} departmentID={deptID} />
-            <div className="dashboard-container">
-              <div className="dashboard-cards">
-                <div className="card-outer fill-space-left">
+    <html>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </head>
+      <body>
+        <div className="App">
+          <header className="nav-header">
+            <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+            <img src={logo} alt="Logo" className="logo" />
+            <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+              Log Out
+            </button>
+          </header>
+          <Sidebar show={showNav} departmentID={deptID} />
+          <div className="dashboard-container">
+            <div className="dashboard-cards flex lg:flex-row flex-col">
+              <div className="equal-width">
+                <div className="flex flex-col w-full">
                   <p className="title">To Do</p>
                   <div className="card-inner width-100-percent">{ToDo()}</div>
-                  <p className="title">
+
+                  <p className="title mt-6">
                     Leaderboard
                     <div className="align-right icon instructions">{Instruction()}</div>
                   </p>
                   <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
                 </div>
-                <div className="card-outer fill-space-right">
-                  <p className="title">Employee of the Month</p>
-                  <div className="card-inner height-100-percent">{EmployeeOfTheMonth()}</div>
+              </div>
+              <div className="equal-width lg:pl-14 mt-6 lg:mt-0">
+              <div className="flex flex-col w-full">
+                  <p className="title whitesapce-nowrap">Employee of the Month</p>
+                  <div className="">{EmployeeOfTheMonth()}</div>
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </body>
       </html>

@@ -229,14 +229,14 @@ const AdminEditUser = () => {
               </h2>
               <div className="w-full flex flex-col pt-10">
                 <p>Fields that are left unselected or empty will default to their previously saved values</p>
-                <label className="admin-inside-text">Role</label>
+                <label className="admin-inner-text">Role</label>
                 <select className="minimal self-center" name="updateRoleId" value={updateUserValues.updateRoleId} onChange={handleChange}>
                   <option selected>--Select a New Role--</option>
                   {roleState.roles.map((roleName: any) => {
                     return <option value={roleName.id}>{roleName.label}</option>;
                   })}
                 </select>
-                <label className="admin-inside-text" hidden={userIsAdmin}>
+                <label className="admin-inner-text" hidden={userIsAdmin}>
                   Department
                 </label>
                 <select className="minimal self-center" name="updateDepartmentId" value={updateUserValues.updateDepartmentId} hidden={userIsAdmin} onChange={handleChange}>
@@ -245,9 +245,9 @@ const AdminEditUser = () => {
                     return <option value={departmentName.id}>{departmentName.name}</option>;
                   })}
                 </select>
-                <label className="admin-inside-text">Username</label>
+                <label className="admin-inner-text">Username</label>
                 <input className="admin-response" name="updateUsername" value={updateUserValues.updateUsername} placeholder="Type new username..." onChange={handleChange}></input>
-                <label className="admin-inside-text">Password</label>
+                <label className="admin-inner-text">Password</label>
                 <input
                   className="admin-response"
                   name="updatePassword"
@@ -256,7 +256,7 @@ const AdminEditUser = () => {
                   placeholder="Type new password..."
                   onChange={handleChange}
                 ></input>
-                <label className="admin-inside-text">Repeat Password</label>
+                <label className="admin-inner-text">Repeat Password</label>
                 <input
                   className="admin-response"
                   name="updateRepeatedPassword"
@@ -315,7 +315,7 @@ const AdminEditUser = () => {
                     if (selectedUser.roleId !== 1 && selectedUser.roleId !== 2) {
                       return (
                         <li className="alternate-background-colours">
-                          <label className="admin-inside-text">{selectedUser.username}</label>
+                          <label className="admin-inner-text">{selectedUser.username}</label>
                           <button
                             className="gg-pen"
                             onClick={() =>

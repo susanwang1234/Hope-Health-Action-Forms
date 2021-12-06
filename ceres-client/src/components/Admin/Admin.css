@@ -1,4 +1,24 @@
-label.admin-inside-text {
+.admin-inner-input-text {
+  font-family: Arial;
+  font-size: 25px;
+  margin: 4px;
+  position: relative;
+  text-align: center;
+  border-width: 1.5px;
+  border-radius: 5px;
+  border-color: #d6d6d6;
+  outline: none;
+}
+.admin-inner-input-text:disabled {
+  font-family: Arial;
+  font-size: 25px;
+  margin: 4px;
+  position: relative;
+  text-align: center;
+  background: none;
+  border: none;
+}
+.admin-inner-text {
   font-family: Arial;
   font-size: 25px;
   margin: 4px;
@@ -36,4 +56,12 @@ option:first-child {
 }
 li.alternate-background-colours:nth-child(odd) {
   background-color: #fafafa;
+}
+.button-text {
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 600;
+  float: right;
+  margin-right: 16px;
+  margin-top: 10px;
 }

@@ -7,6 +7,9 @@ import { useContext, useState } from 'react';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
 import { toast } from 'react-toastify';
+import Popup from '../CaseStudySubmit/PopUpModal/Popup';
+import { StringMappingType } from 'typescript';
+import httpService from '../../services/httpService';
 
 interface FormData {
   username: string;
@@ -16,6 +19,8 @@ interface FormData {
 
 function Login() {
   const userContext = useContext(UserContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const [usernameForPasswordReset, setUsernameForPasswordReset] = useState<string>('');
   let history = useHistory();
 
   const {
@@ -44,11 +49,11 @@ function Login() {
     } else {
       const { msg } = data;
       // do something with error message
-      toast.error('Invalid Username or Password', {position: "top-center"})
+      toast.error('Invalid Username or Password', { position: 'top-center' });
     }
   };
 
-  const onSubmit = handleSubmit(({ username, password, remember }) => {
+  const onSubmit = handleSubmit(({ username, password }) => {
     const user = {
       username,
       password
@@ -58,6 +63,27 @@ function Login() {
 
     postLogin(user);
   });
+
+  const popUpToEnterUserName = () => {
+    setIsOpen(true);
+  };
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const sendUsernameToResetPassword = async () => {
+    let postUsername = { username: usernameForPasswordReset };
+    httpService
+      .post(`/forgot-password`, postUsername)
+      .then(() => {
+        setIsOpen(true);
+        toast.success('Email Sent!!', { position: 'top-center', autoClose: 5000 });
+      })
+      .catch((error: any) => {
+        console.log(error);
+      }); 
+  };
 
   return (
     <div className="flex xl:flex-row flex-col">
@@ -85,7 +111,6 @@ function Login() {
                 name="username"
                 type="text"
               />
-              {errors.username && 'Username is invalid'}
             </div>
 
             <div>
@@ -94,6 +119,32 @@ function Login() {
               </label>
               <input {...register('password', { required: true })} name="password" type="password" className="border input-field" />
             </div>
+            <button className="clickable-text" onClick={popUpToEnterUserName}>
+              Forgot Password?
+            </button>
+            {isOpen && (
+              <Popup
+                content={
+                  <>
+                    <div className="popup_modal flex flex-col">
+                      <div className="popup_child pt-2">
+                        <label className="w-full text-center font-bold text-lg">Enter the username of the password you would like to retrieve</label>
+                      </div>
+                      <input className="border input-field" value={usernameForPasswordReset} onChange={(event) => setUsernameForPasswordReset(event.target.value.replace(/\s/g, ''))}></input>
+                      <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                        <button onClick={() => setIsOpen(false)} className="grey-button-popup w-full ">
+                          Cancel
+                        </button>
+                        <button onClick={sendUsernameToResetPassword} className="blue-button-popup w-full">
+                          Send
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                }
+                handleClose={togglePopup}
+              />
+            )}
             <div>
               <button className="transform hover:bg-blue-800 hover:font-bold submit-button">Submit</button>
             </div>

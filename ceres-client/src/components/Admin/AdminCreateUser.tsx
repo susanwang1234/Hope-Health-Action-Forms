@@ -168,14 +168,14 @@ const AdminCreateUser = () => {
             <b>Create a New User</b>
           </h2>
           <div className="w-full flex flex-col pt-10">
-            <label className="admin-inside-text">Role</label>
+            <label className="admin-inner-text">Role</label>
             <select className="minimal self-center" onChange={selectChange}>
               <option selected>--Select a Role--</option>
               {roleState.roles.map((roleName: any) => {
                 return <option value={roleName.id}>{roleName.label}</option>;
               })}
             </select>
-            <label hidden={userIsAdmin} className="admin-inside-text">
+            <label hidden={userIsAdmin} className="admin-inner-text">
               Department
             </label>
             <select className="minimal self-center" hidden={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
@@ -184,11 +184,11 @@ const AdminCreateUser = () => {
                 return <option value={departmentName.id}>{departmentName.name}</option>;
               })}
             </select>
-            <label className="admin-inside-text">Username</label>
+            <label className="admin-inner-text">Username</label>
             <input value={username} onChange={(event) => setUsername(event.target.value)} className="admin-response" placeholder="Type here..."></input>
-            <label className="admin-inside-text">Password</label>
+            <label className="admin-inner-text">Password</label>
             <input value={password} type={passwordShown ? 'text' : 'password'} onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
-            <label className="admin-inside-text">Repeat Password</label>
+            <label className="admin-inner-text">Repeat Password</label>
             <input
               value={repeatedPassword}
               onChange={(event) => setRepeatedPassword(event.target.value)}

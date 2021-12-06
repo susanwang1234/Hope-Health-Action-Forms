@@ -15,6 +15,12 @@ import AuthService from '../../services/authService';
 import { Redirect, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
+import Select from 'react-select';
+
+
+/*
+Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
+*/
 import { departmentParam } from '../../types/departmentParamType';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
 /*
@@ -38,6 +44,28 @@ const CaseStudySubmit = () => {
   useEffect(() => {
     getTypeData();
   }, [setCaseStudyType]);
+
+  const [loading, setLoading] = useState(true);
+  const [optionData, setOptionData] = useState([{}]);
+
+  useEffect(() => {
+    if(caseStudyType.types){
+      console.log("HGelo",caseStudyType.types.map((Types: any, index: any) => ({
+        value: Types.id, label: Types.name
+      })));
+      const data = caseStudyType.types.map((Types: any, index: any) => ({
+        value: Types.id, label: Types.name
+      }));
+      setOptionData(data);
+    }
+  }, [caseStudyType.types]);
+
+  useEffect(() => {
+    if(optionData.length>1){
+      setLoading(false);
+
+    }
+  }, [optionData]);
 
   const onClickLogOutHandler = async () => {
     await userContext.logout();
@@ -178,11 +206,12 @@ const CaseStudySubmit = () => {
     }
   };
 
-  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
+  const selectChangeValues = (event: any) => {
+    const value = event.value;
     setSelectedCaseStudyType(value);
     getQuestions(value);
-  };
+    
+  }
 
   const handleChange = (event: any) => {
     const image = event.target.files[0];
@@ -212,45 +241,40 @@ const CaseStudySubmit = () => {
     window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
   };
 
+  if(loading){
+    return <p>Loading....</p>
+  }
+
   return (
     <div className="casestudy-background">
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
-        <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
           Log Out
         </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID} />
       <div className="cards-case-study">
         <div className="casestudy-single-card">
-          <h2 className="inside-card -mt-10 mb-8">
+          <h2 className="inside-card mt-10 mb-8">
             <b>Current Case Study</b>
           </h2>
-          <div className="w-full flex flex-col pt-10">
-            <label className="inside-text-case-study">Type of Case Study</label>
-            <select className="minimal" onChange={selectChange}>
-              <option selected disabled>
-                --Select a Case Study type--
-              </option>
-              {caseStudyType.types.map((Types: any, index: any) => {
-                return <option value={Types.id}>{Types.name}</option>;
-              })}
-            </select>
-            <div className="photo">
-              <label className="inside-text-case-study">Upload Photo</label>
-              <div>
-                <div className="person_image float-left">
-                  <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
-                </div>
-                <div className="float-left pl-10">
-                  <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-                  <p>
-                    This person has given permission to share their story <br />
-                    and photo in HHA communications, including online platforms.
-                  </p>
-                  <input type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
-                </div>
+          <p className="inside-text-case-study">Type of Case Study</p>
+          <Select className = "minimal" options={optionData} onChange={selectChangeValues} placeholder = "--Select a Case Study type--"/>
+          <div className="photo">
+            <p className="inside-text-case-study">Upload Photo</p>
+            <div className = "photo-flex flex">
+              <div className="person_image float-left">
+                <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
+              </div>
+              <div className="float-left input-declaration pl-10">
+                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
+                <p className = "photo-text">
+                  This person has given permission to share their story <br />
+                  and photo in HHA communications, including online platforms.
+                </p>
+                <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
             <label className="inside-text-case-study">Title of Case Study?</label>
@@ -273,11 +297,11 @@ const CaseStudySubmit = () => {
                   <>
                     <div className="popup_modal flex flex-col">
                       <div className="popup_child pt-2">
-                        <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
-                        <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                        <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                        <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
                       </div>
 
-                      <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                      <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
                         <button onClick={OnClickNo} className="grey-button-popup w-full ">
                           No
                         </button>

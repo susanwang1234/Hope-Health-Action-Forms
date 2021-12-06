@@ -18,6 +18,7 @@ import ThisMonth from './components/DataPage/ThisMonth';
 import AdminRoute from './hocs/AdminRoute';
 import DashboardRoute from './hocs/DashboardRoute';
 import AdminHeadRoute from './hocs/AdminHeadRoute';
+import AdminEmailForPasswordReset from './components/Admin/AdminEmailForPasswordReset';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
         <AdminRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></AdminRoute>
         <AdminRoute path="/new-user" component={AdminCreateUser}></AdminRoute>
         <AdminRoute path="/edit-user" component={AdminEditUser}></AdminRoute>
+        <AdminRoute path="/edit-emails" component={AdminEmailForPasswordReset}></AdminRoute>
       </Switch>
     </Router>
   );
