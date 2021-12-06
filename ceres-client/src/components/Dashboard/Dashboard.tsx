@@ -33,6 +33,7 @@ const Dashboard = () => {
     if (data.success) {
       userContext.setUser(null);
       userContext.setIsAuthenticated(false);
+      console.log("Deauthenticated user!")
     }
     return <Redirect to="/" />;
   };

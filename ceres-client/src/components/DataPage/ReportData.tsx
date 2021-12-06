@@ -101,11 +101,24 @@ const ReportData = (props: any) => {
       Cancel
     </button>
   );
-  const editButton = (
-    <button className="edit-button" onClick={() => setEditStatus(true)}>
-      Edit
-    </button>
+  let editButton = (
+    <div></div>
   );
+
+    // Disable edit button if you are not part of the department
+    const str = window.location.pathname;
+    const first = str.split('/')[2];
+    const deptId: number = Number(first);
+    console.log("userContext.user?.departmentId:" + userContext.user?.departmentId);
+    console.log("deptId:" + deptId);
+
+  if (userContext.user?.departmentId == deptId) {
+    editButton = (
+      <button id="editButton" className="edit-button" onClick={() => setEditStatus(true)}>
+        Edit
+      </button>
+    );
+  }
 
   const exportAsCsvButton = (
     <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>
@@ -118,6 +131,8 @@ const ReportData = (props: any) => {
       Export as PDF
     </button>
   );
+
+
 
   if (props.data === null) {
     return <p className="m-60 font-bold text-xl">Select a report from the list</p>;

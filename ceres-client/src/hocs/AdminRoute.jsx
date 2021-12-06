@@ -8,10 +8,17 @@ const AdminRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) => {
-        if ((userContext.isAuthenticated) && (userContext.user?.roleId != 4)) {
-          return <Component {...props}></Component>;
+        if (userContext.isAuthenticated) {
+
+          if ((userContext.user?.roleId == 1) || (userContext.user?.roleId == 2)) {
+            console.log("AdminRoute [AUTHENTICATED]!")
+            return <Component {...props}></Component>;
+          } else {
+            return <Redirect to={{ pathname: '/dashboard/' + userContext.user?.departmentId, state: { from: props.location } }} />;
+          }
+
         }
-        return <Redirect to={{ pathname: '/dashboard/' + userContext.user?.departmentId, state: { from: props.location } }} />;
+        return <Redirect to={{ pathname: '/', state: { from: props.location } }} />;
       }}
     />
   );
