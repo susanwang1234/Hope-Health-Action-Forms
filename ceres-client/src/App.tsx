@@ -34,11 +34,8 @@ function App() {
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
-<<<<<<< HEAD
         <PrivateRoute path="/new-announcement" component={NewAnnouncement}></PrivateRoute>
-=======
         <PrivateRoute path="/edit-emails" component={AdminEmailForPasswordReset}></PrivateRoute>
->>>>>>> master
         <PrivateRoute path="/new-user" component={AdminCreateUser}></PrivateRoute>
         <PrivateRoute path="/edit-user" component={AdminEditUser}></PrivateRoute>
       </Switch>
