@@ -55,7 +55,7 @@ option:first-child {
   overflow-y: scroll;
 }
 li.alternate-background-colours:nth-child(odd) {
-  background-color: #fafafa;
+  background-color: #f0f0f0;
 }
 .button-text {
   font-family: Arial;

@@ -16,7 +16,6 @@ Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
 Cite: https://css.gg/pen
 */
 const AdminEditUser = () => {
-  document.body.style.backgroundColor = '#f5f5f5';
   const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -224,124 +223,126 @@ const AdminEditUser = () => {
       <div className="flex h-full">
         <AdminSidebar show={showNav} />
       </div>
-      <div className="cards-case-study">
-        <div className="casestudy-single-card">
-          {originalUserValues.userShown ? (
-            <div>
-              <h2 className="inside-card -mt-10 mb-8">
-                <b>Edit {originalUserValues.originalUsername}</b>
-              </h2>
-              <div className="w-full flex flex-col pt-10">
-                <p>Fields that are left unselected or empty will default to their previously saved values</p>
-                <label className="admin-inner-text">Role</label>
-                <select className="minimal self-center" name="updateRoleId" value={updateUserValues.updateRoleId} onChange={handleChange}>
-                  <option selected>--Select a New Role--</option>
-                  {roleState.roles.map((roleName: any) => {
-                    return <option value={roleName.id}>{roleName.label}</option>;
-                  })}
-                </select>
-                <label className="admin-inner-text" hidden={userIsAdmin}>
-                  Department
-                </label>
-                <select className="minimal self-center" name="updateDepartmentId" value={updateUserValues.updateDepartmentId} hidden={userIsAdmin} onChange={handleChange}>
-                  <option selected>--Select a New Department--</option>
-                  {departmentState.departments.slice(1).map((departmentName: any) => {
-                    return <option value={departmentName.id}>{departmentName.name}</option>;
-                  })}
-                </select>
-                <label className="admin-inner-text">Username</label>
-                <input className="admin-response" name="updateUsername" value={updateUserValues.updateUsername} placeholder="Type new username..." onChange={handleChange}></input>
-                <label className="admin-inner-text">Password</label>
-                <input
-                  className="admin-response"
-                  name="updatePassword"
-                  value={updateUserValues.updatePassword}
-                  type={passwordShown ? 'text' : 'password'}
-                  placeholder="Type new password..."
-                  onChange={handleChange}
-                ></input>
-                <label className="admin-inner-text">Repeat Password</label>
-                <input
-                  className="admin-response"
-                  name="updateRepeatedPassword"
-                  value={updateUserValues.updateRepeatedPassword}
-                  type={passwordShown ? 'text' : 'password'}
-                  placeholder="Type new password..."
-                  onChange={handleChange}
-                ></input>
-                <div className="self-center w-50">
-                  <input className="float-left mr-2 mt-1" type="checkbox" onChange={togglePassword} />
-                  <p>Show password</p>
+      <div className="casestudy-background">
+        <div className="cards-case-study">
+          <div className="casestudy-single-card">
+            {originalUserValues.userShown ? (
+              <div>
+                <h2 className="inside-card -mt-10 mb-8">
+                  <b>Edit {originalUserValues.originalUsername}</b>
+                </h2>
+                <div className="w-full flex flex-col pt-10">
+                  <p>Fields that are left unselected or empty will default to their previously saved values</p>
+                  <label className="admin-inner-text">Role</label>
+                  <select className="minimal self-center" name="updateRoleId" value={updateUserValues.updateRoleId} onChange={handleChange}>
+                    <option selected>--Select a New Role--</option>
+                    {roleState.roles.map((roleName: any) => {
+                      return <option value={roleName.id}>{roleName.label}</option>;
+                    })}
+                  </select>
+                  <label className="admin-inner-text" hidden={userIsAdmin}>
+                    Department
+                  </label>
+                  <select className="minimal self-center" name="updateDepartmentId" value={updateUserValues.updateDepartmentId} hidden={userIsAdmin} onChange={handleChange}>
+                    <option selected>--Select a New Department--</option>
+                    {departmentState.departments.slice(1).map((departmentName: any) => {
+                      return <option value={departmentName.id}>{departmentName.name}</option>;
+                    })}
+                  </select>
+                  <label className="admin-inner-text">Username</label>
+                  <input className="admin-response" name="updateUsername" value={updateUserValues.updateUsername} placeholder="Type new username..." onChange={handleChange}></input>
+                  <label className="admin-inner-text">Password</label>
+                  <input
+                    className="admin-response"
+                    name="updatePassword"
+                    value={updateUserValues.updatePassword}
+                    type={passwordShown ? 'text' : 'password'}
+                    placeholder="Type new password..."
+                    onChange={handleChange}
+                  ></input>
+                  <label className="admin-inner-text">Repeat Password</label>
+                  <input
+                    className="admin-response"
+                    name="updateRepeatedPassword"
+                    value={updateUserValues.updateRepeatedPassword}
+                    type={passwordShown ? 'text' : 'password'}
+                    placeholder="Type new password..."
+                    onChange={handleChange}
+                  ></input>
+                  <div className="self-center w-50">
+                    <input className="float-left mr-2 mt-1" type="checkbox" onChange={togglePassword} />
+                    <p>Show password</p>
+                  </div>
+                </div>
+                <button className="grey-button bottom-5 left-31" onClick={onClickCancel}>
+                  Cancel
+                </button>
+                {isOpen && (
+                  <Popup
+                    content={
+                      <>
+                        <div className="popup_modal flex flex-col">
+                          <div className="popup_child pt-2">
+                            <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                            <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                          </div>
+
+                          <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                            <button className="grey-button-popup w-full" onClick={OnClickNo}>
+                              No
+                            </button>
+                            <button className="blue-button-popup w-full" onClick={OnClickYes}>
+                              Yes
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    }
+                    handleClose={togglePopup}
+                  />
+                )}
+                <button className="blue-button bottom-5 right-20" onClick={() => updateNewValues()}>
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div>
+                <h2 className="inside-card -mt-10 mb-8">
+                  <b>Select a User</b>
+                </h2>
+                <button className="grey-button bottom-5 left-31" onClick={() => (window.location.href = '/departments')}>
+                  Cancel
+                </button>
+                <div className="box-inside-for-overflow">
+                  <ul>
+                    {userState.users.map((selectedUser: any) => {
+                      if (selectedUser.roleId !== 1 && selectedUser.roleId !== 2) {
+                        return (
+                          <li className="alternate-background-colours">
+                            <label className="admin-inner-text">{selectedUser.username}</label>
+                            <button
+                              className="gg-pen"
+                              onClick={() =>
+                                setOriginalUserValues({
+                                  originalUsername: selectedUser.username,
+                                  originalPassword: selectedUser.password,
+                                  originalDepartment: selectedUser.departmentId,
+                                  originalRole: selectedUser.roleId,
+                                  userShown: true,
+                                  userId: selectedUser.id
+                                })
+                              }
+                            />
+                          </li>
+                        );
+                      }
+                      return;
+                    })}
+                  </ul>
                 </div>
               </div>
-              <button className="grey-button bottom-5 left-31" onClick={onClickCancel}>
-                Cancel
-              </button>
-              {isOpen && (
-                <Popup
-                  content={
-                    <>
-                      <div className="popup_modal flex flex-col">
-                        <div className="popup_child pt-2">
-                          <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
-                          <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
-                        </div>
-
-                        <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
-                          <button className="grey-button-popup w-full" onClick={OnClickNo}>
-                            No
-                          </button>
-                          <button className="blue-button-popup w-full" onClick={OnClickYes}>
-                            Yes
-                          </button>
-                        </div>
-                      </div>
-                    </>
-                  }
-                  handleClose={togglePopup}
-                />
-              )}
-              <button className="blue-button bottom-5 right-20" onClick={() => updateNewValues()}>
-                Save
-              </button>
-            </div>
-          ) : (
-            <div>
-              <h2 className="inside-card -mt-10 mb-8">
-                <b>Select a User</b>
-              </h2>
-              <button className="grey-button bottom-5 left-31" onClick={() => (window.location.href = '/departments')}>
-                Cancel
-              </button>
-              <div className="box-inside-for-overflow">
-                <ul>
-                  {userState.users.map((selectedUser: any) => {
-                    if (selectedUser.roleId !== 1 && selectedUser.roleId !== 2) {
-                      return (
-                        <li className="alternate-background-colours">
-                          <label className="admin-inner-text">{selectedUser.username}</label>
-                          <button
-                            className="gg-pen"
-                            onClick={() =>
-                              setOriginalUserValues({
-                                originalUsername: selectedUser.username,
-                                originalPassword: selectedUser.password,
-                                originalDepartment: selectedUser.departmentId,
-                                originalRole: selectedUser.roleId,
-                                userShown: true,
-                                userId: selectedUser.id
-                              })
-                            }
-                          />
-                        </li>
-                      );
-                    }
-                    return;
-                  })}
-                </ul>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
     </div>

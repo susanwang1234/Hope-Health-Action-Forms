@@ -43,6 +43,7 @@ const EmployeeOfTheMonth = () => {
 
   return (
     <div className="flex flex-col w-full card-inner">
+      <p className="title whitesapce-nowrap">Employee of the Month</p>
       <img src={employeeOfTheMonthImage} alt="profile pic" className="profile-pic"></img>
       <h1 className="text-base sm:text-xl md:text-2xl">Name: {employeeOfTheMonth.name}</h1>
       <h1 className="text-base sm:text-xl md:text-2xl">Department: {employeeOfTheMonth.department}</h1>

@@ -13,7 +13,6 @@ import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 
 const ThisMonth = () => {
-  document.body.style.backgroundColor = '#f5f5f5';
   const { deptID } = useParams<departmentParam>();
   const [displayingData, setDisplayingData] = useState<any>(null);
   const [showNav, setShowNav] = useState(false);
@@ -55,7 +54,7 @@ const ThisMonth = () => {
       </header>
       <div className="flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
-        {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}
+        <div className="global-background">{displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <ReportData data={displayingData} />}</div>
       </div>
     </div>
   );

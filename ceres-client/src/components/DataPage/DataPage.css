@@ -116,13 +116,6 @@
   justify-content: space-between;
 }
 
-.cancel-button:hover {
-  background-color: rgb(131, 131, 131);
-}
-.update-button:hover {
-  background: rgb(79, 138, 79);
-}
-
 .grey-button {
   background-color: rgb(245, 245, 245);
   border-color: #d6d6d6;
@@ -147,10 +140,6 @@
   width: 8rem;
   padding: 5px;
   font-weight: bold;
-}
-
-.export-button:hover {
-  background-color: rgb(119, 227, 247);
 }
 
 .select-text {

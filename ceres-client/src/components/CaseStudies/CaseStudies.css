@@ -193,141 +193,133 @@ h2.radio-button-text {
   width: 100px;
 }
 
-.search-bar{
+.search-bar {
   width: 350px;
 }
 
-.submit-button{
+.submit-button {
   padding: auto;
 }
 
-.radio-button-value{
+.radio-button-value {
   font-size: 18px !important;
 }
 
-@media only screen and (max-width: 1028px){
-  .radio-button-value{
+@media only screen and (max-width: 1028px) {
+  .radio-button-value {
     font-size: 16px !important;
   }
-  .button{
+  .button {
     font-size: 18px;
   }
 
-
-  .case-study-title-heading{
+  .case-study-title-heading {
     font-size: 20px;
     font-weight: bold;
     margin-left: 0px;
   }
 
-  .case-study-created-at{
+  .case-study-created-at {
     font-size: 16px;
     color: black;
     padding-top: 5px;
   }
 
-  .case-study-response{
+  .case-study-response {
     font-size: 16px;
   }
 }
 
-@media only screen and (max-width: 900px){
-  .radio-button-value{
+@media only screen and (max-width: 900px) {
+  .radio-button-value {
     font-size: 14px !important;
   }
-  .search-bar{
+  .search-bar {
     width: 250px;
   }
-  .button{
+  .button {
     font-size: 16px;
   }
 }
 
-@media only screen and (max-width: 750px){
-  .radio-column{
+@media only screen and (max-width: 750px) {
+  .radio-column {
     display: table-row;
   }
 
-  .button-div{
+  .button-div {
     text-align: center;
   }
 
-  .search-submit{
+  .search-submit {
     padding-top: 25px;
   }
 }
 
-
-
-
-@media only screen and (max-width: 600px){
-  .radio-column{
+@media only screen and (max-width: 600px) {
+  .radio-column {
     display: table-row;
   }
-  .radio-button-value{
+  .radio-button-value {
     font-size: 14px !important;
   }
 
-  .case-study-created-at{
+  .case-study-created-at {
     font-size: 13px;
     color: black;
     padding-top: 5px;
   }
 
-  .case-study-response{
+  .case-study-response {
     font-size: 13px;
   }
-  .button{
+  .button {
     font-size: 16px;
   }
-  .case-study-block-image{
+  .case-study-block-image {
     width: 100px;
     height: 100px;
   }
-  
 
-  .search-bar{
+  .search-bar {
     width: 280px;
   }
-  .case-study-title-heading{
+  .case-study-title-heading {
     font-size: 17px;
     font-weight: bold;
     margin-left: 0px;
   }
 
-  .button-new-case{
+  .button-new-case {
     width: 230px;
   }
-  .logout-button{
+  .logout-button {
     font-size: 10px !important;
     width: 90px !important;
   }
-  
 }
 
-
-@media only screen and (max-width: 400px){
-  .search-bar{
+@media only screen and (max-width: 400px) {
+  .search-bar {
     width: 200px;
   }
-  .case-study-title-heading{
+  .case-study-title-heading {
     font-size: 15px;
     font-weight: bold;
     margin-left: 0px;
   }
 
-  .case-study-created-at{
+  .case-study-created-at {
     font-size: 12px;
     color: black;
     padding-top: 5px;
   }
 
-  .case-study-response{
+  .case-study-response {
     font-size: 12px;
   }
 
-  .radio-button-value{
+  .radio-button-value {
     font-size: 12px !important;
   }
-  
 }

@@ -20,7 +20,6 @@ import { departmentParam } from '../../types/departmentParamType';
 
 const Dashboard = () => {
   const userContext = useContext(UserContext);
-  document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const { deptID } = useParams<departmentParam>();
   const [toDo, setToDoState] = useState<any>({
@@ -85,23 +84,25 @@ const Dashboard = () => {
             </header>
             <Sidebar show={showNav} departmentID={deptID} />
             <div className="dashboard-container">
-              <div className="dashboard-cards flex lg:flex-row flex-col">
-                <div className="equal-width">
-                  <div className="flex flex-col w-full">
-                    <p className="title">To Do</p>
-                    <div className="card-inner width-100-percent">{ToDo()}</div>
+              <div className="global-background">
+                <div className="dashboard-cards flex lg:flex-row flex-col">
+                  <div className="equal-width">
+                    <div className="flex flex-col w-full">
+                      <div className="card-inner width-100-percent">
+                        <p className="title">To Do</p>
+                        {ToDo()}
+                      </div>
 
-                    <p className="title mt-6">
-                      Leaderboard
-                      <div className="align-right icon instructions">{Instruction()}</div>
-                    </p>
-                    <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
+                      <p className="title mt-6">
+                        <div className="align-right icon instructions">{Instruction()}</div>
+                      </p>
+                      <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
+                    </div>
                   </div>
-                </div>
-                <div className="equal-width lg:pl-14 mt-6 lg:mt-0">
-                  <div className="flex flex-col w-full">
-                    <p className="title whitesapce-nowrap">Employee of the Month</p>
-                    <div className="">{EmployeeOfTheMonth()}</div>
+                  <div className="equal-width lg:pl-14 mt-6 lg:mt-0">
+                    <div className="flex flex-col w-full">
+                      <div className="">{EmployeeOfTheMonth()}</div>
+                    </div>
                   </div>
                 </div>
               </div>

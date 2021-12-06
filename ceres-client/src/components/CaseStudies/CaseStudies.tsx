@@ -20,7 +20,6 @@ const CaseStudy = (props: any) => {
 
   const { deptID } = useParams<departmentParam>();
   let queryStr = '';
-  document.body.style.backgroundColor = '#f5f5f5';
   const [selectedCaseStudyType, setSelectedCaseStudyType] = useState('0');
   const [caseStudyType, setCaseStudyType] = useState({
     types: []
@@ -165,82 +164,84 @@ const CaseStudy = (props: any) => {
         </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID} />
-      <div className="container">
-        <table>
-          <tr>
-            <td className="radio-column">
-              <div className="card">
-                <div className="card-inner-case-study">
-                  <table className="filter-container">
-                    <tr className="radio-button-value">
-                      <td>
-                        <div>
-                          <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>
-                          <h2 className="radio-button-text">All Case Studies</h2>
-                        </div>
-                      </td>
-                    </tr>
-                    {caseStudyType.types.map((Types: any) => {
-                      return (
-                        <tr className="radio-button-value">
-                          <td>
-                            <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioButtonHandler}></input>
-                            <h2 className="radio-button-text">{Types.name}</h2>
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </table>
-                </div>
-              </div>
-              <Link to={`${createDashboardIDPath(deptID)}/case-studies/new`}>
-                <div className="button-div">
-                  <button className="button-new-case">+ Add Case Study</button>
-                </div>
-              </Link>
-            </td>
-            <td className="column-right radio-column">
-              <Form>
-                <div className="search-submit flex">
-                  <div className="search-bar">
-                    <Form.Group className="mb-3" controlId="formSearch">
-                      <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
-                    </Form.Group>
-                  </div>
-                  <div className="pl-4">
-                    <Button className="submit-button" variant="primary" type="button" onClick={() => search()}>
-                      Submit
-                    </Button>
-                  </div>
-                </div>
-              </Form>
-              <p id="results-msg"></p>
-              <div className="case-study-block-container">
-                {caseStudyState.caseStudies.map((caseStudy: any) => {
-                  return (
-                    <table className="case-study-block">
-                      <tr>
-                        <td className="case-study-block-image">
-                          <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
-                        </td>
-                        <td className="case-study-block-text">
-                          <h2 className="case-study-title-heading">{caseStudy.title}</h2>
-                          <h5 className="case-study-created-at">{caseStudy.createdAt}</h5>
-                          <p className="case-study-response">{caseStudy.response}</p>
-                        </td>
-                        <td className="case-study-block-button">
-                          <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>
-                            <button className="button">View</button>
-                          </Link>
+      <div className="global-background">
+        <div className="container">
+          <table>
+            <tr>
+              <td className="radio-column">
+                <div className="card">
+                  <div className="card-inner-case-study">
+                    <table className="filter-container">
+                      <tr className="radio-button-value">
+                        <td>
+                          <div>
+                            <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>
+                            <h2 className="radio-button-text">All Case Studies</h2>
+                          </div>
                         </td>
                       </tr>
+                      {caseStudyType.types.map((Types: any) => {
+                        return (
+                          <tr className="radio-button-value">
+                            <td>
+                              <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioButtonHandler}></input>
+                              <h2 className="radio-button-text">{Types.name}</h2>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </table>
-                  );
-                })}
-              </div>
-            </td>
-          </tr>
-        </table>
+                  </div>
+                </div>
+                <Link to={`${createDashboardIDPath(deptID)}/case-studies/new`}>
+                  <div className="button-div">
+                    <button className="button-new-case">+ Add Case Study</button>
+                  </div>
+                </Link>
+              </td>
+              <td className="column-right radio-column">
+                <Form>
+                  <div className="search-submit flex">
+                    <div className="search-bar">
+                      <Form.Group className="mb-3" controlId="formSearch">
+                        <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
+                      </Form.Group>
+                    </div>
+                    <div className="pl-4">
+                      <Button className="button" variant="primary" type="button" onClick={() => search()}>
+                        Submit
+                      </Button>
+                    </div>
+                  </div>
+                </Form>
+                <p id="results-msg"></p>
+                <div className="case-study-block-container">
+                  {caseStudyState.caseStudies.map((caseStudy: any) => {
+                    return (
+                      <table className="case-study-block">
+                        <tr>
+                          <td className="case-study-block-image">
+                            <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
+                          </td>
+                          <td className="case-study-block-text">
+                            <h2 className="case-study-title-heading">{caseStudy.title}</h2>
+                            <h5 className="case-study-created-at">{caseStudy.createdAt}</h5>
+                            <p className="case-study-response">{caseStudy.response}</p>
+                          </td>
+                          <td className="case-study-block-button">
+                            <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>
+                              <button className="button">View</button>
+                            </Link>
+                          </td>
+                        </tr>
+                      </table>
+                    );
+                  })}
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   );

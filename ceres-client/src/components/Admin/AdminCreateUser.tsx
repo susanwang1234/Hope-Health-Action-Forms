@@ -16,7 +16,6 @@ Cite: https://melvingeorge.me/blog/show-or-hide-password-ability-reactjs
 */
 
 const AdminCreateUser = () => {
-  document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
   const [userIsAdmin, setUserIsAdmin] = useState<boolean>(false);
@@ -166,74 +165,76 @@ const AdminCreateUser = () => {
       <div className="flex h-full">
         <AdminSidebar show={showNav} />
       </div>
-      <div className="cards-case-study">
-        <div className="casestudy-single-card">
-          <h2 className="inside-card -mt-10 mb-8">
-            <b>Create a New User</b>
-          </h2>
-          <div className="w-full flex flex-col pt-10">
-            <label className="admin-inner-text">Role</label>
-            <select className="minimal self-center" onChange={selectChange}>
-              <option selected>--Select a Role--</option>
-              {roleState.roles.map((roleName: any) => {
-                return <option value={roleName.id}>{roleName.label}</option>;
-              })}
-            </select>
-            <label hidden={userIsAdmin} className="admin-inner-text">
-              Department
-            </label>
-            <select className="minimal self-center" hidden={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
-              <option selected>--Select a Department--</option>
-              {departmentState.departments.slice(1).map((departmentName: any) => {
-                return <option value={departmentName.id}>{departmentName.name}</option>;
-              })}
-            </select>
-            <label className="admin-inner-text">Username</label>
-            <input value={username} onChange={(event) => setUsername(event.target.value)} className="admin-response" placeholder="Type here..."></input>
-            <label className="admin-inner-text">Password</label>
-            <input value={password} type={passwordShown ? 'text' : 'password'} onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
-            <label className="admin-inner-text">Repeat Password</label>
-            <input
-              value={repeatedPassword}
-              onChange={(event) => setRepeatedPassword(event.target.value)}
-              className="admin-response"
-              type={passwordShown ? 'text' : 'password'}
-              placeholder="Type here..."
-            ></input>
-            <div className="self-center w-50">
-              <input className="float-left mr-2 mt-1" onChange={togglePassword} type="checkbox" />
-              <p>Show password</p>
-            </div>
-            <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
-              Cancel
-            </button>
-            {isOpen && (
-              <Popup
-                content={
-                  <>
-                    <div className="popup_modal flex flex-col">
-                      <div className="popup_child pt-2">
-                        <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
-                        <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
-                      </div>
+      <div className="casestudy-background">
+        <div className="cards-case-study">
+          <div className="casestudy-single-card">
+            <h2 className="inside-card mb-8">
+              <b>Create a New User</b>
+            </h2>
+            <div className="w-full flex flex-col pt-10">
+              <label className="admin-inner-text">Role</label>
+              <select className="minimal self-center" onChange={selectChange}>
+                <option selected>--Select a Role--</option>
+                {roleState.roles.map((roleName: any) => {
+                  return <option value={roleName.id}>{roleName.label}</option>;
+                })}
+              </select>
+              <label hidden={userIsAdmin} className="admin-inner-text">
+                Department
+              </label>
+              <select className="minimal self-center" hidden={userIsAdmin} onChange={(event) => setDepartmentId(event.target.value)}>
+                <option selected>--Select a Department--</option>
+                {departmentState.departments.slice(1).map((departmentName: any) => {
+                  return <option value={departmentName.id}>{departmentName.name}</option>;
+                })}
+              </select>
+              <label className="admin-inner-text">Username</label>
+              <input value={username} onChange={(event) => setUsername(event.target.value)} className="admin-response" placeholder="Type here..."></input>
+              <label className="admin-inner-text">Password</label>
+              <input value={password} type={passwordShown ? 'text' : 'password'} onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
+              <label className="admin-inner-text">Repeat Password</label>
+              <input
+                value={repeatedPassword}
+                onChange={(event) => setRepeatedPassword(event.target.value)}
+                className="admin-response"
+                type={passwordShown ? 'text' : 'password'}
+                placeholder="Type here..."
+              ></input>
+              <div className="self-center w-50">
+                <input className="float-left mr-2 mt-1" onChange={togglePassword} type="checkbox" />
+                <p>Show password</p>
+              </div>
+              <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
+                Cancel
+              </button>
+              {isOpen && (
+                <Popup
+                  content={
+                    <>
+                      <div className="popup_modal flex flex-col">
+                        <div className="popup_child pt-2">
+                          <p className="w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                          <p className="w-full text-center">It will remove all the fields that you have filled!!</p>
+                        </div>
 
-                      <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
-                        <button onClick={OnClickNo} className="grey-button-popup w-full ">
-                          No
-                        </button>
-                        <button onClick={OnClickYes} className="blue-button-popup w-full">
-                          Yes
-                        </button>
+                        <div className="flex w-full mt-10 relative justify-between px-20 space-x-10 pb-2">
+                          <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                            No
+                          </button>
+                          <button onClick={OnClickYes} className="blue-button-popup w-full">
+                            Yes
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </>
-                }
-                handleClose={togglePopup}
-              />
-            )}
-            <button onClick={createUser} className="blue-button bottom-5 right-20">
-              Submit
-            </button>
+                    </>
+                  }
+                  handleClose={togglePopup}
+                />
+              )}
+              <button onClick={createUser} className="blue-button bottom-5 right-20">
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>

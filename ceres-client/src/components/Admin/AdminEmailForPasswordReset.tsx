@@ -15,7 +15,6 @@ Cite: https://stackoverflow.com/questions/41348459/regex-in-react-email-validati
 */
 
 const AdminEmailForPasswordReset = () => {
-  document.body.style.backgroundColor = '#f5f5f5';
   const userContext = useContext(UserContext);
   const [showNav, setShowNav] = useState(false);
   const [newEmail, setNewEmail] = useState<string>('');
@@ -129,40 +128,42 @@ const AdminEmailForPasswordReset = () => {
       <div className="flex h-full">
         <AdminSidebar show={showNav} />
       </div>
-      <div className="cards-case-study">
-        <div className="casestudy-single-card">
-          <h2 className="inside-card -mt-10 mb-8">
-            <b>Emails to Reset Passwords</b>
-          </h2>
-          <div className="box-inside-for-overflow">
-            <ul>
-              {adminEmails.emails.map((Emails: any, index: number) => {
-                return (
-                  <li className="alternate-background-colours">
-                    <p>
-                      <input className="admin-inner-input-text" id={'input-id-' + index} defaultValue={Emails.email} disabled={true} onChange={(event) => setEditEmail(event.target.value)}></input>
-                      <button className="gg-pen" onClick={() => editCurrentEmail(index)} />
-                      <button className="gg-close" onClick={() => deleteAnEmail(Emails.id)} />
-                      <button className="button-text" onClick={() => validateEmailAddress(index, Emails.id)}>
-                        Save
-                      </button>
-                    </p>
-                  </li>
-                );
-              })}
-              <li className="alternate-background-colours">
-                <p>
-                  <input className="admin-inner-input-text" id={'input-id-' + adminEmails.emails.length} defaultValue={''} onChange={(event) => setNewEmail(event.target.value)}></input>
-                  <button className="button-text" onClick={() => validateEmailAddress(adminEmails.emails.length)}>
-                    Submit
-                  </button>
-                </p>
-              </li>
-            </ul>
+      <div className="casestudy-background">
+        <div className="cards-case-study">
+          <div className="casestudy-single-card">
+            <h2 className="inside-card -mt-10 mb-8">
+              <b>Emails to Reset Passwords</b>
+            </h2>
+            <div className="box-inside-for-overflow">
+              <ul>
+                {adminEmails.emails.map((Emails: any, index: number) => {
+                  return (
+                    <li className="alternate-background-colours">
+                      <p>
+                        <input className="admin-inner-input-text" id={'input-id-' + index} defaultValue={Emails.email} disabled={true} onChange={(event) => setEditEmail(event.target.value)}></input>
+                        <button className="gg-pen" onClick={() => editCurrentEmail(index)} />
+                        <button className="gg-close" onClick={() => deleteAnEmail(Emails.id)} />
+                        <button className="button-text" onClick={() => validateEmailAddress(index, Emails.id)}>
+                          Save
+                        </button>
+                      </p>
+                    </li>
+                  );
+                })}
+                <li className="alternate-background-colours">
+                  <p>
+                    <input className="admin-inner-input-text" id={'input-id-' + adminEmails.emails.length} defaultValue={''} onChange={(event) => setNewEmail(event.target.value)}></input>
+                    <button className="button-text" onClick={() => validateEmailAddress(adminEmails.emails.length)}>
+                      Submit
+                    </button>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
+              Cancel
+            </button>
           </div>
-          <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
-            Cancel
-          </button>
         </div>
       </div>
     </div>

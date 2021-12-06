@@ -15,7 +15,6 @@ import { departmentParam } from '../../types/departmentParamType';
 
 const DataPage = () => {
   const { deptID } = useParams<departmentParam>();
-  document.body.style.backgroundColor = '#f5f5f5';
 
   const [reports, setReports] = useState([]);
   const [indexOfSelectedReport, setindexOfSelectedReport] = useState<any>(null);
@@ -61,17 +60,19 @@ const DataPage = () => {
           Log Out
         </button>
       </header>
-      <div className="list-view-report flex justify-center">
-        <Sidebar show={showNav} departmentID={deptID} />
-        <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
-          <h4 className="text-center pb-3">Submitted Reports</h4>
-          <ul className="list-of-reports">
-            {reports.map((report: any, index: number) => (
-              <ReportElement data={report} onClick={() => handleClick(index)} />
-            ))}
-          </ul>
+      <Sidebar show={showNav} departmentID={deptID} />
+      <div className="global-background ">
+        <div className="list-view-report flex justify-center">
+          <div className=" data-list font-bold text-center p-4 m-6 row-span-3 relative rounded min-w-16">
+            <h4 className="text-center pb-3">Submitted Reports</h4>
+            <ul className="list-of-reports">
+              {reports.map((report: any, index: number) => (
+                <ReportElement data={report} onClick={() => handleClick(index)} />
+              ))}
+            </ul>
+          </div>
+          {displayingData === null ? <p className="select-text m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
         </div>
-        {displayingData === null ? <p className="select-text m-60 font-bold text-xl">Select a report from the list</p> : <ReportData data={displayingData} />}
       </div>
     </React.Fragment>
   );

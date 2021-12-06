@@ -22,7 +22,6 @@
   align-items: center;
   justify-content: space-between;
 }
-
 .radio-button {
   margin-right: 10px;
 }
@@ -30,7 +29,8 @@
 .case-study-img {
   width: 300px;
   border-radius: 5px;
-  box-shadow: 10px 10px 10px #ededed, -5px -5px 13px #ffffff;
+  border-color: #cfcfcf;
+  border-width: 1px;
 }
 
 table {
@@ -121,24 +121,23 @@ td {
   width: 100px;
 }
 
-.case-study-block-text-heading{
+.case-study-block-text-heading {
   word-break: break-all;
   width: 1000px !important;
   height: auto;
   text-align: center !important;
 }
 
-
-@media only screen and (max-width: 790px){
-  .case-study-title{
+@media only screen and (max-width: 790px) {
+  .case-study-title {
     font-size: 26px;
     font-weight: bold;
   }
 
-  .case-study-date{
+  .case-study-date {
     font-size: 20px;
   }
-  .case-study-desc{
+  .case-study-desc {
     font-size: 23px;
   }
 
@@ -150,46 +149,45 @@ td {
     width: 250px;
   }
 
-  .container{
+  .container {
     max-width: 620px !important;
-  } 
-
+  }
 }
 
-@media only screen and (max-width: 600px){
-  .container{
+@media only screen and (max-width: 600px) {
+  .container {
     max-width: 500px !important;
-  } 
-  .case-study-title{
+  }
+  .case-study-title {
     font-size: 24px;
     font-weight: bold;
   }
 
-  .case-study-date{
+  .case-study-date {
     font-size: 18px;
   }
-  .case-study-desc{
+  .case-study-desc {
     font-size: 21px;
   }
 
-  .view-cancel-form-button{
+  .view-cancel-form-button {
     font-size: 15px !important;
   }
 }
 
-@media only screen and (max-width: 500px){
-  .container{
+@media only screen and (max-width: 500px) {
+  .container {
     max-width: 450px !important;
-  } 
-  .case-study-title{
+  }
+  .case-study-title {
     font-size: 22px;
     font-weight: bold;
   }
 
-  .case-study-date{
+  .case-study-date {
     font-size: 16px;
   }
-  .case-study-desc{
+  .case-study-desc {
     font-size: 19px;
   }
 
@@ -197,7 +195,7 @@ td {
     font-style: bold !important;
     margin-top: 18px;
   }
-  
+
   .response {
     font-style: normal !important;
     margin-left: 20px;
@@ -214,15 +212,15 @@ td {
   }
 }
 
-@media only screen and (max-width: 400px){
-  .container{
+@media only screen and (max-width: 400px) {
+  .container {
     max-width: 375px !important;
-  } 
+  }
   .question {
     font-style: bold !important;
     margin-top: 16px;
   }
-  
+
   .response {
     font-style: normal !important;
     margin-left: 20px;
@@ -230,5 +228,3 @@ td {
     font-size: 13px;
   }
 }
-
-

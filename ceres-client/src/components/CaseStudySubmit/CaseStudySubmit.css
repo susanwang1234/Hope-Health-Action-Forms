@@ -55,6 +55,7 @@ CSS Classes
   min-height: 100vh;
   overflow: hidden;
   width: 100%;
+  padding-top: 80px;
 }
 .casestudy-single-card {
   background-color: rgb(255, 255, 255);
@@ -136,7 +137,7 @@ select {
   margin: 4px;
   width: 400px !important;
 }
-.minimal>div{
+.minimal > div {
   border: 0.5px solid black !important;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -162,14 +163,12 @@ textarea.response {
   width: 100%;
 }
 
-
-
-@media only screen and (max-width: 1028px){
-  .cards-case-study{
+@media only screen and (max-width: 1028px) {
+  .cards-case-study {
     margin: 20px 150px;
   }
 
-  .casestudy-single-card{
+  .casestudy-single-card {
     min-height: 70vh;
   }
 
@@ -177,45 +176,43 @@ textarea.response {
     width: 300px !important;
   }
 
-  .photo-text{
+  .photo-text {
     font-size: 14px;
   }
 
-  .input-photo{
+  .input-photo {
     font-size: 16px;
   }
 
-  .inside-card{
+  .inside-card {
     margin-top: 0.5rem;
     font-size: 16px;
   }
-  
 }
 
-@media only screen and (max-width: 830px){
-  .photo-text{
+@media only screen and (max-width: 830px) {
+  .photo-text {
     font-size: 12px;
   }
-
 }
 
-@media only screen and (max-width: 600px){
-  .cards-case-study{
+@media only screen and (max-width: 600px) {
+  .cards-case-study {
     margin-top: 0px;
   }
 
-  .popup-question{
+  .popup-question {
     font-size: 16px;
   }
-  .popup-warning{
+  .popup-warning {
     font-size: 14px;
   }
 
-  .inside-card{
+  .inside-card {
     font-size: 15px;
   }
 
-  .casestudy-single-card{
+  .casestudy-single-card {
     padding-top: 20px;
   }
 
@@ -223,32 +220,27 @@ textarea.response {
     width: 275px !important;
   }
 
-  .photo-flex{
+  .photo-flex {
     flex-direction: column;
   }
-  .inside-text-case-study,
-  label.inside-text-case-study {
-    font-size: 16px;
-  }
-  
-  .input-photo{
+
+  .input-photo {
     font-size: 12px;
   }
 
-  .input-declaration{
+  .input-declaration {
     padding-left: 0px;
   }
 
-  .minimal>div{
+  .minimal > div {
     font-size: 12px !important;
   }
 
-  select{
+  select {
     padding: 0.5em 1em 0.5em 1em;
   }
-  .logout-button{
+  .logout-button {
     font-size: 10px !important;
     width: 90px !important;
   }
 }
-

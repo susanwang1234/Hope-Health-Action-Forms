@@ -16,7 +16,6 @@ import { departmentParam } from '../../types/departmentParamType';
 
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
-  document.body.style.backgroundColor = '#f5f5f5';
   const [checkMark, SetCheckMark] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [shareImage, setShareImage] = useState('');
@@ -36,7 +35,6 @@ const AdminEmployeeOfTheMonth = () => {
     }
     return <Redirect to="/" />;
   };
-  
 
   useEffect(() => {
     getDepartments();
@@ -65,7 +63,7 @@ const AdminEmployeeOfTheMonth = () => {
       toast.error("Check Box isn't marked!! Please mark the checkbox.");
       return;
     }
-    
+
     if (employeeName === '' || employeeDescription === '' || selectedDepartment === 'Nothing selected') {
       toast.error('Please fill in all fields.');
       return;
@@ -153,70 +151,72 @@ const AdminEmployeeOfTheMonth = () => {
       <div className="flex h-full">
         <AdminSidebar show={showNav} />
       </div>
-      <div className="cards-case-study">
-        <div className="casestudy-single-card">
-          <h2 className="inside-card -mt-10 mb-8 employee-heading">
-            <b>New Employee of the Month</b>
-          </h2>
-          <div className="photo">
-            <label className="inside-text-case-study">Upload Photo</label>
-            <div>
-              <div className="person_image float-left">
-                <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
+      <div className="casestudy-background">
+        <div className="cards-case-study">
+          <div className="casestudy-single-card">
+            <h2 className="inside-card -mt-10 mb-8 employee-heading">
+              <b>New Employee of the Month</b>
+            </h2>
+            <div className="photo">
+              <label className="inside-text-case-study">Upload Photo</label>
+              <div>
+                <div className="person_image float-left">
+                  <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
+                </div>
+                <div className="float-left pl-10 declarartion-checkbox">
+                  <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
+                  <p className="photo-text">
+                    This person has given permission to share their story <br />
+                    and photo in HHA communications, including online platforms.
+                  </p>
+                  <input className="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                </div>
               </div>
-              <div className="float-left pl-10 declarartion-checkbox">
-                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-                <p className = "photo-text">
-                  This person has given permission to share their story <br />
-                  and photo in HHA communications, including online platforms.
-                </p>
-                <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
-              </div>
-            </div>
-            <div className="w-full flex flex-col pt-10">
-              <label className="inside-text-case-study">What is their name?</label>
-              <textarea value={employeeName} onChange={(event) => setEmployeeName(event.target.value)} className="response" placeholder="Type here..."></textarea>
-              <label className="inside-text-case-study">What department do they work in?</label>
-              <select className="minimal" onChange={(event) => setSelectedDepartment(event.target.value)}>
-                <option selected disabled>
-                  --Select a Department--
-                </option>
-                {departmentState.departments.slice(1).map((departmentName: any) => {
-                  return <option value={departmentName.id}>{departmentName.name}</option>;
-                })}
-              </select>
-              <label className="inside-text-case-study">Why are they employee of the month?</label>
-              <textarea value={employeeDescription} onChange={(event) => setEmployeeDescription(event.target.value)} className="response" placeholder="Type here..."></textarea>
-              <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
-                Cancel
-              </button>
-              {isOpen && (
-                <Popup
-                  content={
-                    <>
-                      <div className="popup_modal flex flex-col">
-                        <div className="popup_child pt-2">
-                          <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
-                          <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
-                        </div>
+              <div className="w-full flex flex-col pt-10">
+                <label className="inside-text-case-study">What is their name?</label>
+                <textarea value={employeeName} onChange={(event) => setEmployeeName(event.target.value)} className="response" placeholder="Type here..."></textarea>
+                <label className="inside-text-case-study">What department do they work in?</label>
+                <select className="minimal" onChange={(event) => setSelectedDepartment(event.target.value)}>
+                  <option selected disabled>
+                    --Select a Department--
+                  </option>
+                  {departmentState.departments.slice(1).map((departmentName: any) => {
+                    return <option value={departmentName.id}>{departmentName.name}</option>;
+                  })}
+                </select>
+                <label className="inside-text-case-study">Why are they employee of the month?</label>
+                <textarea value={employeeDescription} onChange={(event) => setEmployeeDescription(event.target.value)} className="response" placeholder="Type here..."></textarea>
+                <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
+                  Cancel
+                </button>
+                {isOpen && (
+                  <Popup
+                    content={
+                      <>
+                        <div className="popup_modal flex flex-col">
+                          <div className="popup_child pt-2">
+                            <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                            <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
+                          </div>
 
-                        <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
-                          <button onClick={OnClickNo} className="grey-button-popup w-full ">
-                            No
-                          </button>
-                          <button onClick={OnClickYes} className="blue-button-popup w-full">
-                            Yes
-                          </button>
+                          <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
+                            <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                              No
+                            </button>
+                            <button onClick={OnClickYes} className="blue-button-popup w-full">
+                              Yes
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  }
-                  handleClose={togglePopup}
-                />
-              )}
-              <button onClick={saveImageForEmployeeOfTheMonth} className="blue-button bottom-5 right-20">
-                Submit
-              </button>
+                      </>
+                    }
+                    handleClose={togglePopup}
+                  />
+                )}
+                <button onClick={saveImageForEmployeeOfTheMonth} className="blue-button bottom-5 right-20">
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
         </div>

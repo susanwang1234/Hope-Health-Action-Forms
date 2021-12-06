@@ -6,9 +6,12 @@ import { BsPencilSquare, BsFillCalendarFill } from 'react-icons/bs';
 import { IoIosJournal } from 'react-icons/io';
 import { FaHistory } from 'react-icons/fa';
 import { ImStatsDots } from 'react-icons/im';
-import { BsFileEarmarkTextFill } from 'react-icons/bs';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
+import { MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import './Sidebar.css';
+/*
+ Cite: https://css.gg/chevron-down
+*/
 
 const Sidebar = ({ show, departmentID }: any) => {
   const [open, setOpen] = useState(false);
@@ -35,10 +38,10 @@ const Sidebar = ({ show, departmentID }: any) => {
         </li>
         <li>
           <Button className="side-button" onClick={() => setOpen(!open)}>
-            <BsFileEarmarkTextFill />
+            <MdOutlineKeyboardArrowDown />
             Reports
           </Button>
-          {open && ( 
+          {open && (
             <li>
               <Link to={{ pathname: createDashboardIDPath(departmentID) + '/submit-report', state: { currentDeparmentID: departmentID } }} className="drop-link" color="red">
                 <BsFillCalendarFill />

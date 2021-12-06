@@ -17,7 +17,6 @@ import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
 import Select from 'react-select';
 
-
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -49,21 +48,25 @@ const CaseStudySubmit = () => {
   const [optionData, setOptionData] = useState([{}]);
 
   useEffect(() => {
-    if(caseStudyType.types){
-      console.log("HGelo",caseStudyType.types.map((Types: any, index: any) => ({
-        value: Types.id, label: Types.name
-      })));
+    if (caseStudyType.types) {
+      console.log(
+        'HGelo',
+        caseStudyType.types.map((Types: any, index: any) => ({
+          value: Types.id,
+          label: Types.name
+        }))
+      );
       const data = caseStudyType.types.map((Types: any, index: any) => ({
-        value: Types.id, label: Types.name
+        value: Types.id,
+        label: Types.name
       }));
       setOptionData(data);
     }
   }, [caseStudyType.types]);
 
   useEffect(() => {
-    if(optionData.length>1){
+    if (optionData.length > 1) {
       setLoading(false);
-
     }
   }, [optionData]);
 
@@ -214,8 +217,7 @@ const CaseStudySubmit = () => {
     const value = event.value;
     setSelectedCaseStudyType(value);
     getQuestions(value);
-    
-  }
+  };
 
   const handleChange = (event: any) => {
     const image = event.target.files[0];
@@ -245,12 +247,12 @@ const CaseStudySubmit = () => {
     window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
   };
 
-  if(loading){
-    return <p>Loading....</p>
+  if (loading) {
+    return <p>Loading....</p>;
   }
 
   return (
-    <div className="casestudy-background">
+    <div>
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
@@ -259,69 +261,71 @@ const CaseStudySubmit = () => {
         </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID} />
-      <div className="cards-case-study">
-        <div className="casestudy-single-card">
-          <h2 className="inside-card mt-10 mb-8">
-            <b>Current Case Study</b>
-          </h2>
-          <p className="inside-text-case-study">Type of Case Study</p>
-          <Select className = "minimal" options={optionData} onChange={selectChangeValues} placeholder = "--Select a Case Study type--"/>
-          <div className="photo">
-            <p className="inside-text-case-study">Upload Photo</p>
-            <div className = "photo-flex flex">
-              <div className="person_image float-left">
-                <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
-              </div>
-              <div className="float-left input-declaration pl-10">
-                <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-                <p className = "photo-text">
-                  This person has given permission to share their story <br />
-                  and photo in HHA communications, including online platforms.
-                </p>
-                <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
-              </div>
-            </div>
-            <label className="inside-text-case-study">Title of Case Study?</label>
-            <textarea id={'text-area-id-title'} value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
-            {caseStudyQuestions.questions.map((Questions: any, index: any) => {
-              return (
-                <div>
-                  <label className="inside-text-case-study">{Questions.label}</label>
-                  <textarea id={'text-area-id-' + index} className="response" placeholder="Type response here..."></textarea>
+      <div className="casestudy-background">
+        <div className="cards-case-study">
+          <div className="casestudy-single-card">
+            <h2 className="inside-card mb-8">
+              <b>Current Case Study</b>
+            </h2>
+            <p className="inside-text-case-study">Type of Case Study</p>
+            <Select className="minimal" options={optionData} onChange={selectChangeValues} placeholder="--Select a Case Study type--" />
+            <div className="photo">
+              <p className="inside-text-case-study">Upload Photo</p>
+              <div className="photo-flex flex">
+                <div className="person_image float-left">
+                  <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
                 </div>
-              );
-            })}
+                <div className="float-left input-declaration pl-10">
+                  <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
+                  <p className="photo-text">
+                    This person has given permission to share their story <br />
+                    and photo in HHA communications, including online platforms.
+                  </p>
+                  <input className="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                </div>
+              </div>
+              <label className="inside-text-case-study">Title of Case Study?</label>
+              <textarea id={'text-area-id-title'} value={title} onChange={(event) => setTitle(event.target.value)} className="response" placeholder="Type here..."></textarea>
+              {caseStudyQuestions.questions.map((Questions: any, index: any) => {
+                return (
+                  <div>
+                    <label className="inside-text-case-study">{Questions.label}</label>
+                    <textarea id={'text-area-id-' + index} className="response" placeholder="Type response here..."></textarea>
+                  </div>
+                );
+              })}
 
-            <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
-              Cancel
-            </button>
-            {isOpen && (
-              <Popup
-                content={
-                  <>
-                    <div className="popup_modal flex flex-col">
-                      <div className="popup_child pt-2">
-                        <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
-                        <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
-                      </div>
+              <button onClick={onClickCancel} className="grey-button bottom-5 left-31">
+                Cancel
+              </button>
+              {isOpen && (
+                <Popup
+                  content={
+                    <>
+                      <div className="popup_modal flex flex-col">
+                        <div className="popup_child pt-2">
+                          <p className="popup-question w-full text-center font-bold text-lg">Are you sure you want to cancel?</p>
+                          <p className="popup-warning w-full text-center">It will remove all the fields that you have filled!!</p>
+                        </div>
 
-                      <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
-                        <button onClick={OnClickNo} className="grey-button-popup w-full ">
-                          No
-                        </button>
-                        <button onClick={OnClickYes} className="blue-button-popup w-full">
-                          Yes
-                        </button>
+                        <div className="flex w-full mt-4 sm:mt-10 relative justify-center px-20 space-x-10 pb-2">
+                          <button onClick={OnClickNo} className="grey-button-popup w-full ">
+                            No
+                          </button>
+                          <button onClick={OnClickYes} className="blue-button-popup w-full">
+                            Yes
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  </>
-                }
-                handleClose={togglePopup}
-              />
-            )}
-            <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
-              Submit
-            </button>
+                    </>
+                  }
+                  handleClose={togglePopup}
+                />
+              )}
+              <button onClick={saveImageForCaseStudy} className="blue-button bottom-5 right-20">
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>
