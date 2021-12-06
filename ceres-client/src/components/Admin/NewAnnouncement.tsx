@@ -17,6 +17,27 @@ const NewAnnouncement = () => {
   const userContext = useContext(UserContext);
   const user = userContext.user;
   const [announcement, setAnnouncement] = useState<string>('');
+  const [departmentId, setDepartmentId] = useState<string>('Nothing selected');
+  const [departmentState, setDepartmentState] = useState({
+    departments: []
+  });
+
+  useEffect(() => {
+    getDepartments();
+  }, [setDepartmentState]);
+
+  const getDepartments = async () => {
+    const url = '/department';
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setDepartmentState({
+        departments: data
+      });
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -33,24 +54,23 @@ const NewAnnouncement = () => {
   };
 
 const saveAnnouncement = async () => {
-  const url_add = `/messages`;
-  const url_put = `/messages/` + user?.departmentId;
-  if (announcement.trim() === '') {
-    toast.error('Please write an announcement.');
+  const urlAdd = `/messages`;
+  if (announcement.trim() === '' || departmentId === 'Nothing selected') {
+    toast.error('Please fill in all the fields.');
     return;
   }
 
   const config = {
-      departmentId: user?.departmentId,
+      departmentId: departmentId,
       author: user?.username,
       messageContent: announcement
     }
 
   httpService
-    .post(url_add, config)
+    .post(urlAdd, config)
     .then(() => {
-      toast.success('New announcement added');
-      setAnnouncement("");
+      alert("Your new announcement has been added.");
+      window.location.href = '/new-announcement';
     })
     .catch((error: any) => {
       console.log(error);
@@ -77,7 +97,16 @@ const saveAnnouncement = async () => {
           </h2>
           <div className="announcement">
             <div className="w-full flex flex-col pt-10">
-              <label className="inside-text-case-study">Post your announcement here</label>
+            <label className="admin-inner-text">
+              Department
+            </label>
+            <select className="minimal self-center" onChange={(event) => setDepartmentId(event.target.value)}>
+              <option id="dept" selected>--Select a Department--</option>
+              {departmentState.departments.slice(1).map((departmentName: any) => {
+                return <option value={departmentName.id}>{departmentName.name}</option>;
+              })}
+            </select>
+              <label className="inside-text-case-study self-center">Post your announcement here</label>
               <textarea id="announcement" value={announcement} onChange={(event) => setAnnouncement(event.target.value)} className="response" style={{ height: '600px' }} placeholder="Type here..."></textarea>
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
