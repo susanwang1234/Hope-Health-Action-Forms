@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import '../../App.css';
 import { Department } from '../../models/department';
@@ -6,6 +6,7 @@ import httpService from '../../services/httpService';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 import { makeDateShort } from './FormElement';
+import { UserContext } from '../../UserContext';
 
 const FormData = (props: any) => {
   const { deptID } = useParams<departmentParam>();
@@ -14,6 +15,7 @@ const FormData = (props: any) => {
   const [emptyFields, setEmptyFields] = useState<number[]>([]);
   const [editStatus, setEditStatus] = useState(false);
   const [userDepartment, setUserDepartment] = useState('');
+  const userContext = useContext(UserContext);
   const state = {
     configButton: 1
   };
@@ -225,11 +227,26 @@ const FormData = (props: any) => {
     </button>
   );
 
-  const editButton = (
-    <button className="edit-button" onClick={() => setEditStatus(true)}>
-      Edit
-    </button>
+  let editButton = (
+    <div></div>
   );
+
+
+
+    // Disable edit button if you are not part of the department
+    const str = window.location.pathname;
+    const first = str.split('/')[2];
+    const deptId: number = Number(first);
+    console.log("userContext.user?.departmentId:" + userContext.user?.departmentId);
+    console.log("deptId:" + deptId);
+
+    if ((userContext.user?.departmentId == deptId) || (userContext.user?.roleId == 1) || (userContext.user?.roleId == 2)) {
+      editButton = (
+        <button id="editButton" className="edit-button" onClick={() => setEditStatus(true)}>
+          Edit
+        </button>
+      );
+    }
 
   const exportAsCsvButton = (
     <button className="export-button" onClick={() => exportToCsv(props.data.id)}>
