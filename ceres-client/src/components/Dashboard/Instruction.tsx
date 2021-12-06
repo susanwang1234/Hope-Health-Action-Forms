@@ -26,7 +26,7 @@ const Instruction = () => {
 
     return (
       <>
-        <div id="blurry-background" style={{ background: 'rgba(255,255,255,0.5)', width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}></div>
+        <div id="blurry-background" style={{ background: 'rgba(200,200,200,0.5)', width: '100%', height: '100%', position: 'fixed', top: 0, left: 0 }}></div>
         <Alert show={show} variant="light" style={{ position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <Alert.Heading>
             <h1 className="text-center">How to get points?</h1>

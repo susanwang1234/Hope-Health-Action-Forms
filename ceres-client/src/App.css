@@ -72,24 +72,6 @@ body {
   box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.view-department-button:hover {
-  background-color: #117088;
-  font-family: Arial;
-  font-weight: bold;
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 4px 10px;
-  text-align: center;
-  border-radius: 5px;
-  width: 60%;
-  position: absolute;
-  top: 240px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 .checkmark-icon {
   height: 30px;
   width: 30px;

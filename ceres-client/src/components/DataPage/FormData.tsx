@@ -204,7 +204,7 @@ const FormData = (props: any) => {
   };
 
   const submitButton = (
-    <button form="data-form" onClick={() => (state.configButton = 1)} className="submit-button">
+    <button form="data-form" onClick={() => (state.configButton = 1)} className="form-submit-button">
       Submit data
     </button>
   );

@@ -83,14 +83,6 @@
   background-color: #e7e7e7;
 }
 
-.form-view-button:hover {
-  background-color: #62c8eb;
-}
-
-.edit-button:hover {
-  background-color: rgb(119, 227, 247);
-}
-
 .edit-button {
   color: white;
   border-radius: 0.25rem;
@@ -102,7 +94,7 @@
   font-weight: bold;
 }
 
-.submit-button {
+.form-submit-button {
   color: white;
   border-radius: 0.25rem;
   background-color: #4aa9c9;
@@ -142,20 +134,8 @@
   justify-content: space-between;
 }
 
-.cancel-button:hover {
-  background-color: rgb(131, 131, 131);
-}
-
 .outer-container-this-month {
   padding-top: 80px;
-}
-
-.save-button:hover {
-  background: rgb(79, 138, 79);
-}
-
-.submit-button:hover {
-  background: rgb(88, 114, 202);
 }
 
 .grey-button {
@@ -182,13 +162,10 @@
   width: 8rem;
   padding: 5px;
   font-weight: bold;
+  float: right;
 }
 
-.export-button:hover {
-  background-color: rgb(119, 227, 247);
-}
-
-.list-view-report{
+.list-view-report {
   padding-top: 80px;
 }
 
@@ -232,7 +209,6 @@
     text-align: center;
   }
 
- 
   .data-list {
     width: 300px;
   }

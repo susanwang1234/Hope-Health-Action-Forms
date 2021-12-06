@@ -18,7 +18,13 @@
   background: none;
   border: none;
 }
-.cards-case-study{
+.info-message {
+  font-size: 15px;
+  margin: 4px;
+  position: relative;
+  text-align: center;
+}
+.cards-case-study {
   padding-top: 80px;
 }
 .admin-inner-text {
@@ -62,18 +68,17 @@ li.alternate-background-colours:nth-child(odd) {
   background-color: #fafafa;
 }
 
-
-@media only screen and (max-width: 1300px){
+@media only screen and (max-width: 1300px) {
   .minimal {
     width: 40% !important;
   }
-  .admin-response{
+  .admin-response {
     width: 60%;
   }
 }
 
-@media only screen and (max-width: 900px){
-  .admin-inside-text{
+@media only screen and (max-width: 900px) {
+  .admin-inside-text {
     font-size: 23px !important;
   }
 
@@ -81,11 +86,9 @@ li.alternate-background-colours:nth-child(odd) {
     margin-top: 0rem;
   }
 
-  .admin-response{
+  .admin-response {
     width: 70%;
   }
-
-
 }
 
 .button-text {
@@ -97,74 +100,62 @@ li.alternate-background-colours:nth-child(odd) {
   margin-top: 10px;
 }
 
-.email-inner{
+.email-inner {
   text-align: left !important;
 }
 
-
-@media only screen and (max-width: 900px){
-  .admin-inside-text,.admin-inner-text{
+@media only screen and (max-width: 900px) {
+  .admin-inside-text,
+  .admin-inner-text {
     font-size: 21px !important;
   }
 
-  
-
-  .casestudy-single-card{
+  .casestudy-single-card {
     padding-top: 50px;
   }
 
-  .card-info{
+  .card-info {
     padding-top: 0rem !important;
   }
-
 }
 
-@media only screen and (max-width: 780px){
-  .email-inner{
+@media only screen and (max-width: 780px) {
+  .email-inner {
     font-size: 20px !important;
   }
 }
 
-@media only screen and (max-width: 700px){
-  .admin-response{
+@media only screen and (max-width: 700px) {
+  .admin-response {
     width: 80%;
   }
-
-
 }
 
-@media only screen and (max-width: 600px){
-  .admin-response{
+@media only screen and (max-width: 600px) {
+  .admin-response {
     width: 90%;
   }
 
-  .message{
-    font-size: 15px;
-  }
-
-  .email-inner{
+  .email-inner {
     font-size: 16px !important;
   }
 
-  .email-card-single{
+  .email-card-single {
     margin: 20px 30px;
   }
 
-  .email-card-casestudy{
+  .email-card-casestudy {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .box-inside-for-overflow-email{
+  .box-inside-for-overflow-email {
     padding: 0px !important;
   }
-
 }
 
-
-
-@media only screen and (max-width: 450px){
-  .admin-response{
+@media only screen and (max-width: 450px) {
+  .admin-response {
     width: 90%;
   }
   .casestudy-single-card {
@@ -176,7 +167,7 @@ li.alternate-background-colours:nth-child(odd) {
     margin: 20px 20px;
   }
 
-  .label-start{
+  .label-start {
     padding-top: 0px;
   }
 
@@ -186,10 +177,7 @@ li.alternate-background-colours:nth-child(odd) {
     width: 80vw;
   }
 
-  .message{
+  .message {
     font-size: 14px;
   }
-
-  
 }
-
