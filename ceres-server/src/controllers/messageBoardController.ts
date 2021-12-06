@@ -12,7 +12,6 @@ const getMessages = async (req: Request, res: Response, next: NextFunction) => {
   logging.info(NAMESPACE, `GETTING ${TABLE_NAME.toUpperCase()} BY DEPARTMENT ID`);
   const departmentId: number = +req.params.departmentId;
   if (isInvalidInput(departmentId)) {
-    console.log(departmentId);
     res.status(400).send(departmentNegativeOrNanInputError);
     return;
   }
