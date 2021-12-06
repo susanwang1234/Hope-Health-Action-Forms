@@ -108,7 +108,7 @@ let messageContentArrayDept2 = [
 ];
 
 createNewMessage(3, messageContentArrayDept1[3], 7);
-getMessage('/messages/1', 3, messageContentArrayDept1);
+getMessage('/messages/3', 3, messageContentArrayDept1);
 
 createNewMessage(2, messageContentArrayDept2[3], 8);
 getMessage('/messages/2', 2, messageContentArrayDept2);
