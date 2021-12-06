@@ -50,6 +50,7 @@ const saveAnnouncement = async () => {
     .post(url_add, config)
     .then(() => {
       toast.success('New announcement added');
+      setAnnouncement("");
     })
     .catch((error: any) => {
       console.log(error);
@@ -77,7 +78,7 @@ const saveAnnouncement = async () => {
           <div className="announcement">
             <div className="w-full flex flex-col pt-10">
               <label className="inside-text-case-study">Post your announcement here</label>
-              <textarea value={announcement} onChange={(event) => setAnnouncement(event.target.value)} className="response" style={{ height: '600px' }} placeholder="Type here..."></textarea>
+              <textarea id="announcement" value={announcement} onChange={(event) => setAnnouncement(event.target.value)} className="response" style={{ height: '600px' }} placeholder="Type here..."></textarea>
               <button onClick={onclickCancel} className="grey-button bottom-5 left-31">
                 Cancel
               </button>
