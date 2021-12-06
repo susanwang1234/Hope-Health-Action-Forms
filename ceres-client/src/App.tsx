@@ -29,16 +29,19 @@ function App() {
         <UnPrivateRoute exact path="/" component={Login} />
         <DashboardRoute exact path="/dashboard/:deptID" component={Dashboard}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/:deptID/submit-report" component={ThisMonth}></DashboardRoute>
-        <DashboardRoute exact path="/dashboard/:deptID/data-page" component={DataPage}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></DashboardRoute>
         <DashboardRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></DashboardRoute>
         <DashboardRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/:deptID/data-form/current" component={ThisMonth}></DashboardRoute>
+        <DashboardRoute exact path="/dashboard/:deptID/data-form" component={DataPage}></DashboardRoute>
+        <DashboardRoute path="/dashboard/:deptID/data-form/statistics/" component={StatisticsDashboard}></DashboardRoute>
         <AdminHeadRoute path="/departments" component={Departments}></AdminHeadRoute>
         <AdminRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></AdminRoute>
         <AdminRoute path="/new-user" component={AdminCreateUser}></AdminRoute>
         <AdminRoute path="/edit-user" component={AdminEditUser}></AdminRoute>
         <AdminRoute path="/edit-emails" component={AdminEmailForPasswordReset}></AdminRoute>
+
       </Switch>
     </Router>
   );

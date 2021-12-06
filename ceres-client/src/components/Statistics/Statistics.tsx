@@ -9,14 +9,12 @@ import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
 import { toast } from 'react-toastify';
-import { MONTHS } from '../../util/timezone';
+import { MONTHS } from '../../utils/timezone';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 
-
 const StatisticsDashboard = () => {
-
   const userContext = useContext(UserContext);
   const { deptID } = useParams<departmentParam>();
   const [departmentName, setDepartmentName] = useState('');
@@ -30,7 +28,7 @@ const StatisticsDashboard = () => {
   const [endMonth, setEndMonth] = useState('');
   const [endYear, setEndYear] = useState(0);
   const [isSearching, setSearching] = useState(false);
-  
+
   useEffect(() => {
     getDepartmentName();
   }, []);
@@ -103,7 +101,7 @@ const StatisticsDashboard = () => {
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
         <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
-           Log Out
+          Log Out
         </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID}></Sidebar>
@@ -170,7 +168,6 @@ const StatisticsDashboard = () => {
             </ul>
           </div>
           <div className="right-container">
-            
             {dataForPlots[0] ? (
               <Plot
                 className="plot statistics-card"
