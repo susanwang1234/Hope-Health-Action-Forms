@@ -5,7 +5,6 @@ import logo from '../../images/navlogo.png';
 import 'react-calendar/dist/Calendar.css';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
-import { Redirect } from 'react-router-dom';
 import 'react-calendar/dist/Calendar.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
@@ -15,7 +14,7 @@ import Leaderboard from './Leaderboard';
 import EmployeeOfTheMonth from './EmployeeOfTheMonth';
 import ToDo from './ToDo';
 import Instruction from './Instruction';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 
 const Dashboard = () => {
@@ -29,6 +28,11 @@ const Dashboard = () => {
   const [pointSystem, setPointSystem] = useState<any>({
     monthlyPointSystem: []
   });
+
+  const onClickLogOutHandler = async () => {
+    await userContext.logout();
+    return <Redirect to="/" />;
+  };
 
   const getToDoStatus = async () => {
     const url = '/to-do';
@@ -58,15 +62,6 @@ const Dashboard = () => {
   useEffect(() => {
     getToDoStatus();
   }, [setToDoState]);
-
-  const onClickLogOutHandler = async () => {
-    const data = await AuthService.logout();
-    if (data.success) {
-      userContext.setUser(null);
-      userContext.setIsAuthenticated(false);
-    }
-    return <Redirect to="/" />;
-  };
 
   return (
     <>

@@ -5,12 +5,11 @@ import './CaseStudies.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Redirect, useParams } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import AuthService from '../../services/authService';
-import { Redirect } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 import { departmentParam } from '../../types/departmentParamType';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
@@ -122,6 +121,11 @@ const CaseStudy = (props: any) => {
     }
   };
 
+  const onClickLogOutHandler = async () => {
+    await userContext.logout();
+    return <Redirect to="/" />;
+  };
+
   const getCaseStudiesByType = async (caseStudyTypeId: any) => {
     const url = `/case-studies/${caseStudyTypeId}`;
     try {
@@ -147,15 +151,6 @@ const CaseStudy = (props: any) => {
     const value = event.target.value;
     setSelectedCaseStudyType(value);
     value !== '0' ? getCaseStudiesByType(value) : getCaseStudies();
-  };
-
-  const onClickLogOutHandler = async () => {
-    const data = await AuthService.logout();
-    if (data.success) {
-      userContext.setUser(null);
-      userContext.setIsAuthenticated(false);
-    }
-    return <Redirect to="/" />;
   };
 
   return (

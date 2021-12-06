@@ -31,11 +31,7 @@ const AdminEmployeeOfTheMonth = () => {
   });
 
   const onClickLogOutHandler = async () => {
-    const data = await AuthService.logout();
-    if (data.success) {
-      userContext.setUser(null);
-      userContext.setIsAuthenticated(false);
-    }
+    await userContext.logout();
     return <Redirect to="/" />;
   };
   
