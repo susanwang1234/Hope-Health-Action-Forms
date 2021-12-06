@@ -146,6 +146,10 @@
   background-color: rgb(131, 131, 131);
 }
 
+.outer-container-this-month {
+  padding-top: 80px;
+}
+
 .save-button:hover {
   background: rgb(79, 138, 79);
 }
@@ -184,6 +188,10 @@
   background-color: rgb(119, 227, 247);
 }
 
+.list-view-report{
+  padding-top: 80px;
+}
+
 .select-text {
   margin-right: auto !important;
   margin-left: auto !important;
@@ -218,22 +226,18 @@
 }
 
 @media only screen and (max-width: 540px) {
-  .report-data-buttons {
+  .form-data-buttons {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
 
-  .edit-button {
-    margin-left: auto;
-    margin-right: auto;
-    width: 6rem;
-  }
+ 
   .data-list {
     width: 300px;
   }
 
-  .report-in-list {
+  .form-in-list {
     min-width: 13rem;
   }
 
@@ -245,6 +249,13 @@
   .update-button {
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .edit-button {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 6rem;
+    float: none;
   }
 }
 

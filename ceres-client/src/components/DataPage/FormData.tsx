@@ -232,13 +232,13 @@ const FormData = (props: any) => {
   );
 
   const exportAsCsvButton = (
-    <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>
+    <button className="export-button" onClick={() => exportToCsv(props.data.id)}>
       Export as CSV
     </button>
   );
 
   const exportAsPdfButton = (
-    <button className="edit-button" onClick={() => exportToPdf(props.data.id)}>
+    <button className="export-button" onClick={() => exportToPdf(props.data.id)}>
       Export as PDF
     </button>
   );
@@ -250,9 +250,9 @@ const FormData = (props: any) => {
       <div className="displaying-form">
         {editStatus === true ? <h2 className="edit-title">Edit Mode</h2> : <></>}
         <div className="data-header">
-          <p className="px-3 text-gray-500">Form Dated: {makeDateShort(props.data.createdAt)}</p>
+          <p className="date px-3 text-gray-500 pt-4">Form Dated: {makeDateShort(props.data.createdAt)}</p>
         </div>
-        <p className="mx-3 font-bold text-center">{userDepartment} Department's Data Form</p>
+        <p className="mx-3 font-bold text-center pb-6 text-lg pt-2">{userDepartment} Department's Data Form</p>
         <form id={'data-form'} className="displaying-form-elements" onSubmit={handleSubmission}>
           {formEntries.map(
             (entry: any, index: number) =>
@@ -268,7 +268,7 @@ const FormData = (props: any) => {
         </form>
         <div className="form-data-buttons">
           <div>{editStatus === true ? cancelButton : editButton}</div>
-          <div>
+          <div className="export-buttons">
             {!editStatus && exportAsCsvButton}
             {!editStatus && exportAsPdfButton}
           </div>
