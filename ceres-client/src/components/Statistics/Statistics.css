@@ -1,4 +1,4 @@
-.questionMenu {
+.question-menu {
   background-color: white;
   height: 100%;
   text-align: left;
@@ -19,17 +19,23 @@
   margin-right: 10px;
 }
 
-.dashboard-title {
-  font-size: 2em;
-  font-weight: bold;
-}
+
 
 .statistics-dashboard-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items:  center;
-  height: 60vh;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  font-weight: bold;
+  width: 100% !important;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .statistics-card {
@@ -38,6 +44,7 @@
 
 .right-container {
   width: 80%;
+  padding-left: 15px;
 }
 
 .left-container {
@@ -48,7 +55,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 80vh;
+  /* height: 80vh; */
 }
 
 .grey-button {
@@ -95,7 +102,7 @@
   font-family: Arial;
   outline: none;
   margin: 4px;
-  padding: 0.5em 1em 0.5em 1em;
+  padding: 0.5em 3.5em 0.5em 1em;
 }
 
 .filter-label {
@@ -106,6 +113,69 @@
   margin: 5px;
 }
 
-@media only screen and (max-width: 500px){
+.user-select-none,.main-svg{
+  width: 100% !important;
+}
+@media only screen and (max-width: 750px){
+  .statistics-dashboard-container{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .parent-div-statistics{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .outer-container{
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 50px;
+
+  }
+
+  .right-container{
+    padding-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 550px){
+  select{
+    min-width: 170px;
+  }
+
+  .filter-input{
+    min-width: 120px;
+  }
+
+  .right-container{
+    width: 100%;
+  }
 
 }
+
+@media only screen and (max-width: 450px){
+  select{
+    min-width: 130px;
+  }
+
+  .filter-input{
+    min-width: 100px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  select {
+    min-width: 100px;
+  }
+
+  .filter-input {
+    min-width: 50px;
+    width: 80px !important;
+  }
+}
+
+

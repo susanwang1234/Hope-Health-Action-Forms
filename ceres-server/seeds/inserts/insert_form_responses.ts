@@ -18,6 +18,22 @@ export async function insertFormResponse(knex: Knex): Promise<void> {
   ]);
 
   await knex('FormResponse').insert(buildRehabFormResponses());
+
+  await knex('FormResponse').insert([
+    { departmentQuestionId: 1, formId: 14, response: '' },
+    { departmentQuestionId: 2, formId: 14, response: '' },
+    { departmentQuestionId: 3, formId: 14, response: '' },
+    { departmentQuestionId: 4, formId: 14, response: '' },
+    { departmentQuestionId: 5, formId: 14, response: '' },
+    { departmentQuestionId: 6, formId: 14, response: '' },
+    { departmentQuestionId: 7, formId: 14, response: '' },
+    { departmentQuestionId: 8, formId: 14, response: '' },
+    { departmentQuestionId: 9, formId: 14, response: '' },
+    { departmentQuestionId: 10, formId: 14, response: '' },
+    { departmentQuestionId: 11, formId: 14, response: '' },
+    { departmentQuestionId: 12, formId: 14, response: '' },
+    { departmentQuestionId: 13, formId: 14, response: '' }
+  ]);
 }
 
 function buildRehabFormResponses() {

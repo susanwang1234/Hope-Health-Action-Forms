@@ -9,14 +9,12 @@ import Plot from 'react-plotly.js';
 import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
 import { toast } from 'react-toastify';
-import { MONTHS } from '../../util/timezone';
+import { MONTHS } from '../../utils/timezone';
 import { UserContext } from '../../UserContext';
 import AuthService from '../../services/authService';
 import { Redirect } from 'react-router-dom';
 
-
 const StatisticsDashboard = () => {
-
   const userContext = useContext(UserContext);
   const { deptID } = useParams<departmentParam>();
   const [departmentName, setDepartmentName] = useState('');
@@ -30,7 +28,7 @@ const StatisticsDashboard = () => {
   const [endMonth, setEndMonth] = useState('');
   const [endYear, setEndYear] = useState(0);
   const [isSearching, setSearching] = useState(false);
-  
+
   useEffect(() => {
     getDepartmentName();
   }, []);
@@ -103,17 +101,25 @@ const StatisticsDashboard = () => {
 
   return (
     <div className="App">
+
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
         <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
-           Log Out
+          Log Out
         </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID}></Sidebar>
-      <div className="dashboard-title statistics-card">{departmentName} Statistics</div>
+      <div className="global-background ">
+      
 
-      <div className="date-filter pt-10 pl-16 pr-16">
+
+
+      <div className="dashboard-title pt-4 w-full">{departmentName} Statistics</div>
+
+      <div className = "parent-div-statistics">
+
+      <div className="date-filter flex flex-col pt-10 pl-16 pr-16">
         <div className="date-from">
           <div className="filter-label">From:</div>
           <select defaultValue="" onChange={(event) => setStartMonth(event.target.value)}>
@@ -129,7 +135,7 @@ const StatisticsDashboard = () => {
           <input className="filter-input" onChange={(event) => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
         </div>
         <div className="date-to">
-          <div className="filter-label">To:</div>
+          <div className="filter-label">  To:</div>
           <select defaultValue="" onChange={(event) => setEndMonth(event.target.value)}>
             <option value="" disabled>
               Month
@@ -153,7 +159,7 @@ const StatisticsDashboard = () => {
       <div className="outer-container">
         <div className="statistics-dashboard-container">
           <div className="left-container statistics-card">
-            <ul className="questionMenu">
+            <ul className="question-menu">
               {questionLabels.length
                 ? questionLabels.map((label, index) => {
                     const question =
@@ -174,7 +180,6 @@ const StatisticsDashboard = () => {
             </ul>
           </div>
           <div className="right-container">
-            
             {dataForPlots[0] ? (
               <Plot
                 className="plot statistics-card"
@@ -186,13 +191,16 @@ const StatisticsDashboard = () => {
                     mode: 'lines+markers'
                   }
                 ]}
-                layout={{ title: questionLabels[plotIndex] }}
+                layout={{ title: questionLabels[plotIndex], autosize: true}}
+                config = {{responsive:true}}
               />
             ) : (
               <Plot data={[{ x: [], y: [] }]} layout={{}} />
             )}
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </div>
   );
