@@ -119,7 +119,7 @@ function Login() {
               </label>
               <input {...register('password', { required: true })} name="password" type="password" className="border input-field" />
             </div>
-            <button className="clickable-text" onClick={popUpToEnterUserName}>
+            <button type="button" className="clickable-text" onClick={popUpToEnterUserName}>
               Forgot Password?
             </button>
             {isOpen && (

@@ -112,7 +112,7 @@ const ReportData = (props: any) => {
     console.log("userContext.user?.departmentId:" + userContext.user?.departmentId);
     console.log("deptId:" + deptId);
 
-  if (userContext.user?.departmentId == deptId) {
+  if ((userContext.user?.departmentId == deptId) || (userContext.user?.roleId == 1) || (userContext.user?.roleId == 2)) {
     editButton = (
       <button id="editButton" className="edit-button" onClick={() => setEditStatus(true)}>
         Edit
