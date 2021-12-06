@@ -5,6 +5,7 @@ label.admin-inside-text {
   position: relative;
   text-align: center;
 }
+
 .admin-response {
   align-items: center;
   align-self: center;
@@ -36,4 +37,66 @@ option:first-child {
 }
 li.alternate-background-colours:nth-child(odd) {
   background-color: #fafafa;
+}
+
+
+@media only screen and (max-width: 1300px){
+  .minimal {
+    width: 40% !important;
+  }
+  .admin-response{
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 900px){
+  .admin-inside-text{
+    font-size: 23px !important;
+  }
+
+  .inside-card {
+    margin-top: 0rem;
+  }
+
+  .admin-response{
+    width: 70%;
+  }
+
+
+}
+
+@media only screen and (max-width: 900px){
+  .admin-inside-text{
+    font-size: 21px !important;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .admin-response{
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .admin-response{
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 450px){
+  .admin-response{
+    width: 90%;
+  }
+  .casestudy-single-card {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cards-case-study {
+    margin: 20px 20px;
+  }
+
+  .label-start{
+    padding-top: 0px;
+  }
 }
