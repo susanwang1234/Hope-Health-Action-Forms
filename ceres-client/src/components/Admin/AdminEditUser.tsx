@@ -231,16 +231,16 @@ const AdminEditUser = () => {
               <h2 className="inside-card -mt-10 mb-8">
                 <b>Edit {originalUserValues.originalUsername}</b>
               </h2>
-              <div className="w-full flex flex-col pt-10">
-                <p>Fields that are left unselected or empty will default to their previously saved values</p>
-                <label className="admin-inside-text">Role</label>
+              <div className=" card-info w-full flex flex-col pt-10">
+                <p className = "message">Fields that are left unselected or empty will default to their previously saved values</p>
+                <label className="admin-inner-text">Role</label>
                 <select className="minimal self-center" name="updateRoleId" value={updateUserValues.updateRoleId} onChange={handleChange}>
                   <option selected>--Select a New Role--</option>
                   {roleState.roles.map((roleName: any) => {
                     return <option value={roleName.id}>{roleName.label}</option>;
                   })}
                 </select>
-                <label className="admin-inside-text" hidden={userIsAdmin}>
+                <label className="admin-inner-text" hidden={userIsAdmin}>
                   Department
                 </label>
                 <select className="minimal self-center" name="updateDepartmentId" value={updateUserValues.updateDepartmentId} hidden={userIsAdmin} onChange={handleChange}>
@@ -249,9 +249,9 @@ const AdminEditUser = () => {
                     return <option value={departmentName.id}>{departmentName.name}</option>;
                   })}
                 </select>
-                <label className="admin-inside-text">Username</label>
+                <label className="admin-inner-text pt-10">Username</label>
                 <input className="admin-response" name="updateUsername" value={updateUserValues.updateUsername} placeholder="Type new username..." onChange={handleChange}></input>
-                <label className="admin-inside-text">Password</label>
+                <label className="admin-inner-text">Password</label>
                 <input
                   className="admin-response"
                   name="updatePassword"
@@ -260,7 +260,7 @@ const AdminEditUser = () => {
                   placeholder="Type new password..."
                   onChange={handleChange}
                 ></input>
-                <label className="admin-inside-text">Repeat Password</label>
+                <label className="admin-inner-text">Repeat Password</label>
                 <input
                   className="admin-response"
                   name="updateRepeatedPassword"
@@ -269,7 +269,7 @@ const AdminEditUser = () => {
                   placeholder="Type new password..."
                   onChange={handleChange}
                 ></input>
-                <div className="self-center w-50">
+                <div className="self-center w-50 pt-2">
                   <input className="float-left mr-2 mt-1" type="checkbox" onChange={togglePassword} />
                   <p>Show password</p>
                 </div>
@@ -307,7 +307,7 @@ const AdminEditUser = () => {
             </div>
           ) : (
             <div>
-              <h2 className="inside-card -mt-10 mb-8">
+              <h2 className="inside-card -mt-10 mb-8 select-user-heading">
                 <b>Select a User</b>
               </h2>
               <button className="grey-button bottom-5 left-31" onClick={() => (window.location.href = '/departments')}>
@@ -319,7 +319,7 @@ const AdminEditUser = () => {
                     if (selectedUser.roleId !== 1 && selectedUser.roleId !== 2) {
                       return (
                         <li className="alternate-background-colours">
-                          <label className="admin-inside-text">{selectedUser.username}</label>
+                          <label className="admin-inner-text">{selectedUser.username}</label>
                           <button
                             className="gg-pen"
                             onClick={() =>

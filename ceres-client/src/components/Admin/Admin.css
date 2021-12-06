@@ -1,10 +1,31 @@
-label.admin-inside-text {
+.admin-inner-input-text {
+  font-family: Arial;
+  font-size: 25px;
+  margin: 4px;
+  position: relative;
+  text-align: center;
+  border-width: 1.5px;
+  border-radius: 5px;
+  border-color: #d6d6d6;
+  outline: none;
+}
+.admin-inner-input-text:disabled {
+  font-family: Arial;
+  font-size: 25px;
+  margin: 4px;
+  position: relative;
+  text-align: center;
+  background: none;
+  border: none;
+}
+.admin-inner-text {
   font-family: Arial;
   font-size: 25px;
   margin: 4px;
   position: relative;
   text-align: center;
 }
+
 .admin-response {
   align-items: center;
   align-self: center;
@@ -37,3 +58,135 @@ option:first-child {
 li.alternate-background-colours:nth-child(odd) {
   background-color: #fafafa;
 }
+
+
+@media only screen and (max-width: 1300px){
+  .minimal {
+    width: 40% !important;
+  }
+  .admin-response{
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 900px){
+  .admin-inside-text{
+    font-size: 23px !important;
+  }
+
+  .inside-card {
+    margin-top: 0rem;
+  }
+
+  .admin-response{
+    width: 70%;
+  }
+
+
+}
+
+.button-text {
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: 600;
+  float: right;
+  margin-right: 16px;
+  margin-top: 10px;
+}
+
+.email-inner{
+  text-align: left !important;
+}
+
+
+@media only screen and (max-width: 900px){
+  .admin-inside-text,.admin-inner-text{
+    font-size: 21px !important;
+  }
+
+  
+
+  .casestudy-single-card{
+    padding-top: 50px;
+  }
+
+  .card-info{
+    padding-top: 0rem !important;
+  }
+
+}
+
+@media only screen and (max-width: 780px){
+  .email-inner{
+    font-size: 20px !important;
+  }
+}
+
+@media only screen and (max-width: 700px){
+  .admin-response{
+    width: 80%;
+  }
+
+
+}
+
+@media only screen and (max-width: 600px){
+  .admin-response{
+    width: 90%;
+  }
+
+  .message{
+    font-size: 15px;
+  }
+
+  .email-inner{
+    font-size: 16px !important;
+  }
+
+  .email-card-single{
+    margin: 20px 30px;
+  }
+
+  .email-card-casestudy{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .box-inside-for-overflow-email{
+    padding: 0px !important;
+  }
+
+}
+
+
+
+@media only screen and (max-width: 450px){
+  .admin-response{
+    width: 90%;
+  }
+  .casestudy-single-card {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .cards-case-study {
+    margin: 20px 20px;
+  }
+
+  .label-start{
+    padding-top: 0px;
+  }
+
+  .box-inside-for-overflow {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+  }
+
+  .message{
+    font-size: 14px;
+  }
+
+  
+}
+
