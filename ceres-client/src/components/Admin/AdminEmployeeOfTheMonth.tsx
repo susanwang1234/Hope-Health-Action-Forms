@@ -14,12 +14,14 @@ import Popup from '../CaseStudySubmit/PopUpModal/Popup';
 import '../Admin/AdminEmployeeOfTheMonth.css';
 import { departmentParam } from '../../types/departmentParamType';
 
+
 let employeeOfTheMonth;
 const AdminEmployeeOfTheMonth = () => {
+  
   document.body.style.backgroundColor = '#f5f5f5';
   const [checkMark, SetCheckMark] = useState(false);
   const [showNav, setShowNav] = useState(false);
-  const [shareImage, setShareImage] = useState('');
+  const [shareImage, setShareImage] : any = useState('');
   const userContext = useContext(UserContext);
   const [selectedDepartment, setSelectedDepartment] = useState<string>('Nothing selected');
   const [employeeName, setEmployeeName] = useState<string>('');
@@ -223,5 +225,6 @@ const AdminEmployeeOfTheMonth = () => {
       </div>
     </div>
   );
+  
 };
 export default AdminEmployeeOfTheMonth;

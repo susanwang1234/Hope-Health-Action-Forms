@@ -204,6 +204,7 @@ const StatisticsDashboard = () => {
       </div>
     </div>
   );
+  
 };
 
 export default StatisticsDashboard;
