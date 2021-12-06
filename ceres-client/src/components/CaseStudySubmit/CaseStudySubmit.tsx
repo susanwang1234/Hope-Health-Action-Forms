@@ -17,7 +17,6 @@ import { toast } from 'react-toastify';
 import Popup from './PopUpModal/Popup';
 import Select from 'react-select';
 
-
 /*
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
@@ -44,28 +43,6 @@ const CaseStudySubmit = () => {
   useEffect(() => {
     getTypeData();
   }, [setCaseStudyType]);
-
-  const [loading, setLoading] = useState(true);
-  const [optionData, setOptionData] = useState([{}]);
-
-  useEffect(() => {
-    if(caseStudyType.types){
-      console.log("HGelo",caseStudyType.types.map((Types: any, index: any) => ({
-        value: Types.id, label: Types.name
-      })));
-      const data = caseStudyType.types.map((Types: any, index: any) => ({
-        value: Types.id, label: Types.name
-      }));
-      setOptionData(data);
-    }
-  }, [caseStudyType.types]);
-
-  useEffect(() => {
-    if(optionData.length>1){
-      setLoading(false);
-
-    }
-  }, [optionData]);
 
   const onClickLogOutHandler = async () => {
     const data = await AuthService.logout();
@@ -211,11 +188,10 @@ const CaseStudySubmit = () => {
   };
 
   const selectChangeValues = (event: any) => {
-    const value = event.value;
+    const value = event.target.value;
     setSelectedCaseStudyType(value);
     getQuestions(value);
-    
-  }
+  };
 
   const handleChange = (event: any) => {
     const image = event.target.files[0];
@@ -245,10 +221,6 @@ const CaseStudySubmit = () => {
     window.location.href = `${createDashboardIDPath(deptID)}/case-studies`;
   };
 
-  if(loading){
-    return <p>Loading....</p>
-  }
-
   return (
     <div className="casestudy-background">
       <header className="nav-header">
@@ -265,20 +237,28 @@ const CaseStudySubmit = () => {
             <b>Current Case Study</b>
           </h2>
           <p className="inside-text-case-study">Type of Case Study</p>
-          <Select className = "minimal" options={optionData} onChange={selectChangeValues} placeholder = "--Select a Case Study type--"/>
+          <select className="minimal" onChange={selectChangeValues}>
+            <option selected disabled>
+              --Select a Case Study type--
+            </option>
+            {caseStudyType.types.map((Types: any, index: any) => {
+              return <option value={Types.id}>{Types.name}</option>;
+            })}
+          </select>
+
           <div className="photo">
             <p className="inside-text-case-study">Upload Photo</p>
-            <div className = "photo-flex flex">
+            <div className="photo-flex flex">
               <div className="person_image float-left">
                 <img src={shareImage ? URL.createObjectURL(shareImage) : gray_person} alt="Person" />
               </div>
               <div className="float-left input-declaration pl-10">
                 <input onChange={() => SetCheckMark(!checkMark)} checked={checkMark} type="checkbox" />
-                <p className = "photo-text">
+                <p className="photo-text">
                   This person has given permission to share their story <br />
                   and photo in HHA communications, including online platforms.
                 </p>
-                <input className ="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
+                <input className="input-photo" type="file" accept="image/jpg, image/jpeg, image/png" name="image" id="file" onChange={handleChange} />
               </div>
             </div>
             <label className="inside-text-case-study">Title of Case Study?</label>
