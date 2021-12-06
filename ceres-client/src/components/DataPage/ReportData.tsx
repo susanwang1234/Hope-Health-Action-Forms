@@ -106,13 +106,13 @@ const ReportData = (props: any) => {
   );
 
   const exportAsCsvButton = (
-    <button className="edit-button" onClick={() => exportToCsv(props.data.id)}>
+    <button className="export-button" onClick={() => exportToCsv(props.data.id)}>
       Export as CSV
     </button>
   );
 
   const exportAsPdfButton = (
-    <button className="edit-button" onClick={() => exportToPdf(props.data.id)}>
+    <button className="export-button" onClick={() => exportToPdf(props.data.id)}>
       Export as PDF
     </button>
   );
@@ -124,16 +124,16 @@ const ReportData = (props: any) => {
       <div className="displaying-form">
         {editStatus === true ? <h2 className="edit-title">Edit Mode</h2> : <></>}
         <div className="data-header">
-          <p className="px-3 text-gray-500">Date: {makeDateShort(props.data.createdAt)}</p>
-          <p className="px-3 text-gray-500">report ID: {props.data.id}</p>
+          <p className="date px-3 text-gray-500 pt-4">Date: {makeDateShort(props.data.createdAt)}</p>
+          <p className="report-id px-3 text-gray-500 pt-4">Report ID: {props.data.id}</p>
         </div>
-        <p className="mx-3 font-bold text-xl text-center">{userDepartment} department's report</p>
+        <p className="mx-3 font-bold text-center pb-6 text-lg pt-2">{userDepartment} Department's report</p>
         <form id={'daForm'} className="displaying-form-elements" onSubmit={handleSubmission}>
           {formEntries.map(
             (entry: any, index: number) =>
               entry.label !== 'departmentId' &&
               entry.label !== 'createdAt' && (
-                <div>
+                <div className="pb-3">
                   <label className="mx-3">{entry.label}</label>
                   <br></br>
                   <input key={index} className={'input-box mx-3'} type="text" value={entry.response} readOnly={!editStatus} onChange={(event) => changeEntry(index, event)}></input>

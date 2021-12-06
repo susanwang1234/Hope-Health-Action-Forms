@@ -1,6 +1,6 @@
 import './Statistics.css';
 import '../../App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -10,8 +10,14 @@ import { useParams } from 'react-router';
 import { departmentParam } from '../../types/departmentParamType';
 import { toast } from 'react-toastify';
 import { MONTHS } from '../../util/timezone';
+import { UserContext } from '../../UserContext';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+
 
 const StatisticsDashboard = () => {
+
+  const userContext = useContext(UserContext);
   const { deptID } = useParams<departmentParam>();
   const [departmentName, setDepartmentName] = useState('');
   document.body.style.backgroundColor = '#f5f5f5';
@@ -24,7 +30,7 @@ const StatisticsDashboard = () => {
   const [endMonth, setEndMonth] = useState('');
   const [endYear, setEndYear] = useState(0);
   const [isSearching, setSearching] = useState(false);
-
+  
   useEffect(() => {
     getDepartmentName();
   }, []);
@@ -86,14 +92,64 @@ const StatisticsDashboard = () => {
     setPlotIndex(+value);
   };
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <div className="App">
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+           Log Out
+        </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID}></Sidebar>
       <div className="dashboard-title statistics-card">{departmentName} Statistics</div>
+
+      <div className="date-filter pt-10 pl-16 pr-16">
+        <div className="date-from">
+          <div className="filter-label">From:</div>
+          <select defaultValue="" onChange={(event) => setStartMonth(event.target.value)}>
+            <option value="" disabled>
+              Month
+            </option>
+            {MONTHS.map((month: string) => (
+              <option key={month} value={month}>
+                {month}
+              </option>
+            ))}
+          </select>
+          <input className="filter-input" onChange={(event) => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
+        </div>
+        <div className="date-to">
+          <div className="filter-label">To:</div>
+          <select defaultValue="" onChange={(event) => setEndMonth(event.target.value)}>
+            <option value="" disabled>
+              Month
+            </option>
+            {MONTHS.map((month: string) => (
+              <option key={month}>{month}</option>
+            ))}
+          </select>
+          <input className="filter-input" onChange={(event) => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
+        </div>
+        <div className="flex flex-row statistic-buttons">
+          <button className="button" onClick={fetchData}>
+            Search
+          </button>
+          <button className="button" onClick={resetDateFilter}>
+            Reset
+          </button>
+        </div>
+      </div>
+
       <div className="outer-container">
         <div className="statistics-dashboard-container">
           <div className="left-container statistics-card">
@@ -118,42 +174,7 @@ const StatisticsDashboard = () => {
             </ul>
           </div>
           <div className="right-container">
-            <div className="date-filter">
-              <div className="date-from">
-                <div className="filter-label">From:</div>
-                <select defaultValue="" onChange={(event) => setStartMonth(event.target.value)}>
-                  <option value="" disabled>
-                    Month
-                  </option>
-                  {MONTHS.map((month: string) => (
-                    <option key={month} value={month}>
-                      {month}
-                    </option>
-                  ))}
-                </select>
-                <input className="filter-input" onChange={(event) => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
-              </div>
-              <div className="date-to">
-                <div className="filter-label">To:</div>
-                <select defaultValue="" onChange={(event) => setEndMonth(event.target.value)}>
-                  <option value="" disabled>
-                    Month
-                  </option>
-                  {MONTHS.map((month: string) => (
-                    <option key={month}>{month}</option>
-                  ))}
-                </select>
-                <input className="filter-input" onChange={(event) => setEndYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
-              </div>
-              <div className="statistic-buttons">
-                <button className="button" onClick={fetchData}>
-                  Search
-                </button>
-                <button className="button" onClick={resetDateFilter}>
-                  Reset
-                </button>
-              </div>
-            </div>
+            
             {dataForPlots[0] ? (
               <Plot
                 className="plot statistics-card"

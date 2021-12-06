@@ -1,10 +1,14 @@
 import '../../App.css';
 import './Dashboard.css';
+import { useContext, useState, useEffect } from 'react';
+import logo from '../../images/navlogo.png';
 import 'react-calendar/dist/Calendar.css';
-import { useState, useEffect } from 'react';
+import { UserContext } from '../../UserContext';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+import 'react-calendar/dist/Calendar.css';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
 import { calculateDepartmentPoints } from '../../util/pointSystem';
 import Leaderboard from './Leaderboard';
@@ -15,6 +19,7 @@ import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 
 const Dashboard = () => {
+  const userContext = useContext(UserContext);
   document.body.style.backgroundColor = '#f5f5f5';
   const [showNav, setShowNav] = useState(false);
   const { deptID } = useParams<departmentParam>();
@@ -54,6 +59,15 @@ const Dashboard = () => {
     getToDoStatus();
   }, [setToDoState]);
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <>
       <html>
@@ -65,24 +79,29 @@ const Dashboard = () => {
             <header className="nav-header">
               <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
               <img src={logo} alt="Logo" className="logo" />
+              <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+                Log Out
+              </button>
             </header>
             <Sidebar show={showNav} departmentID={deptID} />
             <div className="dashboard-container">
-              <div className="dashboard-cards">
-                <div className="card-outer fill-space-left">
-                  <div className="card-inner width-100-percent">
+              <div className="dashboard-cards flex lg:flex-row flex-col">
+                <div className="equal-width">
+                  <div className="flex flex-col w-full">
                     <p className="title">To Do</p>
-                    {ToDo()}
+                    <div className="card-inner width-100-percent">{ToDo()}</div>
+
+                    <p className="title mt-6">
+                      Leaderboard
+                      <div className="align-right icon instructions">{Instruction()}</div>
+                    </p>
+                    <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
                   </div>
-                  <p>
-                    <div className="align-right icon instructions">{Instruction()}</div>
-                  </p>
-                  <div className="card-inner width-100-percent">{Leaderboard(pointSystem.monthlyPointSystem)}</div>
                 </div>
-                <div className="card-outer fill-space-right">
-                  <div className="card-inner height-100-percent">
-                    <p className="title">Employee of the Month</p>
-                    {EmployeeOfTheMonth()}
+                <div className="equal-width lg:pl-14 mt-6 lg:mt-0">
+                  <div className="flex flex-col w-full">
+                    <p className="title whitesapce-nowrap">Employee of the Month</p>
+                    <div className="">{EmployeeOfTheMonth()}</div>
                   </div>
                 </div>
               </div>
