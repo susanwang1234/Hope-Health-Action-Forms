@@ -1,17 +1,21 @@
 import '../../App.css';
 import './DataPage.css';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import FormElement from './FormElement';
 import FormData from './FormData';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
 import httpService from '../../services/httpService';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+import { UserContext } from '../../UserContext';
 import { useParams } from 'react-router-dom';
 import { departmentParam } from '../../types/departmentParamType';
 
 const DataPage = () => {
   document.body.style.backgroundColor = '#f5f5f5';
+  const userContext = useContext(UserContext);
   const { deptID } = useParams<departmentParam>();
   const [forms, setForms] = useState([]);
   const [showNav, setShowNav] = useState(false);
@@ -36,11 +40,23 @@ const DataPage = () => {
     getFormByDeptId();
   }, [setForms]);
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <React.Fragment>
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+          Log Out
+        </button>
       </header>
       <div className="flex justify-center hide-overflow">
         <Sidebar show={showNav} departmentID={deptID} />
