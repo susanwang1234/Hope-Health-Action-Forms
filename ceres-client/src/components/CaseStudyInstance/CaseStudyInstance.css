@@ -53,7 +53,7 @@ td {
   border: 10pt !important;
   border-color: black !important;
   display: flex;
-  text-align: left !important;
+  text-align: center !important;
   background-color: white;
 }
 
@@ -104,3 +104,131 @@ td {
   color: grey;
   font-size: 16px;
 }
+
+.grey-button {
+  background-color: rgb(245, 245, 245);
+  border-color: #d6d6d6;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: 0 4px 8px 0 rgba(207, 207, 207, 0.2), 0 6px 20px 0 rgba(121, 121, 121, 0.19);
+  color: rgb(0, 0, 0);
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 4px 10px;
+  position: absolute;
+  text-align: center;
+  width: 100px;
+}
+
+.case-study-block-text-heading{
+  word-break: break-all;
+  width: 1000px !important;
+  height: auto;
+  text-align: center !important;
+}
+
+
+@media only screen and (max-width: 790px){
+  .case-study-title{
+    font-size: 26px;
+    font-weight: bold;
+  }
+
+  .case-study-date{
+    font-size: 20px;
+  }
+  .case-study-desc{
+    font-size: 23px;
+  }
+
+  .case-study-block-image {
+    width: 250px;
+  }
+
+  .case-study-img {
+    width: 250px;
+  }
+
+  .container{
+    max-width: 620px !important;
+  } 
+
+}
+
+@media only screen and (max-width: 600px){
+  .container{
+    max-width: 500px !important;
+  } 
+  .case-study-title{
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .case-study-date{
+    font-size: 18px;
+  }
+  .case-study-desc{
+    font-size: 21px;
+  }
+
+  .view-cancel-form-button{
+    font-size: 15px !important;
+  }
+}
+
+@media only screen and (max-width: 500px){
+  .container{
+    max-width: 450px !important;
+  } 
+  .case-study-title{
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .case-study-date{
+    font-size: 16px;
+  }
+  .case-study-desc{
+    font-size: 19px;
+  }
+
+  .question {
+    font-style: bold !important;
+    margin-top: 18px;
+  }
+  
+  .response {
+    font-style: normal !important;
+    margin-left: 20px;
+    color: grey;
+    font-size: 15px;
+  }
+
+  .case-study-block-image {
+    width: 200px;
+  }
+
+  .case-study-img {
+    width: 200px;
+  }
+}
+
+@media only screen and (max-width: 400px){
+  .container{
+    max-width: 375px !important;
+  } 
+  .question {
+    font-style: bold !important;
+    margin-top: 16px;
+  }
+  
+  .response {
+    font-style: normal !important;
+    margin-left: 20px;
+    color: grey;
+    font-size: 13px;
+  }
+}
+
+

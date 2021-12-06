@@ -39,8 +39,8 @@ CSS Classes
   width: 100px;
 }
 
-.blue-button-popup{
-  position:relative
+.blue-button-popup {
+  position: relative;
 }
 
 .cards-case-study {
@@ -88,14 +88,15 @@ CSS Classes
   width: 100px;
 }
 
-.grey-button-popup{
-  position:relative
+.grey-button-popup {
+  position: relative;
 }
 
 h2.questions {
   font-family: Arial;
   font-size: 20px;
 }
+.inside-text-case-study,
 label.inside-text-case-study {
   font-family: Arial;
   font-size: 20px;
@@ -127,13 +128,20 @@ select {
   padding: 0.5em 3.5em 0.5em 1em;
   width: 50%;
 }
-select.minimal {
+.minimal {
   background-image: linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc);
   background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
   background-repeat: no-repeat;
   background-size: 5px 5px, 5px 5px, 1px 1.5em;
   margin: 4px;
+  width: 400px !important;
 }
+.minimal>div{
+  border: 0.5px solid black !important;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
 textarea.response {
   align-items: center;
   background-color: rgb(255, 255, 255);
@@ -153,3 +161,94 @@ textarea.response {
   text-align: left;
   width: 100%;
 }
+
+
+
+@media only screen and (max-width: 1028px){
+  .cards-case-study{
+    margin: 20px 150px;
+  }
+
+  .casestudy-single-card{
+    min-height: 70vh;
+  }
+
+  .minimal {
+    width: 300px !important;
+  }
+
+  .photo-text{
+    font-size: 14px;
+  }
+
+  .input-photo{
+    font-size: 16px;
+  }
+
+  .inside-card{
+    margin-top: 0.5rem;
+    font-size: 16px;
+  }
+  
+}
+
+@media only screen and (max-width: 830px){
+  .photo-text{
+    font-size: 12px;
+  }
+
+}
+
+@media only screen and (max-width: 600px){
+  .cards-case-study{
+    margin-top: 0px;
+  }
+
+  .popup-question{
+    font-size: 16px;
+  }
+  .popup-warning{
+    font-size: 14px;
+  }
+
+  .inside-card{
+    font-size: 15px;
+  }
+
+  .casestudy-single-card{
+    padding-top: 20px;
+  }
+
+  .minimal {
+    width: 275px !important;
+  }
+
+  .photo-flex{
+    flex-direction: column;
+  }
+  .inside-text-case-study,
+  label.inside-text-case-study {
+    font-size: 16px;
+  }
+  
+  .input-photo{
+    font-size: 12px;
+  }
+
+  .input-declaration{
+    padding-left: 0px;
+  }
+
+  .minimal>div{
+    font-size: 12px !important;
+  }
+
+  select{
+    padding: 0.5em 1em 0.5em 1em;
+  }
+  .logout-button{
+    font-size: 10px !important;
+    width: 90px !important;
+  }
+}
+

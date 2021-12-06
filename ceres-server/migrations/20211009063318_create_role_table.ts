@@ -4,6 +4,7 @@ export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable('Role', (table: Knex.CreateTableBuilder) => {
     table.increments();
     table.string('name', 50).notNullable();
+    table.string('label', 50).notNullable();
   });
 }
 

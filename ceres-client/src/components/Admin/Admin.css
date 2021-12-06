@@ -1,0 +1,39 @@
+label.admin-inside-text {
+  font-family: Arial;
+  font-size: 25px;
+  margin: 4px;
+  position: relative;
+  text-align: center;
+}
+.admin-response {
+  align-items: center;
+  align-self: center;
+  background-color: rgb(255, 255, 255);
+  border: solid;
+  border-color: #d6d6d6;
+  border-radius: 5px;
+  border-width: 1px;
+  box-shadow: 0 4px 8px 0 rgba(151, 151, 151, 0.2);
+  display: inline-block;
+  font-family: Arial;
+  font-size: 20px;
+  font-size: 15px;
+  height: 40px;
+  margin: 4px;
+  padding: 0.5em 1em 0.5em 0.8em;
+  position: relative;
+  text-align: left;
+  width: 50%;
+}
+option:first-child {
+  display: none;
+}
+.box-inside-for-overflow {
+  height: 80vh;
+  width: 60vw;
+  padding: 20px;
+  overflow-y: scroll;
+}
+li.alternate-background-colours:nth-child(odd) {
+  background-color: #fafafa;
+}
