@@ -20,7 +20,6 @@ const AuthService = {
   },
 
   isAuthenticated: (): Promise<any> => {
-    console.log(baseApiUrl);
     return httpService
       .get('/auth/authenticate')
       .then((res) => res.data)

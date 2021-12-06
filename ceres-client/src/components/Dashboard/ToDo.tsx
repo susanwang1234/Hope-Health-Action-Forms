@@ -63,11 +63,11 @@ const ToDo = () => {
         <div className="flex sm:flex-row flex-col">
           <div className="align-left">
             <div className="due-content">
-              <div className="flex whitespace-nowrap w-full justify-center sm:justify-start">  <p >{iconChecker(toDo.caseStudies)}Case Study</p></div>
+              <div className="flex whitespace-nowrap w-full justify-center sm:justify-start">  <p >{iconChecker(toDo?.caseStudies)}Case Study</p></div>
               <p className="ml-10 whitespace-nowrap"> Due on {MONTHS[currMonth]} {currMonthLastDay}</p>
             </div>
             <div className="due-content mt-6">
-              <div className="flex text-left w-full justify-center sm:justify-start"> <p>{iconChecker(Number(toDo.dataForm))}Data Form</p></div>
+              <div className="flex text-left w-full justify-center sm:justify-start"> <p>{iconChecker(Number(toDo?.dataForm))}Data Form</p></div>
               <p className="due-in-red ml-10 whitespace-nowrap">Due on {MONTHS[currMonth]} {currMonthLastDay}</p>
             </div>
           </div>

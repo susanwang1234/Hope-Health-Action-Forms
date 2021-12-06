@@ -35,7 +35,15 @@ function Login() {
     if (isAuthenticated) {
       userContext.setUser(data.user);
       userContext.setIsAuthenticated(isAuthenticated);
-      history.push('/departments');
+
+      if (data.user.roleId != 4) {
+        history.push('/departments');
+      } else {
+        let link = "/dashboard/" + data.user.departmentId.toString();
+        history.push(link);
+      }
+
+      
     } else {
       const { msg } = data;
       // do something with error message
@@ -109,7 +117,7 @@ function Login() {
               </label>
               <input {...register('password', { required: true })} name="password" type="password" className="border input-field" />
             </div>
-            <button className="clickable-text" onClick={popUpToEnterUserName}>
+            <button type="button" className="clickable-text" onClick={popUpToEnterUserName}>
               Forgot Password?
             </button>
             {isOpen && (
