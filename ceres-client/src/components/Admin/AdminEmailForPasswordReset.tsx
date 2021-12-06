@@ -126,34 +126,47 @@ const AdminEmailForPasswordReset = () => {
       <div className="flex h-full">
         <AdminSidebar show={showNav} />
       </div>
-      <div className="cards-case-study">
-        <div className="casestudy-single-card">
+      <div className="cards-case-study email-card-single">
+        <div className="casestudy-single-card email-card-casestudy ">
           <h2 className="inside-card -mt-10 mb-8">
             <b>Emails to Reset Passwords</b>
           </h2>
-          <div className="box-inside-for-overflow">
+          <div className="box-inside-for-overflow box-inside-for-overflow-email ">
             <ul>
               {adminEmails.emails.map((Emails: any, index: number) => {
                 return (
                   <li className="alternate-background-colours">
-                    <p>
-                      <input className="admin-inner-input-text" id={'input-id-' + index} defaultValue={Emails.email} disabled={true} onChange={(event) => setEditEmail(event.target.value)}></input>
-                      <button className="gg-pen" onClick={() => editCurrentEmail(index)} />
-                      <button className="gg-close" onClick={() => deleteAnEmail(Emails.id)} />
-                      <button className="button-text" onClick={() => validateEmailAddress(index, Emails.id)}>
-                        Save
-                      </button>
-                    </p>
+                    <div className = "flex flex-col w-full justify-between pb-10">
+
+                      <div className = "flex">
+                        <input className="admin-inner-input-text email-inner" id={'input-id-' + index} defaultValue={Emails.email} disabled={true} onChange={(event) => setEditEmail(event.target.value)}></input>
+                      </div>
+                      <div className = "flex w-full flex-grow">
+                        <button className="button-text email-inner" onClick={() => validateEmailAddress(index, Emails.id)}>
+                          Save
+                        </button>
+                        <button className="gg-pen" onClick={() => editCurrentEmail(index)} />
+                        <button className="gg-close" onClick={() => deleteAnEmail(Emails.id)} />
+                      </div>
+                    </div>
                   </li>
                 );
               })}
               <li className="alternate-background-colours">
-                <p>
-                  <input className="admin-inner-input-text" id={'input-id-' + adminEmails.emails.length} defaultValue={''} onChange={(event) => setNewEmail(event.target.value)}></input>
-                  <button className="button-text" onClick={() => validateEmailAddress(adminEmails.emails.length)}>
-                    Submit
-                  </button>
-                </p>
+                <div>
+
+                  <div className = "flex flex-col justify-start">
+                    <div>
+                      <input className="admin-inner-input-text" id={'input-id-' + adminEmails.emails.length} defaultValue={''} onChange={(event) => setNewEmail(event.target.value)}></input>
+                    </div>
+                    <div className = "flex">
+                      <button className="button-text email-inner" onClick={() => validateEmailAddress(adminEmails.emails.length)}>
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                 
+                </div>
               </li>
             </ul>
           </div>

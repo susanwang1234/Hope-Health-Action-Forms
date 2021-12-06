@@ -2,7 +2,7 @@ import Chart from 'react-google-charts';
 import './Dashboard.css';
 import { barDataLabel } from '../../models/barDataLabel';
 import { LeaderboardDepartment } from '../../models/leaderboardDepartment';
-import { currMonth, MONTHS } from '../../util/timezone';
+import { currMonth, MONTHS } from '../../utils/timezone';
 
 const Leaderboard = (pointSystem: LeaderboardDepartment[]) => {
   const createColor = (departmentName: string) => {

@@ -1,5 +1,6 @@
 .data-list {
   margin: 2em;
+  overflow: auto;
   padding: 25px;
   border: 1px solid rgb(204, 204, 204);
   height: 500px;
@@ -8,11 +9,13 @@
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
-.list-of-reports {
+.list-of-forms {
   overflow: auto;
+  overflow-x: hidden;
   padding: 0em;
   max-height: 23rem;
 }
+
 .input-box {
   border: 1px solid rgb(233, 233, 233);
   text-align: center;
@@ -27,7 +30,7 @@
   background-color: rgb(241, 241, 241);
 }
 
-.report-data-buttons {
+.form-data-buttons {
   display: flex;
   justify-content: space-between;
 }
@@ -36,7 +39,7 @@
   background-color: #e57200;
   color: white;
   justify-self: stretch;
-  text-align:center;
+  text-align: center;
   border-radius: 0.25rem;
   font-weight: bold;
   height: 30px;
@@ -60,7 +63,7 @@
   max-height: 25em;
 }
 
-.report-in-list {
+.form-in-list {
   border: 0.5px solid rgb(161, 161, 161);
   background-color: #fbfbfb;
   display: flex;
@@ -68,18 +71,19 @@
   min-width: 17rem;
 }
 
-.report-view-button {
+.form-view-button {
   background-color: #4aa9c9;
   float: right;
   padding: 6px;
   border-radius: 0.25rem;
   box-shadow: 1px 3px 5px rgb(211, 211, 211);
 }
-.report-in-list:nth-child(even) {
+
+.form-in-list:nth-child(even) {
   background-color: #e7e7e7;
 }
 
-.report-view-button:hover {
+.form-view-button:hover {
   background-color: #62c8eb;
 }
 
@@ -94,18 +98,34 @@
   margin: 0.75rem;
   width: 8rem;
   padding: 5px;
+  float: right;
   font-weight: bold;
 }
-.update-button {
+
+.submit-button {
   color: white;
   border-radius: 0.25rem;
-  background-color: #59b030;
+  background-color: #4aa9c9;
   padding: 6px;
+  line-height: 1.5rem;
   margin: 0.75rem;
   width: 7rem;
   float: right;
   font-weight: bold;
 }
+
+.save-button {
+  color: white;
+  border-radius: 0.25rem;
+  background-color: #59b030;
+  padding: 6px;
+  line-height: 1.5rem;
+  margin: 0.75rem;
+  width: 7rem;
+  float: right;
+  font-weight: bold;
+}
+
 .cancel-button {
   color: black;
   border-radius: 0.25rem;
@@ -125,10 +145,18 @@
 .cancel-button:hover {
   background-color: rgb(131, 131, 131);
 }
-.update-button:hover {
+
+.outer-container-this-month {
+  padding-top: 80px;
+}
+
+.save-button:hover {
   background: rgb(79, 138, 79);
 }
 
+.submit-button:hover {
+  background: rgb(88, 114, 202);
+}
 
 .grey-button {
   background-color: rgb(245, 245, 245);
@@ -146,7 +174,7 @@
   width: 100px;
 }
 
-.export-button{
+.export-button {
   color: white;
   border-radius: 0.25rem;
   background-color: #4aa9c9;
@@ -160,98 +188,94 @@
   background-color: rgb(119, 227, 247);
 }
 
-.select-text{
+.list-view-report{
+  padding-top: 80px;
+}
+
+.select-text {
   margin-right: auto !important;
   margin-left: auto !important;
 }
 
-
-@media only screen and (max-width: 1040px){
-  .list-view-report{
+@media only screen and (max-width: 1040px) {
+  .list-view-report {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
-  .data-list{
+  .data-list {
     width: 400px;
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  .select-text{
+  .select-text {
     margin-top: 40px !important;
     margin-bottom: 60px !important;
   }
-
-  
-
 }
 
-@media only screen and (max-width: 800px){
-
+@media only screen and (max-width: 800px) {
   .displaying-form-elements {
-    grid-template-columns: repeat(2, minmax(0, 1fr));  
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .data-list{
+  .data-list {
     width: 350px;
   }
-
-  
 }
 
-@media only screen and (max-width: 540px){
-
-  .report-data-buttons{
+@media only screen and (max-width: 540px) {
+  .form-data-buttons {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
 
-  .edit-button{
-    margin-left: auto;
-    margin-right: auto;
-    width: 6rem;
-  }
-  .data-list{
+ 
+  .data-list {
     width: 300px;
   }
 
-  .report-in-list{
+  .form-in-list {
     min-width: 13rem;
   }
 
-  .cancel-button{
+  .cancel-button {
     margin-left: auto !important;
     margin-right: auto !important;
   }
 
-  .update-button{
+  .update-button {
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .edit-button {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 6rem;
+    float: none;
   }
 }
 
-@media only screen and (max-width: 500px)
-{
+@media only screen and (max-width: 500px) {
   .displaying-form-elements {
-    grid-template-columns: repeat(1, minmax(0, 1fr));  
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 
-  .select-text{
+  .select-text {
     margin-right: 8rem !important;
     margin-left: 8rem !important;
   }
 }
 
-@media only screen and (max-width: 350px)
-{
-  .date{
+@media only screen and (max-width: 350px) {
+  .date {
     font-size: 12px;
   }
 
-  .report-id{
+  .report-id {
     font-size: 12px;
   }
 }
-

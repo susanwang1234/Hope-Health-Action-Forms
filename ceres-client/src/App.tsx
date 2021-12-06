@@ -16,6 +16,7 @@ import UnPrivateRoute from './hocs/UnprivateRoutes';
 import AdminCreateUser from './components/Admin/AdminCreateUser';
 import AdminEditUser from './components/Admin/AdminEditUser';
 import ThisMonth from './components/DataPage/ThisMonth';
+import MessageBoard from './components/MeesageBoard/MessageBoard';
 import AdminEmailForPasswordReset from './components/Admin/AdminEmailForPasswordReset';
 
 function App() {
@@ -25,13 +26,14 @@ function App() {
       <Switch>
         <UnPrivateRoute exact path="/" component={Login} />
         <PrivateRoute exact path="/dashboard/:deptID" component={Dashboard}></PrivateRoute>
-        <PrivateRoute exact path="/dashboard/:deptID/submit-report" component={ThisMonth}></PrivateRoute>
-        <PrivateRoute exact path="/dashboard/:deptID/data-page" component={DataPage}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/data-form/current" component={ThisMonth}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/data-form" component={DataPage}></PrivateRoute>
         <PrivateRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></PrivateRoute>
         <PrivateRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
         <PrivateRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/messages/" component={MessageBoard}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
-        <PrivateRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></PrivateRoute>
+        <PrivateRoute path="/dashboard/:deptID/data-form/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
         <PrivateRoute path="/edit-emails" component={AdminEmailForPasswordReset}></PrivateRoute>
         <PrivateRoute path="/new-user" component={AdminCreateUser}></PrivateRoute>
