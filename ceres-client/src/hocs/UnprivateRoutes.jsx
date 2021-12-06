@@ -9,12 +9,11 @@ const UnPrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) => {
         if (!userContext.isAuthenticated) {
-          console.log("User is NOT authenticated.");
+          console.log("[UnprivateRoute]: Not authenticated, returning to login!");
           return <Component {...props}></Component>;
         }
-        console.log("User is authenticated.");
-        console.log("Redirecting to:" + `${userContext.user?.roleName !== 'user' ? '/departments' : '/dashboard/' + userContext.user?.roleId}`)
-        return <Redirect to={{ pathname: `${userContext.user?.roleName !== 'user' ? '/departments' : '/dashboard/' + userContext.user?.roleId}`, state: { from: props.location } }} />;
+        console.log("[UnprivateRoute]: Authenticated, redirecting to:" + `${userContext.user?.roleName !== 'user' ? '/departments' : '/dashboard/' + userContext.user?.departmentId}`)
+        return <Redirect to={{ pathname: `${userContext.user?.roleName !== 'user' ? '/departments' : '/dashboard/' + userContext.user?.departmentId}`, state: { from: props.location } }} />;
       }}
     />
   );

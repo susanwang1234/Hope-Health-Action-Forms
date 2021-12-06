@@ -17,6 +17,7 @@ import AdminEditUser from './components/Admin/AdminEditUser';
 import ThisMonth from './components/DataPage/ThisMonth';
 import AdminRoute from './hocs/AdminRoute';
 import DashboardRoute from './hocs/DashboardRoute';
+import AdminHeadRoute from './hocs/AdminHeadRoute';
 
 function App() {
 
@@ -32,7 +33,7 @@ function App() {
         <DashboardRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></DashboardRoute>
         <DashboardRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></DashboardRoute>
         <DashboardRoute path="/dashboard/:deptID/statistics/" component={StatisticsDashboard}></DashboardRoute>
-        <AdminRoute path="/departments" component={Departments}></AdminRoute>
+        <AdminHeadRoute path="/departments" component={Departments}></AdminHeadRoute>
         <AdminRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></AdminRoute>
         <AdminRoute path="/new-user" component={AdminCreateUser}></AdminRoute>
         <AdminRoute path="/edit-user" component={AdminEditUser}></AdminRoute>
