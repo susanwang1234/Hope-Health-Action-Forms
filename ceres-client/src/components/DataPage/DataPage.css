@@ -146,6 +146,10 @@
   background-color: rgb(131, 131, 131);
 }
 
+.outer-container-this-month {
+  padding-top: 80px;
+}
+
 .save-button:hover {
   background: rgb(79, 138, 79);
 }
@@ -182,6 +186,10 @@
 
 .export-button:hover {
   background-color: rgb(119, 227, 247);
+}
+
+.list-view-report{
+  padding-top: 80px;
 }
 
 .select-text {

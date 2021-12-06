@@ -18,6 +18,9 @@
   background: none;
   border: none;
 }
+.cards-case-study{
+  padding-top: 80px;
+}
 .admin-inner-text {
   font-family: Arial;
   font-size: 25px;
