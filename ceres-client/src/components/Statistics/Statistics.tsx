@@ -119,6 +119,8 @@ const StatisticsDashboard = () => {
 
       <div className="dashboard-title pt-4 w-full">{departmentName} Statistics</div>
 
+      <div className = "parent-div-statistics">
+
       <div className="date-filter flex flex-col pt-10 pl-16 pr-16">
         <div className="date-from">
           <div className="filter-label">From:</div>
@@ -192,13 +194,15 @@ const StatisticsDashboard = () => {
                     mode: 'lines+markers'
                   }
                 ]}
-                layout={{ title: questionLabels[plotIndex] }}
+                layout={{ title: questionLabels[plotIndex], autosize: true}}
+                config = {{responsive:true}}
               />
             ) : (
               <Plot data={[{ x: [], y: [] }]} layout={{}} />
             )}
           </div>
         </div>
+      </div>
       </div>
       </div>
     </div>
