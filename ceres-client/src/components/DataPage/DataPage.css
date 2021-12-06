@@ -15,6 +15,7 @@
   padding: 0em;
   max-height: 23rem;
 }
+
 .input-box {
   border: 1px solid rgb(233, 233, 233);
   text-align: center;
@@ -77,6 +78,7 @@
   border-radius: 0.25rem;
   box-shadow: 1px 3px 5px rgb(211, 211, 211);
 }
+
 .form-in-list:nth-child(even) {
   background-color: #e7e7e7;
 }
@@ -96,18 +98,34 @@
   margin: 0.75rem;
   width: 8rem;
   padding: 5px;
+  float: right;
   font-weight: bold;
 }
-.update-button {
+
+.submit-button {
   color: white;
   border-radius: 0.25rem;
-  background-color: #59b030;
+  background-color: #4aa9c9;
   padding: 6px;
+  line-height: 1.5rem;
   margin: 0.75rem;
   width: 7rem;
   float: right;
   font-weight: bold;
 }
+
+.save-button {
+  color: white;
+  border-radius: 0.25rem;
+  background-color: #59b030;
+  padding: 6px;
+  line-height: 1.5rem;
+  margin: 0.75rem;
+  width: 7rem;
+  float: right;
+  font-weight: bold;
+}
+
 .cancel-button {
   color: black;
   border-radius: 0.25rem;
@@ -127,6 +145,11 @@
 .cancel-button:hover {
   background-color: rgb(131, 131, 131);
 }
-.update-button:hover {
+
+.save-button:hover {
   background: rgb(79, 138, 79);
+}
+
+.submit-button:hover {
+  background: rgb(88, 114, 202);
 }

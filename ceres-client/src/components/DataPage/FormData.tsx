@@ -14,6 +14,9 @@ const FormData = (props: any) => {
   const [emptyFields, setEmptyFields] = useState<number[]>([]);
   const [editStatus, setEditStatus] = useState(false);
   const [userDepartment, setUserDepartment] = useState('');
+  const state = {
+    configButton: 1
+  };
   const ERROR_CODE = -1;
 
   const getDepartmentId = (department: Department[], currentDepartment: number) => {
@@ -46,6 +49,25 @@ const FormData = (props: any) => {
     }
   };
 
+  const putFormResponsesByFormId = async (formId: number, editedResponses: any, isSubmitted: boolean) => {
+    const url = `/form-responses/${formId}`;
+    try {
+      await httpService.put(url, editedResponses);
+      toast.success('Data Form has been '.concat(isSubmitted ? 'submitted!' : 'saved!'), { position: 'top-center', autoClose: 5000 });
+    } catch (error: any) {
+      console.log('Error: Unable to put to ' + url);
+    }
+  };
+
+  const putFormSubmittedStatus = async (formId: number, isSubmitted: boolean) => {
+    const url = `/form/${formId}`;
+    try {
+      await httpService.put(url, { isSubmitted: isSubmitted });
+    } catch (error: any) {
+      console.log('Error: Unable to put to ' + url);
+    }
+  };
+
   useEffect(() => {
     getFormResponsesByDepartmentId();
     getDepartment();
@@ -64,6 +86,29 @@ const FormData = (props: any) => {
       clonedEntries[index] = changedEntry;
       setFormEntries(clonedEntries);
     }
+  };
+
+  const submitFormEntries = () => {
+    if (validateEntries(formEntries)) {
+      const formResponses = createArrayEntriesToPut(formEntries);
+      const formId: number = props.data.id;
+      const isSubmitted: boolean = true;
+      putFormResponsesByFormId(formId, formResponses, isSubmitted);
+      putFormSubmittedStatus(formId, isSubmitted);
+      setEditStatus(false);
+    } else {
+      markEmptyfields(formEntries);
+      toast('Please fill in all fields!');
+    }
+  };
+
+  const saveFormEntries = () => {
+    const formResponses = createArrayEntriesToPut(formEntries);
+    const formId: number = props.data.id;
+    const isSubmitted: boolean = false;
+    putFormResponsesByFormId(formId, formResponses, isSubmitted);
+    putFormSubmittedStatus(formId, isSubmitted);
+    setEditStatus(false);
   };
 
   const markEmptyfields = (dataObj: any): void => {
@@ -86,36 +131,31 @@ const FormData = (props: any) => {
     return true;
   };
 
-  const handleSubmission = (event: any) => {
-    event.preventDefault();
-
-    if (validateEntries(formEntries)) {
-      const putEntries = createArrayEntriesToPut(formEntries);
-      const formId: Number = props.data.id;
-      httpService
-        .put(`/form-responses/${formId}`, putEntries)
-        .then((response: any) => response.data)
-        .then((data: any) => console.log(data))
-        .catch((error) => {
-          console.error('Error:', error);
-        });
-      setEditStatus(false);
-    } else {
-      markEmptyfields(formEntries);
-      alert('All fields are required. please fill them up!');
-    }
-  };
-
   const createArrayEntriesToPut = (rawArray: any[]): any[] => {
     let proccesedEntries = [];
     for (let i = 0; i < rawArray.length; i++) {
+      console.log(rawArray[i].response);
       proccesedEntries[i] = {
         id: parseInt(rawArray[i].id),
         departmentQuestionId: parseInt(rawArray[i].departmentQuestionId),
-        response: parseInt(rawArray[i].response)
+        response: rawArray[i].response === '' ? '' : parseInt(rawArray[i].response)
       };
     }
     return proccesedEntries;
+  };
+
+  const handleSubmission = (event: any) => {
+    event.preventDefault();
+    switch (state.configButton) {
+      case 1:
+        submitFormEntries();
+        break;
+      case 2:
+        saveFormEntries();
+        break;
+      default:
+        toast.error('Error code '.concat(ERROR_CODE.toString()));
+    }
   };
 
   const exportToCsv = async (formId: number): Promise<void> => {
@@ -153,9 +193,15 @@ const FormData = (props: any) => {
     document.body.removeChild(link);
   };
 
-  const updateButton = (
-    <button form="data-form" className="update-button">
-      Update data
+  const submitButton = (
+    <button form="data-form" onClick={() => (state.configButton = 1)} className="submit-button">
+      Submit data
+    </button>
+  );
+
+  const saveButton = (
+    <button form="data-form" onClick={() => (state.configButton = 2)} className="save-button">
+      Save data
     </button>
   );
 
@@ -213,15 +259,19 @@ const FormData = (props: any) => {
           )}
         </form>
         <div className="form-data-buttons">
-          {editStatus === true ? cancelButton : editButton}
-          <div className="export-buttons">
+          <div>{editStatus === true ? cancelButton : editButton}</div>
+          <div>
             {!editStatus && exportAsCsvButton}
             {!editStatus && exportAsPdfButton}
           </div>
-          {editStatus === true && updateButton}
+          <div>
+            {editStatus === true && submitButton}
+            {editStatus === true && saveButton}
+          </div>
         </div>
       </div>
     );
   }
 };
+
 export default FormData;

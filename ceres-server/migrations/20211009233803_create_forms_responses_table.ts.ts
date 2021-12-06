@@ -5,7 +5,7 @@ export async function up(knex: Knex): Promise<void> {
     table.increments();
     table.integer('departmentQuestionId').unsigned().notNullable().references('id').inTable('DepartmentQuestion');
     table.integer('formId').unsigned().notNullable().references('id').inTable('Form');
-    table.string('response').notNullable();
+    table.string('response');
   });
 }
 
