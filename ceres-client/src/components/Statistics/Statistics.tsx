@@ -16,12 +16,8 @@ import { Redirect } from 'react-router-dom';
 
 
 const StatisticsDashboard = () => {
-<<<<<<< HEAD
-  
-=======
 
   const userContext = useContext(UserContext);
->>>>>>> master
   const { deptID } = useParams<departmentParam>();
   const [departmentName, setDepartmentName] = useState('');
   document.body.style.backgroundColor = '#f5f5f5';
