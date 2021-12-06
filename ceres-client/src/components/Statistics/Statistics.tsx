@@ -161,7 +161,7 @@ const StatisticsDashboard = () => {
       <div className="outer-container">
         <div className="statistics-dashboard-container">
           <div className="left-container statistics-card">
-            <ul className="questionMenu">
+            <ul className="question-menu">
               {questionLabels.length
                 ? questionLabels.map((label, index) => {
                     const question =
