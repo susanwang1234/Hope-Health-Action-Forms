@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom';
 
 
 const MessageBoard = () => {
+    document.body.style.backgroundColor = '#f5f5f5';
     const [showNav, setShowNav] = useState(false);
     const [messages, setMessages] = useState<any[]>([]);
     const { deptID } = useParams<departmentParam>();
