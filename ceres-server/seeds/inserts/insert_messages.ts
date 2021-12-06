@@ -20,19 +20,19 @@ export async function insertMessages(knex: Knex): Promise<void> {
       id: 4,
       author: 'admin',
       messageContent: 'This is my message from dept id 1.',
-      departmentId: 1
+      departmentId: 3
     },
     {
       id: 5,
       author: 'admin',
       messageContent: 'This is my message from dept id 1. Hello world. ',
-      departmentId: 1
+      departmentId: 3
     },
     {
       id: 6,
       author: 'admin',
       messageContent: 'This is my message from dept id 1. Testing 1 2 3. ',
-      departmentId: 1
+      departmentId: 3
     }
   ]);
 }

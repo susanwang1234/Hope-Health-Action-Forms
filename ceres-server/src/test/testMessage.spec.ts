@@ -107,8 +107,8 @@ let messageContentArrayDept2 = [
   'There is no meeting tommorow. It has been cancellled. Sorry for the inconvenience.'
 ];
 
-createNewMessage(1, messageContentArrayDept1[3], 7);
-getMessage('/messages/1', 1, messageContentArrayDept1);
+createNewMessage(3, messageContentArrayDept1[3], 7);
+getMessage('/messages/1', 3, messageContentArrayDept1);
 
 createNewMessage(2, messageContentArrayDept2[3], 8);
 getMessage('/messages/2', 2, messageContentArrayDept2);
