@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../App.css';
+import {useContext, useState, useEffect } from 'react';
 import './CaseStudies.css';
-import { useState, useEffect } from 'react';
 import Sidebar from '../Sidebar/Sidebar';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import logo from '../../images/navlogo.png';
@@ -9,10 +9,18 @@ import { Link, useParams } from 'react-router-dom';
 import httpService from '../../services/httpService';
 import { Button, Form } from 'react-bootstrap';
 import { toast } from 'react-toastify';
+import AuthService from '../../services/authService';
+import { Redirect } from 'react-router-dom';
+import { UserContext } from '../../UserContext';
 import { departmentParam } from '../../types/departmentParamType';
 import { createDashboardIDPath } from '../../utils/urlParamUtil';
 
+
+
+
 const CaseStudy = (props: any) => {
+  const userContext = useContext(UserContext);
+
   const { deptID } = useParams<departmentParam>();
   let queryStr = '';
   document.body.style.backgroundColor = '#f5f5f5';
@@ -141,28 +149,40 @@ const CaseStudy = (props: any) => {
     value !== '0' ? getCaseStudiesByType(value) : getCaseStudies();
   };
 
+  const onClickLogOutHandler = async () => {
+    const data = await AuthService.logout();
+    if (data.success) {
+      userContext.setUser(null);
+      userContext.setIsAuthenticated(false);
+    }
+    return <Redirect to="/" />;
+  };
+
   return (
     <div className="App">
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
+        <button type="submit" onClick={onClickLogOutHandler} className="grey-button logout-button top-2% right-2">
+          Log Out
+        </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID} />
       <div className="container">
         <table>
           <tr>
-            <td>
+            <td className = "radio-column">
               <div className="card">
                 <div className="card-inner-case-study">
                   <table className="filter-container">
-                    <tr>
+                    <tr className = "radio-button-value">
                       <td>
                         <input className="radio-button" name="filter" type="radio" value="0" checked={selectedCaseStudyType === '0'} onChange={radioButtonHandler}></input>All Case Studies
                       </td>
                     </tr>
                     {caseStudyType.types.map((Types: any) => {
                       return (
-                        <tr>
+                        <tr className = "radio-button-value">
                           <td>
                             <input className="radio-button" name="filter" type="radio" value={Types.id} onChange={radioButtonHandler}></input>
                             {Types.name}
@@ -174,17 +194,25 @@ const CaseStudy = (props: any) => {
                 </div>
               </div>
               <Link to={`${createDashboardIDPath(deptID)}/case-studies/new`}>
-                <button className="button-new-case">+ Add Case Study</button>
+                <div className = "button-div">
+                  <button className="button-new-case">+ Add Case Study</button>
+                </div>
               </Link>
             </td>
-            <td className="column-right">
+            <td className="column-right radio-column">
               <Form>
-                <Form.Group className="mb-3" controlId="formSearch">
-                  <Form.Control id="search-bar" type="search" placeholder="Search case studies..."></Form.Control>
-                </Form.Group>
-                <Button variant="primary" type="button" onClick={() => search()}>
-                  Submit
-                </Button>
+                <div className = "search-submit flex">
+                  <div className = "search-bar">
+                    <Form.Group className="mb-3" controlId="formSearch">
+                      <Form.Control id="search-bar" type="search" placeholder="Search case studies..." ></Form.Control>
+                    </Form.Group>
+                  </div>
+                  <div className = "pl-4">
+                    <Button className = "submit-button" variant="primary" type="button" onClick={() => search()}>
+                      Submit
+                    </Button>
+                  </div>
+                </div>  
               </Form>
               <p id="results-msg"></p>
               <div className="case-study-block-container">
@@ -196,9 +224,9 @@ const CaseStudy = (props: any) => {
                           <img src={caseStudyImageState.caseStudiesImages[caseStudy.id - 1]} alt="" width="auto" height="150px"></img>
                         </td>
                         <td className="case-study-block-text">
-                          <h2 className="case-study-title">{caseStudy.title}</h2>
-                          <h5 className="case-study-date">{caseStudy.createdAt}</h5>
-                          <p>{caseStudy.response}</p>
+                          <h2 className = "case-study-title-heading">{caseStudy.title}</h2>
+                          <h5 className = "case-study-created-at">{caseStudy.createdAt}</h5>
+                          <p className = "case-study-response">{caseStudy.response}</p>
                         </td>
                         <td className="case-study-block-button">
                           <Link to={`${createDashboardIDPath(deptID)}/case-studies/view/${caseStudy.id}`}>
