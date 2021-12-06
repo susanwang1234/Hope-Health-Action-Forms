@@ -19,13 +19,7 @@
   margin-right: 10px;
 }
 
-.dashboard-title {
-  font-size: 2em;
-  font-weight: bold;
-  width: 100% !important;
-  margin-right: auto;
-  margin-left: auto;
-}
+
 
 .statistics-dashboard-container {
   display: flex;
@@ -34,6 +28,14 @@
   align-items:  center;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  font-weight: bold;
+  width: 100% !important;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .statistics-card {
