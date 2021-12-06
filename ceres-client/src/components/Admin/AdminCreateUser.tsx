@@ -167,7 +167,7 @@ const AdminCreateUser = () => {
           <h2 className="inside-card -mt-10 mb-8">
             <b>Create a New User</b>
           </h2>
-          <div className="w-full flex flex-col pt-10">
+          <div className="label-start w-full flex flex-col pt-6">
             <label className="admin-inner-text">Role</label>
             <select className="minimal self-center" onChange={selectChange}>
               <option selected>--Select a Role--</option>
@@ -184,7 +184,7 @@ const AdminCreateUser = () => {
                 return <option value={departmentName.id}>{departmentName.name}</option>;
               })}
             </select>
-            <label className="admin-inner-text">Username</label>
+            <label className="admin-inner-text pt-10">Username</label>
             <input value={username} onChange={(event) => setUsername(event.target.value)} className="admin-response" placeholder="Type here..."></input>
             <label className="admin-inner-text">Password</label>
             <input value={password} type={passwordShown ? 'text' : 'password'} onChange={(event) => setPassword(event.target.value)} className="admin-response" placeholder="Type here..."></input>
@@ -196,7 +196,7 @@ const AdminCreateUser = () => {
               type={passwordShown ? 'text' : 'password'}
               placeholder="Type here..."
             ></input>
-            <div className="self-center w-50">
+            <div className="self-center w-50 pt-2">
               <input className="float-left mr-2 mt-1" onChange={togglePassword} type="checkbox" />
               <p>Show password</p>
             </div>

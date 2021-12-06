@@ -48,7 +48,7 @@ const ThisMonth = () => {
           Log Out
         </button>
       </header>
-      <div className="flex justify-center">
+      <div className="outer-container-this-month flex justify-center">
         <Sidebar show={showNav} departmentID={deptID} />
         {displayingData == null ? <p className="m-60 font-bold text-xl">There is no form currently for this month</p> : <FormData data={displayingData} />}
       </div>

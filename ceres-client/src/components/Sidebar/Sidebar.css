@@ -1,16 +1,14 @@
 .sidebar {
-  /* When sidebar is open */
-  display: block;
-  width: 240px;
-  background: #ffffff;
-  position: absolute;
   height: 100%;
-  left: -100%;
-  transition: all 0.3s;
-  text-align: left;
-  margin: 0px;
-  padding: 0px;
+  width: 240px;
+  position: fixed;
   z-index: 1;
+  top: 70px;
+  left: -100%;
+  background: #ffffff;
+  transition: all 0.3s;
+  overflow-x: hidden;
+  padding-top: 20px;
 }
 
 .sidebar.active {
@@ -30,7 +28,7 @@
 .drop-link {
   /* Links that descend from a dropdown button */
   color: #91908e;
-  padding-left: 20px;
+  padding-left: 40px;
   font-size: 14px;
 }
 
@@ -53,7 +51,7 @@ ul li a.active {
   display: flex !important;
   width: 100% !important;
   margin-left: 0px !important;
-  padding-left: 0px !important;
+  padding-left: 20px !important;
   align-items: center !important;
 }
 
@@ -107,5 +105,5 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  /* color: #efeaea; */
+  color: #efeaea;
 }
