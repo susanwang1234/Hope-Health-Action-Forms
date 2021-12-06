@@ -69,6 +69,17 @@ li.alternate-background-colours:nth-child(odd) {
   .admin-inside-text{
     font-size: 21px !important;
   }
+
+  
+
+  .casestudy-single-card{
+    padding-top: 50px;
+  }
+
+  .card-info{
+    padding-top: 0rem !important;
+  }
+
 }
 
 @media only screen and (max-width: 700px){
@@ -80,6 +91,10 @@ li.alternate-background-colours:nth-child(odd) {
 @media only screen and (max-width: 600px){
   .admin-response{
     width: 90%;
+  }
+
+  .message{
+    font-size: 15px;
   }
 }
 
@@ -99,4 +114,16 @@ li.alternate-background-colours:nth-child(odd) {
   .label-start{
     padding-top: 0px;
   }
+
+  .box-inside-for-overflow {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vw;
+  }
+
+  .message{
+    font-size: 14px;
+  }
+
+  
 }
