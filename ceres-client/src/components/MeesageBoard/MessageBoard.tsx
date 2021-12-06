@@ -27,31 +27,33 @@ const MessageBoard = () => {
       });
   }, []);
   return (
-    <div className={'ki'}>
+    <div>
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
       </header>
       <Sidebar show={showNav} departmentID={deptID} />
-      <div className="message-board">
-        <h1 className={'announcements-title'}>Department Announcements</h1>
-        <ul className={'message-list'}>
-          {messages.length == 0 ? (
-            <h2 className={'no-message'}>No announcements currently available </h2>
-          ) : (
-            messages.map((message) => {
-              return (
-                <li className="message">
-                  {message.messageContent}
-                  <div className="message-footer">
-                    <div>Posted by: {message.author}</div>
-                    <div className="px-3">{makeDateShort(message.createdAt)}</div>
-                  </div>
-                </li>
-              );
-            })
-          )}
-        </ul>
+      <div className="global-background">
+        <div className="message-board">
+          <h1 className={'announcements-title'}>Department Announcements</h1>
+          <ul className={'message-list'}>
+            {messages.length == 0 ? (
+              <h2 className={'no-message'}>No announcements currently available </h2>
+            ) : (
+              messages.map((message) => {
+                return (
+                  <li className="message">
+                    {message.messageContent}
+                    <div className="message-footer">
+                      <div>Posted by: {message.author}</div>
+                      <div className="px-3">{makeDateShort(message.createdAt)}</div>
+                    </div>
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </div>
       </div>
     </div>
   );
