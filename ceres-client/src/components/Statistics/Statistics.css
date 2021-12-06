@@ -22,6 +22,9 @@
 .dashboard-title {
   font-size: 2em;
   font-weight: bold;
+  width: 100% !important;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .statistics-dashboard-container {
@@ -30,6 +33,8 @@
   justify-content: space-around;
   align-items:  center;
   height: 60vh;
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .statistics-card {
@@ -38,6 +43,7 @@
 
 .right-container {
   width: 80%;
+  padding-left: 15px;
 }
 
 .left-container {
@@ -106,6 +112,7 @@
   margin: 5px;
 }
 
-@media only screen and (max-width: 500px){
 
+.user-select-none,.main-svg{
+  width: 100% !important;
 }

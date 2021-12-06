@@ -103,6 +103,7 @@ const StatisticsDashboard = () => {
 
   return (
     <div className="App">
+
       <header className="nav-header">
         <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
         <img src={logo} alt="Logo" className="logo" />
@@ -111,9 +112,14 @@ const StatisticsDashboard = () => {
         </button>
       </header>
       <Sidebar show={showNav} departmentID={deptID}></Sidebar>
-      <div className="dashboard-title statistics-card">{departmentName} Statistics</div>
+      <div className="global-background ">
+      
 
-      <div className="date-filter pt-10 pl-16 pr-16">
+
+
+      <div className="dashboard-title pt-4 w-full">{departmentName} Statistics</div>
+
+      <div className="date-filter flex flex-col pt-10 pl-16 pr-16">
         <div className="date-from">
           <div className="filter-label">From:</div>
           <select defaultValue="" onChange={(event) => setStartMonth(event.target.value)}>
@@ -129,7 +135,7 @@ const StatisticsDashboard = () => {
           <input className="filter-input" onChange={(event) => setStartYear(+event.target.value)} type="number" min="1970" max="3000" placeholder="Year"></input>
         </div>
         <div className="date-to">
-          <div className="filter-label">To:</div>
+          <div className="filter-label">  To:</div>
           <select defaultValue="" onChange={(event) => setEndMonth(event.target.value)}>
             <option value="" disabled>
               Month
@@ -193,6 +199,7 @@ const StatisticsDashboard = () => {
             )}
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
