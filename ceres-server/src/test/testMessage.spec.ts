@@ -99,7 +99,7 @@ const getMessage = (url: string, departmentId: number, msgContentArr: Array<Stri
 };
 
 //Tests go here
-let messageContentArrayDept1 = ['This is my message from dept id 1.', 'This is my message from dept id 1. Hello world. ', 'This is my message from dept id 1. Testing 1 2 3. ', 'Hello world'];
+let messageContentArrayDept3 = ['This is my message from dept id 3.', 'This is my message from dept id 3. Hello world. ', 'This is my message from dept id 3. Testing 1 2 3. ', 'Hello world'];
 let messageContentArrayDept2 = [
   'Good evening everyone, this is a friendly reminder that tommorow he have our monthly meeting at 6:00 pm. try to be on time before all snacks are gone. looking forward too seeing you all!',
   'We support and stand by @HaitiCancerCenter in their fight aigains cancer! #go_away_cancer',
@@ -107,8 +107,8 @@ let messageContentArrayDept2 = [
   'There is no meeting tommorow. It has been cancellled. Sorry for the inconvenience.'
 ];
 
-createNewMessage(3, messageContentArrayDept1[3], 7);
-getMessage('/messages/3', 3, messageContentArrayDept1);
+createNewMessage(3, messageContentArrayDept3[3], 7);
+getMessage('/messages/3', 3, messageContentArrayDept3);
 
 createNewMessage(2, messageContentArrayDept2[3], 8);
 getMessage('/messages/2', 2, messageContentArrayDept2);
