@@ -18,7 +18,6 @@ const getFormResponsesByFormId = async (req: Request, res: Response, next: NextF
     res.status(400).send(formResponseNegativeOrNanInputError);
     return;
   }
-
   try {
     const retrievedResponses = await Knex.select('Question.*', 'DepartmentQuestion.isRequired', 'FormResponse.*')
       .from('FormResponse')
