@@ -10,6 +10,9 @@ let testApp: Application;
 let httpServer: http.Server;
 let agent: any;
 
+let messageContentArray = ['This is my message from dept id 1.', 'This is my message from dept id 1. Hello world. ', 'This is my message from dept id 1. Testing 1 2 3. ', 'Hello world'];
+
+// Test 1: POST request (Single message from dept id 1)
 describe('createNewMessage', () => {
   before('Create a working server', (done) => {
     testApp = setupApp();
@@ -30,7 +33,7 @@ describe('createNewMessage', () => {
       .send({
         departmentId: 1,
         author: 'admin',
-        messageContent: 'Hello world'
+        messageContent: messageContentArray[3]
       })
       .end((err: any, res: any) => {
         expect(err).to.be.null;
@@ -47,5 +50,41 @@ describe('createNewMessage', () => {
         expect(res.body[0]).to.have.deep.property('createdAt');
         done();
       });
+  });
+});
+
+//Test 2: GET request (Gets all messages from department id 1)
+describe('getMessage', () => {
+  let testId = 3;
+  let messageContentArrayIndex = 0;
+  before('Create a working server', (done) => {
+    testApp = setupApp();
+    httpServer = setupHttpServer(testApp);
+    agent = chai.request.agent(testApp);
+
+    attemptAuthentication(agent, done, Accounts.ADMIN);
+  });
+  after('Close a working server', () => {
+    httpServer.close();
+  });
+  it('Should get messages successfully', (done) => {
+    agent.get('/messages/1').end((err: any, res: any) => {
+      expect(err).to.be.null;
+      expect(res).to.have.status(200);
+      res.body.forEach((item: any) => {
+        expect(item).to.be.an('object');
+        expect(item).to.have.deep.property('id');
+        expect(item.id).to.deep.equal(++testId);
+        ++messageContentArrayIndex;
+        expect(item).to.have.deep.property('messageContent');
+        expect(item.messageContent).to.deep.equal(messageContentArray[messageContentArrayIndex - 1]);
+        expect(item).to.have.deep.property('author');
+        expect(item.author).to.deep.equal('admin');
+        expect(item).to.have.deep.property('departmentId');
+        expect(item.departmentId).to.deep.equal(1);
+        expect(item).to.have.deep.property('createdAt');
+      });
+      done();
+    });
   });
 });
