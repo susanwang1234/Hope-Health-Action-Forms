@@ -19,20 +19,19 @@ const ThisMonth = () => {
   const [showNav, setShowNav] = useState(false);
   const userContext = useContext(UserContext);
 
+  const getFormByDeptId = async () => {
+    const url = `/form/latest/${deptID}`;
+    try {
+      const response = await httpService.get(url);
+      const data = response.data;
+      setDisplayingData(data);
+    } catch (error: any) {
+      console.log('Error: Unable to fetch from ' + url);
+    }
+  };
+
   useEffect(() => {
     getFormByDeptId();
-    async function getFormByDeptId() {
-      const url = `/form/latest/${deptID}`;
-      try {
-        const response = await httpService.get(url);
-        console.log(response);
-        const data = response.data;
-        console.log('Fetched Form:', data);
-        setDisplayingData(data);
-      } catch (error: any) {
-        console.log('Error: Unable to fetch from ' + url);
-      }
-    }
   }, []);
 
   const onClickLogOutHandler = async () => {

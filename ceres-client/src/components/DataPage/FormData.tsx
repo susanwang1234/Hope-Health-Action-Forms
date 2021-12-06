@@ -95,6 +95,7 @@ const FormData = (props: any) => {
       const isSubmitted: boolean = true;
       putFormResponsesByFormId(formId, formResponses, isSubmitted);
       putFormSubmittedStatus(formId, isSubmitted);
+      updateResponses(formResponses);
       setEditStatus(false);
     } else {
       markEmptyfields(formEntries);
@@ -108,7 +109,15 @@ const FormData = (props: any) => {
     const isSubmitted: boolean = false;
     putFormResponsesByFormId(formId, formResponses, isSubmitted);
     putFormSubmittedStatus(formId, isSubmitted);
+    updateResponses(formResponses);
     setEditStatus(false);
+  };
+
+  const updateResponses = (formResponses: any[]) => {
+    for (let i = 0; i < formEntries.length; i++) {
+      formEntries[i].response = formResponses[i].response;
+      fetchedFormEntries[i].response = formResponses[i].response;
+    }
   };
 
   const markEmptyfields = (dataObj: any): void => {
@@ -131,14 +140,13 @@ const FormData = (props: any) => {
     return true;
   };
 
-  const createArrayEntriesToPut = (rawArray: any[]): any[] => {
+  const createArrayEntriesToPut = (formResponses: any[]): any[] => {
     let proccesedEntries = [];
-    for (let i = 0; i < rawArray.length; i++) {
-      console.log(rawArray[i].response);
+    for (let i = 0; i < formResponses.length; i++) {
       proccesedEntries[i] = {
-        id: parseInt(rawArray[i].id),
-        departmentQuestionId: parseInt(rawArray[i].departmentQuestionId),
-        response: rawArray[i].response === '' ? '' : parseInt(rawArray[i].response)
+        id: parseInt(formResponses[i].id),
+        departmentQuestionId: parseInt(formResponses[i].departmentQuestionId),
+        response: formResponses[i].response === '' ? '' : parseInt(formResponses[i].response)
       };
     }
     return proccesedEntries;
