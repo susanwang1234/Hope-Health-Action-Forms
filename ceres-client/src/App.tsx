@@ -16,6 +16,7 @@ import UnPrivateRoute from './hocs/UnprivateRoutes';
 import AdminCreateUser from './components/Admin/AdminCreateUser';
 import AdminEditUser from './components/Admin/AdminEditUser';
 import ThisMonth from './components/DataPage/ThisMonth';
+import MessageBoard from './components/MeesageBoard/MessageBoard';
 import AdminEmailForPasswordReset from './components/Admin/AdminEmailForPasswordReset';
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <PrivateRoute exact path="/dashboard/:deptID/case-studies" component={CaseStudies}></PrivateRoute>
         <PrivateRoute exact path={'/dashboard/:deptID/case-studies/view/:id'} component={CaseStudyInstance}></PrivateRoute>
         <PrivateRoute exact path="/dashboard/:deptID/case-studies/new" component={CaseStudySubmit}></PrivateRoute>
+        <PrivateRoute exact path="/dashboard/:deptID/messages/" component={MessageBoard}></PrivateRoute>
         <PrivateRoute path="/departments" component={Departments}></PrivateRoute>
         <PrivateRoute path="/dashboard/:deptID/data-form/statistics/" component={StatisticsDashboard}></PrivateRoute>
         <PrivateRoute path="/new-employee-of-the-month" component={AdminEmployeeOfTheMonth}></PrivateRoute>
