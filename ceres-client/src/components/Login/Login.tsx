@@ -35,13 +35,11 @@ function Login() {
     if (isAuthenticated) {
       userContext.setUser(data.user);
       userContext.setIsAuthenticated(isAuthenticated);
-      console.log("data.user.roleId: " + data.user.roleId);
 
       if (data.user.roleId != 4) {
         history.push('/departments');
       } else {
         let link = "/dashboard/" + data.user.departmentId.toString();
-        console.log("going to: " + link)
         history.push(link);
       }
 

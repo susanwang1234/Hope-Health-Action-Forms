@@ -88,8 +88,7 @@ function Departments() {
   } else {
 
   }
-  
-  console.log('DDDuserContext.user: ' + userContext.user);
+
 
   return (
     <div>

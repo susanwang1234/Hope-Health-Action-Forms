@@ -231,14 +231,10 @@ const FormData = (props: any) => {
     <div></div>
   );
 
-
-
     // Disable edit button if you are not part of the department
     const str = window.location.pathname;
     const first = str.split('/')[2];
     const deptId: number = Number(first);
-    console.log("userContext.user?.departmentId:" + userContext.user?.departmentId);
-    console.log("deptId:" + deptId);
 
     if ((userContext.user?.departmentId == deptId) || (userContext.user?.roleId == 1) || (userContext.user?.roleId == 2)) {
       editButton = (
