@@ -77,12 +77,24 @@ function Departments() {
     );
   };
 
+  let hamburger = (
+    <GiHamburgerMenu style={{color: "white"}} className="svg-hamburger"></GiHamburgerMenu>
+  );
+
+  if (userContext.user?.roleId != 3) {
+    hamburger = (
+      <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+    );
+  } else {
+
+  }
+  
   console.log('DDDuserContext.user: ' + userContext.user);
 
   return (
     <div>
       <header className="nav-header">
-        <GiHamburgerMenu className="svg-hamburger" onClick={() => setShowNav(!showNav)} />
+      {hamburger}
         <img src={logo} alt="Logo" className="logo" />
         <button type="submit" onClick={onClickLogOutHandler} className="grey-button top-2% right-2">
           Log Out
