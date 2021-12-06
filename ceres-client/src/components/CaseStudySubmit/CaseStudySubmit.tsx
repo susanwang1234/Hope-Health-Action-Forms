@@ -26,9 +26,10 @@ import { createDashboardIDPath } from '../../utils/urlParamUtil';
 Citation: https://www.kindacode.com/article/react-typescript-handling-select-onchange-event/
 */
 const CaseStudySubmit = () => {
+  
   const { deptID } = useParams<departmentParam>();
   const userContext = useContext(UserContext);
-  const [shareImage, setShareImage] = useState('');
+  const [shareImage, setShareImage] : any = useState('');
   const [checkMark, SetCheckMark] = useState(false);
   const [title, setTitle] = useState('');
   const [showNav, setShowNav] = useState(false);
@@ -307,6 +308,8 @@ const CaseStudySubmit = () => {
       </div>
     </div>
   );
+  
 };
 
 export default CaseStudySubmit;
+
